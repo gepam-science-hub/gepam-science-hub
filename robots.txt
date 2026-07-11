@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gepam-science-hub.github.io/gepam-science-hub/sitemap.xml
