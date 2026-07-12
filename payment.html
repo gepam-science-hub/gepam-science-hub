@@ -26,6 +26,7 @@ alt="GEPAM Science Hub Logo">
 
 </header>
 
+
 <nav>
 
 <a href="index.html">Home</a>
@@ -37,6 +38,7 @@ alt="GEPAM Science Hub Logo">
 <a href="contact.html">Contact</a>
 
 </nav>
+
 
 <section>
 
@@ -56,6 +58,7 @@ Please wait...
 
 <h3>📱 M-Pesa (API Coming Soon)</h3>
 
+
 <a href="https://wa.me/255748978398">
 
 <button>
@@ -64,9 +67,12 @@ Confirm Payment
 
 </a>
 
+
 </div>
 
 </section>
+
+
 
 <footer>
 
@@ -76,13 +82,18 @@ Confirm Payment
 
 </footer>
 
+
+
 <script>
+
 
 const params = new URLSearchParams(window.location.search);
 
 const product = params.get("product");
 
+
 const products = {
+
 
 form1_physics:{
 title:"🔒 Form 1 Physics Notes",
@@ -90,11 +101,21 @@ name:"Complete Form 1 Physics",
 desc:"Complete notes, solved questions and revision materials."
 },
 
+
 form1_chemistry:{
 title:"🔒 Form 1 Chemistry Notes",
 name:"Complete Form 1 Chemistry",
 desc:"Complete notes, solved questions and revision materials."
 },
+
+
+form1_package:{
+title:"🔒 Form 1 Physics + Chemistry Package",
+name:"Complete Form 1 Science Package",
+desc:"Complete Physics and Chemistry notes, revision materials and examination preparation resources."
+},
+
+
 
 form2_physics:{
 title:"🔒 Form 2 Physics Notes",
@@ -102,64 +123,13 @@ name:"Complete Form 2 Physics",
 desc:"Complete notes, solved questions and revision materials."
 },
 
+
 form2_chemistry:{
 title:"🔒 Form 2 Chemistry Notes",
 name:"Complete Form 2 Chemistry",
 desc:"Complete notes, solved questions and revision materials."
 },
 
-form3_physics:{
-title:"🔒 Form 3 Physics Notes",
-name:"Complete Form 3 Physics",
-desc:"Complete notes, solved questions and revision materials."
-},
-
-form3_chemistry:{
-title:"🔒 Form 3 Chemistry Notes",
-name:"Complete Form 3 Chemistry",
-desc:"Complete notes, solved questions and revision materials."
-},
-
-form4_physics:{
-title:"🔒 Form 4 Physics Notes",
-name:"Complete Form 4 Physics",
-desc:"Complete notes, solved questions and revision materials."
-},
-
-form4_chemistry:{
-title:"🔒 Form 4 Chemistry Notes",
-name:"Complete Form 4 Chemistry",
-desc:"Complete notes, solved questions and revision materials."
-},
-
-form5_physics:{
-title:"🔒 Form 5 Physics Notes",
-name:"Complete Form 5 Physics",
-desc:"Complete notes, solved questions and revision materials."
-},
-
-form5_chemistry:{
-title:"🔒 Form 5 Chemistry Notes",
-name:"Complete Form 5 Chemistry",
-desc:"Complete notes, solved questions and revision materials."
-},
-
-form6_physics:{
-title:"🔒 Form 6 Physics Notes",
-name:"Complete Form 6 Physics",
-desc:"Complete notes, solved questions and revision materials."
-},
-
-form6_chemistry:{
-title:"🔒 Form 6 Chemistry Notes",
-name:"Complete Form 6 Chemistry",
-desc:"Complete notes, solved questions and revision materials."
-
-};form1_package:{
-title:"🔒 Form 1 Physics + Chemistry Package",
-name:"Complete Form 1 Science Package",
-desc:"Complete Physics and Chemistry notes, revision materials and examination preparation resources."
-},
 
 form2_package:{
 title:"🔒 Form 2 Physics + Chemistry Package",
@@ -167,11 +137,43 @@ name:"Complete Form 2 Science Package",
 desc:"Complete Physics and Chemistry notes, revision materials and examination preparation resources."
 },
 
+
+
+form3_physics:{
+title:"🔒 Form 3 Physics Notes",
+name:"Complete Form 3 Physics",
+desc:"Complete notes, solved questions and revision materials."
+},
+
+
+form3_chemistry:{
+title:"🔒 Form 3 Chemistry Notes",
+name:"Complete Form 3 Chemistry",
+desc:"Complete notes, solved questions and revision materials."
+},
+
+
 form3_package:{
 title:"🔒 Form 3 Physics + Chemistry Package",
 name:"Complete Form 3 Science Package",
 desc:"Complete Physics and Chemistry notes, revision materials and examination preparation resources."
 },
+
+
+
+form4_physics:{
+title:"🔒 Form 4 Physics Notes",
+name:"Complete Form 4 Physics",
+desc:"Complete notes, solved questions and revision materials."
+},
+
+
+form4_chemistry:{
+title:"🔒 Form 4 Chemistry Notes",
+name:"Complete Form 4 Chemistry",
+desc:"Complete notes, solved questions and revision materials."
+},
+
 
 form4_package:{
 title:"🔒 Form 4 Physics + Chemistry Package",
@@ -179,11 +181,43 @@ name:"Complete Form 4 Science Package",
 desc:"Complete Physics and Chemistry notes, revision materials and examination preparation resources."
 },
 
+
+
+form5_physics:{
+title:"🔒 Form 5 Physics Notes",
+name:"Complete Form 5 Physics",
+desc:"Complete notes, solved questions and revision materials."
+},
+
+
+form5_chemistry:{
+title:"🔒 Form 5 Chemistry Notes",
+name:"Complete Form 5 Chemistry",
+desc:"Complete notes, solved questions and revision materials."
+},
+
+
 form5_package:{
 title:"🔒 Form 5 Physics + Chemistry Package",
 name:"Complete Form 5 Science Package",
 desc:"Complete Physics and Chemistry notes, revision materials and examination preparation resources."
 },
+
+
+
+form6_physics:{
+title:"🔒 Form 6 Physics Notes",
+name:"Complete Form 6 Physics",
+desc:"Complete notes, solved questions and revision materials."
+},
+
+
+form6_chemistry:{
+title:"🔒 Form 6 Chemistry Notes",
+name:"Complete Form 6 Chemistry",
+desc:"Complete notes, solved questions and revision materials."
+},
+
 
 form6_package:{
 title:"🔒 Form 6 Physics + Chemistry Package",
@@ -191,15 +225,31 @@ name:"Complete Form 6 Science Package",
 desc:"Complete Physics and Chemistry notes, revision materials and examination preparation resources."
 }
 
+
+};
+
+
+
 if(products[product]){
 
-document.getElementById("title").innerHTML=products[product].title;
-document.getElementById("product").innerHTML=products[product].name;
-document.getElementById("description").innerHTML=products[product].desc;
+document.getElementById("title").innerHTML = products[product].title;
+
+document.getElementById("product").innerHTML = products[product].name;
+
+document.getElementById("description").innerHTML = products[product].desc;
+
+}
+else{
+
+document.getElementById("product").innerHTML = "Premium Resource";
+
+document.getElementById("description").innerHTML = "Please select a valid learning package.";
 
 }
 
+
 </script>
+
 
 </body>
 
