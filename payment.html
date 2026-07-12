@@ -59,7 +59,7 @@ Please wait...
 <h3>📱 M-Pesa (API Coming Soon)</h3>
 
 
-<a href="https://wa.me/255748978398">
+<a id="whatsappLink" href="#">
 
 <button>
 Confirm Payment
@@ -247,7 +247,18 @@ document.getElementById("description").innerHTML = "Please select a valid learni
 
 }
 
+const whatsappLink = document.getElementById("whatsappLink");
 
+if(products[product]){
+
+whatsappLink.href =
+"https://wa.me/255748978398?text=" +
+encodeURIComponent(
+"Nataka kununua " + products[product].name +
+" kupitia GEPAM Science Hub."
+);
+
+  }
 </script>
 
 
