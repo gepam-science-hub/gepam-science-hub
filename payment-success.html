@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Payment Successful | GEPAM Science Hub</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+
+<header>
+
+<img src="file_00000000f17471f4b8f76a744122207a.png"
+class="logo"
+alt="GEPAM Science Hub Logo">
+
+<h1>GEPAM Science Hub</h1>
+
+<p>Learning Access</p>
+
+</header>
+
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="notes.html">Notes</a>
+
+<a href="pastpapers.html">Past Papers</a>
+
+<a href="contact.html">Contact</a>
+
+</nav>
+
+
+<section>
+
+<div class="card">
+
+
+<h2>✅ Payment Successful</h2>
+
+
+<h3 id="product">
+Loading Package...
+</h3>
+
+
+<p id="description">
+Your learning materials are ready.
+</p>
+
+
+<a id="downloadLink" href="#">
+
+<button>
+Download Notes
+</button>
+
+</a>
+
+
+</div>
+
+</section>
+
+
+<footer>
+
+<h3>GEPAM Science Hub</h3>
+
+<p>Making Science Easy</p>
+
+</footer>
+
+
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const product = params.get("product");
+
+
+const materials = {
+
+
+form1_physics:{
+name:"Form 1 Physics Notes",
+file:"premium/form1/physics/Form1_Physics_Notes.pdf"
+},
+
+
+form1_chemistry:{
+name:"Form 1 Chemistry Notes",
+file:"premium/form1/chemistry/Form1_Chemistry_Notes.pdf"
+},
+
+
+form1_package:{
+name:"Form 1 Physics + Chemistry Package",
+file:"premium/form1/package/Form1_Physics_Chemistry_Package.pdf"
+},
+
+
+form2_physics:{
+name:"Form 2 Physics Notes",
+file:"premium/form2/physics/Form2_Physics_Notes.pdf"
+},
+
+
+form2_chemistry:{
+name:"Form 2 Chemistry Notes",
+file:"premium/form2/chemistry/Form2_Chemistry_Notes.pdf"
+},
+
+
+form2_package:{
+name:"Form 2 Physics + Chemistry Package",
+file:"premium/form2/package/Form2_Physics_Chemistry_Package.pdf"
+},
+
+
+form3_physics:{
+name:"Form 3 Physics Notes",
+file:"premium/form3/physics/Form3_Physics_Notes.pdf"
+},
+
+
+form3_chemistry:{
+name:"Form 3 Chemistry Notes",
+file:"premium/form3/chemistry/Form3_Chemistry_Notes.pdf"
+},
+
+
+form3_package:{
+name:"Form 3 Physics + Chemistry Package",
+file:"premium/form3/package/Form3_Physics_Chemistry_Package.pdf"
+},
+
+
+form4_physics:{
+name:"Form 4 Physics Notes",
+file:"premium/form4/physics/Form4_Physics_Notes.pdf"
+},
+
+
+form4_chemistry:{
+name:"Form 4 Chemistry Notes",
+file:"premium/form4/chemistry/Form4_Chemistry_Notes.pdf"
+},
+
+
+form4_package:{
+name:"Form 4 Physics + Chemistry Package",
+file:"premium/form4/package/Form4_Physics_Chemistry_Package.pdf"
+},
+
+
+form5_physics:{
+name:"Form 5 Physics Notes",
+file:"premium/form5/physics/Form5_Physics_Notes.pdf"
+},
+
+
+form5_chemistry:{
+name:"Form 5 Chemistry Notes",
+file:"premium/form5/chemistry/Form5_Chemistry_Notes.pdf"
+},
+
+
+form5_package:{
+name:"Form 5 Physics + Chemistry Package",
+file:"premium/form5/package/Form5_Physics_Chemistry_Package.pdf"
+},
+
+
+form6_physics:{
+name:"Form 6 Physics Notes",
+file:"premium/form6/physics/Form6_Physics_Notes.pdf"
+},
+
+
+form6_chemistry:{
+name:"Form 6 Chemistry Notes",
+file:"premium/form6/chemistry/Form6_Chemistry_Notes.pdf"
+},
+
+
+form6_package:{
+name:"Form 6 Physics + Chemistry Package",
+file:"premium/form6/package/Form6_Physics_Chemistry_Package.pdf"
+}
+
+
+};
+
+
+
+if(materials[product]){
+
+document.getElementById("product").innerHTML =
+"✅ " + materials[product].name;
+
+
+document.getElementById("description").innerHTML =
+"Your notes are ready. Click below to access your materials.";
+
+
+document.getElementById("downloadLink").href =
+materials[product].file;
+
+}
+
+else{
+
+document.getElementById("product").innerHTML =
+"Package Not Found";
+
+document.getElementById("description").innerHTML =
+"Please select a valid package.";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
