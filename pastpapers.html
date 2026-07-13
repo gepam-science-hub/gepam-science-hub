@@ -7,20 +7,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-<title>GEPAM Science Hub | Past Papers With Solutions</title>
-
+<title>GEPAM Science Hub | Past Papers</title>
 
 <link rel="icon" type="image/png" href="file_00000000f17471f4b8f76a744122207a.png">
 
-
-<meta name="description" content="Access Physics and Chemistry past papers with solutions from O Level to A Level through GEPAM Science Hub.">
-
+<meta name="description" content="NECTA, Mock, Joint and Regional Physics and Chemistry past papers for Form 1 to Form 6 Tanzania.">
 
 <link rel="stylesheet" href="style.css">
 
 </head>
-
 
 
 <body>
@@ -29,18 +24,14 @@
 <header>
 
 <img src="file_00000000f17471f4b8f76a744122207a.png"
-alt="GEPAM Science Hub Logo"
-class="logo">
-
+class="logo"
+alt="GEPAM Science Hub Logo">
 
 <h1>GEPAM Science Hub</h1>
 
 <p>Making Science Easy</p>
 
-
 </header>
-
-
 
 
 
@@ -56,242 +47,245 @@ class="logo">
 
 <a href="contact.html">Contact</a>
 
-
 </nav>
 
 
 
+<section>
 
+<h2>📚 Past Papers Library</h2>
+
+<p>
+Access Physics and Chemistry examination papers from Form 1 to Form 6.
+</p>
+
+
+<div class="card">
+
+
+<label>Select Form</label>
+
+<select id="formSelect">
+
+<option value="">Choose Form</option>
+
+<option value="form1">Form 1</option>
+
+<option value="form2">Form 2</option>
+
+<option value="form3">Form 3</option>
+
+<option value="form4">Form 4</option>
+
+<option value="form5">Form 5</option>
+
+<option value="form6">Form 6</option>
+
+</select>
+
+
+
+<label>Select Subject</label>
+
+<select id="subjectSelect">
+
+<option value="">Choose Subject</option>
+
+<option value="physics">Physics</option>
+
+<option value="chemistry">Chemistry</option>
+
+</select>
+
+
+
+<label>Select Examination Type</label>
+
+<select id="typeSelect">
+
+<option value="">Choose Type</option>
+
+</select>
+
+
+</div>
+
+</section>
 
 
 
 <section>
 
+<h2>Available Papers</h2>
 
-<h2> Past Papers With Solutions</h2>
+<div id="papersContainer">
 
+<p>Select options above to view papers.</p>
 
-<p>
-Practice with previous examinations and solutions
-to improve understanding, confidence and examination performance.
-</p>
+</div>
 
 
 </section>
 
 
 
+<a href="https://wa.me/255748978398" class="whatsapp">
 
-
-
-
-<section>
-
-
-<h2> O'LEVEL PAST PAPERS</h2>
-
-
-
-
-
-<div class="card">
-
-<h3>Form 1 Past Papers</h3>
-
-<p>
-Physics and Chemistry practice papers with solutions.
-</p>
-
-
-<a href="form1papers.html">
-
-<button>Open Form 1 Papers</button>
+💬 WhatsApp Us
 
 </a>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-<h3>Form 2 Past Papers</h3>
-
-<p>
-Physics and Chemistry practice papers with solutions.
-</p>
-
-
-<a href="form2papers.html">
-
-<button>Open Form 2 Papers</button>
-
-</a>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-<h3>Form 3 Past Papers</h3>
-
-<p>
-Physics and Chemistry practice papers with solutions.
-</p>
-
-
-<a href="form3papers.html">
-
-<button>Open Form 3 Papers</button>
-
-</a>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-<h3>Form 4 Past Papers</h3>
-
-<p>
-NECTA focused past papers and solutions preparation.
-</p>
-
-
-<a href="form4papers.html">
-
-<button>Open Form 4 Papers</button>
-
-</a>
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<section>
-
-
-<h2> A'LEVEL PAST PAPERS</h2>
-
-
-
-
-
-<div class="card">
-
-<h3>Form 5 Past Papers</h3>
-
-<p>
-Advanced Physics and Chemistry past papers.
-</p>
-
-
-<a href="form5papers.html">
-
-<button>Open Form 5 Papers</button>
-
-</a>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-<h3>Form 6 Past Papers</h3>
-
-<p>
-Advanced Level revision papers with solutions.
-</p>
-
-
-<a href="form6papers.html">
-
-<button>Open Form 6 Papers</button>
-
-</a>
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<section>
-
-
-
-
-</div>
-
-
-
-
-</section>
-
-
-
-
-
 
 
 
 <footer>
 
-
 <h3>GEPAM Science Hub</h3>
-
 
 <p>Making Science Easy</p>
 
-
 <p>© 2026 GEPAM Science Hub. All Rights Reserved.</p>
-
 
 </footer>
 
+
+
+<script src="pastpapers-config.js"></script>
+
+<script src="pastpapers-data.js"></script>
+
+
+
+<script>
+
+
+const formSelect=document.getElementById("formSelect");
+
+const subjectSelect=document.getElementById("subjectSelect");
+
+const typeSelect=document.getElementById("typeSelect");
+
+const container=document.getElementById("papersContainer");
+
+
+
+formSelect.addEventListener("change",loadTypes);
+
+
+function loadTypes(){
+
+let form=formSelect.value;
+
+typeSelect.innerHTML='<option value="">Choose Type</option>';
+
+
+if(form){
+
+pastPaperConfig[form].types.forEach(type=>{
+
+let option=document.createElement("option");
+
+option.value=type;
+
+option.textContent=type.replace("_"," ").toUpperCase();
+
+typeSelect.appendChild(option);
+
+});
+
+
+}
+
+}
+
+
+
+typeSelect.addEventListener("change",showPapers);
+
+subjectSelect.addEventListener("change",showPapers);
+
+
+
+function showPapers(){
+
+
+let form=formSelect.value;
+
+let subject=subjectSelect.value;
+
+let type=typeSelect.value;
+
+
+
+container.innerHTML="";
+
+
+
+if(!form || !subject || !type){
+
+container.innerHTML="<p>Please select all options.</p>";
+
+return;
+
+}
+
+
+
+let papers=pastPapers[form][subject].filter(
+
+paper=>paper.type===type
+
+);
+
+
+
+if(papers.length===0){
+
+container.innerHTML="<p>No papers uploaded yet.</p>";
+
+return;
+
+}
+
+
+
+papers.forEach(paper=>{
+
+
+let card=document.createElement("div");
+
+card.className="card";
+
+
+card.innerHTML=`
+
+<h3>${paper.title}</h3>
+
+<p>
+${paper.region.toUpperCase()} - ${paper.year}
+</p>
+
+<a href="${paper.file}" target="_blank">
+
+<button>
+Open PDF
+</button>
+
+</a>
+
+`;
+
+
+container.appendChild(card);
+
+
+});
+
+
+}
+
+
+
+</script>
 
 
 </body>
