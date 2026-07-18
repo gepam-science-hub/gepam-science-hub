@@ -183,3 +183,4 @@ typeSelect.addEventListener("change", loadRegions);
 regionSelect.addEventListener("change", loadYears);
 
 yearSelect.addEventListener("change", showPapers);
+console.log("DATA CHECK", pastPapers);
