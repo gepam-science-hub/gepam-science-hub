@@ -33,33 +33,38 @@ function loadTypes() {
 
 }
 
-// Load Regions
-function loadRegions() {
+function loadRegions(){
 
     regionSelect.innerHTML = '<option value="">Choose Region</option>';
-    yearSelect.innerHTML = '<option value="">Choose Year</option>';
-    container.innerHTML = "<p>Select Region.</p>";
 
-    const form = formSelect.value;
-    const subject = subjectSelect.value;
-    const type = typeSelect.value;
+    let form = formSelect.value;
+    let subject = subjectSelect.value;
+    let type = typeSelect.value;
 
-    if (!form || !subject || !type) return;
+    if(!form || !subject || !type){
+        return;
+    }
 
-    const papers = pastPapers[form][subject].filter(
-    paper => paper.type.toLowerCase() === type.toLowerCase()
-);
+    let papers = pastPapers[form][subject];
 
-console.log(papers);
+    let regions = [];
 
-    const regions = [...new Set(papers.map(p => p.region))];
-    console.log("Regions:", regions);
+    papers.forEach(paper => {
 
-    regions.sort();
+        if(paper.type == type){
 
-    regions.forEach(region => {
+            if(!regions.includes(paper.region)){
+                regions.push(paper.region);
+            }
 
-        const option = document.createElement("option");
+        }
+
+    });
+
+
+    regions.forEach(region=>{
+
+        let option = document.createElement("option");
 
         option.value = region;
 
