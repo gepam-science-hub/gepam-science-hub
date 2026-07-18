@@ -47,8 +47,10 @@ function loadRegions() {
     if (!form || !subject || !type) return;
 
     const papers = pastPapers[form][subject].filter(
-        paper => paper.type.toLowerCase() === type.toLowerCase()
-    );
+    paper => paper.type.toLowerCase() === type.toLowerCase()
+);
+
+console.log(papers);
 
     const regions = [...new Set(papers.map(p => p.region))];
     console.log("Regions:", regions);
