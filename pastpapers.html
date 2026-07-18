@@ -180,13 +180,11 @@ Access Physics and Chemistry examination papers from Form 1 to Form 6.
 
 
 const formSelect=document.getElementById("formSelect");
-
 const subjectSelect=document.getElementById("subjectSelect");
-
 const typeSelect=document.getElementById("typeSelect");
-
+const regionSelect=document.getElementById("regionSelect");
+const yearSelect=document.getElementById("yearSelect");
 const container=document.getElementById("papersContainer");
-
 
 
 formSelect.addEventListener("change",loadTypes);
@@ -220,9 +218,13 @@ typeSelect.appendChild(option);
 
 
 
-typeSelect.addEventListener("change",showPapers);
+typeSelect.addEventListener("change",loadRegions);
 
-subjectSelect.addEventListener("change",showPapers);
+regionSelect.addEventListener("change",loadYears);
+
+yearSelect.addEventListener("change",showPapers);
+
+subjectSelect.addEventListener("change",loadTypes);
 
 
 
