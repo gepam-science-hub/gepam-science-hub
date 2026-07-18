@@ -51,6 +51,7 @@ function loadRegions() {
     );
 
     const regions = [...new Set(papers.map(p => p.region))];
+    console.log("Regions:", regions);
 
     regions.sort();
 
