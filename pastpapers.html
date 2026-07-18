@@ -176,140 +176,17 @@ Access Physics and Chemistry examination papers from Form 1 to Form 6.
 
 
 
-<script>
 
 
-const formSelect=document.getElementById("formSelect");
-const subjectSelect=document.getElementById("subjectSelect");
-const typeSelect=document.getElementById("typeSelect");
-const regionSelect=document.getElementById("regionSelect");
-const yearSelect=document.getElementById("yearSelect");
-const container=document.getElementById("papersContainer");
 
 
-formSelect.addEventListener("change",loadTypes);
 
 
-function loadTypes(){
+<script src="pastpapers-config.js"></script>
 
-let form=formSelect.value;
+<script src="pastpapers-data.js"></script>
 
-typeSelect.innerHTML='<option value="">Choose Type</option>';
-
-
-if(form){
-
-pastPaperConfig[form].types.forEach(type=>{
-
-let option=document.createElement("option");
-
-option.value=type;
-
-option.textContent=type.replace("_"," ").toUpperCase();
-
-typeSelect.appendChild(option);
-
-});
-
-
-}
-
-}
-
-
-
-typeSelect.addEventListener("change",loadRegions);
-
-regionSelect.addEventListener("change",loadYears);
-
-yearSelect.addEventListener("change",showPapers);
-
-subjectSelect.addEventListener("change",loadTypes);
-
-
-
-function showPapers(){
-
-
-let form=formSelect.value;
-
-let subject=subjectSelect.value;
-
-let type=typeSelect.value;
-
-
-
-container.innerHTML="";
-
-
-
-if(!form || !subject || !type){
-
-container.innerHTML="<p>Please select all options.</p>";
-
-return;
-
-}
-
-
-
-let papers=pastPapers[form][subject].filter(
-
-paper=>paper.type===type
-
-);
-
-
-
-if(papers.length===0){
-
-container.innerHTML="<p>No papers uploaded yet.</p>";
-
-return;
-
-}
-
-
-
-papers.forEach(paper=>{
-
-
-let card=document.createElement("div");
-
-card.className="card";
-
-
-card.innerHTML=`
-
-<h3>${paper.title}</h3>
-
-<p>
-${paper.region.toUpperCase()} - ${paper.year}
-</p>
-
-<a href="${paper.file}" target="_blank">
-
-<button>
-Open PDF
-</button>
-
-</a>
-
-`;
-
-
-container.appendChild(card);
-
-
-});
-
-
-}
-
-
-
-</script>
-
+<script src="pastpapers.js"></script>
 
 </body>
 
