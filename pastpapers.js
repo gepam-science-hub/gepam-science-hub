@@ -47,7 +47,7 @@ function loadRegions() {
     if (!form || !subject || !type) return;
 
     const papers = pastPapers[form][subject].filter(
-        paper => paper.type === type
+        paper => paper.type.toLowerCase() === type.toLowerCase()
     );
 
     const regions = [...new Set(papers.map(p => p.region))];
@@ -83,8 +83,8 @@ function loadYears() {
 
     const papers = pastPapers[form][subject].filter(
         paper =>
-            paper.type === type &&
-            paper.region === region
+            paper.type.toLowerCase() === type.toLowerCase() &&
+            paper.region.toLowerCase() === region.toLowerCase()
     );
 
     const years = [...new Set(papers.map(p => p.year))];
@@ -128,10 +128,8 @@ function showPapers(){
 
         paper =>
 
-            paper.type === type &&
-
-            paper.region === region &&
-
+            paper.type.toLowerCase() === type.toLowerCase() &&
+            paper.region.toLowerCase() === region.toLowerCase() &&
             paper.year == year
 
     );
