@@ -75,7 +75,9 @@ chemistry: [
 
 ]
 
-}
+},
+
+    
 // Helper function for adding papers easily
 
 function addPaper(form, subject, title, type, region, year, file){
@@ -94,7 +96,7 @@ function addPaper(form, subject, title, type, region, year, file){
 
     });
 
-}
+},
 
 
 // FORM 1 SAMPLE STRUCTURE
@@ -143,6 +145,8 @@ addPaper(
 2025,
 "pastpapers/form2/chemistry/mock/mbeya/2025/paper1.pdf"
 );
+
+
  // FORM 3 SAMPLE STRUCTURE
 
 addPaper(
@@ -201,6 +205,8 @@ addPaper(
 2025,
 "pastpapers/form4/chemistry/pre_necta/mbeya/2025/paper1.pdf"
 );
+
+
 // FORM 4 MORE PAPERS
 
 
@@ -273,6 +279,7 @@ addPaper(
 "pastpapers/form5/chemistry/joint/shinyanga/2025/paper1.pdf"
 );
 
+
 // FORM 5 MORE PAPERS
 
 
@@ -344,6 +351,7 @@ addPaper(
 2025,
 "pastpapers/form6/chemistry/annual/dodoma/2025/paper1.pdf"
 );
+
 
 // FORM 6 MORE PAPERS
 
@@ -422,6 +430,7 @@ const years = [
 2025,
 2026
 ];
+
 // ADDITIONAL FORM 1 PAPERS
 
 
@@ -703,6 +712,8 @@ addPaper(
 2024,
 "pastpapers/form6/chemistry/annual/kagera/2024/paper1.pdf"
 );
+
+
 // FINAL SUPPORT DATA
 
 
@@ -757,4 +768,4 @@ addPaper(
 console.log(
 "GEPAM Science Hub Past Papers Database Loaded Successfully"
 );
-};
+}
