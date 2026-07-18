@@ -104,3 +104,81 @@ function loadYears() {
     });
 
 }
+// Show Papers
+
+function showPapers(){
+
+    container.innerHTML = "";
+
+    const form = formSelect.value;
+    const subject = subjectSelect.value;
+    const type = typeSelect.value;
+    const region = regionSelect.value;
+    const year = yearSelect.value;
+
+    if(!form || !subject || !type || !region || !year){
+
+        container.innerHTML="<p>Please select all options.</p>";
+
+        return;
+
+    }
+
+    const papers = pastPapers[form][subject].filter(
+
+        paper =>
+
+            paper.type === type &&
+
+            paper.region === region &&
+
+            paper.year == year
+
+    );
+
+    if(papers.length===0){
+
+        container.innerHTML="<p>No papers uploaded yet.</p>";
+
+        return;
+
+    }
+
+    papers.forEach(paper=>{
+
+        const card=document.createElement("div");
+
+        card.className="card";
+
+        card.innerHTML=`
+
+        <h3>${paper.title}</h3>
+
+        <p><strong>Region:</strong> ${paper.region}</p>
+
+        <p><strong>Year:</strong> ${paper.year}</p>
+
+        <a href="${paper.file}" target="_blank">
+
+        <button>📄 Open PDF</button>
+
+        </a>
+
+        `;
+
+        container.appendChild(card);
+
+    });
+
+        }
+// Event Listeners
+
+formSelect.addEventListener("change", loadTypes);
+
+subjectSelect.addEventListener("change", loadTypes);
+
+typeSelect.addEventListener("change", loadRegions);
+
+regionSelect.addEventListener("change", loadYears);
+
+yearSelect.addEventListener("change", showPapers);
