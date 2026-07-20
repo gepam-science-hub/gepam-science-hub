@@ -1,191 +1,227 @@
-// GEPAM Science Hub Past Papers System
+// ==========================================
+// GEPAM SCIENCE HUB
+// PAST PAPERS DATABASE V2
+// ==========================================
 
-const formSelect = document.getElementById("formSelect");
-const subjectSelect = document.getElementById("subjectSelect");
-const typeSelect = document.getElementById("typeSelect");
-const regionSelect = document.getElementById("regionSelect");
-const yearSelect = document.getElementById("yearSelect");
-const container = document.getElementById("papersContainer");
 
-// Load Examination Types
-function loadTypes() {
+// -----------------------------
+// DATABASE
+// -----------------------------
 
-    typeSelect.innerHTML = '<option value="">Choose Type</option>';
-    regionSelect.innerHTML = '<option value="">Choose Region</option>';
-    yearSelect.innerHTML = '<option value="">Choose Year</option>';
-    container.innerHTML = "<p>Select options above to view papers.</p>";
+const pastPapers = {
+    form1: { physics: [], chemistry: [] },
+    form2: { physics: [], chemistry: [] },
+    form3: { physics: [], chemistry: [] },
+    form4: { physics: [], chemistry: [] },
+    form5: { physics: [], chemistry: [] },
+    form6: { physics: [], chemistry: [] }
+};
 
-    const form = formSelect.value;
 
-    if (!form) return;
+// -----------------------------
+// ADD PAPER FUNCTION
+// -----------------------------
 
-    pastPaperConfig[form].types.forEach(type => {
+function addPaper(form, subject, title, type, region, year, file){
 
-        const option = document.createElement("option");
+    pastPapers[form][subject].push({
 
-        option.value = type;
-
-        option.textContent = type.replaceAll("_"," ").toUpperCase();
-
-        typeSelect.appendChild(option);
+        title,
+        type,
+        region,
+        year,
+        file
 
     });
 
 }
 
-function loadRegions(){
 
-    regionSelect.innerHTML = '<option value="">Choose Region</option>';
+// -----------------------------
+// YEARS
+// -----------------------------
 
-    let form = formSelect.value;
-    let subject = subjectSelect.value;
-    let type = typeSelect.value;
+const YEARS = [
 
-    if(!form || !subject || !type){
-        return;
-    }
+2023,
+2024,
+2025,
+2026
 
-    let papers = pastPapers[form][subject];
+];
 
-    let regions = [];
 
-    papers.forEach(paper => {
+// -----------------------------
+// REGIONS
+// -----------------------------
 
-        if(paper.type == type){
+const REGIONS = [
 
-            if(!regions.includes(paper.region)){
-                regions.push(paper.region);
+"dar_es_salaam",
+"dodoma",
+"arusha",
+"mbeya",
+"kagera",
+"shinyanga"
+
+];
+
+
+// -----------------------------
+// SUBJECTS
+// -----------------------------
+
+const SUBJECTS = [
+
+"physics",
+"chemistry"
+
+];
+
+
+// -----------------------------
+// FORMS
+// -----------------------------
+
+const FORMS = [
+
+"form1",
+"form2",
+"form3",
+"form4",
+"form5",
+"form6"
+
+];
+
+
+// -----------------------------
+// TYPES
+// -----------------------------
+
+const TYPES = {
+
+form1:[
+"annual",
+"terminal",
+"joint",
+"mock"
+],
+
+form2:[
+"annual",
+"terminal",
+"joint",
+"mock"
+],
+
+form3:[
+"annual",
+"terminal",
+"joint",
+"mock"
+],
+
+form4:[
+"annual",
+"mock",
+"joint",
+"pre_necta",
+"necta"
+],
+
+form5:[
+"annual",
+"joint",
+"mock"
+],
+
+form6:[
+"annual",
+"joint",
+"mock",
+"acsee"
+]
+
+};// ==========================================
+// GEPAM DATABASE GENERATOR
+// ==========================================
+
+FORMS.forEach(form => {
+
+    SUBJECTS.forEach(subject => {
+
+        TYPES[form].forEach(type => {
+
+            // NECTA / ACSEE hutumia NATIONAL pekee
+            if(type === "necta" || type === "acsee"){
+
+                YEARS.forEach(year => {
+
+                    addPaper(
+
+                        form,
+
+                        subject,
+
+                        `${form.toUpperCase()} ${subject.toUpperCase()} ${type.toUpperCase()} ${year}`,
+
+                        type,
+
+                        "national",
+
+                        year,
+
+                        `pastpapers/${form}/${subject}/${type}/national/${year}/paper1.pdf`
+
+                    );
+
+                });
+
             }
 
-        }
+            // Types nyingine hutumia mikoa yote
+            else{
+
+                REGIONS.forEach(region => {
+
+                    YEARS.forEach(year => {
+
+                        addPaper(
+
+                            form,
+
+                            subject,
+
+                            `${region.replaceAll("_"," ").toUpperCase()} ${type.replaceAll("_"," ").toUpperCase()} ${subject.toUpperCase()} ${year}`,
+
+                            type,
+
+                            region,
+
+                            year,
+
+                            `pastpapers/${form}/${subject}/${type}/${region}/${year}/paper1.pdf`
+
+                        );
+
+                    });
+
+                });
+
+            }
+
+        });
 
     });
 
+});
 
-    regions.forEach(region=>{
 
-        let option = document.createElement("option");
+// ==========================================
+// DATABASE READY
+// ==========================================
 
-        option.value = region;
+console.log("GEPAM Science Hub Database Loaded Successfully");
 
-        option.textContent = region.toUpperCase();
-
-        regionSelect.appendChild(option);
-
-    });
-
-}
-
-// Load Years
-function loadYears() {
-
-    yearSelect.innerHTML = '<option value="">Choose Year</option>';
-    container.innerHTML = "<p>Select Year.</p>";
-
-    const form = formSelect.value;
-    const subject = subjectSelect.value;
-    const type = typeSelect.value;
-    const region = regionSelect.value;
-
-    if (!region) return;
-
-    const papers = pastPapers[form][subject].filter(
-        paper =>
-            paper.type.toLowerCase() === type.toLowerCase() &&
-            paper.region.toLowerCase() === region.toLowerCase()
-    );
-
-    const years = [...new Set(papers.map(p => p.year))];
-
-    years.sort((a,b)=>b-a);
-
-    years.forEach(year => {
-
-        const option = document.createElement("option");
-
-        option.value = year;
-
-        option.textContent = year;
-
-        yearSelect.appendChild(option);
-
-    });
-
-}
-// Show Papers
-
-function showPapers(){
-
-    container.innerHTML = "";
-
-    const form = formSelect.value;
-    const subject = subjectSelect.value;
-    const type = typeSelect.value;
-    const region = regionSelect.value;
-    const year = yearSelect.value;
-
-    if(!form || !subject || !type || !region || !year){
-
-        container.innerHTML="<p>Please select all options.</p>";
-
-        return;
-
-    }
-
-    const papers = pastPapers[form][subject].filter(
-
-        paper =>
-
-            paper.type.toLowerCase() === type.toLowerCase() &&
-            paper.region.toLowerCase() === region.toLowerCase() &&
-            paper.year == year
-
-    );
-
-    if(papers.length===0){
-
-        container.innerHTML="<p>No papers uploaded yet.</p>";
-
-        return;
-
-    }
-
-    papers.forEach(paper=>{
-
-        const card=document.createElement("div");
-
-        card.className="card";
-
-        card.innerHTML=`
-
-        <h3>${paper.title}</h3>
-
-        <p><strong>Region:</strong> ${paper.region}</p>
-
-        <p><strong>Year:</strong> ${paper.year}</p>
-
-        <a href="${paper.file}" target="_blank">
-
-        <button>📄 Open PDF</button>
-
-        </a>
-
-        `;
-
-        container.appendChild(card);
-
-    });
-
-        }
-// Event Listeners
-
-formSelect.addEventListener("change", loadTypes);
-
-subjectSelect.addEventListener("change", loadTypes);
-
-typeSelect.addEventListener("change", loadRegions);
-
-regionSelect.addEventListener("change", loadYears);
-
-yearSelect.addEventListener("change", showPapers);
-console.log("DATA CHECK", pastPapers);
+console.log(pastPapers);
