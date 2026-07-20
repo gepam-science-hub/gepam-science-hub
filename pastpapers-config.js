@@ -62,7 +62,7 @@ const pastPaperConfig = {
     form6: {
         subjects: ["physics", "chemistry"],
         types: [
-            "necta",
+            "acsee",
             "mock",
             "pre_necta",
             "joint",
