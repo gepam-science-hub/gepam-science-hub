@@ -1144,6 +1144,97 @@ addPaper(
 "pastpapers/form2/chemistry/annual/shinyanga/2026/paper1.pdf"
 );
 // =====================================
+// FORM 2 FTNA (NATIONAL)
+// PHYSICS
+// =====================================
+
+addPaper(
+"form2",
+"physics",
+"FTNA Physics 2023",
+"ftna",
+"national",
+2023,
+"pastpapers/form2/physics/ftna/national/2023/physics.pdf"
+);
+
+addPaper(
+"form2",
+"physics",
+"FTNA Physics 2024",
+"ftna",
+"national",
+2024,
+"pastpapers/form2/physics/ftna/national/2024/physics.pdf"
+);
+
+addPaper(
+"form2",
+"physics",
+"FTNA Physics 2025",
+"ftna",
+"national",
+2025,
+"pastpapers/form2/physics/ftna/national/2025/physics.pdf"
+);
+
+addPaper(
+"form2",
+"physics",
+"FTNA Physics 2026",
+"ftna",
+"national",
+2026,
+"pastpapers/form2/physics/ftna/national/2026/physics.pdf"
+);
+
+
+// =====================================
+// FORM 2 FTNA (NATIONAL)
+// CHEMISTRY
+// =====================================
+
+addPaper(
+"form2",
+"chemistry",
+"FTNA Chemistry 2023",
+"ftna",
+"national",
+2023,
+"pastpapers/form2/chemistry/ftna/national/2023/chemistry.pdf"
+);
+
+addPaper(
+"form2",
+"chemistry",
+"FTNA Chemistry 2024",
+"ftna",
+"national",
+2024,
+"pastpapers/form2/chemistry/ftna/national/2024/chemistry.pdf"
+);
+
+addPaper(
+"form2",
+"chemistry",
+"FTNA Chemistry 2025",
+"ftna",
+"national",
+2025,
+"pastpapers/form2/chemistry/ftna/national/2025/chemistry.pdf"
+);
+
+addPaper(
+"form2",
+"chemistry",
+"FTNA Chemistry 2026",
+"ftna",
+"national",
+2026,
+"pastpapers/form2/chemistry/ftna/national/2026/chemistry.pdf"
+);
+
+// =====================================
 // FORM 3 PHYSICS
 // DAR ES SALAAM + DODOMA
 // =====================================
@@ -1584,6 +1675,97 @@ addPaper(
 2025,
 "pastpapers/form4/chemistry/joint/national/2025/chemistry.pdf"
 );
+// =====================================
+// FORM 4 CSEE (NECTA)
+// PHYSICS
+// =====================================
+
+addPaper(
+"form4",
+"physics",
+"CSEE Physics 2023",
+"necta",
+"national",
+2023,
+"pastpapers/form4/physics/necta/national/2023/physics.pdf"
+);
+
+addPaper(
+"form4",
+"physics",
+"CSEE Physics 2024",
+"necta",
+"national",
+2024,
+"pastpapers/form4/physics/necta/national/2024/physics.pdf"
+);
+
+addPaper(
+"form4",
+"physics",
+"CSEE Physics 2025",
+"necta",
+"national",
+2025,
+"pastpapers/form4/physics/necta/national/2025/physics.pdf"
+);
+
+addPaper(
+"form4",
+"physics",
+"CSEE Physics 2026",
+"necta",
+"national",
+2026,
+"pastpapers/form4/physics/necta/national/2026/physics.pdf"
+);
+
+
+// =====================================
+// FORM 4 CSEE (NECTA)
+// CHEMISTRY
+// =====================================
+
+addPaper(
+"form4",
+"chemistry",
+"CSEE Chemistry 2023",
+"necta",
+"national",
+2023,
+"pastpapers/form4/chemistry/necta/national/2023/chemistry.pdf"
+);
+
+addPaper(
+"form4",
+"chemistry",
+"CSEE Chemistry 2024",
+"necta",
+"national",
+2024,
+"pastpapers/form4/chemistry/necta/national/2024/chemistry.pdf"
+);
+
+addPaper(
+"form4",
+"chemistry",
+"CSEE Chemistry 2025",
+"necta",
+"national",
+2025,
+"pastpapers/form4/chemistry/necta/national/2025/chemistry.pdf"
+);
+
+addPaper(
+"form4",
+"chemistry",
+"CSEE Chemistry 2026",
+"necta",
+"national",
+2026,
+"pastpapers/form4/chemistry/necta/national/2026/chemistry.pdf"
+);
+
 
 // =====================================
 // FORM 5 PHYSICS
@@ -2052,4 +2234,94 @@ addPaper(
 "national",
 2025,
 "pastpapers/form6/chemistry/mock/national/2025/chemistry.pdf"
+);
+// =====================================
+// FORM 6 ACSEE (NECTA)
+// PHYSICS
+// =====================================
+
+addPaper(
+"form6",
+"physics",
+"ACSEE Physics 2023",
+"acsee",
+"national",
+2023,
+"pastpapers/form6/physics/acsee/national/2023/physics.pdf"
+);
+
+addPaper(
+"form6",
+"physics",
+"ACSEE Physics 2024",
+"acsee",
+"national",
+2024,
+"pastpapers/form6/physics/acsee/national/2024/physics.pdf"
+);
+
+addPaper(
+"form6",
+"physics",
+"ACSEE Physics 2025",
+"acsee",
+"national",
+2025,
+"pastpapers/form6/physics/acsee/national/2025/physics.pdf"
+);
+
+addPaper(
+"form6",
+"physics",
+"ACSEE Physics 2026",
+"acsee",
+"national",
+2026,
+"pastpapers/form6/physics/acsee/national/2026/physics.pdf"
+);
+
+
+// =====================================
+// FORM 6 ACSEE (NECTA)
+// CHEMISTRY
+// =====================================
+
+addPaper(
+"form6",
+"chemistry",
+"ACSEE Chemistry 2023",
+"acsee",
+"national",
+2023,
+"pastpapers/form6/chemistry/acsee/national/2023/chemistry.pdf"
+);
+
+addPaper(
+"form6",
+"chemistry",
+"ACSEE Chemistry 2024",
+"acsee",
+"national",
+2024,
+"pastpapers/form6/chemistry/acsee/national/2024/chemistry.pdf"
+);
+
+addPaper(
+"form6",
+"chemistry",
+"ACSEE Chemistry 2025",
+"acsee",
+"national",
+2025,
+"pastpapers/form6/chemistry/acsee/national/2025/chemistry.pdf"
+);
+
+addPaper(
+"form6",
+"chemistry",
+"ACSEE Chemistry 2026",
+"acsee",
+"national",
+2026,
+"pastpapers/form6/chemistry/acsee/national/2026/chemistry.pdf"
 );
