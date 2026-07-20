@@ -1651,30 +1651,147 @@ addPaper(
 2025,
 "pastpapers/form4/chemistry/pre_necta/national/2025/chemistry.pdf"
 );
+// =====================================
+// FORM 4 JOINT EXAMINATIONS
+// PHYSICS
+// =====================================
 
 
-// JOINT EXAMS
+// DAR ES SALAAM
 
-addPaper(
-"form4",
-"physics",
-"Joint Physics Examination 2025",
-"joint",
-"national",
-2025,
-"pastpapers/form4/physics/joint/national/2025/physics.pdf"
-);
+addPaper("form4","physics","Dar es Salaam Joint Physics 2023","joint","dar_es_salaam",2023,"pastpapers/form4/physics/joint/dar_es_salaam/2023/paper1.pdf");
+
+addPaper("form4","physics","Dar es Salaam Joint Physics 2024","joint","dar_es_salaam",2024,"pastpapers/form4/physics/joint/dar_es_salaam/2024/paper1.pdf");
+
+addPaper("form4","physics","Dar es Salaam Joint Physics 2025","joint","dar_es_salaam",2025,"pastpapers/form4/physics/joint/dar_es_salaam/2025/paper1.pdf");
+
+addPaper("form4","physics","Dar es Salaam Joint Physics 2026","joint","dar_es_salaam",2026,"pastpapers/form4/physics/joint/dar_es_salaam/2026/paper1.pdf");
 
 
-addPaper(
-"form4",
-"chemistry",
-"Joint Chemistry Examination 2025",
-"joint",
-"national",
-2025,
-"pastpapers/form4/chemistry/joint/national/2025/chemistry.pdf"
-);
+// DODOMA
+
+addPaper("form4","physics","Dodoma Joint Physics 2023","joint","dodoma",2023,"pastpapers/form4/physics/joint/dodoma/2023/paper1.pdf");
+
+addPaper("form4","physics","Dodoma Joint Physics 2024","joint","dodoma",2024,"pastpapers/form4/physics/joint/dodoma/2024/paper1.pdf");
+
+addPaper("form4","physics","Dodoma Joint Physics 2025","joint","dodoma",2025,"pastpapers/form4/physics/joint/dodoma/2025/paper1.pdf");
+
+addPaper("form4","physics","Dodoma Joint Physics 2026","joint","dodoma",2026,"pastpapers/form4/physics/joint/dodoma/2026/paper1.pdf");
+
+
+// ARUSHA
+
+addPaper("form4","physics","Arusha Joint Physics 2023","joint","arusha",2023,"pastpapers/form4/physics/joint/arusha/2023/paper1.pdf");
+
+addPaper("form4","physics","Arusha Joint Physics 2024","joint","arusha",2024,"pastpapers/form4/physics/joint/arusha/2024/paper1.pdf");
+
+addPaper("form4","physics","Arusha Joint Physics 2025","joint","arusha",2025,"pastpapers/form4/physics/joint/arusha/2025/paper1.pdf");
+
+addPaper("form4","physics","Arusha Joint Physics 2026","joint","arusha",2026,"pastpapers/form4/physics/joint/arusha/2026/paper1.pdf");
+
+
+// MBEYA
+
+addPaper("form4","physics","Mbeya Joint Physics 2023","joint","mbeya",2023,"pastpapers/form4/physics/joint/mbeya/2023/paper1.pdf");
+
+addPaper("form4","physics","Mbeya Joint Physics 2024","joint","mbeya",2024,"pastpapers/form4/physics/joint/mbeya/2024/paper1.pdf");
+
+addPaper("form4","physics","Mbeya Joint Physics 2025","joint","mbeya",2025,"pastpapers/form4/physics/joint/mbeya/2025/paper1.pdf");
+
+addPaper("form4","physics","Mbeya Joint Physics 2026","joint","mbeya",2026,"pastpapers/form4/physics/joint/mbeya/2026/paper1.pdf");
+
+
+// KAGERA
+
+addPaper("form4","physics","Kagera Joint Physics 2023","joint","kagera",2023,"pastpapers/form4/physics/joint/kagera/2023/paper1.pdf");
+
+addPaper("form4","physics","Kagera Joint Physics 2024","joint","kagera",2024,"pastpapers/form4/physics/joint/kagera/2024/paper1.pdf");
+
+addPaper("form4","physics","Kagera Joint Physics 2025","joint","kagera",2025,"pastpapers/form4/physics/joint/kagera/2025/paper1.pdf");
+
+addPaper("form4","physics","Kagera Joint Physics 2026","joint","kagera",2026,"pastpapers/form4/physics/joint/kagera/2026/paper1.pdf");
+
+
+// SHINYANGA
+
+addPaper("form4","physics","Shinyanga Joint Physics 2023","joint","shinyanga",2023,"pastpapers/form4/physics/joint/shinyanga/2023/paper1.pdf");
+
+addPaper("form4","physics","Shinyanga Joint Physics 2024","joint","shinyanga",2024,"pastpapers/form4/physics/joint/shinyanga/2024/paper1.pdf");
+
+addPaper("form4","physics","Shinyanga Joint Physics 2025","joint","shinyanga",2025,"pastpapers/form4/physics/joint/shinyanga/2025/paper1.pdf");
+
+addPaper("form4","physics","Shinyanga Joint Physics 2026","joint","shinyanga",2026,"pastpapers/form4/physics/joint/shinyanga/2026/paper1.pdf");
+// =====================================
+// FORM 4 JOINT EXAMINATIONS
+// CHEMISTRY
+// =====================================
+
+
+// DAR ES SALAAM
+
+addPaper("form4","chemistry","Dar es Salaam Joint Chemistry 2023","joint","dar_es_salaam",2023,"pastpapers/form4/chemistry/joint/dar_es_salaam/2023/paper1.pdf");
+
+addPaper("form4","chemistry","Dar es Salaam Joint Chemistry 2024","joint","dar_es_salaam",2024,"pastpapers/form4/chemistry/joint/dar_es_salaam/2024/paper1.pdf");
+
+addPaper("form4","chemistry","Dar es Salaam Joint Chemistry 2025","joint","dar_es_salaam",2025,"pastpapers/form4/chemistry/joint/dar_es_salaam/2025/paper1.pdf");
+
+addPaper("form4","chemistry","Dar es Salaam Joint Chemistry 2026","joint","dar_es_salaam",2026,"pastpapers/form4/chemistry/joint/dar_es_salaam/2026/paper1.pdf");
+
+
+// DODOMA
+
+addPaper("form4","chemistry","Dodoma Joint Chemistry 2023","joint","dodoma",2023,"pastpapers/form4/chemistry/joint/dodoma/2023/paper1.pdf");
+
+addPaper("form4","chemistry","Dodoma Joint Chemistry 2024","joint","dodoma",2024,"pastpapers/form4/chemistry/joint/dodoma/2024/paper1.pdf");
+
+addPaper("form4","chemistry","Dodoma Joint Chemistry 2025","joint","dodoma",2025,"pastpapers/form4/chemistry/joint/dodoma/2025/paper1.pdf");
+
+addPaper("form4","chemistry","Dodoma Joint Chemistry 2026","joint","dodoma",2026,"pastpapers/form4/chemistry/joint/dodoma/2026/paper1.pdf");
+
+
+// ARUSHA
+
+addPaper("form4","chemistry","Arusha Joint Chemistry 2023","joint","arusha",2023,"pastpapers/form4/chemistry/joint/arusha/2023/paper1.pdf");
+
+addPaper("form4","chemistry","Arusha Joint Chemistry 2024","joint","arusha",2024,"pastpapers/form4/chemistry/joint/arusha/2024/paper1.pdf");
+
+addPaper("form4","chemistry","Arusha Joint Chemistry 2025","joint","arusha",2025,"pastpapers/form4/chemistry/joint/arusha/2025/paper1.pdf");
+
+addPaper("form4","chemistry","Arusha Joint Chemistry 2026","joint","arusha",2026,"pastpapers/form4/chemistry/joint/arusha/2026/paper1.pdf");
+
+
+// MBEYA
+
+addPaper("form4","chemistry","Mbeya Joint Chemistry 2023","joint","mbeya",2023,"pastpapers/form4/chemistry/joint/mbeya/2023/paper1.pdf");
+
+addPaper("form4","chemistry","Mbeya Joint Chemistry 2024","joint","mbeya",2024,"pastpapers/form4/chemistry/joint/mbeya/2024/paper1.pdf");
+
+addPaper("form4","chemistry","Mbeya Joint Chemistry 2025","joint","mbeya",2025,"pastpapers/form4/chemistry/joint/mbeya/2025/paper1.pdf");
+
+addPaper("form4","chemistry","Mbeya Joint Chemistry 2026","joint","mbeya",2026,"pastpapers/form4/chemistry/joint/mbeya/2026/paper1.pdf");
+
+
+// KAGERA
+
+addPaper("form4","chemistry","Kagera Joint Chemistry 2023","joint","kagera",2023,"pastpapers/form4/chemistry/joint/kagera/2023/paper1.pdf");
+
+addPaper("form4","chemistry","Kagera Joint Chemistry 2024","joint","kagera",2024,"pastpapers/form4/chemistry/joint/kagera/2024/paper1.pdf");
+
+addPaper("form4","chemistry","Kagera Joint Chemistry 2025","joint","kagera",2025,"pastpapers/form4/chemistry/joint/kagera/2025/paper1.pdf");
+
+addPaper("form4","chemistry","Kagera Joint Chemistry 2026","joint","kagera",2026,"pastpapers/form4/chemistry/joint/kagera/2026/paper1.pdf");
+
+
+// SHINYANGA
+
+addPaper("form4","chemistry","Shinyanga Joint Chemistry 2023","joint","shinyanga",2023,"pastpapers/form4/chemistry/joint/shinyanga/2023/paper1.pdf");
+
+addPaper("form4","chemistry","Shinyanga Joint Chemistry 2024","joint","shinyanga",2024,"pastpapers/form4/chemistry/joint/shinyanga/2024/paper1.pdf");
+
+addPaper("form4","chemistry","Shinyanga Joint Chemistry 2025","joint","shinyanga",2025,"pastpapers/form4/chemistry/joint/shinyanga/2025/paper1.pdf");
+
+addPaper("form4","chemistry","Shinyanga Joint Chemistry 2026","joint","shinyanga",2026,"pastpapers/form4/chemistry/joint/shinyanga/2026/paper1.pdf");
+
 // =====================================
 // FORM 4 CSEE (NECTA)
 // PHYSICS
