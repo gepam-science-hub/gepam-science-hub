@@ -2102,77 +2102,6 @@ addPaper("form6","chemistry","Shinyanga Annual Chemistry 2024","annual","shinyan
 addPaper("form6","chemistry","Shinyanga Annual Chemistry 2025","annual","shinyanga",2025,"pastpapers/form6/chemistry/annual/shinyanga/2025/paper1.pdf");
 
 addPaper("form6","chemistry","Shinyanga Annual Chemistry 2026","annual","shinyanga",2026,"pastpapers/form6/chemistry/annual/shinyanga/2026/paper1.pdf");
-// =====================================
-// FORM 6 NECTA / ACSEE
-// =====================================
-
-
-// PHYSICS ACSEE
-
-addPaper(
-"form6",
-"physics",
-"NECTA ACSEE Physics 2023",
-"acsee",
-"national",
-2023,
-"pastpapers/form6/physics/acsee/national/2023/physics.pdf"
-);
-
-addPaper(
-"form6",
-"physics",
-"NECTA ACSEE Physics 2024",
-"acsee",
-"national",
-2024,
-"pastpapers/form6/physics/acsee/national/2024/physics.pdf"
-);
-
-addPaper(
-"form6",
-"physics",
-"NECTA ACSEE Physics 2025",
-"acsee",
-"national",
-2025,
-"pastpapers/form6/physics/acsee/national/2025/physics.pdf"
-);
-
-
-// CHEMISTRY ACSEE
-
-addPaper(
-"form6",
-"chemistry",
-"NECTA ACSEE Chemistry 2023",
-"acsee",
-"national",
-2023,
-"pastpapers/form6/chemistry/acsee/national/2023/chemistry.pdf"
-);
-
-addPaper(
-"form6",
-"chemistry",
-"NECTA ACSEE Chemistry 2024",
-"acsee",
-"national",
-2024,
-"pastpapers/form6/chemistry/acsee/national/2024/chemistry.pdf"
-);
-
-addPaper(
-"form6",
-"chemistry",
-"NECTA ACSEE Chemistry 2025",
-"acsee",
-"national",
-2025,
-"pastpapers/form6/chemistry/acsee/national/2025/chemistry.pdf"
-);
-
-
 
 // =====================================
 // FORM 6 JOINT EXAMS
@@ -2213,28 +2142,89 @@ addPaper(
 
 // PHYSICS
 
-addPaper(
-"form6",
-"physics",
-"Form Six Mock Physics 2025",
-"mock",
-"national",
-2025,
-"pastpapers/form6/physics/mock/national/2025/physics.pdf"
-);
+// =====================================
+// FORM 6 MOCK EXAMINATIONS
+// =====================================
 
+// ---------- PHYSICS ----------
 
+// DAR ES SALAAM
+addPaper("form6","physics","Dar es Salaam Mock Physics 2023","mock","dar_es_salaam",2023,"pastpapers/form6/physics/mock/dar_es_salaam/2023/paper1.pdf");
+addPaper("form6","physics","Dar es Salaam Mock Physics 2024","mock","dar_es_salaam",2024,"pastpapers/form6/physics/mock/dar_es_salaam/2024/paper1.pdf");
+addPaper("form6","physics","Dar es Salaam Mock Physics 2025","mock","dar_es_salaam",2025,"pastpapers/form6/physics/mock/dar_es_salaam/2025/paper1.pdf");
+addPaper("form6","physics","Dar es Salaam Mock Physics 2026","mock","dar_es_salaam",2026,"pastpapers/form6/physics/mock/dar_es_salaam/2026/paper1.pdf");
+
+// DODOMA
+addPaper("form6","physics","Dodoma Mock Physics 2023","mock","dodoma",2023,"pastpapers/form6/physics/mock/dodoma/2023/paper1.pdf");
+addPaper("form6","physics","Dodoma Mock Physics 2024","mock","dodoma",2024,"pastpapers/form6/physics/mock/dodoma/2024/paper1.pdf");
+addPaper("form6","physics","Dodoma Mock Physics 2025","mock","dodoma",2025,"pastpapers/form6/physics/mock/dodoma/2025/paper1.pdf");
+addPaper("form6","physics","Dodoma Mock Physics 2026","mock","dodoma",2026,"pastpapers/form6/physics/mock/dodoma/2026/paper1.pdf");
+
+// ARUSHA
+addPaper("form6","physics","Arusha Mock Physics 2023","mock","arusha",2023,"pastpapers/form6/physics/mock/arusha/2023/paper1.pdf");
+addPaper("form6","physics","Arusha Mock Physics 2024","mock","arusha",2024,"pastpapers/form6/physics/mock/arusha/2024/paper1.pdf");
+addPaper("form6","physics","Arusha Mock Physics 2025","mock","arusha",2025,"pastpapers/form6/physics/mock/arusha/2025/paper1.pdf");
+addPaper("form6","physics","Arusha Mock Physics 2026","mock","arusha",2026,"pastpapers/form6/physics/mock/arusha/2026/paper1.pdf");
+
+// MBEYA
+addPaper("form6","physics","Mbeya Mock Physics 2023","mock","mbeya",2023,"pastpapers/form6/physics/mock/mbeya/2023/paper1.pdf");
+addPaper("form6","physics","Mbeya Mock Physics 2024","mock","mbeya",2024,"pastpapers/form6/physics/mock/mbeya/2024/paper1.pdf");
+addPaper("form6","physics","Mbeya Mock Physics 2025","mock","mbeya",2025,"pastpapers/form6/physics/mock/mbeya/2025/paper1.pdf");
+addPaper("form6","physics","Mbeya Mock Physics 2026","mock","mbeya",2026,"pastpapers/form6/physics/mock/mbeya/2026/paper1.pdf");
+
+// KAGERA
+addPaper("form6","physics","Kagera Mock Physics 2023","mock","kagera",2023,"pastpapers/form6/physics/mock/kagera/2023/paper1.pdf");
+addPaper("form6","physics","Kagera Mock Physics 2024","mock","kagera",2024,"pastpapers/form6/physics/mock/kagera/2024/paper1.pdf");
+addPaper("form6","physics","Kagera Mock Physics 2025","mock","kagera",2025,"pastpapers/form6/physics/mock/kagera/2025/paper1.pdf");
+addPaper("form6","physics","Kagera Mock Physics 2026","mock","kagera",2026,"pastpapers/form6/physics/mock/kagera/2026/paper1.pdf");
+
+// SHINYANGA
+addPaper("form6","physics","Shinyanga Mock Physics 2023","mock","shinyanga",2023,"pastpapers/form6/physics/mock/shinyanga/2023/paper1.pdf");
+addPaper("form6","physics","Shinyanga Mock Physics 2024","mock","shinyanga",2024,"pastpapers/form6/physics/mock/shinyanga/2024/paper1.pdf");
+addPaper("form6","physics","Shinyanga Mock Physics 2025","mock","shinyanga",2025,"pastpapers/form6/physics/mock/shinyanga/2025/paper1.pdf");
+addPaper("form6","physics","Shinyanga Mock Physics 2026","mock","shinyanga",2026,"pastpapers/form6/physics/mock/shinyanga/2026/paper1.pdf");
+
+// =====================================
+// FORM 6 MOCK EXAMINATIONS
 // CHEMISTRY
+// =====================================
 
-addPaper(
-"form6",
-"chemistry",
-"Form Six Mock Chemistry 2025",
-"mock",
-"national",
-2025,
-"pastpapers/form6/chemistry/mock/national/2025/chemistry.pdf"
-);
+// DAR ES SALAAM
+addPaper("form6","chemistry","Dar es Salaam Mock Chemistry 2023","mock","dar_es_salaam",2023,"pastpapers/form6/chemistry/mock/dar_es_salaam/2023/paper1.pdf");
+addPaper("form6","chemistry","Dar es Salaam Mock Chemistry 2024","mock","dar_es_salaam",2024,"pastpapers/form6/chemistry/mock/dar_es_salaam/2024/paper1.pdf");
+addPaper("form6","chemistry","Dar es Salaam Mock Chemistry 2025","mock","dar_es_salaam",2025,"pastpapers/form6/chemistry/mock/dar_es_salaam/2025/paper1.pdf");
+addPaper("form6","chemistry","Dar es Salaam Mock Chemistry 2026","mock","dar_es_salaam",2026,"pastpapers/form6/chemistry/mock/dar_es_salaam/2026/paper1.pdf");
+
+// DODOMA
+addPaper("form6","chemistry","Dodoma Mock Chemistry 2023","mock","dodoma",2023,"pastpapers/form6/chemistry/mock/dodoma/2023/paper1.pdf");
+addPaper("form6","chemistry","Dodoma Mock Chemistry 2024","mock","dodoma",2024,"pastpapers/form6/chemistry/mock/dodoma/2024/paper1.pdf");
+addPaper("form6","chemistry","Dodoma Mock Chemistry 2025","mock","dodoma",2025,"pastpapers/form6/chemistry/mock/dodoma/2025/paper1.pdf");
+addPaper("form6","chemistry","Dodoma Mock Chemistry 2026","mock","dodoma",2026,"pastpapers/form6/chemistry/mock/dodoma/2026/paper1.pdf");
+
+// ARUSHA
+addPaper("form6","chemistry","Arusha Mock Chemistry 2023","mock","arusha",2023,"pastpapers/form6/chemistry/mock/arusha/2023/paper1.pdf");
+addPaper("form6","chemistry","Arusha Mock Chemistry 2024","mock","arusha",2024,"pastpapers/form6/chemistry/mock/arusha/2024/paper1.pdf");
+addPaper("form6","chemistry","Arusha Mock Chemistry 2025","mock","arusha",2025,"pastpapers/form6/chemistry/mock/arusha/2025/paper1.pdf");
+addPaper("form6","chemistry","Arusha Mock Chemistry 2026","mock","arusha",2026,"pastpapers/form6/chemistry/mock/arusha/2026/paper1.pdf");
+
+// MBEYA
+addPaper("form6","chemistry","Mbeya Mock Chemistry 2023","mock","mbeya",2023,"pastpapers/form6/chemistry/mock/mbeya/2023/paper1.pdf");
+addPaper("form6","chemistry","Mbeya Mock Chemistry 2024","mock","mbeya",2024,"pastpapers/form6/chemistry/mock/mbeya/2024/paper1.pdf");
+addPaper("form6","chemistry","Mbeya Mock Chemistry 2025","mock","mbeya",2025,"pastpapers/form6/chemistry/mock/mbeya/2025/paper1.pdf");
+addPaper("form6","chemistry","Mbeya Mock Chemistry 2026","mock","mbeya",2026,"pastpapers/form6/chemistry/mock/mbeya/2026/paper1.pdf");
+
+// KAGERA
+addPaper("form6","chemistry","Kagera Mock Chemistry 2023","mock","kagera",2023,"pastpapers/form6/chemistry/mock/kagera/2023/paper1.pdf");
+addPaper("form6","chemistry","Kagera Mock Chemistry 2024","mock","kagera",2024,"pastpapers/form6/chemistry/mock/kagera/2024/paper1.pdf");
+addPaper("form6","chemistry","Kagera Mock Chemistry 2025","mock","kagera",2025,"pastpapers/form6/chemistry/mock/kagera/2025/paper1.pdf");
+addPaper("form6","chemistry","Kagera Mock Chemistry 2026","mock","kagera",2026,"pastpapers/form6/chemistry/mock/kagera/2026/paper1.pdf");
+
+// SHINYANGA
+addPaper("form6","chemistry","Shinyanga Mock Chemistry 2023","mock","shinyanga",2023,"pastpapers/form6/chemistry/mock/shinyanga/2023/paper1.pdf");
+addPaper("form6","chemistry","Shinyanga Mock Chemistry 2024","mock","shinyanga",2024,"pastpapers/form6/chemistry/mock/shinyanga/2024/paper1.pdf");
+addPaper("form6","chemistry","Shinyanga Mock Chemistry 2025","mock","shinyanga",2025,"pastpapers/form6/chemistry/mock/shinyanga/2025/paper1.pdf");
+addPaper("form6","chemistry","Shinyanga Mock Chemistry 2026","mock","shinyanga",2026,"pastpapers/form6/chemistry/mock/shinyanga/2026/paper1.pdf");
+
 // =====================================
 // FORM 6 ACSEE (NECTA)
 // PHYSICS
