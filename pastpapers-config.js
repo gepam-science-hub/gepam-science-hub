@@ -14,7 +14,7 @@ const pastPaperConfig = {
     form2: {
         subjects: ["physics", "chemistry"],
         types: [
-            "necta",
+            "ftna",
             "midterm",
             "terminal",
             "annual",
