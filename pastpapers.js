@@ -1,4 +1,4 @@
-// GEPAM Science Hub - Past Papers Engine (Fixed Selection Bug)
+// GEPAM Science Hub - Past Papers Engine (Fixed Event Cascade Bug)
 
 const formSelect = document.getElementById("formSelect");
 const subjectSelect = document.getElementById("subjectSelect");
@@ -10,6 +10,7 @@ const searchInput = document.getElementById("searchInput");
 
 let activePapersList = [];
 
+// 1. Pakia Aina za Mitihani kulingana na Form
 function loadTypes() {
     typeSelect.innerHTML = '<option value="">Choose Type</option>';
     regionSelect.innerHTML = '<option value="">Choose Region</option>';
@@ -26,8 +27,23 @@ function loadTypes() {
         option.textContent = type.toUpperCase();
         typeSelect.appendChild(option);
     });
+
+    // Kama tayari somo lilichaguliwa, jaribu kupakia mikoa
+    checkAndLoadRegions();
 }
 
+// Kazi ya ziada ya kuangalia kama vigezo vyote vimetimia kabla ya kupakia mikoa
+function checkAndLoadRegions() {
+    let form = formSelect.value;
+    let subject = subjectSelect.value;
+    let type = typeSelect.value;
+
+    if (form && subject && type) {
+        loadRegions();
+    }
+}
+
+// 2. Pakia Mikoa kulingana na Form, Somo na Aina ya Mtihani
 function loadRegions(){
     regionSelect.innerHTML = '<option value="">Choose Region</option>';
     yearSelect.innerHTML = '<option value="">Choose Year</option>';
@@ -41,7 +57,6 @@ function loadRegions(){
 
     let regions = [];
     pastPapers[form][subject].forEach(paper => {
-        // Kurekebisha tatizo la ulinganisho wa aina ya mtihani
         let paperTypeClean = paper.type.toLowerCase().replace("_", "").trim();
         let selectedTypeClean = type.toLowerCase().replace("_", "").trim();
 
@@ -58,6 +73,7 @@ function loadRegions(){
     });
 }
 
+// 3. Pakia Miaka inayopatikana
 function loadYears() {
     yearSelect.innerHTML = '<option value="">Choose Year</option>';
     activePapersList = [];
@@ -88,6 +104,7 @@ function loadYears() {
     });
 }
 
+// 4. Onyesha Grid ya Mitihani
 function showPapers(){
     const form = formSelect.value;
     const subject = subjectSelect.value;
@@ -164,8 +181,9 @@ if(searchInput) {
     });
 }
 
+// Kuunganisha matukio kwa mtiririko sahihi wa kiwanda (Cascade flow)
 formSelect.addEventListener("change", loadTypes);
-subjectSelect.addEventListener("change", loadRegions);
-typeSelect.addEventListener("change", loadRegions);
+subjectSelect.addEventListener("change", checkAndLoadRegions);
+typeSelect.addEventListener("change", checkAndLoadRegions);
 regionSelect.addEventListener("change", loadYears);
 yearSelect.addEventListener("change", showPapers);
