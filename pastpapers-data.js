@@ -1395,6 +1395,68 @@ addPaper("form3","chemistry","Shinyanga Annual Chemistry 2026","annual","shinyan
 // DAR ES SALAAM + DODOMA
 // =====================================
 
+// =====================================
+// FORM 4 PHYSICS - MOCK - DAR ES SALAAM
+// =====================================
+
+// Physics 1
+addAdvancedPaper(
+"form4",
+"physics",
+"Dar es Salaam Mock Physics 2026",
+"mock",
+"dar_es_salaam",
+2026,
+"physics1",
+"pastpapers/form4/physics/mock/dar_es_salaam/2026/dar_es_salaam_mock_physics1_2026_set1.pdf"
+);
+
+addAdvancedPaper(
+"form4",
+"physics",
+"Dar es Salaam Mock Physics 2026",
+"mock",
+"dar_es_salaam",
+2026,
+"physics1",
+"pastpapers/form4/physics/mock/dar_es_salaam/2026/dar_es_salaam_mock_physics1_2026_set2.pdf"
+);
+
+// Physics 2A
+addAdvancedPaper(
+"form4",
+"physics",
+"Dar es Salaam Mock Physics 2026",
+"mock",
+"dar_es_salaam",
+2026,
+"physics2a",
+"pastpapers/form4/physics/mock/dar_es_salaam/2026/dar_es_salaam_mock_physics2a_2026_set1.pdf"
+);
+
+// Physics 2B
+addAdvancedPaper(
+"form4",
+"physics",
+"Dar es Salaam Mock Physics 2026",
+"mock",
+"dar_es_salaam",
+2026,
+"physics2b",
+"pastpapers/form4/physics/mock/dar_es_salaam/2026/dar_es_salaam_mock_physics2b_2026_set1.pdf"
+);
+
+// Physics 2C
+addAdvancedPaper(
+"form4",
+"physics",
+"Dar es Salaam Mock Physics 2026",
+"mock",
+"dar_es_salaam",
+2026,
+"physics2c",
+"pastpapers/form4/physics/mock/dar_es_salaam/2026/dar_es_salaam_mock_physics2c_2026_set1.pdf"
+);
 
 // DAR ES SALAAM
 
