@@ -186,4 +186,4 @@ formSelect.addEventListener("change", loadTypes);
 subjectSelect.addEventListener("change", checkAndLoadRegions);
 typeSelect.addEventListener("change", checkAndLoadRegions);
 regionSelect.addEventListener("change", loadYears);
-yearSelect.addEventListener("change", showPapers);
+yearSelect.addEventListener("change", showPapers); F12
