@@ -1,4 +1,4 @@
-// GEPAM Science Hub - Past Papers Engine (Fixed Event Cascade Bug)
+// GEPAM Science Hub - Past Papers Engine
 
 const formSelect = document.getElementById("formSelect");
 const subjectSelect = document.getElementById("subjectSelect");
@@ -6,17 +6,12 @@ const typeSelect = document.getElementById("typeSelect");
 const regionSelect = document.getElementById("regionSelect");
 const yearSelect = document.getElementById("yearSelect");
 const container = document.getElementById("papersContainer");
-const searchInput = document.getElementById("searchInput");
 
-let activePapersList = [];
-
-// 1. Pakia Aina za Mitihani kulingana na Form
 function loadTypes() {
     typeSelect.innerHTML = '<option value="">Choose Type</option>';
     regionSelect.innerHTML = '<option value="">Choose Region</option>';
     yearSelect.innerHTML = '<option value="">Choose Year</option>';
     container.innerHTML = "<p>Select options above to view papers.</p>";
-    activePapersList = [];
 
     const form = formSelect.value;
     if (!form || !pastPaperConfig[form]) return;
@@ -27,27 +22,20 @@ function loadTypes() {
         option.textContent = type.toUpperCase();
         typeSelect.appendChild(option);
     });
-
-    // Kama tayari somo lilichaguliwa, jaribu kupakia mikoa
-    checkAndLoadRegions();
 }
 
-// Kazi ya ziada ya kuangalia kama vigezo vyote vimetimia kabla ya kupakia mikoa
 function checkAndLoadRegions() {
     let form = formSelect.value;
     let subject = subjectSelect.value;
     let type = typeSelect.value;
-
     if (form && subject && type) {
         loadRegions();
     }
 }
 
-// 2. Pakia Mikoa kulingana na Form, Somo na Aina ya Mtihani
 function loadRegions(){
     regionSelect.innerHTML = '<option value="">Choose Region</option>';
     yearSelect.innerHTML = '<option value="">Choose Year</option>';
-    activePapersList = [];
 
     let form = formSelect.value;
     let subject = subjectSelect.value;
@@ -57,10 +45,7 @@ function loadRegions(){
 
     let regions = [];
     pastPapers[form][subject].forEach(paper => {
-        let paperTypeClean = paper.type.toLowerCase().replace("_", "").trim();
-        let selectedTypeClean = type.toLowerCase().replace("_", "").trim();
-
-        if(paperTypeClean === selectedTypeClean && !regions.includes(paper.region.toLowerCase().trim())){
+        if(paper.type.toLowerCase().trim() === type.toLowerCase().trim() && !regions.includes(paper.region.toLowerCase().trim())){
             regions.push(paper.region.toLowerCase().trim());
         }
     });
@@ -73,10 +58,8 @@ function loadRegions(){
     });
 }
 
-// 3. Pakia Miaka inayopatikana
 function loadYears() {
     yearSelect.innerHTML = '<option value="">Choose Year</option>';
-    activePapersList = [];
 
     const form = formSelect.value;
     const subject = subjectSelect.value;
@@ -87,10 +70,7 @@ function loadYears() {
 
     let years = [];
     pastPapers[form][subject].forEach(paper => {
-        let paperTypeClean = paper.type.toLowerCase().replace("_", "").trim();
-        let selectedTypeClean = type.toLowerCase().replace("_", "").trim();
-
-        if (paperTypeClean === selectedTypeClean && paper.region.toLowerCase().trim() === region.toLowerCase().trim()) {
+        if (paper.type.toLowerCase().trim() === type.toLowerCase().trim() && paper.region.toLowerCase().trim() === region.toLowerCase().trim()) {
             if (!years.includes(paper.year)) years.push(paper.year);
         }
     });
@@ -104,7 +84,6 @@ function loadYears() {
     });
 }
 
-// 4. Onyesha Grid ya Mitihani
 function showPapers(){
     const form = formSelect.value;
     const subject = subjectSelect.value;
@@ -114,56 +93,42 @@ function showPapers(){
 
     if(!form || !subject || !type || !region || !year){
         container.innerHTML = "<p>Please select all options above.</p>";
-        activePapersList = [];
         return;
     }
 
-    activePapersList = pastPapers[form][subject].filter(paper => {
-        let paperTypeClean = paper.type.toLowerCase().replace("_", "").trim();
-        let selectedTypeClean = type.toLowerCase().replace("_", "").trim();
-        
-        return paperTypeClean === selectedTypeClean &&
-               paper.region.toLowerCase().trim() === region.toLowerCase().trim() &&
-               paper.year == year;
-    });
+    const filteredPapers = pastPapers[form][subject].filter(paper => 
+        paper.type.toLowerCase().trim() === type.toLowerCase().trim() &&
+        paper.region.toLowerCase().trim() === region.toLowerCase().trim() &&
+        paper.year == year
+    );
 
-    renderGrid(activePapersList);
-}
-
-function renderGrid(papers) {
     container.innerHTML = "";
-    const subject = subjectSelect.value;
-    const region = regionSelect.value;
-    const type = typeSelect.value;
-    const year = yearSelect.value;
-
-    if(papers.length === 0){
-        container.innerHTML = "<p>No papers match your selection or search term.</p>";
+    if(filteredPapers.length === 0){
+        container.innerHTML = "<p>No papers match your selection.</p>";
         return;
     }
 
     const grid = document.createElement("div");
     grid.className = "papers-grid";
+    grid.style.display = "grid";
+    grid.style.gridTemplateColumns = "repeat(auto-fill, minmax(240px, 1fr))";
+    grid.style.gap = "20px";
 
-    papers.forEach(paper => {
+    filteredPapers.forEach(paper => {
         const card = document.createElement("div");
-        
-        if (subject.toLowerCase() === "physics") {
-            card.className = "paper-card physics-theme";
-        } else {
-            card.className = "paper-card chemistry-theme";
-        }
+        card.className = "card paper-card";
+        card.style.borderTop = "5px solid #00c300";
+        card.style.padding = "15px";
+        card.style.background = "#fff";
+        card.style.boxShadow = "0 2px 5px rgba(0,0,0,0.1)";
         
         card.innerHTML = `
             <h3>${paper.title}</h3>
-            <div class="card-details">
-                <p><strong>Somo:</strong> ${subject.toUpperCase()}</p>
-                <p><strong>Mkoa:</strong> ${region.replaceAll("_", " ").toUpperCase()}</p>
-                <p><strong>Aina:</strong> ${type.toUpperCase()}</p>
-                <p><strong>Mwaka:</strong> ${year}</p>
-            </div>
+            <p><strong>Subject:</strong> ${subject.toUpperCase()}</p>
+            <p><strong>Region:</strong> ${region.replaceAll("_", " ").toUpperCase()}</p>
+            <p><strong>Year:</strong> ${year}</p>
             <a href="${paper.file}" target="_blank">
-                <button class="download-btn">📄 OPEN PDF</button>
+                <button style="width:100%; padding:10px; background:#00c300; color:#fff; border:none; cursor:pointer;">📄 OPEN PDF</button>
             </a>
         `;
         grid.appendChild(card);
@@ -171,19 +136,8 @@ function renderGrid(papers) {
     container.appendChild(grid);
 }
 
-if(searchInput) {
-    searchInput.addEventListener("input", (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        const filteredPapers = activePapersList.filter(paper => 
-            paper.title.toLowerCase().includes(searchTerm)
-        );
-        renderGrid(filteredPapers);
-    });
-}
-
-// Kuunganisha matukio kwa mtiririko sahihi wa kiwanda (Cascade flow)
 formSelect.addEventListener("change", loadTypes);
 subjectSelect.addEventListener("change", checkAndLoadRegions);
 typeSelect.addEventListener("change", checkAndLoadRegions);
 regionSelect.addEventListener("change", loadYears);
-yearSelect.addEventListener("change", showPapers); F12
+yearSelect.addEventListener("change", showPapers);
