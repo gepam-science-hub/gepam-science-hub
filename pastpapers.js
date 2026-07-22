@@ -1,4 +1,4 @@
-// GEPAM Science Hub - Past Papers Engine (Dynamic Grid System)
+// GEPAM Science Hub - Past Papers Engine (Fixed Selection Bug)
 
 const formSelect = document.getElementById("formSelect");
 const subjectSelect = document.getElementById("subjectSelect");
@@ -6,29 +6,32 @@ const typeSelect = document.getElementById("typeSelect");
 const regionSelect = document.getElementById("regionSelect");
 const yearSelect = document.getElementById("yearSelect");
 const container = document.getElementById("papersContainer");
+const searchInput = document.getElementById("searchInput");
 
-// 1. Pakia Aina za Mitihani (Annual, Mock, nk)
+let activePapersList = [];
+
 function loadTypes() {
     typeSelect.innerHTML = '<option value="">Choose Type</option>';
     regionSelect.innerHTML = '<option value="">Choose Region</option>';
     yearSelect.innerHTML = '<option value="">Choose Year</option>';
     container.innerHTML = "<p>Select options above to view papers.</p>";
+    activePapersList = [];
 
     const form = formSelect.value;
     if (!form || !pastPaperConfig[form]) return;
 
     pastPaperConfig[form].types.forEach(type => {
         const option = document.createElement("option");
-        option.value = type;
-        option.textContent = type.replaceAll("_"," ").toUpperCase();
+        option.value = type.toLowerCase().trim();
+        option.textContent = type.toUpperCase();
         typeSelect.appendChild(option);
     });
 }
 
-// 2. Pakia Mikoa kulingana na Darasa, Somo na Aina ya Mtihani
 function loadRegions(){
     regionSelect.innerHTML = '<option value="">Choose Region</option>';
     yearSelect.innerHTML = '<option value="">Choose Year</option>';
+    activePapersList = [];
 
     let form = formSelect.value;
     let subject = subjectSelect.value;
@@ -38,12 +41,15 @@ function loadRegions(){
 
     let regions = [];
     pastPapers[form][subject].forEach(paper => {
-        if(paper.type.toLowerCase() === type.toLowerCase() && !regions.includes(paper.region)){
-            regions.push(paper.region);
+        // Kurekebisha tatizo la ulinganisho wa aina ya mtihani
+        let paperTypeClean = paper.type.toLowerCase().replace("_", "").trim();
+        let selectedTypeClean = type.toLowerCase().replace("_", "").trim();
+
+        if(paperTypeClean === selectedTypeClean && !regions.includes(paper.region.toLowerCase().trim())){
+            regions.push(paper.region.toLowerCase().trim());
         }
     });
 
-    // Panga mikoa kialfabeti na uiweke kwenye Select list
     regions.sort().forEach(region => {
         let option = document.createElement("option");
         option.value = region;
@@ -52,9 +58,9 @@ function loadRegions(){
     });
 }
 
-// 3. Pakia Miaka inayopatikana (2023, 2024, 2025, 2026 nk)
 function loadYears() {
     yearSelect.innerHTML = '<option value="">Choose Year</option>';
+    activePapersList = [];
 
     const form = formSelect.value;
     const subject = subjectSelect.value;
@@ -65,12 +71,14 @@ function loadYears() {
 
     let years = [];
     pastPapers[form][subject].forEach(paper => {
-        if (paper.type.toLowerCase() === type.toLowerCase() && paper.region.toLowerCase() === region.toLowerCase()) {
+        let paperTypeClean = paper.type.toLowerCase().replace("_", "").trim();
+        let selectedTypeClean = type.toLowerCase().replace("_", "").trim();
+
+        if (paperTypeClean === selectedTypeClean && paper.region.toLowerCase().trim() === region.toLowerCase().trim()) {
             if (!years.includes(paper.year)) years.push(paper.year);
         }
     });
 
-    // Miaka ya karibuni ianzie juu (Descending order)
     years.sort((a,b) => b - a);
     years.forEach(year => {
         const option = document.createElement("option");
@@ -80,10 +88,7 @@ function loadYears() {
     });
 }
 
-// 4. Onyesha Faili Zote (Multiple Papers Display) kwa Wakati Mmoja
 function showPapers(){
-    container.innerHTML = "";
-
     const form = formSelect.value;
     const subject = subjectSelect.value;
     const type = typeSelect.value;
@@ -92,40 +97,56 @@ function showPapers(){
 
     if(!form || !subject || !type || !region || !year){
         container.innerHTML = "<p>Please select all options above.</p>";
+        activePapersList = [];
         return;
     }
 
-    const papers = pastPapers[form][subject].filter(paper => 
-        paper.type.toLowerCase() === type.toLowerCase() &&
-        paper.region.toLowerCase() === region.toLowerCase() &&
-        paper.year == year
-    );
+    activePapersList = pastPapers[form][subject].filter(paper => {
+        let paperTypeClean = paper.type.toLowerCase().replace("_", "").trim();
+        let selectedTypeClean = type.toLowerCase().replace("_", "").trim();
+        
+        return paperTypeClean === selectedTypeClean &&
+               paper.region.toLowerCase().trim() === region.toLowerCase().trim() &&
+               paper.year == year;
+    });
+
+    renderGrid(activePapersList);
+}
+
+function renderGrid(papers) {
+    container.innerHTML = "";
+    const subject = subjectSelect.value;
+    const region = regionSelect.value;
+    const type = typeSelect.value;
+    const year = yearSelect.value;
 
     if(papers.length === 0){
-        container.innerHTML = "<p>No papers uploaded yet for this selection.</p>";
+        container.innerHTML = "<p>No papers match your selection or search term.</p>";
         return;
     }
 
-    // Unda muundo wa Grid (Safu) ili kadi zikae pembeni mwa nyingine
     const grid = document.createElement("div");
-    grid.style.display = "grid";
-    grid.style.gridTemplateColumns = "repeat(auto-fill, minmax(240px, 1fr))";
-    grid.style.gap = "20px";
-    grid.style.marginTop = "15px";
+    grid.className = "papers-grid";
 
     papers.forEach(paper => {
         const card = document.createElement("div");
-        card.className = "card paper-card";
-        card.style.borderLeft = "5px solid #00c300"; // Rangi maalum kuashiria PDF ipo tayari
+        
+        if (subject.toLowerCase() === "physics") {
+            card.className = "paper-card physics-theme";
+        } else {
+            card.className = "paper-card chemistry-theme";
+        }
         
         card.innerHTML = `
-            <h3 style="margin-bottom:10px; color:#222;">${paper.title}</h3>
-            <p style="margin:4px 0; font-size:14px;"><strong>Somo:</strong> ${subject.toUpperCase()}</p>
-            <p style="margin:4px 0; font-size:14px;"><strong>Mkoa:</strong> ${region.replaceAll("_", " ").toUpperCase()}</p>
-            <p style="margin:4px 0; font-size:14px;"><strong>Aina:</strong> ${type.replaceAll("_", " ").toUpperCase()}</p>
-            <p style="margin:4px 0; font-size:14px; margin-bottom:15px;"><strong>Mwaka:</strong> ${year}</p>
-            <a href="${paper.file}" target="_blank" style="text-decoration:none;">
-                <button style="cursor:pointer; width:100%; padding:10px; background-color:#00c300; color:white; border:none; border-radius:4px; font-weight:bold;">📄 OPEN PDF</button>
+            <h3>${paper.title}</h3>
+            <div class="card-details">
+                <p><strong>Somo:</strong> ${subject.toUpperCase()}</p>
+                <p><strong>Mkoa:</strong> ${region.replaceAll("_", " ").toUpperCase()}</p>
+                <p><strong>Aina:</strong> ${type.toUpperCase()}</p>
+                <p><strong>Mwaka:</strong> ${year}</p>
+            </div>
+            <a href="${paper.file}" target="_blank">
+                <button class="download-btn">📄 OPEN PDF</button>
             </a>
         `;
         grid.appendChild(card);
@@ -133,11 +154,18 @@ function showPapers(){
     container.appendChild(grid);
 }
 
-// Mtiririko wa Matukio (Event Listeners)
+if(searchInput) {
+    searchInput.addEventListener("input", (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const filteredPapers = activePapersList.filter(paper => 
+            paper.title.toLowerCase().includes(searchTerm)
+        );
+        renderGrid(filteredPapers);
+    });
+}
+
 formSelect.addEventListener("change", loadTypes);
 subjectSelect.addEventListener("change", loadRegions);
 typeSelect.addEventListener("change", loadRegions);
 regionSelect.addEventListener("change", loadYears);
 yearSelect.addEventListener("change", showPapers);
-
-console.log("GEPAM Database Status: Loaded Successfully ✅", pastPapers);
