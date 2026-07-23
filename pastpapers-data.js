@@ -80,11 +80,11 @@ const pastPapers = {
             // DAR ES SALAAM (MOCK YENYE FAILI NYINGI)
             { "title": "Physics 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/mock/dar_es_salaam/2026/dsm_mock_2026_phy1.pdf" },
             { "title": "Physics 2A (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/mock/dar_es_salaam/2026/dsm_mock_2026_phy2a.pdf" },
-            { "title": "Physics 2B (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/dsm_mock_2026_phy2b.pdf" },
-            { "title": "Physics 2C (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/dsm_mock_2026_phy2c.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2025, "file": "papers/form4/physics/dsm_mock_2025_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2024, "file": "papers/form4/physics/dsm_mock_2024_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2023, "file": "papers/form4/physics/dsm_mock_2023_phy1.pdf" },
+            { "title": "Physics 2B (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/mock/dar_es_salaam/2026/dsm_mock_2026_phy2b.pdf" },
+            { "title": "Physics 2C (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/mock/dar_es_salaam/2026/dsm_mock_2026_phy2c.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2025, "file": "papers/form4/physics/mock/dar_es_salaam/2026/dsm_mock_2025_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2024, "file": "papers/form4/physics/mock/dar_es_salaam/2026/dsm_mock_2024_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2023, "file": "papers/form4/physics/mock/dar_es_salaam/2026/dsm_mock_2023_phy1.pdf" },
 
             // DODOMA (MOCK YENYE MIAKA YOTE)
             { "title": "Physics 1 (Theory)", "type": "mock", "region": "dodoma", "year": 2026, "file": "papers/form4/physics/dom_mock_2026_phy1.pdf" },
@@ -118,13 +118,13 @@ const pastPapers = {
         ]
       ,"chemistry": [
         // DAR ES SALAAM (MOCK YENYE FAILI NYINGI)
-        { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/dsm_mock_2026_chem1.pdf" },
-        { "title": "Chemistry 2A (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/dsm_mock_2026_chem2a.pdf" },
-        { "title": "Chemistry 2B (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/dsm_mock_2026_chem2b.pdf" },
-        { "title": "Chemistry 2C (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/dsm_mock_2026_chem2c.pdf" },
-        { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2025, "file": "papers/form4/chemistry/dsm_mock_2025_chem1.pdf" },
-        { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2024, "file": "papers/form4/chemistry/dsm_mock_2024_chem1.pdf" },
-        { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2023, "file": "papers/form4/chemistry/dsm_mock_2023_chem1.pdf" }
+        { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem1.pdf" },
+        { "title": "Chemistry 2A (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem2a.pdf" },
+        { "title": "Chemistry 2B (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem2b.pdf" },
+        { "title": "Chemistry 2C (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem2c.pdf" },
+        { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2025, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2025_chem1.pdf" },
+        { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2024, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2024_chem1.pdf" },
+        { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2023, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2023_chem1.pdf" }
       ]
   },
   
@@ -165,12 +165,12 @@ const pastPapers = {
       { "title": "Physics Midterm Exam", "type": "midterm", "region": "shinyanga", "year": 2026, "file": "papers/form6/physics/shy_2026.pdf" }
     ]
     ,"chemistry": [
-      { "title": "Chemistry 1 (Theory)", "type": "acsee", "region": "dar_es_salaam", "year": 2026, "file": "papers/form6/chemistry/dsm_acsee_2026_chem1.pdf" },
-      { "title": "Chemistry 2 (Theory)", "type": "acsee", "region": "dar_es_salaam", "year": 2026, "file": "papers/form6/chemistry/dsm_acsee_2026_chem2.pdf" },
-      { "title": "Chemistry 3 (Practical)", "type": "acsee", "region": "dar_es_salaam", "year": 2026, "file": "papers/form6/chemistry/dsm_acsee_2026_chem3.pdf" },
-      { "title": "Chemistry 1 (Theory)", "type": "acsee", "region": "dar_es_salaam", "year": 2025, "file": "papers/form6/chemistry/dsm_acsee_2025_chem1.pdf" },
-      { "title": "Chemistry 1 (Theory)", "type": "acsee", "region": "dar_es_salaam", "year": 2024, "file": "papers/form6/chemistry/dsm_acsee_2024_chem1.pdf" },
-      { "title": "Chemistry 1 (Theory)", "type": "acsee", "region": "dar_es_salaam", "year": 2023, "file": "papers/form6/chemistry/dsm_acsee_2023_chem1.pdf" }
+      { "title": "Chemistry 1 (Theory)", "type": "acsee", "region": "necta", "year": 2026, "file": "papers/form6/chemistry/dsm_acsee_2026_chem1.pdf" },
+      { "title": "Chemistry 2 (Theory)", "type": "acsee", "region": "necta", "year": 2026, "file": "papers/form6/chemistry/dsm_acsee_2026_chem2.pdf" },
+      { "title": "Chemistry 3 (Practical)", "type": "acsee", "region": "necta", "year": 2026, "file": "papers/form6/chemistry/dsm_acsee_2026_chem3.pdf" },
+      { "title": "Chemistry 1 (Theory)", "type": "acsee", "region": "necta", "year": 2025, "file": "papers/form6/chemistry/dsm_acsee_2025_chem1.pdf" },
+      { "title": "Chemistry 1 (Theory)", "type": "acsee", "region": "necta", "year": 2024, "file": "papers/form6/chemistry/dsm_acsee_2024_chem1.pdf" },
+      { "title": "Chemistry 1 (Theory)", "type": "acsee", "region": "necta", "year": 2023, "file": "papers/form6/chemistry/dsm_acsee_2023_chem1.pdf" }
     ]
   }
 };
