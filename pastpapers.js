@@ -142,4 +142,3 @@ subjectSelect.addEventListener("change", loadRegions);
 typeSelect.addEventListener("change", loadRegions);
 regionSelect.addEventListener("change", loadYears);
 yearSelect.addEventListener("change", showPapers);
-
