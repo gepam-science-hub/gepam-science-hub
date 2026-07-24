@@ -161,7 +161,7 @@ const pastPapers = {
       { "title": "Physics Midterm Exam", "type": "midterm", "region": "dodoma", "year": 2026, "file": "papers/form6/physics/dom_2026.pdf" },
       { "title": "Physics Terminal Exam", "type": "terminal", "region": "arusha", "year": 2025, "file": "papers/form6/physics/aru_2025.pdf" },
       { "title": "Physics Joint Exam", "type": "joint", "region": "mbeya", "year": 2026, "file": "papers/form6/physics/mby_2026.pdf" },
-      { "title": "Physics Annual Exam", "type": "annual", "region": "kagera", "year": 2025, "file": "papers/form6/physics/kag_2025.pdf" },
+      { "title": "Physics Joint Exam", "type": "joint", "region": "kagera", "year": 2025, "file": "papers/form6/physics/kag_2025.pdf" },
       { "title": "Physics Midterm Exam", "type": "midterm", "region": "shinyanga", "year": 2026, "file": "papers/form6/physics/shy_2026.pdf" }
     ]
     ,"chemistry": [
