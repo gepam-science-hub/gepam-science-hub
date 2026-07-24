@@ -1,12 +1,12 @@
 // GEPAM Science Hub - Master Combined Configuration & Database (Form 1 - 6)
 
 const pastPaperConfig = {
-    "form1": { "subjects": ["physics", "chemistry"], "types": ["midterm", "terminal", "annual", "joint"] },
-    "form2": { "subjects": ["physics", "chemistry"], "types": ["ftna", "midterm", "terminal", "annual", "joint"] },
+    "form1": { "subjects": ["physics", "chemistry"], "types": ["midterm", "terminal", "annual"] },
+    "form2": { "subjects": ["physics", "chemistry"], "types": ["ftna", "midterm", "terminal", "joint"] },
     "form3": { "subjects": ["physics", "chemistry"], "types": ["midterm", "terminal", "annual", "joint"] },
-    "form4": { "subjects": ["physics", "chemistry"], "types": ["necta", "mock", "pre_necta", "joint", "annual", "midterm", "terminal"] },
+    "form4": { "subjects": ["physics", "chemistry"], "types": ["necta", "mock", "pre_necta", "joint"] },
     "form5": { "subjects": ["physics", "chemistry"], "types": ["midterm", "terminal", "annual", "joint"] },
-    "form6": { "subjects": ["physics", "chemistry"], "types": ["acsee", "mock", "pre_necta", "joint", "annual", "midterm", "terminal"] }
+    "form6": { "subjects": ["physics", "chemistry"], "types": ["acsee", "mock", "pre_necta", "joint"] }
 };
 
 const pastPapers = {
@@ -35,21 +35,21 @@ const pastPapers = {
     // ==================== FORM 2 ====================
     "form2": {
         "physics": [
-            { "title": "Physics FTNA Exam", "type": "ftna", "region": "dar_es_salaam", "year": 2026, "file": "papers/form2/physics/dsm_2026.pdf" },
-            { "title": "Physics FTNA Exam", "type": "ftna", "region": "dar_es_salaam", "year": 2025, "file": "papers/form2/physics/dsm_2025.pdf" },
-            { "title": "Physics FTNA Exam", "type": "ftna", "region": "dar_es_salaam", "year": 2024, "file": "papers/form2/physics/dsm_2024.pdf" },
-            { "title": "Physics FTNA Exam", "type": "ftna", "region": "dar_es_salaam", "year": 2023, "file": "papers/form2/physics/dsm_2023.pdf" },
+            { "title": "Physics FTNA Exam", "type": "ftna", "region": "necta", "year": 2026, "file": "papers/form2/physics/necta_2026.pdf" },
+            { "title": "Physics FTNA Exam", "type": "ftna", "region": "necta", "year": 2025, "file": "papers/form2/physics/necta_2025.pdf" },
+            { "title": "Physics FTNA Exam", "type": "ftna", "region": "necta", "year": 2024, "file": "papers/form2/physics/necta_2024.pdf" },
+            { "title": "Physics FTNA Exam", "type": "ftna", "region": "necta", "year": 2023, "file": "papers/form2/physics/necta_2023.pdf" },
             { "title": "Physics Midterm Exam", "type": "midterm", "region": "dodoma", "year": 2026, "file": "papers/form2/physics/dom_2026.pdf" },
             { "title": "Physics Terminal Exam", "type": "terminal", "region": "arusha", "year": 2025, "file": "papers/form2/physics/aru_2025.pdf" },
             { "title": "Physics Joint Exam", "type": "joint", "region": "mbeya", "year": 2026, "file": "papers/form2/physics/mby_2026.pdf" },
-            { "title": "Physics FTNA Exam", "type": "ftna", "region": "kagera", "year": 2025, "file": "papers/form2/physics/kag_2025.pdf" },
-            { "title": "Physics Annual Exam", "type": "annual", "region": "shinyanga", "year": 2026, "file": "papers/form2/physics/shy_2026.pdf" }
+            { "title": "Physics Joint Exam", "type": "joint", "region": "dodoma", "year": 2025, "file": "papers/form2/physics/dom_2025.pdf" },
+            { "title": "Physics Joint Exam", "type": "joint", "region": "dar_es_salaam", "year": 2026, "file": "papers/form2/physics/dsm_2026.pdf" }
         ],
         "chemistry": [
-            { "title": "Chemistry FTNA Exam", "type": "ftna", "region": "dar_es_salaam", "year": 2026, "file": "papers/form2/chemistry/dsm_2026.pdf" },
-            { "title": "Chemistry FTNA Exam", "type": "ftna", "region": "dar_es_salaam", "year": 2025, "file": "papers/form2/chemistry/dsm_2025.pdf" },
-            { "title": "Chemistry FTNA Exam", "type": "ftna", "region": "dar_es_salaam", "year": 2024, "file": "papers/form2/chemistry/dsm_2024.pdf" },
-            { "title": "Chemistry FTNA Exam", "type": "ftna", "region": "dar_es_salaam", "year": 2023, "file": "papers/form2/chemistry/dsm_2023.pdf" }
+            { "title": "Chemistry FTNA Exam", "type": "ftna", "region": "necta", "year": 2026, "file": "papers/form2/chemistry/necta_2026.pdf" },
+            { "title": "Chemistry FTNA Exam", "type": "ftna", "region": "necta", "year": 2025, "file": "papers/form2/chemistry/dsm_2025.pdf" },
+            { "title": "Chemistry FTNA Exam", "type": "ftna", "region": "necta", "year": 2024, "file": "papers/form2/chemistry/necta_2024.pdf" },
+            { "title": "Chemistry FTNA Exam", "type": "ftna", "region": "necta", "year": 2023, "file": "papers/form2/chemistry/necta_2023.pdf" }
         ]
     },
 
