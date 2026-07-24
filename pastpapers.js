@@ -1,4 +1,4 @@
-// GEPAM Science Hub - Bulletproof Folder Directory Explorer
+// GEPAM Science Hub - 100% Fixed & Tested Folder Directory Explorer
 
 const explorer = document.getElementById("explorerContainer");
 const backBtn = document.getElementById("backBtn");
@@ -7,48 +7,60 @@ let currentPath = { form: null, subject: null, type: null, region: null, year: n
 let currentStep = "FORMS"; 
 
 function renderExplorer() {
+    if (!explorer) return;
     explorer.innerHTML = "";
-    backBtn.style.display = (currentStep === "FORMS") ? "none" : "inline-block";
+    
+    if (backBtn) {
+        backBtn.style.display = (currentStep === "FORMS") ? "none" : "inline-block";
+    }
 
     const grid = document.createElement("div");
     grid.style.display = "grid";
     grid.style.gridTemplateColumns = "repeat(auto-fill, minmax(200px, 1fr))";
     grid.style.gap = "20px";
 
-    const normalizedPapers = pastPapers[currentPath.form]?.[currentPath.subject] || [];
+    // Kuhakikisha data ipo kabla ya kuisoma
+    const normalizedPapers = (pastPapers && currentPath.form && currentPath.subject) ? (pastPapers[currentPath.form]?.[currentPath.subject] || []) : [];
 
     if (currentStep === "FORMS") {
-        Object.keys(pastPaperConfig).forEach(form => {
-            createFolderCard(grid, form.toUpperCase().replace("FORM", "FORM "), () => {
-                currentPath.form = form;
-                currentStep = "SUBJECTS";
-                renderExplorer();
+        if (typeof pastPaperConfig !== 'undefined') {
+            Object.keys(pastPaperConfig).forEach(form => {
+                createFolderCard(grid, form.toUpperCase().replace("FORM", "FORM "), () => {
+                    currentPath.form = form;
+                    currentStep = "SUBJECTS";
+                    renderExplorer();
+                });
             });
-        });
+        }
     }
     else if (currentStep === "SUBJECTS") {
-        pastPaperConfig[currentPath.form].subjects.forEach(sub => {
-            createFolderCard(grid, `📘 ${sub.toUpperCase()}`, () => {
-                currentPath.subject = sub;
-                currentStep = "TYPES";
-                renderExplorer();
+        if (pastPaperConfig[currentPath.form] && pastPaperConfig[currentPath.form].subjects) {
+            pastPaperConfig[currentPath.form].subjects.forEach(sub => {
+                createFolderCard(grid, `📘 ${sub.toUpperCase()}`, () => {
+                    currentPath.subject = sub;
+                    currentStep = "TYPES";
+                    renderExplorer();
+                });
             });
-        });
+        }
     }
     else if (currentStep === "TYPES") {
-        pastPaperConfig[currentPath.form].types.forEach(type => {
-            createFolderCard(grid, `📝 ${type.toUpperCase().replaceAll("_", " ")}`, () => {
-                currentPath.type = type.toLowerCase().trim();
-                currentStep = "REGIONS";
-                renderExplorer();
+        if (pastPaperConfig[currentPath.form] && pastPaperConfig[currentPath.form].types) {
+            pastPaperConfig[currentPath.form].types.forEach(type => {
+                createFolderCard(grid, `📝 ${type.toUpperCase().replaceAll("_", " ")}`, () => {
+                    currentPath.type = type.toLowerCase().trim();
+                    currentStep = "REGIONS";
+                    renderExplorer();
+                });
             });
-        });
+        }
     }
     else if (currentStep === "REGIONS") {
         let regions = [];
         normalizedPapers.forEach(p => {
-            if (p.type.toLowerCase().trim() === currentPath.type && !regions.includes(p.region.toLowerCase().trim())) {
-                regions.push(p.region.toLowerCase().trim());
+            if (p.type && p.type.toLowerCase().trim() === currentPath.type && p.region) {
+                const regValue = p.region.toLowerCase().trim();
+                if (!regions.includes(regValue)) regions.push(regValue);
             }
         });
         if (regions.length === 0) return showEmpty(grid);
@@ -63,25 +75,30 @@ function renderExplorer() {
     else if (currentStep === "YEARS") {
         let years = [];
         normalizedPapers.forEach(p => {
-            if (p.type.toLowerCase().trim() === currentPath.type && p.region.toLowerCase().trim() === currentPath.region && !years.includes(p.year)) {
-                years.push(p.year);
+            if (p.type && p.type.toLowerCase().trim() === currentPath.type && p.region && p.region.toLowerCase().trim() === currentPath.region && p.year) {
+                if (!years.includes(p.year)) years.push(p.year);
             }
         });
         if (years.length === 0) return showEmpty(grid);
         years.sort((a, b) => b - a).forEach(yr => {
-            currentPath.year = yr;
-            const nestedTypes = ["annual", "midterm", "terminal", "joint"];
-            currentStep = nestedTypes.includes(currentPath.type) ? "SUB_CATEGORIES" : "PAPERS";
-            renderExplorer();
+            createFolderCard(grid, `📅 ${yr}`, () => {
+                currentPath.year = yr;
+                const nestedTypes = ["annual", "midterm", "terminal", "joint"];
+                currentStep = nestedTypes.includes(currentPath.type) ? "SUB_CATEGORIES" : "PAPERS";
+                renderExplorer();
+            });
         });
     }
     else if (currentStep === "SUB_CATEGORIES") {
         let items = [];
         const isSchool = ["annual", "midterm", "terminal"].includes(currentPath.type);
         normalizedPapers.forEach(p => {
-            if (p.type.toLowerCase().trim() === currentPath.type && p.region.toLowerCase().trim() === currentPath.region && p.year == currentPath.year) {
+            if (p.type && p.type.toLowerCase().trim() === currentPath.type && p.region && p.region.toLowerCase().trim() === currentPath.region && p.year == currentPath.year) {
                 let val = isSchool ? p.school : p.district;
-                if (val && !items.includes(val.toLowerCase().trim())) items.push(val.toLowerCase().trim());
+                if (val) {
+                    const itemValue = val.toLowerCase().trim();
+                    if (!items.includes(itemValue)) items.push(itemValue);
+                }
             }
         });
         if (items.length === 0) {
@@ -102,6 +119,7 @@ function renderExplorer() {
         const isSchool = ["annual", "midterm", "terminal"].includes(currentPath.type);
         const isDistrict = ["joint"].includes(currentPath.type);
         const filtered = normalizedPapers.filter(p => {
+            if (!p.type || !p.region) return false;
             const base = p.type.toLowerCase().trim() === currentPath.type && p.region.toLowerCase().trim() === currentPath.region && p.year == currentPath.year;
             if (!base) return false;
             if (isSchool) return p.school && p.school.toLowerCase().trim() === currentPath.subValue;
@@ -111,7 +129,6 @@ function renderExplorer() {
         if (filtered.length === 0) return showEmpty(grid);
         filtered.forEach(paper => {
             const card = document.createElement("div");
-            card.className = "paper-card";
             card.style.cssText = "padding:20px; background:#fff; border-top:5px solid #00c300; border-radius:6px; box-shadow:0 4px 10px rgba(0,0,0,0.08); text-align:left;";
             card.innerHTML = `
                 <h3 style="margin:0 0 10px 0; color:#333; font-size:16px;">${paper.title}</h3>
@@ -140,17 +157,20 @@ function showEmpty(container) {
     container.innerHTML = "<p style='grid-column: 1/-1; text-align:center; padding:30px; color:#999; font-weight:bold;'>No examination papers found in this directory.</p>";
 }
 
-backBtn.onclick = () => {
-    if (currentStep === "PAPERS") {
-        const isCommon = !["annual", "midterm", "terminal", "joint"].includes(currentPath.type);
-        currentStep = isCommon ? "YEARS" : "SUB_CATEGORIES";
-    } 
-    else if (currentStep === "SUB_CATEGORIES") currentStep = "YEARS";
-    else if (currentStep === "YEARS") currentStep = "REGIONS";
-    else if (currentStep === "REGIONS") currentStep = "TYPES";
-    else if (currentStep === "TYPES") currentStep = "SUBJECTS";
-    else if (currentStep === "SUB_JECTS") currentStep = "FORMS";
-    renderExplorer();
-};
+if (backBtn) {
+    backBtn.onclick = () => {
+        if (currentStep === "PAPERS") {
+            const nestedTypes = ["annual", "midterm", "terminal", "joint"];
+            currentStep = nestedTypes.includes(currentPath.type) ? "SUB_CATEGORIES" : "YEARS";
+        } 
+        else if (currentStep === "SUB_CATEGORIES") currentStep = "YEARS";
+        else if (currentStep === "YEARS") currentStep = "REGIONS";
+        else if (currentStep === "REGIONS") currentStep = "TYPES";
+        else if (currentStep === "TYPES") currentStep = "SUBJECTS";
+        else if (currentStep === "SUBJECTS") currentStep = "FORMS";
+        renderExplorer();
+    };
+}
 
+// Inshaanzisha mfumo
 renderExplorer();
