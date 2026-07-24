@@ -24,16 +24,54 @@
     <a href="contact.html">Contact</a>
 </nav>
 
-<section style="max-width: 1000px; margin: 0 auto; padding: 20px;">
+<section>
     <h2>📚 Past Papers Library</h2>
-    <p>Browse Physics and Chemistry examination papers hierarchically by clicking folders.</p>
+    <p>Access Physics and Chemistry examination papers from Form 1 to Form 6.</p>
 
-    <!-- Navigation Back Button -->
-    <button id="backBtn" style="display:none; padding:12px 24px; background:#00c300; color:#fff; border:none; cursor:pointer; margin-bottom:20px; font-weight:bold; border-radius:5px; box-shadow: 0 2px 4px rgba(0,0,0,0.15);">⬅️ BACK</button>
+    <div class="card">
+        <label>Select Form / Kidato</label>
+        <select id="formSelect">
+            <option value="">Choose Form</option>
+            <option value="form1">Form 1</option>
+            <option value="form2">Form 2</option>
+            <option value="form3">Form 3</option>
+            <option value="form4">Form 4</option>
+            <option value="form5">Form 5</option>
+            <option value="form6">Form 6</option>
+        </select>
 
-    <!-- Dynamic Directory Explorer (Folda Zitakaa Hapa) -->
-    <div id="explorerContainer"></div>
+        <label>Select Subject / Somo</label>
+        <select id="subjectSelect">
+            <option value="">Choose Subject</option>
+            <option value="physics">Physics</option>
+            <option value="chemistry">Chemistry</option>
+        </select>
+
+        <label>Select Examination Type / Aina ya Mtihani</label>
+        <select id="typeSelect">
+            <option value="">Choose Type</option>
+        </select>
+
+        <label>Select Region / Mkoa</label>
+        <select id="regionSelect">
+            <option value="">Choose Region</option>
+        </select>
+
+        <label>Select Year / Mwaka</label>
+        <select id="yearSelect">
+            <option value="">Choose Year</option>
+        </select>
+    </div>
 </section>
+
+<section>
+    <h2>Available Papers / Mitihani Inayopatikana</h2>
+    <div id="papersContainer">
+        <p>Select options above to view papers.</p>
+    </div>
+</section>
+
+<a href="https://wa.me" class="whatsapp">💬 WhatsApp Us</a>
 
 <footer>
     <h3>GEPAM Science Hub</h3>
@@ -41,8 +79,8 @@
     <p>© 2026 GEPAM Science Hub. All Rights Reserved.</p>
 </footer>
 
-<!-- JavaScript Files Load Order -->
-<script src="pastpapers.data.js"></script>
+<!-- Muhimu: Mpangilio wa mafaili ya JavaScript chini kabisa -->
+<script src="pastpapers-data.js"></script>
 <script src="pastpapers.js"></script>
 </body>
 </html>
