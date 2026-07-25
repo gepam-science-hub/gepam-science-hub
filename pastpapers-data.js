@@ -82,9 +82,9 @@ const pastPapers = {
             { "title": "Physics 2A (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/mock/dar_es_salaam/2026/dsm_mock_2026_phy2a.pdf" },
             { "title": "Physics 2B (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/mock/dar_es_salaam/2026/dsm_mock_2026_phy2b.pdf" },
             { "title": "Physics 2C (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/mock/dar_es_salaam/2026/dsm_mock_2026_phy2c.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2025, "file": "papers/form4/physics/mock/dar_es_salaam/2026/dsm_mock_2025_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2024, "file": "papers/form4/physics/mock/dar_es_salaam/2026/dsm_mock_2024_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2023, "file": "papers/form4/physics/mock/dar_es_salaam/2026/dsm_mock_2023_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2025, "file": "papers/form4/physics/mock/dar_es_salaam/2025/dsm_mock_2025_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2024, "file": "papers/form4/physics/mock/dar_es_salaam/2024/dsm_mock_2024_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2023, "file": "papers/form4/physics/mock/dar_es_salaam/2023/dsm_mock_2023_phy1.pdf" },
 
             // DODOMA (MOCK YENYE MIAKA YOTE)
             { "title": "Physics 1 (Theory)", "type": "mock", "region": "dodoma", "year": 2026, "file": "papers/form4/physics/dom_mock_2026_phy1.pdf" },
