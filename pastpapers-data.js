@@ -159,84 +159,84 @@ const pastPapers = {
         ]
         ,"physics": [
             // DAR ES SALAAM (PRE NECTA YENYE FAILI NYINGI)
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_phy1.pdf" },
-            { "title": "Physics 2A (Practical)", "type": "prenecta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_phy2a.pdf" },
-            { "title": "Physics 2B (Practical)", "type": "prenecta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_phy2b.pdf" },
-            { "title": "Physics 2C (Practical)", "type": "prenecta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_phy2c.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "dar_es_salaam", "year": 2025, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta2025_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "dar_es_salaam", "year": 2024, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta_2024_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "dar_es_salaam", "year": 2023, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta_2023_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_phy1.pdf" },
+            { "title": "Physics 2A (Practical)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_phy2a.pdf" },
+            { "title": "Physics 2B (Practical)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_phy2b.pdf" },
+            { "title": "Physics 2C (Practical)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_phy2c.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2025, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta2025_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2024, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta_2024_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2023, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta_2023_phy1.pdf" },
 
             // DODOMA (PRE NECTA YENYE MIAKA YOTE)
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "dodoma", "year": 2026, "file": "papers/form4/physics/dom_prenecta_2026_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "dodoma", "year": 2025, "file": "papers/form4/physics/dom_prenecta_2025_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "dodoma", "year": 2024, "file": "papers/form4/physics/dom_prenecta_2024_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "dodoma", "year": 2023, "file": "papers/form4/physics/dom_prenecta_2023_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "dodoma", "year": 2026, "file": "papers/form4/physics/dom_prenecta_2026_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "dodoma", "year": 2025, "file": "papers/form4/physics/dom_prenecta_2025_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "dodoma", "year": 2024, "file": "papers/form4/physics/dom_prenecta_2024_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "dodoma", "year": 2023, "file": "papers/form4/physics/dom_prenecta_2023_phy1.pdf" },
 
             // ARUSHA (PRE NECTA YENYE MIAKA YOTE)
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "arusha", "year": 2026, "file": "papers/form4/physics/aru_prenecta_2026_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "arusha", "year": 2025, "file": "papers/form4/physics/aru_prenecta_2025_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "arusha", "year": 2024, "file": "papers/form4/physics/aru_prenecta_2024_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "arusha", "year": 2023, "file": "papers/form4/physics/aru_prenecta_2023_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "arusha", "year": 2026, "file": "papers/form4/physics/aru_prenecta_2026_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "arusha", "year": 2025, "file": "papers/form4/physics/aru_prenecta_2025_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "arusha", "year": 2024, "file": "papers/form4/physics/aru_prenecta_2024_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "arusha", "year": 2023, "file": "papers/form4/physics/aru_prenecta_2023_phy1.pdf" },
 
             // MBEYA (PRE NECTA YENYE MIAKA YOTE)
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "mbeya", "year": 2026, "file": "papers/form4/physics/mby_prenecta_2026_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "mbeya", "year": 2025, "file": "papers/form4/physics/mby_prenecta_2025_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "mbeya", "year": 2024, "file": "papers/form4/physics/mby_prenecta_2024_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "mbeya", "year": 2023, "file": "papers/form4/physics/mby_prenecta_2023_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "mbeya", "year": 2026, "file": "papers/form4/physics/mby_prenecta_2026_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "mbeya", "year": 2025, "file": "papers/form4/physics/mby_prenecta_2025_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "mbeya", "year": 2024, "file": "papers/form4/physics/mby_prenecta_2024_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "mbeya", "year": 2023, "file": "papers/form4/physics/mby_prenecta_2023_phy1.pdf" },
           
             // KAGERA (PRE NECTA YENYE MIAKA YOTE)
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "kagera", "year": 2026, "file": "papers/form4/physics/kag_prenecta_2026_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "kagera", "year": 2025, "file": "papers/form4/physics/kag_prenecta_2025_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "kagera", "year": 2024, "file": "papers/form4/physics/kag_prenecta_2024_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "kagera", "year": 2023, "file": "papers/form4/physics/kag_prenecta_2023_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "kagera", "year": 2026, "file": "papers/form4/physics/kag_prenecta_2026_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "kagera", "year": 2025, "file": "papers/form4/physics/kag_prenecta_2025_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "kagera", "year": 2024, "file": "papers/form4/physics/kag_prenecta_2024_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "kagera", "year": 2023, "file": "papers/form4/physics/kag_prenecta_2023_phy1.pdf" },
           
             // SHINYANGA (PRE NECTA YENYE MIAKA YOTE)
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "shinyanga", "year": 2026, "file": "papers/form4/physics/shy_prenecta_2026_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "shinyanga", "year": 2025, "file": "papers/form4/physics/shy_prenecta_2025_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "shinyanga", "year": 2024, "file": "papers/form4/physics/shy_prenecta_2024_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "prenecta", "region": "shinyanga", "year": 2023, "file": "papers/form4/physics/shy_prenecta_2023_phy1.pdf" }
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2026, "file": "papers/form4/physics/shy_prenecta_2026_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2025, "file": "papers/form4/physics/shy_prenecta_2025_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2024, "file": "papers/form4/physics/shy_prenecta_2024_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2023, "file": "papers/form4/physics/shy_prenecta_2023_phy1.pdf" }
 
     ]
       ,"Chemistry": [
             // DAR ES SALAAM (PRE NECTA YENYE FAILI NYINGI)
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_chem1.pdf" },
-            { "title": "Chemistry 2A (Practical)", "type": "prenecta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_chem2a.pdf" },
-            { "title": "Chemistry 2B (Practical)", "type": "prenecta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_chem2b.pdf" },
-            { "title": "Chemistry 2C (Practical)", "type": "prenecta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_chem2c.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "dar_es_salaam", "year": 2025, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2025_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "dar_es_salaam", "year": 2024, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2024_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "dar_es_salaam", "year": 2023, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2023_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_chem1.pdf" },
+            { "title": "Chemistry 2A (Practical)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_chem2a.pdf" },
+            { "title": "Chemistry 2B (Practical)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_chem2b.pdf" },
+            { "title": "Chemistry 2C (Practical)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_chem2c.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2025, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2025_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2024, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2024_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2023, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2023_chem1.pdf" },
 
             // DODOMA (PRE NECTA YENYE MIAKA YOTE)
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "dodoma", "year": 2026, "file": "papers/form4/Chemistry/dom_prenecta_2026_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "dodoma", "year": 2025, "file": "papers/form4/Chemistry/dom_prenecta_2025_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "dodoma", "year": 2024, "file": "papers/form4/Chemistry/dom_prenecta_2024_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "dodoma", "year": 2023, "file": "papers/form4/Chemistry/dom_prenecta_2023_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "dodoma", "year": 2026, "file": "papers/form4/Chemistry/dom_prenecta_2026_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "dodoma", "year": 2025, "file": "papers/form4/Chemistry/dom_prenecta_2025_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "dodoma", "year": 2024, "file": "papers/form4/Chemistry/dom_prenecta_2024_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "dodoma", "year": 2023, "file": "papers/form4/Chemistry/dom_prenecta_2023_chem1.pdf" },
 
             // ARUSHA (PRE NECTA YENYE MIAKA YOTE)
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "arusha", "year": 2026, "file": "papers/form4/Chemistry/aru_prenecta_2026_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "arusha", "year": 2025, "file": "papers/form4/Chemistry/aru_prenecta_2025_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "arusha", "year": 2024, "file": "papers/form4/Chemistry/aru_prenecta_2024_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "arusha", "year": 2023, "file": "papers/form4/Chemistry/aru_prenecta_2023_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "arusha", "year": 2026, "file": "papers/form4/Chemistry/aru_prenecta_2026_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "arusha", "year": 2025, "file": "papers/form4/Chemistry/aru_prenecta_2025_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "arusha", "year": 2024, "file": "papers/form4/Chemistry/aru_prenecta_2024_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "arusha", "year": 2023, "file": "papers/form4/Chemistry/aru_prenecta_2023_chem1.pdf" },
 
             // MBEYA (PRE NECTA YENYE MIAKA YOTE)
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "mbeya", "year": 2026, "file": "papers/form4/Chemistry/mby_prenecta_2026_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "mbeya", "year": 2025, "file": "papers/form4/Chemistry/mby_prenecta_2025_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "mbeya", "year": 2024, "file": "papers/form4/Chemistry/mby_prenecta_2024_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "mbeya", "year": 2023, "file": "papers/form4/Chemistry/mby_prenecta_2023_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "mbeya", "year": 2026, "file": "papers/form4/Chemistry/mby_prenecta_2026_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "mbeya", "year": 2025, "file": "papers/form4/Chemistry/mby_prenecta_2025_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "mbeya", "year": 2024, "file": "papers/form4/Chemistry/mby_prenecta_2024_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "mbeya", "year": 2023, "file": "papers/form4/Chemistry/mby_prenecta_2023_chem1.pdf" },
           
             // KAGERA (PRE NECTA YENYE MIAKA YOTE)
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "kagera", "year": 2026, "file": "papers/form4/Chemistry/kag_prenecta_2026_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "kagera", "year": 2025, "file": "papers/form4/Chemistry/kag_prenecta_2025_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "kagera", "year": 2024, "file": "papers/form4/Chemistry/kag_prenecta_2024_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "kagera", "year": 2023, "file": "papers/form4/Chemistry/kag_prenecta_2023_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "kagera", "year": 2026, "file": "papers/form4/Chemistry/kag_prenecta_2026_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "kagera", "year": 2025, "file": "papers/form4/Chemistry/kag_prenecta_2025_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "kagera", "year": 2024, "file": "papers/form4/Chemistry/kag_prenecta_2024_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "kagera", "year": 2023, "file": "papers/form4/Chemistry/kag_prenecta_2023_chem1.pdf" },
           
             // SHINYANGA (PRE NECTA YENYE MIAKA YOTE)
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "shinyanga", "year": 2026, "file": "papers/form4/Chemistry/shy_prenecta_2026_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "shinyanga", "year": 2025, "file": "papers/form4/Chemistry/shy_prenecta_2025_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "shinyanga", "year": 2024, "file": "papers/form4/Chemistry/shy_prenecta_2024_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "prenecta", "region": "shinyanga", "year": 2023, "file": "papers/form4/Chemistry/shy_prenecta_2023_chem1.pdf" }
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2026, "file": "papers/form4/Chemistry/shy_prenecta_2026_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2025, "file": "papers/form4/Chemistry/shy_prenecta_2025_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2024, "file": "papers/form4/Chemistry/shy_prenecta_2024_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2023, "file": "papers/form4/Chemistry/shy_prenecta_2023_chem1.pdf" }
             
         ],
           "physics": [
@@ -244,9 +244,9 @@ const pastPapers = {
             { "title": "Physics 2A (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy2a.pdf" },
             { "title": "Physics 2B (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy2b.pdf" },
             { "title": "Physics 2C (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy2c.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2025, "file": "papers/form4/physics/necta/2026/necta_2025_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2024, "file": "papers/form4/physics/necta/2026/necta_2024_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2023, "file": "papers/form4/physics/necta/2026/necta_2023_phy1.pdf" }
+            { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2025, "file": "papers/form4/physics/necta/2025/necta_2025_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2024, "file": "papers/form4/physics/necta/2024/necta_2024_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2023, "file": "papers/form4/physics/necta/2023/necta_2023_phy1.pdf" }
               
        ]
         ,"Chemistry": [
@@ -254,9 +254,9 @@ const pastPapers = {
             { "title": "Chemistry 2A (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/Chemistry/necta/2026/necta_2026_chem2a.pdf" },
             { "title": "Chemistry 2B (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/Chemistry/necta/2026/necta_2026_chem2b.pdf" },
             { "title": "Chemistry 2C (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/Chemistry/necta/2026/necta_2026_chem2c.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "necta", "region": "necta", "year": 2025, "file": "papers/form4/Chemistry/necta/2026/necta_2025_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "necta", "region": "necta", "year": 2024, "file": "papers/form4/Chemistry/necta/2026/necta_2024_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "necta", "region": "necta", "year": 2023, "file": "papers/form4/Chemistry/necta/2026/necta_2023_chem1.pdf" }
+            { "title": "Chemistry 1 (Theory)", "type": "necta", "region": "necta", "year": 2025, "file": "papers/form4/Chemistry/necta/2025/necta_2025_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "necta", "region": "necta", "year": 2024, "file": "papers/form4/Chemistry/necta/2024/necta_2024_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "necta", "region": "necta", "year": 2023, "file": "papers/form4/Chemistry/necta/2023/necta_2023_chem1.pdf" }
       ]
   },
   
