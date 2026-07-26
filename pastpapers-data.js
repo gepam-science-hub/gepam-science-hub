@@ -154,7 +154,7 @@ const pastPapers = {
             { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2025, "file": "papers/form4/physics/shy_prenecta_2025_phy1.pdf" },
             { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2024, "file": "papers/form4/physics/shy_prenecta_2024_phy1.pdf" },
             { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2023, "file": "papers/form4/physics/shy_prenecta_2023_phy1.pdf" },
-        "physics": [
+
             { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy1.pdf" },
             { "title": "Physics 2A (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy2a.pdf" },
             { "title": "Physics 2B (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy2b.pdf" },
