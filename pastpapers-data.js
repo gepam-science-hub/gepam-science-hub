@@ -114,50 +114,8 @@ const pastPapers = {
             { "title": "Physics 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2026, "file": "papers/form4/physics/shy_mock_2026_phy1.pdf" },
             { "title": "Physics 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2025, "file": "papers/form4/physics/shy_mock_2025_phy1.pdf" },
             { "title": "Physics 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2024, "file": "papers/form4/physics/shy_mock_2024_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2023, "file": "papers/form4/physics/shy_mock_2023_phy1.pdf" }
-        ]
-         ,"chemistry": [
-            // DAR ES SALAAM (MOCK YENYE FAILI NYINGI)
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem1.pdf" },
-            { "title": "Chemistry 2A (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem2a.pdf" },
-            { "title": "Chemistry 2B (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem2b.pdf" },
-            { "title": "Chemistry 2C (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem2c.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2025, "file": "papers/form4/chemistry/mock/dar_es_salaam/2025/dsm_mock_2025_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2024, "file": "papers/form4/chemistry/mock/dar_es_salaam/2024/dsm_mock_2024_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2023, "file": "papers/form4/chemistry/mock/dar_es_salaam/2023/dsm_mock_2023_chem1.pdf" },
-
-            // DODOMA (MOCK YENYE MIAKA YOTE)
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dodoma", "year": 2026, "file": "papers/form4/Chemistry/mock/dodoma/2026/dom_mock_2026_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dodoma", "year": 2025, "file": "papers/form4/Chemistry/mock/dodoma/2025/dom_mock_2025_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dodoma", "year": 2024, "file": "papers/form4/Chemistry/mock/dodoma/2024/dom_mock_2024_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dodoma", "year": 2023, "file": "papers/form4/Chemistry/mock/dodoma/2023/om_mock_2023_chem1.pdf" },
-
-            // ARUSHA (MOCK YENYE MIAKA YOTE)
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "arusha", "year": 2026, "file": "papers/form4/Chemistry/mock/arusha/2026/aru_mock_2026_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "arusha", "year": 2025, "file": "papers/form4/Chemistry/mock/arusha/2025/aru_mock_2025_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "arusha", "year": 2024, "file": "papers/form4/Chemistry/mock/arusha/2024/aru_mock_2024_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "arusha", "year": 2023, "file": "papers/form4/Chemistry/mock/arusha/2023/aru_mock_2023_chem1.pdf" },
-
-            // MBEYA (MOCK YENYE MIAKA YOTE)
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "mbeya", "year": 2026, "file": "papers/form4/Chemistry/mock/mbeya/2026/mby_mock_2026_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "mbeya", "year": 2025, "file": "papers/form4/Chemistry/mock/mbeya/2025/mby_mock_2025_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "mbeya", "year": 2024, "file": "papers/form4/Chemistry/mock/mbeya/2024/mby_mock_2024_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "mbeya", "year": 2023, "file": "papers/form4/Chemistry/mock/mbeya/2023/mby_mock_2023_chem1.pdf" },
-          
-            // KAGERA (MOCK YENYE MIAKA YOTE)
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "kagera", "year": 2026, "file": "papers/form4/Chemistry/mock/kagera/2026/kag_mock_2026_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "kagera", "year": 2025, "file": "papers/form4/Chemistry/mock/kagera/2025/kag_mock_2025_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "kagera", "year": 2024, "file": "papers/form4/Chemistry/mock/kagera/2024/kag_mock_2024_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "kagera", "year": 2023, "file": "papers/form4/Chemistry/mock/kagera/2023/kag_mock_2023_chem1.pdf" },
-          
-            // SHINYANGA (MOCK YENYE MIAKA YOTE)
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2026, "file": "papers/form4/Chemistry/mock/shinyanga/2026/shy_mock_2026_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2025, "file": "papers/form4/Chemistry/mock/shinyanga/2025/shy_mock_2025_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2024, "file": "papers/form4/Chemistry/mock/shinyanga/2024/shy_mock_2024_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2023, "file": "papers/form4/Chemistry/mock/shinyanga/2023/shy_mock_2023_chem1.pdf" }
-
-        ],
-         "physics": [
+            { "title": "Physics 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2023, "file": "papers/form4/physics/shy_mock_2023_phy1.pdf" },
+             
             // DAR ES SALAAM (PRE NECTA YENYE FAILI NYINGI)
             { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_phy1.pdf" },
             { "title": "Physics 2A (Practical)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_phy2a.pdf" },
@@ -195,9 +153,56 @@ const pastPapers = {
             { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2026, "file": "papers/form4/physics/shy_prenecta_2026_phy1.pdf" },
             { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2025, "file": "papers/form4/physics/shy_prenecta_2025_phy1.pdf" },
             { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2024, "file": "papers/form4/physics/shy_prenecta_2024_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2023, "file": "papers/form4/physics/shy_prenecta_2023_phy1.pdf" }
-     ],
+            { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2023, "file": "papers/form4/physics/shy_prenecta_2023_phy1.pdf" },
+        "physics": [
+            { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy1.pdf" },
+            { "title": "Physics 2A (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy2a.pdf" },
+            { "title": "Physics 2B (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy2b.pdf" },
+            { "title": "Physics 2C (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy2c.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2025, "file": "papers/form4/physics/necta/2025/necta_2025_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2024, "file": "papers/form4/physics/necta/2024/necta_2024_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2023, "file": "papers/form4/physics/necta/2023/necta_2023_phy1.pdf" }   
+       ],                   
       "chemistry": [
+          // DAR ES SALAAM (MOCK YENYE FAILI NYINGI)
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem1.pdf" },
+            { "title": "Chemistry 2A (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem2a.pdf" },
+            { "title": "Chemistry 2B (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem2b.pdf" },
+            { "title": "Chemistry 2C (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem2c.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2025, "file": "papers/form4/chemistry/mock/dar_es_salaam/2025/dsm_mock_2025_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2024, "file": "papers/form4/chemistry/mock/dar_es_salaam/2024/dsm_mock_2024_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2023, "file": "papers/form4/chemistry/mock/dar_es_salaam/2023/dsm_mock_2023_chem1.pdf" },
+
+            // DODOMA (MOCK YENYE MIAKA YOTE)
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dodoma", "year": 2026, "file": "papers/form4/Chemistry/mock/dodoma/2026/dom_mock_2026_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dodoma", "year": 2025, "file": "papers/form4/Chemistry/mock/dodoma/2025/dom_mock_2025_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dodoma", "year": 2024, "file": "papers/form4/Chemistry/mock/dodoma/2024/dom_mock_2024_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dodoma", "year": 2023, "file": "papers/form4/Chemistry/mock/dodoma/2023/om_mock_2023_chem1.pdf" },
+
+            // ARUSHA (MOCK YENYE MIAKA YOTE)
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "arusha", "year": 2026, "file": "papers/form4/Chemistry/mock/arusha/2026/aru_mock_2026_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "arusha", "year": 2025, "file": "papers/form4/Chemistry/mock/arusha/2025/aru_mock_2025_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "arusha", "year": 2024, "file": "papers/form4/Chemistry/mock/arusha/2024/aru_mock_2024_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "arusha", "year": 2023, "file": "papers/form4/Chemistry/mock/arusha/2023/aru_mock_2023_chem1.pdf" },
+
+            // MBEYA (MOCK YENYE MIAKA YOTE)
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "mbeya", "year": 2026, "file": "papers/form4/Chemistry/mock/mbeya/2026/mby_mock_2026_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "mbeya", "year": 2025, "file": "papers/form4/Chemistry/mock/mbeya/2025/mby_mock_2025_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "mbeya", "year": 2024, "file": "papers/form4/Chemistry/mock/mbeya/2024/mby_mock_2024_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "mbeya", "year": 2023, "file": "papers/form4/Chemistry/mock/mbeya/2023/mby_mock_2023_chem1.pdf" },
+          
+            // KAGERA (MOCK YENYE MIAKA YOTE)
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "kagera", "year": 2026, "file": "papers/form4/Chemistry/mock/kagera/2026/kag_mock_2026_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "kagera", "year": 2025, "file": "papers/form4/Chemistry/mock/kagera/2025/kag_mock_2025_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "kagera", "year": 2024, "file": "papers/form4/Chemistry/mock/kagera/2024/kag_mock_2024_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "kagera", "year": 2023, "file": "papers/form4/Chemistry/mock/kagera/2023/kag_mock_2023_chem1.pdf" },
+          
+            // SHINYANGA (MOCK YENYE MIAKA YOTE)
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2026, "file": "papers/form4/Chemistry/mock/shinyanga/2026/shy_mock_2026_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2025, "file": "papers/form4/Chemistry/mock/shinyanga/2025/shy_mock_2025_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2024, "file": "papers/form4/Chemistry/mock/shinyanga/2024/shy_mock_2024_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2023, "file": "papers/form4/Chemistry/mock/shinyanga/2023/shy_mock_2023_chem1.pdf" },
+          
             // DAR ES SALAAM (PRE NECTA YENYE FAILI NYINGI)
             { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_chem1.pdf" },
             { "title": "Chemistry 2A (Practical)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_chem2a.pdf" },
@@ -235,19 +240,8 @@ const pastPapers = {
             { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2026, "file": "papers/form4/Chemistry/shy_prenecta_2026_chem1.pdf" },
             { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2025, "file": "papers/form4/Chemistry/shy_prenecta_2025_chem1.pdf" },
             { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2024, "file": "papers/form4/Chemistry/shy_prenecta_2024_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2023, "file": "papers/form4/Chemistry/shy_prenecta_2023_chem1.pdf" }
-            
-        ],
-          "physics": [
-            { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy1.pdf" },
-            { "title": "Physics 2A (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy2a.pdf" },
-            { "title": "Physics 2B (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy2b.pdf" },
-            { "title": "Physics 2C (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy2c.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2025, "file": "papers/form4/physics/necta/2025/necta_2025_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2024, "file": "papers/form4/physics/necta/2024/necta_2024_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2023, "file": "papers/form4/physics/necta/2023/necta_2023_phy1.pdf" }   
-       ],
-        "chemistry": [
+            { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2023, "file": "papers/form4/Chemistry/shy_prenecta_2023_chem1.pdf" },
+
             { "title": "Chemistry 1 (Theory)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/chemistry/necta/2026/necta_2026_chem1.pdf" },
             { "title": "Chemistry 2A (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/chemistry/necta/2026/necta_2026_chem2a.pdf" },
             { "title": "Chemistry 2B (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/chemistry/necta/2026/necta_2026_chem2b.pdf" },
