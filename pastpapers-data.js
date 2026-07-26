@@ -196,8 +196,8 @@ const pastPapers = {
             { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2025, "file": "papers/form4/physics/shy_prenecta_2025_phy1.pdf" },
             { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2024, "file": "papers/form4/physics/shy_prenecta_2024_phy1.pdf" },
             { "title": "Physics 1 (Theory)", "type": "pre_necta", "region": "shinyanga", "year": 2023, "file": "papers/form4/physics/shy_prenecta_2023_phy1.pdf" }
-    ]
-      ,"Chemistry": [
+     ],
+      "chemistry": [
             // DAR ES SALAAM (PRE NECTA YENYE FAILI NYINGI)
             { "title": "Chemistry 1 (Theory)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_chem1.pdf" },
             { "title": "Chemistry 2A (Practical)", "type": "pre_necta", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/Chemistry/pre_necta/dar_es_salaam/2026/dsm_prenecta_2026_chem2a.pdf" },
@@ -246,8 +246,8 @@ const pastPapers = {
             { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2025, "file": "papers/form4/physics/necta/2025/necta_2025_phy1.pdf" },
             { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2024, "file": "papers/form4/physics/necta/2024/necta_2024_phy1.pdf" },
             { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2023, "file": "papers/form4/physics/necta/2023/necta_2023_phy1.pdf" }   
-       ]
-        ,"Chemistry": [
+       ],
+        "chemistry": [
             { "title": "Chemistry 1 (Theory)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/chemistry/necta/2026/necta_2026_chem1.pdf" },
             { "title": "Chemistry 2A (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/chemistry/necta/2026/necta_2026_chem2a.pdf" },
             { "title": "Chemistry 2B (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/chemistry/necta/2026/necta_2026_chem2b.pdf" },
