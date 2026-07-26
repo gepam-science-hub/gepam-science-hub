@@ -1,155 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEPAM Science Hub | Making Science Easy</title>
+    <link rel="icon" type="image/png" href="file_00000000f17471f4b8f76a744122207a.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Hamburger Menu Styling */
+        .nav-header { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 10px 20px; background: #fff; border-bottom: 1px solid #eee; position: relative; }
+        .menu-toggle { font-size: 28px; background: none; border: none; cursor: pointer; color: #333; display: block; }
+        .sidebar { position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: 0.3s ease; z-index: 10000; padding: 20px; box-sizing: border-box; overflow-y: auto; text-align: left; }
+        .sidebar.active { right: 0; }
+        .close-btn { font-size: 24px; background: none; border: none; cursor: pointer; color: #999; float: right; margin-bottom: 20px; }
+        .sidebar-links { margin-top: 50px; display: flex; flex-direction: column; gap: 15px; }
+        .sidebar-links a { text-decoration: none; color: #333; font-weight: bold; font-size: 16px; padding: 10px; border-radius: 4px; transition: 0.2s; display: block; }
+        .sidebar-links a:hover { background: #f4f4f4; color: #00c300; }
+        
+        /* Dropdown Ndani ya Sidebar (Accordion) */
+        .dropdown-btn { background: none; border: none; width: 100%; text-align: left; font-weight: bold; font-size: 16px; padding: 10px; cursor: pointer; color: #333; display: flex; justify-content: space-between; align-items: center; }
+        .dropdown-container { display: none; background: #f9f9f9; padding-left: 15px; border-left: 3px solid #00c300; margin-top: 5px; }
+        .dropdown-container a { font-size: 14px; font-weight: normal; padding: 6px 10px; }
 
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GEPAM Science Hub | Physics & Chemistry Notes, NECTA Past Papers Tanzania</title>
-
-<meta name="description" content="GEPAM Science Hub provides simplified Physics and Chemistry notes, NECTA past papers, revision materials and science learning resources for secondary school students in Tanzania.">
-
-<meta name="keywords" content="GEPAM Science Hub, Physics Notes Tanzania, Chemistry Notes Tanzania, NECTA Past Papers, Form 1 Physics Notes, Form 2 Physics Notes, Form 3 Physics Notes, Form 4 Physics Notes, Form 5 Physics Notes, Form 6 Physics Notes, Form 1 Chemistry Notes, Form 4 Chemistry Notes, Form 6 Chemistry Notes, Science Notes PDF Tanzania, NECTA Revision Materials">
-
-<meta name="author" content="GEPAM Science Hub">
-
-<link rel="stylesheet" href="style.css">
-
+        /* Homepage Cards (Kama za Notes) */
+        .home-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .home-card { background: #fff; border: 1px solid #eee; border-top: 5px solid #00c300; border-radius: 8px; padding: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: left; transition: 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
+        .home-card:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.08); }
+        .action-btn { width: 100%; padding: 12px; background: #00c300; color: white; border: none; font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 20px; font-size: 15px; transition: 0.2s; text-align: center; display: inline-block; text-decoration: none; box-sizing: border-box; }
+        .action-btn:hover { background: #00a500; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 9999; }
+    </style>
 </head>
-
-
 <body>
+  
+<!-- Sehemu ya Juu yenye Logo na Mistari Mitatu -->
+<div class="nav-header">
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="file_00000000f17471f4b8f76a744122207a.png" style="height: 40px;" alt="Logo">
+        <span style="font-weight: bold; font-size: 18px; color: #222;">GEPAM Hub</span>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+</div>
 
-
-<header>
-
-
-<img src="file_00000000f17471f4b8f76a744122207a.png"
-alt="GEPAM Science Hub Logo"
-class="logo">
-
-
-<h1>GEPAM Science Hub</h1>
-
-
-<p>Making Science Easy</p>
-
-
+<header style="text-align: center; padding: 40px 20px; background: #f8f9fa;">
+    <h1>GEPAM Science Hub</h1>
+    <p style="font-size: 18px; color: #666;">Making Physics and Chemistry Easy for Tanzanian Students.</p>
 </header>
 
+<!-- Soko Kuu la Homepage (Grid ya Kadi za Kisasa) -->
+<main class="home-grid">
+    <div class="home-card">
+        <div>
+            <h3 style="font-size: 20px; margin-top: 0;">📚 Past Papers Library</h3>
+            <p style="color: #666; line-height: 1.6;">Browse and download free Physics and Chemistry examination papers hierarchically. Access NECTA, Regional Mocks, and Joint exams from Form 1 to Form 6.</p>
+        </div>
+        <a href="pastpapers.html" class="action-btn">FUNGUA MITIHANI</a>
+    </div>
 
+    <div class="home-card">
+        <div>
+            <h3 style="font-size: 20px; margin-top: 0;">📘 Premium Notes Store</h3>
+            <p style="color: #666; line-height: 1.6;">Get high-quality, topic-by-topic Physics and Chemistry notes. Simplified explanations designed to help you score an A in your terminal and national exams.</p>
+        </div>
+        <a href="notes.html" class="action-btn">NUNUA NOTES</a>
+    </div>
+</main>
 
+<!-- SIRI YA MSOMI BORA: Sidebar Menu yenye Maelekezo ya Ndani -->
+<div class="overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+<div class="sidebar" id="sidebarMenu">
+    <button class="close-btn" onclick="toggleMenu()">✕</button>
+    <div class="sidebar-links">
+        <a href="index.html">🏠 Home</a>
+        <a href="about.html">ℹ️ About Us</a>
+        
+        <!-- Dropdown ya Notes -->
+        <button class="dropdown-btn" onclick="toggleDropdown(this)">📝 Notes Store <span>▼</span></button>
+        <div class="dropdown-container">
+            <a href="notes.html">Form 1 Topics</a>
+            <a href="notes.html">Form 2 Topics</a>
+            <a href="notes.html">Form 3 Topics</a>
+            <a href="notes.html">Form 4 Topics</a>
+            <a href="notes.html">Form 5 Topics</a>
+            <a href="notes.html">Form 6 Topics</a>
+        </div>
 
+        <!-- Dropdown ya Past Papers -->
+        <button class="dropdown-btn" onclick="toggleDropdown(this)">📚 Past Papers <span>▼</span></button>
+        <div class="dropdown-container">
+            <a href="pastpapers.html">Form 1 Exams</a>
+            <a href="pastpapers.html">Form 2 Exams</a>
+            <a href="pastpapers.html">Form 3 Exams</a>
+            <a href="pastpapers.html">Form 4 (NECTA/Mock)</a>
+            <a href="pastpapers.html">Form 5 Exams</a>
+            <a href="pastpapers.html">Form 6 (ACSEE/Mock)</a>
+        </div>
 
-<nav>
-
-<a href="index.html">Home</a>
-
-<a href="about.html">About</a>
-
-<a href="notes.html">Notes</a>
-
-<a href="pastpapers.html">Past Papers</a>
-
-<a href="contact.html">Contact</a>
-
-</nav>
-
-
-
-
-
-
-
-<section class="hero">
-
-
-<h2>Master Physics & Chemistry With Confidence</h2>
-
-
-<p>
-
-Simplified Physics and Chemistry notes, past papers,
-solutions and learning resources designed to help
-students understand science easily.
-
-</p>
-
-
-
-<a href="notes.html">
-
-<button>Explore Notes</button>
-
-</a>
-
-
-
-<a href="pastpapers.html">
-
-<button>Past Papers</button>
-
-</a>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-<section>
-
-
-<h2>Why Choose GEPAM Science Hub?</h2>
-
-
-
-<div class="card">
-
-<h3>📖 Simple Explanations</h3>
-
-<p>
-We simplify difficult Physics and Chemistry concepts
-for better understanding.
-</p>
-
+        <a href="contact.html">📞 Contact Us</a>
+    </div>
 </div>
 
-
-
-<div class="card">
-
-<h3>🎯 NECTA Focused</h3>
-
-<p>
-Learning materials designed to support examination success.
-</p>
-
-</div>
-</section>
-
-<a href="https://wa.me/255748978398" class="whatsapp">
-💬 WhatsApp Us
-</a>
-
-<footer>
-
-<h3>GEPAM Science Hub</h3>
-
-<p>Making Science Easy</p>
-
-<p>© 2026 GEPAM Science Hub. All Rights Reserved.</p>
-
+<footer style="text-align: center; padding: 30px; background: #222; color: #fff; margin-top: 50px;">
+    <h3>GEPAM Science Hub</h3>
+    <p>© 2026 GEPAM Science Hub. All Rights Reserved.</p>
 </footer>
 
+<script>
+    function toggleMenu() {
+        const sidebar = document.getElementById("sidebarMenu");
+        const overlay = document.getElementById("menuOverlay");
+        sidebar.classList.toggle("active");
+        overlay.style.display = sidebar.classList.contains("active") ? "block" : "none";
+    }
+
+    function toggleDropdown(btn) {
+        btn.classList.toggle("active");
+        const container = btn.nextElementSibling;
+        const arrow = btn.querySelector("span");
+        if (container.style.display === "block") {
+            container.style.display = "none";
+            arrow.textContent = "▼";
+        } else {
+            container.style.display = "block";
+            arrow.textContent = "▲";
+        }
+    }
+</script>
 </body>
-
 </html>
-
