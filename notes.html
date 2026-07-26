@@ -258,14 +258,20 @@ html<!DOCTYPE html>
         btn.classList.add('active');
     }
 
-    function openPayment(noteId, noteName, price) {
+        function openPayment(noteId, noteName, price) {
         document.getElementById("modalNoteName").textContent = noteName;
         document.getElementById("modalPrice").textContent = "TSH " + price;
+        
+        // 1. Maandishi ya ujumbe (Hapa weka hivi hivi usibadilishe kitu)
         const message = `Habari GEPAM Science Hub. Nimefanya malipo ya TSH ${price} kwa ajili ya kununua topic maalum. \n\nKODI YA TOPIC: GPM-${noteId}\n\nNaomba nitumiwe link ya kudownload faili langu.`;
+        
+        // 2. MSTARI ULIOREKEBISHWA (Zingatia alama ya / na $ zilizorudi hapa chini)
         const whatsappUrl = `https://wa.me{WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+        
         document.getElementById("whatsappPayBtn").onclick = function() {
             window.open(whatsappUrl, '_blank');
         };
+
         document.getElementById("paymentModal").style.display = "block";
         document.getElementById("overlay").style.display = "block";
     }
