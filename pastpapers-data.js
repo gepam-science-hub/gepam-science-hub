@@ -76,7 +76,7 @@ const pastPapers = {
 
     // ==================== FORM 4 ====================
     "form4": {
-        physics: [
+        "physics": [
             // DAR ES SALAAM (MOCK YENYE FAILI NYINGI)
             { "title": "Physics 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/mock/dar_es_salaam/2026/dsm_mock_2026_phy1.pdf" },
             { "title": "Physics 2A (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/mock/dar_es_salaam/2026/dsm_mock_2026_phy2a.pdf" },
@@ -203,7 +203,7 @@ const pastPapers = {
             { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2023, "file": "papers/form4/physics/necta/2023/necta_2023_phy1.pdf" }
         ],
         
-        chemistry: [
+        "chemistry": [
             // DAR ES SALAAM (MOCK YENYE FAILI NYINGI)
             { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem1.pdf" },
             { "title": "Chemistry 2A (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem2a.pdf" },
