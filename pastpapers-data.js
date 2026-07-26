@@ -141,7 +141,7 @@ const pastPapers = {
             { "title": "Physics 1 (Theory)", "type": "joint", "region": "mbeya", "year": 2026, "file": "papers/form4/physics/mby_joint_2026_phy1.pdf" },
             { "title": "Physics 1 (Theory)", "type": "joint", "region": "mbeya", "year": 2025, "file": "papers/form4/physics/mby_joint_2025_phy1.pdf" },
             { "title": "Physics 1 (Theory)", "type": "joint", "region": "mbeya", "year": 2024, "file": "papers/form4/physics/mby_joint_2024_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "joint, "region": "mbeya", "year": 2023, "file": "papers/form4/physics/mby_joint_2023_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "joint", "region": "mbeya", "year": 2023, "file": "papers/form4/physics/mby_joint_2023_phy1.pdf" },
           
             // KAGERA (JOINT YENYE MIAKA YOTE)
             { "title": "Physics 1 (Theory)", "type": "joint", "region": "kagera", "year": 2026, "file": "papers/form4/physics/kag_joint_2026_phy1.pdf" },
@@ -217,7 +217,7 @@ const pastPapers = {
             { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dodoma", "year": 2026, "file": "papers/form4/chemistry/mock/dodoma/2026/dom_mock_2026_chem1.pdf" },
             { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dodoma", "year": 2025, "file": "papers/form4/chemistry/mock/dodoma/2025/dom_mock_2025_chem1.pdf" },
             { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dodoma", "year": 2024, "file": "papers/form4/chemistry/mock/dodoma/2024/dom_mock_2024_chem1.pdf" },
-            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dodoma", "year": 2023, "file": "papers/form4/chemistry/mock/dodoma/2023/om_mock_2023_chem1.pdf" },
+            { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dodoma", "year": 2023, "file": "papers/form4/chemistry/mock/dodoma/2023/dom_mock_2023_chem1.pdf" },
 
             // ARUSHA (MOCK YENYE MIAKA YOTE)
             { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "arusha", "year": 2026, "file": "papers/form4/chemistry/mock/arusha/2026/aru_mock_2026_chem1.pdf" },
