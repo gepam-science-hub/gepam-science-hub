@@ -248,7 +248,7 @@
 
 <script>
     const WHATSAPP_NUMBER = "255748978398"; 
-
+    
     function switchForm(formId, btn) {
         const sections = document.querySelectorAll('.form-section');
         sections.forEach(sec => sec.classList.remove('active'));
@@ -261,13 +261,15 @@
     function openPayment(noteId, noteName, price) {
         document.getElementById("modalNoteName").textContent = noteName;
         document.getElementById("modalPrice").textContent = "TSH " + price;
-        const message = `Habari GEPAM Science Hub. Nimefanya malipo ya TSH ${price} kwa ajili ya kununua topic maalum. \n\nKODI YA TOPIC: GPM-${noteId}\n\nNaomba nitumiwe link ya kudownload faili langu.`;
+        
+        const message = "Habari GEPAM Science Hub. Nimefanya malipo ya TSH " + price + " kwa ajili ya kununua topic maalum.\n\nKODI YA TOPIC: GPM-" + noteId + "\n\nNaomba nitumiwe link ya kudownload faili langu.";
         
         const whatsappUrl = "https://wa.me" + encodeURIComponent(message);
-
+        
         document.getElementById("whatsappPayBtn").onclick = function() {
             window.open(whatsappUrl, '_blank');
         };
+        
         document.getElementById("paymentModal").style.display = "block";
         document.getElementById("overlay").style.display = "block";
     }
