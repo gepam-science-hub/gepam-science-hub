@@ -28,13 +28,7 @@
     <p>Making Science Easy</p>
 </header>
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="notes.html" class="active">Notes</a>
-    <a href="pastpapers.html">Past Papers</a>
-    <a href="contact.html">Contact</a>
-</nav>
+
 
 <div class="tabs-container">
     <button class="tab-btn active" onclick="switchForm('form1', this)">Form 1</button>
@@ -62,7 +56,44 @@
     </div>
     <h3 class="subject-title">Chemistry Topics - Form 1</h3>
     <div class="notes-grid">
-        <div class="notes-card">
+        <!-- Sehemu ya Juu yenye Logo na Mistari Mitatu (Weka hii badala ya <nav>) -->
+<div class="nav-header">
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="file_00000000f17471f4b8f76a744122207a.png" style="height: 40px;" alt="Logo">
+        <span style="font-weight: bold; font-size: 18px; color: #222;">GEPAM Hub</span>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+</div>
+
+<!-- Sidebar Menu (Weka hii juu ya <footer>) -->
+<div class="overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+<div class="sidebar" id="sidebarMenu">
+    <button class="close-btn" onclick="toggleMenu()">✕</button>
+    <div class="sidebar-links">
+        <a href="index.html">🏠 Home</a>
+        <a href="about.html">ℹ️ About Us</a>
+        <button class="dropdown-btn" onclick="toggleDropdown(this)">📝 Notes Store <span>▼</span></button>
+        <div class="dropdown-container">
+            <a href="notes.html">Form 1 Topics</a>
+            <a href="notes.html">Form 2 Topics</a>
+            <a href="notes.html">Form 3 Topics</a>
+            <a href="notes.html">Form 4 Topics</a>
+            <a href="notes.html">Form 5 Topics</a>
+            <a href="notes.html">Form 6 Topics</a>
+        </div>
+        <button class="dropdown-btn" onclick="toggleDropdown(this)">📚 Past Papers <span>▼</span></button>
+        <div class="dropdown-container">
+            <a href="pastpapers.html">Form 1 Exams</a>
+            <a href="pastpapers.html">Form 2 Exams</a>
+            <a href="pastpapers.html">Form 3 Exams</a>
+            <a href="pastpapers.html">Form 4 Exams</a>
+            <a href="pastpapers.html">Form 5 Exams</a>
+            <a href="pastpapers.html">Form 6 Exams</a>
+        </div>
+        <a href="contact.html">📞 Contact Us</a>
+    </div>
+</div>
+<div class="notes-card">
             <div>
                 <h3>Topic 1: Introduction to Chemistry</h3>
                 <p style="color: #666; font-size: 14px;">Concept, importance, and application of chemistry in life.</p>
