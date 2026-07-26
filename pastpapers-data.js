@@ -204,7 +204,7 @@ const pastPapers = {
        ], 
              
       chemistry: [
-          // DAR ES SALAAM (MOCK YENYE FAILI NYINGI)
+            // DAR ES SALAAM (MOCK YENYE FAILI NYINGI)
             { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem1.pdf" },
             { "title": "Chemistry 2A (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem2a.pdf" },
             { "title": "Chemistry 2B (Practical)", "type": "mock", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/mock/dar_es_salaam/2026/dsm_mock_2026_chem2b.pdf" },
@@ -243,7 +243,7 @@ const pastPapers = {
             { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2024, "file": "papers/form4/Chemistry/mock/shinyanga/2024/shy_mock_2024_chem1.pdf" },
             { "title": "Chemistry 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2023, "file": "papers/form4/Chemistry/mock/shinyanga/2023/shy_mock_2023_chem1.pdf" },
 
-          // DAR ES SALAAM (JOINT YENYE FAILI NYINGI)
+            // DAR ES SALAAM (JOINT YENYE FAILI NYINGI)
             { "title": "Chemistry 1 (Theory)", "type": "joint", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/joint/dar_es_salaam/2026/dsm_joint_2026_chem1.pdf" },
             { "title": "Chemistry 2A (Practical)", "type": "joint", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/joint/dar_es_salaam/2026/dsm_joint_2026_chem2a.pdf" },
             { "title": "Chemistry 2B (Practical)", "type": "joint", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/chemistry/joint/dar_es_salaam/2026/dsm_joint_2026_chem2b.pdf" },
