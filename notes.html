@@ -265,7 +265,7 @@
         
         const message = "Habari GEPAM Science Hub. Nimefanya malipo ya TSH " + price + " kwa ajili ya kununua topic maalum.\n\nKODI YA TOPIC: GPM-" + noteId + "\n\nNaomba nitumiwe link ya kudownload faili langu.";
         
-        const whatsappUrl = "https://wa.me{255748978398}" + encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
         
         document.getElementById("whatsappPayBtn").onclick = function() {
             window.open(whatsappUrl, '_blank');
