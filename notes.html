@@ -44,6 +44,7 @@ html<!DOCTYPE html>
     <button class="tab-btn" onclick="switchForm('form5', this)">Form 5</button>
     <button class="tab-btn" onclick="switchForm('form6', this)">Form 6</button>
 </div>
+    
 <!-- ==================== FORM 1 SECTION ==================== -->
 <div id="form1" class="form-section active">
     <h3 class="subject-title">Physics Topics - Form 1</h3>
@@ -233,7 +234,7 @@ html<!DOCTYPE html>
         <strong>JINSI YA KULIPIA:</strong><br>
         1. Tuma pesa kwenye namba hii ya simu:<br>
         • M-Pesa: <strong>255748978398</strong><br>
-        • Jina la Akaunti: <strong>GEPAM SCIENCE HUB</strong><br><br>
+        • Jina la Akaunti: <strong>GEREMANUS MCHAKILA</strong><br><br>
         2. Baada ya kutuma, bonyeza kitufe cha kijani chini kutuma uthibitisho WhatsApp na kupokea Notes yako.
     </div>
     <button class="buy-btn" id="whatsappPayBtn" style="background:#25D366; margin-top: 5px;">TUMA USHAHIDI WHATSAPP</button>
@@ -266,7 +267,7 @@ html<!DOCTYPE html>
         const message = `Habari GEPAM Science Hub. Nimefanya malipo ya TSH ${price} kwa ajili ya kununua topic maalum. \n\nKODI YA TOPIC: GPM-${noteId}\n\nNaomba nitumiwe link ya kudownload faili langu.`;
         
         // 2. MSTARI ULIOREKEBISHWA (Zingatia alama ya / na $ zilizorudi hapa chini)
-        const whatsappUrl = `https://wa.me{WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+        const whatsappUrl = `https://wa.me{255748978398}?text=${encodeURIComponent(message)}`;
         
         document.getElementById("whatsappPayBtn").onclick = function() {
             window.open(whatsappUrl, '_blank');
