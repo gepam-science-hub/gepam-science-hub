@@ -5,82 +5,252 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GEPAM Science Hub | Past Papers Library</title>
     <link rel="icon" type="image/png" href="file_00000000f17471f4b8f76a744122207a.png">
-    <meta name="description" content="NECTA, Mock, Joint and Regional Physics and Chemistry past papers for Form 1 to Form 6 Tanzania.">
     <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fafafa; text-align: center; overflow-x: hidden; }
+        .nav-header { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 15px 20px; background: #fff; border-bottom: 1px solid #eee; box-sizing: border-box; }
+        .menu-toggle { font-size: 28px; background: none; border: none; cursor: pointer; color: #333; }
+        .sidebar { position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: 0.3s ease; z-index: 10000; padding: 20px; box-sizing: border-box; overflow-y: auto; display: block; }
+        .sidebar.active { right: 0 !important; }
+        .close-btn { font-size: 24px; background: none; border: none; cursor: pointer; color: #999; float: right; }
+        .sidebar-links { margin-top: 50px; display: flex; flex-direction: column; gap: 15px; }
+        .sidebar-links a, .dropdown-btn { text-decoration: none; color: #333; font-weight: bold; font-size: 16px; padding: 12px; border-radius: 4px; display: block; text-align: left; width: 100%; box-sizing: border-box; border: none; background: none; cursor: pointer; }
+        .sidebar-links a:hover, .dropdown-btn:hover { background: #f4f4f4; color: #00c300; }
+        .dropdown-container { display: none; background: #f9f9f9; padding-left: 15px; border-left: 3px solid #00c300; }
+        .dropdown-container a { font-size: 14px; font-weight: normal; padding: 8px; }
+        
+        /* MTINDO WA KISASA WA FOLDA (WAZAELIMU STYLE) */
+        .explorer-section { max-width: 1000px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
+        .back-btn { display: none; padding: 12px 24px; background: #222; color: #fff; border: none; cursor: pointer; margin-bottom: 25px; font-weight: bold; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: 0.2s; }
+        .back-btn:hover { background: #444; }
+        .explorer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; margin-top: 15px; }
+        .folder-card { padding: 25px 15px; background: #fff; border: 1px solid #e9ecef; border-radius: 8px; text-align: center; cursor: pointer; font-weight: bold; font-size: 15px; transition: all 0.2s ease-in-out; box-shadow: 0 4px 6px rgba(0,0,0,0.02); color: #333; }
+        .folder-card:hover { background: #f8f9fa; transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.06); border-color: #00c300; }
+        .folder-icon { font-size: 40px; margin-bottom: 10px; color: #00c300; }
+        .paper-card { padding: 20px; background: #fff; border-top: 5px solid #00c300; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); text-align: left; box-sizing: border-box; }
+        .open-btn { width: 100%; margin-top: 15px; padding: 12px; background: #00c300; color: #fff; border: none; cursor: pointer; font-weight: bold; border-radius: 5px; font-size: 14px; transition: 0.2s; }
+        .open-btn:hover { background: #00a500; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; }
+    </style>
 </head>
 <body>
+    <div class="nav-header">
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="file_00000000f17471f4b8f76a744122207a.png" style="height: 40px;" alt="Logo">
+        <span style="font-weight: bold; font-size: 18px; color: #222;">GEPAM Hub</span>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+</div>
 
-<header>
-    <img src="file_00000000f17471f4b8f76a744122207a.png" class="logo" alt="GEPAM Science Hub Logo">
-    <h1>GEPAM Science Hub</h1>
-    <p>Making Science Easy</p>
-</header>
-
-<nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="notes.html">Notes</a>
-    <a href="pastpapers.html" class="active">Past Papers</a>
-    <a href="contact.html">Contact</a>
-</nav>
-
-<section>
+<header style="text-align: center; padding: 30px 20px; background: #f8f9fa;">
     <h2>📚 Past Papers Library</h2>
-    <p>Access Physics and Chemistry examination papers from Form 1 to Form 6.</p>
+    <p style="color: #666; margin: 5px 0 0 0;">Bofya folda hapa chini kupitia mitihani kwa mtiririko sahihi.</p>
+</header>
+<section class="explorer-section">
+    <!-- Kitufe cha kurudi nyuma -->
+    <button id="backBtn" class="back-btn">⬅️ BACK</button>
 
-    <div class="card">
-        <label>Select Form / Kidato</label>
-        <select id="formSelect">
-            <option value="">Choose Form</option>
-            <option value="form1">Form 1</option>
-            <option value="form2">Form 2</option>
-            <option value="form3">Form 3</option>
-            <option value="form4">Form 4</option>
-            <option value="form5">Form 5</option>
-            <option value="form6">Form 6</option>
-        </select>
-
-        <label>Select Subject / Somo</label>
-        <select id="subjectSelect">
-            <option value="">Choose Subject</option>
-            <option value="physics">Physics</option>
-            <option value="chemistry">Chemistry</option>
-        </select>
-
-        <label>Select Examination Type / Aina ya Mtihani</label>
-        <select id="typeSelect">
-            <option value="">Choose Type</option>
-        </select>
-
-        <label>Select Region / Mkoa</label>
-        <select id="regionSelect">
-            <option value="">Choose Region</option>
-        </select>
-
-        <label>Select Year / Mwaka</label>
-        <select id="yearSelect">
-            <option value="">Choose Year</option>
-        </select>
+    <!-- Hapa ndipo folda zitakapojitengeneza zenyewe -->
+    <div id="explorerContainer" class="explorer-grid"></div>
+    
+    <!-- Mfumo wa SEO wa Google -->
+    <div style="display:none;">
+        GEPAM Science Hub past papers database. Free download PDF Physics and Chemistry examination papers for Form 1, Form 2, Form 3, Form 4, Form 5, Form 6 in Tanzania. NECTA, CSEE, ACSEE, FTNA, Mock, Joint, Terminal, Annual and Midterm papers.
     </div>
 </section>
 
-<section>
-    <h2>Available Papers / Mitihani Inayopatikana</h2>
-    <div id="papersContainer">
-        <p>Select options above to view papers.</p>
+<div class="overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+<div class="sidebar" id="sidebarMenu">
+    <button class="close-btn" onclick="toggleMenu()">✕</button>
+    <div class="sidebar-links">
+        <a href="index.html">🏠 Home</a>
+        <a href="about.html">ℹ️ About Us</a>
+        <a href="notes.html">📝 Notes Store</a>
+        <a href="pastpapers.html" style="color: #00c300;">📚 Past Papers</a>
+        <a href="contact.html">📞 Contact</a>
     </div>
-</section>
+</div>
 
-<a href="https://wa.me" class="whatsapp">💬 WhatsApp Us</a>
-
-<footer>
-    <h3>GEPAM Science Hub</h3>
-    <p>Making Science Easy</p>
+<footer style="text-align: center; padding: 30px; background: #222; color: #fff; margin-top: 50px;">
     <p>© 2026 GEPAM Science Hub. All Rights Reserved.</p>
 </footer>
+<script src="pastpapers.data.js"></script>
+<script>
+    function toggleMenu() {
+        const sidebar = document.getElementById("sidebarMenu");
+        const overlay = document.getElementById("menuOverlay");
+        if (sidebar && overlay) {
+            sidebar.classList.toggle("active");
+            overlay.style.display = sidebar.classList.contains("active") ? "block" : "none";
+        }
+    }
 
-<!-- Muhimu: Mpangilio wa mafaili ya JavaScript chini kabisa -->
-<script src="pastpapers-data.js"></script>
-<script src="pastpapers.js"></script>
+    const explorer = document.getElementById("explorerContainer");
+    const backBtn = document.getElementById("backBtn");
+
+    let currentPath = { form: null, subject: null, type: null, region: null, year: null, subValue: null };
+    let currentStep = "FORMS"; 
+
+    function renderExplorer() {
+        if (!explorer) return;
+        explorer.innerHTML = "";
+        if (backBtn) backBtn.style.display = (currentStep === "FORMS") ? "none" : "inline-block";
+
+        const normalizedPapers = (typeof pastPapers !== 'undefined' && currentPath.form && currentPath.subject) ? (pastPapers[currentPath.form]?.[currentPath.subject] || []) : [];
+
+        if (currentStep === "FORMS") {
+            if (typeof pastPaperConfig !== 'undefined') {
+                Object.keys(pastPaperConfig).forEach(form => {
+                    createFolderCard(explorer, form.toUpperCase().replace("FORM", "FORM "), "📁", () => {
+                        currentPath.form = form;
+                        currentStep = "SUBJECTS";
+                        renderExplorer();
+                    });
+                });
+            }
+        }
+        else if (currentStep === "SUBJECTS") {
+            if (pastPaperConfig[currentPath.form]?.subjects) {
+                pastPaperConfig[currentPath.form].subjects.forEach(sub => {
+                    createFolderCard(explorer, sub.toUpperCase(), "📘", () => {
+                        currentPath.subject = sub;
+                        currentStep = "TYPES";
+                        renderExplorer();
+                    });
+                });
+            }
+        }
+        else if (currentStep === "TYPES") {
+            if (pastPaperConfig[currentPath.form]?.types) {
+                pastPaperConfig[currentPath.form].types.forEach(type => {
+                    createFolderCard(explorer, type.toUpperCase().replaceAll("_", " "), "📝", () => {
+                        currentPath.type = type.toLowerCase().trim();
+                        currentStep = "REGIONS";
+                        renderExplorer();
+                    });
+                });
+            }
+        }
+        else if (currentStep === "REGIONS") {
+            let regions = [];
+            normalizedPapers.forEach(p => {
+                if (p.type && p.type.toLowerCase().trim() === currentPath.type && p.region) {
+                    const regValue = p.region.toLowerCase().trim();
+                    if (!regions.includes(regValue)) regions.push(regValue);
+                }
+            });
+            if (regions.length === 0) return showEmpty();
+            regions.sort().forEach(reg => {
+                createFolderCard(explorer, reg.toUpperCase().replaceAll("_", " "), "📍", () => {
+                    currentPath.region = reg;
+                    currentStep = "YEARS";
+                    renderExplorer();
+                });
+            });
+        }
+        else if (currentStep === "YEARS") {
+            let years = [];
+            normalizedPapers.forEach(p => {
+                if (p.type && p.type.toLowerCase().trim() === currentPath.type && p.region && p.region.toLowerCase().trim() === currentPath.region && p.year) {
+                    if (!years.includes(p.year)) years.push(p.year);
+                }
+            });
+            if (years.length === 0) return showEmpty();
+            years.sort((a, b) => b - a).forEach(yr => {
+                createFolderCard(explorer, "MWAKA " + yr, "📅", () => {
+                    currentPath.year = yr;
+                    const nestedTypes = ["annual", "midterm", "terminal", "joint"];
+                    currentStep = nestedTypes.includes(currentPath.type) ? "SUB_CATEGORIES" : "PAPERS";
+                    renderExplorer();
+                });
+            });
+        }
+        else if (currentStep === "SUB_CATEGORIES") {
+            let items = [];
+            const isSchool = ["annual", "midterm", "terminal"].includes(currentPath.type);
+            normalizedPapers.forEach(p => {
+                if (p.type && p.type.toLowerCase().trim() === currentPath.type && p.region && p.region.toLowerCase().trim() === currentPath.region && p.year == currentPath.year) {
+                    let val = isSchool ? p.school : p.district;
+                    if (val) {
+                        const itemValue = val.toLowerCase().trim();
+                        if (!items.includes(itemValue)) items.push(itemValue);
+                    }
+                }
+            });
+            if (items.length === 0) {
+                currentStep = "PAPERS";
+                renderExplorer();
+                return;
+            }
+            items.sort().forEach(item => {
+                let icon = isSchool ? "🏫" : "💼";
+                createFolderCard(explorer, item.toUpperCase().replaceAll("_", " "), icon, () => {
+                    currentPath.subValue = item;
+                    currentStep = "PAPERS";
+                    renderExplorer();
+                });
+            });
+        }
+        else if (currentStep === "PAPERS") {
+            const isSchool = ["annual", "midterm", "terminal"].includes(currentPath.type);
+            const isDistrict = ["joint"].includes(currentPath.type);
+            const filtered = normalizedPapers.filter(p => {
+                if (!p.type || !p.region) return false;
+                const base = p.type.toLowerCase().trim() === currentPath.type && p.region.toLowerCase().trim() === currentPath.region && p.year == currentPath.year;
+                if (!base) return false;
+                if (isSchool) return p.school && p.school.toLowerCase().trim() === currentPath.subValue;
+                if (isDistrict) return p.district && p.district.toLowerCase().trim() === currentPath.subValue;
+                return true;
+            });
+            if (filtered.length === 0) return showEmpty();
+            
+            explorer.style.gridTemplateColumns = "repeat(auto-fill, minmax(250px, 1fr))";
+            
+            filtered.forEach(paper => {
+                const card = document.createElement("div");
+                card.className = "paper-card";
+                card.innerHTML = `
+                    <h3 style="margin:0 0 10px 0; color:#333; font-size:16px;">${paper.title}</h3>
+                    <p style="font-size:13px; color:#666; margin:4px 0;">Year: ${paper.year}</p>
+                    <a href="${paper.file}" target="_blank" style="text-decoration:none;">
+                        <button class="open-btn">📄 OPEN PDF</button>
+                    </a>
+                `;
+                explorer.appendChild(card);
+            });
+            return;
+        }
+        explorer.style.gridTemplateColumns = "repeat(auto-fill, minmax(180px, 1fr))";
+    }
+
+    function createFolderCard(container, text, icon, onClick) {
+        const card = document.createElement("div");
+        card.className = "folder-card";
+        card.innerHTML = `<div class="folder-icon">${icon}</div><div>${text}</div>`;
+        card.onclick = onClick;
+        container.appendChild(card);
+    }
+
+    function showEmpty() {
+        explorer.innerHTML = "<p style='grid-column: 1/-1; text-align:center; padding:30px; color:#999; font-weight:bold;'>No examination papers found in this directory.</p>";
+    }
+
+    if (backBtn) {
+        backBtn.onclick = () => {
+            if (currentStep === "PAPERS") {
+                const nestedTypes = ["annual", "midterm", "terminal", "joint"];
+                currentStep = nestedTypes.includes(currentPath.type) ? "SUB_CATEGORIES" : "YEARS";
+            } 
+            else if (currentStep === "SUB_CATEGORIES") currentStep = "YEARS";
+            else if (currentStep === "YEARS") currentStep = "REGIONS";
+            else if (currentStep === "REGIONS") currentStep = "TYPES";
+            else if (currentStep === "TYPES") currentStep = "SUBJECTS";
+            else if (currentStep === "SUBJECTS") currentStep = "FORMS";
+            renderExplorer();
+        };
+    }
+
+    renderExplorer();
+</script>
 </body>
 </html>
