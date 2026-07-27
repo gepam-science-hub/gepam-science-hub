@@ -10,8 +10,11 @@
         body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fafafa; text-align: center; overflow-x: hidden; }
         .nav-header { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 15px 20px; background: #fff; border-bottom: 1px solid #eee; box-sizing: border-box; }
         .menu-toggle { font-size: 28px; background: none; border: none; cursor: pointer; color: #333; }
-        .sidebar { position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: 0.3s ease; z-index: 10000; padding: 20px; box-sizing: border-box; overflow-y: auto; display: block; }
+        
+        /* === FIXED SIDEBAR CODE (Hapa ndipo tulipofungia menyu isionekane kiholela) === */
+        .sidebar { position: fixed; top: 0; right: -280px !important; width: 280px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: 0.3s ease; z-index: 10000; padding: 20px; box-sizing: border-box; overflow-y: auto; text-align: left; }
         .sidebar.active { right: 0 !important; }
+        
         .close-btn { font-size: 24px; background: none; border: none; cursor: pointer; color: #999; float: right; }
         .sidebar-links { margin-top: 50px; display: flex; flex-direction: column; gap: 15px; }
         .sidebar-links a, .dropdown-btn { text-decoration: none; color: #333; font-weight: bold; font-size: 16px; padding: 12px; border-radius: 4px; display: block; text-align: left; width: 100%; box-sizing: border-box; border: none; background: none; cursor: pointer; }
@@ -34,7 +37,8 @@
     </style>
 </head>
 <body>
-    <div class="nav-header">
+
+<div class="nav-header">
     <div style="display: flex; align-items: center; gap: 10px;">
         <img src="file_00000000f17471f4b8f76a744122207a.png" style="height: 40px;" alt="Logo">
         <span style="font-weight: bold; font-size: 18px; color: #222;">GEPAM Hub</span>
@@ -45,8 +49,7 @@
 <header style="text-align: center; padding: 30px 20px; background: #f8f9fa;">
     <h2>📚 Past Papers Library</h2>
     <p style="color: #666; margin: 5px 0 0 0;">Bofya folda hapa chini kupitia mitihani kwa mtiririko sahihi.</p>
-</header>
-<section class="explorer-section">
+</header><section class="explorer-section">
     <!-- Kitufe cha kurudi nyuma -->
     <button id="backBtn" class="back-btn">⬅️ BACK</button>
 
