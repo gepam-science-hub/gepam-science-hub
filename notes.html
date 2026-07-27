@@ -133,7 +133,7 @@
     <p>Kiasi: <strong id="modalPrice" style="color:#00c300;">000</strong></p>
     <div style="background:#f9f9f9; padding:15px; border-radius:5px; text-align:left; font-size:14px; border-left:4px solid #00c300; color:#333;">
         Lipa TSH kwenye simu:<br> 
-        • M-Pesa / Tigo Pesa: <strong>0748978398</strong><br> 
+        • M-Pesa: <strong>0748978398</strong><br> 
         • Jina: <strong>GEREMANUS MCHAKILA</strong>
     </div>
     <button class="buy-btn" id="whatsappPayBtn" style="background:#25D366; margin-top:15px;">🟢 TUMA USHAHIDI WHATSAPP</button>
@@ -201,7 +201,7 @@
         document.getElementById("modalPrice").textContent = "TSH " + price;
         const message = "Habari GEPAM Science Hub. Nimefanya malipo ya TSH " + price + " kwa ajili ya kununua topic maalum.\n\nKODI YA TOPIC: GPM-" + noteId;
         document.getElementById("whatsappPayBtn").onclick = function() {
-            window.open('https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message), '_blank');
+            window.open("https://wa.me" + encodeURIComponent(message), '_blank');
         };
         document.getElementById("paymentModal").style.display = "block";
         document.getElementById("overlay").style.display = "block";
