@@ -165,6 +165,23 @@
 </footer>
 
 <script>
+    function switchForm(formId, btn) {
+        const sections = document.querySelectorAll('.form-section');
+        sections.forEach(sec => sec.classList.remove('active'));
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(b => b.classList.remove('active'));
+        
+        const targetSection = document.getElementById(formId);
+        if (targetSection) targetSection.classList.add('active');
+        
+        if (btn) {
+            btn.classList.add('active');
+        } else {
+            const staticBtn = document.querySelector('.id-' + formId);
+            if (staticBtn) staticBtn.classList.add('active');
+        }
+    }
+    
     function toggleMenu() {
         const sidebar = document.getElementById("sidebarMenu");
         const overlay = document.getElementById("menuOverlay");
@@ -181,31 +198,20 @@
         }
     }
 
-    function switchForm(formId, btn) {
-        document.querySelectorAll('.form-section').forEach(sec => sec.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        
-        const targetSection = document.getElementById(formId);
-        if (targetSection) targetSection.classList.add('active');
-        
-        if (btn) {
-            btn.classList.add('active');
-        } else {
-            const staticBtn = document.querySelector('.id-' + formId);
-            if (staticBtn) staticBtn.classList.add('active');
-        }
-    }
-
     function openPayment(noteId, noteName, price) {
         document.getElementById("modalNoteName").textContent = noteName;
         document.getElementById("modalPrice").textContent = "TSH " + price;
-        const message = "Habari GEPAM Science Hub. Nimefanya malipo ya TSH " + price + " kwa ajili ya kununua topic maalum.\n\nKODI YA TOPIC: GPM-" + noteId;
-
-        const whatsappUrl = "https://whatsapp.com" + encodeURIComponent(message);
-
+        
+        // Kutengeneza ujumbe uliopangwa vizuri kwenda WhatsApp
+        const message = `Habari GEPAM Science Hub. Nimefanya malipo ya TSH ${price} kwa ajili ya kununua topic maalum. \n\nKODI YA TOPIC: GPM-${noteId}\n\nNaomba nitumiwe link ya kudownload faili langu la PDF.`;
+        
+        // Mfumo rasmi na salama wa ://whatsapp.com kwa ajili ya simu zote
+        const whatsappUrl = `https://://whatsapp.com/send?phone=255748978398&text=${encodeURIComponent(message)}`;
+        
         document.getElementById("whatsappPayBtn").onclick = function() {
-            window.open("https://wa.me" + encodeURIComponent(message), '_blank');
+            window.open(whatsappUrl, '_blank');
         };
+        
         document.getElementById("paymentModal").style.display = "block";
         document.getElementById("overlay").style.display = "block";
     }
@@ -215,6 +221,7 @@
         document.getElementById("overlay").style.display = "none";
     }
 
+    // Kusoma maelekezo ya form kutoka kwenye link url (?form=formX)
     const urlParams = new URLSearchParams(window.location.search);
     const targetForm = urlParams.get('form');
     if (targetForm) {
