@@ -201,7 +201,7 @@
         document.getElementById("modalPrice").textContent = "TSH " + price;
         const message = "Habari GEPAM Science Hub. Nimefanya malipo ya TSH " + price + " kwa ajili ya kununua topic maalum.\n\nKODI YA TOPIC: GPM-" + noteId;
         document.getElementById("whatsappPayBtn").onclick = function() {
-            window.open("https://wa.me" + encodeURIComponent(message), '_blank');
+            window.open('https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message), '_blank');
         };
         document.getElementById("paymentModal").style.display = "block";
         document.getElementById("overlay").style.display = "block";
