@@ -111,10 +111,10 @@ const pastPapers = {
             { "title": "Physics 1 (Theory)", "type": "mock", "region": "kagera", "year": 2023, "file": "papers/form4/physics/kag_mock_2023_phy1.pdf" },
           
             // SHINYANGA (MOCK YENYE MIAKA YOTE)
-            { "title": "Physics 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2026, "file": "papers/form4/physics/mock/shy_mock_2026_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2025, "file": "papers/form4/physics/mock/shy_mock_2025_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2024, "file": "papers/form4/physics/mock/shy_mock_2024_phy1.pdf" },
-            { "title": "Physics 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2023, "file": "papers/form4/physics/mock/shy_mock_2023_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2026, "file": "papers/form4/physics/mock/2026/shy_mock_2026_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2025, "file": "papers/form4/physics/mock/2025/shy_mock_2025_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2024, "file": "papers/form4/physics/mock/2024/shy_mock_2024_phy1.pdf" },
+            { "title": "Physics 1 (Theory)", "type": "mock", "region": "shinyanga", "year": 2023, "file": "papers/form4/physics/mock/2023/shy_mock_2023_phy1.pdf" },
             
             // DAR ES SALAAM (JOINT YENYE FAILI NYINGI)
             { "title": "Physics 1 (Theory)", "type": "joint", "region": "dar_es_salaam", "year": 2026, "file": "papers/form4/physics/joint/dar_es_salaam/2026/dsm_joint_2026_phy1.pdf" },
