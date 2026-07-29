@@ -147,7 +147,7 @@ yearSelect.addEventListener("change", showPapers);
 // Mfumo wa Malipo na Ununuzi wa Notes Kiotomatiki
 // ==========================================
 const SUPABASE_URL = "https://supabase.co"; 
-const SUPABASE_ANON_KEY = "WEKA_HIYO_SB_PUBLISHABLE_KEY_YAKO_HAPA";
+const SUPABASE_ANON_KEY = "sb_publishable_6xyxzTtwK6kROikIln7pFw_o5ZmIpU-";
 
 // Tengeneza mteja wa Supabase
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
