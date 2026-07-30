@@ -239,7 +239,7 @@
         switchForm(targetForm, null);
     }
 </script>
-<!-- 1. Pakia maktaba sahihi na kamili ya Supabase SDK -->
+<!-- 1. Pakia maktaba sahihi na kamili ya Supabase SDK kutoka CDN -->
 <script src="https://jsdelivr.net"></script>
 
 <script>
@@ -261,8 +261,8 @@
     }
 
     function switchForm(formId, btn) {
-        document.querySelectorAll('.form-section').forEach(sec => sec.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.form-section').forEach(function(sec) { sec.classList.remove('active'); });
+        document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
         
         const targetSection = document.getElementById(formId);
         if (targetSection) targetSection.classList.add('active');
@@ -275,21 +275,18 @@
         }
     }
 
-    // === 3. INJINI YA MALIPO YA KIOTOMATIKI (SUPABASE + PESAPAL) ===
-    // ⚠️ REKEBISHA: Weka link ya mradi wako (Project URL) kutoka Supabase Dashboard hapa:
+    // === 3. INJINI RASMI YA MALIPO (SUPABASE + PESAPAL) ===
+    // ⚠️ HAKIKISHA unaweka link yako halisi ya mradi kutoka Supabase Dashboard hapa katikati ya ""
     const SUPABASE_URL = "https://gouflitseihklbeomzpe.supabase.co"; 
-    // ⚠️ REKEBISHA: Weka ule ufunguo wako wa anon key uliokuwa nao hapa:
     const SUPABASE_ANON_KEY = "sb_publishable_6xyxzTtwK6kROikIln7pFw_o5ZmIpU-"; 
 
-    // Anzisha mteja wa Supabase
-    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // Anzisha mteja wa Supabase rasmi mtandaoni
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    async function openPayment(noteId, noteName, price) {
-        // Geuza bei kutoka maandishi yenye koma (kama '1,000') kuwa namba (1000)
-        const bei = parseInt(price.replace(/,/g, ''), 10);
-        
-        // Inamwomba mteja aweke email yake ya kupokelea Notes (PDF)
-        const emailMteja = prompt(`Unanunua: ${noteName}\nBei: TZS ${bei.toLocaleString()}\nWeka Email yako kupokea notes:`);
+    // Hii ndio function inayokimbizwa mteja akiklik kitufe cha "NUNUA TOPIC"
+    async function anzishaUnunuziWaNotes(notesId, jinaLaNotes, bei) {
+        // Inamwomba mteja aweke email yake ya kupokelea PDF
+        const emailMteja = prompt(`Unanunua: ${jinaLaNotes}\nBei: TZS ${bei.toLocaleString()}\nWeka Email yako kupokea notes:`);
         
         if (!emailMteja || !emailMteja.includes('@')) {
             alert("Tafadhali weka Email sahihi ili uweze kupokea PDF!");
@@ -299,7 +296,7 @@
         alert("Inakupeleka kwenye ukurasa wa malipo ya simu (M-Pesa/Tigo Pesa)...");
 
         try {
-            // Tunatuma taarifa kwenda kwenye Supabase Edge Function inayongea na Pesapal
+            // Tunarusha taarifa kwenda kwenye Supabase Edge Function inayotengeneza Invoice Pesapal
             const response = await fetch(`${SUPABASE_URL}/functions/v1/tengeneza-malipo-pesapal`, {
                 method: "POST",
                 headers: {
@@ -307,8 +304,8 @@
                     "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
                 },
                 body: JSON.stringify({
-                    notes_id: noteId,
-                    jina: noteName,
+                    notes_id: notesId,
+                    jina: jinaLaNotes,
                     bei: bei,
                     email: emailMteja
                 })
@@ -316,7 +313,7 @@
 
             const data = await response.json();
             
-            // Kama muunganisho upo sawa, mteja anarushwa kwenda ukurasa wa Pesapal kulipa
+            // Muunganisho ukiwa sawa, mteja anarushwa kwenda ukurasa wa malipo Pesapal
             if (data && data.redirect_url) {
                 window.location.href = data.redirect_url;
             } else {
@@ -334,7 +331,6 @@
     if (targetForm) {
         switchForm(targetForm, null);
     }
-    </script>
-    
+</script>
 </body>
 </html>
