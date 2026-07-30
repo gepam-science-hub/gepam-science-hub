@@ -238,12 +238,9 @@
     if (targetForm) {
         switchForm(targetForm, null);
     }
-</script>
-<!-- 1. Pakia maktaba sahihi na kamili ya Supabase SDK kutoka CDN -->
-<script src="https://jsdelivr.net"></script>
-
+        
 <script>
-    // === 2. INJINI YA MENYU YA SIDEBAR ===
+    // === 1. INJINI YA MENYU YA SIDEBAR ===
     function toggleMenu() {
         const sidebar = document.getElementById("sidebarMenu");
         const overlay = document.getElementById("menuOverlay");
@@ -275,18 +272,14 @@
         }
     }
 
-    // === 3. INJINI RASMI YA MALIPO (SUPABASE + PESAPAL) ===
-    // ⚠️ HAKIKISHA unaweka link yako halisi ya mradi kutoka Supabase Dashboard hapa katikati ya ""
+    // === 2. INJINI IMARA YA MALIPO YA KIOTOMATIKI (FETCH ONLY) ===
+    // ⚠️ WEKA LINK YA PROJECT YAKO YA SUPABASE HAPA (Hakikisha haina mshazari / mwisho)
     const SUPABASE_URL = "https://gouflitseihklbeomzpe.supabase.co"; 
     const SUPABASE_ANON_KEY = "sb_publishable_6xyxzTtwK6kROikIln7pFw_o5ZmIpU-"; 
 
-    // Anzisha mteja wa Supabase rasmi mtandaoni
-    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // Hii ndio function inayokimbizwa mteja akiklik kitufe cha "NUNUA TOPIC"
     async function anzishaUnunuziWaNotes(notesId, jinaLaNotes, bei) {
-        // Inamwomba mteja aweke email yake ya kupokelea PDF
-        const emailMteja = prompt(`Unanunua: ${jinaLaNotes}\nBei: TZS ${bei.toLocaleString()}\nWeka Email yako kupokea notes:`);
+        // 1. Inamwomba mteja Email
+        const emailMteja = prompt("Unanunua: " + jinaLaNotes + "\nBei: TZS " + bei.toLocaleString() + "\nWeka Email yako kupokea notes:");
         
         if (!emailMteja || !emailMteja.includes('@')) {
             alert("Tafadhali weka Email sahihi ili uweze kupokea PDF!");
@@ -296,12 +289,14 @@
         alert("Inakupeleka kwenye ukurasa wa malipo ya simu (M-Pesa/Tigo Pesa)...");
 
         try {
-            // Tunarusha taarifa kwenda kwenye Supabase Edge Function inayotengeneza Invoice Pesapal
-            const response = await fetch(`${SUPABASE_URL}/functions/v1/tengeneza-malipo-pesapal`, {
+            // 2. Kutumia Fetch ya Moja kwa Moja ili kuzuia CDN Errors au Library Fails
+            const functionUrl = SUPABASE_URL + "/functions/v1/tengeneza-malipo-pesapal";
+            
+            const response = await fetch(functionUrl, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+                    "Authorization": "Bearer " + SUPABASE_ANON_KEY
                 },
                 body: JSON.stringify({
                     notes_id: notesId,
@@ -313,19 +308,17 @@
 
             const data = await response.json();
             
-            // Muunganisho ukiwa sawa, mteja anarushwa kwenda ukurasa wa malipo Pesapal
             if (data && data.redirect_url) {
                 window.location.href = data.redirect_url;
             } else {
-                alert("Imeshindwa kutengeneza link ya malipo: " + (data.message || "Jaribu tena."));
+                alert("Imeshindwa kutengeneza link ya malipo: " + (data.message || "Kagua kama Edge Function imewashwa kule Supabase."));
             }
         } catch (error) {
-            console.error("Makosa ya Seva:", error);
-            alert("Mfumo wa malipo haupatikani kwa sasa. Kagua kama umeweka SUPABASE_URL sahihi.");
+            console.error("Makosa ya Muunganisho:", error);
+            alert("Mfumo wa malipo haupatikani kwa sasa au anwani ya SUPABASE_URL ina makosa.");
         }
     }
 
-    // Kusoma maelekezo ya form kutoka kwenye link url (?form=formX)
     const urlParams = new URLSearchParams(window.location.search);
     const targetForm = urlParams.get('form');
     if (targetForm) {
