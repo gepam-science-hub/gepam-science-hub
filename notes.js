@@ -1,4 +1,4 @@
-const SUPABASE_URL = "https://supabase.co"; 
+const SUPABASE_URL = "https://gouflitseihklbeomzpe.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_6xyxzTtwK6kROikIln7pFw_o5ZmIpU-"; // Paste ile key yako ya Supabase hapa
 
 // Tengeneza mteja wa Supabase
