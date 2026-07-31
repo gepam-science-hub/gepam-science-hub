@@ -1,11 +1,11 @@
-const SUPABASE_URL = "https://gouflitseihklbeomzpe.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_6xyxzTtwK6kROikIln7pFw_o5ZmIpU-"; // Paste ile key yako ya Supabase hapa
+// GEPAM Science Hub - Isolated Supabase Payments Engine
 
-// Tengeneza mteja wa Supabase
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// ⚠️ WEKA LINK YAKO HALISI YA SUPABASE HAPA (Kutoka Settings -> API -> Project URL)
+const SUPABASE_URL = "https://XYZ_MRADI_WAKO.supabase.co"; 
+const SUPABASE_ANON_KEY = "sb_publishable_6xyxzTtwK6kROikIln7pFw_o5ZmIpU-"; 
 
 async function anzishaUnunuziWaNotes(notesId, jinaLaNotes, bei) {
-    // Inamwomba mteja aweke email ambapo Notes (PDF) itatumwa kiotomatiki akishalipa
+    // 1. Inamwomba mteja Email ya kupokelea PDF
     const emailMteja = prompt(`Unanunua: ${jinaLaNotes}\nBei: TZS ${bei.toLocaleString()}\nWeka Email yako kupokea notes:`);
     
     if (!emailMteja || !emailMteja.includes('@')) {
@@ -13,11 +13,13 @@ async function anzishaUnunuziWaNotes(notesId, jinaLaNotes, bei) {
         return;
     }
 
-    alert("Inakupeleka kwenye ukurasa wa malipo ya simu (M-Pesa/Tigo Pesa)...");
+    alert("Inakupeleka kwenye ukurasa wa malipo ya simu ya majaribio...");
 
     try {
-        // Tunaiambia Supabase iwasiliane na Pesapal kutengeneza Invoice
-        const response = await fetch(`${SUPABASE_URL}/functions/v1/tengeneza-malipo-pesapal`, {
+        // 2. Kuita Supabase Edge Function kwa njia salama bila kuingiliana na pastpapers.js
+        const functionUrl = `${SUPABASE_URL}/functions/v1/tengeneza-malipo-pesapal`;
+        
+        const response = await fetch(functionUrl, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -33,14 +35,14 @@ async function anzishaUnunuziWaNotes(notesId, jinaLaNotes, bei) {
 
         const data = await response.json();
         
-        // Kama kila kitu kipo sawa, mteja anapelekwa page ya Pesapal kulipa
+        // 3. Mteja anarushwa kwenda ukurasa wa majaribio wa Pesapal kulipa
         if (data && data.redirect_url) {
             window.location.href = data.redirect_url;
         } else {
-            alert("Imeshindwa kutengeneza link ya malipo. Jaribu tena.");
+            alert("Imeshindwa kutengeneza link ya malipo: " + (data.message || "Kagua kama Edge Function ipo hai."));
         }
     } catch (error) {
-        console.error("Makosa:", error);
-        alert("Mfumo wa malipo haupatikani kwa sasa.");
+        console.error("Makosa ya Muunganisho:", error);
+        alert("Mfumo wa malipo haupatikani kwa sasa. Kagua internet au SUPABASE_URL.");
     }
 }
