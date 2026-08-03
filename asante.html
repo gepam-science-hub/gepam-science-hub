@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asante kwa Kununua - GEPAM Science Hub</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; text-align: center; padding: 50px; color: #333; }
+        .container { max-width: 600px; background: white; margin: 0 auto; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #00c300; }
+        .btn-download { display: inline-block; background-color: #00c300; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 20px; display: none; }
+        .loading { font-size: 18px; color: #666; margin: 20px 0; }
+        .error-msg { color: red; font-weight: bold; margin-top: 20px; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎉 Malipo Yamepokelewa!</h1>
+    <p>Asante kwa kuunga mkono GEPAM Science Hub. Tunathibitisha malipo yako sasa hivi...</p>
+    
+    <div id="status-loading" class="loading">Inatafuta muamala wako kwenye mfumo wetu... Real-time check...</div>
+    
+    <!-- Kitufe cha kudownload kitatokea hapa kikithibitishwa -->
+    <a href="#" id="download-link" class="btn-download" download>PAKUA (DOWNLOAD) PDF SASA</a>
+    
+    <div id="error-box" class="error-msg">Mmh! Hatujapata kumbukumbu za malipo ya faili hili kwa email yako bado. Kama umelipa, subiri sekunde chache kisha urudie kurasa hii.</div>
+</div>
+
+<script>
+    // ⚠️ WEKA LINK NA KEY YAKO HALISI YA SUPABASE HAPA
+    const SUPABASE_URL = "https://XYZ_MRADI_WAKO.supabase.co"; 
+    const SUPABASE_ANON_KEY = "sb_publishable_6xyxzTtwK6kROikIln7pFw_o5ZmIpU-"; 
+
+    // 1. Kusoma parameter kutoka kwenye URL iliyorudishwa na PesaPal
+    const urlParams = new URLSearchParams(window.location.search);
+    const OrderTrackingId = urlParams.get('OrderTrackingId'); // ID ya PesaPal
+    const MerchantReference = urlParams.get('OrderMerchantReference'); // Inabeba ID yetu (mfano: NOTE-notes_physics_f3_light-...)
+
+    async function kaguaMalipoNaToaFile() {
+        if (!MerchantReference) {
+            onyeshaKosa("Mfumo haujatambua muamala wowote wa notes.");
+            return;
+        }
+
+        // Kujua mteja alikuwa ananunua notes gani kutoka kwenye jina la muamala
+        // Mfano: "NOTE-notes_physics_f3_light-TXT-171..." -> Tunachukua ya pili
+        const vipengele = MerchantReference.split('-');
+        const notesIdId = vipengele[1]; 
+
+        try {
+            // 2. Kuuliza table yetu ya 'purchased_notes' kama malipo yamekamilika
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/purchased_notes?notes_id=eq.${notesIdId}&status=eq.COMPLETED&select=*`, {
+                headers: {
+                    "apikey": SUPABASE_ANON_KEY,
+                    "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+                }
+            });
+            
+            const data = await response.json();
+
+            // 3. Kama malipo yapo na yamefanikiwa, tunatengeneza Signed URL ya Storage
+            if (data && data.length > 0) {
+                // Tambua faili halisi la PDF kulingana na ID
+                let jinaLaFilePdf = "";
+                if (notesIdId === "notes_physics_f3_light") {
+                    jinaLaFilePdf = "F3_LIGHT_PART_I&II.pdf"; // Lile faili lako la kwenye bucket halisi!
+                } else if (notesIdId === "notes_physics_f3_linear_motion") {
+                    jinaLaFilePdf = "F3_LINEAR_MOTION.pdf";
+                }
+
+                // Omba siri (Signed URL) itakayodumu kwa dakika 15 tu ili mteja adownload
+                const storageUrl = `${SUPABASE_URL}/storage/v1/object/sign/notes-files/${jinaLaFilePdf}`;
+                const fileResponse = await fetch(storageUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "apikey": SUPABASE_ANON_KEY,
+                        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+                    },
+                    body: JSON.stringify({ expiresIn: 900 }) // Inadumu kwa sekunde 900 (Dakika 15)
+                });
+
+                const fileData = await fileResponse.json();
+
+                if (fileData && fileData.signedUrl) {
+                    document.getElementById("status-loading").style.display = "none";
+                    const dwnBtn = document.getElementById("download-link");
+                    dwnBtn.href = `${SUPABASE_URL}/storage/v1${fileData.signedUrl}`;
+                    dwnBtn.style.display = "inline-block";
+                } else {
+                    onyeshaKosa("Imeshindwa kufungua faili la PDF kwenye storage yetu.");
+                }
+
+            } else {
+                // Kama bado haijabadilika kuwa COMPLETED (Inasubiri PesaPal Webhook)
+                onyeshaKosa();
+            }
+
+        } catch (error) {
+            console.error(error);
+            onyeshaKosa("Hitilafu ya mtandao imetokea wakati wa kuhakiki muamala.");
+        }
+    }
+
+    function onyeshaKosa(ujumbe) {
+        document.getElementById("status-loading").style.display = "none";
+        const errorBox = document.getElementById("error-box");
+        if(ujumbe) errorBox.innerText = ujumbe;
+        errorBox.style.display = "block";
+    }
+
+    // Run kazi mara tu ukurasa unapoftunguka
+    window.onload = kaguaMalipoNaToaFile;
+</script>
+</body>
+</html>
