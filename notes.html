@@ -1,245 +1,409 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GEPAM Science Hub | Notes Store</title>
     <link rel="icon" type="image/png" href="file_00000000f17471f4b8f76a744122207a.png">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fafafa; text-align: center; overflow-x: hidden; }
-        .nav-header { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 15px 20px; background: #fff; border-bottom: 1px solid #eee; box-sizing: border-box; }
-        .menu-toggle { font-size: 28px; background: none; border: none; cursor: pointer; color: #333; }
-        .sidebar { position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: 0.3s ease; z-index: 10000; padding: 20px; box-sizing: border-box; overflow-y: auto; display: block; }
-        .sidebar.active { right: 0 !important; }
-        .close-btn { font-size: 24px; background: none; border: none; cursor: pointer; color: #999; float: right; }
-        .sidebar-links { margin-top: 50px; display: flex; flex-direction: column; gap: 15px; }
-        .sidebar-links a, .dropdown-btn { text-decoration: none; color: #333; font-weight: bold; font-size: 16px; padding: 12px; border-radius: 4px; display: block; text-align: left; width: 100%; box-sizing: border-box; border: none; background: none; cursor: pointer; }
-        .sidebar-links a:hover, .dropdown-btn:hover { background: #f4f4f4; color: #00c300; }
-        .dropdown-container { display: none; background: #f9f9f9; padding-left: 15px; border-left: 3px solid #00c300; }
-        .dropdown-container a { font-size: 14px; font-weight: normal; padding: 8px; }
-        .tabs-container { display: flex; justify-content: center; gap: 10px; margin: 20px auto; flex-wrap: wrap; max-width: 1000px; padding: 0 10px; box-sizing: border-box; }
-        .tab-btn { padding: 10px 20px; background: #f4f4f4; border: 1px solid #ddd; font-weight: bold; cursor: pointer; border-radius: 5px; color: #333; transition: 0.2s; }
-        .tab-btn.active { background: #00c300; color: white; border-color: #00c300; }
-        .form-section { display: none; max-width: 1000px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
-        .form-section.active { display: block; }
-        .subject-title { text-align: left; border-bottom: 2px solid #00c300; padding-bottom: 5px; margin-top: 30px; color: #222; }
-        .notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 15px; }
-        .notes-card { background: #fff; border: 1px solid #eee; border-top: 5px solid #00c300; border-radius: 8px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
-        .buy-btn { width: 100%; padding: 12px; background: #00c300; color: white; border: none; font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 15px; font-size: 14px; }
-        .payment-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; box-shadow: 0 5px 25px rgba(0,0,0,0.2); border-radius: 8px; z-index: 1001; width: 90%; max-width: 400px; box-sizing: border-box; }
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; }
-    </style>
-</head>
-<body>
+    <link rel="stylesheet" href="style.css"><style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fafafa; text-align: center; overflow-x: hidden; }
+    .nav-header { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 15px 20px; background: #fff; border-bottom: 1px solid #eee; box-sizing: border-box; }
+    .menu-toggle { font-size: 28px; background: none; border: none; cursor: pointer; color: #333; }
+    .sidebar { position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: 0.3s ease; z-index: 10000; padding: 20px; box-sizing: border-box; overflow-y: auto; display: block; }
+    .sidebar.active { right: 0 !important; }
+    .close-btn { font-size: 24px; background: none; border: none; cursor: pointer; color: #999; float: right; }
+    .sidebar-links { margin-top: 50px; display: flex; flex-direction: column; gap: 15px; }
+    .sidebar-links a, .dropdown-btn { text-decoration: none; color: #333; font-weight: bold; font-size: 16px; padding: 12px; border-radius: 4px; display: block; text-align: left; width: 100%; box-sizing: border-box; border: none; background: none; cursor: pointer; }
+    .sidebar-links a:hover, .dropdown-btn:hover { background: #f4f4f4; color: #00c300; }
+    .dropdown-container { display: none; background: #f9f9f9; padding-left: 15px; border-left: 3px solid #00c300; }
+    .dropdown-container a { font-size: 14px; font-weight: normal; padding: 8px; }
+    .tabs-container { display: flex; justify-content: center; gap: 10px; margin: 20px auto; flex-wrap: wrap; max-width: 1000px; padding: 0 10px; box-sizing: border-box; }
+    .tab-btn { padding: 10px 20px; background: #f4f4f4; border: 1px solid #ddd; font-weight: bold; cursor: pointer; border-radius: 5px; color: #333; transition: 0.2s; }
+    .tab-btn.active { background: #00c300; color: white; border-color: #00c300; }
+    .form-section { display: none; max-width: 1000px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
+    .form-section.active { display: block; }
+    .subject-title { text-align: left; border-bottom: 2px solid #00c300; padding-bottom: 5px; margin-top: 30px; color: #222; }
+    .notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 15px; }
+    .notes-card { background: #fff; border: 1px solid #eee; border-top: 5px solid #00c300; border-radius: 8px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
+    .buy-btn { width: 100%; padding: 12px; background: #00c300; color: white; border: none; font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 15px; font-size: 14px; }
+    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; }
+</style>
 
-<div class="nav-header">
+</head><body><div class="nav-header">
     <div style="display: flex; align-items: center; gap: 10px;">
         <img src="file_00000000f17471f4b8f76a744122207a.png" style="height: 40px;" alt="Logo">
         <span style="font-weight: bold; font-size: 18px; color: #222;">GEPAM Store</span>
-    </div>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-</div>
-<div class="tabs-container">
+    </div><button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+</div><div class="tabs-container">
     <button class="tab-btn id-form1 active" onclick="switchForm('form1', this)">Form 1</button>
     <button class="tab-btn id-form2" onclick="switchForm('form2', this)">Form 2</button>
     <button class="tab-btn id-form3" onclick="switchForm('form3', this)">Form 3</button>
     <button class="tab-btn id-form4" onclick="switchForm('form4', this)">Form 4</button>
     <button class="tab-btn id-form5" onclick="switchForm('form5', this)">Form 5</button>
     <button class="tab-btn id-form6" onclick="switchForm('form6', this)">Form 6</button>
+</div><!-- ==================== FORM 1 ==================== --><div id="form1" class="form-section active"><h3 class="subject-title">Physics Topics - Form 1</h3>
+
+<div class="notes-grid">
+
+    <div class="notes-card">
+        <h3>Topic 1: Introduction to Physics</h3>
+
+        <p style="color:#666; font-size:14px;">
+            Concept of physics, laboratory rules, and first aid.
+        </p>
+
+        <p style="font-size: 18px; font-weight: bold; color: #00c300;">
+            TSH 1,000
+        </p>
+
+        <button class="buy-btn"
+            onclick="anzishaUnunuziWaNotes(
+                'notes_physics_f1_introduction',
+                'Form 1 Physics - Topic 1: Introduction to Physics',
+                1000
+            )">
+            NUNUA TOPIC
+        </button>
+    </div>
+
 </div>
 
-<div id="form1" class="form-section active">
-    <h3 class="subject-title">Physics Topics - Form 1</h3>
-    <div class="notes-grid">
-        <div class="notes-card">
-            <h3>Topic 1: Introduction to Physics</h3>
-            <p style="color:#666; font-size:14px;">Concept of physics, laboratory rules, and first aid.</p>
-            <p style="font-size: 18px; font-weight: bold; color: #00c300;">TSH 1,000</p>
-            <button class="buy-btn" onclick="openPayment('F1-PHYS-T1', 'Form 1 Physics - Topic 1', '1,000')">NUNUA TOPIC</button>
-        </div>
+
+<h3 class="subject-title">Chemistry Topics - Form 1</h3>
+
+<div class="notes-grid">
+
+    <div class="notes-card">
+
+        <h3>Topic 1: Introduction to Chemistry</h3>
+
+        <p style="color:#666; font-size:14px;">
+            Concept, importance, and application of chemistry in life.
+        </p>
+
+        <p style="font-size: 18px; font-weight: bold; color: #00c300;">
+            TSH 1,000
+        </p>
+
+        <button class="buy-btn"
+            onclick="anzishaUnunuziWaNotes(
+                'notes_chemistry_f1_introduction',
+                'Form 1 Chemistry - Topic 1: Introduction to Chemistry',
+                1000
+            )">
+            NUNUA TOPIC
+        </button>
+
     </div>
-    <h3 class="subject-title">Chemistry Topics - Form 1</h3>
-    <div class="notes-grid">
-        <div class="notes-card">
-            <h3>Topic 1: Introduction to Chemistry</h3>
-            <p style="color:#666; font-size:14px;">Concept, importance, and application of chemistry in life.</p>
-            <p style="font-size: 18px; font-weight: bold; color: #00c300;">TSH 1,000</p>
-            <button class="buy-btn" onclick="openPayment('F1-CHEM-T1', 'Form 1 Chemistry - Topic 1', '1,000')">NUNUA TOPIC</button>
-        </div>
-    </div>
+
 </div>
 
-<div id="form2" class="form-section">
-    <h3 class="subject-title">Physics Topics - Form 2</h3>
-    <div class="notes-grid">
-        <div class="notes-card">
-            <h3>Topic 1: Static Electricity</h3>
-            <p style="color:#666; font-size:14px;">Concept of electric charges and lightning conductors.</p>
-            <p style="font-size: 18px; font-weight: bold; color: #00c300;">TSH 1,500</p>
-            <button class="buy-btn" onclick="openPayment('F2-PHYS-T1', 'Form 2 Physics - Topic 1', '1,500')">NUNUA TOPIC</button>
-        </div>
-    </div>
-</div><div id="form3" class="form-section">
-    <h3 class="subject-title">Physics Topics - Form 3</h3>
-    <div class="notes-grid">
-        
-        <!-- TOPIC 1: LINEAR MOTION (Iliyokuwepo) -->
-        <div class="notes-card">
-            <h3>Topic 1: Linear Motion</h3>
-            <p style="color:#666; font-size:14px;">Distance, displacement, velocity, and equations of motion.</p>
-            <p style="font-size: 18px; font-weight: bold; color: #00c300;">TSH 1,500</p>
-            <button class="buy-btn" onclick="anzishaUnunuziWaNotes('notes_physics_f3_linear_motion', 'Form 3 Physics - Topic 1: Linear Motion', 1500)">NUNUA TOPIC</button>
-        </div>
+</div><!-- ==================== FORM 2 ==================== --><div id="form2" class="form-section"><h3 class="subject-title">Physics Topics - Form 2</h3>
 
-        <!-- TOPIC YA PILI: LIGHT PART I & II (MPYA INAYOONGEZEKA) -->
-        <div class="notes-card">
-            <h3>Topic: Light Part I & II</h3>
-            <p style="color:#666; font-size:14px;">Reflection, refraction, lenses, and optical instruments.</p>
-            <p style="font-size: 18px; font-weight: bold; color: #00c300;">TSH 3,000</p>
-            <button class="buy-btn" onclick="anzishaUnunuziWaNotes('notes_physics_f3_light', 'Physics Form 3 Light Part I & II', 3000)">NUNUA TOPIC</button>
-        </div>
+<div class="notes-grid">
+
+    <div class="notes-card">
+
+        <h3>Topic 1: Static Electricity</h3>
+
+        <p style="color:#666; font-size:14px;">
+            Concept of electric charges and lightning conductors.
+        </p>
+
+        <p style="font-size: 18px; font-weight: bold; color: #00c300;">
+            TSH 1,500
+        </p>
+
+        <button class="buy-btn"
+            onclick="anzishaUnunuziWaNotes(
+                'notes_physics_f2_static_electricity',
+                'Form 2 Physics - Topic 1: Static Electricity',
+                1500
+            )">
+            NUNUA TOPIC
+        </button>
 
     </div>
+
 </div>
 
-<div id="form4" class="form-section">
-    <h3 class="subject-title">Physics Topics - Form 4</h3>
-    <div class="notes-grid">
-        <div class="notes-card">
-            <h3>Topic 1: Waves</h3>
-            <p style="color:#666; font-size:14px;">Mechanical waves, spectrum, and magnetic effects.</p>
-            <p style="font-size: 18px; font-weight: bold; color: #00c300;">TSH 1,500</p>
-            <button class="buy-btn" onclick="openPayment('F4-PHYS-T1', 'Form 4 Physics - Topic 1', '1,500')">NUNUA TOPIC</button>
-        </div>
+</div><!-- ==================== FORM 3 ==================== --><div id="form3" class="form-section"><h3 class="subject-title">Physics Topics - Form 3</h3>
+
+<div class="notes-grid">
+
+    <div class="notes-card">
+
+        <h3>Topic 1: Linear Motion</h3>
+
+        <p style="color:#666; font-size:14px;">
+            Distance, displacement, velocity, and equations of motion.
+        </p>
+
+        <p style="font-size: 18px; font-weight: bold; color: #00c300;">
+            TSH 1,500
+        </p>
+
+        <button class="buy-btn"
+            onclick="anzishaUnunuziWaNotes(
+                'notes_physics_f3_linear_motion',
+                'Form 3 Physics - Topic 1: Linear Motion',
+                1500
+            )">
+            NUNUA TOPIC
+        </button>
+
     </div>
+
+
+    <div class="notes-card">
+
+        <h3>Topic: Light Part I & II</h3>
+
+        <p style="color:#666; font-size:14px;">
+            Reflection, refraction, lenses, and optical instruments.
+        </p>
+
+        <p style="font-size: 18px; font-weight: bold; color: #00c300;">
+            TSH 3,000
+        </p>
+
+        <button class="buy-btn"
+            onclick="anzishaUnunuziWaNotes(
+                'notes_physics_f3_light',
+                'Physics Form 3 Light Part I & II',
+                3000
+            )">
+            NUNUA TOPIC
+        </button>
+
+    </div>
+
 </div>
 
-<div id="form5" class="form-section">
-    <h3 class="subject-title">Physics Topics - Form 5</h3>
-    <div class="notes-grid">
-        <div class="notes-card">
-            <h3>Topic 1: Mechanics</h3>
-            <p style="color:#666; font-size:14px;">Dimensions, projectile motion, and gravitation.</p>
-            <p style="font-size: 18px; font-weight: bold; color: #00c300;">TSH 2,500</p>
-            <button class="buy-btn" onclick="openPayment('F5-PHYS-T1', 'Form 5 Physics - Mechanics', '2,500')">NUNUA TOPIC</button>
-        </div>
+</div><!-- ==================== FORM 4 ==================== --><div id="form4" class="form-section"><h3 class="subject-title">Physics Topics - Form 4</h3>
+
+<div class="notes-grid">
+
+    <div class="notes-card">
+
+        <h3>Topic 1: Waves</h3>
+
+        <p style="color:#666; font-size:14px;">
+            Mechanical waves, spectrum, and magnetic effects.
+        </p>
+
+        <p style="font-size: 18px; font-weight: bold; color: #00c300;">
+            TSH 1,500
+        </p>
+
+        <button class="buy-btn"
+            onclick="anzishaUnunuziWaNotes(
+                'notes_physics_f4_waves',
+                'Form 4 Physics - Topic 1: Waves',
+                1500
+            )">
+            NUNUA TOPIC
+        </button>
+
     </div>
+
 </div>
 
-<div id="form6" class="form-section">
-    <h3 class="subject-title">Physics Topics - Form 6</h3>
-    <div class="notes-grid">
-        <div class="notes-card">
-            <h3>Topic 1: Modern Physics</h3>
-            <p style="color:#666; font-size:14px;">Quantum physics, atomic structure, and electronics.</p>
-            <p style="font-size: 18px; font-weight: bold; color: #00c300;">TSH 3,500</p>
-            <button class="buy-btn" onclick="openPayment('F6-PHYS-T1', 'Form 6 Physics - Modern Physics', '3,500')">NUNUA TOPIC</button>
-        </div>
-    </div>
-</div>
-<div class="overlay" id="overlay" onclick="closePayment()"></div>
-<div class="payment-modal" id="paymentModal">
-    <h3 id="modalNoteName">Notes Name</h3>
-    <p>Kiasi: <strong id="modalPrice" style="color:#00c300;">000</strong></p>
-    <div style="background:#f9f9f9; padding:15px; border-radius:5px; text-align:left; font-size:14px; border-left:4px solid #00c300; color:#333;">
-        Lipa TSH kwenye simu:<br> 
-        • M-Pesa: <strong>0748978398</strong><br> 
-        • Jina: <strong>GEREMANUS MCHAKILA</strong>
-    </div>
-    <button class="buy-btn" id="whatsappPayBtn" style="background:#25D366; margin-top:15px;">🟢 TUMA USHAHIDI WHATSAPP</button>
-    <button onclick="closePayment()" style="background:none; border:none; color:#999; margin-top:10px; cursor:pointer;">Ghairi</button>
-</div>
+</div><!-- ==================== FORM 5 ==================== --><div id="form5" class="form-section"><h3 class="subject-title">Physics Topics - Form 5</h3>
 
-<div class="overlay" id="menuOverlay" onclick="toggleMenu()"></div>
-<div class="sidebar" id="sidebarMenu">
-    <button class="close-btn" onclick="toggleMenu()">✕</button>
-    <div class="sidebar-links">
-        <a href="index.html">🏠 Home</a>
-        <a href="about.html">ℹ️ About Us</a>
-        <button class="dropdown-btn" onclick="toggleDropdown(this)">📝 Notes Store ▼</button>
-        <div class="dropdown-container">
-            <a href="notes.html?form=form1" onclick="toggleMenu()">Form 1 Topics</a>
-            <a href="notes.html?form=form2" onclick="toggleMenu()">Form 2 Topics</a>
-            <a href="notes.html?form=form3" onclick="toggleMenu()">Form 3 Topics</a>
-            <a href="notes.html?form=form4" onclick="toggleMenu()">Form 4 Topics</a>
-            <a href="notes.html?form=form5" onclick="toggleMenu()">Form 5 Topics</a>
-            <a href="notes.html?form=form6" onclick="toggleMenu()">Form 6 Topics</a>
-        </div>
-        <a href="pastpapers.html">📚 Past Papers</a>
-        <a href="contact.html">📞 Contact</a>
+<div class="notes-grid">
+
+    <div class="notes-card">
+
+        <h3>Topic 1: Mechanics</h3>
+
+        <p style="color:#666; font-size:14px;">
+            Dimensions, projectile motion, and gravitation.
+        </p>
+
+        <p style="font-size: 18px; font-weight: bold; color: #00c300;">
+            TSH 2,500
+        </p>
+
+        <button class="buy-btn"
+            onclick="anzishaUnunuziWaNotes(
+                'notes_physics_f5_mechanics',
+                'Form 5 Physics - Mechanics',
+                2500
+            )">
+            NUNUA TOPIC
+        </button>
+
     </div>
+
 </div>
 
-<footer style="text-align: center; padding: 30px; background: #222; color: #fff; margin-top: 50px;">
-    <p>© 2026 GEPAM Science Hub. All Rights Reserved.</p>
-</footer>
+</div><!-- ==================== FORM 6 ==================== --><div id="form6" class="form-section"><h3 class="subject-title">Physics Topics - Form 6</h3>
 
-<script>
+<div class="notes-grid">
+
+    <div class="notes-card">
+
+        <h3>Topic 1: Modern Physics</h3>
+
+        <p style="color:#666; font-size:14px;">
+            Quantum physics, atomic structure, and electronics.
+        </p>
+
+        <p style="font-size: 18px; font-weight: bold; color: #00c300;">
+            TSH 3,500
+        </p>
+
+        <button class="buy-btn"
+            onclick="anzishaUnunuziWaNotes(
+                'notes_physics_f6_modern_physics',
+                'Form 6 Physics - Modern Physics',
+                3500
+            )">
+            NUNUA TOPIC
+        </button>
+
+    </div>
+
+</div>
+
+</div><!-- ==================== MENU ==================== --><div class="overlay" id="menuOverlay" onclick="toggleMenu()"></div><div class="sidebar" id="sidebarMenu"><button class="close-btn" onclick="toggleMenu()">✕</button>
+
+<div class="sidebar-links">
+
+    <a href="index.html">🏠 Home</a>
+
+    <a href="about.html">ℹ️ About Us</a>
+
+    <button class="dropdown-btn" onclick="toggleDropdown(this)">
+        📝 Notes Store ▼
+    </button>
+
+    <div class="dropdown-container">
+
+        <a href="notes.html?form=form1" onclick="toggleMenu()">
+            Form 1 Topics
+        </a>
+
+        <a href="notes.html?form=form2" onclick="toggleMenu()">
+            Form 2 Topics
+        </a>
+
+        <a href="notes.html?form=form3" onclick="toggleMenu()">
+            Form 3 Topics
+        </a>
+
+        <a href="notes.html?form=form4" onclick="toggleMenu()">
+            Form 4 Topics
+        </a>
+
+        <a href="notes.html?form=form5" onclick="toggleMenu()">
+            Form 5 Topics
+        </a>
+
+        <a href="notes.html?form=form6" onclick="toggleMenu()">
+            Form 6 Topics
+        </a>
+
+    </div>
+
+    <a href="pastpapers.html">📚 Past Papers</a>
+
+    <a href="contact.html">📞 Contact</a>
+
+</div>
+
+</div><!-- ==================== FOOTER ==================== --><footer style="text-align: center; padding: 30px; background: #222; color: #fff; margin-top: 50px;"><p>
+    © 2026 GEPAM Science Hub. All Rights Reserved.
+</p>
+
+</footer><!-- ==================== JAVASCRIPT YA PAGE ==================== --><script>
+
     function switchForm(formId, btn) {
+
         const sections = document.querySelectorAll('.form-section');
+
         sections.forEach(sec => sec.classList.remove('active'));
+
         const buttons = document.querySelectorAll('.tab-btn');
+
         buttons.forEach(b => b.classList.remove('active'));
-        
+
         const targetSection = document.getElementById(formId);
-        if (targetSection) targetSection.classList.add('active');
-        
+
+        if (targetSection) {
+            targetSection.classList.add('active');
+        }
+
         if (btn) {
+
             btn.classList.add('active');
+
         } else {
-            const staticBtn = document.querySelector('.id-' + formId);
-            if (staticBtn) staticBtn.classList.add('active');
+
+            const staticBtn =
+                document.querySelector('.id-' + formId);
+
+            if (staticBtn) {
+                staticBtn.classList.add('active');
+            }
+
         }
+
     }
-    
+
+
     function toggleMenu() {
-        const sidebar = document.getElementById("sidebarMenu");
-        const overlay = document.getElementById("menuOverlay");
+
+        const sidebar =
+            document.getElementById("sidebarMenu");
+
+        const overlay =
+            document.getElementById("menuOverlay");
+
         if (sidebar && overlay) {
+
             sidebar.classList.toggle("active");
-            overlay.style.display = sidebar.classList.contains("active") ? "block" : "none";
+
+            overlay.style.display =
+                sidebar.classList.contains("active")
+                ? "block"
+                : "none";
+
         }
+
     }
-    
+
+
     function toggleDropdown(btn) {
-        const container = btn.nextElementSibling;
+
+        const container =
+            btn.nextElementSibling;
+
         if (container) {
-            container.style.display = (container.style.display === "block") ? "none" : "block";
+
+            container.style.display =
+                (container.style.display === "block")
+                ? "none"
+                : "block";
+
         }
+
     }
 
-    function openPayment(noteId, noteName, price) {
-        document.getElementById("modalNoteName").textContent = noteName;
-        document.getElementById("modalPrice").textContent = "TSH " + price;
-        
-        // Kutengeneza ujumbe uliopangwa vizuri kwenda WhatsApp
-        const message = `Habari GEPAM Science Hub. Nimefanya malipo ya TSH ${price} kwa ajili ya kununua topic maalum. \n\nKODI YA TOPIC: GPM-${noteId}\n\nNaomba nitumiwe link ya kudownload faili langu la PDF.`;
-        
-        // Mfumo rasmi na salama wa ://whatsapp.com kwa ajili ya simu zote
-        const whatsappUrl = `https://api.whatsapp.com/send?phone=255748978398&text=${encodeURIComponent(message)}`;
-        
-        document.getElementById("whatsappPayBtn").onclick = function() {
-            window.open(whatsappUrl, '_blank');
-        };
-        
-        document.getElementById("paymentModal").style.display = "block";
-        document.getElementById("overlay").style.display = "block";
-    }
 
-    function closePayment() {
-        document.getElementById("paymentModal").style.display = "none";
-        document.getElementById("overlay").style.display = "none";
-    }
+    // Kusoma form kutoka kwenye URL
+    const urlParams =
+        new URLSearchParams(window.location.search);
 
-    // Kusoma maelekezo ya form kutoka kwenye link url (?form=formX)
-    const urlParams = new URLSearchParams(window.location.search);
-    const targetForm = urlParams.get('form');
+    const targetForm =
+        urlParams.get('form');
+
     if (targetForm) {
+
         switchForm(targetForm, null);
+
     }
-    
-</script>
-<script src="notes.js"></script>
-</body>
+
+</script><!-- PAYMENT SYSTEM --><script src="notes.js"></script></body>
 </html>
