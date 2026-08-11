@@ -1,6 +1,6 @@
 // ==========================================
-// GEPAM SCIENCE HUB - PESAPAL PAYMENT
-// NOTES PURCHASE + PDF DELIVERY
+// GEPAM SCIENCE HUB
+// PESAPAL PAYMENT + PDF DELIVERY
 // ==========================================
 
 
@@ -24,7 +24,7 @@ const PAYMENT_FUNCTION_URL =
 
 
 // ==========================================
-// ANZISHA UNUNUZI
+// ANZISHA UNUNUZI WA NOTES
 // ==========================================
 
 async function anzishaUnunuziWaNotes(
@@ -34,7 +34,7 @@ async function anzishaUnunuziWaNotes(
 ) {
 
     // ------------------------------------------
-    // ASK EMAIL
+    // MUOMBE CUSTOMER EMAIL
     // ------------------------------------------
 
     const emailMteja = prompt(
@@ -43,6 +43,10 @@ async function anzishaUnunuziWaNotes(
         `Weka Email yako kupokea notes:`
     );
 
+
+    // ------------------------------------------
+    // VALIDATE EMAIL
+    // ------------------------------------------
 
     if (
         !emailMteja ||
@@ -61,6 +65,10 @@ async function anzishaUnunuziWaNotes(
         emailMteja.trim();
 
 
+    // ------------------------------------------
+    // START PAYMENT
+    // ------------------------------------------
+
     alert(
         "Tafadhali subiri...\n\n" +
         "Tunaandaa ukurasa wa malipo wa PesaPal."
@@ -73,6 +81,20 @@ async function anzishaUnunuziWaNotes(
             "Calling payment function..."
         );
 
+        console.log(
+            "Notes ID:",
+            notesId
+        );
+
+        console.log(
+            "Amount:",
+            bei
+        );
+
+
+        // ------------------------------------------
+        // SEND PAYMENT REQUEST
+        // ------------------------------------------
 
         const response =
             await fetch(
@@ -125,6 +147,10 @@ async function anzishaUnunuziWaNotes(
         );
 
 
+        // ------------------------------------------
+        // SERVER ERROR
+        // ------------------------------------------
+
         if (!response.ok) {
 
             console.error(
@@ -166,6 +192,16 @@ async function anzishaUnunuziWaNotes(
 
             return;
         }
+
+
+        // ------------------------------------------
+        // NO PAYMENT LINK
+        // ------------------------------------------
+
+        console.error(
+            "No redirect URL received:",
+            data
+        );
 
 
         alert(
@@ -217,6 +253,10 @@ async function angaliaPaymentCallback() {
         );
 
 
+    // ------------------------------------------
+    // NO CALLBACK
+    // ------------------------------------------
+
     if (
         payment !== "callback" ||
         !orderTrackingId
@@ -233,14 +273,16 @@ async function angaliaPaymentCallback() {
 
 
     // ------------------------------------------
-    // SHOW WAITING MESSAGE
+    // WAITING MESSAGE
     // ------------------------------------------
 
     const message =
         document.createElement("div");
 
+
     message.id =
         "paymentMessage";
+
 
     message.style.position =
         "fixed";
@@ -275,7 +317,9 @@ async function angaliaPaymentCallback() {
     message.style.textAlign =
         "center";
 
+
     message.innerHTML = `
+
         <h2 style="color:#00a000;">
             ⏳ Tunathibitisha malipo...
         </h2>
@@ -283,7 +327,9 @@ async function angaliaPaymentCallback() {
         <p>
             Tafadhali subiri kidogo.
         </p>
+
     `;
+
 
     document.body.appendChild(
         message
@@ -293,7 +339,7 @@ async function angaliaPaymentCallback() {
     try {
 
         // ------------------------------------------
-        // REQUEST PDF
+        // REQUEST SECURE PDF DOWNLOAD
         // ------------------------------------------
 
         const downloadUrl =
@@ -303,6 +349,11 @@ async function angaliaPaymentCallback() {
             encodeURIComponent(
                 orderTrackingId
             );
+
+
+        console.log(
+            "Requesting secure PDF URL..."
+        );
 
 
         const response =
@@ -336,6 +387,10 @@ async function angaliaPaymentCallback() {
         );
 
 
+        // ------------------------------------------
+        // PDF AVAILABLE
+        // ------------------------------------------
+
         if (
             response.ok &&
             data.success === true &&
@@ -344,11 +399,17 @@ async function angaliaPaymentCallback() {
 
             message.innerHTML = `
 
-                <div style="font-size:45px;">
+                <div style="
+                    font-size:45px;
+                    margin-bottom:10px;
+                ">
                     ✅
                 </div>
 
-                <h2 style="color:#00a000;">
+                <h2 style="
+                    color:#00a000;
+                    margin-bottom:10px;
+                ">
                     Malipo yamefanikiwa!
                 </h2>
 
@@ -380,8 +441,10 @@ async function angaliaPaymentCallback() {
                     color:#777;
                     margin-top:15px;
                 ">
-                    Link hii itafanya kazi kwa muda wa saa 1.
+                    Link hii ni salama na itafanya kazi
+                    kwa muda wa saa 1.
                 </p>
+
             `;
 
 
@@ -390,8 +453,14 @@ async function angaliaPaymentCallback() {
 
 
         // ------------------------------------------
-        // PAYMENT NOT COMPLETED
+        // PDF NOT AVAILABLE
         // ------------------------------------------
+
+        console.error(
+            "PDF unavailable:",
+            data
+        );
+
 
         message.innerHTML = `
 
@@ -408,6 +477,14 @@ async function angaliaPaymentCallback() {
                 au PDF haijapatikana.
             </p>
 
+            <p style="
+                font-size:13px;
+                color:#777;
+            ">
+                Ikiwa umelipia tayari, tafadhali
+                subiri dakika chache kisha ujaribu tena.
+            </p>
+
             <button
                 onclick="window.location.href='notes.html'"
                 style="
@@ -422,6 +499,7 @@ async function angaliaPaymentCallback() {
             >
                 RUDI KWENYE NOTES
             </button>
+
         `;
 
 
@@ -462,6 +540,7 @@ async function angaliaPaymentCallback() {
             >
                 JARIBU TENA
             </button>
+
         `;
 
     }
