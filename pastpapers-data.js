@@ -199,7 +199,9 @@ const pastPapers = {
             { "title": "Physics 2B (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy2b.pdf" },
             { "title": "Physics 2C (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/physics/necta/2026/necta_2026_phy2c.pdf" },
             { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2025, "file": "papers/form4/physics/necta/2025/necta_2025_phy1.pdf" },
+            { "title": "Physics 2A (Practical)", "type": "necta", "region": "necta", "year": 2025, "file": "papers/form4/physics/necta/2025/necta_2025_phy2a.pdf" },
             { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2024, "file": "papers/form4/physics/necta/2024/necta_2024_phy1.pdf" },
+            { "title": "Physics 2A (Practical)", "type": "necta", "region": "necta", "year": 2024, "file": "papers/form4/physics/necta/2024/necta_2024_phy2a.pdf" },
             { "title": "Physics 1 (Theory)", "type": "necta", "region": "necta", "year": 2023, "file": "papers/form4/physics/necta/2023/necta_2023_phy1.pdf" }
     ],
         
@@ -326,6 +328,7 @@ const pastPapers = {
             { "title": "Chemistry 2B (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/chemistry/necta/2026/necta_2026_chem2b.pdf" },
             { "title": "Chemistry 2C (Practical)", "type": "necta", "region": "necta", "year": 2026, "file": "papers/form4/chemistry/necta/2026/necta_2026_chem2c.pdf" },
             { "title": "Chemistry 1 (Theory)", "type": "necta", "region": "necta", "year": 2025, "file": "papers/form4/chemistry/necta/2025/necta_2025_chem1.pdf" },
+            { "title": "Chemistry 2A (Practical)", "type": "necta", "region": "necta", "year": 2025, "file": "papers/form4/chemistry/necta/2025/necta_2025_chem2a.pdf" },
             { "title": "Chemistry 1 (Theory)", "type": "necta", "region": "necta", "year": 2024, "file": "papers/form4/chemistry/necta/2024/necta_2024_chem1.pdf" },
             { "title": "Chemistry 1 (Theory)", "type": "necta", "region": "necta", "year": 2023, "file": "papers/form4/chemistry/necta/2023/necta_2023_chem1.pdf" }
       ]
