@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>GEPAM Science Hub | Past Papers</title>
 
@@ -22,12 +18,15 @@
         :root {
             --primary: #003366;
             --primary-light: #0b5a9e;
-            --background: #f4f8fb;
+            --secondary: #f4f8fb;
             --white: #ffffff;
             --text: #1f2937;
             --muted: #64748b;
             --border: #dbe4ee;
             --success: #008f5a;
+            --danger: #b91c1c;
+            --shadow: 0 8px 25px rgba(0, 51, 102, 0.10);
+            --radius: 16px;
         }
 
         * {
@@ -38,405 +37,518 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background: var(--background);
+            background: var(--secondary);
             color: var(--text);
+            line-height: 1.6;
         }
 
-        /* ================= HEADER ================= */
+        /* =========================
+           HEADER
+        ========================= */
 
-        header {
-            background: linear-gradient(
-                135deg,
-                #003366,
-                #064f8f
-            );
-
+        .site-header {
+            background: linear-gradient(135deg, #003366, #064f8f);
             color: white;
-            padding: 18px 20px;
-            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
         }
 
-        header h1 {
-            font-size: 25px;
+        .header-inner {
+            max-width: 1200px;
+            margin: auto;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
         }
 
-        header p {
-            margin-top: 5px;
-            opacity: .9;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .brand-icon {
+            width: 43px;
+            height: 43px;
+            border-radius: 11px;
+            background: white;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 17px;
+        }
+
+        .brand-name {
+            font-size: 17px;
+        }
+
+        .brand-tagline {
+            font-size: 11px;
+            opacity: 0.85;
+        }
+
+        .nav {
+            display: flex;
+            gap: 7px;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 9px 13px;
+            border-radius: 8px;
             font-size: 14px;
+            transition: 0.2s;
         }
 
-        /* ================= HERO ================= */
+        .nav a:hover,
+        .nav a.active {
+            background: rgba(255,255,255,0.16);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            width: min(1150px, 94%);
+            margin: auto;
+            padding: 25px 0 50px;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
 
         .hero {
-            background: linear-gradient(
-                135deg,
-                #003366,
-                #0b5a9e
-            );
-
+            background: linear-gradient(135deg, #003366, #0b5a9e);
             color: white;
+            border-radius: 22px;
+            padding: 48px 25px;
             text-align: center;
-            padding: 50px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 28px;
         }
 
-        .hero h2 {
-            font-size: clamp(
-                30px,
-                6vw,
-                46px
-            );
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.14);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 7px 15px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
 
-            margin-bottom: 10px;
+        .hero h1 {
+            font-size: clamp(30px, 6vw, 46px);
+            margin-bottom: 8px;
         }
 
         .hero p {
             font-size: 16px;
-            opacity: .9;
+            opacity: 0.92;
         }
 
-        /* ================= CONTAINER ================= */
+        /* =========================
+           PROGRESS
+        ========================= */
 
-        .container {
-            width: min(
-                1100px,
-                94%
-            );
-
-            margin: 35px auto 60px;
+        .progress {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            overflow-x: auto;
+            padding: 5px 0 25px;
         }
 
-        /* ================= BREADCRUMB ================= */
+        .progress-step {
+            min-width: 65px;
+            text-align: center;
+            color: #a0acb8;
+            flex-shrink: 0;
+        }
+
+        .progress-circle {
+            width: 35px;
+            height: 35px;
+            margin: auto;
+            border-radius: 50%;
+            background: #e2e8ee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .progress-step.active {
+            color: var(--primary);
+        }
+
+        .progress-step.active .progress-circle {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.08);
+        }
+
+        .progress-step.done {
+            color: var(--success);
+        }
+
+        .progress-step.done .progress-circle {
+            background: var(--success);
+            color: white;
+        }
+
+        .progress-label {
+            display: block;
+            font-size: 10px;
+            margin-top: 5px;
+        }
+
+        .progress-line {
+            width: 45px;
+            height: 2px;
+            background: #d8e0e7;
+            flex-shrink: 0;
+        }
+
+        /* =========================
+           BREADCRUMB
+        ========================= */
 
         .breadcrumb {
             background: white;
             border: 1px solid var(--border);
-            border-radius: 12px;
-
-            padding: 13px 16px;
-
+            border-radius: 13px;
+            padding: 12px 16px;
             margin-bottom: 20px;
-
-            color: var(--muted);
-
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 7px;
             font-size: 13px;
+            color: var(--muted);
         }
 
         .breadcrumb strong {
             color: var(--primary);
         }
 
-        /* ================= CARD ================= */
-
-        .main-card {
-            background: white;
-
-            border: 1px solid var(--border);
-
-            border-radius: 18px;
-
-            padding: 30px;
-
-            box-shadow:
-                0 8px 30px
-                rgba(0,51,102,.08);
+        .breadcrumb-arrow {
+            color: #a5b0bb;
         }
 
-        /* ================= TITLE ================= */
+        /* =========================
+           SELECTION CARD
+        ========================= */
 
-        .section-title {
+        .selection-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.04);
+        }
+
+        .selection-heading {
             display: flex;
             align-items: center;
-
-            gap: 12px;
-
-            margin-bottom: 25px;
+            gap: 13px;
+            margin-bottom: 22px;
         }
 
-        .section-icon {
-            width: 48px;
-            height: 48px;
-
-            border-radius: 13px;
-
-            background: #eaf4ff;
-
+        .selection-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: #eaf3fb;
+            color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
-
-            font-size: 23px;
-        }
-
-        .section-title h3 {
-            color: var(--primary);
-            font-size: 22px;
-        }
-
-        .section-title p {
-            color: var(--muted);
-            font-size: 13px;
-            margin-top: 3px;
-        }
-
-        /* ================= OPTIONS ================= */
-
-        .options {
-            display: grid;
-
-            grid-template-columns:
-                repeat(
-                    auto-fit,
-                    minmax(210px, 1fr)
-                );
-
-            gap: 15px;
-        }
-
-        .option {
-            position: relative;
-
-            border: 1px solid var(--border);
-
-            background: white;
-
-            border-radius: 15px;
-
-            padding: 18px;
-
-            min-height: 90px;
-
-            cursor: pointer;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 14px;
-
-            text-align: left;
-
-            transition: .2s;
-        }
-
-        .option:hover {
-            transform: translateY(-3px);
-
-            border-color:
-                var(--primary-light);
-
-            box-shadow:
-                0 8px 20px
-                rgba(0,51,102,.10);
-
-            background: #fafdff;
-        }
-
-        .option-icon {
-            width: 45px;
-            height: 45px;
-
-            border-radius: 12px;
-
-            background: #eaf4ff;
-
-            color: var(--primary);
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            font-size: 22px;
-
+            font-size: 24px;
             flex-shrink: 0;
         }
 
-        .option-text strong {
-            display: block;
-
+        .selection-heading h2 {
             color: var(--primary);
-
-            font-size: 16px;
+            font-size: 23px;
         }
 
-        .option-text small {
-            display: block;
-
+        .selection-heading p {
             color: var(--muted);
-
-            margin-top: 4px;
-
-            font-size: 12px;
+            font-size: 13px;
         }
 
-        .arrow {
+        /* =========================
+           OPTIONS
+        ========================= */
+
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 14px;
+        }
+
+        .option-card {
+            position: relative;
+            background: #fbfdff;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 17px;
+            min-height: 82px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            text-align: left;
+            transition: 0.2s;
+        }
+
+        .option-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-light);
+            background: #f7fbff;
+            box-shadow: 0 7px 20px rgba(0,70,120,0.10);
+        }
+
+        .option-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #eaf3fb;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            flex-shrink: 0;
+        }
+
+        .option-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .option-title {
+            color: var(--primary);
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .option-subtitle {
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        .option-arrow {
             margin-left: auto;
-
-            color:
-                var(--primary-light);
-
+            color: var(--primary-light);
             font-size: 20px;
         }
 
-        /* ================= PAPER CHAIN ================= */
+        /* =========================
+           RESULTS
+        ========================= */
+
+        .results {
+            margin-top: 25px;
+        }
+
+        .results-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .results-header h2 {
+            color: var(--primary);
+            font-size: 23px;
+        }
+
+        .count-badge {
+            background: #e8f3ff;
+            color: var(--primary);
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           PAPER CHAIN
+        ========================= */
 
         .paper-chain {
-            border: 1px solid var(--border);
-
-            border-radius: 15px;
-
-            overflow: hidden;
-
             background: white;
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
         }
 
         .chain-header {
             background: var(--primary);
-
             color: white;
-
-            padding: 16px 18px;
-
+            padding: 16px 19px;
             display: flex;
-
+            align-items: center;
             justify-content: space-between;
-
-            gap: 10px;
-
+            gap: 15px;
             flex-wrap: wrap;
         }
 
+        .chain-title {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
         .chain-count {
-            background:
-                rgba(255,255,255,.15);
-
+            background: rgba(255,255,255,0.15);
             padding: 5px 10px;
-
             border-radius: 20px;
-
-            font-size: 12px;
+            font-size: 11px;
         }
 
-        .paper {
+        .paper-item {
             display: grid;
-
-            grid-template-columns:
-                45px 1fr auto;
-
+            grid-template-columns: 45px 1fr auto;
             align-items: center;
-
             gap: 15px;
-
-            padding: 18px;
-
-            border-bottom:
-                1px solid #e7edf2;
+            padding: 19px;
+            border-bottom: 1px solid #e6edf2;
         }
 
-        .paper:last-child {
+        .paper-item:last-child {
             border-bottom: none;
         }
 
         .paper-number {
             width: 40px;
             height: 40px;
-
             border-radius: 50%;
-
-            background: #eaf4ff;
-
+            background: #eaf3fb;
             color: var(--primary);
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
-            font-weight: bold;
+            font-weight: 800;
         }
 
-        .paper h4 {
-            color: var(--primary);
-
+        .paper-info h3 {
+            color: #243746;
             font-size: 16px;
-
             margin-bottom: 7px;
         }
 
         .paper-meta {
             display: flex;
-
             flex-wrap: wrap;
-
-            gap: 7px;
+            gap: 6px;
         }
 
-        .paper-meta span {
-            background: #f1f5f9;
-
-            color: #64748b;
-
-            padding: 5px 9px;
-
+        .meta {
+            background: #f1f5f8;
+            color: #687783;
+            padding: 4px 8px;
             border-radius: 20px;
-
             font-size: 11px;
         }
 
         .open-pdf {
             display: inline-flex;
-
             align-items: center;
             justify-content: center;
-
             gap: 6px;
-
-            background:
-                var(--success);
-
+            background: var(--success);
             color: white;
-
             text-decoration: none;
-
-            padding: 11px 15px;
-
             border-radius: 9px;
-
-            font-weight: bold;
-
+            padding: 11px 15px;
             font-size: 13px;
-
+            font-weight: bold;
             white-space: nowrap;
+            transition: 0.2s;
         }
 
         .open-pdf:hover {
             background: #006f46;
+            transform: translateY(-1px);
         }
 
-        /* ================= BUTTONS ================= */
+        /* =========================
+           EMPTY / ERROR
+        ========================= */
 
-        .controls {
+        .empty-state {
+            background: white;
+            border: 1px dashed #cbd7e0;
+            border-radius: 16px;
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .empty-icon {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        .empty-state strong {
+            display: block;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .error-state strong {
+            color: var(--danger);
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .bottom-actions {
+            margin-top: 20px;
             display: flex;
-
             gap: 10px;
-
             flex-wrap: wrap;
-
-            margin-top: 22px;
         }
 
         .control-btn {
             border: none;
-
-            border-radius: 9px;
-
+            border-radius: 10px;
             padding: 11px 17px;
-
             cursor: pointer;
-
             font-weight: bold;
+            font-size: 13px;
         }
 
         .back-btn {
@@ -444,60 +556,87 @@
             color: #405261;
         }
 
+        .back-btn:hover {
+            background: #dfe7ed;
+        }
+
         .restart-btn {
             background: var(--primary);
             color: white;
         }
 
-        /* ================= EMPTY ================= */
-
-        .empty {
-            text-align: center;
-
-            padding: 50px 20px;
-
-            color: var(--muted);
+        .restart-btn:hover {
+            background: #00264d;
         }
 
-        .empty-icon {
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
-
-        .empty h3 {
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-
-        /* ================= FOOTER ================= */
+        /* =========================
+           FOOTER
+        ========================= */
 
         footer {
             background: #00294f;
-
             color: white;
-
             text-align: center;
-
-            padding: 22px 15px;
-
+            padding: 25px 15px;
             font-size: 13px;
+            margin-top: 30px;
         }
 
-        /* ================= MOBILE ================= */
+        /* =========================
+           MOBILE
+        ========================= */
 
-        @media(max-width:700px) {
+        @media (max-width: 760px) {
 
-            .main-card {
+            .header-inner {
+                padding: 11px 15px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav {
+                display: none;
+                position: absolute;
+                top: 65px;
+                left: 0;
+                right: 0;
+                background: #003366;
+                flex-direction: column;
+                padding: 12px 15px 18px;
+            }
+
+            .nav.open {
+                display: flex;
+            }
+
+            .nav a {
+                width: 100%;
+                text-align: center;
+            }
+
+            main {
+                width: 94%;
+                padding-top: 18px;
+            }
+
+            .hero {
+                padding: 35px 18px;
+            }
+
+            .selection-card {
                 padding: 18px;
             }
 
-            .options {
-                grid-template-columns: 1fr;
+            .option-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .paper {
-                grid-template-columns:
-                    40px 1fr;
+            .paper-item {
+                grid-template-columns: 40px 1fr;
+                gap: 11px;
+                padding: 16px;
             }
 
             .paper-action {
@@ -508,78 +647,181 @@
                 width: 100%;
             }
 
-            .controls {
+            .progress {
+                justify-content: flex-start;
+            }
+
+            .progress-line {
+                width: 25px;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .option-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .paper-item {
+                grid-template-columns: 38px 1fr;
+            }
+
+            .bottom-actions {
                 flex-direction: column;
             }
 
             .control-btn {
                 width: 100%;
             }
-
         }
 
     </style>
-
 </head>
-
 
 <body>
 
+<header class="site-header">
 
-<header>
+    <div class="header-inner">
 
-    <h1>📚 GEPAM Science Hub</h1>
+        <a href="index.html" class="brand">
 
-    <p>
-        Physics & Chemistry Past Papers
-    </p>
+            <div class="brand-icon">
+                GS
+            </div>
+
+            <div>
+                <div class="brand-name">
+                    GEPAM Science Hub
+                </div>
+
+                <div class="brand-tagline">
+                    Making Science Easy
+                </div>
+            </div>
+
+        </a>
+
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            type="button"
+        >
+            ☰
+        </button>
+
+        <nav class="nav" id="mainNav">
+
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="notes.html">Notes</a>
+            <a href="pastpapers.html" class="active">Past Papers</a>
+            <a href="contact.html">Contact</a>
+
+        </nav>
+
+    </div>
 
 </header>
 
 
-<section class="hero">
+<main>
 
-    <h2>Past Papers</h2>
+    <section class="hero">
 
-    <p>
-        Find examination papers step by step
-    </p>
+        <div class="hero-badge">
+            📚 GEPAM SCIENCE HUB
+        </div>
 
-</section>
+        <h1>
+            Physics & Chemistry Past Papers
+        </h1>
+
+        <p>
+            Find examination papers step by step
+        </p>
+
+    </section>
 
 
-<main class="container">
+    <!-- PROGRESS -->
 
+    <div class="progress">
 
-    <div
-        id="breadcrumb"
-        class="breadcrumb"
-    >
-        <strong>Past Papers</strong>
+        <div class="progress-step active" data-step="1">
+            <div class="progress-circle">1</div>
+            <span class="progress-label">Form</span>
+        </div>
+
+        <div class="progress-line"></div>
+
+        <div class="progress-step" data-step="2">
+            <div class="progress-circle">2</div>
+            <span class="progress-label">Subject</span>
+        </div>
+
+        <div class="progress-line"></div>
+
+        <div class="progress-step" data-step="3">
+            <div class="progress-circle">3</div>
+            <span class="progress-label">Type</span>
+        </div>
+
+        <div class="progress-line"></div>
+
+        <div class="progress-step" data-step="4">
+            <div class="progress-circle">4</div>
+            <span class="progress-label">Year</span>
+        </div>
+
+        <div class="progress-line"></div>
+
+        <div class="progress-step" data-step="5">
+            <div class="progress-circle">5</div>
+            <span class="progress-label">Region</span>
+        </div>
+
+        <div class="progress-line"></div>
+
+        <div class="progress-step" data-step="6">
+            <div class="progress-circle">6</div>
+            <span class="progress-label">Papers</span>
+        </div>
+
     </div>
 
 
-    <div class="main-card">
+    <!-- BREADCRUMB -->
+
+    <div class="breadcrumb" id="breadcrumb">
+
+        <strong>Past Papers</strong>
+
+        <span class="breadcrumb-arrow">›</span>
+
+        <span>Choose Form</span>
+
+    </div>
 
 
-        <div class="section-title">
+    <!-- MAIN SELECTION -->
 
-            <div
-                class="section-icon"
-                id="sectionIcon"
-            >
-                📚
+    <section class="selection-card">
+
+        <div class="selection-heading">
+
+            <div class="selection-icon" id="selectionIcon">
+                🎓
             </div>
 
             <div>
 
-                <h3 id="sectionTitle">
+                <h2 id="selectionTitle">
                     Choose Form
-                </h3>
+                </h2>
 
-                <p id="sectionDescription">
-                    Select the class whose
-                    past papers you want.
+                <p id="selectionDescription">
+                    Select the class whose past papers you want.
                 </p>
 
             </div>
@@ -588,119 +830,123 @@
 
 
         <div
-            id="content"
-            class="options"
+            class="option-grid"
+            id="optionsContainer"
         ></div>
 
 
-        <div
-            id="controls"
-            class="controls"
-            style="display:none;"
-        >
+        <div class="bottom-actions">
 
             <button
+                type="button"
                 class="control-btn back-btn"
-                id="backBtn"
+                id="backButton"
+                hidden
             >
                 ← Back
             </button>
 
             <button
+                type="button"
                 class="control-btn restart-btn"
-                id="restartBtn"
+                id="restartButton"
+                hidden
             >
                 ↻ Start Again
             </button>
 
         </div>
 
+    </section>
 
-    </div>
 
+    <!-- RESULTS -->
+
+    <section class="results">
+
+        <div class="results-header">
+
+            <h2>
+                Available Papers
+            </h2>
+
+            <span
+                class="count-badge"
+                id="resultCount"
+            >
+                0 papers
+            </span>
+
+        </div>
+
+
+        <div id="paperResults">
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    📚
+                </div>
+
+                <strong>
+                    Select a form to begin
+                </strong>
+
+                Choose Form 1–6 above to view available papers.
+
+            </div>
+
+        </div>
+
+    </section>
 
 </main>
 
 
 <footer>
 
-    © <span id="year"></span>
-    GEPAM Science Hub — Physics & Chemistry
-    Learning Resources
+    © <span id="currentYear"></span>
+    GEPAM Science Hub — Physics & Chemistry Learning Resources
 
 </footer>
 
 
-<!-- =====================================================
-     DATA FIRST
-===================================================== -->
+<!-- DATA FIRST -->
 
-<script src="data.js"></script>
+<script src="pastpapers.data.js"></script>
 
-
-<!-- =====================================================
-     PAST PAPERS ENGINE SECOND
-===================================================== -->
+<!-- ENGINE SECOND -->
 
 <script src="pastpapers.js"></script>
 
 
 <script>
 
-document.getElementById("year").textContent =
-    new Date().getFullYear();
+    document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
 
+    const menuToggle =
+        document.getElementById("menuToggle");
 
-/*
-    Mobile-safe error message.
-*/
+    const mainNav =
+        document.getElementById("mainNav");
 
-window.addEventListener(
-    "error",
-    function(event) {
+    if (menuToggle && mainNav) {
 
-        if (
-            event.filename &&
-            event.filename.includes("pastpapers.js")
-        ) {
+        menuToggle.addEventListener("click", function () {
 
-            const content =
-                document.getElementById("content");
+            mainNav.classList.toggle("open");
 
-            if (content) {
+            menuToggle.setAttribute(
+                "aria-expanded",
+                mainNav.classList.contains("open")
+            );
 
-                content.innerHTML = `
-                    <div class="empty"
-                         style="grid-column:1/-1;">
-
-                        <div class="empty-icon">
-                            ⚠️
-                        </div>
-
-                        <h3>
-                            Mfumo haukuweza kupakia
-                        </h3>
-
-                        <p>
-                            Tafadhali hakikisha
-                            data.js na pastpapers.js
-                            zipo pamoja.
-                        </p>
-
-                    </div>
-                `;
-
-            }
-
-        }
+        });
 
     }
 
-);
-
 </script>
 
-
 </body>
-
 </html>
