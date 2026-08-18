@@ -7,30 +7,30 @@ let selectedYear = null;
 function goBackOrHome() {
     window.location.href = "index.html";
 }
+
+// Hatua ya 1: Mtumiaji anapobofya Kidato
 function handleFormSelect(formId) {
     selectedForm = formId;
     selectedSubject = null; selectedType = null; selectedLocation = null; selectedYear = null;
     
     // Weka rangi ya batani iliyobonyezwa
-    document.querySelectorAll('#formOptions .opt-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
+    document.querySelectorAll('#formOptions .opt-btn').forEach(btn => btn.classList.remove('active'));
     
     const allButtons = document.querySelectorAll('#formOptions .opt-btn');
     allButtons.forEach(btn => {
         if(btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(formId)) {
-            btn.add ? btn.add('active') : btn.classList.add('active');
+            btn.classList.add('active');
         }
     });
 
-    // Ficha hatua zote za chini ili zifuate mlolongo mmoja baada ya mwingine
+    // Ficha hatua zote za chini kwanza ili zifuate mlolongo
     document.getElementById('step2').classList.add('hidden');
     document.getElementById('step3').classList.add('hidden');
     document.getElementById('step4').classList.add('hidden');
     document.getElementById('step5').classList.add('hidden');
     document.getElementById('finalPapersArea').innerHTML = '';
 
-    // Lebo inabadilika kiotomatiki hapa
+    // MPANGILIO MAPYA: Vidato 1, 3, 5 vinalenga SHULE kwenye screen. Vidato 2, 4, 6 vinalenga MKOA
     const locLabel = document.getElementById('locationLabel');
     if (formId === 'form1' || formId === 'form3' || formId === 'form5') {
         locLabel.textContent = "Hatua ya 4: Chagua Shule";
@@ -38,10 +38,10 @@ function handleFormSelect(formId) {
         locLabel.textContent = "Hatua ya 4: Chagua Mkoa";
     }
 
+    // Jaza Masomo (Physics, Chemistry)
     const subjectOpts = document.getElementById('subjectOptions');
     subjectOpts.innerHTML = '';
     
-    // Kinga ya kiufundi: Tafuta database popote ilipo (kwenye window au local variable)
     const db = window.pastPapers || (typeof pastPapers !== 'undefined' ? pastPapers : null);
     
     if (db && db[formId]) {
@@ -49,13 +49,10 @@ function handleFormSelect(formId) {
             subjectOpts.innerHTML += `<div class="opt-btn" onclick="handleSubjectSelect('${sub}')">${sub}</div>`;
         });
         document.getElementById('step2').classList.remove('hidden');
-    } else {
-        // Hii itakusaidia kujua kama HTML haioni data yako
-        console.error("Database ya pastPapers haijapatikana! Angalia jina la faili la data.");
-        alert("Shida ya Kiufundi: Faili la 'pastpapers.data.js' halijapatikana au lina makosa ya kufunga mabano. Hakikisha majina yanafanana.");
     }
 }
 
+// Hatua ya 2: Mtumiaji anapobofya Somo
 function handleSubjectSelect(subId) {
     selectedSubject = subId;
     selectedType = null; selectedLocation = null; selectedYear = null;
@@ -86,6 +83,7 @@ function handleSubjectSelect(subId) {
         document.getElementById('step3').classList.remove('hidden');
     }
 }
+// Hatua ya 3: Mtumiaji anapobofya Aina ya Mtihani
 function handleTypeSelect(typeId) {
     selectedType = typeId;
     selectedLocation = null; selectedYear = null;
@@ -110,19 +108,21 @@ function handleTypeSelect(typeId) {
     });
 
     locsSet.forEach(l => {
-        locOpts.innerHTML += `<div class="opt-btn" onclick="handleLocationSelect('${l}')">${l}</div>`;
+        // Tunasoma "region" kutoka database yako ya asili, ila kwenye screen itaandikwa chini ya lebo ya Shule au Mkoa
+        locOpts.innerHTML += `<div class="opt-btn" onclick="handleLocationSelect('${l}')">${l.replace(/_/g, ' ')}</div>`;
     });
 
     document.getElementById('step4').classList.remove('hidden');
 }
 
+// Hatua ya 4: Mtumiaji anapobofya Shule au Mkoa
 function handleLocationSelect(locId) {
     selectedLocation = locId;
     selectedYear = null;
 
     document.querySelectorAll('#locationOptions .opt-btn').forEach(btn => {
         btn.classList.remove('active');
-        if(btn.textContent === locId) btn.classList.add('active');
+        if(btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(locId)) btn.classList.add('active');
     });
 
     document.getElementById('step5').classList.add('hidden');
@@ -138,6 +138,7 @@ function handleLocationSelect(locId) {
         if(p.type === selectedType && p.region === selectedLocation && p.year) yearsSet.add(p.year);
     });
 
+    // Kupanga miaka kuanzia mpya kurudi nyuma
     Array.from(yearsSet).sort((a,b) => b - a).forEach(y => {
         yearOpts.innerHTML += `<div class="opt-btn" onclick="handleYearSelect('${y}')">${y}</div>`;
     });
@@ -145,6 +146,7 @@ function handleLocationSelect(locId) {
     document.getElementById('step5').classList.remove('hidden');
 }
 
+// Hatua ya 5: Mtumiaji anapobofya Mwaka - Kadi za PDF zinatokea
 function handleYearSelect(yearId) {
     selectedYear = yearId;
 
@@ -164,9 +166,17 @@ function handleYearSelect(yearId) {
     });
 
     targetPapers.forEach(paper => {
+        // Lebo maalum ya kadi kwa ajili ya usafi wa maneno
+        const locationType = (selectedForm === 'form1' || selectedForm === 'form3' || selectedForm === 'form5') ? 'Shule' : 'Mkoa';
+        
         const cardHTML = `
             <div class="paper-card">
-                <h3 class="paper-title">${paper.title}</h3>
+                <div>
+                    <h3 class="paper-title">${paper.title}</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; text-transform: capitalize;">
+                        📍 ${locationType}: ${paper.region.replace(/_/g, ' ')} | 📅 Mwaka: ${paper.year}
+                    </p>
+                </div>
                 <a href="${paper.file}" target="_blank" class="download-btn">Fungua / Download PDF</a>
             </div>
         `;
