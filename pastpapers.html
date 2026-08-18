@@ -7,7 +7,7 @@
           content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="GEPAM Science Hub Physics and Chemistry Past Papers">
+          content="GEPAM Science Hub - Physics and Chemistry Past Papers">
 
     <title>Past Papers | GEPAM Science Hub</title>
 
@@ -24,31 +24,21 @@
      HEADER
 ===================================================== -->
 
-<header>
-    <img src="logo.png"
-         alt="GEPAM Science Hub Logo"
-         class="logo">
+<header class="pastpapers-header">
 
-    <h1>📚 GEPAM Science Hub</h1>
+    <div class="pastpapers-logo">
+        📚
+    </div>
+
+    <h1>GEPAM Science Hub</h1>
 
     <p>Physics & Chemistry Past Papers</p>
+
 </header>
 
 
 <!-- =====================================================
-     NAVIGATION
-===================================================== -->
-
-<nav>
-    <a href="index.html">Home</a>
-    <a href="notes.html">Notes</a>
-    <a href="pastpapers.html">Past Papers</a>
-    <a href="index.html#contact">Contact</a>
-</nav>
-
-
-<!-- =====================================================
-     PAST PAPERS PAGE
+     MAIN
 ===================================================== -->
 
 <main class="pastpapers-page">
@@ -60,10 +50,12 @@
         <div>
 
             <span class="hero-badge">
-                GEPAM SCIENCE HUB
+                📚 PAST PAPERS
             </span>
 
-            <h2>Past Papers</h2>
+            <h2>
+                Past Papers
+            </h2>
 
             <p>
                 Find examination papers step by step
@@ -75,7 +67,7 @@
 
 
     <!-- =================================================
-         NAVIGATION ENGINE
+         NAVIGATION
     ================================================== -->
 
     <section class="paper-navigation">
@@ -84,22 +76,46 @@
 
         <div id="progressWrapper"
              class="progress-wrapper">
+
         </div>
 
 
         <!-- BREADCRUMB -->
 
-        <div id="breadcrumb"
+        <div id="selectionBreadcrumb"
              class="selection-breadcrumb">
+
+            <span>Past Papers</span>
+
         </div>
 
 
         <!-- CONTENT -->
 
-        <div id="paperContent"
-             class="paper-content">
+        <div class="paper-content">
 
-            <!-- JavaScript will load content here -->
+            <div id="paperApp">
+
+                <!-- JavaScript will generate
+                     the complete system here -->
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        📚
+                    </div>
+
+                    <h3>
+                        Loading Past Papers...
+                    </h3>
+
+                    <p>
+                        Tafadhali subiri kidogo.
+                    </p>
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -114,38 +130,26 @@
 
 <footer class="site-footer">
 
-    <div class="footer-inner">
-
-        <div>
-            <h3>📚 GEPAM Science Hub</h3>
-
-            <p>
-                Physics & Chemistry Learning Resources
-            </p>
-        </div>
-
-        <div>
-            <p>
-                Past Papers • Notes • Revision Materials
-            </p>
-        </div>
-
-    </div>
-
     <div class="copyright">
-        © 2026 GEPAM Science Hub — Physics & Chemistry Learning Resources
+
+        © 2026 GEPAM Science Hub —
+        Physics & Chemistry Learning Resources
+
     </div>
 
 </footer>
 
 
 <!-- =====================================================
-     IMPORTANT:
-     data.js MUST COME FIRST
-     pastpapers.js MUST COME SECOND
+     JAVASCRIPT
+     
+     MUHIMU:
+     data.js LAZIMA IJE KWANZA
+     pastpapers.js IJE BAADA YA DATA.JS
 ===================================================== -->
 
 <script src="data.js" defer></script>
+
 <script src="pastpapers.js" defer></script>
 
 </body>
