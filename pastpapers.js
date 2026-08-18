@@ -9,22 +9,20 @@ window.onload = function() {
 };
 
 window.onpopstate = function(event) {
-    window.location.href = "premium-notes.html"; 
+    window.location.href = "index.html"; 
 };
 
 function goBackOrHome() {
-    if (document.referrer !== "") {
-        history.back();
-    } else {
-        window.location.href = "premium-notes.html";
-    }
+    window.location.href = "index.html";
 }
+
 function handleFormSelect(formId) {
     selectedForm = formId;
     selectedSubject = null; selectedType = null; selectedLocation = null; selectedYear = null;
     
     document.querySelectorAll('#formOptions .opt-btn').forEach(btn => {
         btn.classList.remove('active');
+        // Kurekebisha ulinganisho wa neno Form lifanane na ID
         if(btn.textContent.toLowerCase().replace(' ', '') === formId) {
             btn.classList.add('active');
         }
@@ -36,7 +34,6 @@ function handleFormSelect(formId) {
     document.getElementById('step5').classList.add('hidden');
     document.getElementById('finalPapersArea').innerHTML = '';
 
-    // Lebo Inabadilika: Form 1, 3, 5 ni SHULE. Form 2, 4, 6 ni MKOA
     const locLabel = document.getElementById('locationLabel');
     if (formId === 'form1' || formId === 'form3' || formId === 'form5') {
         locLabel.textContent = "Hatua ya 4: Chagua Shule";
@@ -82,6 +79,7 @@ function handleSubjectSelect(subId) {
 
     document.getElementById('step3').classList.remove('hidden');
 }
+
 function handleTypeSelect(typeId) {
     selectedType = typeId;
     selectedLocation = null; selectedYear = null;
