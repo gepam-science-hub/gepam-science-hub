@@ -8,19 +8,14 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <meta
-        name="description"
-        content="GEPAM Science Hub Past Papers - Physics and Chemistry examination papers from Form 1 to Form 6."
-    >
-
     <title>Past Papers | GEPAM Science Hub</title>
 
-    <link rel="stylesheet" href="style.css">
+    <meta
+        name="description"
+        content="Physics and Chemistry past papers for Form 1 to Form 6."
+    >
 
-    <!-- IMPORTANT:
-         Data MUST load before the engine -->
-    <script src="pastpapers.data.js" defer></script>
-    <script src="pastpapers.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -54,7 +49,7 @@
         </a>
 
 
-        <nav class="desktop-nav">
+        <nav class="main-nav">
 
             <a href="index.html">
                 Home
@@ -81,6 +76,7 @@
         <button
             class="menu-button"
             id="menuButton"
+            type="button"
             aria-label="Open menu"
         >
             ☰
@@ -88,34 +84,38 @@
 
     </div>
 
-
-    <div
-        class="mobile-nav"
-        id="mobileNav"
-    >
-
-        <a href="index.html">
-            Home
-        </a>
-
-        <a href="notes.html">
-            Notes
-        </a>
-
-        <a
-            href="pastpapers.html"
-            class="active"
-        >
-            Past Papers
-        </a>
-
-        <a href="contact.html">
-            Contact
-        </a>
-
-    </div>
-
 </header>
+
+
+<!-- =====================================================
+     MOBILE NAV
+===================================================== -->
+
+<div
+    class="mobile-nav"
+    id="mobileNav"
+>
+
+    <a href="index.html">
+        Home
+    </a>
+
+    <a href="notes.html">
+        Notes
+    </a>
+
+    <a
+        href="pastpapers.html"
+        class="active"
+    >
+        Past Papers
+    </a>
+
+    <a href="contact.html">
+        Contact
+    </a>
+
+</div>
 
 
 <!-- =====================================================
@@ -148,11 +148,12 @@
      MAIN
 ===================================================== -->
 
-<main class="papers-page">
+<main class="papers-container">
+
 
     <!-- BACK -->
 
-    <div class="top-controls">
+    <div class="top-bar">
 
         <button
             type="button"
@@ -165,95 +166,75 @@
     </div>
 
 
-    <!-- =================================================
-         PROGRESS
-    ================================================== -->
+    <!-- BREADCRUMB -->
 
-    <div class="progress-wrapper">
+    <div
+        id="breadcrumb"
+        class="breadcrumb"
+    >
 
-        <div class="progress-line"></div>
+        <span class="current">
+            Past Papers
+        </span>
 
-        <div class="progress-step active">
+    </div>
 
+
+    <!-- STEPS -->
+
+    <div class="steps">
+
+        <div class="step active">
             <span>1</span>
-
-            <small>
-                Form
-            </small>
-
+            <small>Form</small>
         </div>
 
-        <div class="progress-step">
-
+        <div class="step">
             <span>2</span>
-
-            <small>
-                Subject
-            </small>
-
+            <small>Subject</small>
         </div>
 
-        <div class="progress-step">
-
+        <div class="step">
             <span>3</span>
-
-            <small>
-                Type
-            </small>
-
+            <small>Type</small>
         </div>
 
-        <div class="progress-step">
-
+        <div class="step">
             <span>4</span>
-
-            <small>
-                Year
-            </small>
-
+            <small>Year</small>
         </div>
 
-        <div class="progress-step">
-
+        <div class="step">
             <span>5</span>
-
-            <small>
-                Region
-            </small>
-
+            <small>Region</small>
         </div>
 
-        <div class="progress-step">
-
+        <div class="step">
             <span>6</span>
-
-            <small>
-                Papers
-            </small>
-
+            <small>Papers</small>
         </div>
 
     </div>
 
 
     <!-- =================================================
-         FORM SECTION
+         FORM
     ================================================== -->
 
     <section
-        class="selection-section"
         id="formSection"
+        class="paper-section"
     >
 
         <div class="section-heading">
 
-            <div class="heading-icon">
+            <div class="section-icon">
                 🎓
             </div>
 
             <div>
 
-                <span class="step-label">
+                <span class="section-step">
                     STEP 1
                 </span>
 
@@ -271,8 +252,8 @@
 
 
         <div
-            class="option-grid"
             id="formOptions"
+            class="card-grid"
         ></div>
 
     </section>
@@ -283,19 +264,20 @@
     ================================================== -->
 
     <section
-        class="selection-section hidden-section"
         id="subjectSection"
+        class="paper-section"
+        hidden
     >
 
         <div class="section-heading">
 
-            <div class="heading-icon">
-                📚
+            <div class="section-icon">
+                🔬
             </div>
 
             <div>
 
-                <span class="step-label">
+                <span class="section-step">
                     STEP 2
                 </span>
 
@@ -313,8 +295,8 @@
 
 
         <div
-            class="option-grid"
             id="subjectOptions"
+            class="card-grid"
         ></div>
 
     </section>
@@ -325,19 +307,20 @@
     ================================================== -->
 
     <section
-        class="selection-section hidden-section"
         id="typeSection"
+        class="paper-section"
+        hidden
     >
 
         <div class="section-heading">
 
-            <div class="heading-icon">
+            <div class="section-icon">
                 📝
             </div>
 
             <div>
 
-                <span class="step-label">
+                <span class="section-step">
                     STEP 3
                 </span>
 
@@ -346,7 +329,7 @@
                 </h2>
 
                 <p>
-                    Choose the type of examination paper.
+                    Choose the type of examination.
                 </p>
 
             </div>
@@ -355,8 +338,8 @@
 
 
         <div
-            class="option-grid"
             id="typeOptions"
+            class="card-grid"
         ></div>
 
     </section>
@@ -367,19 +350,20 @@
     ================================================== -->
 
     <section
-        class="selection-section hidden-section"
         id="yearSection"
+        class="paper-section"
+        hidden
     >
 
         <div class="section-heading">
 
-            <div class="heading-icon">
+            <div class="section-icon">
                 📅
             </div>
 
             <div>
 
-                <span class="step-label">
+                <span class="section-step">
                     STEP 4
                 </span>
 
@@ -397,8 +381,8 @@
 
 
         <div
-            class="option-grid"
             id="yearOptions"
+            class="card-grid year-grid"
         ></div>
 
     </section>
@@ -409,19 +393,20 @@
     ================================================== -->
 
     <section
-        class="selection-section hidden-section"
         id="locationSection"
+        class="paper-section"
+        hidden
     >
 
         <div class="section-heading">
 
-            <div class="heading-icon">
+            <div class="section-icon">
                 📍
             </div>
 
             <div>
 
-                <span class="step-label">
+                <span class="section-step">
                     STEP 5
                 </span>
 
@@ -439,27 +424,32 @@
 
 
         <div
-            class="option-grid"
             id="locationOptions"
+            class="card-grid"
         ></div>
 
     </section>
 
 
     <!-- =================================================
-         RESULTS
+         PAPERS
     ================================================== -->
 
     <section
-        class="results-section hidden-section"
         id="resultsSection"
+        class="paper-section"
+        hidden
     >
 
-        <div class="results-top">
+        <div class="section-heading">
+
+            <div class="section-icon">
+                📄
+            </div>
 
             <div>
 
-                <span class="step-label">
+                <span class="section-step">
                     STEP 6
                 </span>
 
@@ -467,25 +457,19 @@
                     Available Papers
                 </h2>
 
-            </div>
+                <p>
+                    Select a paper below to open the PDF.
+                </p>
 
-            <span
-                id="resultCount"
-                class="result-count"
-            >
-                0 Papers
-            </span>
+            </div>
 
         </div>
 
 
         <div
-            id="breadcrumb"
-            class="breadcrumb"
+            id="resultCount"
+            class="result-count"
         >
-            <span class="current">
-                Past Papers
-            </span>
         </div>
 
 
@@ -496,6 +480,7 @@
 
     </section>
 
+
 </main>
 
 
@@ -505,93 +490,105 @@
 
 <footer class="site-footer">
 
-    <div class="footer-brand">
+    <div class="footer-inner">
 
-        <div class="footer-logo">
-            GS
+        <div class="footer-brand">
+
+            <div class="brand-logo">
+                GS
+            </div>
+
+            <div>
+
+                <strong>
+                    GEPAM Science Hub
+                </strong>
+
+                <span>
+                    Making Science Easy
+                </span>
+
+            </div>
+
         </div>
 
-        <div>
 
-            <strong>
-                GEPAM Science Hub
-            </strong>
+        <div class="footer-links">
 
-            <span>
-                Making Science Easy
-            </span>
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="notes.html">
+                Notes
+            </a>
+
+            <a href="pastpapers.html">
+                Past Papers
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
 
         </div>
 
     </div>
 
 
-    <div class="footer-links">
+    <div class="copyright">
 
-        <a href="index.html">
-            Home
-        </a>
-
-        <a href="notes.html">
-            Notes
-        </a>
-
-        <a href="pastpapers.html">
-            Past Papers
-        </a>
-
-        <a href="contact.html">
-            Contact
-        </a>
-
-    </div>
-
-
-    <p>
         © <span id="currentYear"></span>
         GEPAM Science Hub.
         All Rights Reserved.
-    </p>
+
+    </div>
 
 </footer>
 
 
 <!-- =====================================================
-     MOBILE MENU
+     IMPORTANT:
+     DATA MUST COME FIRST
 ===================================================== -->
+
+<script
+    src="./pastpapers.data.js?v=20260818"
+></script>
+
+
+<!-- ENGINE COMES SECOND -->
+
+<script
+    src="./pastpapers.js?v=20260818"
+></script>
+
+
+<!-- MOBILE MENU -->
 
 <script>
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+const menuButton =
+    document.getElementById("menuButton");
 
-        const menuButton =
-            document.getElementById("menuButton");
+const mobileNav =
+    document.getElementById("mobileNav");
 
-        const mobileNav =
-            document.getElementById("mobileNav");
 
-        if (
-            menuButton &&
-            mobileNav
-        ) {
+if (menuButton && mobileNav) {
 
-            menuButton.addEventListener(
-                "click",
-                function () {
+    menuButton.addEventListener(
+        "click",
+        function () {
 
-                    mobileNav.classList.toggle(
-                        "show"
-                    );
-
-                }
+            mobileNav.classList.toggle(
+                "show"
             );
 
         }
+    );
 
-    }
-);
+}
 
 </script>
 
