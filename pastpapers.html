@@ -1,487 +1,812 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>GEPAM Science Hub | Past Papers</title>
 
     <meta
         name="description"
-        content="GEPAM Science Hub Past Papers - Physics and Chemistry examination papers for Form 1 to Form 6."
+        content="GEPAM Science Hub - Physics and Chemistry Past Papers for Form 1 to Form 6."
     >
 
     <link rel="icon" href="favicon.ico">
 
     <style>
+
         :root {
             --primary: #003366;
-            --primary-light: #0b5a9e;
-            --secondary: #f4f8fb;
+            --primary-light: #005b96;
+            --blue: #0077b6;
+            --green: #008f5a;
+            --bg: #f4f8fb;
             --white: #ffffff;
-            --text: #1f2937;
-            --muted: #64748b;
-            --border: #dbe4ee;
-            --success: #0f766e;
-            --shadow: 0 8px 25px rgba(0, 51, 102, 0.10);
-            --radius: 16px;
+            --text: #263746;
+            --muted: #71808e;
+            --border: #dfe7ee;
         }
 
+
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
+
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background: var(--secondary);
+            background: var(--bg);
             color: var(--text);
             line-height: 1.6;
         }
 
-        /* HEADER */
-        .site-header {
-            background: linear-gradient(135deg, #003366, #064f8f);
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: linear-gradient(
+                135deg,
+                #003366,
+                #005b96
+            );
+
             color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            padding: 18px 20px;
         }
 
+
         .header-inner {
-            max-width: 1200px;
+            max-width: 1150px;
             margin: auto;
-            padding: 14px 20px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
+
             gap: 20px;
         }
 
+
         .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
             text-decoration: none;
             color: white;
-            font-weight: bold;
+
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
         }
 
+
         .brand-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
+            width: 45px;
+            height: 45px;
+
             background: white;
             color: var(--primary);
+
+            border-radius: 12px;
+
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 18px;
+
+            font-weight: 900;
         }
 
-        .brand-text {
-            line-height: 1.2;
-        }
 
         .brand-name {
-            font-size: 17px;
+            font-size: 18px;
+            font-weight: 800;
         }
+
 
         .brand-tagline {
-            font-size: 11px;
-            opacity: 0.85;
+            font-size: 12px;
+            opacity: .85;
         }
 
-        .nav {
+
+        nav {
             display: flex;
-            align-items: center;
             gap: 8px;
         }
 
-        .nav a {
+
+        nav a {
             color: white;
             text-decoration: none;
+
             padding: 9px 13px;
+
             border-radius: 8px;
+
             font-size: 14px;
-            transition: 0.2s;
         }
 
-        .nav a:hover,
-        .nav a.active {
-            background: rgba(255,255,255,0.16);
+
+        nav a:hover,
+        nav a.active {
+            background: rgba(255,255,255,.15);
         }
 
-        .menu-toggle {
-            display: none;
-            border: 0;
-            background: transparent;
-            color: white;
-            font-size: 28px;
-            cursor: pointer;
-        }
 
-        /* MAIN */
+        /* =========================
+           MAIN
+        ========================= */
+
         main {
-            max-width: 1200px;
+            max-width: 1150px;
             margin: auto;
-            padding: 25px 20px 50px;
+
+            padding: 25px 18px 60px;
         }
 
-        .back-row {
-            margin-bottom: 18px;
-        }
 
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: white;
-            color: var(--primary);
-            border: 1px solid var(--border);
-            padding: 10px 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            transition: 0.2s;
-        }
-
-        .back-btn:hover {
-            background: #eef6ff;
-            transform: translateX(-2px);
-        }
+        /* =========================
+           HERO
+        ========================= */
 
         .hero {
-            background: linear-gradient(135deg, #003366, #0b5a9e);
+            background: linear-gradient(
+                135deg,
+                #003366,
+                #0b5a9e
+            );
+
             color: white;
-            border-radius: 20px;
-            padding: 35px 25px;
-            margin-bottom: 25px;
-            box-shadow: var(--shadow);
+
             text-align: center;
+
+            padding: 45px 20px;
+
+            border-radius: 20px;
+
+            margin-bottom: 28px;
+
+            box-shadow:
+                0 8px 25px rgba(0,51,102,.12);
         }
 
+
         .hero h1 {
-            font-size: clamp(26px, 5vw, 42px);
+            font-size: clamp(28px, 5vw, 44px);
             margin-bottom: 8px;
         }
 
+
         .hero p {
-            max-width: 700px;
-            margin: auto;
-            opacity: 0.92;
+            font-size: 16px;
+            opacity: .92;
         }
 
-        /* STEPS */
+
+        /* =========================
+           BREADCRUMB
+        ========================= */
+
+        .breadcrumb {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            padding: 12px 15px;
+
+            margin-bottom: 20px;
+
+            display: flex;
+            flex-wrap: wrap;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+
+        .breadcrumb .current {
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+
+        /* =========================
+           STEP CARD
+        ========================= */
+
         .step-card {
             background: white;
+
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 20px;
+
+            border-radius: 17px;
+
+            padding: 24px;
+
             margin-bottom: 18px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+
+            box-shadow:
+                0 5px 18px rgba(0,0,0,.04);
         }
+
 
         .step-title {
             display: flex;
+
             align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
+
+            gap: 11px;
+
+            margin-bottom: 18px;
+
             color: var(--primary);
-            font-size: 18px;
-            font-weight: bold;
+
+            font-size: 20px;
+
+            font-weight: 800;
         }
+
 
         .step-number {
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
+
             border-radius: 50%;
+
             background: var(--primary);
+
             color: white;
+
             display: flex;
+
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+
+            font-size: 15px;
         }
 
-        .option-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
-            gap: 10px;
-        }
 
-        .option-btn {
-            background: #f8fbff;
-            border: 1px solid var(--border);
-            color: var(--primary);
-            border-radius: 12px;
-            padding: 13px 10px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-            min-height: 48px;
-        }
-
-        .option-btn:hover {
-            border-color: var(--primary-light);
-            background: #eef6ff;
-            transform: translateY(-1px);
-        }
-
-        .option-btn.selected {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        /* SEARCH */
-        .search-box {
-            position: relative;
+        .step-description {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: -10px;
             margin-bottom: 18px;
         }
 
-        .search-box input {
-            width: 100%;
-            padding: 14px 16px;
+
+        /* =========================
+           OPTIONS
+        ========================= */
+
+        .option-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(190px, 1fr));
+
+            gap: 14px;
+        }
+
+
+        .option-card {
+            position: relative;
+
             border: 1px solid var(--border);
-            border-radius: 12px;
-            outline: none;
-            font-size: 15px;
+
             background: white;
+
+            border-radius: 15px;
+
+            min-height: 95px;
+
+            padding: 17px;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            text-align: left;
+
+            color: var(--text);
+
+            transition: .2s;
         }
 
-        .search-box input:focus {
-            border-color: var(--primary-light);
-            box-shadow: 0 0 0 3px rgba(11,90,158,0.10);
+
+        .option-card:hover {
+            transform: translateY(-3px);
+
+            border-color: var(--blue);
+
+            box-shadow:
+                0 8px 20px rgba(0,80,140,.12);
+
+            background: #fafdff;
         }
 
-        /* RESULTS */
+
+        .option-icon {
+            width: 45px;
+            height: 45px;
+
+            flex-shrink: 0;
+
+            border-radius: 12px;
+
+            background: #eaf3fb;
+
+            color: var(--primary);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+        }
+
+
+        .option-text strong {
+            display: block;
+
+            color: var(--primary);
+
+            font-size: 16px;
+        }
+
+
+        .option-text small {
+            display: block;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            margin-top: 3px;
+        }
+
+
+        .option-arrow {
+            margin-left: auto;
+
+            color: var(--blue);
+
+            font-size: 20px;
+        }
+
+
+        /* =========================
+           HIDDEN
+        ========================= */
+
+        [hidden] {
+            display: none !important;
+        }
+
+
+        /* =========================
+           RESULTS
+        ========================= */
+
         .results-header {
             display: flex;
-            align-items: center;
+
             justify-content: space-between;
+
+            align-items: center;
+
             gap: 15px;
-            margin: 28px 0 15px;
+
             flex-wrap: wrap;
+
+            margin: 28px 0 15px;
         }
+
 
         .results-header h2 {
             color: var(--primary);
-            font-size: 22px;
+
+            font-size: 24px;
         }
 
-        .count-badge {
+
+        .count {
             background: #e8f3ff;
+
             color: var(--primary);
-            padding: 7px 12px;
+
+            padding: 7px 13px;
+
             border-radius: 20px;
+
             font-size: 13px;
-            font-weight: bold;
+
+            font-weight: 800;
         }
 
-        .paper-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-        }
 
-        .paper-card {
+        /* =========================
+           PAPER CHAIN
+        ========================= */
+
+        .paper-chain {
             background: white;
+
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 19px;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            transition: 0.2s;
+
+            border-radius: 17px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 5px 18px rgba(0,0,0,.05);
         }
 
-        .paper-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow);
-        }
 
-        .paper-icon {
-            width: 45px;
-            height: 45px;
-            background: #eaf4ff;
-            color: var(--primary);
-            border-radius: 11px;
+        .paper-chain-header {
+            background: var(--primary);
+
+            color: white;
+
+            padding: 17px 20px;
+
             display: flex;
+
+            justify-content: space-between;
+
             align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            margin-bottom: 13px;
-        }
 
-        .paper-card h3 {
-            color: var(--primary);
-            font-size: 17px;
-            margin-bottom: 10px;
-        }
+            gap: 10px;
 
-        .paper-meta {
-            display: flex;
             flex-wrap: wrap;
-            gap: 7px;
-            margin-bottom: 15px;
         }
 
-        .meta {
-            background: #f1f5f9;
-            color: #475569;
-            padding: 5px 9px;
-            border-radius: 7px;
+
+        .paper-chain-header strong {
+            font-size: 16px;
+        }
+
+
+        .paper-chain-header span {
+            background: rgba(255,255,255,.15);
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
             font-size: 12px;
         }
 
-        .paper-actions {
-            margin-top: auto;
+
+        .paper-item {
+            display: grid;
+
+            grid-template-columns:
+                45px 1fr auto;
+
+            gap: 15px;
+
+            align-items: center;
+
+            padding: 19px;
+
+            border-bottom: 1px solid #e7edf2;
         }
 
-        .open-btn {
-            display: block;
-            width: 100%;
-            text-align: center;
-            text-decoration: none;
-            background: var(--primary);
+
+        .paper-item:last-child {
+            border-bottom: none;
+        }
+
+
+        .paper-number {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: #eaf3fb;
+
+            color: var(--primary);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 900;
+        }
+
+
+        .paper-info h3 {
+            color: var(--primary);
+
+            font-size: 16px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .paper-meta {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+        }
+
+
+        .paper-meta span {
+            background: #f1f5f8;
+
+            color: #657482;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+        }
+
+
+        .open-pdf {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 6px;
+
+            background: var(--green);
+
             color: white;
-            padding: 11px 14px;
-            border-radius: 10px;
-            font-weight: bold;
-            transition: 0.2s;
+
+            text-decoration: none;
+
+            padding: 11px 15px;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+
+            transition: .2s;
         }
 
-        .open-btn:hover {
-            background: var(--primary-light);
+
+        .open-pdf:hover {
+            background: #006f46;
+
+            transform: translateY(-1px);
         }
 
-        /* EMPTY */
-        .empty-state {
+
+        /* =========================
+           EMPTY / ERROR
+        ========================= */
+
+        .message {
             background: white;
+
             border: 1px dashed var(--border);
-            border-radius: 16px;
-            padding: 35px 20px;
+
+            border-radius: 15px;
+
+            padding: 40px 20px;
+
             text-align: center;
+
             color: var(--muted);
         }
 
-        .empty-state strong {
+
+        .message-icon {
+            font-size: 40px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .message strong {
             display: block;
+
             color: var(--primary);
+
             margin-bottom: 5px;
         }
 
-        /* FOOTER */
+
+        .error-message {
+            border-color: #f0b4b4;
+
+            background: #fff8f8;
+
+            color: #a33;
+        }
+
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-btn {
+            border: none;
+
+            background: #edf2f6;
+
+            color: #405261;
+
+            padding: 11px 17px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            font-weight: 800;
+
+            margin-top: 20px;
+        }
+
+
+        .back-btn:hover {
+            background: #dfe7ed;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
         footer {
-            background: #00294f;
+            background: #001a33;
+
             color: white;
+
             text-align: center;
-            padding: 25px 15px;
+
+            padding: 22px 15px;
+
             font-size: 13px;
         }
 
-        /* MOBILE */
-        @media (max-width: 760px) {
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
 
             .header-inner {
-                padding: 11px 15px;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .nav {
-                display: none;
-                position: absolute;
-                top: 64px;
-                left: 0;
-                right: 0;
-                background: #003366;
                 flex-direction: column;
-                padding: 12px 15px 18px;
-                box-shadow: 0 8px 15px rgba(0,0,0,0.15);
             }
 
-            .nav.open {
-                display: flex;
-            }
 
-            .nav a {
-                width: 100%;
-                text-align: center;
-            }
-
-            main {
-                padding: 18px 12px 35px;
-            }
-
-            .hero {
-                padding: 27px 17px;
-                border-radius: 16px;
-            }
-
-            .step-card {
-                padding: 15px;
-            }
-
-            .option-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .paper-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .back-btn {
-                width: 100%;
+            nav {
+                flex-wrap: wrap;
                 justify-content: center;
             }
-        }
 
-        @media (max-width: 380px) {
+
+            main {
+                padding: 15px 12px 40px;
+            }
+
+
+            .hero {
+                border-radius: 15px;
+                padding: 32px 15px;
+            }
+
+
+            .step-card {
+                padding: 17px;
+            }
+
+
             .option-grid {
                 grid-template-columns: 1fr;
             }
+
+
+            .paper-item {
+                grid-template-columns: 40px 1fr;
+            }
+
+
+            .paper-action {
+                grid-column: 2;
+            }
+
+
+            .open-pdf {
+                width: 100%;
+            }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-<header class="site-header">
+
+<header>
 
     <div class="header-inner">
 
-        <a href="index.html" class="brand">
-            <div class="brand-icon">GS</div>
+        <a
+            href="index.html"
+            class="brand"
+        >
 
-            <div class="brand-text">
-                <div class="brand-name">GEPAM Science Hub</div>
-                <div class="brand-tagline">Making Science Easy</div>
+            <div class="brand-icon">
+                GS
             </div>
+
+            <div>
+
+                <div class="brand-name">
+                    GEPAM Science Hub
+                </div>
+
+                <div class="brand-tagline">
+                    Making Science Easy
+                </div>
+
+            </div>
+
         </a>
 
-        <button
-            class="menu-toggle"
-            id="menuToggle"
-            aria-label="Open navigation menu"
-            aria-expanded="false">
-            ☰
-        </button>
 
-        <nav class="nav" id="mainNav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="notes.html">Notes</a>
-            <a href="pastpapers.html" class="active">Past Papers</a>
-            <a href="contact.html">Contact</a>
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="notes.html">
+                Notes
+            </a>
+
+            <a
+                href="pastpapers.html"
+                class="active"
+            >
+                Past Papers
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
         </nav>
 
     </div>
@@ -491,206 +816,241 @@
 
 <main>
 
-    <div class="back-row">
-        <button class="back-btn" id="backButton">
-            ← Back
-        </button>
-    </div>
-
 
     <section class="hero">
 
-        <h1>📚 Past Papers</h1>
+        <h1>
+            📚 Past Papers
+        </h1>
 
         <p>
-            Find examination papers step by step.
-            Choose Form, Subject, Examination Type, Year,
-            Region or School, then open the paper PDF.
+            Find Physics and Chemistry examination papers step by step.
         </p>
 
     </section>
 
 
-    <!-- STEP 1: FORM -->
+    <!-- BREADCRUMB -->
 
-    <section class="step-card" id="formSection">
+    <div
+        class="breadcrumb"
+        id="breadcrumb"
+    >
+
+        <span class="current">
+            Past Papers
+        </span>
+
+    </div>
+
+
+    <!-- FORM -->
+
+    <section class="step-card">
 
         <div class="step-title">
-            <span class="step-number">1</span>
+
+            <span class="step-number">
+                1
+            </span>
+
             Choose Form
+
         </div>
 
-        <div class="option-grid" id="formOptions"></div>
+        <div class="step-description">
+            Select the Form whose past papers you want.
+        </div>
+
+
+        <div
+            class="option-grid"
+            id="formOptions"
+        ></div>
 
     </section>
 
 
-    <!-- STEP 2: SUBJECT -->
+    <!-- SUBJECT -->
 
-    <section class="step-card" id="subjectSection" hidden>
+    <section
+        class="step-card"
+        id="subjectSection"
+        hidden
+    >
 
         <div class="step-title">
-            <span class="step-number">2</span>
+
+            <span class="step-number">
+                2
+            </span>
+
             Choose Subject
+
         </div>
 
-        <div class="option-grid" id="subjectOptions"></div>
+        <div class="step-description">
+            Choose Physics or Chemistry.
+        </div>
+
+
+        <div
+            class="option-grid"
+            id="subjectOptions"
+        ></div>
 
     </section>
 
 
-    <!-- STEP 3: EXAM TYPE -->
+    <!-- EXAM TYPE -->
 
-    <section class="step-card" id="typeSection" hidden>
+    <section
+        class="step-card"
+        id="typeSection"
+        hidden
+    >
 
         <div class="step-title">
-            <span class="step-number">3</span>
+
+            <span class="step-number">
+                3
+            </span>
+
             Choose Examination Type
+
         </div>
 
-        <div class="option-grid" id="typeOptions"></div>
+
+        <div
+            class="option-grid"
+            id="typeOptions"
+        ></div>
 
     </section>
 
 
-    <!-- STEP 4: YEAR -->
+    <!-- YEAR -->
 
-    <section class="step-card" id="yearSection" hidden>
+    <section
+        class="step-card"
+        id="yearSection"
+        hidden
+    >
 
         <div class="step-title">
-            <span class="step-number">4</span>
+
+            <span class="step-number">
+                4
+            </span>
+
             Choose Year
+
         </div>
 
-        <div class="option-grid" id="yearOptions"></div>
+
+        <div
+            class="option-grid"
+            id="yearOptions"
+        ></div>
 
     </section>
 
 
-    <!-- STEP 5: REGION / SCHOOL -->
+    <!-- REGION / SCHOOL -->
 
-    <section class="step-card" id="locationSection" hidden>
+    <section
+        class="step-card"
+        id="locationSection"
+        hidden
+    >
 
         <div class="step-title">
-            <span class="step-number">5</span>
+
+            <span class="step-number">
+                5
+            </span>
+
             Region / School
+
         </div>
 
-        <div class="option-grid" id="locationOptions"></div>
+        <div class="step-description">
+            Select the region, school or examination source available for this paper.
+        </div>
+
+
+        <div
+            class="option-grid"
+            id="locationOptions"
+        ></div>
 
     </section>
 
 
-    <!-- STEP 6: PAPER CHAIN -->
+    <!-- PAPERS -->
 
-    <section class="step-card" id="seriesSection" hidden>
-
-        <div class="step-title">
-            <span class="step-number">6</span>
-            Paper Chain
-        </div>
-
-        <div class="option-grid" id="seriesOptions"></div>
-
-    </section>
-
-
-    <!-- SEARCH -->
-
-    <section id="searchSection" hidden>
-
-        <div class="search-box">
-
-            <input
-                type="search"
-                id="searchInput"
-                placeholder="Search papers..."
-                autocomplete="off"
-            >
-
-        </div>
-
-    </section>
-
-
-    <!-- RESULTS -->
-
-    <section id="resultsSection">
+    <section
+        id="resultsSection"
+        hidden
+    >
 
         <div class="results-header">
 
-            <h2>Available Papers</h2>
+            <h2>
+                📄 Available Papers
+            </h2>
 
-            <span class="count-badge" id="resultCount">
-                0 papers
+            <span
+                class="count"
+                id="resultCount"
+            >
+                0 Papers
             </span>
 
         </div>
 
-        <div class="paper-grid" id="paperResults">
 
-            <div class="empty-state">
-
-                <strong>Choose Form 1–6 to begin</strong>
-
-                Your available Physics and Chemistry
-                past papers will appear here step by step.
-
-            </div>
-
-        </div>
+        <div id="paperResults"></div>
 
     </section>
+
+
+    <!-- BACK -->
+
+    <button
+        class="back-btn"
+        id="backButton"
+        hidden
+    >
+        ← Back
+    </button>
+
 
 </main>
 
 
 <footer>
 
-    <p>
-        © <span id="currentYear"></span>
-        GEPAM Science Hub — Physics & Chemistry Learning Resources
-    </p>
+    © <span id="currentYear"></span>
+    GEPAM Science Hub — Physics & Chemistry Learning Resources
 
 </footer>
 
 
-<!-- =====================================================
-     IMPORTANT SCRIPT ORDER
-     
-     DATA MUST COME FIRST.
-     ENGINE MUST COME SECOND.
-===================================================== -->
+<!-- ======================================================
+     DATA FIRST
+====================================================== -->
 
 <script src="pastpapers.data.js"></script>
+
+
+<!-- ======================================================
+     PAST PAPERS ENGINE
+====================================================== -->
+
 <script src="pastpapers.js"></script>
 
 
-<script>
-    /* Current year */
-    document.getElementById("currentYear").textContent =
-        new Date().getFullYear();
-
-
-    /* Mobile menu */
-    const menuToggle = document.getElementById("menuToggle");
-    const mainNav = document.getElementById("mainNav");
-
-    if (menuToggle && mainNav) {
-
-        menuToggle.addEventListener("click", function () {
-
-            const isOpen = mainNav.classList.toggle("open");
-
-            menuToggle.setAttribute(
-                "aria-expanded",
-                isOpen ? "true" : "false"
-            );
-
-        });
-
-    }
-</script>
-
 </body>
+
 </html>
