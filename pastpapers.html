@@ -2,171 +2,289 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="GEPAM Science Hub Past Papers - Physics and Chemistry examinations from Form 1 to Form 6.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Past Papers | GEPAM Science Hub</title>
 
+    <meta name="description"
+          content="Physics and Chemistry past papers for Form 1 to Form 6, including Mock, Joint, Pre-NECTA and NECTA examinations.">
+
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f8fb;
+            color: #222;
+        }
+
+        header {
+            background: #003366;
+            color: white;
+            padding: 18px 15px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 25px;
+        }
+
+        header p {
+            margin: 6px 0 0;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 25px auto;
+            padding: 0 15px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .page-title h2 {
+            color: #003366;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #666;
+        }
+
+        .breadcrumb {
+            background: white;
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            font-size: 14px;
+        }
+
+        .breadcrumb span {
+            color: #003366;
+            font-weight: bold;
+        }
+
+        .navigation-panel {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .section-heading {
+            text-align: center;
+            color: #003366;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .paper-card {
+            background: #f8fbff;
+            border: 1px solid #dbe7f2;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .paper-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.10);
+            border-color: #003366;
+        }
+
+        .paper-card h3 {
+            color: #003366;
+            margin: 0 0 8px;
+        }
+
+        .paper-card p {
+            margin: 4px 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .paper-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            border: none;
+            background: #003366;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            background: #00509e;
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 35px 15px;
+            color: #777;
+        }
+
+        .empty-message strong {
+            display: block;
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .paper-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            background: #fff;
+            border: 1px solid #e1e8ef;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+
+        .paper-info {
+            flex: 1;
+        }
+
+        .paper-info h3 {
+            margin: 0 0 6px;
+            color: #003366;
+            font-size: 17px;
+        }
+
+        .paper-info p {
+            margin: 3px 0;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .open-pdf {
+            display: inline-block;
+            background: #007b5e;
+            color: white;
+            text-decoration: none;
+            padding: 9px 14px;
+            border-radius: 6px;
+            white-space: nowrap;
+            font-size: 13px;
+        }
+
+        .open-pdf:hover {
+            background: #005f48;
+        }
+
+        .count-badge {
+            display: inline-block;
+            background: #003366;
+            color: white;
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 30px;
+            background: #003366;
+            color: white;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .paper-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .open-pdf {
+                text-align: center;
+            }
+
+            .navigation-panel {
+                padding: 18px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-<header class="site-header">
-
-    <div class="header-inner">
-
-        <div class="brand">
-            <div class="brand-logo">G</div>
-
-            <div>
-                <h1>GEPAM Science Hub</h1>
-                <p>Physics & Chemistry Learning Resources</p>
-            </div>
-        </div>
-
-        <nav class="main-nav">
-            <a href="index.html">Home</a>
-            <a href="notes.html">Notes</a>
-            <a href="pastpapers.html" class="active">Past Papers</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-
-    </div>
-
+<header>
+    <h1>📚 GEPAM Science Hub</h1>
+    <p>Physics & Chemistry Past Papers</p>
 </header>
 
+<main class="container">
 
-<!-- ================= MAIN ================= -->
-<main class="pastpapers-page">
+    <div class="page-title">
+        <h2>Past Papers</h2>
+        <p>Find examination papers step by step</p>
+    </div>
 
-    <section class="pastpapers-hero">
+    <div class="breadcrumb" id="breadcrumb">
+        <span>Past Papers</span>
+    </div>
 
-        <div>
-            <span class="hero-badge">GEPAM SCIENCE HUB</span>
+    <section class="navigation-panel">
 
-            <h2>Past Papers</h2>
+        <button
+            id="backButton"
+            class="back-btn"
+            type="button"
+            style="display:none;">
+            ← Back
+        </button>
 
-            <p>
-                Access Physics and Chemistry past papers from
-                Form 1 to Form 6.
-            </p>
-        </div>
+        <h2 id="sectionHeading" class="section-heading">
+            Choose Form
+        </h2>
 
-    </section>
-
-
-    <!-- ================= PROGRESS ================= -->
-
-    <section class="paper-navigation">
-
-        <div class="progress-wrapper">
-
-            <div class="progress-step active" data-step="1">
-                <span>1</span>
-                <small>Form</small>
-            </div>
-
-            <div class="progress-line"></div>
-
-            <div class="progress-step" data-step="2">
-                <span>2</span>
-                <small>Subject</small>
-            </div>
-
-            <div class="progress-line"></div>
-
-            <div class="progress-step" data-step="3">
-                <span>3</span>
-                <small>Exam Type</small>
-            </div>
-
-            <div class="progress-line"></div>
-
-            <div class="progress-step" data-step="4">
-                <span>4</span>
-                <small>Year</small>
-            </div>
-
-            <div class="progress-line"></div>
-
-            <div class="progress-step" data-step="5">
-                <span>5</span>
-                <small>Region</small>
-            </div>
-
-            <div class="progress-line"></div>
-
-            <div class="progress-step" data-step="6">
-                <span>6</span>
-                <small>Paper</small>
-            </div>
-
-        </div>
-
-
-        <!-- ================= BREADCRUMB ================= -->
-
-        <div id="selectionBreadcrumb" class="selection-breadcrumb">
-            <span>Past Papers</span>
-        </div>
-
-
-        <!-- ================= CONTENT ================= -->
-
-        <div id="paperContent" class="paper-content">
-
-            <!-- JavaScript itaweka content hapa -->
-
-        </div>
+        <div id="paperContent"></div>
 
     </section>
 
 </main>
 
-
-<!-- ================= FOOTER ================= -->
-
-<footer class="site-footer">
-
-    <div class="footer-inner">
-
-        <div>
-            <h3>GEPAM Science Hub</h3>
-            <p>
-                Making Science Easy for Tanzanian Students.
-            </p>
-        </div>
-
-        <div>
-            <p>Physics & Chemistry Resources</p>
-            <p>Form 1 – Form 6</p>
-        </div>
-
-    </div>
-
-    <div class="copyright">
-        © 2026 GEPAM Science Hub. All Rights Reserved.
-    </div>
-
+<footer>
+    © 2026 GEPAM Science Hub — Physics & Chemistry Learning Resources
 </footer>
 
 
-<!-- =================================================
-     IMPORTANT SCRIPT ORDER
-     =================================================
-
-     data.js lazima ipakwe KWANZA kwa sababu
-     pastpapers.js inatumia pastPapers na pastPaperConfig.
+<!--
+====================================================
+IMPORTANT
+data.js MUST COME BEFORE pastpapers.js
+====================================================
 -->
 
 <script src="data.js"></script>
-
 <script src="pastpapers.js"></script>
 
 </body>
