@@ -6,7 +6,6 @@
     <title>GEPAM Science Hub - Past Papers</title>
     <!-- Google Fonts -->
     <link href="https://googleapis.com" rel="stylesheet">
-    
     <style>
         :root {
             --primary-dark: #0f172a;
@@ -28,7 +27,6 @@
             min-height: 100vh;
         }
 
-        /* Navbar Layout */
         .navbar {
             background: var(--primary-dark);
             padding: 15px 20px;
@@ -85,8 +83,6 @@
         .back-nav-btn:hover {
             color: white;
         }
-
-        /* Main Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -111,7 +107,6 @@
             margin: 0;
         }
 
-        /* 1. Form Tabs Grid */
         .forms-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -145,7 +140,6 @@
             box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
         }
 
-        /* 2. Subject Tabs */
         .subjects-container {
             display: flex;
             justify-content: center;
@@ -176,7 +170,6 @@
             box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
         }
 
-        /* Search Input */
         .search-wrapper {
             max-width: 500px;
             margin: 0 auto 30px auto;
@@ -198,7 +191,6 @@
             border-color: var(--brand-color);
         }
 
-        /* 3. Filters Box */
         .filters-wrapper {
             background: var(--card-bg);
             padding: 24px;
@@ -242,7 +234,6 @@
             background-color: white;
         }
 
-        /* 4. Papers Dynamic Grid */
         .papers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -335,7 +326,7 @@
 </head>
 <body>
 
-<!-- Top Navigation Bar Menu -->
+<!-- Modern Fixed Navbar Menu -->
 <nav class="navbar">
     <div style="display: flex; align-items: center; gap: 20px;">
         <span class="back-nav-btn" onclick="goBackOrHome()">← Rudi</span>
@@ -395,8 +386,8 @@
     <div class="papers-grid" id="papersGrid"></div>
 </div>
 
-<!-- KUUNGANISHA DATABASE: Inaita faili lako la data.js -->
-<script src="data.js"></script>
+<!-- INAITA DATABASE INAYOJITEGEMEA YA PAST PAPERS -->
+<script src="past-papers.data.js"></script>
 <script>
     let currentForm = 'form1';
     let currentSubject = 'physics';
@@ -448,7 +439,6 @@
         populateFilters();
         applyFilters();
     }
-
     function populateFilters() {
         const typeSelect = document.getElementById('filterType');
         const regionSelect = document.getElementById('filterRegion');
@@ -470,7 +460,6 @@
             if(paper.year) years.add(paper.year);
         });
 
-        // Kuchukua maneno halisi bila kubadili herufi au majina yako ya asili
         types.forEach(t => { typeSelect.innerHTML += `<option value="${t}">${t}</option>`; });
         regions.forEach(r => { regionSelect.innerHTML += `<option value="${r}">${r}</option>`; });
         Array.from(years).sort((a,b) => b - a).forEach(y => { yearSelect.innerHTML += `<option value="${y}">${y}</option>`; });
@@ -502,9 +491,8 @@
             return;
         }
 
-        // Kujaza kadi kwa kutumia data zako halisi bila kubadilisha thamani (values)
         filteredPapers.forEach(paper => {
-            // Kuangalia kama tuonyeshe neno Shule au Mkoa kwenye kadi ya kidato husika
+            // Lebo maalum: Form 1, 3, na 5 zinasomeka kama "Shule", zingine kama "Mkoa"
             const locationType = (currentForm === 'form1' || currentForm === 'form3' || currentForm === 'form5') ? 'Shule' : 'Mkoa';
             
             const cardHTML = `
