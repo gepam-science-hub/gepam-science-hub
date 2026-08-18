@@ -1,156 +1,706 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-          content="GEPAM Science Hub - Physics and Chemistry Past Papers">
+    <title>GEPAM Science Hub | Past Papers</title>
 
-    <title>Past Papers | GEPAM Science Hub</title>
+    <meta
+        name="description"
+        content="GEPAM Science Hub Past Papers - Physics and Chemistry examination papers from Form 1 to Form 6."
+    >
 
-    <!-- MAIN WEBSITE CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico">
 
-    <!-- PAST PAPERS CSS -->
-    <link rel="stylesheet" href="pastpapers.css">
+    <style>
+
+        :root {
+            --primary: #003366;
+            --primary-light: #0b5a9e;
+            --background: #f4f8fb;
+            --white: #ffffff;
+            --text: #1f2937;
+            --muted: #64748b;
+            --border: #dbe4ee;
+            --success: #008f5a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--background);
+            color: var(--text);
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: linear-gradient(
+                135deg,
+                #003366,
+                #064f8f
+            );
+
+            color: white;
+            padding: 18px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 25px;
+        }
+
+        header p {
+            margin-top: 5px;
+            opacity: .9;
+            font-size: 14px;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            background: linear-gradient(
+                135deg,
+                #003366,
+                #0b5a9e
+            );
+
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero h2 {
+            font-size: clamp(
+                30px,
+                6vw,
+                46px
+            );
+
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: .9;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: min(
+                1100px,
+                94%
+            );
+
+            margin: 35px auto 60px;
+        }
+
+        /* ================= BREADCRUMB ================= */
+
+        .breadcrumb {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            padding: 13px 16px;
+
+            margin-bottom: 20px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        .breadcrumb strong {
+            color: var(--primary);
+        }
+
+        /* ================= CARD ================= */
+
+        .main-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 8px 30px
+                rgba(0,51,102,.08);
+        }
+
+        /* ================= TITLE ================= */
+
+        .section-title {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 25px;
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 13px;
+
+            background: #eaf4ff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 23px;
+        }
+
+        .section-title h3 {
+            color: var(--primary);
+            font-size: 22px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 3px;
+        }
+
+        /* ================= OPTIONS ================= */
+
+        .options {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(210px, 1fr)
+                );
+
+            gap: 15px;
+        }
+
+        .option {
+            position: relative;
+
+            border: 1px solid var(--border);
+
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 18px;
+
+            min-height: 90px;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            text-align: left;
+
+            transition: .2s;
+        }
+
+        .option:hover {
+            transform: translateY(-3px);
+
+            border-color:
+                var(--primary-light);
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,51,102,.10);
+
+            background: #fafdff;
+        }
+
+        .option-icon {
+            width: 45px;
+            height: 45px;
+
+            border-radius: 12px;
+
+            background: #eaf4ff;
+
+            color: var(--primary);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+
+            flex-shrink: 0;
+        }
+
+        .option-text strong {
+            display: block;
+
+            color: var(--primary);
+
+            font-size: 16px;
+        }
+
+        .option-text small {
+            display: block;
+
+            color: var(--muted);
+
+            margin-top: 4px;
+
+            font-size: 12px;
+        }
+
+        .arrow {
+            margin-left: auto;
+
+            color:
+                var(--primary-light);
+
+            font-size: 20px;
+        }
+
+        /* ================= PAPER CHAIN ================= */
+
+        .paper-chain {
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            background: white;
+        }
+
+        .chain-header {
+            background: var(--primary);
+
+            color: white;
+
+            padding: 16px 18px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+        }
+
+        .chain-count {
+            background:
+                rgba(255,255,255,.15);
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+        }
+
+        .paper {
+            display: grid;
+
+            grid-template-columns:
+                45px 1fr auto;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 18px;
+
+            border-bottom:
+                1px solid #e7edf2;
+        }
+
+        .paper:last-child {
+            border-bottom: none;
+        }
+
+        .paper-number {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: #eaf4ff;
+
+            color: var(--primary);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+        .paper h4 {
+            color: var(--primary);
+
+            font-size: 16px;
+
+            margin-bottom: 7px;
+        }
+
+        .paper-meta {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+        }
+
+        .paper-meta span {
+            background: #f1f5f9;
+
+            color: #64748b;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+        }
+
+        .open-pdf {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 6px;
+
+            background:
+                var(--success);
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 11px 15px;
+
+            border-radius: 9px;
+
+            font-weight: bold;
+
+            font-size: 13px;
+
+            white-space: nowrap;
+        }
+
+        .open-pdf:hover {
+            background: #006f46;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .controls {
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+            margin-top: 22px;
+        }
+
+        .control-btn {
+            border: none;
+
+            border-radius: 9px;
+
+            padding: 11px 17px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .back-btn {
+            background: #edf2f6;
+            color: #405261;
+        }
+
+        .restart-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+            text-align: center;
+
+            padding: 50px 20px;
+
+            color: var(--muted);
+        }
+
+        .empty-icon {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .empty h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #00294f;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 22px 15px;
+
+            font-size: 13px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width:700px) {
+
+            .main-card {
+                padding: 18px;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .paper {
+                grid-template-columns:
+                    40px 1fr;
+            }
+
+            .paper-action {
+                grid-column: 2;
+            }
+
+            .open-pdf {
+                width: 100%;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .control-btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
 
-<header class="pastpapers-header">
+<header>
 
-    <div class="pastpapers-logo">
-        📚
-    </div>
+    <h1>📚 GEPAM Science Hub</h1>
 
-    <h1>GEPAM Science Hub</h1>
-
-    <p>Physics & Chemistry Past Papers</p>
+    <p>
+        Physics & Chemistry Past Papers
+    </p>
 
 </header>
 
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+<section class="hero">
 
-<main class="pastpapers-page">
+    <h2>Past Papers</h2>
 
-    <!-- HERO -->
+    <p>
+        Find examination papers step by step
+    </p>
 
-    <section class="pastpapers-hero">
-
-        <div>
-
-            <span class="hero-badge">
-                📚 PAST PAPERS
-            </span>
-
-            <h2>
-                Past Papers
-            </h2>
-
-            <p>
-                Find examination papers step by step
-            </p>
-
-        </div>
-
-    </section>
+</section>
 
 
-    <!-- =================================================
-         NAVIGATION
-    ================================================== -->
-
-    <section class="paper-navigation">
-
-        <!-- PROGRESS -->
-
-        <div id="progressWrapper"
-             class="progress-wrapper">
-
-        </div>
+<main class="container">
 
 
-        <!-- BREADCRUMB -->
-
-        <div id="selectionBreadcrumb"
-             class="selection-breadcrumb">
-
-            <span>Past Papers</span>
-
-        </div>
+    <div
+        id="breadcrumb"
+        class="breadcrumb"
+    >
+        <strong>Past Papers</strong>
+    </div>
 
 
-        <!-- CONTENT -->
+    <div class="main-card">
 
-        <div class="paper-content">
 
-            <div id="paperApp">
+        <div class="section-title">
 
-                <!-- JavaScript will generate
-                     the complete system here -->
+            <div
+                class="section-icon"
+                id="sectionIcon"
+            >
+                📚
+            </div>
 
-                <div class="empty-state">
+            <div>
 
-                    <div class="empty-icon">
-                        📚
-                    </div>
+                <h3 id="sectionTitle">
+                    Choose Form
+                </h3>
 
-                    <h3>
-                        Loading Past Papers...
-                    </h3>
-
-                    <p>
-                        Tafadhali subiri kidogo.
-                    </p>
-
-                </div>
+                <p id="sectionDescription">
+                    Select the class whose
+                    past papers you want.
+                </p>
 
             </div>
 
         </div>
 
-    </section>
+
+        <div
+            id="content"
+            class="options"
+        ></div>
+
+
+        <div
+            id="controls"
+            class="controls"
+            style="display:none;"
+        >
+
+            <button
+                class="control-btn back-btn"
+                id="backBtn"
+            >
+                ← Back
+            </button>
+
+            <button
+                class="control-btn restart-btn"
+                id="restartBtn"
+            >
+                ↻ Start Again
+            </button>
+
+        </div>
+
+
+    </div>
+
 
 </main>
 
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
+<footer>
 
-<footer class="site-footer">
-
-    <div class="copyright">
-
-        © 2026 GEPAM Science Hub —
-        Physics & Chemistry Learning Resources
-
-    </div>
+    © <span id="year"></span>
+    GEPAM Science Hub — Physics & Chemistry
+    Learning Resources
 
 </footer>
 
 
 <!-- =====================================================
-     JAVASCRIPT
-     
-     MUHIMU:
-     data.js LAZIMA IJE KWANZA
-     pastpapers.js IJE BAADA YA DATA.JS
+     DATA FIRST
 ===================================================== -->
 
-<script src="data.js" defer></script>
+<script src="data.js"></script>
 
-<script src="pastpapers.js" defer></script>
+
+<!-- =====================================================
+     PAST PAPERS ENGINE SECOND
+===================================================== -->
+
+<script src="pastpapers.js"></script>
+
+
+<script>
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+
+/*
+    Mobile-safe error message.
+*/
+
+window.addEventListener(
+    "error",
+    function(event) {
+
+        if (
+            event.filename &&
+            event.filename.includes("pastpapers.js")
+        ) {
+
+            const content =
+                document.getElementById("content");
+
+            if (content) {
+
+                content.innerHTML = `
+                    <div class="empty"
+                         style="grid-column:1/-1;">
+
+                        <div class="empty-icon">
+                            ⚠️
+                        </div>
+
+                        <h3>
+                            Mfumo haukuweza kupakia
+                        </h3>
+
+                        <p>
+                            Tafadhali hakikisha
+                            data.js na pastpapers.js
+                            zipo pamoja.
+                        </p>
+
+                    </div>
+                `;
+
+            }
+
+        }
+
+    }
+
+);
+
+</script>
+
 
 </body>
+
 </html>
