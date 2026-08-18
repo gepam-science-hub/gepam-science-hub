@@ -11,27 +11,26 @@ function handleFormSelect(formId) {
     selectedForm = formId;
     selectedSubject = null; selectedType = null; selectedLocation = null; selectedYear = null;
     
-    // Inasafisha na kuweka rangi batani iliyobonyezwa bila kukwama
+    // Weka rangi ya batani iliyobonyezwa
     document.querySelectorAll('#formOptions .opt-btn').forEach(btn => {
         btn.classList.remove('active');
     });
     
-    // Kutafuta batani sahihi kwa njia ya mkato ya onclick attribute
     const allButtons = document.querySelectorAll('#formOptions .opt-btn');
     allButtons.forEach(btn => {
-        if(btn.getAttribute('onclick').includes(formId)) {
-            btn.classList.add('active');
+        if(btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(formId)) {
+            btn.add ? btn.add('active') : btn.classList.add('active');
         }
     });
 
-    // Ficha hatua zote za chini kwanza ili zifuate mlolongo
+    // Ficha hatua zote za chini ili zifuate mlolongo mmoja baada ya mwingine
     document.getElementById('step2').classList.add('hidden');
     document.getElementById('step3').classList.add('hidden');
     document.getElementById('step4').classList.add('hidden');
     document.getElementById('step5').classList.add('hidden');
     document.getElementById('finalPapersArea').innerHTML = '';
 
-    // Badili Lebo: Vidato 1,3,5 ni Shule | 2,4,6 ni Mkoa
+    // Lebo inabadilika kiotomatiki hapa
     const locLabel = document.getElementById('locationLabel');
     if (formId === 'form1' || formId === 'form3' || formId === 'form5') {
         locLabel.textContent = "Hatua ya 4: Chagua Shule";
@@ -39,17 +38,22 @@ function handleFormSelect(formId) {
         locLabel.textContent = "Hatua ya 4: Chagua Mkoa";
     }
 
-    // Jaza masomo yaliyopo kwenye hiyo form kutoka pastPapers database yako
     const subjectOpts = document.getElementById('subjectOptions');
     subjectOpts.innerHTML = '';
     
-    if (pastPapers && pastPapers[formId]) {
-        Object.keys(pastPapers[formId]).forEach(sub => {
+    // Kinga ya kiufundi: Tafuta database popote ilipo (kwenye window au local variable)
+    const db = window.pastPapers || (typeof pastPapers !== 'undefined' ? pastPapers : null);
+    
+    if (db && db[formId]) {
+        Object.keys(db[formId]).forEach(sub => {
             subjectOpts.innerHTML += `<div class="opt-btn" onclick="handleSubjectSelect('${sub}')">${sub}</div>`;
         });
+        document.getElementById('step2').classList.remove('hidden');
+    } else {
+        // Hii itakusaidia kujua kama HTML haioni data yako
+        console.error("Database ya pastPapers haijapatikana! Angalia jina la faili la data.");
+        alert("Shida ya Kiufundi: Faili la 'pastpapers.data.js' halijapatikana au lina makosa ya kufunga mabano. Hakikisha majina yanafanana.");
     }
-
-    document.getElementById('step2').classList.remove('hidden');
 }
 
 function handleSubjectSelect(subId) {
@@ -69,17 +73,18 @@ function handleSubjectSelect(subId) {
     const typeOpts = document.getElementById('typeOptions');
     typeOpts.innerHTML = '';
 
-    if (pastPapers[selectedForm] && pastPapers[selectedForm][selectedSubject]) {
-        const currentPapers = pastPapers[selectedForm][selectedSubject];
+    const db = window.pastPapers || (typeof pastPapers !== 'undefined' ? pastPapers : null);
+
+    if (db && db[selectedForm] && db[selectedForm][selectedSubject]) {
+        const currentPapers = db[selectedForm][selectedSubject];
         let typesSet = new Set();
         currentPapers.forEach(p => { if(p.type) typesSet.add(p.type); });
 
         typesSet.forEach(t => {
             typeOpts.innerHTML += `<div class="opt-btn" onclick="handleTypeSelect('${t}')">${t}</div>`;
         });
+        document.getElementById('step3').classList.remove('hidden');
     }
-
-    document.getElementById('step3').classList.remove('hidden');
 }
 function handleTypeSelect(typeId) {
     selectedType = typeId;
@@ -97,7 +102,8 @@ function handleTypeSelect(typeId) {
     const locOpts = document.getElementById('locationOptions');
     locOpts.innerHTML = '';
 
-    const currentPapers = pastPapers[selectedForm][selectedSubject];
+    const db = window.pastPapers || (typeof pastPapers !== 'undefined' ? pastPapers : null);
+    const currentPapers = db[selectedForm][selectedSubject];
     let locsSet = new Set();
     currentPapers.forEach(p => {
         if(p.type === selectedType && p.region) locsSet.add(p.region);
@@ -125,7 +131,8 @@ function handleLocationSelect(locId) {
     const yearOpts = document.getElementById('yearOptions');
     yearOpts.innerHTML = '';
 
-    const currentPapers = pastPapers[selectedForm][selectedSubject];
+    const db = window.pastPapers || (typeof pastPapers !== 'undefined' ? pastPapers : null);
+    const currentPapers = db[selectedForm][selectedSubject];
     let yearsSet = new Set();
     currentPapers.forEach(p => {
         if(p.type === selectedType && p.region === selectedLocation && p.year) yearsSet.add(p.year);
@@ -149,7 +156,8 @@ function handleYearSelect(yearId) {
     const finalPapersArea = document.getElementById('finalPapersArea');
     finalPapersArea.innerHTML = '';
 
-    const currentPapers = pastPapers[selectedForm][selectedSubject];
+    const db = window.pastPapers || (typeof pastPapers !== 'undefined' ? pastPapers : null);
+    const currentPapers = db[selectedForm][selectedSubject];
     
     const targetPapers = currentPapers.filter(p => {
         return p.type === selectedType && p.region === selectedLocation && p.year.toString() === yearId;
