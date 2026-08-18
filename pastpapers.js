@@ -1,1038 +1,1054 @@
 /* =========================================================
    GEPAM SCIENCE HUB
-   PAST PAPERS NAVIGATION ENGINE
+   PAST PAPERS SYSTEM
+   =========================================================
 
-   Flow:
+   SYSTEM:
 
    Past Papers
        ↓
    Form
        ↓
-   Subject
+   Physics / Chemistry
        ↓
    Exam Type
        ↓
    Year
        ↓
-   Region / School
+   Region
        ↓
    Paper Chain
        ↓
    Open PDF
+
+   DATA SOURCE:
+   data.js
+
+   Variables used directly:
+   - pastPaperConfig
+   - pastPapers
 ========================================================= */
 
-
-let currentStep = "form";
-
-let selected = {
-    form: null,
-    subject: null,
-    type: null,
-    year: null,
-    region: null
-};
-
-
-/* =========================================================
-   HELPER: FIND DATA OBJECT
-========================================================= */
-
-function getPastPaperData() {
-
-    /*
-       Your pastpapers.data.js is expected to expose:
-
-       const pastPapersData = {
-           form1: {...},
-           form2: {...},
-           ...
-           form6: {...}
-       };
-
-       If your variable has another name, change only the
-       variable below.
-    */
-
-    if (typeof pastPapersData !== "undefined") {
-        return pastPapersData;
-    }
-
-    if (typeof pastpapersData !== "undefined") {
-        return pastpapersData;
-    }
-
-    if (typeof PAST_PAPERS_DATA !== "undefined") {
-        return PAST_PAPERS_DATA;
-    }
-
-    console.error("Past papers data was not found.");
-
-    return {};
-}
-
-
-/* =========================================================
-   FORM LABELS
-========================================================= */
-
-const formLabels = {
-    form1: "Form 1",
-    form2: "Form 2",
-    form3: "Form 3",
-    form4: "Form 4",
-    form5: "Form 5",
-    form6: "Form 6"
-};
-
-
-/* =========================================================
-   SUBJECT LABELS
-========================================================= */
-
-const subjectLabels = {
-    physics: "Physics",
-    chemistry: "Chemistry"
-};
-
-
-/* =========================================================
-   EXAM TYPE LABELS
-========================================================= */
-
-const typeLabels = {
-    annual: "Annual Examination",
-    terminal: "Terminal Examination",
-    midterm: "Midterm Examination",
-    joint: "Joint Examination",
-    mock: "Mock Examination",
-    pre_necta: "Pre-NECTA Examination",
-    necta: "NECTA Examination",
-    csee: "CSEE Examination",
-    acsee: "ACSEE Examination"
-};
-
-
-/* =========================================================
-   REGION LABELS
-========================================================= */
-
-const regionLabels = {
-    dar_es_salaam: "Dar es Salaam",
-    dodoma: "Dodoma",
-    arusha: "Arusha",
-    mbeya: "Mbeya",
-    kagera: "Kagera",
-    shinyanga: "Shinyanga",
-    mwanza: "Mwanza",
-    tanga: "Tanga",
-    morogoro: "Morogoro",
-    singida: "Singida",
-    tabora: "Tabora",
-    kigoma: "Kigoma",
-    iringa: "Iringa",
-    njombe: "Njombe",
-    rukwa: "Rukwa",
-    katavi: "Katavi",
-    mtwara: "Mtwara",
-    lindi: "Lindi",
-    manyara: "Manyara",
-    mara: "Mara",
-    simiyu: "Simiyu",
-    songwe: "Songwe",
-    pwani: "Pwani",
-    geita: "Geita",
-    zanzibar: "Zanzibar",
-    necta: "NECTA"
-};
-
-
-/* =========================================================
-   DISPLAY LABEL
-========================================================= */
-
-function prettyLabel(value, type = "general") {
-
-    if (!value) return "";
-
-    if (type === "form") {
-        return formLabels[value] || value;
-    }
-
-    if (type === "subject") {
-        return subjectLabels[value] || value;
-    }
-
-    if (type === "type") {
-        return typeLabels[value] || value;
-    }
-
-    if (type === "region") {
-        return regionLabels[value] || formatText(value);
-    }
-
-    return formatText(value);
-}
-
-
-/* =========================================================
-   FORMAT UNKNOWN TEXT
-========================================================= */
-
-function formatText(value) {
-
-    return String(value)
-        .replace(/_/g, " ")
-        .replace(/\b\w/g, letter => letter.toUpperCase());
-}
-
-
-/* =========================================================
-   SCREEN CONTROL
-========================================================= */
-
-function showScreen(screenName) {
-
-    document.querySelectorAll(".screen").forEach(screen => {
-        screen.classList.remove("active");
-    });
-
-    const target = document.getElementById("screen-" + screenName);
-
-    if (target) {
-        target.classList.add("active");
-    }
-
-    currentStep = screenName;
-
-    updateBreadcrumb();
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-
-/* =========================================================
-   BREADCRUMB
-========================================================= */
-
-function updateBreadcrumb() {
-
-    const breadcrumb = document.getElementById("breadcrumb");
-
-    if (!breadcrumb) return;
-
-    const items = [];
-
-    items.push({
-        label: "Past Papers",
-        step: "form"
-    });
-
-    if (selected.form) {
-        items.push({
-            label: prettyLabel(selected.form, "form"),
-            step: "subject"
-        });
-    }
-
-    if (selected.subject) {
-        items.push({
-            label: prettyLabel(selected.subject, "subject"),
-            step: "type"
-        });
-    }
-
-    if (selected.type) {
-        items.push({
-            label: prettyLabel(selected.type, "type"),
-            step: "year"
-        });
-    }
-
-    if (selected.year) {
-        items.push({
-            label: selected.year,
-            step: "region"
-        });
-    }
-
-    if (selected.region) {
-        items.push({
-            label: prettyLabel(selected.region, "region"),
-            step: "papers"
-        });
-    }
-
-    breadcrumb.innerHTML = items.map((item, index) => {
-
-        const arrow = index < items.length - 1
-            ? `<span style="cursor:default;">›</span>`
-            : "";
-
-        return `
-            <span
-                class="${item.step === currentStep ? "active" : ""}"
-                onclick="breadcrumbGo('${item.step}')"
-            >
-                ${item.label}
-            </span>
-            ${arrow}
-        `;
-
-    }).join("");
-}
-
-
-/* =========================================================
-   BREADCRUMB NAVIGATION
-========================================================= */
-
-function breadcrumbGo(step) {
-
-    if (step === "form") {
-
-        selected = {
-            form: null,
-            subject: null,
-            type: null,
-            year: null,
-            region: null
-        };
-
-        renderForms();
-        showScreen("form");
-        return;
-    }
-
-
-    if (step === "subject" && selected.form) {
-
-        selected.subject = null;
-        selected.type = null;
-        selected.year = null;
-        selected.region = null;
-
-        renderSubjects();
-        showScreen("subject");
-        return;
-    }
-
-
-    if (step === "type" && selected.subject) {
-
-        selected.type = null;
-        selected.year = null;
-        selected.region = null;
-
-        renderExamTypes();
-        showScreen("type");
-        return;
-    }
-
-
-    if (step === "year" && selected.type) {
-
-        selected.year = null;
-        selected.region = null;
-
-        renderYears();
-        showScreen("year");
-        return;
-    }
-
-
-    if (step === "region" && selected.year) {
-
-        selected.region = null;
-
-        renderRegions();
-        showScreen("region");
-        return;
-    }
-
-
-    if (step === "papers" && selected.region) {
-
-        renderPapers();
-        showScreen("papers");
-    }
-}
-
-
-/* =========================================================
-   STEP 1: FORMS
-========================================================= */
-
-function renderForms() {
-
-    const data = getPastPaperData();
-
-    const container = document.getElementById("formChoices");
-
-    container.innerHTML = "";
-
-    Object.keys(data)
-        .filter(key => /^form[1-6]$/i.test(key))
-        .sort((a, b) => {
-
-            const numA = Number(a.replace(/\D/g, ""));
-            const numB = Number(b.replace(/\D/g, ""));
-
-            return numA - numB;
-
-        })
-        .forEach(form => {
-
-            container.innerHTML += `
-                <div
-                    class="choice-card"
-                    onclick="selectForm('${form}')"
-                >
-                    <div class="choice-icon">📚</div>
-
-                    <h3>
-                        ${prettyLabel(form, "form")}
-                    </h3>
-
-                    <p>
-                        View available past papers
-                    </p>
-                </div>
-            `;
-        });
-
-
-    if (!container.innerHTML) {
-
-        container.innerHTML = `
-            <div class="empty-state">
-                <h3>No Forms Available</h3>
-                <p>
-                    No past paper data was found.
-                </p>
-            </div>
-        `;
-    }
-}
-
-
-/* =========================================================
-   SELECT FORM
-========================================================= */
-
-function selectForm(form) {
-
-    selected.form = form;
-    selected.subject = null;
-    selected.type = null;
-    selected.year = null;
-    selected.region = null;
-
-    renderSubjects();
-
-    showScreen("subject");
-}
-
-
-/* =========================================================
-   STEP 2: SUBJECT
-========================================================= */
-
-function renderSubjects() {
-
-    const data = getPastPaperData();
-
-    const formData = data[selected.form];
-
-    const container = document.getElementById("subjectChoices");
-
-    container.innerHTML = "";
-
-    if (!formData) {
-
-        showEmpty(
-            container,
-            "No Data",
-            "No past paper data is available for this form."
-        );
-
-        return;
-    }
-
-
-    Object.keys(formData)
-        .filter(subject => {
-
-            return Array.isArray(formData[subject]);
-
-        })
-        .forEach(subject => {
-
-            container.innerHTML += `
-                <div
-                    class="choice-card"
-                    onclick="selectSubject('${subject}')"
-                >
-                    <div class="choice-icon">
-                        ${subject === "physics" ? "⚛️" : "🧪"}
-                    </div>
-
-                    <h3>
-                        ${prettyLabel(subject, "subject")}
-                    </h3>
-
-                    <p>
-                        Past examination papers
-                    </p>
-                </div>
-            `;
-        });
-
-
-    if (!container.innerHTML) {
-
-        showEmpty(
-            container,
-            "No Subjects Available",
-            "There are no Physics or Chemistry papers available here."
-        );
-    }
-}
-
-
-/* =========================================================
-   SELECT SUBJECT
-========================================================= */
-
-function selectSubject(subject) {
-
-    selected.subject = subject;
-    selected.type = null;
-    selected.year = null;
-    selected.region = null;
-
-    renderExamTypes();
-
-    showScreen("type");
-}
-
-
-/* =========================================================
-   GET CURRENT PAPERS
-========================================================= */
-
-function getCurrentPapers() {
-
-    const data = getPastPaperData();
-
-    if (!selected.form) return [];
-
-    if (!data[selected.form]) return [];
-
-    if (!selected.subject) return [];
-
-    if (!Array.isArray(data[selected.form][selected.subject])) {
-        return [];
-    }
-
-    return data[selected.form][selected.subject];
-}
-
-
-/* =========================================================
-   STEP 3: EXAM TYPES
-========================================================= */
-
-function renderExamTypes() {
-
-    const papers = getCurrentPapers();
-
-    const container = document.getElementById("typeChoices");
-
-    container.innerHTML = "";
-
-    const types = [
-        ...new Set(
-            papers
-                .map(paper => paper.type)
-                .filter(Boolean)
-        )
-    ];
-
-
-    types.sort((a, b) => {
-
-        const labelA = prettyLabel(a, "type");
-        const labelB = prettyLabel(b, "type");
-
-        return labelA.localeCompare(labelB);
-    });
-
-
-    types.forEach(type => {
-
-        const count = papers.filter(
-            paper => paper.type === type
-        ).length;
-
-        container.innerHTML += `
-            <div
-                class="choice-card"
-                onclick="selectExamType('${type}')"
-            >
-                <div class="choice-icon">📝</div>
-
-                <h3>
-                    ${prettyLabel(type, "type")}
-                </h3>
-
-                <p>
-                    ${count} paper${count === 1 ? "" : "s"} available
-                </p>
-            </div>
-        `;
-    });
-
-
-    if (!container.innerHTML) {
-
-        showEmpty(
-            container,
-            "No Exam Types",
-            "No examination type is available for this selection."
-        );
-    }
-}
-
-
-/* =========================================================
-   SELECT EXAM TYPE
-========================================================= */
-
-function selectExamType(type) {
-
-    selected.type = type;
-    selected.year = null;
-    selected.region = null;
-
-    renderYears();
-
-    showScreen("year");
-}
-
-
-/* =========================================================
-   STEP 4: YEARS
-========================================================= */
-
-function renderYears() {
-
-    const papers = getCurrentPapers();
-
-    const container = document.getElementById("yearChoices");
-
-    container.innerHTML = "";
-
-    const years = [
-        ...new Set(
-            papers
-                .filter(paper => paper.type === selected.type)
-                .map(paper => Number(paper.year))
-                .filter(year => !Number.isNaN(year))
-        )
-    ];
-
-
-    years.sort((a, b) => b - a);
-
-
-    years.forEach(year => {
-
-        const count = papers.filter(paper =>
-            paper.type === selected.type &&
-            Number(paper.year) === year
-        ).length;
-
-        container.innerHTML += `
-            <div
-                class="choice-card"
-                onclick="selectYear(${year})"
-            >
-                <div class="choice-icon">📅</div>
-
-                <h3>${year}</h3>
-
-                <p>
-                    ${count} paper${count === 1 ? "" : "s"} available
-                </p>
-            </div>
-        `;
-    });
-
-
-    if (!container.innerHTML) {
-
-        showEmpty(
-            container,
-            "No Years Available",
-            "There are no papers for this examination type."
-        );
-    }
-}
-
-
-/* =========================================================
-   SELECT YEAR
-========================================================= */
-
-function selectYear(year) {
-
-    selected.year = year;
-    selected.region = null;
-
-    renderRegions();
-
-    showScreen("region");
-}
-
-
-/* =========================================================
-   STEP 5: REGION / SCHOOL
-========================================================= */
-
-function renderRegions() {
-
-    const papers = getCurrentPapers();
-
-    const container = document.getElementById("regionChoices");
-
-    container.innerHTML = "";
-
-
-    const filtered = papers.filter(paper =>
-
-        paper.type === selected.type &&
-        Number(paper.year) === Number(selected.year)
-
-    );
-
-
-    const regions = [
-        ...new Set(
-            filtered
-                .map(paper => paper.region)
-                .filter(Boolean)
-        )
-    ];
-
-
-    regions.sort((a, b) => {
-
-        return prettyLabel(a, "region")
-            .localeCompare(
-                prettyLabel(b, "region")
-            );
-    });
-
-
-    regions.forEach(region => {
-
-        const count = filtered.filter(
-            paper => paper.region === region
-        ).length;
-
-        container.innerHTML += `
-            <div
-                class="choice-card"
-                onclick="selectRegion('${region}')"
-            >
-                <div class="choice-icon">📍</div>
-
-                <h3>
-                    ${prettyLabel(region, "region")}
-                </h3>
-
-                <p>
-                    ${count} paper${count === 1 ? "" : "s"} available
-                </p>
-            </div>
-        `;
-    });
-
-
-    if (!container.innerHTML) {
-
-        showEmpty(
-            container,
-            "No Region / School",
-            "No region or school data is available for this selection."
-        );
-    }
-}
-
-
-/* =========================================================
-   SELECT REGION
-========================================================= */
-
-function selectRegion(region) {
-
-    selected.region = region;
-
-    renderPapers();
-
-    showScreen("papers");
-}
-
-
-/* =========================================================
-   STEP 6: PAPER CHAIN
-========================================================= */
-
-function renderPapers() {
-
-    const papers = getCurrentPapers();
-
-    const container = document.getElementById("paperList");
-
-    const description =
-        document.getElementById("paperDescription");
-
-
-    container.innerHTML = "";
-
-
-    const filtered = papers.filter(paper =>
-
-        paper.type === selected.type &&
-        Number(paper.year) === Number(selected.year) &&
-        paper.region === selected.region
-
-    );
-
-
-    description.textContent =
-        `${prettyLabel(selected.form, "form")} → ` +
-        `${prettyLabel(selected.subject, "subject")} → ` +
-        `${prettyLabel(selected.type, "type")} → ` +
-        `${selected.year} → ` +
-        `${prettyLabel(selected.region, "region")}`;
-
-
-    /*
-       PAPER CHAIN
-
-       Sort naturally:
-
-       Paper 1
-       Paper 2
-       Paper 3A
-       Paper 3B
-    */
-
-    filtered.sort(comparePapers);
-
-
-    filtered.forEach(paper => {
-
-        const safeFile = encodeURI(paper.file);
-
-        container.innerHTML += `
-
-            <div class="paper-card">
-
-                <div class="paper-info">
-
-                    <h3>
-                        📄 ${escapeHTML(paper.title)}
-                    </h3>
-
-                    <p>
-                        ${prettyLabel(selected.subject, "subject")}
-                        •
-                        ${selected.year}
-                        •
-                        ${prettyLabel(selected.region, "region")}
-                    </p>
-
-                </div>
-
-
-                <a
-                    class="open-pdf"
-                    href="${safeFile}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    📖 Fungua PDF
-                </a>
-
-            </div>
-
-        `;
-    });
-
-
-    if (!container.innerHTML) {
-
-        showEmpty(
-            container,
-            "No Papers Found",
-            "There is no PDF available for this exact selection."
-        );
-    }
-}
-
-
-/* =========================================================
-   PAPER SORTING
-========================================================= */
-
-function comparePapers(a, b) {
-
-    const titleA = String(a.title || "").toLowerCase();
-    const titleB = String(b.title || "").toLowerCase();
-
-
-    function paperNumber(title) {
-
-        const match = title.match(/(\d+)/);
-
-        return match
-            ? Number(match[1])
-            : 999;
-    }
-
-
-    const numA = paperNumber(titleA);
-    const numB = paperNumber(titleB);
-
-
-    if (numA !== numB) {
-        return numA - numB;
-    }
-
-
-    /*
-       3A before 3B
-    */
-
-    return titleA.localeCompare(titleB);
-}
-
-
-/* =========================================================
-   BACK BUTTON
-========================================================= */
-
-function goBack() {
-
-    if (currentStep === "subject") {
-
-        selected.form = null;
-
-        renderForms();
-
-        showScreen("form");
-
-        return;
-    }
-
-
-    if (currentStep === "type") {
-
-        selected.subject = null;
-
-        renderSubjects();
-
-        showScreen("subject");
-
-        return;
-    }
-
-
-    if (currentStep === "year") {
-
-        selected.type = null;
-
-        renderExamTypes();
-
-        showScreen("type");
-
-        return;
-    }
-
-
-    if (currentStep === "region") {
-
-        selected.year = null;
-
-        renderYears();
-
-        showScreen("year");
-
-        return;
-    }
-
-
-    if (currentStep === "papers") {
-
-        selected.region = null;
-
-        renderRegions();
-
-        showScreen("region");
-
-        return;
-    }
-}
-
-
-/* =========================================================
-   EMPTY STATE
-========================================================= */
-
-function showEmpty(container, title, message) {
-
-    container.innerHTML = `
-
-        <div class="empty-state">
-
-            <h3>${escapeHTML(title)}</h3>
-
-            <p>${escapeHTML(message)}</p>
-
-        </div>
-
-    `;
-}
-
-
-/* =========================================================
-   BASIC HTML ESCAPE
-========================================================= */
-
-function escapeHTML(value) {
-
-    return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    renderForms();
+    const content = document.getElementById("paperContent");
+    const breadcrumb = document.getElementById("selectionBreadcrumb");
 
-    updateBreadcrumb();
+    let selected = {
+        form: null,
+        subject: null,
+        type: null,
+        year: null,
+        region: null
+    };
+
+
+    /* =====================================================
+       UTILITY FUNCTIONS
+    ===================================================== */
+
+    function escapeHTML(value) {
+
+        if (value === null || value === undefined) {
+            return "";
+        }
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+
+    function formatName(value) {
+
+        if (!value) {
+            return "";
+        }
+
+        const specialNames = {
+            "dar_es_salaam": "Dar es Salaam",
+            "pre_necta": "Pre-NECTA",
+            "acsee": "ACSEE",
+            "ftna": "FTNA",
+            "necta": "NECTA"
+        };
+
+        if (specialNames[value]) {
+            return specialNames[value];
+        }
+
+        return value
+            .replace(/_/g, " ")
+            .replace(/\b\w/g, function (letter) {
+                return letter.toUpperCase();
+            });
+    }
+
+
+    function formatSubject(subject) {
+
+        if (subject === "physics") {
+            return "Physics";
+        }
+
+        if (subject === "chemistry") {
+            return "Chemistry";
+        }
+
+        return formatName(subject);
+    }
+
+
+    function formatExamType(type) {
+
+        const names = {
+            "midterm": "Midterm Examination",
+            "terminal": "Terminal Examination",
+            "annual": "Annual Examination",
+            "joint": "Joint Examination",
+            "mock": "Mock Examination",
+            "pre_necta": "Pre-NECTA Examination",
+            "necta": "NECTA Examination",
+            "acsee": "ACSEE Examination",
+            "ftna": "FTNA Examination"
+        };
+
+        return names[type] || formatName(type);
+    }
+
+
+    function getCurrentPapers() {
+
+        if (!selected.form || !selected.subject) {
+            return [];
+        }
+
+        if (
+            !pastPapers[selected.form] ||
+            !pastPapers[selected.form][selected.subject]
+        ) {
+            return [];
+        }
+
+        return pastPapers[selected.form][selected.subject];
+    }
+
+
+    /* =====================================================
+       PROGRESS
+    ===================================================== */
+
+    function updateProgress(step) {
+
+        document.querySelectorAll(".progress-step").forEach(function (item) {
+
+            const itemStep = Number(item.dataset.step);
+
+            item.classList.remove("active");
+            item.classList.remove("completed");
+
+            if (itemStep === step) {
+                item.classList.add("active");
+            }
+
+            if (itemStep < step) {
+                item.classList.add("completed");
+            }
+        });
+    }
+
+
+    /* =====================================================
+       BREADCRUMB
+    ===================================================== */
+
+    function updateBreadcrumb() {
+
+        let items = ["Past Papers"];
+
+        if (selected.form) {
+            items.push(formatName(selected.form));
+        }
+
+        if (selected.subject) {
+            items.push(formatSubject(selected.subject));
+        }
+
+        if (selected.type) {
+            items.push(formatExamType(selected.type));
+        }
+
+        if (selected.year) {
+            items.push(String(selected.year));
+        }
+
+        if (selected.region) {
+            items.push(formatName(selected.region));
+        }
+
+        breadcrumb.innerHTML = items
+            .map(function (item, index) {
+
+                if (index === 0) {
+                    return `<span>${escapeHTML(item)}</span>`;
+                }
+
+                return `
+                    <span class="breadcrumb-arrow">›</span>
+                    <span>${escapeHTML(item)}</span>
+                `;
+
+            })
+            .join("");
+    }
+
+
+    /* =====================================================
+       STEP 1
+       FORM
+    ===================================================== */
+
+    function showForms() {
+
+        selected.subject = null;
+        selected.type = null;
+        selected.year = null;
+        selected.region = null;
+
+        updateProgress(1);
+        updateBreadcrumb();
+
+        let html = `
+            <div class="selection-heading">
+                <span class="selection-icon">📚</span>
+
+                <div>
+                    <h3>Select Form</h3>
+                    <p>
+                        Choose the class level for the past paper.
+                    </p>
+                </div>
+            </div>
+
+            <div class="selection-grid form-grid">
+        `;
+
+
+        for (let i = 1; i <= 6; i++) {
+
+            const form = "form" + i;
+
+            html += `
+                <button
+                    class="selection-card form-card"
+                    data-form="${form}"
+                    type="button"
+                >
+
+                    <span class="card-number">
+                        ${i}
+                    </span>
+
+                    <span class="card-title">
+                        Form ${i}
+                    </span>
+
+                    <span class="card-arrow">
+                        →
+                    </span>
+
+                </button>
+            `;
+        }
+
+
+        html += `</div>`;
+
+        content.innerHTML = html;
+
+
+        document.querySelectorAll("[data-form]").forEach(function (button) {
+
+            button.addEventListener("click", function () {
+
+                selected.form = this.dataset.form;
+
+                showSubjects();
+
+            });
+
+        });
+    }
+
+
+    /* =====================================================
+       STEP 2
+       SUBJECT
+    ===================================================== */
+
+    function showSubjects() {
+
+        selected.type = null;
+        selected.year = null;
+        selected.region = null;
+
+        updateProgress(2);
+        updateBreadcrumb();
+
+        const config = pastPaperConfig[selected.form];
+
+        let subjects = config && Array.isArray(config.subjects)
+            ? config.subjects
+            : ["physics", "chemistry"];
+
+
+        let html = `
+            <div class="selection-heading">
+
+                <span class="selection-icon">🔬</span>
+
+                <div>
+                    <h3>
+                        Form ${selected.form.replace("form", "")}
+                    </h3>
+
+                    <p>
+                        Choose a subject.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="selection-grid subject-grid">
+        `;
+
+
+        subjects.forEach(function (subject) {
+
+            html += `
+                <button
+                    class="selection-card subject-card ${subject}"
+                    data-subject="${subject}"
+                    type="button"
+                >
+
+                    <span class="subject-icon">
+                        ${subject === "physics" ? "⚛️" : "🧪"}
+                    </span>
+
+                    <span class="card-title">
+                        ${escapeHTML(formatSubject(subject))}
+                    </span>
+
+                    <span class="card-arrow">
+                        →
+                    </span>
+
+                </button>
+            `;
+
+        });
+
+
+        html += `</div>`;
+
+
+        html += `
+            <button
+                class="back-button"
+                id="backToForms"
+                type="button"
+            >
+                ← Back to Forms
+            </button>
+        `;
+
+
+        content.innerHTML = html;
+
+
+        document.querySelectorAll("[data-subject]").forEach(function (button) {
+
+            button.addEventListener("click", function () {
+
+                selected.subject = this.dataset.subject;
+
+                showExamTypes();
+
+            });
+
+        });
+
+
+        document
+            .getElementById("backToForms")
+            .addEventListener("click", showForms);
+    }
+
+
+    /* =====================================================
+       STEP 3
+       EXAM TYPE
+    ===================================================== */
+
+    function showExamTypes() {
+
+        selected.year = null;
+        selected.region = null;
+
+        updateProgress(3);
+        updateBreadcrumb();
+
+
+        const config = pastPaperConfig[selected.form];
+
+        let types = config && Array.isArray(config.types)
+            ? config.types
+            : [];
+
+
+        /*
+           Only show exam types which actually have papers
+           for this subject.
+        */
+
+        const papers = getCurrentPapers();
+
+        const availableTypes = types.filter(function (type) {
+
+            return papers.some(function (paper) {
+
+                return paper.type === type;
+
+            });
+
+        });
+
+
+        let html = `
+            <div class="selection-heading">
+
+                <span class="selection-icon">📝</span>
+
+                <div>
+                    <h3>Exam Type</h3>
+
+                    <p>
+                        Choose the type of examination.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="selection-grid type-grid">
+        `;
+
+
+        availableTypes.forEach(function (type) {
+
+            const count = papers.filter(function (paper) {
+
+                return paper.type === type;
+
+            }).length;
+
+
+            html += `
+                <button
+                    class="selection-card type-card"
+                    data-type="${escapeHTML(type)}"
+                    type="button"
+                >
+
+                    <span class="type-icon">
+                        📄
+                    </span>
+
+                    <span class="card-info">
+
+                        <strong>
+                            ${escapeHTML(formatExamType(type))}
+                        </strong>
+
+                        <small>
+                            ${count} paper${count !== 1 ? "s" : ""}
+                        </small>
+
+                    </span>
+
+                    <span class="card-arrow">
+                        →
+                    </span>
+
+                </button>
+            `;
+
+        });
+
+
+        html += `</div>`;
+
+
+        if (availableTypes.length === 0) {
+
+            html += `
+                <div class="empty-state">
+
+                    <div class="empty-icon">📭</div>
+
+                    <h3>No papers available</h3>
+
+                    <p>
+                        There are currently no papers for
+                        this subject in this form.
+                    </p>
+
+                </div>
+            `;
+        }
+
+
+        html += `
+            <button
+                class="back-button"
+                id="backToSubjects"
+                type="button"
+            >
+                ← Back to Subjects
+            </button>
+        `;
+
+
+        content.innerHTML = html;
+
+
+        document.querySelectorAll("[data-type]").forEach(function (button) {
+
+            button.addEventListener("click", function () {
+
+                selected.type = this.dataset.type;
+
+                showYears();
+
+            });
+
+        });
+
+
+        document
+            .getElementById("backToSubjects")
+            .addEventListener("click", showSubjects);
+    }
+
+
+    /* =====================================================
+       STEP 4
+       YEAR
+    ===================================================== */
+
+    function showYears() {
+
+        selected.region = null;
+
+        updateProgress(4);
+        updateBreadcrumb();
+
+
+        const papers = getCurrentPapers().filter(function (paper) {
+
+            return paper.type === selected.type;
+
+        });
+
+
+        const years = [...new Set(
+            papers.map(function (paper) {
+                return Number(paper.year);
+            })
+        )].sort(function (a, b) {
+
+            return b - a;
+
+        });
+
+
+        let html = `
+            <div class="selection-heading">
+
+                <span class="selection-icon">📅</span>
+
+                <div>
+                    <h3>Select Year</h3>
+
+                    <p>
+                        Choose the examination year.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="selection-grid year-grid">
+        `;
+
+
+        years.forEach(function (year) {
+
+            const count = papers.filter(function (paper) {
+
+                return Number(paper.year) === Number(year);
+
+            }).length;
+
+
+            html += `
+                <button
+                    class="selection-card year-card"
+                    data-year="${year}"
+                    type="button"
+                >
+
+                    <span class="year-number">
+                        ${year}
+                    </span>
+
+                    <span class="year-count">
+                        ${count}
+                        paper${count !== 1 ? "s" : ""}
+                    </span>
+
+                    <span class="card-arrow">
+                        →
+                    </span>
+
+                </button>
+            `;
+
+        });
+
+
+        html += `</div>`;
+
+
+        if (years.length === 0) {
+
+            html += `
+                <div class="empty-state">
+
+                    <div class="empty-icon">📭</div>
+
+                    <h3>No years available</h3>
+
+                </div>
+            `;
+        }
+
+
+        html += `
+            <button
+                class="back-button"
+                id="backToTypes"
+                type="button"
+            >
+                ← Back to Exam Type
+            </button>
+        `;
+
+
+        content.innerHTML = html;
+
+
+        document.querySelectorAll("[data-year]").forEach(function (button) {
+
+            button.addEventListener("click", function () {
+
+                selected.year = Number(this.dataset.year);
+
+                showRegions();
+
+            });
+
+        });
+
+
+        document
+            .getElementById("backToTypes")
+            .addEventListener("click", showExamTypes);
+    }
+
+
+    /* =====================================================
+       STEP 5
+       REGION
+    ===================================================== */
+
+    function showRegions() {
+
+        updateProgress(5);
+        updateBreadcrumb();
+
+
+        const papers = getCurrentPapers().filter(function (paper) {
+
+            return (
+                paper.type === selected.type &&
+                Number(paper.year) === Number(selected.year)
+            );
+
+        });
+
+
+        const regions = [...new Set(
+            papers.map(function (paper) {
+                return paper.region;
+            })
+        )].sort();
+
+
+        let html = `
+            <div class="selection-heading">
+
+                <span class="selection-icon">📍</span>
+
+                <div>
+                    <h3>Select Region / Source</h3>
+
+                    <p>
+                        Choose the region or examination source.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="selection-grid region-grid">
+        `;
+
+
+        regions.forEach(function (region) {
+
+            const count = papers.filter(function (paper) {
+
+                return paper.region === region;
+
+            }).length;
+
+
+            html += `
+                <button
+                    class="selection-card region-card"
+                    data-region="${escapeHTML(region)}"
+                    type="button"
+                >
+
+                    <span class="region-icon">
+                        📍
+                    </span>
+
+                    <span class="card-info">
+
+                        <strong>
+                            ${escapeHTML(formatName(region))}
+                        </strong>
+
+                        <small>
+                            ${count}
+                            paper${count !== 1 ? "s" : ""}
+                        </small>
+
+                    </span>
+
+                    <span class="card-arrow">
+                        →
+                    </span>
+
+                </button>
+            `;
+
+        });
+
+
+        html += `</div>`;
+
+
+        if (regions.length === 0) {
+
+            html += `
+                <div class="empty-state">
+
+                    <div class="empty-icon">📭</div>
+
+                    <h3>No region available</h3>
+
+                </div>
+            `;
+        }
+
+
+        html += `
+            <button
+                class="back-button"
+                id="backToYears"
+                type="button"
+            >
+                ← Back to Years
+            </button>
+        `;
+
+
+        content.innerHTML = html;
+
+
+        document.querySelectorAll("[data-region]").forEach(function (button) {
+
+            button.addEventListener("click", function () {
+
+                selected.region = this.dataset.region;
+
+                showPapers();
+
+            });
+
+        });
+
+
+        document
+            .getElementById("backToYears")
+            .addEventListener("click", showYears);
+    }
+
+
+    /* =====================================================
+       STEP 6
+       PAPER CHAIN
+    ===================================================== */
+
+    function showPapers() {
+
+        updateProgress(6);
+        updateBreadcrumb();
+
+
+        /*
+           THIS IS THE CORE FILTER.
+
+           We use the exact data structure supplied
+           in data.js:
+
+           pastPapers
+             ↓
+           form
+             ↓
+           subject
+             ↓
+           array of papers
+        */
+
+        const papers = getCurrentPapers().filter(function (paper) {
+
+            return (
+                paper.type === selected.type &&
+                Number(paper.year) === Number(selected.year) &&
+                paper.region === selected.region
+            );
+
+        });
+
+
+        let html = `
+            <div class="selection-heading">
+
+                <span class="selection-icon">📑</span>
+
+                <div>
+                    <h3>Paper Chain</h3>
+
+                    <p>
+                        Select a paper below to open the PDF.
+                    </p>
+                </div>
+
+            </div>
+        `;
+
+
+        if (papers.length === 0) {
+
+            html += `
+                <div class="empty-state">
+
+                    <div class="empty-icon">📭</div>
+
+                    <h3>No paper found</h3>
+
+                    <p>
+                        No paper matches the selected
+                        Form, Subject, Exam Type, Year
+                        and Region.
+                    </p>
+
+                </div>
+            `;
+
+        } else {
+
+            html += `
+                <div class="paper-chain">
+
+                    <div class="chain-header">
+
+                        <div>
+                            <strong>
+                                ${escapeHTML(formatSubject(selected.subject))}
+                            </strong>
+
+                            <span>•</span>
+
+                            <strong>
+                                ${escapeHTML(formatExamType(selected.type))}
+                            </strong>
+
+                            <span>•</span>
+
+                            <strong>
+                                ${selected.year}
+                            </strong>
+
+                            <span>•</span>
+
+                            <strong>
+                                ${escapeHTML(formatName(selected.region))}
+                            </strong>
+                        </div>
+
+                        <span class="paper-total">
+                            ${papers.length}
+                            paper${papers.length !== 1 ? "s" : ""}
+                        </span>
+
+                    </div>
+            `;
+
+
+            papers.forEach(function (paper, index) {
+
+                html += `
+                    <div class="paper-chain-item">
+
+                        <div class="paper-chain-number">
+                            ${index + 1}
+                        </div>
+
+                        <div class="paper-chain-line"></div>
+
+                        <div class="paper-info">
+
+                            <h4>
+                                ${escapeHTML(paper.title)}
+                            </h4>
+
+                            <div class="paper-meta">
+
+                                <span>
+                                    📚
+                                    ${escapeHTML(
+                                        formatSubject(selected.subject)
+                                    )}
+                                </span>
+
+                                <span>
+                                    📅
+                                    ${escapeHTML(String(paper.year))}
+                                </span>
+
+                                <span>
+                                    📍
+                                    ${escapeHTML(
+                                        formatName(paper.region)
+                                    )}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="paper-action">
+
+                            <a
+                                class="open-pdf-button"
+                                href="${escapeHTML(paper.file)}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <span>📄</span>
+                                Fungua PDF
+                            </a>
+
+                        </div>
+
+                    </div>
+                `;
+
+            });
+
+
+            html += `</div>`;
+        }
+
+
+        html += `
+            <div class="paper-actions-bottom">
+
+                <button
+                    class="back-button"
+                    id="backToRegions"
+                    type="button"
+                >
+                    ← Back to Regions
+                </button>
+
+                <button
+                    class="restart-button"
+                    id="restartPapers"
+                    type="button"
+                >
+                    ↻ Start Again
+                </button>
+
+            </div>
+        `;
+
+
+        content.innerHTML = html;
+
+
+        const backButton =
+            document.getElementById("backToRegions");
+
+        if (backButton) {
+
+            backButton.addEventListener("click", showRegions);
+
+        }
+
+
+        const restartButton =
+            document.getElementById("restartPapers");
+
+        if (restartButton) {
+
+            restartButton.addEventListener("click", showForms);
+
+        }
+    }
+
+
+    /* =====================================================
+       START SYSTEM
+    ===================================================== */
+
+    showForms();
 
 });
