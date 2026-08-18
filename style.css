@@ -258,3 +258,1030 @@ footer {
     }
 
 }
+/* =========================================================
+   GEPAM SCIENCE HUB
+   PAST PAPERS SYSTEM
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.pastpapers-page {
+    width: 100%;
+    min-height: 80vh;
+    background: #f4f8fb;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.pastpapers-hero {
+    background: linear-gradient(
+        135deg,
+        #003366,
+        #005b96
+    );
+
+    color: white;
+
+    padding: 55px 20px;
+
+    text-align: center;
+}
+
+
+.pastpapers-hero > div {
+    max-width: 1000px;
+    margin: auto;
+}
+
+
+.hero-badge {
+    display: inline-block;
+
+    background: rgba(255,255,255,0.15);
+
+    border: 1px solid rgba(255,255,255,0.25);
+
+    padding: 7px 15px;
+
+    border-radius: 30px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 12px;
+}
+
+
+.pastpapers-hero h2 {
+    margin: 0;
+
+    font-size: clamp(30px, 5vw, 46px);
+}
+
+
+.pastpapers-hero p {
+    margin: 12px 0 0;
+
+    opacity: 0.9;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   NAVIGATION AREA
+========================================================= */
+
+.paper-navigation {
+    width: min(1100px, 94%);
+
+    margin: 35px auto 60px;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-wrapper {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 25px;
+
+    overflow-x: auto;
+
+    padding: 5px;
+}
+
+
+.progress-step {
+    min-width: 60px;
+
+    text-align: center;
+
+    color: #9aa6b2;
+
+    flex-shrink: 0;
+}
+
+
+.progress-step span {
+    display: flex;
+
+    width: 34px;
+    height: 34px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #e2e8ee;
+
+    font-weight: 700;
+
+    transition: 0.25s;
+}
+
+
+.progress-step small {
+    display: block;
+
+    margin-top: 6px;
+
+    font-size: 11px;
+}
+
+
+.progress-step.active {
+    color: #003366;
+}
+
+
+.progress-step.active span {
+    background: #003366;
+
+    color: white;
+
+    transform: scale(1.08);
+}
+
+
+.progress-step.completed {
+    color: #008f5a;
+}
+
+
+.progress-step.completed span {
+    background: #008f5a;
+
+    color: white;
+}
+
+
+.progress-line {
+    width: 45px;
+
+    height: 2px;
+
+    background: #d9e1e8;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+.selection-breadcrumb {
+    background: white;
+
+    border: 1px solid #e0e7ee;
+
+    border-radius: 12px;
+
+    padding: 12px 17px;
+
+    margin-bottom: 20px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    align-items: center;
+
+    font-size: 13px;
+
+    color: #536170;
+}
+
+
+.selection-breadcrumb span:first-child {
+    color: #003366;
+
+    font-weight: 700;
+}
+
+
+.breadcrumb-arrow {
+    color: #a5b0bb;
+}
+
+
+/* =========================================================
+   CONTENT CARD
+========================================================= */
+
+.paper-content {
+    background: white;
+
+    border-radius: 18px;
+
+    padding: clamp(20px, 4vw, 35px);
+
+    box-shadow:
+        0 8px 30px rgba(0, 40, 80, 0.08);
+
+    border: 1px solid #e4ebf1;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.selection-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 28px;
+}
+
+
+.selection-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #eaf3fb;
+
+    border-radius: 14px;
+
+    font-size: 25px;
+
+    flex-shrink: 0;
+}
+
+
+.selection-heading h3 {
+    margin: 0;
+
+    color: #003366;
+
+    font-size: 24px;
+}
+
+
+.selection-heading p {
+    margin: 5px 0 0;
+
+    color: #6b7785;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   SELECTION GRIDS
+========================================================= */
+
+.selection-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(210px, 1fr));
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   SELECTION CARDS
+========================================================= */
+
+.selection-card {
+    position: relative;
+
+    border: 1px solid #dfe7ee;
+
+    background: #ffffff;
+
+    border-radius: 15px;
+
+    min-height: 90px;
+
+    padding: 17px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    text-align: left;
+
+    color: #25313d;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        border-color 0.2s,
+        background 0.2s;
+}
+
+
+.selection-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #0077b6;
+
+    box-shadow:
+        0 8px 22px rgba(0, 80, 140, 0.12);
+
+    background: #fafdff;
+}
+
+
+.card-number {
+    width: 43px;
+    height: 43px;
+
+    border-radius: 50%;
+
+    background: #003366;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 800;
+
+    font-size: 18px;
+
+    flex-shrink: 0;
+}
+
+
+.card-title {
+    font-weight: 700;
+
+    font-size: 16px;
+}
+
+
+.card-arrow {
+    margin-left: auto;
+
+    font-size: 20px;
+
+    color: #0077b6;
+}
+
+
+/* =========================================================
+   SUBJECT
+========================================================= */
+
+.subject-card {
+    min-height: 120px;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    justify-content: center;
+}
+
+
+.subject-icon {
+    font-size: 31px;
+}
+
+
+.subject-card .card-arrow {
+    position: absolute;
+
+    right: 17px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+
+/* =========================================================
+   TYPE
+========================================================= */
+
+.type-card {
+    min-height: 100px;
+}
+
+
+.type-icon {
+    width: 43px;
+    height: 43px;
+
+    border-radius: 12px;
+
+    background: #edf6fc;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+
+    flex-shrink: 0;
+}
+
+
+.card-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.card-info strong {
+    font-size: 15px;
+
+    color: #243746;
+}
+
+
+.card-info small {
+    color: #7b8792;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+.year-card {
+    min-height: 100px;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: flex-start;
+}
+
+
+.year-number {
+    color: #003366;
+
+    font-size: 27px;
+
+    font-weight: 800;
+}
+
+
+.year-count {
+    color: #77838f;
+
+    font-size: 12px;
+}
+
+
+.year-card .card-arrow {
+    position: absolute;
+
+    right: 17px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+
+/* =========================================================
+   REGION
+========================================================= */
+
+.region-card {
+    min-height: 95px;
+}
+
+
+.region-icon {
+    width: 43px;
+    height: 43px;
+
+    border-radius: 12px;
+
+    background: #edf7f2;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   PAPER CHAIN
+========================================================= */
+
+.paper-chain {
+    width: 100%;
+
+    border: 1px solid #e0e7ee;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    background: #fbfdff;
+}
+
+
+.chain-header {
+    background: #003366;
+
+    color: white;
+
+    padding: 15px 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    font-size: 13px;
+}
+
+
+.chain-header > div {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    align-items: center;
+}
+
+
+.paper-total {
+    background: rgba(255,255,255,0.15);
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   PAPER ITEM
+========================================================= */
+
+.paper-chain-item {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        45px 1fr auto;
+
+    gap: 15px;
+
+    align-items: center;
+
+    padding: 20px;
+
+    border-bottom: 1px solid #e6edf2;
+
+    background: white;
+}
+
+
+.paper-chain-item:last-child {
+    border-bottom: none;
+}
+
+
+.paper-chain-number {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    background: #eaf3fb;
+
+    color: #003366;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 800;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   PAPER INFO
+========================================================= */
+
+.paper-info h4 {
+    margin: 0 0 8px;
+
+    color: #263746;
+
+    font-size: 16px;
+}
+
+
+.paper-meta {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+
+.paper-meta span {
+    background: #f1f5f8;
+
+    color: #687783;
+
+    border-radius: 20px;
+
+    padding: 5px 9px;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   OPEN PDF BUTTON
+========================================================= */
+
+.open-pdf-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    background: #008f5a;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 9px;
+
+    padding: 11px 15px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition: 0.2s;
+}
+
+
+.open-pdf-button:hover {
+    background: #006f46;
+
+    transform: translateY(-1px);
+
+    color: white;
+}
+
+
+/* =========================================================
+   BACK / RESTART
+========================================================= */
+
+.back-button,
+.restart-button {
+    border: none;
+
+    border-radius: 9px;
+
+    padding: 11px 16px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    margin-top: 22px;
+}
+
+
+.back-button {
+    background: #edf2f6;
+
+    color: #405261;
+}
+
+
+.back-button:hover {
+    background: #dfe7ed;
+}
+
+
+.restart-button {
+    background: #003366;
+
+    color: white;
+
+    margin-left: 8px;
+}
+
+
+.restart-button:hover {
+    background: #00264d;
+}
+
+
+.paper-actions-bottom {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state {
+    text-align: center;
+
+    padding: 45px 20px;
+
+    border: 1px dashed #cbd7e0;
+
+    border-radius: 15px;
+
+    background: #fbfdff;
+}
+
+
+.empty-icon {
+    font-size: 40px;
+
+    margin-bottom: 10px;
+}
+
+
+.empty-state h3 {
+    margin: 0 0 7px;
+
+    color: #34495e;
+}
+
+
+.empty-state p {
+    margin: 0;
+
+    color: #788692;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.site-footer {
+    background: #002b52;
+
+    color: white;
+
+    padding: 35px 20px 15px;
+
+    margin-top: 40px;
+}
+
+
+.footer-inner {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    flex-wrap: wrap;
+}
+
+
+.site-footer h3 {
+    margin-top: 0;
+}
+
+
+.site-footer p {
+    color: #d6e3ed;
+
+    font-size: 13px;
+}
+
+
+.copyright {
+    max-width: 1100px;
+
+    margin: 25px auto 0;
+
+    padding-top: 15px;
+
+    border-top: 1px solid rgba(255,255,255,0.15);
+
+    text-align: center;
+
+    color: #b9ccd9;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .pastpapers-hero {
+        padding: 40px 15px;
+    }
+
+
+    .paper-navigation {
+        width: 94%;
+
+        margin-top: 20px;
+    }
+
+
+    .progress-wrapper {
+        justify-content: flex-start;
+
+        padding-bottom: 10px;
+    }
+
+
+    .progress-line {
+        width: 25px;
+    }
+
+
+    .paper-content {
+        padding: 17px;
+
+        border-radius: 14px;
+    }
+
+
+    .selection-heading h3 {
+        font-size: 20px;
+    }
+
+
+    .selection-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .paper-chain-item {
+        grid-template-columns: 40px 1fr;
+
+        gap: 12px;
+
+        padding: 16px;
+    }
+
+
+    .paper-action {
+        grid-column: 2;
+
+        width: 100%;
+    }
+
+
+    .open-pdf-button {
+        width: 100%;
+    }
+
+
+    .chain-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .paper-actions-bottom {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .back-button,
+    .restart-button {
+        width: 100%;
+
+        margin-left: 0;
+
+        margin-right: 0;
+    }
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .selection-heading {
+        align-items: flex-start;
+    }
+
+
+    .selection-icon {
+        width: 45px;
+        height: 45px;
+
+        font-size: 21px;
+    }
+
+
+    .progress-step {
+        min-width: 52px;
+    }
+
+
+    .progress-step small {
+        font-size: 9px;
+    }
+
+
+    .progress-line {
+        width: 18px;
+    }
+
+}
