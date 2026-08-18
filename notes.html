@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GEPAM Science Hub | Premium Notes Store</title>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>GEPAM Science Hub | Premium Notes</title>
 
 <link rel="icon"
       type="image/png"
       href="file_00000000f17471f4b8f76a744122207a.png">
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+      href="style.css">
 
 <style>
 
 /* =========================================================
-   GENERAL
+   BASIC
 ========================================================= */
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #fafafa;
-    color: #222;
-    overflow-x: hidden;
-}
 
 * {
     box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #fafafa;
+    color: #222;
+    overflow-x: hidden;
 }
 
 
@@ -41,13 +45,29 @@ body {
     justify-content: space-between;
     align-items: center;
 
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
 
     padding: 15px 20px;
 
     background: #fff;
     border-bottom: 1px solid #eee;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-area img {
+    height: 40px;
+}
+
+.logo-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: #222;
 }
 
 .menu-toggle {
@@ -60,376 +80,23 @@ body {
 
 
 /* =========================================================
-   PAGE HEADER
-========================================================= */
-
-.page-header {
-    text-align: center;
-    padding: 35px 20px;
-    background: #f8f9fa;
-}
-
-.page-header h1 {
-    margin: 0 0 10px;
-    font-size: 28px;
-}
-
-.page-header p {
-    margin: 0;
-    color: #666;
-}
-
-
-/* =========================================================
-   MAIN CONTAINER
-========================================================= */
-
-.notes-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 25px 20px 50px;
-}
-
-
-/* =========================================================
-   FORM CARDS
-   THESE ARE ALWAYS VISIBLE
-========================================================= */
-
-.form-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(150px, 1fr));
-
-    gap: 15px;
-
-    margin-top: 20px;
-}
-
-.form-card {
-    background: #fff;
-
-    border: 2px solid #00c300;
-
-    border-radius: 10px;
-
-    padding: 22px 15px;
-
-    text-align: center;
-
-    cursor: pointer;
-
-    font-weight: bold;
-
-    font-size: 18px;
-
-    color: #222;
-
-    transition: 0.2s;
-
-    min-height: 90px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.form-card:hover {
-    background: #00c300;
-    color: #fff;
-    transform: translateY(-2px);
-}
-
-.form-card.active {
-    background: #00c300;
-    color: #fff;
-}
-
-
-/* =========================================================
-   CHAIN AREA
-========================================================= */
-
-.chain-section {
-    margin-top: 30px;
-}
-
-
-/* =========================================================
-   BACK BUTTON
-========================================================= */
-
-.back-btn {
-    background: #eee;
-    border: none;
-
-    padding: 10px 18px;
-
-    border-radius: 6px;
-
-    cursor: pointer;
-
-    font-weight: bold;
-
-    margin-bottom: 20px;
-}
-
-.back-btn:hover {
-    background: #ddd;
-}
-
-
-/* =========================================================
-   CHAIN TITLE
-========================================================= */
-
-.chain-title {
-    text-align: center;
-
-    margin-bottom: 20px;
-}
-
-.chain-title h2 {
-    margin-bottom: 5px;
-}
-
-.chain-title p {
-    color: #666;
-}
-
-
-/* =========================================================
-   SYLLABUS BUTTONS
-========================================================= */
-
-.syllabus-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(250px, 1fr));
-
-    gap: 20px;
-}
-
-.syllabus-card {
-
-    background: #fff;
-
-    border: 2px solid #00c300;
-
-    border-radius: 10px;
-
-    padding: 25px;
-
-    text-align: center;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.syllabus-card:hover {
-
-    background: #f0fff0;
-
-    transform: translateY(-2px);
-}
-
-.syllabus-card h3 {
-
-    margin-top: 0;
-
-    color: #00a500;
-}
-
-.syllabus-card p {
-
-    color: #666;
-
-    font-size: 14px;
-}
-
-
-/* =========================================================
-   SUBJECT BUTTONS
-========================================================= */
-
-.subject-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(250px, 1fr));
-
-    gap: 20px;
-}
-
-.subject-card {
-
-    background: #fff;
-
-    border: 2px solid #00c300;
-
-    border-radius: 10px;
-
-    padding: 25px;
-
-    text-align: center;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.subject-card:hover {
-
-    background: #f0fff0;
-
-    transform: translateY(-2px);
-}
-
-.subject-icon {
-
-    font-size: 40px;
-
-    margin-bottom: 10px;
-}
-
-
-/* =========================================================
-   TOPIC GRID
-========================================================= */
-
-.topic-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(280px, 1fr));
-
-    gap: 20px;
-}
-
-
-/* =========================================================
-   TOPIC CARD
-========================================================= */
-
-.topic-card {
-
-    background: #fff;
-
-    border: 1px solid #ddd;
-
-    border-top: 5px solid #00c300;
-
-    border-radius: 9px;
-
-    padding: 20px;
-
-    box-shadow:
-        0 4px 8px rgba(0,0,0,0.05);
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: space-between;
-}
-
-.topic-card h3 {
-
-    margin-top: 0;
-
-    font-size: 18px;
-}
-
-.topic-description {
-
-    color: #666;
-
-    font-size: 14px;
-
-    line-height: 1.5;
-}
-
-.topic-price {
-
-    color: #00a500;
-
-    font-size: 19px;
-
-    font-weight: bold;
-
-    margin: 15px 0;
-}
-
-
-/* =========================================================
-   BUY BUTTON
-========================================================= */
-
-.buy-btn {
-
-    width: 100%;
-
-    padding: 13px;
-
-    background: #00c300;
-
-    color: white;
-
-    border: none;
-
-    border-radius: 5px;
-
-    cursor: pointer;
-
-    font-weight: bold;
-
-    font-size: 14px;
-}
-
-.buy-btn:hover {
-
-    background: #00a500;
-}
-
-
-/* =========================================================
-   HIDDEN
-========================================================= */
-
-.hidden {
-
-    display: none !important;
-}
-
-
-/* =========================================================
    SIDEBAR
 ========================================================= */
 
 .sidebar {
-
     position: fixed;
 
     top: 0;
-
     right: -290px;
 
-    width: 290px;
-
+    width: 280px;
     height: 100%;
 
     background: #fff;
 
-    box-shadow:
-        -5px 0 15px rgba(0,0,0,0.15);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.12);
 
-    transition: 0.3s;
+    transition: right 0.3s ease;
 
     z-index: 10000;
 
@@ -439,38 +106,40 @@ body {
 }
 
 .sidebar.active {
-
     right: 0;
 }
 
 .close-btn {
-
     font-size: 24px;
 
     background: none;
-
     border: none;
 
     cursor: pointer;
 
-    color: #999;
+    color: #333;
 
     float: right;
+
+    padding: 5px 10px;
 }
 
 .sidebar-links {
-
     margin-top: 55px;
 
     display: flex;
-
     flex-direction: column;
 
-    gap: 8px;
+    gap: 10px;
 }
 
 .sidebar-links a,
 .dropdown-btn {
+    display: block;
+
+    width: 100%;
+
+    padding: 12px;
 
     text-decoration: none;
 
@@ -480,14 +149,6 @@ body {
 
     font-size: 16px;
 
-    padding: 12px;
-
-    border-radius: 5px;
-
-    display: block;
-
-    width: 100%;
-
     text-align: left;
 
     border: none;
@@ -495,21 +156,20 @@ body {
     background: none;
 
     cursor: pointer;
+
+    border-radius: 5px;
 }
 
 .sidebar-links a:hover,
 .dropdown-btn:hover {
-
     background: #f4f4f4;
-
-    color: #00c300;
+    color: #00a500;
 }
 
 .dropdown-container {
-
     display: none;
 
-    background: #f9f9f9;
+    background: #f8f8f8;
 
     border-left: 3px solid #00c300;
 
@@ -517,9 +177,7 @@ body {
 }
 
 .dropdown-container a {
-
     font-size: 14px;
-
     font-weight: normal;
 }
 
@@ -529,23 +187,355 @@ body {
 ========================================================= */
 
 .overlay {
-
     display: none;
 
     position: fixed;
 
     top: 0;
-
     left: 0;
 
     width: 100%;
-
     height: 100%;
 
-    background:
-        rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.45);
 
     z-index: 9999;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main-container {
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding: 25px 20px 60px;
+}
+
+
+/* =========================================================
+   PAGE TITLE
+========================================================= */
+
+.page-header {
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    margin-bottom: 8px;
+
+    font-size: 28px;
+}
+
+.page-header p {
+    color: #666;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+.breadcrumb {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-bottom: 20px;
+
+    font-size: 14px;
+
+    color: #666;
+}
+
+.breadcrumb span {
+    font-weight: bold;
+    color: #333;
+}
+
+.breadcrumb .separator {
+    color: #aaa;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 11px 18px;
+
+    background: #333;
+
+    color: #fff;
+
+    border: none;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    margin-bottom: 20px;
+
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    background: #222;
+}
+
+
+/* =========================================================
+   STEP TITLE
+========================================================= */
+
+.step-title {
+    text-align: center;
+
+    margin: 20px 0;
+}
+
+.step-title h2 {
+    margin-bottom: 8px;
+
+    font-size: 24px;
+}
+
+.step-title p {
+    color: #666;
+}
+
+
+/* =========================================================
+   SELECTION GRID
+========================================================= */
+
+.selection-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 18px;
+
+    margin-top: 20px;
+}
+
+
+/* =========================================================
+   SELECTION CARD
+========================================================= */
+
+.selection-card {
+
+    background: #fff;
+
+    border: 1px solid #e5e5e5;
+
+    border-top: 5px solid #00c300;
+
+    border-radius: 9px;
+
+    padding: 22px;
+
+    min-height: 150px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.05);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.selection-card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 7px 15px rgba(0,0,0,0.08);
+}
+
+.selection-card h3 {
+
+    margin-top: 0;
+
+    font-size: 19px;
+}
+
+.selection-card p {
+
+    color: #666;
+
+    line-height: 1.5;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   OPEN BUTTON
+========================================================= */
+
+.open-btn {
+
+    width: 100%;
+
+    padding: 12px;
+
+    background: #00c300;
+
+    color: #fff;
+
+    border: none;
+
+    border-radius: 5px;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    margin-top: 15px;
+}
+
+.open-btn:hover {
+    background: #00a500;
+}
+
+
+/* =========================================================
+   SYLLABUS
+========================================================= */
+
+.syllabus-old {
+    border-top-color: #555;
+}
+
+.syllabus-new {
+    border-top-color: #00c300;
+}
+
+
+/* =========================================================
+   SUBJECT
+========================================================= */
+
+.subject-card {
+
+    min-height: 170px;
+}
+
+.subject-icon {
+
+    font-size: 34px;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   TOPICS
+========================================================= */
+
+.topic-card {
+
+    min-height: 190px;
+}
+
+.topic-price {
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    color: #00a500;
+
+    margin: 12px 0;
+}
+
+.buy-btn {
+
+    width: 100%;
+
+    padding: 12px;
+
+    background: #00c300;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 5px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.buy-btn:hover {
+    background: #00a500;
+}
+
+
+/* =========================================================
+   EMPTY / FUTURE TOPICS
+========================================================= */
+
+.topic-card.future {
+
+    border-top-color: #777;
+}
+
+.future-label {
+
+    display: inline-block;
+
+    padding: 5px 8px;
+
+    border-radius: 4px;
+
+    background: #eee;
+
+    color: #555;
+
+    font-size: 12px;
+
+    font-weight: bold;
 }
 
 
@@ -553,56 +543,54 @@ body {
    MOBILE
 ========================================================= */
 
-@media(max-width:600px) {
+@media (max-width: 600px) {
 
-    .form-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
+    .main-container {
+        padding: 20px 15px 50px;
     }
 
-    .form-card {
+    .page-header h1 {
+        font-size: 24px;
+    }
 
-        font-size: 16px;
+    .step-title h2 {
+        font-size: 21px;
+    }
 
-        min-height: 80px;
+    .selection-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .selection-card {
+        min-height: 145px;
     }
 
 }
 
 </style>
-</head>
 
+</head>
 
 <body>
 
 
 <!-- ========================================================
-     NAV
+     TOP HEADER
 ========================================================= -->
 
 <div class="nav-header">
 
-    <div style="
-        display:flex;
-        align-items:center;
-        gap:10px;
-    ">
+    <div class="logo-area">
 
         <img
             src="file_00000000f17471f4b8f76a744122207a.png"
-            style="height:40px;"
             alt="GEPAM Logo">
 
-        <span style="
-            font-weight:bold;
-            font-size:18px;
-        ">
+        <span class="logo-title">
             GEPAM Store
         </span>
 
     </div>
-
 
     <button
         class="menu-toggle"
@@ -616,299 +604,56 @@ body {
 
 
 <!-- ========================================================
-     HEADER
-========================================================= -->
-
-<header class="page-header">
-
-    <h1>📘 Premium Notes Store</h1>
-
-    <p>
-        Choose your class, syllabus, subject and topic.
-    </p>
-
-</header>
-
-
-<!-- ========================================================
      MAIN
 ========================================================= -->
 
-<main class="notes-container">
+<main class="main-container">
 
 
-<!-- ========================================================
-     STEP 1 — FORM 1-6
-========================================================= -->
+    <!-- PAGE HEADER -->
 
-<section id="formSelection">
+    <div class="page-header">
 
-    <div class="chain-title">
-
-        <h2>Choose Your Form</h2>
+        <h1>
+            📘 GEPAM Premium Notes
+        </h1>
 
         <p>
-            Select the class you are studying.
+            Chagua kidato, syllabus, subject na topic
+            unayotaka kusoma.
         </p>
 
     </div>
 
 
-    <div class="form-grid">
-
-        <div
-            class="form-card"
-            onclick="openForm(1)">
-
-            📘<br>
-            Form 1
-
-        </div>
-
-
-        <div
-            class="form-card"
-            onclick="openForm(2)">
-
-            📗<br>
-            Form 2
-
-        </div>
-
-
-        <div
-            class="form-card"
-            onclick="openForm(3)">
-
-            📙<br>
-            Form 3
-
-        </div>
-
-
-        <div
-            class="form-card"
-            onclick="openForm(4)">
-
-            📕<br>
-            Form 4
-
-        </div>
-
-
-        <div
-            class="form-card"
-            onclick="openForm(5)">
-
-            📔<br>
-            Form 5
-
-        </div>
-
-
-        <div
-            class="form-card"
-            onclick="openForm(6)">
-
-            📓<br>
-            Form 6
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ========================================================
-     STEP 2 — SYLLABUS
-========================================================= -->
-
-<section
-    id="syllabusSelection"
-    class="chain-section hidden">
-
-    <button
-        class="back-btn"
-        onclick="goBackToForms()">
-
-        ← Back to Forms
-
-    </button>
-
-
-    <div class="chain-title">
-
-        <h2 id="selectedFormTitle">
-            Form
-        </h2>
-
-        <p>
-            Choose syllabus
-        </p>
-
-    </div>
-
-
-    <div class="syllabus-grid">
-
-
-        <!-- OLD SYLLABUS -->
-
-        <div
-            class="syllabus-card"
-            onclick="openSyllabus('old')">
-
-            <h3>
-                📚 Old Syllabus
-            </h3>
-
-            <p>
-                Notes based on the previous
-                curriculum/syllabus.
-            </p>
-
-        </div>
-
-
-        <!-- NEW SYLLABUS -->
-
-        <div
-            class="syllabus-card"
-            onclick="openSyllabus('new')">
-
-            <h3>
-                🆕 New Syllabus
-            </h3>
-
-            <p>
-                Notes based on the current
-                curriculum/syllabus.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ========================================================
-     STEP 3 — SUBJECT
-========================================================= -->
-
-<section
-    id="subjectSelection"
-    class="chain-section hidden">
-
-    <button
-        class="back-btn"
-        onclick="goBackToSyllabus()">
-
-        ← Back to Syllabus
-
-    </button>
-
-
-    <div class="chain-title">
-
-        <h2 id="selectedSyllabusTitle">
-            Syllabus
-        </h2>
-
-        <p>
-            Choose your subject
-        </p>
-
-    </div>
-
-
-    <div class="subject-grid">
-
-
-        <!-- PHYSICS -->
-
-        <div
-            class="subject-card"
-            onclick="openSubject('physics')">
-
-            <div class="subject-icon">
-                ⚛️
-            </div>
-
-            <h3>
-                Physics
-            </h3>
-
-            <p>
-                Physics notes topic by topic.
-            </p>
-
-        </div>
-
-
-        <!-- CHEMISTRY -->
-
-        <div
-            class="subject-card"
-            onclick="openSubject('chemistry')">
-
-            <div class="subject-icon">
-                🧪
-            </div>
-
-            <h3>
-                Chemistry
-            </h3>
-
-            <p>
-                Chemistry notes topic by topic.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ========================================================
-     STEP 4 — TOPICS
-========================================================= -->
-
-<section
-    id="topicSelection"
-    class="chain-section hidden">
-
-    <button
-        class="back-btn"
-        onclick="goBackToSubject()">
-
-        ← Back to Subjects
-
-    </button>
-
-
-    <div class="chain-title">
-
-        <h2 id="topicPageTitle">
-            Topics
-        </h2>
-
-        <p>
-            Select a topic to purchase.
-        </p>
-
-    </div>
-
+    <!-- BREADCRUMB -->
 
     <div
-        id="topicGrid"
-        class="topic-grid">
+        class="breadcrumb"
+        id="breadcrumb">
+
+        <span>Premium Notes</span>
 
     </div>
 
-</section>
+
+    <!-- BACK -->
+
+    <button
+        class="back-btn"
+        id="backButton"
+        onclick="goBack()">
+
+        ← RUDI NYUMA
+
+    </button>
+
+
+    <!-- ====================================================
+         STEP CONTAINER
+    ===================================================== -->
+
+    <div id="stepContainer"></div>
 
 
 </main>
@@ -929,7 +674,6 @@ body {
     class="sidebar"
     id="sidebarMenu">
 
-
     <button
         class="close-btn"
         onclick="toggleMenu()">
@@ -945,7 +689,6 @@ body {
             🏠 Home
         </a>
 
-
         <a href="about.html">
             ℹ️ About Us
         </a>
@@ -955,34 +698,35 @@ body {
             class="dropdown-btn"
             onclick="toggleDropdown(this)">
 
-            📝 Notes Store ▼
+            📝 Notes Store
+            <span>▼</span>
 
         </button>
 
 
         <div class="dropdown-container">
 
-            <a href="notes.html?form=1">
+            <a href="notes.html?form=form1">
                 Form 1
             </a>
 
-            <a href="notes.html?form=2">
+            <a href="notes.html?form=form2">
                 Form 2
             </a>
 
-            <a href="notes.html?form=3">
+            <a href="notes.html?form=form3">
                 Form 3
             </a>
 
-            <a href="notes.html?form=4">
+            <a href="notes.html?form=form4">
                 Form 4
             </a>
 
-            <a href="notes.html?form=5">
+            <a href="notes.html?form=form5">
                 Form 5
             </a>
 
-            <a href="notes.html?form=6">
+            <a href="notes.html?form=form6">
                 Form 6
             </a>
 
@@ -992,7 +736,6 @@ body {
         <a href="pastpapers.html">
             📚 Past Papers
         </a>
-
 
         <a href="contact.html">
             📞 Contact
@@ -1007,17 +750,14 @@ body {
      FOOTER
 ========================================================= -->
 
-<footer style="
-    text-align:center;
-    padding:30px;
-    background:#222;
-    color:#fff;
-    margin-top:50px;
-">
-
-    <h3>
-        GEPAM Science Hub
-    </h3>
+<footer
+    style="
+        text-align:center;
+        padding:30px;
+        background:#222;
+        color:#fff;
+        margin-top:40px;
+    ">
 
     <p>
         © 2026 GEPAM Science Hub.
@@ -1028,586 +768,952 @@ body {
 
 
 <!-- ========================================================
-     CHAIN JAVASCRIPT
+     PAYMENT SYSTEM
+========================================================= -->
+
+<script src="notes.js"></script>
+
+
+<!-- ========================================================
+     NAVIGATION SYSTEM
 ========================================================= -->
 
 <script>
 
-let selectedForm = null;
-let selectedSyllabus = null;
-let selectedSubject = null;
+/*
+=============================================================
+ GEPAM PREMIUM NOTES NAVIGATION
+
+ LEVELS:
+
+ 1. FORMS
+ 2. SYLLABUS
+ 3. SUBJECT
+ 4. TOPICS
+ 5. PAYMENT
+
+ Browser/Android Back button:
+ returns one level backward.
+=============================================================
+*/
 
 
 /* =========================================================
-   TOPIC DATABASE
-   ========================================================= */
-
-const notesData = {
-
-
-/* =========================================================
-   FORM 1
+   CURRENT STATE
 ========================================================= */
 
-1: {
+let currentState = {
 
-    old: {
+    level: "forms",
 
-        physics: [
+    form: null,
 
-            {
-                id: "notes_physics_f1_introduction",
-                title: "Topic 1: Introduction to Physics",
-                description:
-                    "Concept of physics, laboratory rules, measurements and first aid.",
-                price: 1000
-            },
+    syllabus: null,
 
-            {
-                id: "notes_physics_f1_measurement",
-                title: "Topic 2: Measurement",
-                description:
-                    "Physical quantities, units and measuring instruments.",
-                price: 1000
-            },
+    subject: null
 
-            {
-                id: "notes_physics_f1_force",
-                title: "Topic 3: Force",
-                description:
-                    "Forces, effects of force and applications.",
-                price: 1000
-            }
+};
 
-        ],
 
-        chemistry: [
+/* =========================================================
+   DATA
+========================================================= */
 
-            {
-                id: "notes_chemistry_f1_introduction",
-                title: "Topic 1: Introduction to Chemistry",
-                description:
-                    "Concept, importance and applications of chemistry.",
-                price: 1000
-            },
+const syllabusData = {
 
-            {
-                id: "notes_chemistry_f1_laboratory",
-                title: "Topic 2: Chemistry Laboratory",
-                description:
-                    "Laboratory apparatus, safety rules and procedures.",
-                price: 1000
-            },
+    form1: {
 
-            {
-                id: "notes_chemistry_f1_matter",
-                title: "Topic 3: Matter",
-                description:
-                    "States of matter and changes of state.",
-                price: 1000
-            }
+        name: "Form 1",
 
-        ]
+        old: {
+
+            name: "Old Syllabus",
+
+            subjects: [
+                "Physics",
+                "Chemistry"
+            ]
+
+        },
+
+        new: {
+
+            name: "New Syllabus",
+
+            subjects: [
+                "Physics",
+                "Chemistry"
+            ]
+
+        }
 
     },
 
 
-    new: {
+    form2: {
 
-        physics: [
+        name: "Form 2",
 
-            {
-                id: "notes_physics_f1_introduction",
-                title: "Topic 1: Introduction to Physics",
-                description:
-                    "Introduction to physics and its applications.",
-                price: 1000
-            },
+        old: {
 
-            {
-                id: "notes_physics_f1_measurement",
-                title: "Topic 2: Measurement",
-                description:
-                    "Measurement of physical quantities.",
-                price: 1000
-            },
+            name: "Old Syllabus",
 
-            {
-                id: "notes_physics_f1_force",
-                title: "Topic 3: Force",
-                description:
-                    "Force and its applications.",
-                price: 1000
-            }
+            subjects: [
+                "Physics",
+                "Chemistry"
+            ]
 
-        ],
+        },
 
-        chemistry: [
+        new: {
 
-            {
-                id: "notes_chemistry_f1_introduction",
-                title: "Topic 1: Introduction to Chemistry",
-                description:
-                    "Concept and applications of chemistry.",
-                price: 1000
-            },
+            name: "New Syllabus",
 
-            {
-                id: "notes_chemistry_f1_matter",
-                title: "Topic 2: Matter",
-                description:
-                    "Matter and its properties.",
-                price: 1000
-            }
+            subjects: [
+                "Physics",
+                "Chemistry"
+            ]
 
-        ]
-
-    }
-
-},
-
-
-/* =========================================================
-   FORM 2
-========================================================= */
-
-2: {
-
-    old: {
-
-        physics: [
-
-            {
-                id: "notes_physics_f2_static_electricity",
-                title: "Topic 1: Static Electricity",
-                description:
-                    "Electric charges, charging and lightning conductors.",
-                price: 1500
-            },
-
-            {
-                id: "notes_physics_f2_current_electricity",
-                title: "Topic 2: Current Electricity",
-                description:
-                    "Electric current, circuits and electrical measurements.",
-                price: 1500
-            }
-
-        ],
-
-        chemistry: [
-
-            {
-                id: "notes_chemistry_f2_topic1",
-                title: "Topic 1: Chemistry",
-                description:
-                    "Form 2 Chemistry topic notes.",
-                price: 1500
-            }
-
-        ]
+        }
 
     },
 
-    new: {
 
-        physics: [
+    form3: {
 
-            {
-                id: "notes_physics_f2_static_electricity",
-                title: "Topic 1: Static Electricity",
-                description:
-                    "Electric charges and applications.",
-                price: 1500
-            },
+        name: "Form 3",
 
-            {
-                id: "notes_physics_f2_current_electricity",
-                title: "Topic 2: Current Electricity",
-                description:
-                    "Current electricity and electrical circuits.",
-                price: 1500
-            }
+        old: {
 
-        ],
+            name: "Old Syllabus",
 
-        chemistry: [
+            subjects: [
+                "Physics",
+                "Chemistry"
+            ]
 
-            {
-                id: "notes_chemistry_f2_topic1",
-                title: "Topic 1: Chemistry",
-                description:
-                    "Form 2 Chemistry notes.",
-                price: 1500
-            }
+        },
 
-        ]
+        new: {
 
-    }
+            name: "New Syllabus",
 
-},
+            subjects: [
+                "Physics",
+                "Chemistry"
+            ]
 
-
-/* =========================================================
-   FORM 3
-========================================================= */
-
-3: {
-
-    old: {
-
-        physics: [
-
-            {
-                id: "notes_physics_f3_linear_motion",
-                title: "Topic 1: Linear Motion",
-                description:
-                    "Distance, displacement, velocity and equations of motion.",
-                price: 1500
-            },
-
-            {
-                id: "notes_physics_f3_light",
-                title: "Topic: Light Part I & II",
-                description:
-                    "Reflection, refraction, lenses and optical instruments.",
-                price: 3000
-            }
-
-        ],
-
-        chemistry: [
-
-            {
-                id: "notes_chemistry_f3_topic1",
-                title: "Topic 1: Chemistry",
-                description:
-                    "Form 3 Chemistry premium notes.",
-                price: 1500
-            }
-
-        ]
+        }
 
     },
 
-    new: {
 
-        physics: [
+    form4: {
 
-            {
-                id: "notes_physics_f3_linear_motion",
-                title: "Topic 1: Linear Motion",
-                description:
-                    "Distance, displacement, velocity and equations of motion.",
-                price: 1500
-            },
+        name: "Form 4",
 
-            {
-                id: "notes_physics_f3_light",
-                title: "Topic: Light Part I & II",
-                description:
-                    "Reflection, refraction, lenses and optical instruments.",
-                price: 3000
-            }
+        old: {
 
-        ],
+            name: "Old Syllabus",
 
-        chemistry: [
+            subjects: [
+                "Physics",
+                "Chemistry"
+            ]
 
-            {
-                id: "notes_chemistry_f3_topic1",
-                title: "Topic 1: Chemistry",
-                description:
-                    "Form 3 Chemistry premium notes.",
-                price: 1500
-            }
+        },
 
-        ]
+        new: {
 
-    }
+            name: "New Syllabus",
 
-},
+            subjects: [
+                "Physics",
+                "Chemistry"
+            ]
 
-
-/* =========================================================
-   FORM 4
-========================================================= */
-
-4: {
-
-    old: {
-
-        physics: [
-
-            {
-                id: "notes_physics_f4_waves",
-                title: "Topic 1: Waves",
-                description:
-                    "Mechanical waves, wave properties and applications.",
-                price: 1500
-            },
-
-            {
-                id: "notes_physics_f4_electricity",
-                title: "Topic 2: Electricity",
-                description:
-                    "Electricity and electrical systems.",
-                price: 1500
-            }
-
-        ],
-
-        chemistry: [
-
-            {
-                id: "notes_chemistry_f4_topic1",
-                title: "Topic 1: Chemistry",
-                description:
-                    "Form 4 Chemistry premium notes.",
-                price: 1500
-            }
-
-        ]
+        }
 
     },
 
-    new: {
 
-        physics: [
+    form5: {
 
-            {
-                id: "notes_physics_f4_waves",
-                title: "Topic 1: Waves",
-                description:
-                    "Mechanical waves, spectrum and wave applications.",
-                price: 1500
-            },
+        name: "Form 5",
 
-            {
-                id: "notes_physics_f4_electricity",
-                title: "Topic 2: Electricity",
-                description:
-                    "Electricity and electrical applications.",
-                price: 1500
-            }
+        old: {
 
-        ],
+            name: "Old Syllabus",
 
-        chemistry: [
+            subjects: [
+                "Physics",
+                "Chemistry"
+            ]
 
-            {
-                id: "notes_chemistry_f4_topic1",
-                title: "Topic 1: Chemistry",
-                description:
-                    "Form 4 Chemistry premium notes.",
-                price: 1500
-            }
+        },
 
-        ]
+        new: {
 
-    }
+            name: "New Syllabus",
 
-},
+            subjects: [
+                "Physics",
+                "Chemistry"
+            ]
 
-
-/* =========================================================
-   FORM 5
-========================================================= */
-
-5: {
-
-    old: {
-
-        physics: [
-
-            {
-                id: "notes_physics_f5_mechanics",
-                title: "Topic 1: Mechanics",
-                description:
-                    "Dimensions, vectors, projectile motion and gravitation.",
-                price: 2500
-            },
-
-            {
-                id: "notes_physics_f5_thermal",
-                title: "Topic 2: Thermal Physics",
-                description:
-                    "Temperature, heat and thermal processes.",
-                price: 2500
-            }
-
-        ],
-
-        chemistry: [
-
-            {
-                id: "notes_chemistry_f5_topic1",
-                title: "Topic 1: Chemistry",
-                description:
-                    "Form 5 Chemistry premium notes.",
-                price: 2500
-            }
-
-        ]
+        }
 
     },
 
-    new: {
 
-        physics: [
+    form6: {
 
-            {
-                id: "notes_physics_f5_mechanics",
-                title: "Topic 1: Mechanics",
-                description:
-                    "Dimensions, projectile motion and gravitation.",
-                price: 2500
-            },
+        name: "Form 6",
 
-            {
-                id: "notes_physics_f5_thermal",
-                title: "Topic 2: Thermal Physics",
-                description:
-                    "Thermal physics and applications.",
-                price: 2500
-            }
+        old: {
 
-        ],
+            name: "Old Syllabus",
 
-        chemistry: [
+            subjects: [
+                "Physics",
+                "Chemistry"
+            ]
 
-            {
-                id: "notes_chemistry_f5_topic1",
-                title: "Topic 1: Chemistry",
-                description:
-                    "Form 5 Chemistry premium notes.",
-                price: 2500
-            }
+        },
 
-        ]
+        new: {
+
+            name: "New Syllabus",
+
+            subjects: [
+                "Physics",
+                "Chemistry"
+            ]
+
+        }
 
     }
 
-},
+};
 
 
 /* =========================================================
-   FORM 6
+   TOPICS
+
+   IDs HIZI NI ZILE TAYARI ZIPO DATABASE.
 ========================================================= */
 
-6: {
+const topics = {
 
-    old: {
 
-        physics: [
+    /* =====================================================
+       FORM 1 PHYSICS
+    ===================================================== */
 
+    "form1-old-physics": [
+
+        {
+            id:
+                "notes_physics_f1_introduction",
+
+            title:
+                "Topic 1: Introduction to Physics",
+
+            description:
+                "Concept of physics, laboratory rules, measurements and first aid.",
+
+            price:
+                1000
+        }
+
+    ],
+
+
+    "form1-old-chemistry": [
+
+        {
+            id:
+                "notes_chemistry_f1_introduction",
+
+            title:
+                "Topic 1: Introduction to Chemistry",
+
+            description:
+                "Concept, importance and application of chemistry in daily life.",
+
+            price:
+                1000
+        }
+
+    ],
+
+
+    /*
+    ---------------------------------------------------------
+    FORM 1 NEW
+    ---------------------------------------------------------
+
+    Tutatumia records zile zile mpaka notes za
+    New Syllabus ziwekwe database tofauti.
+    */
+
+    "form1-new-physics": [
+
+        {
+            id:
+                "notes_physics_f1_introduction",
+
+            title:
+                "Topic 1: Introduction to Physics",
+
+            description:
+                "Introduction to Physics and basic scientific concepts.",
+
+            price:
+                1000
+        }
+
+    ],
+
+
+    "form1-new-chemistry": [
+
+        {
+            id:
+                "notes_chemistry_f1_introduction",
+
+            title:
+                "Topic 1: Introduction to Chemistry",
+
+            description:
+                "Introduction to Chemistry and its applications.",
+
+            price:
+                1000
+        }
+
+    ],
+
+
+    /* =====================================================
+       FORM 2
+    ===================================================== */
+
+    "form2-old-physics": [
+
+        {
+            id:
+                "notes_physics_f2_static_electricity",
+
+            title:
+                "Topic 1: Static Electricity",
+
+            description:
+                "Electric charges, static electricity and lightning conductors.",
+
+            price:
+                1500
+        }
+
+    ],
+
+
+    "form2-new-physics": [
+
+        {
+            id:
+                "notes_physics_f2_static_electricity",
+
+            title:
+                "Topic 1: Static Electricity",
+
+            description:
+                "Electric charges and applications of static electricity.",
+
+            price:
+                1500
+        }
+
+    ],
+
+
+    "form2-old-chemistry": [],
+
+    "form2-new-chemistry": [],
+
+
+    /* =====================================================
+       FORM 3
+    ===================================================== */
+
+    "form3-old-physics": [
+
+        {
+            id:
+                "notes_physics_f3_linear_motion",
+
+            title:
+                "Topic 1: Linear Motion",
+
+            description:
+                "Distance, displacement, velocity and equations of motion.",
+
+            price:
+                1500
+        },
+
+        {
+            id:
+                "notes_physics_f3_light",
+
+            title:
+                "Topic: Light Part I & II",
+
+            description:
+                "Reflection, refraction, lenses and optical instruments.",
+
+            price:
+                3000
+        }
+
+    ],
+
+
+    "form3-new-physics": [
+
+        {
+            id:
+                "notes_physics_f3_linear_motion",
+
+            title:
+                "Topic 1: Linear Motion",
+
+            description:
+                "Distance, displacement, velocity and equations of motion.",
+
+            price:
+                1500
+        },
+
+        {
+            id:
+                "notes_physics_f3_light",
+
+            title:
+                "Topic: Light Part I & II",
+
+            description:
+                "Reflection, refraction, lenses and optical instruments.",
+
+            price:
+                3000
+        }
+
+    ],
+
+
+    "form3-old-chemistry": [],
+
+    "form3-new-chemistry": [],
+
+
+    /* =====================================================
+       FORM 4
+    ===================================================== */
+
+    "form4-old-physics": [
+
+        {
+            id:
+                "notes_physics_f4_waves",
+
+            title:
+                "Topic 1: Waves",
+
+            description:
+                "Mechanical waves, spectrum and related applications.",
+
+            price:
+                1500
+        }
+
+    ],
+
+
+    "form4-new-physics": [
+
+        {
+            id:
+                "notes_physics_f4_waves",
+
+            title:
+                "Topic 1: Waves",
+
+            description:
+                "Mechanical waves, spectrum and related applications.",
+
+            price:
+                1500
+        }
+
+    ],
+
+
+    "form4-old-chemistry": [],
+
+    "form4-new-chemistry": [],
+
+
+    /* =====================================================
+       FORM 5
+    ===================================================== */
+
+    "form5-old-physics": [
+
+        {
+            id:
+                "notes_physics_f5_mechanics",
+
+            title:
+                "Topic 1: Mechanics",
+
+            description:
+                "Dimensions, projectile motion and gravitation.",
+
+            price:
+                2500
+        }
+
+    ],
+
+
+    "form5-new-physics": [
+
+        {
+            id:
+                "notes_physics_f5_mechanics",
+
+            title:
+                "Topic 1: Mechanics",
+
+            description:
+                "Dimensions, projectile motion and gravitation.",
+
+            price:
+                2500
+        }
+
+    ],
+
+
+    "form5-old-chemistry": [],
+
+    "form5-new-chemistry": [],
+
+
+    /* =====================================================
+       FORM 6
+    ===================================================== */
+
+    "form6-old-physics": [
+
+        {
+            id:
+                "notes_physics_f6_modern_physics",
+
+            title:
+                "Topic 1: Modern Physics",
+
+            description:
+                "Quantum physics, atomic structure and electronics.",
+
+            price:
+                3500
+        }
+
+    ],
+
+
+    "form6-new-physics": [
+
+        {
+            id:
+                "notes_physics_f6_modern_physics",
+
+            title:
+                "Topic 1: Modern Physics",
+
+            description:
+                "Quantum physics, atomic structure and electronics.",
+
+            price:
+                3500
+        }
+
+    ],
+
+
+    "form6-old-chemistry": [],
+
+    "form6-new-chemistry": []
+
+};
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const container =
+    document.getElementById(
+        "stepContainer"
+    );
+
+const breadcrumb =
+    document.getElementById(
+        "breadcrumb"
+    );
+
+const backButton =
+    document.getElementById(
+        "backButton"
+    );
+
+
+/* =========================================================
+   BROWSER HISTORY
+========================================================= */
+
+let historyReady = false;
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+function initialize() {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const requestedForm =
+        params.get("form");
+
+    if (
+        requestedForm &&
+        syllabusData[requestedForm]
+    ) {
+
+        currentState.level =
+            "syllabus";
+
+        currentState.form =
+            requestedForm;
+
+        renderSyllabus();
+
+        history.replaceState(
             {
-                id: "notes_physics_f6_modern_physics",
-                title: "Topic 1: Modern Physics",
-                description:
-                    "Quantum physics, atomic structure and electronics.",
-                price: 3500
+                level: "syllabus",
+                form: requestedForm
             },
+            "",
+            window.location.href
+        );
 
+    } else {
+
+        currentState.level =
+            "forms";
+
+        renderForms();
+
+        history.replaceState(
             {
-                id: "notes_physics_f6_nuclear",
-                title: "Topic 2: Nuclear Physics",
-                description:
-                    "Radioactivity, nuclear reactions and applications.",
-                price: 3500
-            }
-
-        ],
-
-        chemistry: [
-
-            {
-                id: "notes_chemistry_f6_topic1",
-                title: "Topic 1: Chemistry",
-                description:
-                    "Form 6 Chemistry premium notes.",
-                price: 3500
-            }
-
-        ]
-
-    },
-
-    new: {
-
-        physics: [
-
-            {
-                id: "notes_physics_f6_modern_physics",
-                title: "Topic 1: Modern Physics",
-                description:
-                    "Quantum physics, atomic structure and electronics.",
-                price: 3500
+                level: "forms"
             },
-
-            {
-                id: "notes_physics_f6_nuclear",
-                title: "Topic 2: Nuclear Physics",
-                description:
-                    "Radioactivity and nuclear applications.",
-                price: 3500
-            }
-
-        ],
-
-        chemistry: [
-
-            {
-                id: "notes_chemistry_f6_topic1",
-                title: "Topic 1: Chemistry",
-                description:
-                    "Form 6 Chemistry premium notes.",
-                price: 3500
-            }
-
-        ]
+            "",
+            window.location.href
+        );
 
     }
+
+    historyReady = true;
 
 }
 
-};
+
+/* =========================================================
+   SAVE HISTORY
+========================================================= */
+
+function pushState(
+    state
+) {
+
+    history.pushState(
+        state,
+        "",
+        window.location.href
+    );
+
+}
+
+
+/* =========================================================
+   RENDER FORMS
+========================================================= */
+
+function renderForms() {
+
+    currentState = {
+
+        level:
+            "forms",
+
+        form:
+            null,
+
+        syllabus:
+            null,
+
+        subject:
+            null
+
+    };
+
+
+    updateBreadcrumb();
+
+    backButton.style.display =
+        "none";
+
+
+    let html = `
+
+        <div class="step-title">
+
+            <h2>
+                Chagua Kidato
+            </h2>
+
+            <p>
+                Chagua kidato unachotaka
+                kupata Premium Notes.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+    `;
+
+
+    for (
+        let i = 1;
+        i <= 6;
+        i++
+    ) {
+
+        const formId =
+            "form" + i;
+
+        html += `
+
+            <div class="selection-card">
+
+                <div>
+
+                    <h3>
+                        📚 Form ${i}
+                    </h3>
+
+                    <p>
+                        Premium Physics
+                        & Chemistry Notes
+                    </p>
+
+                </div>
+
+                <button
+                    class="open-btn"
+                    onclick="openForm('${formId}')">
+
+                    FUNGUA FORM ${i}
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    html += `
+
+        </div>
+
+    `;
+
+
+    container.innerHTML =
+        html;
+
+}
 
 
 /* =========================================================
    OPEN FORM
 ========================================================= */
 
-function openForm(form) {
+function openForm(
+    formId
+) {
 
-    selectedForm = form;
+    currentState.level =
+        "syllabus";
 
-    document
-        .getElementById("formSelection")
-        .classList.add("hidden");
+    currentState.form =
+        formId;
 
-    document
-        .getElementById("syllabusSelection")
-        .classList.remove("hidden");
+    currentState.syllabus =
+        null;
 
-    document
-        .getElementById("subjectSelection")
-        .classList.add("hidden");
-
-    document
-        .getElementById("topicSelection")
-        .classList.add("hidden");
+    currentState.subject =
+        null;
 
 
-    document
-        .getElementById("selectedFormTitle")
-        .textContent =
-        "Form " + form;
+    pushState({
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+        level:
+            "syllabus",
+
+        form:
+            formId
+
     });
+
+
+    renderSyllabus();
+
+}
+
+
+/* =========================================================
+   RENDER SYLLABUS
+========================================================= */
+
+function renderSyllabus() {
+
+    const form =
+        syllabusData[
+            currentState.form
+        ];
+
+
+    if (!form) {
+
+        renderForms();
+
+        return;
+
+    }
+
+
+    updateBreadcrumb();
+
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    let html = `
+
+        <div class="step-title">
+
+            <h2>
+                ${form.name}
+            </h2>
+
+            <p>
+                Chagua syllabus.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    html += `
+
+        <div class="selection-card syllabus-old">
+
+            <div>
+
+                <h3>
+                    📕 Old Syllabus
+                </h3>
+
+                <p>
+                    Notes zilizopangwa
+                    kwa Old Syllabus.
+                </p>
+
+            </div>
+
+            <button
+                class="open-btn"
+                onclick="openSyllabus('old')">
+
+                FUNGUA OLD SYLLABUS
+
+            </button>
+
+        </div>
+
+
+        <div class="selection-card syllabus-new">
+
+            <div>
+
+                <h3>
+                    📗 New Syllabus
+                </h3>
+
+                <p>
+                    Notes zilizopangwa
+                    kwa New Syllabus.
+                </p>
+
+            </div>
+
+            <button
+                class="open-btn"
+                onclick="openSyllabus('new')">
+
+                FUNGUA NEW SYLLABUS
+
+            </button>
+
+        </div>
+
+    `;
+
+
+    html += `
+
+        </div>
+
+    `;
+
+
+    container.innerHTML =
+        html;
+
 }
 
 
@@ -1615,42 +1721,146 @@ function openForm(form) {
    OPEN SYLLABUS
 ========================================================= */
 
-function openSyllabus(syllabus) {
+function openSyllabus(
+    syllabus
+) {
 
-    selectedSyllabus = syllabus;
+    currentState.level =
+        "subjects";
 
-    document
-        .getElementById("syllabusSelection")
-        .classList.add("hidden");
+    currentState.syllabus =
+        syllabus;
 
-    document
-        .getElementById("subjectSelection")
-        .classList.remove("hidden");
-
-    document
-        .getElementById("topicSelection")
-        .classList.add("hidden");
+    currentState.subject =
+        null;
 
 
-    const name =
-        syllabus === "old"
-        ? "Old Syllabus"
-        : "New Syllabus";
+    pushState({
 
+        level:
+            "subjects",
 
-    document
-        .getElementById("selectedSyllabusTitle")
-        .textContent =
-        "Form " +
-        selectedForm +
-        " — " +
-        name;
+        form:
+            currentState.form,
 
+        syllabus:
+            syllabus
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
     });
+
+
+    renderSubjects();
+
+}
+
+
+/* =========================================================
+   RENDER SUBJECTS
+========================================================= */
+
+function renderSubjects() {
+
+    const form =
+        syllabusData[
+            currentState.form
+        ];
+
+
+    if (!form) {
+
+        renderForms();
+
+        return;
+
+    }
+
+
+    const syllabus =
+        form[
+            currentState.syllabus
+        ];
+
+
+    updateBreadcrumb();
+
+
+    let html = `
+
+        <div class="step-title">
+
+            <h2>
+                ${form.name}
+                —
+                ${syllabus.name}
+            </h2>
+
+            <p>
+                Chagua subject.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    syllabus.subjects.forEach(
+        subject => {
+
+            const icon =
+                subject === "Physics"
+                ? "⚛️"
+                : "🧪";
+
+
+            html += `
+
+                <div class="selection-card subject-card">
+
+                    <div>
+
+                        <div class="subject-icon">
+                            ${icon}
+                        </div>
+
+                        <h3>
+                            ${subject}
+                        </h3>
+
+                        <p>
+                            Topic-by-topic
+                            Premium Notes
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="openSubject('${subject}')">
+
+                        FUNGUA ${subject.toUpperCase()}
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+        </div>
+
+    `;
+
+
+    container.innerHTML =
+        html;
+
 }
 
 
@@ -1658,48 +1868,36 @@ function openSyllabus(syllabus) {
    OPEN SUBJECT
 ========================================================= */
 
-function openSubject(subject) {
+function openSubject(
+    subject
+) {
 
-    selectedSubject = subject;
+    currentState.level =
+        "topics";
 
-    document
-        .getElementById("subjectSelection")
-        .classList.add("hidden");
-
-    document
-        .getElementById("topicSelection")
-        .classList.remove("hidden");
+    currentState.subject =
+        subject;
 
 
-    const syllabusName =
-        selectedSyllabus === "old"
-        ? "Old Syllabus"
-        : "New Syllabus";
+    pushState({
 
+        level:
+            "topics",
 
-    const subjectName =
-        subject === "physics"
-        ? "Physics"
-        : "Chemistry";
+        form:
+            currentState.form,
 
+        syllabus:
+            currentState.syllabus,
 
-    document
-        .getElementById("topicPageTitle")
-        .textContent =
-        "Form " +
-        selectedForm +
-        " — " +
-        syllabusName +
-        " — " +
-        subjectName;
+        subject:
+            subject
+
+    });
 
 
     renderTopics();
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
 }
 
 
@@ -1709,92 +1907,156 @@ function openSubject(subject) {
 
 function renderTopics() {
 
-    const grid =
-        document.getElementById("topicGrid");
-
-    grid.innerHTML = "";
+    updateBreadcrumb();
 
 
-    const topics =
-        notesData[selectedForm]
-        [selectedSyllabus]
-        [selectedSubject];
+    const key =
+        currentState.form +
+        "-" +
+        currentState.syllabus +
+        "-" +
+        currentState.subject
+            .toLowerCase();
 
 
-    if (!topics || topics.length === 0) {
-
-        grid.innerHTML = `
-            <div class="topic-card">
-
-                <h3>
-                    No topics available
-                </h3>
-
-                <p>
-                    Notes will be added here.
-                </p>
-
-            </div>
-        `;
-
-        return;
-    }
+    const list =
+        topics[key] || [];
 
 
-    topics.forEach(topic => {
+    let html = `
 
-        const card =
-            document.createElement("div");
+        <div class="step-title">
 
-        card.className =
-            "topic-card";
+            <h2>
+                ${currentState.subject}
+            </h2>
+
+            <p>
+                ${syllabusData[
+                    currentState.form
+                ].name}
+                —
+                ${
+                    currentState.syllabus === "old"
+                    ? "Old Syllabus"
+                    : "New Syllabus"
+                }
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
 
 
-        card.innerHTML = `
+    /*
+    =========================================================
+    TOPICS ZILIZOPO
+    =========================================================
+    */
 
-            <div>
+    list.forEach(
+        topic => {
 
-                <h3>
-                    ${topic.title}
-                </h3>
+            html += `
 
-                <p class="topic-description">
-                    ${topic.description}
-                </p>
+                <div class="selection-card topic-card">
 
-                <div class="topic-price">
-                    TSH ${Number(topic.price).toLocaleString()}
+                    <div>
+
+                        <h3>
+                            ${topic.title}
+                        </h3>
+
+                        <p>
+                            ${topic.description}
+                        </p>
+
+                        <div class="topic-price">
+                            TSH
+                            ${Number(
+                                topic.price
+                            ).toLocaleString()}
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="buy-btn"
+                        onclick="buyTopic(
+                            '${escapeForAttribute(topic.id)}',
+                            '${escapeForAttribute(topic.title)}',
+                            ${topic.price}
+                        )">
+
+                        NUNUA TOPIC
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    /*
+    =========================================================
+    IF NO RECORDS YET
+    =========================================================
+    */
+
+    if (list.length === 0) {
+
+        html += `
+
+            <div class="selection-card">
+
+                <div>
+
+                    <h3>
+                        📚 Premium ${currentState.subject}
+                        Notes
+                    </h3>
+
+                    <p>
+                        Topics za ${currentState.subject}
+                        kwa syllabus hii
+                        zitaonekana hapa
+                        mara tu zitakapowekwa
+                        kwenye mfumo wa notes.
+                    </p>
+
+                    <span class="future-label">
+                        PREMIUM NOTES
+                    </span>
+
                 </div>
 
             </div>
 
-
-            <button
-                class="buy-btn"
-                onclick="buyTopic(
-                    '${topic.id}',
-                    '${escapeQuotes(topic.title)}',
-                    ${topic.price}
-                )">
-
-                NUNUA TOPIC
-
-            </button>
-
         `;
 
+    }
 
-        grid.appendChild(card);
 
-    });
+    html += `
+
+        </div>
+
+    `;
+
+
+    container.innerHTML =
+        html;
 
 }
 
 
 /* =========================================================
-   BUY TOPIC
-   IMPORTANT:
-   PAYMENT FUNCTION REMAINS THE SAME.
+   PAYMENT
 ========================================================= */
 
 function buyTopic(
@@ -1803,8 +2065,19 @@ function buyTopic(
     price
 ) {
 
+    /*
+    =========================================================
+    MUHIMU:
+
+    HAPA HATUBADILISHI PAYMENT ENGINE.
+
+    Tunaita function ile ile iliyokuwa
+    inatumika kwenye notes.html yako ya zamani.
+    =========================================================
+    */
+
     if (
-        typeof anzishaUnunuziWa !==
+        typeof anzishaUnunuziWaNotes !==
         "function"
     ) {
 
@@ -1813,6 +2086,7 @@ function buyTopic(
         );
 
         return;
+
     }
 
 
@@ -1821,73 +2095,209 @@ function buyTopic(
         title,
         price
     );
+
 }
 
 
 /* =========================================================
-   BACK FUNCTIONS
+   BACK BUTTON
 ========================================================= */
 
-function goBackToForms() {
+function goBack() {
 
-    document
-        .getElementById("syllabusSelection")
-        .classList.add("hidden");
+    if (
+        currentState.level ===
+        "forms"
+    ) {
 
-    document
-        .getElementById("formSelection")
-        .classList.remove("hidden");
+        window.location.href =
+            "index.html";
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
+        return;
+
+    }
 
 
-function goBackToSyllabus() {
+    history.back();
 
-    document
-        .getElementById("subjectSelection")
-        .classList.add("hidden");
-
-    document
-        .getElementById("syllabusSelection")
-        .classList.remove("hidden");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-
-function goBackToSubject() {
-
-    document
-        .getElementById("topicSelection")
-        .classList.add("hidden");
-
-    document
-        .getElementById("subjectSelection")
-        .classList.remove("hidden");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
 }
 
 
 /* =========================================================
-   ESCAPE QUOTES
+   BROWSER / ANDROID BACK
 ========================================================= */
 
-function escapeQuotes(text) {
+window.addEventListener(
+    "popstate",
+    function(event) {
 
-    return String(text)
-        .replace(/\\/g, "\\\\")
-        .replace(/'/g, "\\'");
+        const state =
+            event.state;
+
+
+        if (!state) {
+
+            renderForms();
+
+            return;
+
+        }
+
+
+        currentState.level =
+            state.level || "forms";
+
+        currentState.form =
+            state.form || null;
+
+        currentState.syllabus =
+            state.syllabus || null;
+
+        currentState.subject =
+            state.subject || null;
+
+
+        if (
+            currentState.level ===
+            "forms"
+        ) {
+
+            renderForms();
+
+        }
+
+        else if (
+            currentState.level ===
+            "syllabus"
+        ) {
+
+            renderSyllabus();
+
+        }
+
+        else if (
+            currentState.level ===
+            "subjects"
+        ) {
+
+            renderSubjects();
+
+        }
+
+        else if (
+            currentState.level ===
+            "topics"
+        ) {
+
+            renderTopics();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+function updateBreadcrumb() {
+
+    let parts = [
+        "Premium Notes"
+    ];
+
+
+    if (
+        currentState.form
+    ) {
+
+        parts.push(
+            syllabusData[
+                currentState.form
+            ].name
+        );
+
+    }
+
+
+    if (
+        currentState.syllabus
+    ) {
+
+        parts.push(
+
+            currentState.syllabus === "old"
+            ? "Old Syllabus"
+            : "New Syllabus"
+
+        );
+
+    }
+
+
+    if (
+        currentState.subject
+    ) {
+
+        parts.push(
+            currentState.subject
+        );
+
+    }
+
+
+    breadcrumb.innerHTML =
+        parts.map(
+            (part, index) => {
+
+                if (
+                    index === 0
+                ) {
+
+                    return `
+                        <span>
+                            ${part}
+                        </span>
+                    `;
+
+                }
+
+
+                return `
+                    <span class="separator">
+                        ›
+                    </span>
+
+                    <span>
+                        ${part}
+                    </span>
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+function escapeForAttribute(
+    value
+) {
+
+    return String(value)
+        .replaceAll(
+            "\\",
+            "\\\\"
+        )
+        .replaceAll(
+            "'",
+            "\\'"
+        );
+
 }
 
 
@@ -1919,70 +2329,51 @@ function toggleMenu() {
         )
         ? "block"
         : "none";
-}
 
-
-function toggleDropdown(btn) {
-
-    const container =
-        btn.nextElementSibling;
-
-
-    if (!container)
-        return;
-
-
-    container.style.display =
-        container.style.display ===
-        "block"
-        ? "none"
-        : "block";
 }
 
 
 /* =========================================================
-   URL FORM SUPPORT
+   DROPDOWN
 ========================================================= */
 
-const urlParams =
-    new URLSearchParams(
-        window.location.search
-    );
+function toggleDropdown(
+    button
+) {
 
-
-const targetForm =
-    urlParams.get("form");
-
-
-if (targetForm) {
-
-    const formNumber =
-        parseInt(targetForm);
+    const container =
+        button.nextElementSibling;
 
 
     if (
-        formNumber >= 1 &&
-        formNumber <= 6
+        !container
     ) {
 
-        openForm(
-            formNumber
-        );
+        return;
 
     }
 
+
+    const isOpen =
+        container.style.display ===
+        "block";
+
+
+    container.style.display =
+        isOpen
+        ? "none"
+        : "block";
+
 }
 
+
+/* =========================================================
+   START
+========================================================= */
+
+initialize();
+
 </script>
-
-
-<!-- ========================================================
-     PAYMENT SYSTEM
-     DO NOT REMOVE
-========================================================= -->
-
-<script src="notes.js"></script>
-
 
 </body>
 </html>
