@@ -6,8 +6,198 @@
     <title>GEPAM Science Hub - Past Papers</title>
     <!-- Google Fonts -->
     <link href="https://googleapis.com" rel="stylesheet">
-    <!-- Inaita faili lako la pastpapers.css -->
-    <link rel="stylesheet" href="pastpapers.css">
+    
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --brand-color: #2563eb;
+            --brand-hover: #1d4ed8;
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: var(--primary-dark);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-brand {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            background: var(--brand-color);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: var(--brand-hover);
+        }
+
+        .back-nav-btn {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .back-nav-btn:hover {
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            color: var(--primary-dark);
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .step-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+        }
+
+        .step-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+        }
+
+        .opt-btn {
+            background: #f8fafc;
+            border: 2px solid var(--border-color);
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            color: var(--primary-dark);
+            text-transform: capitalize;
+        }
+
+        .opt-btn:hover {
+            border-color: var(--brand-color);
+            background: #eff6ff;
+        }
+
+        .opt-btn.active {
+            border-color: var(--brand-color);
+            background: var(--brand-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .papers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .paper-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .paper-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 0 0 15px 0;
+        }
+
+        .download-btn {
+            background: var(--brand-color);
+            color: white;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .download-btn:hover {
+            background: var(--brand-hover);
+        }
+
+        /* HII NDIO AMRI YA MUHIMU INAYOFICHA HATUA ZINGINE */
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -41,25 +231,25 @@
         </div>
     </div>
 
-    <!-- Hatua ya 2: Masomo -->
+    <!-- Hatua ya 2: Masomo (Yamefichwa sasa) -->
     <div class="step-section hidden" id="step2">
         <p class="step-title">Hatua ya 2: Chagua Somo</p>
         <div class="options-grid" id="subjectOptions"></div>
     </div>
 
-    <!-- Hatua ya 3: Aina za Mitihani -->
+    <!-- Hatua ya 3: Aina za Mitihani (Yamefichwa sasa) -->
     <div class="step-section hidden" id="step3">
         <p class="step-title">Hatua ya 3: Chagua Aina ya Mtihani</p>
         <div class="options-grid" id="typeOptions"></div>
     </div>
 
-    <!-- Hatua ya 4: Mkoa au Shule kutegemea Kidato -->
+    <!-- Hatua ya 4: Mkoa au Shule kutegemea Kidato (Yamefichwa sasa) -->
     <div class="step-section hidden" id="step4">
         <p class="step-title" id="locationLabel">Hatua ya 4: Chagua Shule/Mkoa</p>
         <div class="options-grid" id="locationOptions"></div>
     </div>
 
-    <!-- Hatua ya 5: Mwaka -->
+    <!-- Hatua ya 5: Mwaka (Yamefichwa sasa) -->
     <div class="step-section hidden" id="step5">
         <p class="step-title">Hatua ya 5: Chagua Mwaka</p>
         <div class="options-grid" id="yearOptions"></div>
@@ -69,7 +259,7 @@
     <div class="papers-grid" id="finalPapersArea"></div>
 </div>
 
-<!-- Viunganishi vya majina uliyoyaelekeza -->
+<!-- Viunganishi vya majina yako rasmi ya mafaili -->
 <script src="pastpapers.data.js"></script>
 <script src="pastpapers.js"></script>
 </body>
