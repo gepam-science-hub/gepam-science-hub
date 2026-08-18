@@ -1,37 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>GEPAM Science Hub | Past Papers</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Past Papers | GEPAM Science Hub
+    </title>
+
+    <meta
+        name="description"
+        content="GEPAM Science Hub Physics and Chemistry Past Papers from Form 1 to Form 6."
+    >
 
     <style>
+
         * {
             box-sizing: border-box;
         }
 
+
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             background: #f4f8fb;
-            color: #222;
+            color: #1f2937;
         }
+
+
+        /* ==================================================
+           HEADER
+        ================================================== */
 
         header {
             background: #003366;
             color: white;
-            padding: 14px 18px;
+            padding: 14px 20px;
         }
+
 
         .header-inner {
             max-width: 1100px;
             margin: auto;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 15px;
         }
+
 
         .brand {
             display: flex;
@@ -39,276 +61,635 @@
             gap: 10px;
         }
 
+
         .brand-logo {
             width: 42px;
             height: 42px;
+
+            object-fit: contain;
             border-radius: 50%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #003366;
-            font-weight: bold;
         }
 
-        .brand-text h1 {
-            margin: 0;
+
+        .brand-text {
+            line-height: 1.1;
+        }
+
+
+        .brand-name {
             font-size: 20px;
+            font-weight: 700;
         }
 
-        .brand-text p {
-            margin: 3px 0 0;
+
+        .brand-tagline {
             font-size: 12px;
-            opacity: .9;
+            opacity: 0.85;
+            margin-top: 3px;
         }
 
-        .menu-btn {
+
+        /* ==================================================
+           MENU
+        ================================================== */
+
+        .menu-button {
+            display: none;
+
+            border: none;
             background: transparent;
-            border: 1px solid rgba(255,255,255,.5);
             color: white;
-            font-size: 25px;
-            padding: 5px 10px;
-            border-radius: 7px;
+
+            font-size: 28px;
             cursor: pointer;
         }
 
-        .nav {
-            display: none;
-            background: #00264d;
-            padding: 10px 18px;
+
+        nav {
+            display: flex;
+            gap: 18px;
         }
 
-        .nav a {
-            display: block;
+
+        nav a {
             color: white;
             text-decoration: none;
-            padding: 10px 0;
+            font-size: 14px;
         }
 
-        .page {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px 15px 50px;
+
+        nav a:hover {
+            text-decoration: underline;
         }
 
-        .back-btn {
-            border: none;
-            background: #003366;
-            color: white;
-            padding: 10px 17px;
-            border-radius: 7px;
-            cursor: pointer;
-            font-size: 15px;
-            margin-bottom: 18px;
+
+        /* ==================================================
+           MAIN
+        ================================================== */
+
+        main {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 25px 16px 50px;
         }
 
-        .back-btn:hover {
-            background: #00509e;
+
+        .page-intro {
+            text-align: center;
+            margin-bottom: 25px;
         }
 
-        .intro {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 12px rgba(0,0,0,.06);
-        }
 
-        .intro h2 {
+        .page-intro h1 {
+            margin: 0 0 8px;
             color: #003366;
-            margin-top: 0;
+            font-size: 30px;
         }
 
-        .intro p {
-            color: #555;
+
+        .page-intro p {
+            margin: 0;
+            color: #64748b;
             line-height: 1.6;
         }
 
-        .breadcrumb {
-            font-size: 14px;
-            color: #666;
-            margin: 10px 0 18px;
+
+        /* ==================================================
+           PAST PAPERS APP
+        ================================================== */
+
+        .pp-container {
+            width: 100%;
         }
 
-        .breadcrumb span {
+
+        .pp-back {
+            border: none;
+            background: transparent;
+
             color: #003366;
-            font-weight: bold;
-        }
+            font-size: 16px;
+            font-weight: 700;
 
-        .chain-title {
-            color: #003366;
-            margin-bottom: 15px;
-        }
-
-        .chain-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-            gap: 15px;
-        }
-
-        .chain-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            min-height: 120px;
             cursor: pointer;
-            border: 1px solid #e1e8ef;
-            box-shadow: 0 3px 10px rgba(0,0,0,.05);
-            transition: .2s;
+
+            padding: 8px 0;
+            margin-bottom: 10px;
         }
 
-        .chain-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 18px rgba(0,0,0,.10);
-            border-color: #003366;
+
+        .pp-back:hover {
+            color: #0066cc;
         }
 
-        .chain-card h3 {
-            margin: 0 0 8px;
-            color: #003366;
-            font-size: 18px;
+
+        .pp-breadcrumb {
+            font-size: 13px;
+            color: #64748b;
+
+            margin-bottom: 6px;
+
+            min-height: 18px;
         }
 
-        .chain-card p {
+
+        .pp-title {
             margin: 0;
-            color: #666;
-            font-size: 14px;
-        }
 
-        .paper-list {
-            display: grid;
-            gap: 12px;
-        }
-
-        .paper-card {
-            background: white;
-            border-radius: 10px;
-            padding: 16px;
-            border-left: 5px solid #003366;
-            box-shadow: 0 3px 10px rgba(0,0,0,.06);
-        }
-
-        .paper-card h3 {
-            margin: 0 0 8px;
+            font-size: 26px;
             color: #003366;
         }
 
-        .paper-card p {
-            margin: 5px 0;
-            color: #555;
+
+        .pp-subtitle {
+            margin: 7px 0 18px;
+
+            color: #64748b;
+            line-height: 1.5;
         }
 
-        .open-pdf {
-            display: inline-block;
-            margin-top: 10px;
-            background: #003366;
-            color: white;
-            text-decoration: none;
-            padding: 9px 15px;
-            border-radius: 6px;
-        }
 
-        .open-pdf:hover {
-            background: #00509e;
-        }
+        /* ==================================================
+           CHAIN
+        ================================================== */
 
-        .empty {
+        .pp-chain {
+            display: flex;
+            flex-direction: column;
+
+            border-top: 1px solid #dbe4ec;
+
             background: white;
-            padding: 25px;
-            text-align: center;
-            border-radius: 10px;
-            color: #777;
         }
 
-        footer {
-            background: #003366;
-            color: white;
-            text-align: center;
-            padding: 18px;
+
+        /* ==================================================
+           CHAIN ITEM
+        ================================================== */
+
+        .pp-chain-item {
+            width: 100%;
+
+            border: none;
+            border-bottom: 1px solid #dbe4ec;
+
+            background: white;
+
+            padding: 18px 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition:
+                background 0.15s ease,
+                padding-left 0.15s ease;
+        }
+
+
+        .pp-chain-item:hover {
+            background: #f1f7fc;
+            padding-left: 22px;
+        }
+
+
+        .pp-chain-left {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+
+        .pp-chain-name {
+            color: #003366;
+
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+
+        .pp-chain-meta {
+            color: #64748b;
             font-size: 13px;
         }
 
-        @media (min-width: 700px) {
-            .menu-btn {
-                display: none;
-            }
 
-            .nav {
-                display: block;
-                background: #00264d;
-            }
-
-            .nav-inner {
-                max-width: 1100px;
-                margin: auto;
-                display: flex;
-                gap: 25px;
-            }
-
-            .nav a {
-                display: inline-block;
-            }
+        .pp-arrow {
+            color: #003366;
+            font-size: 27px;
+            line-height: 1;
         }
+
+
+        /* ==================================================
+           PAPER ITEM
+        ================================================== */
+
+        .pp-paper-item {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 18px 16px;
+
+            border-bottom: 1px solid #dbe4ec;
+
+            background: white;
+
+            text-decoration: none;
+
+            transition:
+                background 0.15s ease,
+                padding-left 0.15s ease;
+        }
+
+
+        .pp-paper-item:hover {
+            background: #eef7ff;
+            padding-left: 22px;
+        }
+
+
+        .pp-paper-left {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            min-width: 0;
+        }
+
+
+        .pp-paper-title {
+            color: #003366;
+
+            font-size: 16px;
+            font-weight: 700;
+
+            line-height: 1.4;
+        }
+
+
+        .pp-paper-meta {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+
+        .pp-pdf-arrow {
+            flex-shrink: 0;
+
+            margin-left: 15px;
+
+            color: #0066cc;
+
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+
+        /* ==================================================
+           EMPTY
+        ================================================== */
+
+        .pp-empty {
+            background: white;
+
+            padding: 40px 20px;
+
+            text-align: center;
+
+            border-bottom: 1px solid #dbe4ec;
+        }
+
+
+        .pp-empty-icon {
+            font-size: 35px;
+            margin-bottom: 8px;
+        }
+
+
+        .pp-empty h3 {
+            margin: 0 0 6px;
+            color: #003366;
+        }
+
+
+        .pp-empty p {
+            margin: 0;
+            color: #64748b;
+        }
+
+
+        /* ==================================================
+           FOOTER
+        ================================================== */
+
+        footer {
+            text-align: center;
+
+            padding: 25px 15px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        /* ==================================================
+           MOBILE
+        ================================================== */
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 12px 15px;
+            }
+
+
+            .header-inner {
+                position: relative;
+            }
+
+
+            .menu-button {
+                display: block;
+            }
+
+
+            nav {
+                display: none;
+
+                position: absolute;
+
+                top: 55px;
+                right: 0;
+
+                width: 210px;
+
+                background: #003366;
+
+                padding: 15px;
+
+                flex-direction: column;
+
+                gap: 13px;
+
+                border-radius: 0 0 8px 8px;
+
+                z-index: 1000;
+            }
+
+
+            nav.open {
+                display: flex;
+            }
+
+
+            .brand-name {
+                font-size: 18px;
+            }
+
+
+            .brand-tagline {
+                font-size: 11px;
+            }
+
+
+            main {
+                padding: 20px 10px 40px;
+            }
+
+
+            .page-intro h1 {
+                font-size: 25px;
+            }
+
+
+            .pp-title {
+                font-size: 23px;
+            }
+
+
+            .pp-chain-name {
+                font-size: 16px;
+            }
+
+
+            .pp-chain-item,
+            .pp-paper-item {
+                padding: 16px 12px;
+            }
+
+
+            .pp-chain-item:hover,
+            .pp-paper-item:hover {
+                padding-left: 16px;
+            }
+
+
+            .pp-paper-title {
+                font-size: 15px;
+            }
+
+
+            .pp-pdf-arrow {
+                font-size: 12px;
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-<header>
-    <div class="header-inner">
 
-        <div class="brand">
-            <div class="brand-logo">GS</div>
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-            <div class="brand-text">
-                <h1>GEPAM Science Hub</h1>
-                <p>Making Science Easy</p>
+    <header>
+
+        <div class="header-inner">
+
+            <div class="brand">
+
+                <!--
+                    Kama logo yako ina filename tofauti,
+                    BADILISHA src tu.
+                -->
+
+                <img
+                    class="brand-logo"
+                    src="favicon.png"
+                    alt="GEPAM Science Hub"
+                >
+
+                <div class="brand-text">
+
+                    <div class="brand-name">
+                        GEPAM Science Hub
+                    </div>
+
+                    <div class="brand-tagline">
+                        Making Science Easy
+                    </div>
+
+                </div>
+
             </div>
+
+
+            <button
+                id="menuButton"
+                class="menu-button"
+                type="button"
+                aria-label="Open menu"
+            >
+                ☰
+            </button>
+
+
+            <nav id="mainNav">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="notes.html">
+                    Notes
+                </a>
+
+                <a href="pastpapers.html">
+                    Past Papers
+                </a>
+
+                <a href="index.html#contact">
+                    Contact
+                </a>
+
+            </nav>
+
         </div>
 
-        <button class="menu-btn" id="menuBtn">☰</button>
+    </header>
 
-    </div>
-</header>
 
-<nav class="nav" id="mobileNav">
-    <div class="nav-inner">
-        <a href="index.html">Home</a>
-        <a href="notes.html">Notes</a>
-        <a href="pastpapers.html">Past Papers</a>
-        <a href="contact.html">Contact</a>
-    </div>
-</nav>
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
-<main class="page">
+    <main>
 
-    <button id="backBtn" class="back-btn">
-        ← Back
-    </button>
+        <section class="page-intro">
 
-    <div class="intro">
-        <h2>Past Papers</h2>
-        <p>
-            Find Physics and Chemistry examination papers from
-            Form 1 to Form 6. Navigate through the categories
-            step by step until you reach the required paper.
-        </p>
-    </div>
+            <h1>
+                Past Papers
+            </h1>
 
-    <div id="breadcrumb" class="breadcrumb"></div>
+            <p>
+                Find Physics and Chemistry examination papers
+                from Form 1 to Form 6.
+                Follow the chain below until you reach the PDF.
+            </p>
 
-    <h2 id="chainTitle" class="chain-title"></h2>
+        </section>
 
-    <div id="chainContainer" class="chain-grid"></div>
 
-</main>
+        <!--
+            IMPORTANT:
+            pastpapers.js ita-render chain yote hapa.
+        -->
 
-<footer>
-    © 2026 GEPAM Science Hub. All Rights Reserved.
-</footer>
+        <section id="pastPapersApp">
 
-<script src="data.js"></script>
-<script src="pastpapers.js"></script>
+            <p style="text-align:center;">
+                Loading past papers...
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        © 2026 GEPAM Science Hub.
+        All Rights Reserved.
+
+    </footer>
+
+
+    <!-- =====================================================
+         MOBILE MENU
+    ====================================================== -->
+
+    <script>
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const mainNav =
+            document.getElementById("mainNav");
+
+
+        if (menuButton && mainNav) {
+
+            menuButton.addEventListener(
+                "click",
+                () => {
+
+                    mainNav.classList.toggle("open");
+
+                }
+            );
+
+
+            mainNav.querySelectorAll("a")
+                .forEach(link => {
+
+                    link.addEventListener(
+                        "click",
+                        () => {
+
+                            mainNav.classList.remove("open");
+
+                        }
+                    );
+
+                });
+
+        }
+
+    </script>
+
+
+    <!-- =====================================================
+         DATA FIRST
+    ====================================================== -->
+
+    <script src="data.js"></script>
+
+
+    <!-- =====================================================
+         ENGINE SECOND
+    ====================================================== -->
+
+    <script src="pastpapers.js"></script>
+
 
 </body>
+
 </html>
