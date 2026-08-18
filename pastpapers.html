@@ -47,26 +47,6 @@
             text-decoration: none;
         }
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .nav-btn {
-            background: var(--brand-color);
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: background 0.2s;
-        }
-
-        .nav-btn:hover {
-            background: var(--brand-hover);
-        }
-
         .back-nav-btn {
             color: #94a3b8;
             text-decoration: none;
@@ -193,7 +173,6 @@
             background: var(--brand-hover);
         }
 
-        /* HII NDIO AMRI YA MUHIMU INAYOFICHA HATUA ZINGINE */
         .hidden {
             display: none !important;
         }
@@ -201,14 +180,11 @@
 </head>
 <body>
 
-<!-- Fixed Navbar Menu -->
+<!-- Navbar Menu (Premium Notes Imeondolewa Kabisa) -->
 <nav class="navbar">
     <div style="display: flex; align-items: center; gap: 20px;">
-        <span class="back-nav-btn" onclick="goBackOrHome()">← Rudi</span>
+        <span class="back-nav-btn" onclick="goBackOrHome()">← Rudi Home</span>
         <a href="#" class="nav-brand">🧬 GEPAM Hub</a>
-    </div>
-    <div class="nav-links">
-        <a href="premium-notes.html" class="nav-btn">Premium Notes ⭐</a>
     </div>
 </nav>
 
@@ -231,25 +207,25 @@
         </div>
     </div>
 
-    <!-- Hatua ya 2: Masomo (Yamefichwa sasa) -->
+    <!-- Hatua ya 2: Masomo -->
     <div class="step-section hidden" id="step2">
         <p class="step-title">Hatua ya 2: Chagua Somo</p>
         <div class="options-grid" id="subjectOptions"></div>
     </div>
 
-    <!-- Hatua ya 3: Aina za Mitihani (Yamefichwa sasa) -->
+    <!-- Hatua ya 3: Aina za Mitihani -->
     <div class="step-section hidden" id="step3">
         <p class="step-title">Hatua ya 3: Chagua Aina ya Mtihani</p>
         <div class="options-grid" id="typeOptions"></div>
     </div>
 
-    <!-- Hatua ya 4: Mkoa au Shule kutegemea Kidato (Yamefichwa sasa) -->
+    <!-- Hatua ya 4: Mkoa au Shule kutegemea Kidato -->
     <div class="step-section hidden" id="step4">
         <p class="step-title" id="locationLabel">Hatua ya 4: Chagua Shule/Mkoa</p>
         <div class="options-grid" id="locationOptions"></div>
     </div>
 
-    <!-- Hatua ya 5: Mwaka (Yamefichwa sasa) -->
+    <!-- Hatua ya 5: Mwaka -->
     <div class="step-section hidden" id="step5">
         <p class="step-title">Hatua ya 5: Chagua Mwaka</p>
         <div class="options-grid" id="yearOptions"></div>
@@ -259,7 +235,6 @@
     <div class="papers-grid" id="finalPapersArea"></div>
 </div>
 
-<!-- Viunganishi vya majina yako rasmi ya mafaili -->
 <script src="pastpapers.data.js"></script>
 <script src="pastpapers.js"></script>
 </body>
