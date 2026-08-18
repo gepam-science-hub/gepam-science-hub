@@ -2,354 +2,251 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="GEPAM Science Hub Past Papers - Physics and Chemistry examination papers from Form 1 to Form 6.">
-
-    <title>Past Papers | GEPAM Science Hub</title>
-
-    <link rel="stylesheet" href="style.css">
+    <title>GEPAM Science Hub | Past Papers</title>
 
     <style>
-        /* ================================
-           PAST PAPERS PAGE
-        ================================= */
+        * {
+            box-sizing: border-box;
+        }
 
-        .pastpapers-page {
-            min-height: 100vh;
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
             background: #f4f8fb;
-            padding-bottom: 50px;
+            color: #222;
         }
 
-        .pastpapers-container {
-            width: min(1200px, 94%);
-            margin: auto;
-        }
-
-        /* BACK BUTTON */
-
-        .back-row {
-            padding: 18px 0 8px;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 17px;
-            border-radius: 10px;
+        header {
             background: #003366;
             color: white;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            transition: 0.2s ease;
+            padding: 14px 18px;
         }
 
-        .back-btn:hover {
-            background: #00509e;
-            transform: translateY(-1px);
-        }
-
-        /* INTRO */
-
-        .papers-intro {
-            background: white;
-            border-radius: 18px;
-            padding: 25px 20px;
-            margin: 10px 0 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-            border: 1px solid #e4edf5;
-        }
-
-        .papers-intro h1 {
-            margin: 0 0 8px;
-            color: #003366;
-            font-size: clamp(24px, 4vw, 34px);
-        }
-
-        .papers-intro p {
-            margin: 0;
-            color: #607080;
-            line-height: 1.6;
-        }
-
-        /* FILTER BOX */
-
-        .filters-box {
-            background: white;
-            border-radius: 18px;
-            padding: 20px;
-            margin-bottom: 22px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-            border: 1px solid #e4edf5;
-        }
-
-        .filters-title {
-            color: #003366;
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-
-        .filters-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 12px;
-        }
-
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .filter-group label {
-            font-size: 13px;
-            font-weight: 700;
-            color: #445566;
-        }
-
-        .filter-group select,
-        .filter-group input {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 11px 12px;
-            border: 1px solid #cbd8e3;
-            border-radius: 10px;
-            background: #fff;
-            color: #1f2d3d;
-            font-size: 14px;
-            outline: none;
-        }
-
-        .filter-group select:focus,
-        .filter-group input:focus {
-            border-color: #0066cc;
-            box-shadow: 0 0 0 3px rgba(0,102,204,0.10);
-        }
-
-        .filter-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            border: none;
-            border-radius: 10px;
-            padding: 11px 18px;
-            font-weight: 700;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .reset-btn {
-            background: #e9eef3;
-            color: #263746;
-        }
-
-        .reset-btn:hover {
-            background: #dbe4ec;
-        }
-
-        /* RESULT HEADER */
-
-        .results-header {
+        .header-inner {
+            max-width: 1100px;
+            margin: auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 15px;
-            margin: 20px 0 14px;
-            flex-wrap: wrap;
         }
 
-        .results-header h2 {
-            margin: 0;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #003366;
-            font-size: 21px;
+            font-weight: bold;
         }
 
-        .papers-count {
+        .brand-text h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .brand-text p {
+            margin: 3px 0 0;
+            font-size: 12px;
+            opacity: .9;
+        }
+
+        .menu-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,.5);
+            color: white;
+            font-size: 25px;
+            padding: 5px 10px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .nav {
+            display: none;
+            background: #00264d;
+            padding: 10px 18px;
+        }
+
+        .nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px 0;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: auto;
+            padding: 20px 15px 50px;
+        }
+
+        .back-btn {
+            border: none;
             background: #003366;
             color: white;
-            border-radius: 30px;
-            padding: 7px 13px;
-            font-size: 13px;
-            font-weight: 800;
+            padding: 10px 17px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+            margin-bottom: 18px;
         }
 
-        /* CARDS */
+        .back-btn:hover {
+            background: #00509e;
+        }
 
-        .papers-grid {
+        .intro {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 12px rgba(0,0,0,.06);
+        }
+
+        .intro h2 {
+            color: #003366;
+            margin-top: 0;
+        }
+
+        .intro p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0 18px;
+        }
+
+        .breadcrumb span {
+            color: #003366;
+            font-weight: bold;
+        }
+
+        .chain-title {
+            color: #003366;
+            margin-bottom: 15px;
+        }
+
+        .chain-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 17px;
-            align-items: stretch;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 15px;
+        }
+
+        .chain-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 120px;
+            cursor: pointer;
+            border: 1px solid #e1e8ef;
+            box-shadow: 0 3px 10px rgba(0,0,0,.05);
+            transition: .2s;
+        }
+
+        .chain-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 18px rgba(0,0,0,.10);
+            border-color: #003366;
+        }
+
+        .chain-card h3 {
+            margin: 0 0 8px;
+            color: #003366;
+            font-size: 18px;
+        }
+
+        .chain-card p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .paper-list {
+            display: grid;
+            gap: 12px;
         }
 
         .paper-card {
             background: white;
-            border-radius: 16px;
-            border: 1px solid #e0e9f0;
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform .2s ease, box-shadow .2s ease;
+            border-radius: 10px;
+            padding: 16px;
+            border-left: 5px solid #003366;
+            box-shadow: 0 3px 10px rgba(0,0,0,.06);
         }
 
-        .paper-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 9px 25px rgba(0,0,0,0.09);
-        }
-
-        .paper-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 13px;
-        }
-
-        .paper-icon {
-            width: 43px;
-            height: 43px;
-            flex-shrink: 0;
-            border-radius: 12px;
-            background: #eaf3fb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-        }
-
-        .paper-year {
-            background: #f0f4f8;
-            color: #33495c;
-            padding: 6px 9px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 800;
-        }
-
-        .paper-title {
+        .paper-card h3 {
+            margin: 0 0 8px;
             color: #003366;
-            font-size: 17px;
-            font-weight: 800;
-            line-height: 1.35;
-            margin: 0 0 13px;
         }
 
-        .paper-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-bottom: 15px;
+        .paper-card p {
+            margin: 5px 0;
+            color: #555;
         }
 
-        .paper-tag {
-            background: #f4f7fa;
-            color: #4d6172;
-            border-radius: 7px;
-            padding: 6px 8px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .paper-actions {
-            margin-top: auto;
-        }
-
-        .open-paper-btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 7px;
-            width: 100%;
-            box-sizing: border-box;
+        .open-pdf {
+            display: inline-block;
+            margin-top: 10px;
             background: #003366;
             color: white;
             text-decoration: none;
-            padding: 11px 13px;
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 14px;
-            transition: .2s ease;
+            padding: 9px 15px;
+            border-radius: 6px;
         }
 
-        .open-paper-btn:hover {
+        .open-pdf:hover {
             background: #00509e;
         }
 
-        /* EMPTY */
-
-        .empty-state {
+        .empty {
             background: white;
-            border: 1px dashed #b9c9d8;
-            border-radius: 16px;
-            padding: 40px 20px;
+            padding: 25px;
             text-align: center;
-            color: #647789;
+            border-radius: 10px;
+            color: #777;
         }
 
-        .empty-state .empty-icon {
-            font-size: 42px;
-            margin-bottom: 10px;
+        footer {
+            background: #003366;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 13px;
         }
 
-        .empty-state h3 {
-            margin: 0 0 8px;
-            color: #30485d;
-        }
-
-        .empty-state p {
-            margin: 0;
-            line-height: 1.6;
-        }
-
-        /* MOBILE */
-
-        @media (max-width: 900px) {
-            .filters-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+        @media (min-width: 700px) {
+            .menu-btn {
+                display: none;
             }
 
-            .papers-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-
-        @media (max-width: 600px) {
-            .pastpapers-container {
-                width: 92%;
+            .nav {
+                display: block;
+                background: #00264d;
             }
 
-            .filters-grid {
-                grid-template-columns: 1fr;
+            .nav-inner {
+                max-width: 1100px;
+                margin: auto;
+                display: flex;
+                gap: 25px;
             }
 
-            .papers-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .papers-intro {
-                padding: 20px 16px;
-            }
-
-            .filters-box {
-                padding: 16px;
-            }
-
-            .back-btn {
-                width: 100%;
-                justify-content: center;
-                box-sizing: border-box;
+            .nav a {
+                display: inline-block;
             }
         }
     </style>
@@ -357,267 +254,61 @@
 
 <body>
 
-<div class="pastpapers-page">
+<header>
+    <div class="header-inner">
 
-    <!-- HEADER -->
-    <header>
-        <div class="container">
+        <div class="brand">
+            <div class="brand-logo">GS</div>
 
-            <div class="logo">
-                <strong>GS</strong>
-                <div>
-                    <div>GEPAM Science Hub</div>
-                    <small>Making Science Easy</small>
-                </div>
+            <div class="brand-text">
+                <h1>GEPAM Science Hub</h1>
+                <p>Making Science Easy</p>
             </div>
-
-            <button
-                class="menu-toggle"
-                id="menuToggle"
-                aria-label="Open menu">
-                ☰
-            </button>
-
-            <nav id="mainNav">
-                <a href="index.html">Home</a>
-                <a href="notes.html">Notes</a>
-                <a href="pastpapers.html" class="active">Past Papers</a>
-                <a href="index.html#about">About</a>
-                <a href="index.html#contact">Contact</a>
-            </nav>
-
-        </div>
-    </header>
-
-
-    <main class="pastpapers-container">
-
-        <!-- BACK -->
-        <div class="back-row">
-            <a href="index.html" class="back-btn">
-                ← Back to Home
-            </a>
         </div>
 
+        <button class="menu-btn" id="menuBtn">☰</button>
 
-        <!-- INTRO -->
-        <section class="papers-intro">
+    </div>
+</header>
 
-            <h1>Past Papers</h1>
+<nav class="nav" id="mobileNav">
+    <div class="nav-inner">
+        <a href="index.html">Home</a>
+        <a href="notes.html">Notes</a>
+        <a href="pastpapers.html">Past Papers</a>
+        <a href="contact.html">Contact</a>
+    </div>
+</nav>
 
-            <p>
-                Find Physics and Chemistry examination papers
-                from Form 1 to Form 6. Choose your class,
-                subject and examination type to get started.
-            </p>
+<main class="page">
 
-        </section>
+    <button id="backBtn" class="back-btn">
+        ← Back
+    </button>
 
+    <div class="intro">
+        <h2>Past Papers</h2>
+        <p>
+            Find Physics and Chemistry examination papers from
+            Form 1 to Form 6. Navigate through the categories
+            step by step until you reach the required paper.
+        </p>
+    </div>
 
-        <!-- FILTERS -->
-        <section class="filters-box">
+    <div id="breadcrumb" class="breadcrumb"></div>
 
-            <div class="filters-title">
-                🔎 Find Examination Papers
-            </div>
+    <h2 id="chainTitle" class="chain-title"></h2>
 
-            <div class="filters-grid">
+    <div id="chainContainer" class="chain-grid"></div>
 
-                <div class="filter-group">
-                    <label for="formSelect">
-                        Select Form
-                    </label>
+</main>
 
-                    <select id="formSelect">
-                        <option value="">Select Form</option>
-                        <option value="form1">Form 1</option>
-                        <option value="form2">Form 2</option>
-                        <option value="form3">Form 3</option>
-                        <option value="form4">Form 4</option>
-                        <option value="form5">Form 5</option>
-                        <option value="form6">Form 6</option>
-                    </select>
-                </div>
+<footer>
+    © 2026 GEPAM Science Hub. All Rights Reserved.
+</footer>
 
-
-                <div class="filter-group">
-                    <label for="subjectSelect">
-                        Subject
-                    </label>
-
-                    <select id="subjectSelect">
-                        <option value="">All Subjects</option>
-                    </select>
-                </div>
-
-
-                <div class="filter-group">
-                    <label for="typeSelect">
-                        Examination Type
-                    </label>
-
-                    <select id="typeSelect">
-                        <option value="">All Types</option>
-                    </select>
-                </div>
-
-
-                <div class="filter-group">
-                    <label for="regionSelect">
-                        Region
-                    </label>
-
-                    <select id="regionSelect">
-                        <option value="">All Regions</option>
-                    </select>
-                </div>
-
-
-                <div class="filter-group">
-                    <label for="yearSelect">
-                        Year
-                    </label>
-
-                    <select id="yearSelect">
-                        <option value="">All Years</option>
-                    </select>
-                </div>
-
-
-                <div class="filter-group">
-                    <label for="schoolInput">
-                        School
-                    </label>
-
-                    <input
-                        type="text"
-                        id="schoolInput"
-                        placeholder="Search school...">
-                </div>
-
-
-                <div class="filter-group">
-                    <label for="zoneInput">
-                        Zone
-                    </label>
-
-                    <input
-                        type="text"
-                        id="zoneInput"
-                        placeholder="Search zone...">
-                </div>
-
-
-                <div class="filter-group">
-                    <label for="seriesInput">
-                        Series
-                    </label>
-
-                    <input
-                        type="text"
-                        id="seriesInput"
-                        placeholder="Search series...">
-                </div>
-
-            </div>
-
-
-            <div class="filter-actions">
-
-                <button
-                    type="button"
-                    class="filter-btn reset-btn"
-                    id="resetFilters">
-                    Reset Filters
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- RESULTS -->
-        <div class="results-header">
-
-            <h2>
-                Available Papers
-            </h2>
-
-            <div
-                class="papers-count"
-                id="papersCount">
-                0 papers
-            </div>
-
-        </div>
-
-
-        <!-- CARDS -->
-        <section
-            class="papers-grid"
-            id="papersGrid">
-        </section>
-
-
-        <!-- EMPTY STATE -->
-        <div
-            class="empty-state"
-            id="emptyState"
-            style="display:none;">
-
-            <div class="empty-icon">
-                📚
-            </div>
-
-            <h3>
-                No papers found
-            </h3>
-
-            <p>
-                Try another year, region, school,
-                zone or series.
-            </p>
-
-        </div>
-
-    </main>
-
-
-    <footer>
-        <div class="container">
-            © 2026 GEPAM Science Hub. All Rights Reserved.
-        </div>
-    </footer>
-
-</div>
-
-
-<!-- DATA FIRST -->
 <script src="data.js"></script>
-
-<!-- PAGE LOGIC SECOND -->
 <script src="pastpapers.js"></script>
-
-
-<script>
-    /* MOBILE MENU */
-
-    const menuToggle =
-        document.getElementById("menuToggle");
-
-    const mainNav =
-        document.getElementById("mainNav");
-
-    if (menuToggle && mainNav) {
-
-        menuToggle.addEventListener("click", function () {
-
-            mainNav.classList.toggle("show");
-
-        });
-
-    }
-</script>
 
 </body>
 </html>
