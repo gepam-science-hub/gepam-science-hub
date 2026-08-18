@@ -1,1054 +1,554 @@
-/* =========================================================
-   GEPAM SCIENCE HUB
-   PAST PAPERS SYSTEM
-   =========================================================
+// ============================================================
+// GEPAM SCIENCE HUB - PAST PAPERS ENGINE
+// Mfumo:
+// Past Papers → Form → Subject → Exam Type → Year
+// → Region / School → Paper Chain → Fungua PDF
+// ============================================================
 
-   SYSTEM:
+import { pastPaperConfig, pastPapers } from "./data.js";
 
-   Past Papers
-       ↓
-   Form
-       ↓
-   Physics / Chemistry
-       ↓
-   Exam Type
-       ↓
-   Year
-       ↓
-   Region
-       ↓
-   Paper Chain
-       ↓
-   Open PDF
+document.addEventListener("DOMContentLoaded", () => {
 
-   DATA SOURCE:
-   data.js
+    const formContainer = document.getElementById("form-container");
+    const subjectContainer = document.getElementById("subject-container");
+    const typeContainer = document.getElementById("type-container");
+    const yearContainer = document.getElementById("year-container");
+    const regionContainer = document.getElementById("region-container");
+    const paperContainer = document.getElementById("paper-container");
 
-   Variables used directly:
-   - pastPaperConfig
-   - pastPapers
-========================================================= */
-
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const content = document.getElementById("paperContent");
-    const breadcrumb = document.getElementById("selectionBreadcrumb");
-
-    let selected = {
-        form: null,
-        subject: null,
-        type: null,
-        year: null,
-        region: null
-    };
-
-
-    /* =====================================================
-       UTILITY FUNCTIONS
-    ===================================================== */
-
-    function escapeHTML(value) {
-
-        if (value === null || value === undefined) {
-            return "";
-        }
-
-        return String(value)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
+    if (!formContainer) {
+        console.error("GEPAM ERROR: form-container haipo kwenye pastpapers.html");
+        return;
     }
 
+    // --------------------------------------------------------
+    // HIDE ALL STEPS
+    // --------------------------------------------------------
 
-    function formatName(value) {
+    function hideAllAfter(container) {
+        const containers = [
+            subjectContainer,
+            typeContainer,
+            yearContainer,
+            regionContainer,
+            paperContainer
+        ];
 
-        if (!value) {
-            return "";
+        const index = containers.indexOf(container);
+
+        containers.forEach((el, i) => {
+            if (el && i >= index) {
+                el.innerHTML = "";
+                el.style.display = "none";
+            }
+        });
+    }
+
+    function show(container) {
+        if (container) {
+            container.style.display = "block";
+        }
+    }
+
+    // --------------------------------------------------------
+    // BUTTON
+    // --------------------------------------------------------
+
+    function createButton(text, value, callback, extraClass = "") {
+
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = `paper-option ${extraClass}`.trim();
+        button.textContent = text;
+
+        button.addEventListener("click", () => {
+            callback(value);
+        });
+
+        return button;
+    }
+
+    // --------------------------------------------------------
+    // STEP 1: FORM
+    // --------------------------------------------------------
+
+    function renderForms() {
+
+        formContainer.innerHTML = "";
+
+        const forms = Object.keys(pastPaperConfig);
+
+        if (!forms.length) {
+            formContainer.innerHTML = `
+                <div class="empty-message">
+                    No Forms Available
+                </div>
+            `;
+            return;
         }
 
-        const specialNames = {
-            "dar_es_salaam": "Dar es Salaam",
-            "pre_necta": "Pre-NECTA",
-            "acsee": "ACSEE",
-            "ftna": "FTNA",
-            "necta": "NECTA"
-        };
+        forms.forEach(form => {
 
-        if (specialNames[value]) {
-            return specialNames[value];
+            const button = createButton(
+                form.replace("form", "Form "),
+                form,
+                selectForm
+            );
+
+            formContainer.appendChild(button);
+        });
+    }
+
+    // --------------------------------------------------------
+    // STEP 2: SUBJECT
+    // --------------------------------------------------------
+
+    function selectForm(form) {
+
+        hideAllAfter(subjectContainer);
+
+        subjectContainer.innerHTML = "";
+
+        const config = pastPaperConfig[form];
+
+        if (!config || !config.subjects) {
+            subjectContainer.innerHTML = `
+                <div class="empty-message">
+                    No subjects available.
+                </div>
+            `;
+            show(subjectContainer);
+            return;
         }
 
-        return value
-            .replace(/_/g, " ")
-            .replace(/\b\w/g, function (letter) {
-                return letter.toUpperCase();
+        config.subjects.forEach(subject => {
+
+            const label =
+                subject === "physics"
+                    ? "⚛️ Physics"
+                    : subject === "chemistry"
+                        ? "🧪 Chemistry"
+                        : capitalize(subject);
+
+            const button = createButton(
+                label,
+                subject,
+                value => selectSubject(form, value)
+            );
+
+            subjectContainer.appendChild(button);
+        });
+
+        show(subjectContainer);
+    }
+
+    // --------------------------------------------------------
+    // STEP 3: SUBJECT SELECTED
+    // --------------------------------------------------------
+
+    function selectSubject(form, subject) {
+
+        hideAllAfter(typeContainer);
+
+        typeContainer.innerHTML = "";
+
+        const config = pastPaperConfig[form];
+
+        if (!config || !config.types) {
+            typeContainer.innerHTML = `
+                <div class="empty-message">
+                    No exam types available.
+                </div>
+            `;
+            show(typeContainer);
+            return;
+        }
+
+        const papers =
+            pastPapers?.[form]?.[subject] || [];
+
+        if (!papers.length) {
+            typeContainer.innerHTML = `
+                <div class="empty-message">
+                    No ${capitalize(subject)} past papers available.
+                </div>
+            `;
+            show(typeContainer);
+            return;
+        }
+
+        // Only show exam types that actually have data
+        const availableTypes = [
+            ...new Set(
+                papers
+                    .map(p => p.type)
+                    .filter(Boolean)
+            )
+        ];
+
+        config.types.forEach(type => {
+
+            if (!availableTypes.includes(type)) {
+                return;
+            }
+
+            const button = createButton(
+                formatExamType(type),
+                type,
+                value => selectType(form, subject, value)
+            );
+
+            typeContainer.appendChild(button);
+        });
+
+        if (!typeContainer.children.length) {
+            typeContainer.innerHTML = `
+                <div class="empty-message">
+                    No exam types found.
+                </div>
+            `;
+        }
+
+        show(typeContainer);
+    }
+
+    // --------------------------------------------------------
+    // STEP 4: EXAM TYPE
+    // --------------------------------------------------------
+
+    function selectType(form, subject, type) {
+
+        hideAllAfter(yearContainer);
+
+        yearContainer.innerHTML = "";
+
+        const papers =
+            pastPapers?.[form]?.[subject] || [];
+
+        const filtered =
+            papers.filter(p => p.type === type);
+
+        if (!filtered.length) {
+            yearContainer.innerHTML = `
+                <div class="empty-message">
+                    No papers found for this exam type.
+                </div>
+            `;
+            show(yearContainer);
+            return;
+        }
+
+        const years = [
+            ...new Set(
+                filtered
+                    .map(p => p.year)
+                    .filter(Boolean)
+            )
+        ].sort((a, b) => b - a);
+
+        years.forEach(year => {
+
+            const button = createButton(
+                `📅 ${year}`,
+                year,
+                value => selectYear(
+                    form,
+                    subject,
+                    type,
+                    value
+                )
+            );
+
+            yearContainer.appendChild(button);
+        });
+
+        show(yearContainer);
+    }
+
+    // --------------------------------------------------------
+    // STEP 5: YEAR
+    // --------------------------------------------------------
+
+    function selectYear(form, subject, type, year) {
+
+        hideAllAfter(regionContainer);
+
+        regionContainer.innerHTML = "";
+
+        const papers =
+            pastPapers?.[form]?.[subject] || [];
+
+        const filtered =
+            papers.filter(p =>
+                p.type === type &&
+                Number(p.year) === Number(year)
+            );
+
+        if (!filtered.length) {
+            regionContainer.innerHTML = `
+                <div class="empty-message">
+                    No papers found for ${year}.
+                </div>
+            `;
+            show(regionContainer);
+            return;
+        }
+
+        // ----------------------------------------------------
+        // Group by region / school
+        // ----------------------------------------------------
+
+        const groups = groupPapers(filtered);
+
+        Object.keys(groups)
+            .sort((a, b) => a.localeCompare(b))
+            .forEach(groupName => {
+
+                const button = createButton(
+                    `📍 ${formatRegion(groupName)}`,
+                    groupName,
+                    value => selectRegion(
+                        form,
+                        subject,
+                        type,
+                        year,
+                        value,
+                        groups
+                    )
+                );
+
+                regionContainer.appendChild(button);
             });
+
+        show(regionContainer);
     }
 
+    // --------------------------------------------------------
+    // STEP 6: REGION / SCHOOL
+    // --------------------------------------------------------
 
-    function formatSubject(subject) {
+    function selectRegion(
+        form,
+        subject,
+        type,
+        year,
+        region,
+        groups
+    ) {
 
-        if (subject === "physics") {
-            return "Physics";
+        hideAllAfter(paperContainer);
+
+        paperContainer.innerHTML = "";
+
+        const papers = groups[region] || [];
+
+        if (!papers.length) {
+            paperContainer.innerHTML = `
+                <div class="empty-message">
+                    No papers available.
+                </div>
+            `;
+            show(paperContainer);
+            return;
         }
 
-        if (subject === "chemistry") {
-            return "Chemistry";
-        }
+        // ----------------------------------------------------
+        // PAPER CHAIN
+        // ----------------------------------------------------
 
-        return formatName(subject);
+        papers.forEach((paper, index) => {
+
+            const card = document.createElement("div");
+
+            card.className = "paper-card";
+
+            const title = document.createElement("h3");
+
+            title.textContent =
+                paper.title ||
+                `${capitalize(subject)} Paper`;
+
+            card.appendChild(title);
+
+            const info = document.createElement("p");
+
+            info.className = "paper-info";
+
+            info.textContent =
+                `${formatExamType(type)} • ${year}`;
+
+            card.appendChild(info);
+
+            if (paper.school) {
+
+                const school = document.createElement("p");
+
+                school.className = "paper-school";
+
+                school.textContent =
+                    `🏫 ${paper.school}`;
+
+                card.appendChild(school);
+            }
+
+            const openButton =
+                document.createElement("button");
+
+            openButton.type = "button";
+
+            openButton.className = "open-paper";
+
+            openButton.textContent =
+                "📄 Fungua PDF";
+
+            openButton.addEventListener("click", () => {
+
+                openPDF(paper.file);
+
+            });
+
+            card.appendChild(openButton);
+
+            paperContainer.appendChild(card);
+
+            // Chain separator
+            if (index < papers.length - 1) {
+
+                const chain =
+                    document.createElement("div");
+
+                chain.className = "paper-chain";
+
+                chain.textContent = "↓";
+
+                paperContainer.appendChild(chain);
+            }
+        });
+
+        show(paperContainer);
     }
 
+    // --------------------------------------------------------
+    // GROUP PAPERS
+    // --------------------------------------------------------
+
+    function groupPapers(papers) {
+
+        const groups = {};
+
+        papers.forEach(paper => {
+
+            /*
+             * Kama kuna school, tumia school kama group.
+             * Kama hakuna school, tumia region.
+             */
+
+            const group =
+                paper.school ||
+                paper.region ||
+                "other";
+
+            if (!groups[group]) {
+                groups[group] = [];
+            }
+
+            groups[group].push(paper);
+        });
+
+        return groups;
+    }
+
+    // --------------------------------------------------------
+    // OPEN PDF
+    // --------------------------------------------------------
+
+    function openPDF(file) {
+
+        if (!file) {
+            alert("PDF file haijapatikana.");
+            return;
+        }
+
+        // Normalize path
+        let pdfPath = String(file).trim();
+
+        /*
+         * GitHub Pages:
+         * relative path works vizuri kutoka pastpapers.html
+         * ikiwa papers folder ipo kwenye root.
+         */
+
+        if (
+            !pdfPath.startsWith("/") &&
+            !pdfPath.startsWith("http://") &&
+            !pdfPath.startsWith("https://")
+        ) {
+            pdfPath = `./${pdfPath}`;
+        }
+
+        window.open(
+            pdfPath,
+            "_blank",
+            "noopener,noreferrer"
+        );
+    }
+
+    // --------------------------------------------------------
+    // HELPERS
+    // --------------------------------------------------------
+
+    function capitalize(text) {
+
+        if (!text) return "";
+
+        return text.charAt(0).toUpperCase()
+            + text.slice(1);
+    }
 
     function formatExamType(type) {
 
         const names = {
-            "midterm": "Midterm Examination",
-            "terminal": "Terminal Examination",
-            "annual": "Annual Examination",
-            "joint": "Joint Examination",
-            "mock": "Mock Examination",
-            "pre_necta": "Pre-NECTA Examination",
-            "necta": "NECTA Examination",
-            "acsee": "ACSEE Examination",
-            "ftna": "FTNA Examination"
+
+            midterm: "Midterm",
+            terminal: "Terminal",
+            annual: "Annual",
+            ftna: "FTNA",
+            joint: "Joint",
+            mock: "Mock",
+            pre_necta: "Pre-NECTA",
+            necta: "NECTA",
+            acsee: "ACSEE"
+
         };
 
-        return names[type] || formatName(type);
+        return names[type] || capitalize(type);
     }
 
+    function formatRegion(region) {
 
-    function getCurrentPapers() {
+        const names = {
 
-        if (!selected.form || !selected.subject) {
-            return [];
-        }
+            dar_es_salaam: "Dar es Salaam",
+            dodoma: "Dodoma",
+            arusha: "Arusha",
+            mbeya: "Mbeya",
+            kagera: "Kagera",
+            shinyanga: "Shinyanga",
+            necta: "NECTA"
 
-        if (
-            !pastPapers[selected.form] ||
-            !pastPapers[selected.form][selected.subject]
-        ) {
-            return [];
-        }
+        };
 
-        return pastPapers[selected.form][selected.subject];
+        return names[region] ||
+            String(region)
+                .replaceAll("_", " ")
+                .replace(/\b\w/g, c => c.toUpperCase());
     }
 
-
-    /* =====================================================
-       PROGRESS
-    ===================================================== */
-
-    function updateProgress(step) {
-
-        document.querySelectorAll(".progress-step").forEach(function (item) {
-
-            const itemStep = Number(item.dataset.step);
-
-            item.classList.remove("active");
-            item.classList.remove("completed");
-
-            if (itemStep === step) {
-                item.classList.add("active");
-            }
-
-            if (itemStep < step) {
-                item.classList.add("completed");
-            }
-        });
-    }
-
-
-    /* =====================================================
-       BREADCRUMB
-    ===================================================== */
-
-    function updateBreadcrumb() {
-
-        let items = ["Past Papers"];
-
-        if (selected.form) {
-            items.push(formatName(selected.form));
-        }
-
-        if (selected.subject) {
-            items.push(formatSubject(selected.subject));
-        }
-
-        if (selected.type) {
-            items.push(formatExamType(selected.type));
-        }
-
-        if (selected.year) {
-            items.push(String(selected.year));
-        }
-
-        if (selected.region) {
-            items.push(formatName(selected.region));
-        }
-
-        breadcrumb.innerHTML = items
-            .map(function (item, index) {
-
-                if (index === 0) {
-                    return `<span>${escapeHTML(item)}</span>`;
-                }
-
-                return `
-                    <span class="breadcrumb-arrow">›</span>
-                    <span>${escapeHTML(item)}</span>
-                `;
-
-            })
-            .join("");
-    }
-
-
-    /* =====================================================
-       STEP 1
-       FORM
-    ===================================================== */
-
-    function showForms() {
-
-        selected.subject = null;
-        selected.type = null;
-        selected.year = null;
-        selected.region = null;
-
-        updateProgress(1);
-        updateBreadcrumb();
-
-        let html = `
-            <div class="selection-heading">
-                <span class="selection-icon">📚</span>
-
-                <div>
-                    <h3>Select Form</h3>
-                    <p>
-                        Choose the class level for the past paper.
-                    </p>
-                </div>
-            </div>
-
-            <div class="selection-grid form-grid">
-        `;
-
-
-        for (let i = 1; i <= 6; i++) {
-
-            const form = "form" + i;
-
-            html += `
-                <button
-                    class="selection-card form-card"
-                    data-form="${form}"
-                    type="button"
-                >
-
-                    <span class="card-number">
-                        ${i}
-                    </span>
-
-                    <span class="card-title">
-                        Form ${i}
-                    </span>
-
-                    <span class="card-arrow">
-                        →
-                    </span>
-
-                </button>
-            `;
-        }
-
-
-        html += `</div>`;
-
-        content.innerHTML = html;
-
-
-        document.querySelectorAll("[data-form]").forEach(function (button) {
-
-            button.addEventListener("click", function () {
-
-                selected.form = this.dataset.form;
-
-                showSubjects();
-
-            });
-
-        });
-    }
-
-
-    /* =====================================================
-       STEP 2
-       SUBJECT
-    ===================================================== */
-
-    function showSubjects() {
-
-        selected.type = null;
-        selected.year = null;
-        selected.region = null;
-
-        updateProgress(2);
-        updateBreadcrumb();
-
-        const config = pastPaperConfig[selected.form];
-
-        let subjects = config && Array.isArray(config.subjects)
-            ? config.subjects
-            : ["physics", "chemistry"];
-
-
-        let html = `
-            <div class="selection-heading">
-
-                <span class="selection-icon">🔬</span>
-
-                <div>
-                    <h3>
-                        Form ${selected.form.replace("form", "")}
-                    </h3>
-
-                    <p>
-                        Choose a subject.
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="selection-grid subject-grid">
-        `;
-
-
-        subjects.forEach(function (subject) {
-
-            html += `
-                <button
-                    class="selection-card subject-card ${subject}"
-                    data-subject="${subject}"
-                    type="button"
-                >
-
-                    <span class="subject-icon">
-                        ${subject === "physics" ? "⚛️" : "🧪"}
-                    </span>
-
-                    <span class="card-title">
-                        ${escapeHTML(formatSubject(subject))}
-                    </span>
-
-                    <span class="card-arrow">
-                        →
-                    </span>
-
-                </button>
-            `;
-
-        });
-
-
-        html += `</div>`;
-
-
-        html += `
-            <button
-                class="back-button"
-                id="backToForms"
-                type="button"
-            >
-                ← Back to Forms
-            </button>
-        `;
-
-
-        content.innerHTML = html;
-
-
-        document.querySelectorAll("[data-subject]").forEach(function (button) {
-
-            button.addEventListener("click", function () {
-
-                selected.subject = this.dataset.subject;
-
-                showExamTypes();
-
-            });
-
-        });
-
-
-        document
-            .getElementById("backToForms")
-            .addEventListener("click", showForms);
-    }
-
-
-    /* =====================================================
-       STEP 3
-       EXAM TYPE
-    ===================================================== */
-
-    function showExamTypes() {
-
-        selected.year = null;
-        selected.region = null;
-
-        updateProgress(3);
-        updateBreadcrumb();
-
-
-        const config = pastPaperConfig[selected.form];
-
-        let types = config && Array.isArray(config.types)
-            ? config.types
-            : [];
-
-
-        /*
-           Only show exam types which actually have papers
-           for this subject.
-        */
-
-        const papers = getCurrentPapers();
-
-        const availableTypes = types.filter(function (type) {
-
-            return papers.some(function (paper) {
-
-                return paper.type === type;
-
-            });
-
-        });
-
-
-        let html = `
-            <div class="selection-heading">
-
-                <span class="selection-icon">📝</span>
-
-                <div>
-                    <h3>Exam Type</h3>
-
-                    <p>
-                        Choose the type of examination.
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="selection-grid type-grid">
-        `;
-
-
-        availableTypes.forEach(function (type) {
-
-            const count = papers.filter(function (paper) {
-
-                return paper.type === type;
-
-            }).length;
-
-
-            html += `
-                <button
-                    class="selection-card type-card"
-                    data-type="${escapeHTML(type)}"
-                    type="button"
-                >
-
-                    <span class="type-icon">
-                        📄
-                    </span>
-
-                    <span class="card-info">
-
-                        <strong>
-                            ${escapeHTML(formatExamType(type))}
-                        </strong>
-
-                        <small>
-                            ${count} paper${count !== 1 ? "s" : ""}
-                        </small>
-
-                    </span>
-
-                    <span class="card-arrow">
-                        →
-                    </span>
-
-                </button>
-            `;
-
-        });
-
-
-        html += `</div>`;
-
-
-        if (availableTypes.length === 0) {
-
-            html += `
-                <div class="empty-state">
-
-                    <div class="empty-icon">📭</div>
-
-                    <h3>No papers available</h3>
-
-                    <p>
-                        There are currently no papers for
-                        this subject in this form.
-                    </p>
-
-                </div>
-            `;
-        }
-
-
-        html += `
-            <button
-                class="back-button"
-                id="backToSubjects"
-                type="button"
-            >
-                ← Back to Subjects
-            </button>
-        `;
-
-
-        content.innerHTML = html;
-
-
-        document.querySelectorAll("[data-type]").forEach(function (button) {
-
-            button.addEventListener("click", function () {
-
-                selected.type = this.dataset.type;
-
-                showYears();
-
-            });
-
-        });
-
-
-        document
-            .getElementById("backToSubjects")
-            .addEventListener("click", showSubjects);
-    }
-
-
-    /* =====================================================
-       STEP 4
-       YEAR
-    ===================================================== */
-
-    function showYears() {
-
-        selected.region = null;
-
-        updateProgress(4);
-        updateBreadcrumb();
-
-
-        const papers = getCurrentPapers().filter(function (paper) {
-
-            return paper.type === selected.type;
-
-        });
-
-
-        const years = [...new Set(
-            papers.map(function (paper) {
-                return Number(paper.year);
-            })
-        )].sort(function (a, b) {
-
-            return b - a;
-
-        });
-
-
-        let html = `
-            <div class="selection-heading">
-
-                <span class="selection-icon">📅</span>
-
-                <div>
-                    <h3>Select Year</h3>
-
-                    <p>
-                        Choose the examination year.
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="selection-grid year-grid">
-        `;
-
-
-        years.forEach(function (year) {
-
-            const count = papers.filter(function (paper) {
-
-                return Number(paper.year) === Number(year);
-
-            }).length;
-
-
-            html += `
-                <button
-                    class="selection-card year-card"
-                    data-year="${year}"
-                    type="button"
-                >
-
-                    <span class="year-number">
-                        ${year}
-                    </span>
-
-                    <span class="year-count">
-                        ${count}
-                        paper${count !== 1 ? "s" : ""}
-                    </span>
-
-                    <span class="card-arrow">
-                        →
-                    </span>
-
-                </button>
-            `;
-
-        });
-
-
-        html += `</div>`;
-
-
-        if (years.length === 0) {
-
-            html += `
-                <div class="empty-state">
-
-                    <div class="empty-icon">📭</div>
-
-                    <h3>No years available</h3>
-
-                </div>
-            `;
-        }
-
-
-        html += `
-            <button
-                class="back-button"
-                id="backToTypes"
-                type="button"
-            >
-                ← Back to Exam Type
-            </button>
-        `;
-
-
-        content.innerHTML = html;
-
-
-        document.querySelectorAll("[data-year]").forEach(function (button) {
-
-            button.addEventListener("click", function () {
-
-                selected.year = Number(this.dataset.year);
-
-                showRegions();
-
-            });
-
-        });
-
-
-        document
-            .getElementById("backToTypes")
-            .addEventListener("click", showExamTypes);
-    }
-
-
-    /* =====================================================
-       STEP 5
-       REGION
-    ===================================================== */
-
-    function showRegions() {
-
-        updateProgress(5);
-        updateBreadcrumb();
-
-
-        const papers = getCurrentPapers().filter(function (paper) {
-
-            return (
-                paper.type === selected.type &&
-                Number(paper.year) === Number(selected.year)
-            );
-
-        });
-
-
-        const regions = [...new Set(
-            papers.map(function (paper) {
-                return paper.region;
-            })
-        )].sort();
-
-
-        let html = `
-            <div class="selection-heading">
-
-                <span class="selection-icon">📍</span>
-
-                <div>
-                    <h3>Select Region / Source</h3>
-
-                    <p>
-                        Choose the region or examination source.
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="selection-grid region-grid">
-        `;
-
-
-        regions.forEach(function (region) {
-
-            const count = papers.filter(function (paper) {
-
-                return paper.region === region;
-
-            }).length;
-
-
-            html += `
-                <button
-                    class="selection-card region-card"
-                    data-region="${escapeHTML(region)}"
-                    type="button"
-                >
-
-                    <span class="region-icon">
-                        📍
-                    </span>
-
-                    <span class="card-info">
-
-                        <strong>
-                            ${escapeHTML(formatName(region))}
-                        </strong>
-
-                        <small>
-                            ${count}
-                            paper${count !== 1 ? "s" : ""}
-                        </small>
-
-                    </span>
-
-                    <span class="card-arrow">
-                        →
-                    </span>
-
-                </button>
-            `;
-
-        });
-
-
-        html += `</div>`;
-
-
-        if (regions.length === 0) {
-
-            html += `
-                <div class="empty-state">
-
-                    <div class="empty-icon">📭</div>
-
-                    <h3>No region available</h3>
-
-                </div>
-            `;
-        }
-
-
-        html += `
-            <button
-                class="back-button"
-                id="backToYears"
-                type="button"
-            >
-                ← Back to Years
-            </button>
-        `;
-
-
-        content.innerHTML = html;
-
-
-        document.querySelectorAll("[data-region]").forEach(function (button) {
-
-            button.addEventListener("click", function () {
-
-                selected.region = this.dataset.region;
-
-                showPapers();
-
-            });
-
-        });
-
-
-        document
-            .getElementById("backToYears")
-            .addEventListener("click", showYears);
-    }
-
-
-    /* =====================================================
-       STEP 6
-       PAPER CHAIN
-    ===================================================== */
-
-    function showPapers() {
-
-        updateProgress(6);
-        updateBreadcrumb();
-
-
-        /*
-           THIS IS THE CORE FILTER.
-
-           We use the exact data structure supplied
-           in data.js:
-
-           pastPapers
-             ↓
-           form
-             ↓
-           subject
-             ↓
-           array of papers
-        */
-
-        const papers = getCurrentPapers().filter(function (paper) {
-
-            return (
-                paper.type === selected.type &&
-                Number(paper.year) === Number(selected.year) &&
-                paper.region === selected.region
-            );
-
-        });
-
-
-        let html = `
-            <div class="selection-heading">
-
-                <span class="selection-icon">📑</span>
-
-                <div>
-                    <h3>Paper Chain</h3>
-
-                    <p>
-                        Select a paper below to open the PDF.
-                    </p>
-                </div>
-
-            </div>
-        `;
-
-
-        if (papers.length === 0) {
-
-            html += `
-                <div class="empty-state">
-
-                    <div class="empty-icon">📭</div>
-
-                    <h3>No paper found</h3>
-
-                    <p>
-                        No paper matches the selected
-                        Form, Subject, Exam Type, Year
-                        and Region.
-                    </p>
-
-                </div>
-            `;
-
-        } else {
-
-            html += `
-                <div class="paper-chain">
-
-                    <div class="chain-header">
-
-                        <div>
-                            <strong>
-                                ${escapeHTML(formatSubject(selected.subject))}
-                            </strong>
-
-                            <span>•</span>
-
-                            <strong>
-                                ${escapeHTML(formatExamType(selected.type))}
-                            </strong>
-
-                            <span>•</span>
-
-                            <strong>
-                                ${selected.year}
-                            </strong>
-
-                            <span>•</span>
-
-                            <strong>
-                                ${escapeHTML(formatName(selected.region))}
-                            </strong>
-                        </div>
-
-                        <span class="paper-total">
-                            ${papers.length}
-                            paper${papers.length !== 1 ? "s" : ""}
-                        </span>
-
-                    </div>
-            `;
-
-
-            papers.forEach(function (paper, index) {
-
-                html += `
-                    <div class="paper-chain-item">
-
-                        <div class="paper-chain-number">
-                            ${index + 1}
-                        </div>
-
-                        <div class="paper-chain-line"></div>
-
-                        <div class="paper-info">
-
-                            <h4>
-                                ${escapeHTML(paper.title)}
-                            </h4>
-
-                            <div class="paper-meta">
-
-                                <span>
-                                    📚
-                                    ${escapeHTML(
-                                        formatSubject(selected.subject)
-                                    )}
-                                </span>
-
-                                <span>
-                                    📅
-                                    ${escapeHTML(String(paper.year))}
-                                </span>
-
-                                <span>
-                                    📍
-                                    ${escapeHTML(
-                                        formatName(paper.region)
-                                    )}
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                        <div class="paper-action">
-
-                            <a
-                                class="open-pdf-button"
-                                href="${escapeHTML(paper.file)}"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <span>📄</span>
-                                Fungua PDF
-                            </a>
-
-                        </div>
-
-                    </div>
-                `;
-
-            });
-
-
-            html += `</div>`;
-        }
-
-
-        html += `
-            <div class="paper-actions-bottom">
-
-                <button
-                    class="back-button"
-                    id="backToRegions"
-                    type="button"
-                >
-                    ← Back to Regions
-                </button>
-
-                <button
-                    class="restart-button"
-                    id="restartPapers"
-                    type="button"
-                >
-                    ↻ Start Again
-                </button>
-
-            </div>
-        `;
-
-
-        content.innerHTML = html;
-
-
-        const backButton =
-            document.getElementById("backToRegions");
-
-        if (backButton) {
-
-            backButton.addEventListener("click", showRegions);
-
-        }
-
-
-        const restartButton =
-            document.getElementById("restartPapers");
-
-        if (restartButton) {
-
-            restartButton.addEventListener("click", showForms);
-
-        }
-    }
-
-
-    /* =====================================================
-       START SYSTEM
-    ===================================================== */
-
-    showForms();
+    // --------------------------------------------------------
+    // START
+    // --------------------------------------------------------
+
+    renderForms();
 
 });
