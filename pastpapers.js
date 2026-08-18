@@ -19,7 +19,6 @@ function goBackOrHome() {
         window.location.href = "premium-notes.html";
     }
 }
-
 function handleFormSelect(formId) {
     selectedForm = formId;
     selectedSubject = null; selectedType = null; selectedLocation = null; selectedYear = null;
@@ -83,7 +82,6 @@ function handleSubjectSelect(subId) {
 
     document.getElementById('step3').classList.remove('hidden');
 }
-
 function handleTypeSelect(typeId) {
     selectedType = typeId;
     selectedLocation = null; selectedYear = null;
