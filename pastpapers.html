@@ -2,310 +2,171 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>GEPAM Science Hub | Past Papers</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="Access Physics and Chemistry past papers for Form 1 to Form 6, including Mock, Joint, Pre-NECTA and NECTA examinations.">
+          content="GEPAM Science Hub Past Papers - Physics and Chemistry examinations from Form 1 to Form 6.">
+
+    <title>Past Papers | GEPAM Science Hub</title>
 
     <link rel="stylesheet" href="style.css">
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f8fb;
-            color: #222;
-        }
-
-        .pp-header {
-            background: #003366;
-            color: white;
-            padding: 25px 15px;
-            text-align: center;
-        }
-
-        .pp-header h1 {
-            margin: 0 0 8px;
-            font-size: 28px;
-        }
-
-        .pp-header p {
-            margin: 0;
-            opacity: 0.9;
-        }
-
-        .pp-container {
-            width: 94%;
-            max-width: 1100px;
-            margin: 25px auto 50px;
-        }
-
-        .breadcrumb {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            align-items: center;
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: #555;
-        }
-
-        .breadcrumb span {
-            cursor: pointer;
-        }
-
-        .breadcrumb .active {
-            color: #003366;
-            font-weight: bold;
-        }
-
-        .screen {
-            display: none;
-        }
-
-        .screen.active {
-            display: block;
-        }
-
-        .screen-title {
-            text-align: center;
-            color: #003366;
-            margin-bottom: 20px;
-        }
-
-        .screen-subtitle {
-            text-align: center;
-            color: #666;
-            margin-top: -10px;
-            margin-bottom: 25px;
-        }
-
-        .choice-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
-        }
-
-        .choice-card {
-            background: white;
-            border-radius: 12px;
-            padding: 22px 15px;
-            text-align: center;
-            cursor: pointer;
-            border: 1px solid #dfe8ef;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-            transition: 0.2s ease;
-        }
-
-        .choice-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 18px rgba(0,0,0,0.10);
-            border-color: #003366;
-        }
-
-        .choice-icon {
-            font-size: 35px;
-            margin-bottom: 10px;
-        }
-
-        .choice-card h3 {
-            margin: 5px 0;
-            color: #003366;
-        }
-
-        .choice-card p {
-            margin: 5px 0 0;
-            color: #666;
-            font-size: 14px;
-        }
-
-        .back-btn {
-            background: #003366;
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 7px;
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
-
-        .back-btn:hover {
-            background: #00264d;
-        }
-
-        .paper-list {
-            display: grid;
-            gap: 12px;
-        }
-
-        .paper-card {
-            background: white;
-            border: 1px solid #dfe8ef;
-            border-radius: 10px;
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .paper-info h3 {
-            margin: 0 0 6px;
-            color: #003366;
-        }
-
-        .paper-info p {
-            margin: 0;
-            color: #666;
-            font-size: 14px;
-        }
-
-        .open-pdf {
-            display: inline-block;
-            text-decoration: none;
-            background: #003366;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 7px;
-            white-space: nowrap;
-            font-weight: bold;
-        }
-
-        .open-pdf:hover {
-            background: #00264d;
-        }
-
-        .empty-state {
-            text-align: center;
-            background: white;
-            border-radius: 12px;
-            padding: 35px 20px;
-            color: #666;
-        }
-
-        .empty-state h3 {
-            color: #003366;
-        }
-
-        .home-btn {
-            display: inline-block;
-            margin-top: 20px;
-            text-decoration: none;
-            background: #003366;
-            color: white;
-            padding: 11px 18px;
-            border-radius: 7px;
-        }
-
-        @media (max-width: 600px) {
-            .pp-header h1 {
-                font-size: 23px;
-            }
-
-            .paper-card {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .open-pdf {
-                text-align: center;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
-<header class="pp-header">
-    <h1>📚 GEPAM Science Hub</h1>
-    <p>Physics & Chemistry Past Papers</p>
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+
+    <div class="header-inner">
+
+        <div class="brand">
+            <div class="brand-logo">G</div>
+
+            <div>
+                <h1>GEPAM Science Hub</h1>
+                <p>Physics & Chemistry Learning Resources</p>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="notes.html">Notes</a>
+            <a href="pastpapers.html" class="active">Past Papers</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+    </div>
+
 </header>
 
-<main class="pp-container">
 
-    <div id="breadcrumb" class="breadcrumb"></div>
+<!-- ================= MAIN ================= -->
+<main class="pastpapers-page">
 
-    <!-- STEP 1: FORM -->
-    <section id="screen-form" class="screen active">
-        <h2 class="screen-title">Choose Form</h2>
-        <p class="screen-subtitle">
-            Select the class whose past papers you want.
-        </p>
+    <section class="pastpapers-hero">
 
-        <div id="formChoices" class="choice-grid"></div>
+        <div>
+            <span class="hero-badge">GEPAM SCIENCE HUB</span>
+
+            <h2>Past Papers</h2>
+
+            <p>
+                Access Physics and Chemistry past papers from
+                Form 1 to Form 6.
+            </p>
+        </div>
+
     </section>
 
 
-    <!-- STEP 2: SUBJECT -->
-    <section id="screen-subject" class="screen">
-        <button class="back-btn" onclick="goBack()">← Back</button>
+    <!-- ================= PROGRESS ================= -->
 
-        <h2 class="screen-title">Choose Subject</h2>
+    <section class="paper-navigation">
 
-        <div id="subjectChoices" class="choice-grid"></div>
+        <div class="progress-wrapper">
+
+            <div class="progress-step active" data-step="1">
+                <span>1</span>
+                <small>Form</small>
+            </div>
+
+            <div class="progress-line"></div>
+
+            <div class="progress-step" data-step="2">
+                <span>2</span>
+                <small>Subject</small>
+            </div>
+
+            <div class="progress-line"></div>
+
+            <div class="progress-step" data-step="3">
+                <span>3</span>
+                <small>Exam Type</small>
+            </div>
+
+            <div class="progress-line"></div>
+
+            <div class="progress-step" data-step="4">
+                <span>4</span>
+                <small>Year</small>
+            </div>
+
+            <div class="progress-line"></div>
+
+            <div class="progress-step" data-step="5">
+                <span>5</span>
+                <small>Region</small>
+            </div>
+
+            <div class="progress-line"></div>
+
+            <div class="progress-step" data-step="6">
+                <span>6</span>
+                <small>Paper</small>
+            </div>
+
+        </div>
+
+
+        <!-- ================= BREADCRUMB ================= -->
+
+        <div id="selectionBreadcrumb" class="selection-breadcrumb">
+            <span>Past Papers</span>
+        </div>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <div id="paperContent" class="paper-content">
+
+            <!-- JavaScript itaweka content hapa -->
+
+        </div>
+
     </section>
-
-
-    <!-- STEP 3: EXAM TYPE -->
-    <section id="screen-type" class="screen">
-        <button class="back-btn" onclick="goBack()">← Back</button>
-
-        <h2 class="screen-title">Choose Exam Type</h2>
-
-        <div id="typeChoices" class="choice-grid"></div>
-    </section>
-
-
-    <!-- STEP 4: YEAR -->
-    <section id="screen-year" class="screen">
-        <button class="back-btn" onclick="goBack()">← Back</button>
-
-        <h2 class="screen-title">Choose Year</h2>
-
-        <div id="yearChoices" class="choice-grid"></div>
-    </section>
-
-
-    <!-- STEP 5: REGION / SCHOOL -->
-    <section id="screen-region" class="screen">
-        <button class="back-btn" onclick="goBack()">← Back</button>
-
-        <h2 class="screen-title">Choose Region / School</h2>
-
-        <div id="regionChoices" class="choice-grid"></div>
-    </section>
-
-
-    <!-- STEP 6: PAPER CHAIN -->
-    <section id="screen-papers" class="screen">
-        <button class="back-btn" onclick="goBack()">← Back</button>
-
-        <h2 class="screen-title">Available Papers</h2>
-        <p id="paperDescription" class="screen-subtitle"></p>
-
-        <div id="paperList" class="paper-list"></div>
-    </section>
-
-
-    <div style="text-align:center;">
-        <a href="index.html" class="home-btn">🏠 Back to Home</a>
-    </div>
 
 </main>
 
 
-<!-- IMPORTANT:
-     Keep your existing pastpapers.data.js
-     before pastpapers.js
+<!-- ================= FOOTER ================= -->
+
+<footer class="site-footer">
+
+    <div class="footer-inner">
+
+        <div>
+            <h3>GEPAM Science Hub</h3>
+            <p>
+                Making Science Easy for Tanzanian Students.
+            </p>
+        </div>
+
+        <div>
+            <p>Physics & Chemistry Resources</p>
+            <p>Form 1 – Form 6</p>
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 GEPAM Science Hub. All Rights Reserved.
+    </div>
+
+</footer>
+
+
+<!-- =================================================
+     IMPORTANT SCRIPT ORDER
+     =================================================
+
+     data.js lazima ipakwe KWANZA kwa sababu
+     pastpapers.js inatumia pastPapers na pastPaperConfig.
 -->
-<script src="pastpapers.data.js"></script>
+
+<script src="data.js"></script>
+
 <script src="pastpapers.js"></script>
 
 </body>
