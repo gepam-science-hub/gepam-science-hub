@@ -1,4 +1,3 @@
-// State ya kumbukumbu ya hatua alizopo mtumiaji
 let selectedForm = null;
 let selectedSubject = null;
 let selectedType = null;
@@ -20,23 +19,25 @@ function goBackOrHome() {
         window.location.href = "premium-notes.html";
     }
 }
+
 function handleFormSelect(formId) {
     selectedForm = formId;
     selectedSubject = null; selectedType = null; selectedLocation = null; selectedYear = null;
     
-    // Manage active visual state
     document.querySelectorAll('#formOptions .opt-btn').forEach(btn => {
         btn.classList.remove('active');
-        if(btn.textContent.toLowerCase().replace(' ', '') === formId) btn.classList.add('active');
+        if(btn.textContent.toLowerCase().replace(' ', '') === formId) {
+            btn.classList.add('active');
+        }
     });
 
-    // Ficha hatua zote za chini kwanza
+    document.getElementById('step2').classList.add('hidden');
     document.getElementById('step3').classList.add('hidden');
     document.getElementById('step4').classList.add('hidden');
     document.getElementById('step5').classList.add('hidden');
     document.getElementById('finalPapersArea').innerHTML = '';
 
-    // Badili jina la lebo kutegemea kidato
+    // Lebo Inabadilika: Form 1, 3, 5 ni SHULE. Form 2, 4, 6 ni MKOA
     const locLabel = document.getElementById('locationLabel');
     if (formId === 'form1' || formId === 'form3' || formId === 'form5') {
         locLabel.textContent = "Hatua ya 4: Chagua Shule";
@@ -44,7 +45,6 @@ function handleFormSelect(formId) {
         locLabel.textContent = "Hatua ya 4: Chagua Mkoa";
     }
 
-    // Jaza Masomo (Physics, Chemistry)
     const subjectOpts = document.getElementById('subjectOptions');
     subjectOpts.innerHTML = '';
     
@@ -62,14 +62,14 @@ function handleSubjectSelect(subId) {
 
     document.querySelectorAll('#subjectOptions .opt-btn').forEach(btn => {
         btn.classList.remove('active');
-        if(btn.textContent === subId) btn.classList.add('active');
+        if(btn.textContent.toLowerCase() === subId.toLowerCase()) btn.classList.add('active');
     });
 
+    document.getElementById('step3').classList.add('hidden');
     document.getElementById('step4').classList.add('hidden');
     document.getElementById('step5').classList.add('hidden');
     document.getElementById('finalPapersArea').innerHTML = '';
 
-    // Jaza Aina za Mitihani (Types) dynamically kutoka kwenye database yako halisi
     const typeOpts = document.getElementById('typeOptions');
     typeOpts.innerHTML = '';
 
@@ -83,6 +83,7 @@ function handleSubjectSelect(subId) {
 
     document.getElementById('step3').classList.remove('hidden');
 }
+
 function handleTypeSelect(typeId) {
     selectedType = typeId;
     selectedLocation = null; selectedYear = null;
@@ -92,10 +93,10 @@ function handleTypeSelect(typeId) {
         if(btn.textContent === typeId) btn.classList.add('active');
     });
 
+    document.getElementById('step4').classList.add('hidden');
     document.getElementById('step5').classList.add('hidden');
     document.getElementById('finalPapersArea').innerHTML = '';
 
-    // Jaza Shule au Mikoa dynamically
     const locOpts = document.getElementById('locationOptions');
     locOpts.innerHTML = '';
 
@@ -121,9 +122,9 @@ function handleLocationSelect(locId) {
         if(btn.textContent === locId) btn.classList.add('active');
     });
 
+    document.getElementById('step5').classList.add('hidden');
     document.getElementById('finalPapersArea').innerHTML = '';
 
-    // Jaza Miaka dynamically
     const yearOpts = document.getElementById('yearOptions');
     yearOpts.innerHTML = '';
 
@@ -139,6 +140,7 @@ function handleLocationSelect(locId) {
 
     document.getElementById('step5').classList.remove('hidden');
 }
+
 function handleYearSelect(yearId) {
     selectedYear = yearId;
 
@@ -152,12 +154,10 @@ function handleYearSelect(yearId) {
 
     const currentPapers = pastPapers[selectedForm][selectedSubject];
     
-    // Kuchuja faili la mwisho linalokidhi vigezo vyote vitano (Form, Subject, Type, Location, Year)
     const targetPapers = currentPapers.filter(p => {
         return p.type === selectedType && p.region === selectedLocation && p.year.toString() === yearId;
     });
 
-    // Kuonyesha Kadi za PDF sasa baada ya hatua zote kukamilika
     targetPapers.forEach(paper => {
         const cardHTML = `
             <div class="paper-card">
@@ -168,61 +168,3 @@ function handleYearSelect(yearId) {
         finalPapersArea.innerHTML += cardHTML;
     });
 }
-
-                <div style="margin-top:15px;">
-
-                    Hakikisha:
-
-                    <br>
-
-                    <b>
-                        pastpapers.data.js
-                    </b>
-
-                    ipo kwenye repository yako na
-                    ime-load kabla ya
-
-                    <b>
-                        pastpapers.js
-                    </b>.
-
-                </div>
-
-                <div style="margin-top:12px;font-size:12px;opacity:.8;">
-
-                    Angalia Browser Console kama bado kuna error.
-
-                </div>
-
-            </div>
-
-        `;
-
-        console.error(
-            "GEPAM PAST PAPERS DATA ERROR:",
-            reason
-        );
-
-    }
-
-
-    /* =====================================================
-       START
-    ===================================================== */
-
-    if (
-        document.readyState === "loading"
-    ) {
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            startPastPapers
-        );
-
-    } else {
-
-        startPastPapers();
-
-    }
-
-})();
