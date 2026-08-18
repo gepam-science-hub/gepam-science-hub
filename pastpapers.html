@@ -1,531 +1,695 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GEPAM Science Hub | Past Papers</title>
-
-<meta name="description"
-content="GEPAM Science Hub Past Papers - Physics and Chemistry examination papers for Form 1 to Form 6.">
-
-<link rel="icon" href="favicon.ico">
-
-<style>
-:root{
-    --primary:#003366;
-    --primary2:#005b96;
-    --green:#008f5a;
-    --light:#f4f8fb;
-    --white:#fff;
-    --border:#dce5ed;
-    --text:#263746;
-    --muted:#71808d;
-    --shadow:0 8px 25px rgba(0,51,102,.09);
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
-    background:var(--light);
-    color:var(--text);
-    line-height:1.6;
-}
-
-/* HEADER */
-
-.site-header{
-    background:linear-gradient(135deg,#003366,#064f8f);
-    color:white;
-    position:sticky;
-    top:0;
-    z-index:1000;
-    box-shadow:0 4px 15px rgba(0,0,0,.15);
-}
-
-.header-inner{
-    max-width:1200px;
-    margin:auto;
-    padding:13px 20px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    text-decoration:none;
-    color:white;
-}
-
-.brand-icon{
-    width:43px;
-    height:43px;
-    border-radius:10px;
-    background:white;
-    color:#003366;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
-}
-
-.brand-name{
-    font-size:17px;
-    font-weight:bold;
-}
-
-.brand-tagline{
-    font-size:11px;
-    opacity:.85;
-}
-
-.nav{
-    display:flex;
-    gap:7px;
-}
-
-.nav a{
-    color:white;
-    text-decoration:none;
-    padding:9px 13px;
-    border-radius:8px;
-    font-size:14px;
-}
-
-.nav a:hover,
-.nav a.active{
-    background:rgba(255,255,255,.16);
-}
-
-.menu-toggle{
-    display:none;
-    background:none;
-    border:0;
-    color:white;
-    font-size:28px;
-}
-
-/* HERO */
-
-.hero{
-    background:linear-gradient(135deg,#003366,#005b96);
-    color:white;
-    text-align:center;
-    padding:50px 20px;
-}
-
-.hero h1{
-    font-size:clamp(30px,5vw,44px);
-    margin-bottom:8px;
-}
-
-.hero p{
-    max-width:750px;
-    margin:auto;
-    opacity:.92;
-}
-
-/* MAIN */
-
-main{
-    max-width:1100px;
-    margin:auto;
-    padding:25px 15px 50px;
-}
-
-/* BREADCRUMB */
-
-.breadcrumb{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:12px 15px;
-    margin-bottom:20px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    align-items:center;
-    font-size:13px;
-    color:#637381;
-}
-
-.breadcrumb .current{
-    color:#003366;
-    font-weight:bold;
-}
-
-/* STEPS */
-
-.step{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:25px;
-    margin-bottom:20px;
-    box-shadow:0 5px 18px rgba(0,0,0,.04);
-}
-
-.step-header{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-bottom:20px;
-}
-
-.step-number{
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    background:#003366;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
-    flex-shrink:0;
-}
-
-.step-header h2{
-    color:#003366;
-    font-size:21px;
-}
-
-.step-header p{
-    color:var(--muted);
-    font-size:13px;
-}
-
-/* OPTIONS */
-
-.options{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-    gap:14px;
-}
-
-.option{
-    width:100%;
-    min-height:88px;
-    border:1px solid var(--border);
-    background:#fff;
-    border-radius:14px;
-    padding:15px;
-    display:flex;
-    align-items:center;
-    gap:13px;
-    cursor:pointer;
-    text-align:left;
-    transition:.2s;
-}
-
-.option:hover{
-    border-color:#0077b6;
-    background:#fafdff;
-    transform:translateY(-2px);
-    box-shadow:0 7px 20px rgba(0,80,140,.1);
-}
-
-.option-icon{
-    width:44px;
-    height:44px;
-    border-radius:12px;
-    background:#eaf3fb;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:21px;
-    flex-shrink:0;
-}
-
-.option-content{
-    flex:1;
-}
-
-.option-content strong{
-    display:block;
-    color:#243746;
-    font-size:15px;
-}
-
-.option-content small{
-    display:block;
-    color:#7a8792;
-    margin-top:3px;
-    font-size:12px;
-}
-
-.option-arrow{
-    color:#0077b6;
-    font-size:20px;
-    font-weight:bold;
-}
-
-/* RESULTS */
-
-.results{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:25px;
-    box-shadow:var(--shadow);
-}
-
-.results-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-    margin-bottom:20px;
-    flex-wrap:wrap;
-}
-
-.results-head h2{
-    color:#003366;
-}
-
-.badge{
-    background:#e8f3ff;
-    color:#003366;
-    border-radius:20px;
-    padding:7px 12px;
-    font-size:13px;
-    font-weight:bold;
-}
-
-/* PAPER LIST */
-
-.paper-list{
-    border:1px solid var(--border);
-    border-radius:15px;
-    overflow:hidden;
-}
-
-.paper-list-head{
-    background:#003366;
-    color:white;
-    padding:15px 18px;
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.paper{
-    display:grid;
-    grid-template-columns:45px 1fr auto;
-    gap:15px;
-    align-items:center;
-    padding:18px;
-    border-bottom:1px solid #e5edf2;
-}
-
-.paper:last-child{
-    border-bottom:none;
-}
-
-.paper-number{
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    background:#eaf3fb;
-    color:#003366;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
-}
-
-.paper h3{
-    color:#263746;
-    font-size:16px;
-    margin-bottom:7px;
-}
-
-.meta{
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
-}
-
-.meta span{
-    background:#f1f5f8;
-    color:#687783;
-    border-radius:20px;
-    padding:5px 8px;
-    font-size:11px;
-}
-
-.open-pdf{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    background:#008f5a;
-    color:white;
-    text-decoration:none;
-    padding:10px 14px;
-    border-radius:9px;
-    font-size:13px;
-    font-weight:bold;
-    white-space:nowrap;
-}
-
-.open-pdf:hover{
-    background:#006f46;
-}
-
-/* EMPTY */
-
-.empty{
-    text-align:center;
-    padding:40px 20px;
-    border:1px dashed #cbd7e0;
-    border-radius:14px;
-    background:#fbfdff;
-    color:#71808d;
-}
-
-.empty strong{
-    display:block;
-    color:#003366;
-    margin-bottom:6px;
-    font-size:17px;
-}
-
-/* BACK */
-
-.actions{
-    display:flex;
-    gap:10px;
-    margin-top:20px;
-    flex-wrap:wrap;
-}
-
-.action-btn{
-    border:none;
-    border-radius:9px;
-    padding:11px 17px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.back-btn{
-    background:#e9eef3;
-    color:#405261;
-}
-
-.restart-btn{
-    background:#003366;
-    color:white;
-}
-
-/* ERROR */
-
-.error-box{
-    background:#fff4f4;
-    border:1px solid #f0b5b5;
-    color:#7b2020;
-    border-radius:12px;
-    padding:18px;
-    line-height:1.7;
-}
-
-.error-box strong{
-    display:block;
-    font-size:18px;
-    margin-bottom:7px;
-}
-
-/* FOOTER */
-
-footer{
-    background:#002b52;
-    color:white;
-    text-align:center;
-    padding:25px 15px;
-    font-size:13px;
-}
-
-/* HIDDEN */
-
-[hidden]{
-    display:none !important;
-}
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-    .nav{
-        display:none;
-        position:absolute;
-        left:0;
-        right:0;
-        top:68px;
-        background:#003366;
-        flex-direction:column;
-        padding:12px 15px;
-    }
-
-    .nav.open{
-        display:flex;
-    }
-
-    .nav a{
-        text-align:center;
-        width:100%;
-    }
-
-    .menu-toggle{
-        display:block;
-    }
-
-    main{
-        padding:18px 12px 35px;
-    }
-
-    .step,
-    .results{
-        padding:17px;
-    }
-
-    .options{
-        grid-template-columns:1fr;
-    }
-
-    .paper{
-        grid-template-columns:40px 1fr;
-    }
-
-    .paper-action{
-        grid-column:2;
-        width:100%;
-    }
-
-    .open-pdf{
-        width:100%;
-    }
-}
-
-@media(max-width:380px){
-
-    .hero{
-        padding:38px 15px;
-    }
-
-    .hero h1{
-        font-size:28px;
-    }
-}
-</style>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>GEPAM Science Hub | Past Papers</title>
+
+    <meta
+        name="description"
+        content="GEPAM Science Hub - Physics and Chemistry Past Papers for Form 1 to Form 6."
+    >
+
+    <link rel="icon" href="favicon.ico">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f8fb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        /* ================= HEADER ================= */
+
+        .site-header {
+            background: #003366;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 3px 12px rgba(0,0,0,.15);
+        }
+
+        .header-inner {
+            max-width: 1150px;
+            margin: auto;
+            min-height: 68px;
+            padding: 10px 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            color: white;
+            text-decoration: none;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            background: white;
+            color: #003366;
+
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+        .brand-name {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .brand-tagline {
+            font-size: 11px;
+            opacity: .8;
+        }
+
+        .nav {
+            display: flex;
+            gap: 5px;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 9px 12px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: rgba(255,255,255,.15);
+        }
+
+        .menu-toggle {
+            display: none;
+            border: 0;
+            background: transparent;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            background: linear-gradient(
+                135deg,
+                #003366,
+                #075a98
+            );
+
+            color: white;
+            text-align: center;
+
+            padding: 50px 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(30px, 6vw, 45px);
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin: auto;
+            opacity: .92;
+        }
+
+        /* ================= MAIN ================= */
+
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 25px 15px 50px;
+        }
+
+        .back-row {
+            margin-bottom: 18px;
+        }
+
+        .back-button {
+            border: 0;
+            background: white;
+            color: #003366;
+
+            border: 1px solid #dce5ec;
+
+            padding: 10px 16px;
+            border-radius: 9px;
+
+            cursor: pointer;
+            font-weight: bold;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,.05);
+        }
+
+        .back-button:hover {
+            background: #eef6ff;
+        }
+
+        /* ================= PROGRESS ================= */
+
+        .progress {
+            background: white;
+
+            border: 1px solid #dfe7ee;
+
+            border-radius: 15px;
+
+            padding: 15px;
+
+            margin-bottom: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow-x: auto;
+        }
+
+        .progress-step {
+            min-width: 70px;
+            text-align: center;
+            color: #9aa6b2;
+            flex-shrink: 0;
+        }
+
+        .progress-number {
+            width: 32px;
+            height: 32px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            background: #e7edf2;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+        .progress-step.active {
+            color: #003366;
+        }
+
+        .progress-step.active .progress-number {
+            background: #003366;
+            color: white;
+        }
+
+        .progress-step.done {
+            color: #008f5a;
+        }
+
+        .progress-step.done .progress-number {
+            background: #008f5a;
+            color: white;
+        }
+
+        .progress-label {
+            font-size: 10px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .progress-line {
+            width: 35px;
+            height: 2px;
+            background: #d9e1e8;
+            flex-shrink: 0;
+        }
+
+        /* ================= BREADCRUMB ================= */
+
+        #breadcrumb {
+            background: white;
+
+            border: 1px solid #dfe7ee;
+
+            border-radius: 11px;
+
+            padding: 11px 15px;
+
+            margin-bottom: 20px;
+
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+
+            font-size: 13px;
+
+            color: #617080;
+        }
+
+        #breadcrumb .current {
+            color: #003366;
+            font-weight: bold;
+        }
+
+        /* ================= CARD ================= */
+
+        .selection-card {
+            background: white;
+
+            border: 1px solid #dfe7ee;
+
+            border-radius: 17px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 7px 25px rgba(0,40,80,.07);
+
+            margin-bottom: 20px;
+        }
+
+        .selection-heading {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin-bottom: 22px;
+        }
+
+        .selection-icon {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 12px;
+
+            background: #eaf3fb;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 23px;
+        }
+
+        .selection-heading h2 {
+            color: #003366;
+            font-size: 22px;
+        }
+
+        .selection-heading p {
+            color: #74808b;
+            font-size: 13px;
+        }
+
+        /* ================= OPTIONS ================= */
+
+        .options-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(210px, 1fr));
+
+            gap: 13px;
+        }
+
+        .option-card {
+            width: 100%;
+
+            border: 1px solid #dfe7ee;
+
+            background: white;
+
+            border-radius: 14px;
+
+            min-height: 85px;
+
+            padding: 15px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+        .option-card:hover {
+            border-color: #0077b6;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 7px 18px rgba(0,80,140,.11);
+
+            background: #fafdff;
+        }
+
+        .option-icon {
+            width: 44px;
+            height: 44px;
+
+            border-radius: 12px;
+
+            background: #eaf3fb;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 21px;
+
+            flex-shrink: 0;
+        }
+
+        .option-text {
+            display: flex;
+            flex-direction: column;
+
+            min-width: 0;
+        }
+
+        .option-text strong {
+            color: #243746;
+            font-size: 15px;
+        }
+
+        .option-text small {
+            color: #7b8792;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .option-arrow {
+            margin-left: auto;
+
+            color: #0077b6;
+
+            font-size: 20px;
+        }
+
+        /* ================= RESULTS ================= */
+
+        .results-card {
+            background: white;
+
+            border: 1px solid #dfe7ee;
+
+            border-radius: 17px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 7px 25px rgba(0,40,80,.07);
+        }
+
+        .results-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+        }
+
+        .results-heading h2 {
+            color: #003366;
+            font-size: 22px;
+        }
+
+        #resultCount {
+            background: #e8f3ff;
+
+            color: #003366;
+
+            padding: 6px 11px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        /* ================= PAPER LIST ================= */
+
+        .paper-list {
+            border: 1px solid #dfe7ee;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .paper-list-header {
+            background: #003366;
+            color: white;
+
+            padding: 15px 17px;
+
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+
+            flex-wrap: wrap;
+        }
+
+        .paper-item {
+            display: grid;
+
+            grid-template-columns:
+                45px 1fr auto;
+
+            gap: 15px;
+
+            align-items: center;
+
+            padding: 18px;
+
+            border-bottom: 1px solid #e7edf2;
+
+            background: white;
+        }
+
+        .paper-item:last-child {
+            border-bottom: 0;
+        }
+
+        .paper-number {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: #eaf3fb;
+
+            color: #003366;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+        .paper-info h3 {
+            color: #263746;
+
+            font-size: 16px;
+
+            margin-bottom: 8px;
+        }
+
+        .paper-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .paper-meta span {
+            background: #f1f5f8;
+
+            color: #687783;
+
+            border-radius: 20px;
+
+            padding: 5px 8px;
+
+            font-size: 11px;
+        }
+
+        .open-pdf {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #008f5a;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 10px 14px;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+        }
+
+        .open-pdf:hover {
+            background: #006f46;
+        }
+
+        /* ================= EMPTY / ERROR ================= */
+
+        .empty-state {
+            padding: 40px 20px;
+
+            text-align: center;
+
+            border: 1px dashed #ccd7e0;
+
+            border-radius: 14px;
+
+            background: #fbfdff;
+
+            color: #73808c;
+        }
+
+        .empty-state .icon {
+            font-size: 38px;
+            margin-bottom: 8px;
+        }
+
+        .empty-state strong {
+            display: block;
+
+            color: #003366;
+
+            margin-bottom: 5px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #002b52;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px 15px;
+
+            font-size: 13px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width:700px) {
+
+            .header-inner {
+                min-height: 62px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav {
+                display: none;
+
+                position: absolute;
+
+                top: 62px;
+
+                left: 0;
+                right: 0;
+
+                background: #003366;
+
+                padding: 10px 15px 15px;
+
+                flex-direction: column;
+            }
+
+            .nav.open {
+                display: flex;
+            }
+
+            .nav a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .selection-card,
+            .results-card {
+                padding: 17px;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .paper-item {
+                grid-template-columns: 40px 1fr;
+            }
+
+            .paper-action {
+                grid-column: 2;
+            }
+
+            .open-pdf {
+                width: 100%;
+            }
+
+            .progress {
+                justify-content: flex-start;
+            }
+
+            .progress-line {
+                width: 20px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
@@ -534,31 +698,70 @@ footer{
     <div class="header-inner">
 
         <a href="index.html" class="brand">
-            <div class="brand-icon">GS</div>
+
+            <div class="brand-icon">
+                GS
+            </div>
 
             <div>
-                <div class="brand-name">GEPAM Science Hub</div>
-                <div class="brand-tagline">Making Science Easy</div>
+                <div class="brand-name">
+                    GEPAM Science Hub
+                </div>
+
+                <div class="brand-tagline">
+                    Making Science Easy
+                </div>
             </div>
+
         </a>
 
-        <button class="menu-toggle" id="menuToggle">☰</button>
 
-        <nav class="nav" id="mainNav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="notes.html">Notes</a>
-            <a href="pastpapers.html" class="active">Past Papers</a>
-            <a href="contact.html">Contact</a>
+        <button
+            id="menuToggle"
+            class="menu-toggle"
+            type="button"
+        >
+            ☰
+        </button>
+
+
+        <nav id="mainNav" class="nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="notes.html">
+                Notes
+            </a>
+
+            <a
+                href="pastpapers.html"
+                class="active"
+            >
+                Past Papers
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
         </nav>
 
     </div>
 
 </header>
 
+
 <section class="hero">
 
-    <h1>Past Papers</h1>
+    <h1>
+        Past Papers
+    </h1>
 
     <p>
         Find Physics and Chemistry examination papers
@@ -567,155 +770,338 @@ footer{
 
 </section>
 
+
 <main>
 
-    <div class="breadcrumb" id="breadcrumb">
-        <span class="current">Past Papers</span>
+    <div class="back-row">
+
+        <button
+            id="backButton"
+            class="back-button"
+            type="button"
+        >
+            ← Back
+        </button>
+
     </div>
+
+
+    <div class="progress">
+
+        <div
+            class="progress-step active"
+            data-step="1"
+        >
+            <div class="progress-number">
+                1
+            </div>
+
+            <span class="progress-label">
+                Form
+            </span>
+        </div>
+
+
+        <div class="progress-line"></div>
+
+
+        <div
+            class="progress-step"
+            data-step="2"
+        >
+            <div class="progress-number">
+                2
+            </div>
+
+            <span class="progress-label">
+                Subject
+            </span>
+        </div>
+
+
+        <div class="progress-line"></div>
+
+
+        <div
+            class="progress-step"
+            data-step="3"
+        >
+            <div class="progress-number">
+                3
+            </div>
+
+            <span class="progress-label">
+                Type
+            </span>
+        </div>
+
+
+        <div class="progress-line"></div>
+
+
+        <div
+            class="progress-step"
+            data-step="4"
+        >
+            <div class="progress-number">
+                4
+            </div>
+
+            <span class="progress-label">
+                Year
+            </span>
+        </div>
+
+
+        <div class="progress-line"></div>
+
+
+        <div
+            class="progress-step"
+            data-step="5"
+        >
+            <div class="progress-number">
+                5
+            </div>
+
+            <span class="progress-label">
+                Region
+            </span>
+        </div>
+
+
+        <div class="progress-line"></div>
+
+
+        <div
+            class="progress-step"
+            data-step="6"
+        >
+            <div class="progress-number">
+                6
+            </div>
+
+            <span class="progress-label">
+                Papers
+            </span>
+        </div>
+
+    </div>
+
+
+    <div id="breadcrumb">
+        <span class="current">
+            Past Papers
+        </span>
+    </div>
+
 
     <!-- FORM -->
 
-    <section class="step" id="formSection">
+    <section
+        class="selection-card"
+        id="formSection"
+    >
 
-        <div class="step-header">
+        <div class="selection-heading">
 
-            <span class="step-number">1</span>
+            <div class="selection-icon">
+                📚
+            </div>
 
             <div>
-                <h2>Select Form</h2>
-                <p>Choose the class you want to study.</p>
+
+                <h2>
+                    Select Form
+                </h2>
+
+                <p>
+                    Choose the class you want to study.
+                </p>
+
             </div>
 
         </div>
 
-        <div class="options" id="formOptions"></div>
+
+        <div
+            id="formOptions"
+            class="options-grid"
+        ></div>
 
     </section>
 
 
     <!-- SUBJECT -->
 
-    <section class="step" id="subjectSection" hidden>
+    <section
+        class="selection-card"
+        id="subjectSection"
+        hidden
+    >
 
-        <div class="step-header">
+        <div class="selection-heading">
 
-            <span class="step-number">2</span>
+            <div class="selection-icon">
+                🔬
+            </div>
 
             <div>
-                <h2>Select Subject</h2>
-                <p>Choose Physics or Chemistry.</p>
+
+                <h2>
+                    Select Subject
+                </h2>
+
+                <p>
+                    Choose Physics or Chemistry.
+                </p>
+
             </div>
 
         </div>
 
-        <div class="options" id="subjectOptions"></div>
+
+        <div
+            id="subjectOptions"
+            class="options-grid"
+        ></div>
 
     </section>
 
 
     <!-- TYPE -->
 
-    <section class="step" id="typeSection" hidden>
+    <section
+        class="selection-card"
+        id="typeSection"
+        hidden
+    >
 
-        <div class="step-header">
+        <div class="selection-heading">
 
-            <span class="step-number">3</span>
+            <div class="selection-icon">
+                📝
+            </div>
 
             <div>
-                <h2>Select Examination Type</h2>
-                <p>Choose the type of examination.</p>
+
+                <h2>
+                    Select Examination Type
+                </h2>
+
+                <p>
+                    Choose the type of examination.
+                </p>
+
             </div>
 
         </div>
 
-        <div class="options" id="typeOptions"></div>
+
+        <div
+            id="typeOptions"
+            class="options-grid"
+        ></div>
 
     </section>
 
 
     <!-- YEAR -->
 
-    <section class="step" id="yearSection" hidden>
+    <section
+        class="selection-card"
+        id="yearSection"
+        hidden
+    >
 
-        <div class="step-header">
+        <div class="selection-heading">
 
-            <span class="step-number">4</span>
+            <div class="selection-icon">
+                📅
+            </div>
 
             <div>
-                <h2>Select Year</h2>
-                <p>Choose the examination year.</p>
+
+                <h2>
+                    Select Year
+                </h2>
+
+                <p>
+                    Choose examination year.
+                </p>
+
             </div>
 
         </div>
 
-        <div class="options" id="yearOptions"></div>
+
+        <div
+            id="yearOptions"
+            class="options-grid"
+        ></div>
 
     </section>
 
 
     <!-- LOCATION -->
 
-    <section class="step" id="locationSection" hidden>
+    <section
+        class="selection-card"
+        id="locationSection"
+        hidden
+    >
 
-        <div class="step-header">
+        <div class="selection-heading">
 
-            <span class="step-number">5</span>
+            <div class="selection-icon">
+                📍
+            </div>
 
             <div>
-                <h2>Select Region / School / Zone</h2>
-                <p>Choose the source of the paper.</p>
+
+                <h2>
+                    Select Region / School / Zone
+                </h2>
+
+                <p>
+                    Choose the source of the paper.
+                </p>
+
             </div>
 
         </div>
 
-        <div class="options" id="locationOptions"></div>
+
+        <div
+            id="locationOptions"
+            class="options-grid"
+        ></div>
 
     </section>
 
 
     <!-- RESULTS -->
 
-    <section class="results" id="resultsSection">
+    <section
+        class="results-card"
+        id="resultsSection"
+        hidden
+    >
 
-        <div class="results-head">
+        <div class="results-heading">
 
-            <h2>Available Papers</h2>
+            <h2>
+                Available Papers
+            </h2>
 
-            <span class="badge" id="resultCount">
+            <span id="resultCount">
                 0 Papers
             </span>
 
         </div>
 
+
         <div id="paperResults">
-
-            <div class="empty">
-
-                <strong>Select a Form to Begin</strong>
-
-                Choose Form 1–6 above to view available papers.
-
-            </div>
-
-        </div>
-
-        <div class="actions">
-
-            <button
-                type="button"
-                class="action-btn back-btn"
-                id="backButton"
-            >
-                ← Back
-            </button>
-
-            <button
-                type="button"
-                class="action-btn restart-btn"
-                id="restartButton"
-            >
-                ↻ Start Again
-            </button>
 
         </div>
 
@@ -723,1809 +1109,55 @@ footer{
 
 </main>
 
+
 <footer>
 
     © <span id="currentYear"></span>
-    GEPAM Science Hub. All Rights Reserved.
+    GEPAM Science Hub.
+    All Rights Reserved.
 
 </footer>
 
 
-<!-- =====================================================
-     DATA
-     DATA MUST COME BEFORE ENGINE
-===================================================== -->
-
-<script src="./pastpapers.data.js"></script>
-
-
 <script>
-/* =========================================================
-   GEPAM SCIENCE HUB
-   PAST PAPERS — COMPLETE ENGINE
-========================================================= */
-
-(function(){
-
-"use strict";
-
-/* ---------------------------------------------------------
-   MENU
---------------------------------------------------------- */
-
-const menuToggle = document.getElementById("menuToggle");
-const mainNav = document.getElementById("mainNav");
-
-if(menuToggle){
-
-    menuToggle.addEventListener("click",function(){
-
-        mainNav.classList.toggle("open");
-
-    });
-
-}
-
-
-/* ---------------------------------------------------------
-   CURRENT YEAR
---------------------------------------------------------- */
-
-const yearElement =
-    document.getElementById("currentYear");
-
-if(yearElement){
-    yearElement.textContent =
-        new Date().getFullYear();
-}
-
-
-/* ---------------------------------------------------------
-   DOM
---------------------------------------------------------- */
-
-const formSection =
-    document.getElementById("formSection");
-
-const formOptions =
-    document.getElementById("formOptions");
-
-const subjectSection =
-    document.getElementById("subjectSection");
-
-const subjectOptions =
-    document.getElementById("subjectOptions");
-
-const typeSection =
-    document.getElementById("typeSection");
-
-const typeOptions =
-    document.getElementById("typeOptions");
-
-const yearSection =
-    document.getElementById("yearSection");
-
-const yearOptions =
-    document.getElementById("yearOptions");
-
-const locationSection =
-    document.getElementById("locationSection");
-
-const locationOptions =
-    document.getElementById("locationOptions");
-
-const resultsSection =
-    document.getElementById("resultsSection");
-
-const paperResults =
-    document.getElementById("paperResults");
-
-const resultCount =
-    document.getElementById("resultCount");
-
-const breadcrumb =
-    document.getElementById("breadcrumb");
-
-const backButton =
-    document.getElementById("backButton");
-
-const restartButton =
-    document.getElementById("restartButton");
-
-
-/* ---------------------------------------------------------
-   DATA DETECTION
---------------------------------------------------------- */
-
-let config = null;
-let database = null;
-
-
-/*
-   First try direct global variables.
-*/
-
-try{
-
-    if(typeof pastPaperConfig !== "undefined"){
-        config = pastPaperConfig;
-    }
-
-}catch(e){}
-
-
-try{
-
-    if(typeof pastPapers !== "undefined"){
-        database = pastPapers;
-    }
-
-}catch(e){}
-
-
-/*
-   Then try window.
-*/
-
-if(!config && window.pastPaperConfig){
-    config = window.pastPaperConfig;
-}
-
-if(!database && window.pastPapers){
-    database = window.pastPapers;
-}
-
-
-/*
-   Also support common alternative names.
-*/
-
-if(!database && window.PAST_PAPERS){
-    database = window.PAST_PAPERS;
-}
-
-if(!config && window.PAST_PAPER_CONFIG){
-    config = window.PAST_PAPER_CONFIG;
-}
-
-
-/* ---------------------------------------------------------
-   NORMALIZE DATABASE
---------------------------------------------------------- */
-
-function normalizeDatabase(data){
-
-    if(!data){
-        return null;
-    }
 
     /*
-       If database is directly the form object.
-    */
+     * MOBILE MENU
+     */
 
-    if(typeof data === "object" && !Array.isArray(data)){
+    document
+        .getElementById("menuToggle")
+        .addEventListener(
+            "click",
+            function () {
 
-        /*
-           Detect:
-           {
-             form1:{...},
-             form2:{...}
-           }
-        */
+                const nav =
+                    document.getElementById("mainNav");
 
-        const keys =
-            Object.keys(data);
-
-        const hasForm =
-            keys.some(function(key){
-
-                return /^form\d+$/i.test(key);
-
-            });
-
-        if(hasForm){
-            return data;
-        }
-
-
-        /*
-           Support:
-           {
-              data:{
-                 form1:{...}
-              }
-           }
-        */
-
-        if(
-            data.data &&
-            typeof data.data === "object"
-        ){
-
-            const dataKeys =
-                Object.keys(data.data);
-
-            if(
-                dataKeys.some(function(key){
-                    return /^form\d+$/i.test(key);
-                })
-            ){
-                return data.data;
-            }
-        }
-
-
-        /*
-           Support:
-           {
-              papers:[...]
-           }
-        */
-
-        if(Array.isArray(data.papers)){
-
-            return convertPaperArray(
-                data.papers
-            );
-
-        }
-
-
-        /*
-           Support:
-           {
-              papers:{
-                 form1:[...]
-              }
-           }
-        */
-
-        if(
-            data.papers &&
-            typeof data.papers === "object"
-        ){
-
-            const paperKeys =
-                Object.keys(data.papers);
-
-            if(
-                paperKeys.some(function(key){
-                    return /^form\d+$/i.test(key);
-                })
-            ){
-
-                return data.papers;
+                nav.classList.toggle("open");
 
             }
-
-        }
-
-    }
-
-
-    /*
-       Direct array.
-    */
-
-    if(Array.isArray(data)){
-
-        return convertPaperArray(data);
-
-    }
-
-
-    return null;
-
-}
-
-
-/* ---------------------------------------------------------
-   CONVERT PAPER ARRAY
---------------------------------------------------------- */
-
-function convertPaperArray(array){
-
-    const output = {};
-
-    array.forEach(function(paper){
-
-        if(!paper || typeof paper !== "object"){
-            return;
-        }
-
-        const form =
-            paper.form ||
-            paper.class ||
-            paper.level;
-
-        if(!form){
-            return;
-        }
-
-        let formKey =
-            String(form).toLowerCase();
-
-        if(!/^form\d+$/i.test(formKey)){
-            formKey = "form" + formKey.replace(/\D/g,"");
-        }
-
-        const subject =
-            String(
-                paper.subject ||
-                ""
-            ).toLowerCase();
-
-        if(
-            subject !== "physics" &&
-            subject !== "chemistry"
-        ){
-            return;
-        }
-
-        if(!output[formKey]){
-            output[formKey] = {};
-        }
-
-        if(!Array.isArray(output[formKey][subject])){
-            output[formKey][subject] = [];
-        }
-
-        output[formKey][subject].push(paper);
-
-    });
-
-    return output;
-}
-
-
-/* ---------------------------------------------------------
-   APPLY NORMALIZATION
---------------------------------------------------------- */
-
-database =
-    normalizeDatabase(database);
-
-
-/* ---------------------------------------------------------
-   ERROR
---------------------------------------------------------- */
-
-function showError(title,text){
-
-    formOptions.innerHTML = `
-
-        <div class="error-box">
-
-            <strong>⚠️ ${escapeHTML(title)}</strong>
-
-            ${escapeHTML(text)}
-
-            <br><br>
-
-            <small>
-                File inayotakiwa:
-                <b>pastpapers.data.js</b>
-            </small>
-
-        </div>
-
-    `;
-
-}
-
-
-/* ---------------------------------------------------------
-   CHECK DATA
---------------------------------------------------------- */
-
-if(!database){
-
-    showError(
-        "Past paper data haijapatikana.",
-        "pastpapers.data.js haijasomeka au data yake haipo katika muundo unaotambulika."
-    );
-
-    return;
-}
-
-
-/* ---------------------------------------------------------
-   STATE
---------------------------------------------------------- */
-
-let selectedForm = null;
-let selectedSubject = null;
-let selectedType = null;
-let selectedYear = null;
-let selectedLocation = null;
-
-
-/* ---------------------------------------------------------
-   HELPERS
---------------------------------------------------------- */
-
-function escapeHTML(value){
-
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-
-function capitalize(value){
-
-    value =
-        String(value || "");
-
-    return value.charAt(0).toUpperCase()
-        + value.slice(1);
-
-}
-
-
-function formatForm(form){
-
-    const match =
-        String(form)
-        .match(/form(\d+)/i);
-
-    return match
-        ? "Form " + match[1]
-        : String(form);
-
-}
-
-
-function formatSubject(subject){
-
-    const key =
-        String(subject || "").toLowerCase();
-
-    if(key === "physics"){
-        return "Physics";
-    }
-
-    if(key === "chemistry"){
-        return "Chemistry";
-    }
-
-    return capitalize(key);
-
-}
-
-
-function formatType(type){
-
-    const key =
-        String(type || "")
-        .toLowerCase()
-        .replace(/[\s-]+/g,"_");
-
-    const labels = {
-
-        midterm:"Midterm",
-        terminal:"Terminal",
-        annual:"Annual",
-        joint:"Joint",
-        mock:"Mock",
-        necta:"NECTA",
-        pre_necta:"Pre-NECTA",
-        ftna:"FTNA",
-        acsee:"ACSEE",
-        school:"School Examination",
-        zonal:"Zonal",
-        zone:"Zone"
-
-    };
-
-    return labels[key] ||
-        capitalize(
-            key.replace(/_/g," ")
         );
 
-}
-
-
-function formatLocation(location){
-
-    const key =
-        String(location || "")
-        .toLowerCase()
-        .replace(/[\s-]+/g,"_");
-
-    const labels = {
-
-        dar_es_salaam:"Dar es Salaam",
-        dodoma:"Dodoma",
-        arusha:"Arusha",
-        mbeya:"Mbeya",
-        kagera:"Kagera",
-        shinyanga:"Shinyanga",
-        morogoro:"Morogoro",
-        mwanza:"Mwanza",
-        tanga:"Tanga",
-        tabora:"Tabora",
-        kigoma:"Kigoma",
-        geita:"Geita",
-        katavi:"Katavi",
-        lindi:"Lindi",
-        mtwara:"Mtwara",
-        pwani:"Pwani",
-        rukwa:"Rukwa",
-        singida:"Singida",
-        simiyu:"Simiyu",
-        mara:"Mara",
-        manyara:"Manyara",
-        njombe:"Njombe",
-        iringa:"Iringa",
-        songwe:"Songwe",
-        zanzibar:"Zanzibar",
-        necta:"NECTA",
-        national:"National"
-
-    };
-
-    return labels[key] ||
-        capitalize(
-            key.replace(/_/g," ")
-        );
-
-}
-
-
-function iconForSubject(subject){
-
-    return String(subject).toLowerCase()
-        === "physics"
-        ? "⚛️"
-        : "🧪";
-
-}
-
-
-function iconForType(type){
-
-    const icons = {
-
-        annual:"📘",
-        terminal:"📗",
-        midterm:"📝",
-        joint:"🤝",
-        mock:"📑",
-        necta:"🏛️",
-        pre_necta:"📋",
-        ftna:"🎓",
-        acsee:"🎓"
-
-    };
-
-    return icons[
-        String(type).toLowerCase()
-    ] || "📄";
-
-}
-
-
-function scrollTo(element){
-
-    if(!element){
-        return;
-    }
-
-    setTimeout(function(){
-
-        element.scrollIntoView({
-            behavior:"smooth",
-            block:"start"
-        });
-
-    },80);
-
-}
-
-
-/* ---------------------------------------------------------
-   OPTION BUTTON
---------------------------------------------------------- */
-
-function createOption(
-    icon,
-    title,
-    subtitle,
-    callback
-){
-
-    const button =
-        document.createElement("button");
-
-    button.type = "button";
-    button.className = "option";
-
-    button.innerHTML = `
-
-        <span class="option-icon">
-            ${icon}
-        </span>
-
-        <span class="option-content">
-
-            <strong>
-                ${escapeHTML(title)}
-            </strong>
-
-            <small>
-                ${escapeHTML(subtitle || "")}
-            </small>
-
-        </span>
-
-        <span class="option-arrow">
-            →
-        </span>
-
-    `;
-
-    button.addEventListener(
-        "click",
-        callback
-    );
-
-    return button;
-
-}
-
-
-/* ---------------------------------------------------------
-   CURRENT PAPERS
---------------------------------------------------------- */
-
-function getCurrentPapers(){
-
-    if(!selectedForm || !selectedSubject){
-        return [];
-    }
-
-    const form =
-        database[selectedForm];
-
-    if(!form){
-        return [];
-    }
-
-    const papers =
-        form[selectedSubject];
-
-    return Array.isArray(papers)
-        ? papers
-        : [];
-
-}
-
-
-/* ---------------------------------------------------------
-   FORMS
---------------------------------------------------------- */
-
-function loadForms(){
-
-    formOptions.innerHTML = "";
-
-    const forms =
-        Object.keys(database)
-        .filter(function(key){
-
-            const value =
-                database[key];
-
-            return (
-                value &&
-                typeof value === "object" &&
-                (
-                    Array.isArray(value.physics) ||
-                    Array.isArray(value.chemistry)
-                )
-            );
-
-        })
-        .sort(function(a,b){
-
-            const na =
-                parseInt(
-                    String(a).replace(/\D/g,""),
-                    10
-                ) || 0;
-
-            const nb =
-                parseInt(
-                    String(b).replace(/\D/g,""),
-                    10
-                ) || 0;
-
-            return na - nb;
-
-        });
-
-
-    if(!forms.length){
-
-        showError(
-            "Hakuna Form zilizopatikana.",
-            "Database imefunguka lakini hakuna form1, form2 ... form6 yenye Physics au Chemistry."
-        );
-
-        return;
-    }
-
-
-    forms.forEach(function(form){
-
-        let total = 0;
-
-        const data =
-            database[form];
-
-        if(Array.isArray(data.physics)){
-            total += data.physics.length;
-        }
-
-        if(Array.isArray(data.chemistry)){
-            total += data.chemistry.length;
-        }
-
-
-        formOptions.appendChild(
-
-            createOption(
-                "📚",
-                formatForm(form),
-                total +
-                (
-                    total === 1
-                    ? " paper"
-                    : " papers"
-                ),
-                function(){
-
-                    selectForm(form);
-
-                }
-            )
-
-        );
-
-    });
-
-}
-
-
-/* ---------------------------------------------------------
-   SELECT FORM
---------------------------------------------------------- */
-
-function selectForm(form){
-
-    selectedForm = form;
-
-    selectedSubject = null;
-    selectedType = null;
-    selectedYear = null;
-    selectedLocation = null;
-
-    hide(subjectSection);
-    hide(typeSection);
-    hide(yearSection);
-    hide(locationSection);
-
-    paperResults.innerHTML = `
-        <div class="empty">
-            <strong>Select Subject</strong>
-            Choose Physics or Chemistry.
-        </div>
-    `;
-
-    resultCount.textContent =
-        "0 Papers";
-
-    updateBreadcrumb();
-
-    loadSubjects();
-
-    show(subjectSection);
-
-    scrollTo(subjectSection);
-
-}
-
-
-/* ---------------------------------------------------------
-   SUBJECTS
---------------------------------------------------------- */
-
-function loadSubjects(){
-
-    subjectOptions.innerHTML = "";
-
-    const form =
-        database[selectedForm];
-
-    const subjects =
-        Object.keys(form || {})
-        .filter(function(subject){
-
-            return Array.isArray(
-                form[subject]
-            );
-
-        });
-
-
-    subjects.forEach(function(subject){
-
-        const count =
-            form[subject].length;
-
-        subjectOptions.appendChild(
-
-            createOption(
-                iconForSubject(subject),
-                formatSubject(subject),
-                count +
-                (
-                    count === 1
-                    ? " paper"
-                    : " papers"
-                ),
-                function(){
-
-                    selectSubject(subject);
-
-                }
-            )
-
-        );
-
-    });
-
-}
-
-
-/* ---------------------------------------------------------
-   SELECT SUBJECT
---------------------------------------------------------- */
-
-function selectSubject(subject){
-
-    selectedSubject = subject;
-
-    selectedType = null;
-    selectedYear = null;
-    selectedLocation = null;
-
-    hide(yearSection);
-    hide(locationSection);
-
-    paperResults.innerHTML = `
-        <div class="empty">
-            <strong>Select Examination Type</strong>
-            Choose the examination type.
-        </div>
-    `;
-
-    resultCount.textContent =
-        "0 Papers";
-
-    updateBreadcrumb();
-
-    loadTypes();
-
-    show(typeSection);
-
-    scrollTo(typeSection);
-
-}
-
-
-/* ---------------------------------------------------------
-   TYPES
---------------------------------------------------------- */
-
-function loadTypes(){
-
-    typeOptions.innerHTML = "";
-
-    const papers =
-        getCurrentPapers();
-
-    const map = {};
-
-    papers.forEach(function(paper){
-
-        const type =
-            String(
-                paper.type ||
-                paper.examType ||
-                paper.exam_type ||
-                ""
-            ).trim();
-
-        if(type){
-            map[type] = true;
-        }
-
-    });
-
-    const types =
-        Object.keys(map);
-
-
-    const order = [
-        "necta",
-        "acsee",
-        "ftna",
-        "annual",
-        "terminal",
-        "midterm",
-        "joint",
-        "mock",
-        "pre_necta"
-    ];
-
-
-    types.sort(function(a,b){
-
-        const ia =
-            order.indexOf(
-                String(a).toLowerCase()
-            );
-
-        const ib =
-            order.indexOf(
-                String(b).toLowerCase()
-            );
-
-        if(ia === -1 && ib === -1){
-            return a.localeCompare(b);
-        }
-
-        if(ia === -1){
-            return 1;
-        }
-
-        if(ib === -1){
-            return -1;
-        }
-
-        return ia - ib;
-
-    });
-
-
-    types.forEach(function(type){
-
-        const count =
-            papers.filter(function(paper){
-
-                return String(
-                    paper.type ||
-                    paper.examType ||
-                    paper.exam_type ||
-                    ""
-                ).trim() === type;
-
-            }).length;
-
-
-        typeOptions.appendChild(
-
-            createOption(
-                iconForType(type),
-                formatType(type),
-                count +
-                (
-                    count === 1
-                    ? " paper"
-                    : " papers"
-                ),
-                function(){
-
-                    selectType(type);
-
-                }
-            )
-
-        );
-
-    });
-
-}
-
-
-/* ---------------------------------------------------------
-   SELECT TYPE
---------------------------------------------------------- */
-
-function selectType(type){
-
-    selectedType = type;
-
-    selectedYear = null;
-    selectedLocation = null;
-
-    hide(locationSection);
-
-    paperResults.innerHTML = `
-        <div class="empty">
-            <strong>Select Year</strong>
-            Choose the examination year.
-        </div>
-    `;
-
-    resultCount.textContent =
-        "0 Papers";
-
-    updateBreadcrumb();
-
-    loadYears();
-
-    show(yearSection);
-
-    scrollTo(yearSection);
-
-}
-
-
-/* ---------------------------------------------------------
-   YEARS
---------------------------------------------------------- */
-
-function loadYears(){
-
-    yearOptions.innerHTML = "";
-
-    const papers =
-        getCurrentPapers()
-        .filter(function(paper){
-
-            return String(
-                paper.type ||
-                paper.examType ||
-                paper.exam_type ||
-                ""
-            ).trim() === String(selectedType);
-
-        });
-
-
-    const years =
-        [...new Set(
-            papers
-            .map(function(paper){
-
-                return Number(
-                    paper.year ||
-                    paper.examYear ||
-                    paper.exam_year
-                );
-
-            })
-            .filter(function(year){
-
-                return Number.isFinite(year);
-
-            })
-        )]
-        .sort(function(a,b){
-            return b-a;
-        });
-
-
-    years.forEach(function(year){
-
-        const count =
-            papers.filter(function(paper){
-
-                return Number(
-                    paper.year ||
-                    paper.examYear ||
-                    paper.exam_year
-                ) === year;
-
-            }).length;
-
-
-        yearOptions.appendChild(
-
-            createOption(
-                "📅",
-                String(year),
-                count +
-                (
-                    count === 1
-                    ? " paper"
-                    : " papers"
-                ),
-                function(){
-
-                    selectYear(year);
-
-                }
-            )
-
-        );
-
-    });
-
-}
-
-
-/* ---------------------------------------------------------
-   SELECT YEAR
---------------------------------------------------------- */
-
-function selectYear(year){
-
-    selectedYear = year;
-
-    selectedLocation = null;
-
-    updateBreadcrumb();
-
-    loadLocations();
-
-    show(locationSection);
-
-    scrollTo(locationSection);
-
-}
-
-
-/* ---------------------------------------------------------
-   LOCATION
---------------------------------------------------------- */
-
-function getPaperLocation(paper){
-
-    return (
-        paper.region ||
-        paper.school ||
-        paper.zone ||
-        paper.location ||
-        "National"
-    );
-
-}
-
-
-function loadLocations(){
-
-    locationOptions.innerHTML = "";
-
-    const papers =
-        getCurrentPapers()
-        .filter(function(paper){
-
-            const type =
-                String(
-                    paper.type ||
-                    paper.examType ||
-                    paper.exam_type ||
-                    ""
-                ).trim();
-
-            const year =
-                Number(
-                    paper.year ||
-                    paper.examYear ||
-                    paper.exam_year
-                );
-
-            return (
-                type === String(selectedType) &&
-                year === Number(selectedYear)
-            );
-
-        });
-
-
-    const locations = [];
-
-    papers.forEach(function(paper){
-
-        const location =
-            getPaperLocation(paper);
-
-        if(
-            !locations.includes(location)
-        ){
-
-            locations.push(location);
-
-        }
-
-    });
-
-
-    locations.sort(function(a,b){
-
-        return formatLocation(a)
-            .localeCompare(
-                formatLocation(b)
-            );
-
-    });
-
-
-    locations.forEach(function(location){
-
-        const count =
-            papers.filter(function(paper){
-
-                return getPaperLocation(paper)
-                    === location;
-
-            }).length;
-
-
-        locationOptions.appendChild(
-
-            createOption(
-                "📍",
-                formatLocation(location),
-                count +
-                (
-                    count === 1
-                    ? " paper"
-                    : " papers"
-                ),
-                function(){
-
-                    selectLocation(location);
-
-                }
-            )
-
-        );
-
-    });
-
-}
-
-
-/* ---------------------------------------------------------
-   SELECT LOCATION
---------------------------------------------------------- */
-
-function selectLocation(location){
-
-    selectedLocation =
-        location;
-
-    updateBreadcrumb();
-
-    loadPapers();
-
-    scrollTo(resultsSection);
-
-}
-
-
-/* ---------------------------------------------------------
-   LOAD PAPERS
---------------------------------------------------------- */
-
-function loadPapers(){
-
-    const papers =
-        getCurrentPapers()
-        .filter(function(paper){
-
-            const type =
-                String(
-                    paper.type ||
-                    paper.examType ||
-                    paper.exam_type ||
-                    ""
-                ).trim();
-
-            const year =
-                Number(
-                    paper.year ||
-                    paper.examYear ||
-                    paper.exam_year
-                );
-
-            const location =
-                getPaperLocation(paper);
-
-            return (
-                type === String(selectedType) &&
-                year === Number(selectedYear) &&
-                location === selectedLocation
-            );
-
-        });
-
-
-    resultCount.textContent =
-        papers.length +
-        (
-            papers.length === 1
-            ? " Paper"
-            : " Papers"
-        );
-
-
-    if(!papers.length){
-
-        paperResults.innerHTML = `
-            <div class="empty">
-
-                <strong>No Papers Found</strong>
-
-                There are no papers matching
-                your selected options.
-
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    const list =
-        document.createElement("div");
-
-    list.className =
-        "paper-list";
-
-
-    const head =
-        document.createElement("div");
-
-    head.className =
-        "paper-list-head";
-
-    head.innerHTML = `
-
-        <strong>
-            📚 ${escapeHTML(
-                formatSubject(selectedSubject)
-            )}
-            —
-            ${escapeHTML(
-                formatType(selectedType)
-            )}
-            —
-            ${escapeHTML(
-                String(selectedYear)
-            )}
-        </strong>
-
-        <span>
-            ${papers.length}
-            ${papers.length === 1
-                ? "Paper"
-                : "Papers"}
-        </span>
-
-    `;
-
-    list.appendChild(head);
-
-
-    papers.forEach(function(paper,index){
-
-        list.appendChild(
-            createPaper(
-                paper,
-                index + 1
-            )
-        );
-
-    });
-
-
-    paperResults.innerHTML = "";
-
-    paperResults.appendChild(list);
-
-}
-
-
-/* ---------------------------------------------------------
-   CREATE PAPER
---------------------------------------------------------- */
-
-function createPaper(paper,number){
-
-    const item =
-        document.createElement("div");
-
-    item.className =
-        "paper";
-
-
-    const title =
-        paper.title ||
-        paper.name ||
-        `${formatSubject(selectedSubject)} ${formatType(selectedType)} Examination`;
-
-
-    const file =
-        paper.file ||
-        paper.pdf ||
-        paper.url ||
-        paper.path ||
-        paper.link ||
-        "";
-
-
-    const location =
-        getPaperLocation(paper);
-
-
-    item.innerHTML = `
-
-        <div class="paper-number">
-            ${number}
-        </div>
-
-        <div>
-
-            <h3>
-                ${escapeHTML(title)}
-            </h3>
-
-            <div class="meta">
-
-                <span>
-                    📚 ${escapeHTML(
-                        formatSubject(selectedSubject)
-                    )}
-                </span>
-
-                <span>
-                    📝 ${escapeHTML(
-                        formatType(selectedType)
-                    )}
-                </span>
-
-                <span>
-                    📅 ${escapeHTML(
-                        String(selectedYear)
-                    )}
-                </span>
-
-                <span>
-                    📍 ${escapeHTML(
-                        formatLocation(location)
-                    )}
-                </span>
-
-            </div>
-
-        </div>
-
-        <div class="paper-action">
-
-            ${
-                file
-                ?
-                `
-                <a
-                    class="open-pdf"
-                    href="${safePath(file)}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    📄 Fungua PDF
-                </a>
-                `
-                :
-                `
-                <span
-                    class="open-pdf"
-                    style="background:#999;"
-                >
-                    PDF haipo
-                </span>
-                `
-            }
-
-        </div>
-
-    `;
-
-
-    return item;
-
-}
-
-
-/* ---------------------------------------------------------
-   SAFE PATH
---------------------------------------------------------- */
-
-function safePath(file){
-
-    let path =
-        String(file || "")
-        .trim();
-
-
-    if(
-        /^https?:\/\//i.test(path)
-    ){
-
-        return escapeHTML(path);
-
-    }
-
-
-    path =
-        path.replace(/^\/+/,"");
-
-
-    return path
-        .split("/")
-        .map(function(part){
-
-            return encodeURIComponent(part);
-
-        })
-        .join("/");
-
-}
-
-
-/* ---------------------------------------------------------
-   BREADCRUMB
---------------------------------------------------------- */
-
-function updateBreadcrumb(){
-
-    const parts = [
-        "Past Papers"
-    ];
-
-
-    if(selectedForm){
-        parts.push(
-            formatForm(selectedForm)
-        );
-    }
-
-    if(selectedSubject){
-        parts.push(
-            formatSubject(selectedSubject)
-        );
-    }
-
-    if(selectedType){
-        parts.push(
-            formatType(selectedType)
-        );
-    }
-
-    if(selectedYear){
-        parts.push(
-            String(selectedYear)
-        );
-    }
-
-    if(selectedLocation){
-        parts.push(
-            formatLocation(selectedLocation)
-        );
-    }
-
-
-    breadcrumb.innerHTML =
-        parts.map(function(part,index){
-
-            const last =
-                index === parts.length - 1;
-
-            return last
-                ?
-                `<span class="current">
-                    ${escapeHTML(part)}
-                 </span>`
-                :
-                `<span>
-                    ${escapeHTML(part)}
-                 </span>
-                 <span>→</span>`;
-
-        }).join("");
-
-}
-
-
-/* ---------------------------------------------------------
-   SHOW / HIDE
---------------------------------------------------------- */
-
-function show(element){
-
-    if(element){
-        element.hidden = false;
-    }
-
-}
-
-
-function hide(element){
-
-    if(element){
-        element.hidden = true;
-    }
-
-}
-
-
-/* ---------------------------------------------------------
-   RESTART
---------------------------------------------------------- */
-
-restartButton.addEventListener(
-    "click",
-    function(){
-
-        selectedForm = null;
-        selectedSubject = null;
-        selectedType = null;
-        selectedYear = null;
-        selectedLocation = null;
-
-        hide(subjectSection);
-        hide(typeSection);
-        hide(yearSection);
-        hide(locationSection);
-
-        paperResults.innerHTML = `
-            <div class="empty">
-
-                <strong>
-                    Select a Form to Begin
-                </strong>
-
-                Choose Form 1–6 above
-                to view available papers.
-
-            </div>
-        `;
-
-        resultCount.textContent =
-            "0 Papers";
-
-        updateBreadcrumb();
-
-        scrollTo(formSection);
-
-    }
-);
-
-
-/* ---------------------------------------------------------
-   BACK
---------------------------------------------------------- */
-
-backButton.addEventListener(
-    "click",
-    function(){
-
-        if(selectedLocation){
-
-            selectedLocation = null;
-
-            hide(resultsSection);
-
-            updateBreadcrumb();
-
-            scrollTo(locationSection);
-
-            return;
-
-        }
-
-
-        if(selectedYear){
-
-            selectedYear = null;
-
-            hide(locationSection);
-
-            hide(resultsSection);
-
-            updateBreadcrumb();
-
-            scrollTo(yearSection);
-
-            return;
-
-        }
-
-
-        if(selectedType){
-
-            selectedType = null;
-
-            hide(yearSection);
-
-            hide(locationSection);
-
-            hide(resultsSection);
-
-            updateBreadcrumb();
-
-            scrollTo(typeSection);
-
-            return;
-
-        }
-
-
-        if(selectedSubject){
-
-            selectedSubject = null;
-
-            hide(typeSection);
-
-            hide(yearSection);
-
-            hide(locationSection);
-
-            hide(resultsSection);
-
-            updateBreadcrumb();
-
-            scrollTo(subjectSection);
-
-            return;
-
-        }
-
-
-        if(selectedForm){
-
-            selectedForm = null;
-
-            hide(subjectSection);
-            hide(typeSection);
-            hide(yearSection);
-            hide(locationSection);
-            hide(resultsSection);
-
-            updateBreadcrumb();
-
-            scrollTo(formSection);
-
-            return;
-
-        }
-
-
-        window.location.href =
-            "index.html";
-
-    }
-);
-
-
-/* ---------------------------------------------------------
-   INITIALIZE
---------------------------------------------------------- */
-
-loadForms();
-
-})();
 </script>
+
+
+<!-- ======================================================
+     IMPORTANT:
+     DATA FIRST
+     ENGINE SECOND
+====================================================== -->
+
+<script
+    src="pastpapers.data.js"
+    defer
+></script>
+
+<script
+    src="pastpapers.js"
+    defer
+></script>
+
 
 </body>
 </html>
