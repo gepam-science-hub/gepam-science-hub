@@ -2,342 +2,248 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>GEPAM Science Hub | Past Papers</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="description"
-        content="GEPAM Science Hub Past Papers - Physics and Chemistry examination papers for Form 1 to Form 6."
-    >
+    <meta name="description"
+          content="GEPAM Science Hub Past Papers - Physics and Chemistry examination papers from Form 1 to Form 6.">
 
-    <link rel="icon" href="favicon.ico">
+    <title>Past Papers | GEPAM Science Hub</title>
+
+    <link rel="stylesheet" href="style.css">
 
     <style>
-        :root {
-            --primary: #003366;
-            --primary-light: #0b5a9e;
-            --secondary: #f4f8fb;
-            --white: #ffffff;
-            --text: #1f2937;
-            --muted: #64748b;
-            --border: #dbe4ee;
-            --success: #0f766e;
-            --shadow: 0 8px 25px rgba(0, 51, 102, 0.10);
-            --radius: 16px;
+        /* ================================
+           PAST PAPERS PAGE
+        ================================= */
+
+        .pastpapers-page {
+            min-height: 100vh;
+            background: #f4f8fb;
+            padding-bottom: 50px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: var(--secondary);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        /* =========================
-           HEADER
-        ========================= */
-
-        .site-header {
-            background: linear-gradient(135deg, #003366, #064f8f);
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-        }
-
-        .header-inner {
-            max-width: 1200px;
+        .pastpapers-container {
+            width: min(1200px, 94%);
             margin: auto;
-            padding: 14px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
         }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-        }
-
-        .brand-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            background: white;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        .brand-text {
-            line-height: 1.2;
-        }
-
-        .brand-name {
-            font-size: 17px;
-        }
-
-        .brand-tagline {
-            font-size: 11px;
-            opacity: 0.85;
-        }
-
-        .nav {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav a {
-            color: white;
-            text-decoration: none;
-            padding: 9px 13px;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: 0.2s;
-        }
-
-        .nav a:hover,
-        .nav a.active {
-            background: rgba(255, 255, 255, 0.16);
-        }
-
-        .menu-toggle {
-            display: none;
-            border: 0;
-            background: transparent;
-            color: white;
-            font-size: 28px;
-            cursor: pointer;
-        }
-
-        /* =========================
-           MAIN
-        ========================= */
-
-        main {
-            max-width: 1200px;
-            margin: auto;
-            padding: 25px 20px 50px;
-        }
+        /* BACK BUTTON */
 
         .back-row {
-            margin-bottom: 18px;
+            padding: 18px 0 8px;
         }
 
         .back-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: white;
-            color: var(--primary);
-            border: 1px solid var(--border);
-            padding: 10px 16px;
+            padding: 10px 17px;
             border-radius: 10px;
-            cursor: pointer;
+            background: #003366;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
             font-size: 14px;
-            font-weight: bold;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            transition: 0.2s;
+            transition: 0.2s ease;
         }
 
         .back-btn:hover {
-            background: #eef6ff;
-            transform: translateX(-2px);
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #003366, #0b5a9e);
-            color: white;
-            border-radius: 20px;
-            padding: 35px 25px;
-            margin-bottom: 25px;
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: clamp(26px, 5vw, 42px);
-            margin-bottom: 8px;
-        }
-
-        .hero p {
-            max-width: 700px;
-            margin: auto;
-            opacity: 0.92;
-        }
-
-        /* =========================
-           STEPS
-        ========================= */
-
-        .step-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 20px;
-            margin-bottom: 18px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-        }
-
-        .step-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            color: var(--primary);
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .step-number {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-        }
-
-        .option-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
-            gap: 10px;
-        }
-
-        .option-btn {
-            background: #f8fbff;
-            border: 1px solid var(--border);
-            color: var(--primary);
-            border-radius: 12px;
-            padding: 13px 10px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-            min-height: 48px;
-        }
-
-        .option-btn:hover {
-            border-color: var(--primary-light);
-            background: #eef6ff;
+            background: #00509e;
             transform: translateY(-1px);
         }
 
-        .option-btn.selected {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
+        /* INTRO */
 
-        /* =========================
-           SEARCH
-        ========================= */
-
-        .search-box {
-            position: relative;
-            margin-bottom: 18px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            outline: none;
-            font-size: 15px;
+        .papers-intro {
             background: white;
+            border-radius: 18px;
+            padding: 25px 20px;
+            margin: 10px 0 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            border: 1px solid #e4edf5;
         }
 
-        .search-box input:focus {
-            border-color: var(--primary-light);
-            box-shadow: 0 0 0 3px rgba(11, 90, 158, 0.10);
+        .papers-intro h1 {
+            margin: 0 0 8px;
+            color: #003366;
+            font-size: clamp(24px, 4vw, 34px);
         }
 
-        /* =========================
-           RESULTS
-        ========================= */
+        .papers-intro p {
+            margin: 0;
+            color: #607080;
+            line-height: 1.6;
+        }
+
+        /* FILTER BOX */
+
+        .filters-box {
+            background: white;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 22px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            border: 1px solid #e4edf5;
+        }
+
+        .filters-title {
+            color: #003366;
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .filter-group label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #445566;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 11px 12px;
+            border: 1px solid #cbd8e3;
+            border-radius: 10px;
+            background: #fff;
+            color: #1f2d3d;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0,102,204,0.10);
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            border: none;
+            border-radius: 10px;
+            padding: 11px 18px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .reset-btn {
+            background: #e9eef3;
+            color: #263746;
+        }
+
+        .reset-btn:hover {
+            background: #dbe4ec;
+        }
+
+        /* RESULT HEADER */
 
         .results-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 15px;
-            margin: 28px 0 15px;
+            margin: 20px 0 14px;
             flex-wrap: wrap;
         }
 
         .results-header h2 {
-            color: var(--primary);
-            font-size: 22px;
+            margin: 0;
+            color: #003366;
+            font-size: 21px;
         }
 
-        .count-badge {
-            background: #e8f3ff;
-            color: var(--primary);
-            padding: 7px 12px;
-            border-radius: 20px;
+        .papers-count {
+            background: #003366;
+            color: white;
+            border-radius: 30px;
+            padding: 7px 13px;
             font-size: 13px;
-            font-weight: bold;
+            font-weight: 800;
         }
 
-        .paper-grid {
+        /* CARDS */
+
+        .papers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 17px;
+            align-items: stretch;
         }
 
         .paper-card {
             background: white;
-            border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 19px;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.05);
+            border: 1px solid #e0e9f0;
+            padding: 18px;
             display: flex;
             flex-direction: column;
-            transition: 0.2s;
+            min-width: 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform .2s ease, box-shadow .2s ease;
         }
 
         .paper-card:hover {
             transform: translateY(-3px);
-            box-shadow: var(--shadow);
+            box-shadow: 0 9px 25px rgba(0,0,0,0.09);
+        }
+
+        .paper-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 13px;
         }
 
         .paper-icon {
-            width: 45px;
-            height: 45px;
-            background: #eaf4ff;
-            color: var(--primary);
-            border-radius: 11px;
+            width: 43px;
+            height: 43px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            background: #eaf3fb;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 22px;
-            margin-bottom: 13px;
         }
 
-        .paper-card h3 {
-            color: var(--primary);
+        .paper-year {
+            background: #f0f4f8;
+            color: #33495c;
+            padding: 6px 9px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .paper-title {
+            color: #003366;
             font-size: 17px;
-            margin-bottom: 10px;
+            font-weight: 800;
+            line-height: 1.35;
+            margin: 0 0 13px;
         }
 
         .paper-meta {
@@ -347,131 +253,103 @@
             margin-bottom: 15px;
         }
 
-        .meta {
-            background: #f1f5f9;
-            color: #475569;
-            padding: 5px 9px;
+        .paper-tag {
+            background: #f4f7fa;
+            color: #4d6172;
             border-radius: 7px;
+            padding: 6px 8px;
             font-size: 12px;
+            font-weight: 700;
         }
 
         .paper-actions {
             margin-top: auto;
         }
 
-        .open-btn {
-            display: block;
+        .open-paper-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
             width: 100%;
-            text-align: center;
-            text-decoration: none;
-            background: var(--primary);
+            box-sizing: border-box;
+            background: #003366;
             color: white;
-            padding: 11px 14px;
+            text-decoration: none;
+            padding: 11px 13px;
             border-radius: 10px;
-            font-weight: bold;
-            transition: 0.2s;
+            font-weight: 800;
+            font-size: 14px;
+            transition: .2s ease;
         }
 
-        .open-btn:hover {
-            background: var(--primary-light);
+        .open-paper-btn:hover {
+            background: #00509e;
         }
 
-        /* =========================
-           EMPTY
-        ========================= */
+        /* EMPTY */
 
         .empty-state {
             background: white;
-            border: 1px dashed var(--border);
+            border: 1px dashed #b9c9d8;
             border-radius: 16px;
-            padding: 35px 20px;
+            padding: 40px 20px;
             text-align: center;
-            color: var(--muted);
+            color: #647789;
         }
 
-        .empty-state strong {
-            display: block;
-            color: var(--primary);
-            margin-bottom: 5px;
+        .empty-state .empty-icon {
+            font-size: 42px;
+            margin-bottom: 10px;
         }
 
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            background: #00294f;
-            color: white;
-            text-align: center;
-            padding: 25px 15px;
-            font-size: 13px;
+        .empty-state h3 {
+            margin: 0 0 8px;
+            color: #30485d;
         }
 
-        /* =========================
-           MOBILE
-        ========================= */
+        .empty-state p {
+            margin: 0;
+            line-height: 1.6;
+        }
 
-        @media (max-width: 760px) {
+        /* MOBILE */
 
-            .header-inner {
-                padding: 11px 15px;
+        @media (max-width: 900px) {
+            .filters-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
-            .menu-toggle {
-                display: block;
+            .papers-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .pastpapers-container {
+                width: 92%;
             }
 
-            .nav {
-                display: none;
-                position: absolute;
-                top: 64px;
-                left: 0;
-                right: 0;
-                background: #003366;
-                flex-direction: column;
-                padding: 12px 15px 18px;
-                box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-            }
-
-            .nav.open {
-                display: flex;
-            }
-
-            .nav a {
-                width: 100%;
-                text-align: center;
-            }
-
-            main {
-                padding: 18px 12px 35px;
-            }
-
-            .hero {
-                padding: 27px 17px;
-                border-radius: 16px;
-            }
-
-            .step-card {
-                padding: 15px;
-            }
-
-            .option-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .paper-grid {
+            .filters-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .papers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .papers-intro {
+                padding: 20px 16px;
+            }
+
+            .filters-box {
+                padding: 16px;
             }
 
             .back-btn {
                 width: 100%;
                 justify-content: center;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .option-grid {
-                grid-template-columns: 1fr;
+                box-sizing: border-box;
             }
         }
     </style>
@@ -479,276 +357,267 @@
 
 <body>
 
-<header class="site-header">
+<div class="pastpapers-page">
 
-    <div class="header-inner">
+    <!-- HEADER -->
+    <header>
+        <div class="container">
 
-        <a href="index.html" class="brand">
-
-            <div class="brand-icon">
-                GS
+            <div class="logo">
+                <strong>GS</strong>
+                <div>
+                    <div>GEPAM Science Hub</div>
+                    <small>Making Science Easy</small>
+                </div>
             </div>
 
-            <div class="brand-text">
-                <div class="brand-name">GEPAM Science Hub</div>
-                <div class="brand-tagline">Making Science Easy</div>
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Open menu">
+                ☰
+            </button>
+
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="notes.html">Notes</a>
+                <a href="pastpapers.html" class="active">Past Papers</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main class="pastpapers-container">
+
+        <!-- BACK -->
+        <div class="back-row">
+            <a href="index.html" class="back-btn">
+                ← Back to Home
+            </a>
+        </div>
+
+
+        <!-- INTRO -->
+        <section class="papers-intro">
+
+            <h1>Past Papers</h1>
+
+            <p>
+                Find Physics and Chemistry examination papers
+                from Form 1 to Form 6. Choose your class,
+                subject and examination type to get started.
+            </p>
+
+        </section>
+
+
+        <!-- FILTERS -->
+        <section class="filters-box">
+
+            <div class="filters-title">
+                🔎 Find Examination Papers
             </div>
 
-        </a>
+            <div class="filters-grid">
 
-        <button
-            class="menu-toggle"
-            id="menuToggle"
-            aria-label="Open navigation menu"
-            aria-expanded="false"
-        >
-            ☰
-        </button>
+                <div class="filter-group">
+                    <label for="formSelect">
+                        Select Form
+                    </label>
 
-        <nav class="nav" id="mainNav">
+                    <select id="formSelect">
+                        <option value="">Select Form</option>
+                        <option value="form1">Form 1</option>
+                        <option value="form2">Form 2</option>
+                        <option value="form3">Form 3</option>
+                        <option value="form4">Form 4</option>
+                        <option value="form5">Form 5</option>
+                        <option value="form6">Form 6</option>
+                    </select>
+                </div>
 
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="notes.html">Notes</a>
-            <a href="pastpapers.html" class="active">Past Papers</a>
-            <a href="contact.html">Contact</a>
 
-        </nav>
+                <div class="filter-group">
+                    <label for="subjectSelect">
+                        Subject
+                    </label>
 
-    </div>
+                    <select id="subjectSelect">
+                        <option value="">All Subjects</option>
+                    </select>
+                </div>
 
-</header>
 
+                <div class="filter-group">
+                    <label for="typeSelect">
+                        Examination Type
+                    </label>
 
-<main>
+                    <select id="typeSelect">
+                        <option value="">All Types</option>
+                    </select>
+                </div>
 
-    <div class="back-row">
 
-        <button class="back-btn" id="backButton">
-            ← Back
-        </button>
+                <div class="filter-group">
+                    <label for="regionSelect">
+                        Region
+                    </label>
 
-    </div>
+                    <select id="regionSelect">
+                        <option value="">All Regions</option>
+                    </select>
+                </div>
 
 
-    <section class="hero">
+                <div class="filter-group">
+                    <label for="yearSelect">
+                        Year
+                    </label>
 
-        <h1>Past Papers</h1>
+                    <select id="yearSelect">
+                        <option value="">All Years</option>
+                    </select>
+                </div>
 
-        <p>
-            Find Physics and Chemistry examination papers from Form 1 to Form 6.
-            Choose your class, subject and examination type to get started.
-        </p>
 
-    </section>
+                <div class="filter-group">
+                    <label for="schoolInput">
+                        School
+                    </label>
 
+                    <input
+                        type="text"
+                        id="schoolInput"
+                        placeholder="Search school...">
+                </div>
 
-    <!-- FORM -->
 
-    <section class="step-card">
+                <div class="filter-group">
+                    <label for="zoneInput">
+                        Zone
+                    </label>
 
-        <div class="step-title">
-            <span class="step-number">1</span>
-            Select Form
-        </div>
+                    <input
+                        type="text"
+                        id="zoneInput"
+                        placeholder="Search zone...">
+                </div>
 
-        <div
-            class="option-grid"
-            id="formOptions"
-        ></div>
 
-    </section>
+                <div class="filter-group">
+                    <label for="seriesInput">
+                        Series
+                    </label>
 
+                    <input
+                        type="text"
+                        id="seriesInput"
+                        placeholder="Search series...">
+                </div>
 
-    <!-- SUBJECT -->
+            </div>
 
-    <section
-        class="step-card"
-        id="subjectSection"
-        hidden
-    >
 
-        <div class="step-title">
+            <div class="filter-actions">
 
-            <span class="step-number">2</span>
-            Select Subject
+                <button
+                    type="button"
+                    class="filter-btn reset-btn"
+                    id="resetFilters">
+                    Reset Filters
+                </button>
 
-        </div>
+            </div>
 
-        <div
-            class="option-grid"
-            id="subjectOptions"
-        ></div>
+        </section>
 
-    </section>
 
-
-    <!-- TYPE -->
-
-    <section
-        class="step-card"
-        id="typeSection"
-        hidden
-    >
-
-        <div class="step-title">
-
-            <span class="step-number">3</span>
-            Select Examination Type
-
-        </div>
-
-        <div
-            class="option-grid"
-            id="typeOptions"
-        ></div>
-
-    </section>
-
-
-    <!-- REGION / SCHOOL / ZONE -->
-
-    <section
-        class="step-card"
-        id="locationSection"
-        hidden
-    >
-
-        <div class="step-title">
-
-            <span class="step-number">4</span>
-            Select Region / School / Zone
-
-        </div>
-
-        <div
-            class="option-grid"
-            id="locationOptions"
-        ></div>
-
-    </section>
-
-
-    <!-- YEAR -->
-
-    <section
-        class="step-card"
-        id="yearSection"
-        hidden
-    >
-
-        <div class="step-title">
-
-            <span class="step-number">5</span>
-            Select Year
-
-        </div>
-
-        <div
-            class="option-grid"
-            id="yearOptions"
-        ></div>
-
-    </section>
-
-
-    <!-- SERIES -->
-
-    <section
-        class="step-card"
-        id="seriesSection"
-        hidden
-    >
-
-        <div class="step-title">
-
-            <span class="step-number">6</span>
-            Select Series
-        </div>
-
-        <div
-            class="option-grid"
-            id="seriesOptions"
-        ></div>
-
-    </section>
-
-
-    <!-- SEARCH -->
-
-    <section
-        id="searchSection"
-        hidden
-    >
-
-        <div class="search-box">
-
-            <input
-                type="search"
-                id="searchInput"
-                placeholder="Search papers..."
-                autocomplete="off"
-            >
-
-        </div>
-
-    </section>
-
-
-    <!-- RESULTS -->
-
-    <section id="resultsSection">
-
+        <!-- RESULTS -->
         <div class="results-header">
 
-            <h2>Available Papers</h2>
+            <h2>
+                Available Papers
+            </h2>
 
-            <span
-                class="count-badge"
-                id="resultCount"
-            >
+            <div
+                class="papers-count"
+                id="papersCount">
                 0 papers
-            </span>
-
-        </div>
-
-        <div
-            class="paper-grid"
-            id="paperResults"
-        >
-
-            <div class="empty-state">
-
-                <strong>Select a form to begin</strong>
-
-                Choose Form 1–6 above to view available papers.
-
             </div>
 
         </div>
 
-    </section>
 
-</main>
-
-
-<footer>
-
-    <p>
-        © <span id="currentYear"></span>
-        GEPAM Science Hub. All Rights Reserved.
-    </p>
-
-</footer>
+        <!-- CARDS -->
+        <section
+            class="papers-grid"
+            id="papersGrid">
+        </section>
 
 
-<!--
-    IMPORTANT:
-    Load DATA FIRST, then ENGINE.
--->
+        <!-- EMPTY STATE -->
+        <div
+            class="empty-state"
+            id="emptyState"
+            style="display:none;">
 
-<script src="pastpapers.data.js"></script>
+            <div class="empty-icon">
+                📚
+            </div>
+
+            <h3>
+                No papers found
+            </h3>
+
+            <p>
+                Try another year, region, school,
+                zone or series.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+        <div class="container">
+            © 2026 GEPAM Science Hub. All Rights Reserved.
+        </div>
+    </footer>
+
+</div>
+
+
+<!-- DATA FIRST -->
+<script src="data.js"></script>
+
+<!-- PAGE LOGIC SECOND -->
 <script src="pastpapers.js"></script>
+
+
+<script>
+    /* MOBILE MENU */
+
+    const menuToggle =
+        document.getElementById("menuToggle");
+
+    const mainNav =
+        document.getElementById("mainNav");
+
+    if (menuToggle && mainNav) {
+
+        menuToggle.addEventListener("click", function () {
+
+            mainNav.classList.toggle("show");
+
+        });
+
+    }
+</script>
 
 </body>
 </html>
