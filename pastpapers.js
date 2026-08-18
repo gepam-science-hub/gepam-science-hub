@@ -4,36 +4,30 @@ let selectedType = null;
 let selectedLocation = null;
 let selectedYear = null;
 
-window.onload = function() {
-    history.pushState({page: 'past_papers'}, "");
-};
-
-window.onpopstate = function(event) {
-    window.location.href = "index.html"; 
-};
-
 function goBackOrHome() {
     window.location.href = "index.html";
 }
 
+// 1. Kuchagua Kidato
 function handleFormSelect(formId) {
     selectedForm = formId;
     selectedSubject = null; selectedType = null; selectedLocation = null; selectedYear = null;
     
     document.querySelectorAll('#formOptions .opt-btn').forEach(btn => {
         btn.classList.remove('active');
-        // Kurekebisha ulinganisho wa neno Form lifanane na ID
         if(btn.textContent.toLowerCase().replace(' ', '') === formId) {
             btn.classList.add('active');
         }
     });
 
+    // Ficha hatua zote za chini
     document.getElementById('step2').classList.add('hidden');
     document.getElementById('step3').classList.add('hidden');
     document.getElementById('step4').classList.add('hidden');
     document.getElementById('step5').classList.add('hidden');
     document.getElementById('finalPapersArea').innerHTML = '';
 
+    // Badili Lebo: Vidato 1,3,5 ni Shule | 2,4,6 ni Mkoa
     const locLabel = document.getElementById('locationLabel');
     if (formId === 'form1' || formId === 'form3' || formId === 'form5') {
         locLabel.textContent = "Hatua ya 4: Chagua Shule";
@@ -41,17 +35,20 @@ function handleFormSelect(formId) {
         locLabel.textContent = "Hatua ya 4: Chagua Mkoa";
     }
 
+    // Jaza masomo yaliyopo kwenye hiyo form ndani ya pastPapers database yako
     const subjectOpts = document.getElementById('subjectOptions');
     subjectOpts.innerHTML = '';
     
-    const subjects = ["physics", "chemistry"];
-    subjects.forEach(sub => {
-        subjectOpts.innerHTML += `<div class="opt-btn" onclick="handleSubjectSelect('${sub}')">${sub}</div>`;
-    });
+    if (pastPapers[formId]) {
+        Object.keys(pastPapers[formId]).forEach(sub => {
+            subjectOpts.innerHTML += `<div class="opt-btn" onclick="handleSubjectSelect('${sub}')">${sub}</div>`;
+        });
+    }
 
     document.getElementById('step2').classList.remove('hidden');
 }
 
+// 2. Kuchagua Somo
 function handleSubjectSelect(subId) {
     selectedSubject = subId;
     selectedType = null; selectedLocation = null; selectedYear = null;
@@ -66,20 +63,24 @@ function handleSubjectSelect(subId) {
     document.getElementById('step5').classList.add('hidden');
     document.getElementById('finalPapersArea').innerHTML = '';
 
+    // Kusoma moja kwa moja 'type' zilizopo ndani ya array ya pastPapers bila kutegemea config ya nje
     const typeOpts = document.getElementById('typeOptions');
     typeOpts.innerHTML = '';
 
-    const currentPapers = (pastPapers[selectedForm] && pastPapers[selectedForm][selectedSubject]) ? pastPapers[selectedForm][selectedSubject] : [];
-    let typesSet = new Set();
-    currentPapers.forEach(p => { if(p.type) typesSet.add(p.type); });
+    if (pastPapers[selectedForm] && pastPapers[selectedForm][selectedSubject]) {
+        const currentPapers = pastPapers[selectedForm][selectedSubject];
+        let typesSet = new Set();
+        currentPapers.forEach(p => { if(p.type) typesSet.add(p.type); });
 
-    typesSet.forEach(t => {
-        typeOpts.innerHTML += `<div class="opt-btn" onclick="handleTypeSelect('${t}')">${t}</div>`;
-    });
+        typesSet.forEach(t => {
+            typeOpts.innerHTML += `<div class="opt-btn" onclick="handleTypeSelect('${t}')">${t}</div>`;
+        });
+    }
 
     document.getElementById('step3').classList.remove('hidden');
 }
 
+// 3. Kuchagua Aina ya Mtihani
 function handleTypeSelect(typeId) {
     selectedType = typeId;
     selectedLocation = null; selectedYear = null;
@@ -109,6 +110,7 @@ function handleTypeSelect(typeId) {
     document.getElementById('step4').classList.remove('hidden');
 }
 
+// 4. Kuchagua Shule au Mkoa
 function handleLocationSelect(locId) {
     selectedLocation = locId;
     selectedYear = null;
@@ -137,6 +139,7 @@ function handleLocationSelect(locId) {
     document.getElementById('step5').classList.remove('hidden');
 }
 
+// 5. Kuchagua Mwaka na kuonyesha PDF zake
 function handleYearSelect(yearId) {
     selectedYear = yearId;
 
