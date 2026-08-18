@@ -19,1273 +19,2071 @@
 ========================================================= */
 
 (function () {
+
     "use strict";
+
+
+    /* =====================================================
+       GET DATA
+    ===================================================== */
+
+    let config = null;
+    let database = null;
+
+
+    try {
+
+        /*
+         * Works with:
+         *
+         * const pastPaperConfig = {...}
+         * const pastPapers = {...}
+         *
+         * from pastpapers.data.js
+         */
+
+        if (
+            typeof pastPaperConfig !== "undefined"
+        ) {
+            config = pastPaperConfig;
+        }
+
+
+        if (
+            typeof pastPapers !== "undefined"
+        ) {
+            database = pastPapers;
+        }
+
+
+        /*
+         * Also support window variables if
+         * they are exported from data.js.
+         */
+
+        if (
+            !config &&
+            window.pastPaperConfig
+        ) {
+            config = window.pastPaperConfig;
+        }
+
+
+        if (
+            !database &&
+            window.pastPapers
+        ) {
+            database = window.pastPapers;
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Past paper data error:",
+            error
+        );
+
+    }
+
+
+    /* =====================================================
+       DOM
+    ===================================================== */
+
+    const formOptions =
+        document.getElementById("formOptions");
+
+    const subjectSection =
+        document.getElementById("subjectSection");
+
+    const subjectOptions =
+        document.getElementById("subjectOptions");
+
+    const typeSection =
+        document.getElementById("typeSection");
+
+    const typeOptions =
+        document.getElementById("typeOptions");
+
+    const yearSection =
+        document.getElementById("yearSection");
+
+    const yearOptions =
+        document.getElementById("yearOptions");
+
+    const locationSection =
+        document.getElementById("locationSection");
+
+    const locationOptions =
+        document.getElementById("locationOptions");
+
+    const resultsSection =
+        document.getElementById("resultsSection");
+
+    const paperResults =
+        document.getElementById("paperResults");
+
+    const resultCount =
+        document.getElementById("resultCount");
+
+    const breadcrumb =
+        document.getElementById("breadcrumb");
+
+    const backButton =
+        document.getElementById("backButton");
+
+    const currentYear =
+        document.getElementById("currentYear");
+
+
+    if (currentYear) {
+
+        currentYear.textContent =
+            new Date().getFullYear();
+
+    }
+
 
     /* =====================================================
        STATE
     ===================================================== */
 
     let selectedForm = null;
+
     let selectedSubject = null;
+
     let selectedType = null;
+
     let selectedYear = null;
+
     let selectedLocation = null;
 
-    let currentPapers = [];
 
     /* =====================================================
-       DATA
+       CHECK DATA
     ===================================================== */
 
-    function getConfig() {
-        if (typeof pastPaperConfig !== "undefined") {
-            return pastPaperConfig;
-        }
+    if (
+        !config ||
+        !database ||
+        typeof database !== "object"
+    ) {
 
-        if (window.pastPaperConfig) {
-            return window.pastPaperConfig;
-        }
+        showFatalError();
 
-        return null;
+        return;
     }
 
-    function getDatabase() {
-        if (typeof pastPapers !== "undefined") {
-            return pastPapers;
-        }
-
-        if (window.pastPapers) {
-            return window.pastPapers;
-        }
-
-        return null;
-    }
-
-    const config = getConfig();
-    const database = getDatabase();
 
     /* =====================================================
-       DOM
-    ===================================================== */
-
-    const formOptions = document.getElementById("formOptions");
-
-    const subjectSection = document.getElementById("subjectSection");
-    const subjectOptions = document.getElementById("subjectOptions");
-
-    const typeSection = document.getElementById("typeSection");
-    const typeOptions = document.getElementById("typeOptions");
-
-    const locationSection = document.getElementById("locationSection");
-    const locationOptions = document.getElementById("locationOptions");
-
-    const yearSection = document.getElementById("yearSection");
-    const yearOptions = document.getElementById("yearOptions");
-
-    const seriesSection = document.getElementById("seriesSection");
-    const seriesOptions = document.getElementById("seriesOptions");
-
-    const searchSection = document.getElementById("searchSection");
-    const searchInput = document.getElementById("searchInput");
-
-    const resultsSection = document.getElementById("resultsSection");
-    const paperResults = document.getElementById("paperResults");
-    const resultCount = document.getElementById("resultCount");
-
-    const backButton = document.getElementById("backButton");
-
-    const currentYear = document.getElementById("currentYear");
-
-    /* =====================================================
-       STARTUP
-    ===================================================== */
-
-    document.addEventListener("DOMContentLoaded", init);
-
-    function init() {
-
-        if (currentYear) {
-            currentYear.textContent = new Date().getFullYear();
-        }
-
-        setupMobileMenu();
-
-        if (!config || !database) {
-            showDataError();
-            return;
-        }
-
-        renderForms();
-
-        showEmptyState(
-            "Select a form to begin",
-            "Choose Form 1–6 above to view available papers."
-        );
-
-        if (backButton) {
-            backButton.addEventListener("click", goBack);
-        }
-
-        if (searchInput) {
-            searchInput.addEventListener("input", handleSearch);
-        }
-    }
-
-    /* =====================================================
-       MOBILE MENU
-    ===================================================== */
-
-    function setupMobileMenu() {
-
-        const menuToggle = document.getElementById("menuToggle");
-        const mainNav = document.getElementById("mainNav");
-
-        if (!menuToggle || !mainNav) return;
-
-        menuToggle.addEventListener("click", function () {
-
-            const opened = mainNav.classList.toggle("open");
-
-            menuToggle.setAttribute(
-                "aria-expanded",
-                opened ? "true" : "false"
-            );
-        });
-    }
-
-    /* =====================================================
-       FORM
-    ===================================================== */
-
-    function renderForms() {
-
-        if (!formOptions) return;
-
-        formOptions.innerHTML = "";
-
-        const forms = Object.keys(config);
-
-        if (!forms.length) {
-            showEmptyState(
-                "No Forms Available",
-                "No past paper configuration was found."
-            );
-            return;
-        }
-
-        forms.forEach(function (formKey, index) {
-
-            const button = createOptionButton(
-                formatForm(formKey),
-                index + 1
-            );
-
-            button.addEventListener("click", function () {
-                selectForm(formKey, button);
-            });
-
-            formOptions.appendChild(button);
-        });
-    }
-
-    function selectForm(formKey, button) {
-
-        selectedForm = formKey;
-
-        selectedSubject = null;
-        selectedType = null;
-        selectedYear = null;
-        selectedLocation = null;
-
-        markSelected(formOptions, button);
-
-        resetFrom("subject");
-
-        const formConfig = config[selectedForm];
-
-        if (!formConfig) {
-            showEmptyState(
-                "No Data",
-                "No configuration was found for this form."
-            );
-            return;
-        }
-
-        renderSubjects(formConfig.subjects || []);
-
-        showSection(subjectSection);
-
-        hideSection(typeSection);
-        hideSection(locationSection);
-        hideSection(yearSection);
-        hideSection(seriesSection);
-        hideSection(searchSection);
-
-        showEmptyState(
-            "Select a subject",
-            "Choose Physics or Chemistry to continue."
-        );
-    }
-
-    /* =====================================================
-       SUBJECT
-    ===================================================== */
-
-    function renderSubjects(subjects) {
-
-        if (!subjectOptions) return;
-
-        subjectOptions.innerHTML = "";
-
-        subjects.forEach(function (subject, index) {
-
-            const button = createOptionButton(
-                formatSubject(subject),
-                getSubjectIcon(subject)
-            );
-
-            button.addEventListener("click", function () {
-                selectSubject(subject, button);
-            });
-
-            subjectOptions.appendChild(button);
-        });
-    }
-
-    function selectSubject(subject, button) {
-
-        selectedSubject = subject;
-
-        selectedType = null;
-        selectedYear = null;
-        selectedLocation = null;
-
-        markSelected(subjectOptions, button);
-
-        const types = getAvailableTypes();
-
-        if (!types.length) {
-
-            hideSection(typeSection);
-            hideSection(locationSection);
-            hideSection(yearSection);
-            hideSection(seriesSection);
-            hideSection(searchSection);
-
-            showEmptyState(
-                "No Examination Types",
-                "No papers are currently available for this subject."
-            );
-
-            return;
-        }
-
-        renderTypes(types);
-
-        showSection(typeSection);
-
-        hideSection(locationSection);
-        hideSection(yearSection);
-        hideSection(seriesSection);
-        hideSection(searchSection);
-
-        showEmptyState(
-            "Select examination type",
-            "Choose the type of examination you want."
-        );
-
-        scrollToSection(typeSection);
-    }
-
-    /* =====================================================
-       EXAM TYPE
-    ===================================================== */
-
-    function getAvailableTypes() {
-
-        const formConfig = config[selectedForm];
-
-        if (
-            formConfig &&
-            Array.isArray(formConfig.types)
-        ) {
-            return formConfig.types;
-        }
-
-        return unique(
-            getSubjectPapers().map(function (paper) {
-                return paper.type;
-            })
-        );
-    }
-
-    function renderTypes(types) {
-
-        if (!typeOptions) return;
-
-        typeOptions.innerHTML = "";
-
-        types.forEach(function (type) {
-
-            const papers = getSubjectPapers().filter(function (paper) {
-                return normalize(paper.type) === normalize(type);
-            });
-
-            if (!papers.length) return;
-
-            const button = createOptionButton(
-                formatType(type),
-                getTypeIcon(type)
-            );
-
-            button.addEventListener("click", function () {
-                selectType(type, button);
-            });
-
-            typeOptions.appendChild(button);
-        });
-
-        if (!typeOptions.children.length) {
-
-            showEmptyState(
-                "No papers found",
-                "This subject has no papers for the configured examination types."
-            );
-        }
-    }
-
-    function selectType(type, button) {
-
-        selectedType = type;
-
-        selectedYear = null;
-        selectedLocation = null;
-
-        markSelected(typeOptions, button);
-
-        const papers = getSubjectPapers().filter(function (paper) {
-            return normalize(paper.type) === normalize(selectedType);
-        });
-
-        const years = unique(
-            papers
-                .map(function (paper) {
-                    return paper.year;
-                })
-                .filter(Boolean)
-        ).sort(function (a, b) {
-            return Number(b) - Number(a);
-        });
-
-        if (!years.length) {
-
-            hideSection(yearSection);
-            hideSection(locationSection);
-            hideSection(seriesSection);
-
-            showEmptyState(
-                "No Years Available",
-                "No papers were found for this examination type."
-            );
-
-            return;
-        }
-
-        renderYears(years);
-
-        showSection(yearSection);
-
-        hideSection(locationSection);
-        hideSection(seriesSection);
-        hideSection(searchSection);
-
-        showEmptyState(
-            "Select year",
-            "Choose the examination year."
-        );
-
-        scrollToSection(yearSection);
-    }
-
-    /* =====================================================
-       YEAR
-    ===================================================== */
-
-    function renderYears(years) {
-
-        if (!yearOptions) return;
-
-        yearOptions.innerHTML = "";
-
-        years.forEach(function (year) {
-
-            const button = document.createElement("button");
-
-            button.type = "button";
-            button.className = "option-btn";
-
-            button.innerHTML =
-                "📅 " + escapeHTML(String(year));
-
-            button.addEventListener("click", function () {
-                selectYear(year, button);
-            });
-
-            yearOptions.appendChild(button);
-        });
-    }
-
-    function selectYear(year, button) {
-
-        selectedYear = year;
-        selectedLocation = null;
-
-        markSelected(yearOptions, button);
-
-        const papers = getFilteredPapers({
-            type: selectedType,
-            year: selectedYear
-        });
-
-        const locations = getLocations(papers);
-
-        /*
-         * If there is more than one region/school,
-         * show location step.
-         *
-         * If there is only one location, we still show it
-         * because the requested chain includes Region/School
-         * where applicable.
-         */
-
-        if (locations.length) {
-
-            renderLocations(locations);
-
-            showSection(locationSection);
-
-            hideSection(seriesSection);
-            hideSection(searchSection);
-
-            showEmptyState(
-                "Select Region / School",
-                "Choose the region or school associated with the paper."
-            );
-
-            scrollToSection(locationSection);
-
-        } else {
-
-            selectedLocation = null;
-
-            hideSection(locationSection);
-
-            showPaperChain(papers);
-        }
-    }
-
-    /* =====================================================
-       REGION / SCHOOL
-    ===================================================== */
-
-    function getLocations(papers) {
-
-        const locations = [];
-
-        papers.forEach(function (paper) {
-
-            if (paper.region) {
-
-                locations.push({
-                    key: "region:" + normalize(paper.region),
-                    value: paper.region,
-                    label: formatLocation(paper.region),
-                    kind: "Region"
-                });
-
-            } else if (paper.school) {
-
-                locations.push({
-                    key: "school:" + normalize(paper.school),
-                    value: paper.school,
-                    label: paper.school,
-                    kind: "School"
-                });
-
-            } else if (paper.zone) {
-
-                locations.push({
-                    key: "zone:" + normalize(paper.zone),
-                    value: paper.zone,
-                    label: formatLocation(paper.zone),
-                    kind: "Zone"
-                });
-            }
-        });
-
-        const map = new Map();
-
-        locations.forEach(function (item) {
-
-            if (!map.has(item.key)) {
-                map.set(item.key, item);
-            }
-        });
-
-        return Array.from(map.values());
-    }
-
-    function renderLocations(locations) {
-
-        if (!locationOptions) return;
-
-        locationOptions.innerHTML = "";
-
-        locations.forEach(function (location) {
-
-            const button = createOptionButton(
-                getLocationIcon(location.kind) +
-                " " +
-                location.label,
-                ""
-            );
-
-            button.addEventListener("click", function () {
-
-                selectedLocation = location;
-
-                markSelected(locationOptions, button);
-
-                const papers = getFilteredPapers({
-                    type: selectedType,
-                    year: selectedYear,
-                    location: selectedLocation
-                });
-
-                showPaperChain(papers);
-            });
-
-            locationOptions.appendChild(button);
-        });
-    }
-
-    /* =====================================================
-       PAPER CHAIN
-    ===================================================== */
-
-    function showPaperChain(papers) {
-
-        currentPapers = papers || [];
-
-        hideSection(seriesSection);
-        hideSection(searchSection);
-
-        if (!currentPapers.length) {
-
-            showEmptyState(
-                "No Papers Found",
-                "No paper matches the selections you have made."
-            );
-
-            updateCount(0);
-            return;
-        }
-
-        renderPaperChain(currentPapers);
-
-        showSection(searchSection);
-
-        scrollToResults();
-    }
-
-    function renderPaperChain(papers) {
-
-        if (!paperResults) return;
-
-        paperResults.innerHTML = "";
-
-        updateCount(papers.length);
-
-        /*
-         * PAPER CHAIN
-         */
-
-        const chain = document.createElement("div");
-
-        chain.className = "paper-chain";
-
-        const header = document.createElement("div");
-
-        header.className = "chain-header";
-
-        header.innerHTML = `
-            <div>
-                <strong>📚 ${escapeHTML(formatSubject(selectedSubject))}</strong>
-                <span>›</span>
-                <span>${escapeHTML(formatType(selectedType))}</span>
-                <span>›</span>
-                <span>${escapeHTML(String(selectedYear || ""))}</span>
-            </div>
-
-            <span class="paper-total">
-                ${papers.length} paper${papers.length === 1 ? "" : "s"}
-            </span>
-        `;
-
-        chain.appendChild(header);
-
-        papers.forEach(function (paper, index) {
-
-            const item = document.createElement("div");
-
-            item.className = "paper-chain-item";
-
-            const number = document.createElement("div");
-
-            number.className = "paper-chain-number";
-            number.textContent = index + 1;
-
-            const info = document.createElement("div");
-
-            info.className = "paper-info";
-
-            const title = document.createElement("h4");
-
-            title.textContent =
-                paper.title ||
-                formatSubject(selectedSubject) + " Examination";
-
-            const meta = document.createElement("div");
-
-            meta.className = "paper-meta";
-
-            addMeta(meta, "📚 " + formatSubject(selectedSubject));
-            addMeta(meta, "📝 " + formatType(paper.type));
-
-            if (paper.year) {
-                addMeta(meta, "📅 " + paper.year);
-            }
-
-            if (paper.region) {
-                addMeta(meta, "📍 " + formatLocation(paper.region));
-            }
-
-            if (paper.school) {
-                addMeta(meta, "🏫 " + paper.school);
-            }
-
-            if (paper.zone) {
-                addMeta(meta, "🗺️ " + formatLocation(paper.zone));
-            }
-
-            info.appendChild(title);
-            info.appendChild(meta);
-
-            const action = document.createElement("div");
-
-            action.className = "paper-action";
-
-            const open = document.createElement("a");
-
-            open.className = "open-pdf-button";
-            open.href = getFileURL(paper.file);
-            open.target = "_blank";
-            open.rel = "noopener";
-
-            open.innerHTML = "📄 Fungua PDF";
-
-            action.appendChild(open);
-
-            item.appendChild(number);
-            item.appendChild(info);
-            item.appendChild(action);
-
-            chain.appendChild(item);
-        });
-
-        paperResults.appendChild(chain);
-
-        createBottomActions();
-    }
-
-    /* =====================================================
-       SEARCH
-    ===================================================== */
-
-    function handleSearch() {
-
-        const query = normalize(
-            searchInput ? searchInput.value : ""
-        );
-
-        if (!query) {
-
-            renderPaperChain(currentPapers);
-
-            return;
-        }
-
-        const filtered = currentPapers.filter(function (paper) {
-
-            const text = [
-                paper.title,
-                paper.type,
-                paper.region,
-                paper.school,
-                paper.zone,
-                paper.year
-            ]
-                .filter(Boolean)
-                .join(" ");
-
-            return normalize(text).includes(query);
-        });
-
-        renderPaperChain(filtered);
-    }
-
-    /* =====================================================
-       BACK BUTTON
-    ===================================================== */
-
-    function goBack() {
-
-        if (selectedLocation) {
-
-            selectedLocation = null;
-
-            hideSection(seriesSection);
-            hideSection(searchSection);
-
-            showSection(locationSection);
-
-            showEmptyState(
-                "Select Region / School",
-                "Choose a region or school."
-            );
-
-            scrollToSection(locationSection);
-
-            return;
-        }
-
-        if (selectedYear) {
-
-            selectedYear = null;
-
-            hideSection(locationSection);
-            hideSection(seriesSection);
-            hideSection(searchSection);
-
-            showSection(yearSection);
-
-            showEmptyState(
-                "Select year",
-                "Choose the examination year."
-            );
-
-            scrollToSection(yearSection);
-
-            return;
-        }
-
-        if (selectedType) {
-
-            selectedType = null;
-
-            hideSection(yearSection);
-            hideSection(locationSection);
-            hideSection(seriesSection);
-            hideSection(searchSection);
-
-            showSection(typeSection);
-
-            showEmptyState(
-                "Select examination type",
-                "Choose the examination type."
-            );
-
-            scrollToSection(typeSection);
-
-            return;
-        }
-
-        if (selectedSubject) {
-
-            selectedSubject = null;
-
-            hideSection(typeSection);
-            hideSection(yearSection);
-            hideSection(locationSection);
-            hideSection(seriesSection);
-            hideSection(searchSection);
-
-            showSection(subjectSection);
-
-            showEmptyState(
-                "Select a subject",
-                "Choose Physics or Chemistry."
-            );
-
-            scrollToSection(subjectSection);
-
-            return;
-        }
-
-        if (selectedForm) {
-
-            selectedForm = null;
-
-            hideSection(subjectSection);
-            hideSection(typeSection);
-            hideSection(yearSection);
-            hideSection(locationSection);
-            hideSection(seriesSection);
-            hideSection(searchSection);
-
-            showEmptyState(
-                "Select a form to begin",
-                "Choose Form 1–6 above to view available papers."
-            );
-
-            scrollToSection(formOptions);
-
-            return;
-        }
-
-        window.location.href = "index.html";
-    }
-
-    /* =====================================================
-       FILTERING
-    ===================================================== */
-
-    function getSubjectPapers() {
-
-        if (!database || !selectedForm || !selectedSubject) {
-            return [];
-        }
-
-        const formData = database[selectedForm];
-
-        if (!formData) return [];
-
-        const papers = formData[selectedSubject];
-
-        return Array.isArray(papers) ? papers : [];
-    }
-
-    function getFilteredPapers(options) {
-
-        const papers = getSubjectPapers();
-
-        return papers.filter(function (paper) {
-
-            if (
-                options.type &&
-                normalize(paper.type) !== normalize(options.type)
-            ) {
-                return false;
-            }
-
-            if (
-                options.year &&
-                Number(paper.year) !== Number(options.year)
-            ) {
-                return false;
-            }
-
-            if (options.location) {
-
-                const location = options.location;
-
-                if (location.kind === "Region") {
-
-                    if (
-                        normalize(paper.region) !==
-                        normalize(location.value)
-                    ) {
-                        return false;
-                    }
-
-                } else if (location.kind === "School") {
-
-                    if (
-                        normalize(paper.school) !==
-                        normalize(location.value)
-                    ) {
-                        return false;
-                    }
-
-                } else if (location.kind === "Zone") {
-
-                    if (
-                        normalize(paper.zone) !==
-                        normalize(location.value)
-                    ) {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
-        });
-    }
-
-    /* =====================================================
-       UI HELPERS
-    ===================================================== */
-
-    function createOptionButton(label, icon) {
-
-        const button = document.createElement("button");
-
-        button.type = "button";
-        button.className = "option-btn";
-
-        button.innerHTML =
-            (icon ? icon + " " : "") +
-            escapeHTML(label);
-
-        return button;
-    }
-
-    function markSelected(container, selectedButton) {
-
-        if (!container) return;
-
-        Array.from(container.children).forEach(function (child) {
-            child.classList.remove("selected");
-        });
-
-        if (selectedButton) {
-            selectedButton.classList.add("selected");
-        }
-    }
-
-    function showSection(section) {
-
-        if (section) {
-            section.hidden = false;
-        }
-    }
-
-    function hideSection(section) {
-
-        if (section) {
-            section.hidden = true;
-        }
-    }
-
-    function resetFrom(level) {
-
-        if (level === "subject") {
-
-            hideSection(typeSection);
-            hideSection(yearSection);
-            hideSection(locationSection);
-            hideSection(seriesSection);
-            hideSection(searchSection);
-
-            if (typeOptions) typeOptions.innerHTML = "";
-            if (yearOptions) yearOptions.innerHTML = "";
-            if (locationOptions) locationOptions.innerHTML = "";
-            if (seriesOptions) seriesOptions.innerHTML = "";
-        }
-    }
-
-    function showEmptyState(title, message) {
-
-        if (!paperResults) return;
-
-        paperResults.innerHTML = `
-            <div class="empty-state">
-                <strong>${escapeHTML(title)}</strong>
-                ${escapeHTML(message)}
-            </div>
-        `;
-
-        updateCount(0);
-    }
-
-    function showDataError() {
-
-        if (!paperResults) return;
-
-        paperResults.innerHTML = `
-            <div class="empty-state">
-                <strong>⚠️ Data Error</strong>
-                Past paper data haikupatikana.
-                Hakikisha <b>pastpapers.data.js</b>
-                imewekwa kabla ya <b>pastpapers.js</b>.
-            </div>
-        `;
-
-        updateCount(0);
-    }
-
-    function updateCount(count) {
-
-        if (!resultCount) return;
-
-        resultCount.textContent =
-            count + " paper" + (count === 1 ? "" : "s");
-    }
-
-    function addMeta(container, text) {
-
-        const span = document.createElement("span");
-
-        span.className = "meta";
-        span.textContent = text;
-
-        container.appendChild(span);
-    }
-
-    function createBottomActions() {
-
-        if (!paperResults) return;
-
-        const actions = document.createElement("div");
-
-        actions.className = "paper-actions-bottom";
-
-        const back = document.createElement("button");
-
-        back.type = "button";
-        back.className = "back-button";
-        back.textContent = "← Back";
-
-        back.addEventListener("click", goBack);
-
-        const restart = document.createElement("button");
-
-        restart.type = "button";
-        restart.className = "restart-button";
-        restart.textContent = "↻ Start Again";
-
-        restart.addEventListener("click", restartSystem);
-
-        actions.appendChild(back);
-        actions.appendChild(restart);
-
-        paperResults.appendChild(actions);
-    }
-
-    function restartSystem() {
-
-        selectedForm = null;
-        selectedSubject = null;
-        selectedType = null;
-        selectedYear = null;
-        selectedLocation = null;
-
-        currentPapers = [];
-
-        if (formOptions) {
-            Array.from(formOptions.children).forEach(function (child) {
-                child.classList.remove("selected");
-            });
-        }
-
-        if (subjectOptions) subjectOptions.innerHTML = "";
-        if (typeOptions) typeOptions.innerHTML = "";
-        if (yearOptions) yearOptions.innerHTML = "";
-        if (locationOptions) locationOptions.innerHTML = "";
-        if (seriesOptions) seriesOptions.innerHTML = "";
-
-        hideSection(subjectSection);
-        hideSection(typeSection);
-        hideSection(yearSection);
-        hideSection(locationSection);
-        hideSection(seriesSection);
-        hideSection(searchSection);
-
-        if (searchInput) {
-            searchInput.value = "";
-        }
-
-        showEmptyState(
-            "Select a form to begin",
-            "Choose Form 1–6 above to view available papers."
-        );
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    }
-
-    /* =====================================================
-       FORMATTERS
+       FORM LABEL
     ===================================================== */
 
     function formatForm(form) {
 
-        const value = String(form)
-            .toLowerCase()
-            .replace("form", "")
-            .trim();
+        const match =
+            String(form)
+                .match(/form(\d+)/i);
 
-        return "Form " + value;
+        if (match) {
+
+            return "Form " + match[1];
+
+        }
+
+        return form;
+
     }
+
+
+    /* =====================================================
+       SUBJECT LABEL
+    ===================================================== */
 
     function formatSubject(subject) {
 
-        const value = String(subject || "")
-            .toLowerCase();
+        const labels = {
 
-        if (value === "physics") return "Physics";
-        if (value === "chemistry") return "Chemistry";
+            physics: "Physics",
 
-        return capitalizeWords(value.replace(/_/g, " "));
+            chemistry: "Chemistry"
+
+        };
+
+
+        return (
+            labels[subject] ||
+            capitalize(subject)
+        );
+
     }
+
+
+    /* =====================================================
+       EXAM TYPE LABEL
+    ===================================================== */
 
     function formatType(type) {
 
         const labels = {
 
             midterm: "Midterm",
+
             terminal: "Terminal",
+
             annual: "Annual",
-            ftna: "FTNA",
+
             joint: "Joint",
+
+            ftna: "FTNA",
+
             necta: "NECTA",
+
             mock: "Mock",
+
             pre_necta: "Pre-NECTA",
+
             acsee: "ACSEE"
+
         };
 
-        return labels[normalize(type)] ||
-            capitalizeWords(
-                String(type || "").replace(/_/g, " ")
-            );
+
+        return (
+            labels[type] ||
+            capitalize(
+                String(type)
+                    .replace(/_/g, " ")
+            )
+        );
+
     }
+
+
+    /* =====================================================
+       LOCATION LABEL
+    ===================================================== */
 
     function formatLocation(location) {
 
-        return capitalizeWords(
-            String(location || "")
-                .replace(/_/g, " ")
-        );
-    }
-
-    function capitalizeWords(value) {
-
-        return value
-            .split(" ")
-            .filter(Boolean)
-            .map(function (word) {
-                return word.charAt(0).toUpperCase() +
-                    word.slice(1);
-            })
-            .join(" ");
-    }
-
-    function getSubjectIcon(subject) {
-
-        return normalize(subject) === "physics"
-            ? "⚛️"
-            : "🧪";
-    }
-
-    function getTypeIcon(type) {
-
-        const icons = {
-            midterm: "📝",
-            terminal: "📘",
-            annual: "📚",
-            ftna: "🎓",
-            joint: "🤝",
-            necta: "🏛️",
-            mock: "📋",
-            pre_necta: "🎯",
-            acsee: "🎓"
-        };
-
-        return icons[normalize(type)] || "📄";
-    }
-
-    function getLocationIcon(kind) {
-
-        if (kind === "School") return "🏫";
-        if (kind === "Zone") return "🗺️";
-
-        return "📍";
-    }
-
-    /* =====================================================
-       FILE PATH
-    ===================================================== */
-
-    function getFileURL(file) {
-
-        if (!file) {
-            return "#";
+        if (!location) {
+            return "Unknown";
         }
 
-        /*
-         * GitHub Pages / same-site relative path.
-         *
-         * Example:
-         * papers/form6/chemistry/necta/2026/file.pdf
-         */
 
-        return String(file).replace(/^\/+/, "");
+        const labels = {
+
+            dar_es_salaam:
+                "Dar es Salaam",
+
+            dodoma:
+                "Dodoma",
+
+            arusha:
+                "Arusha",
+
+            mbeya:
+                "Mbeya",
+
+            kagera:
+                "Kagera",
+
+            shinyanga:
+                "Shinyanga",
+
+            morogoro:
+                "Morogoro",
+
+            mwanza:
+                "Mwanza",
+
+            tanga:
+                "Tanga",
+
+            tabora:
+                "Tabora",
+
+            kigoma:
+                "Kigoma",
+
+            geita:
+                "Geita",
+
+            katavi:
+                "Katavi",
+
+            lindi:
+                "Lindi",
+
+            mtwara:
+                "Mtwara",
+
+            pwani:
+                "Pwani",
+
+            rukwa:
+                "Rukwa",
+
+            singida:
+                "Singida",
+
+            simiyu:
+                "Simiyu",
+
+            mara:
+                "Mara",
+
+            manyara:
+                "Manyara",
+
+            njombe:
+                "Njombe",
+
+            iringa:
+                "Iringa",
+
+            songwe:
+                "Songwe",
+
+            zanzibar:
+                "Zanzibar",
+
+            necta:
+                "NECTA"
+
+        };
+
+
+        if (labels[location]) {
+
+            return labels[location];
+
+        }
+
+
+        return capitalize(
+            String(location)
+                .replace(/_/g, " ")
+        );
+
     }
+
 
     /* =====================================================
-       UTILITIES
+       CAPITALIZE
     ===================================================== */
 
-    function normalize(value) {
+    function capitalize(value) {
 
-        return String(value == null ? "" : value)
-            .trim()
-            .toLowerCase();
+        if (!value) {
+            return "";
+        }
+
+
+        return String(value)
+            .charAt(0)
+            .toUpperCase()
+            +
+            String(value)
+                .slice(1);
+
     }
 
-    function unique(array) {
 
-        return Array.from(new Set(array));
+    /* =====================================================
+       CREATE OPTION
+    ===================================================== */
+
+    function createOption(
+        icon,
+        title,
+        subtitle,
+        callback
+    ) {
+
+        const button =
+            document.createElement("button");
+
+
+        button.type = "button";
+
+        button.className =
+            "option-card";
+
+
+        button.innerHTML = `
+
+            <span class="option-icon">
+                ${icon}
+            </span>
+
+            <span class="option-text">
+
+                <strong>
+                    ${escapeHTML(title)}
+                </strong>
+
+                ${
+                    subtitle
+                    ?
+                    `<small>
+                        ${escapeHTML(subtitle)}
+                    </small>`
+                    :
+                    ""
+                }
+
+            </span>
+
+            <span class="option-arrow">
+                →
+            </span>
+
+        `;
+
+
+        button.addEventListener(
+            "click",
+            callback
+        );
+
+
+        return button;
+
     }
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ===================================================== */
 
     function escapeHTML(value) {
 
-        return String(value == null ? "" : value)
+        return String(value ?? "")
             .replace(/&/g, "&amp;")
             .replace(/</g, "&lt;")
             .replace(/>/g, "&gt;")
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
+
     }
 
-    function scrollToSection(element) {
 
-        if (!element) return;
+    /* =====================================================
+       RESET SECTION
+    ===================================================== */
 
-        setTimeout(function () {
+    function resetSection(section) {
 
-            element.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
+        if (section) {
 
-        }, 100);
+            section.hidden = true;
+
+        }
+
     }
 
-    function scrollToResults() {
 
-        if (!resultsSection) return;
+    /* =====================================================
+       RESET EVERYTHING AFTER FORM
+    ===================================================== */
 
-        setTimeout(function () {
+    function resetAfterForm() {
 
-            resultsSection.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
+        selectedSubject = null;
 
-        }, 100);
+        selectedType = null;
+
+        selectedYear = null;
+
+        selectedLocation = null;
+
+
+        resetSection(typeSection);
+
+        resetSection(yearSection);
+
+        resetSection(locationSection);
+
+        resetSection(resultsSection);
+
+
+        subjectOptions.innerHTML = "";
+
+        typeOptions.innerHTML = "";
+
+        yearOptions.innerHTML = "";
+
+        locationOptions.innerHTML = "";
+
+        paperResults.innerHTML = "";
+
+
+        resultCount.textContent =
+            "0 Papers";
+
     }
+
+
+    /* =====================================================
+       RESET AFTER SUBJECT
+    ===================================================== */
+
+    function resetAfterSubject() {
+
+        selectedType = null;
+
+        selectedYear = null;
+
+        selectedLocation = null;
+
+
+        resetSection(yearSection);
+
+        resetSection(locationSection);
+
+        resetSection(resultsSection);
+
+
+        typeOptions.innerHTML = "";
+
+        yearOptions.innerHTML = "";
+
+        locationOptions.innerHTML = "";
+
+        paperResults.innerHTML = "";
+
+
+        resultCount.textContent =
+            "0 Papers";
+
+    }
+
+
+    /* =====================================================
+       RESET AFTER TYPE
+    ===================================================== */
+
+    function resetAfterType() {
+
+        selectedYear = null;
+
+        selectedLocation = null;
+
+
+        resetSection(locationSection);
+
+        resetSection(resultsSection);
+
+
+        yearOptions.innerHTML = "";
+
+        locationOptions.innerHTML = "";
+
+        paperResults.innerHTML = "";
+
+
+        resultCount.textContent =
+            "0 Papers";
+
+    }
+
+
+    /* =====================================================
+       RESET AFTER YEAR
+    ===================================================== */
+
+    function resetAfterYear() {
+
+        selectedLocation = null;
+
+
+        resetSection(resultsSection);
+
+
+        locationOptions.innerHTML = "";
+
+        paperResults.innerHTML = "";
+
+
+        resultCount.textContent =
+            "0 Papers";
+
+    }
+
+
+    /* =====================================================
+       GET PAPERS
+    ===================================================== */
+
+    function getCurrentPapers() {
+
+        if (
+            !selectedForm ||
+            !selectedSubject
+        ) {
+
+            return [];
+
+        }
+
+
+        const formData =
+            database[selectedForm];
+
+
+        if (!formData) {
+
+            return [];
+
+        }
+
+
+        const subjectData =
+            formData[selectedSubject];
+
+
+        if (!Array.isArray(subjectData)) {
+
+            return [];
+
+        }
+
+
+        return subjectData;
+
+    }
+
+
+    /* =====================================================
+       LOAD FORMS
+    ===================================================== */
+
+    function loadForms() {
+
+        formOptions.innerHTML = "";
+
+
+        const forms =
+            Object.keys(database)
+                .filter(
+                    form =>
+                        Array.isArray(
+                            database[form]?.physics
+                        )
+                        ||
+                        Array.isArray(
+                            database[form]?.chemistry
+                        )
+                )
+                .sort(
+                    naturalFormSort
+                );
+
+
+        if (!forms.length) {
+
+            formOptions.innerHTML = `
+
+                <div class="message error-message">
+
+                    <div class="message-icon">
+                        ⚠️
+                    </div>
+
+                    <strong>
+                        No Forms Available
+                    </strong>
+
+                    No past paper data was found.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        forms.forEach(
+            function (form) {
+
+                const total =
+                    countFormPapers(form);
+
+
+                const card =
+                    createOption(
+                        "📚",
+                        formatForm(form),
+                        `${total} paper${total === 1 ? "" : "s"}`,
+                        function () {
+
+                            selectForm(form);
+
+                        }
+                    );
+
+
+                formOptions.appendChild(card);
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       FORM SORT
+    ===================================================== */
+
+    function naturalFormSort(a, b) {
+
+        const na =
+            parseInt(
+                String(a)
+                    .replace(/\D/g, ""),
+                10
+            ) || 0;
+
+
+        const nb =
+            parseInt(
+                String(b)
+                    .replace(/\D/g, ""),
+                10
+            ) || 0;
+
+
+        return na - nb;
+
+    }
+
+
+    /* =====================================================
+       COUNT FORM PAPERS
+    ===================================================== */
+
+    function countFormPapers(form) {
+
+        let total = 0;
+
+
+        const subjects =
+            database[form] || {};
+
+
+        Object.keys(subjects)
+            .forEach(
+                function (subject) {
+
+                    if (
+                        Array.isArray(
+                            subjects[subject]
+                        )
+                    ) {
+
+                        total +=
+                            subjects[subject].length;
+
+                    }
+
+                }
+            );
+
+
+        return total;
+
+    }
+
+
+    /* =====================================================
+       SELECT FORM
+    ===================================================== */
+
+    function selectForm(form) {
+
+        selectedForm = form;
+
+
+        resetAfterForm();
+
+
+        updateBreadcrumb();
+
+
+        loadSubjects();
+
+
+        subjectSection.hidden = false;
+
+
+        scrollToSection(
+            subjectSection
+        );
+
+    }
+
+
+    /* =====================================================
+       LOAD SUBJECTS
+    ===================================================== */
+
+    function loadSubjects() {
+
+        subjectOptions.innerHTML = "";
+
+
+        const formData =
+            database[selectedForm];
+
+
+        const subjects =
+            Object.keys(formData || {})
+                .filter(
+                    subject =>
+                        Array.isArray(
+                            formData[subject]
+                        )
+                );
+
+
+        if (!subjects.length) {
+
+            subjectOptions.innerHTML = `
+
+                <div class="message">
+
+                    <div class="message-icon">
+                        📭
+                    </div>
+
+                    <strong>
+                        No Subjects Available
+                    </strong>
+
+                    No Physics or Chemistry papers
+                    are currently available for
+                    this Form.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        subjects.forEach(
+            function (subject) {
+
+                const count =
+                    formData[subject].length;
+
+
+                let icon =
+                    subject === "physics"
+                    ? "⚛️"
+                    : "🧪";
+
+
+                const card =
+                    createOption(
+                        icon,
+                        formatSubject(subject),
+                        `${count} paper${count === 1 ? "" : "s"}`,
+                        function () {
+
+                            selectSubject(subject);
+
+                        }
+                    );
+
+
+                subjectOptions.appendChild(card);
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       SELECT SUBJECT
+    ===================================================== */
+
+    function selectSubject(subject) {
+
+        selectedSubject = subject;
+
+
+        resetAfterSubject();
+
+
+        updateBreadcrumb();
+
+
+        loadTypes();
+
+
+        typeSection.hidden = false;
+
+
+        scrollToSection(
+            typeSection
+        );
+
+    }
+
+
+    /* =====================================================
+       LOAD EXAM TYPES
+    ===================================================== */
+
+    function loadTypes() {
+
+        typeOptions.innerHTML = "";
+
+
+        const papers =
+            getCurrentPapers();
+
+
+        const types = [
+            ...new Set(
+                papers
+                    .map(
+                        paper =>
+                            String(
+                                paper.type || ""
+                            )
+                    )
+                    .filter(Boolean)
+            )
+        ];
+
+
+        if (!types.length) {
+
+            typeOptions.innerHTML = `
+
+                <div class="message">
+
+                    <div class="message-icon">
+                        📭
+                    </div>
+
+                    <strong>
+                        No Examination Types
+                    </strong>
+
+                    No examination types were
+                    found for this subject.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        types.sort(
+            function (a, b) {
+
+                const order = [
+
+                    "necta",
+                    "acsee",
+                    "ftna",
+                    "annual",
+                    "terminal",
+                    "midterm",
+                    "joint",
+                    "mock",
+                    "pre_necta"
+
+                ];
+
+
+                const ia =
+                    order.indexOf(a);
+
+
+                const ib =
+                    order.indexOf(b);
+
+
+                if (ia === -1 && ib === -1) {
+
+                    return a.localeCompare(b);
+
+                }
+
+
+                if (ia === -1) {
+                    return 1;
+                }
+
+
+                if (ib === -1) {
+                    return -1;
+                }
+
+
+                return ia - ib;
+
+            }
+        );
+
+
+        types.forEach(
+            function (type) {
+
+                const count =
+                    papers.filter(
+                        paper =>
+                            String(
+                                paper.type
+                            ) === type
+                    ).length;
+
+
+                const icon =
+                    getTypeIcon(type);
+
+
+                const card =
+                    createOption(
+                        icon,
+                        formatType(type),
+                        `${count} paper${count === 1 ? "" : "s"}`,
+                        function () {
+
+                            selectType(type);
+
+                        }
+                    );
+
+
+                typeOptions.appendChild(card);
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       TYPE ICON
+    ===================================================== */
+
+    function getTypeIcon(type) {
+
+        const icons = {
+
+            annual: "📘",
+
+            midterm: "📝",
+
+            terminal: "📗",
+
+            joint: "🤝",
+
+            ftna: "🏛️",
+
+            necta: "🏛️",
+
+            acsee: "🎓",
+
+            mock: "📑",
+
+            pre_necta: "📋"
+
+        };
+
+
+        return icons[type] || "📄";
+
+    }
+
+
+    /* =====================================================
+       SELECT TYPE
+    ===================================================== */
+
+    function selectType(type) {
+
+        selectedType = type;
+
+
+        resetAfterType();
+
+
+        updateBreadcrumb();
+
+
+        loadYears();
+
+
+        yearSection.hidden = false;
+
+
+        scrollToSection(
+            yearSection
+        );
+
+    }
+
+
+    /* =====================================================
+       LOAD YEARS
+    ===================================================== */
+
+    function loadYears() {
+
+        yearOptions.innerHTML = "";
+
+
+        const papers =
+            getCurrentPapers()
+                .filter(
+                    paper =>
+                        String(
+                            paper.type
+                        ) === String(
+                            selectedType
+                        )
+                );
+
+
+        const years = [
+            ...new Set(
+                papers
+                    .map(
+                        paper =>
+                            Number(
+                                paper.year
+                            )
+                    )
+                    .filter(
+                        year =>
+                            Number.isFinite(year)
+                    )
+            )
+        ]
+        .sort(
+            (a, b) => b - a
+        );
+
+
+        if (!years.length) {
+
+            yearOptions.innerHTML = `
+
+                <div class="message">
+
+                    <div class="message-icon">
+                        📭
+                    </div>
+
+                    <strong>
+                        No Years Available
+                    </strong>
+
+                    No papers were found for this
+                    examination type.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        years.forEach(
+            function (year) {
+
+                const count =
+                    papers.filter(
+                        paper =>
+                            Number(
+                                paper.year
+                            ) === year
+                    ).length;
+
+
+                const card =
+                    createOption(
+                        "📅",
+                        String(year),
+                        `${count} paper${count === 1 ? "" : "s"}`,
+                        function () {
+
+                            selectYear(year);
+
+                        }
+                    );
+
+
+                yearOptions.appendChild(card);
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       SELECT YEAR
+    ===================================================== */
+
+    function selectYear(year) {
+
+        selectedYear = year;
+
+
+        resetAfterYear();
+
+
+        updateBreadcrumb();
+
+
+        loadLocations();
+
+
+        locationSection.hidden = false;
+
+
+        scrollToSection(
+            locationSection
+        );
+
+    }
+
+
+    /* =====================================================
+       LOAD LOCATIONS
+    ===================================================== */
+
+    function loadLocations() {
+
+        locationOptions.innerHTML = "";
+
+
+        const papers =
+            getCurrentPapers()
+                .filter(
+                    paper =>
+
+                        String(
+                            paper.type
+                        ) === String(
+                            selectedType
+                        )
+
+                        &&
+
+                        Number(
+                            paper.year
+                        ) === Number(
+                            selectedYear
+                        )
+                );
+
+
+        const locations = [];
+
+
+        papers.forEach(
+            function (paper) {
+
+                const location =
+                    paper.region
+                    ||
+                    paper.school
+                    ||
+                    paper.zone
+                    ||
+                    "unknown";
+
+
+                if (
+                    !locations.includes(
+                        location
+                    )
+                ) {
+
+                    locations.push(
+                        location
+                    );
+
+                }
+
+            }
+        );
+
+
+        locations.sort(
+            function (a, b) {
+
+                return formatLocation(a)
+                    .localeCompare(
+                        formatLocation(b)
+                    );
+
+            }
+        );
+
+
+        if (!locations.length) {
+
+            locationOptions.innerHTML = `
+
+                <div class="message">
+
+                    <div class="message-icon">
+                        📭
+                    </div>
+
+                    <strong>
+                        No Region / School Available
+                    </strong>
+
+                    No paper source was found.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        locations.forEach(
+            function (location) {
+
+                const count =
+                    papers.filter(
+                        function (paper) {
+
+                            return (
+                                (
+                                    paper.region
+                                    ||
+                                    paper.school
+                                    ||
+                                    paper.zone
+                                    ||
+                                    "unknown"
+                                )
+                                ===
+                                location
+                            );
+
+                        }
+                    ).length;
+
+
+                const card =
+                    createOption(
+                        "📍",
+                        formatLocation(location),
+                        `${count} paper${count === 1 ? "" : "s"}`,
+                        function () {
+
+                            selectLocation(
+                                location
+                            );
+
+                        }
+                    );
+
+
+                locationOptions.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       SELECT LOCATION
+    ===================================================== */
+
+    function selectLocation(location) {
+
+        selectedLocation =
+            location;
+
+
+        updateBreadcrumb();
+
+
+        loadPapers();
+
+
+        resultsSection.hidden =
+            false;
+
+
+        scrollToSection(
+            resultsSection
+        );
+
+    }
+
+
+    /* =====================================================
+       LOAD PAPERS
+    ===================================================== */
+
+    function loadPapers() {
+
+        const papers =
+            getCurrentPapers()
+                .filter(
+                    function (paper) {
+
+                        const location =
+                            paper.region
+                            ||
+                            paper.school
+                            ||
+                            paper.zone
+                            ||
+                            "unknown";
+
+
+                        return (
+
+                            String(
+                                paper.type
+                            ) === String(
+                                selectedType
+                            )
+
+                            &&
+
+                            Number(
+                                paper.year
+                            ) === Number(
+                                selectedYear
+                            )
+
+                            &&
+
+                            location ===
+                                selectedLocation
+
+                        );
+
+                    }
+                );
+
+
+        resultCount.textContent =
+            `${papers.length} ${
+                papers.length === 1
+                ? "Paper"
+                : "Papers"
+            }`;
+
+
+        if (!papers.length) {
+
+            paperResults.innerHTML = `
+
+                <div class="message">
+
+                    <div class="message-icon">
+                        📭
+                    </div>
+
+                    <strong>
+                        No Papers Found
+                    </strong>
+
+                    There are no papers matching
+                    your selected options.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        const chain =
+            document.createElement("div");
+
+
+        chain.className =
+            "paper-chain";
+
+
+        const header =
+            document.createElement("div");
+
+
+        header.className =
+            "paper-chain-header";
+
+
+        header.innerHTML = `
+
+            <strong>
+                📚 ${escapeHTML(formatSubject(selectedSubject))}
+                — ${escapeHTML(formatType(selectedType))}
+                — ${escapeHTML(String(selectedYear))}
+            </strong>
+
+            <span>
+                ${papers.length}
+                ${papers.length === 1 ? "Paper" : "Papers"}
+            </span>
+
+        `;
+
+
+        chain.appendChild(
+            header
+        );
+
+
+        papers.forEach(
+            function (paper, index) {
+
+                const item =
+                    createPaperItem(
+                        paper,
+                        index + 1
+                    );
+
+
+                chain.appendChild(
+                    item
+                );
+
+            }
+        );
+
+
+        paperResults.innerHTML = "";
+
+        paperResults.appendChild(
+            chain
+        );
+
+    }
+
+
+    /* =====================================================
+       CREATE PAPER ITEM
+    ===================================================== */
+
+    function createPaperItem(
+        paper,
+        number
+    ) {
+
+        const item =
+            document.createElement("div");
+
+
+        item.className =
+            "paper-item";
+
+
+        const location =
+            paper.region
+            ||
+            paper.school
+            ||
+            paper.zone
+            ||
+            "Unknown";
+
+
+        const file =
+            paper.file
+            ||
+            paper.pdf
+            ||
+            paper.url
+            ||
+            "";
+
+
+        const title =
+            paper.title
+            ||
+            `${formatSubject(selectedSubject)} ${formatType(selectedType)} Exam`;
+
+
+        item.innerHTML = `
+
+            <div class="paper-number">
+                ${number}
+            </div>
+
+
+            <div class="paper-info">
+
+                <h3>
+                    ${escapeHTML(title)}
+                </h3>
+
+
+                <div class="paper-meta">
+
+                    <span>
+                        📚 ${escapeHTML(formatSubject(selectedSubject))}
+                    </span>
+
+                    <span>
+                        📝 ${escapeHTML(formatType(selectedType))}
+                    </span>
+
+                    <span>
+                        📅 ${escapeHTML(String(paper.year))}
+                    </span>
+
+                    <span>
+                        📍 ${escapeHTML(formatLocation(location))}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="paper-action">
+
+                ${
+                    file
+                    ?
+                    `
+                    <a
+                        class="open-pdf"
+                        href="${safeFilePath(file)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        📄 Fungua PDF
+                    </a>
+                    `
+                    :
+                    `
+                    <span
+                        class="open-pdf"
+                        style="background:#999;"
+                    >
+                        PDF haipo
+                    </span>
+                    `
+                }
+
+            </div>
+
+        `;
+
+
+        return item;
+
+    }
+
+
+    /* =====================================================
+       SAFE FILE PATH
+    ===================================================== */
+
+    function safeFilePath(file) {
+
+        let path =
+            String(file || "")
+                .trim();
+
+
+        /*
+         * If the file is already an absolute URL,
+         * keep it unchanged.
+         */
+
+        if (
+            /^https?:\/\//i.test(path)
+        ) {
+
+            return escapeHTML(path);
+
+        }
+
+
+        /*
+         * Remove leading slash so that
+         * GitHub Pages resolves relative
+         * to the current repository.
+         */
+
+        path =
+            path.replace(/^\/+/, "");
+
+
+        /*
+         * Encode spaces and special characters
+         * without destroying slashes.
+         */
+
+        const parts =
+            path
+                .split("/")
+                .map(
+                    part =>
+                        encodeURIComponent(part)
+                );
+
+
+        return parts.join("/");
+
+    }
+
+
+    /* =====================================================
+       BREADCRUMB
+    ===================================================== */
+
+    function updateBreadcrumb() {
+
+        const parts = [];
+
+
+        parts.push(
+            "Past Papers"
+        );
+
+
+        if (selectedForm) {
+
+            parts.push(
+                formatForm(
+                    selectedForm
+                )
+            );
+
+        }
+
+
+        if (selectedSubject) {
+
+            parts.push(
+                formatSubject(
+                    selectedSubject
+                )
+            );
+
+        }
+
+
+        if (selectedType) {
+
+            parts.push(
+                formatType(
+                    selectedType
+                )
+            );
+
+        }
+
+
+        if (selectedYear) {
+
+            parts.push(
+                String(
+                    selectedYear
+                )
+            );
+
+        }
+
+
+        if (selectedLocation) {
+
+            parts.push(
+                formatLocation(
+                    selectedLocation
+                )
+            );
+
+        }
+
+
+        breadcrumb.innerHTML =
+            parts.map(
+                function (part, index) {
+
+                    if (
+                        index ===
+                        parts.length - 1
+                    ) {
+
+                        return `
+                            <span class="current">
+                                ${escapeHTML(part)}
+                            </span>
+                        `;
+
+                    }
+
+
+                    return `
+                        <span>
+                            ${escapeHTML(part)}
+                        </span>
+
+                        <span>
+                            →
+                        </span>
+                    `;
+
+                }
+            )
+            .join("");
+
+    }
+
+
+    /* =====================================================
+       BACK BUTTON
+    ===================================================== */
+
+    backButton.addEventListener(
+        "click",
+        function () {
+
+            if (
+                selectedLocation
+            ) {
+
+                selectedLocation =
+                    null;
+
+                resetSection(
+                    resultsSection
+                );
+
+                locationOptions
+                    .innerHTML = "";
+
+                updateBreadcrumb();
+
+                loadLocations();
+
+                return;
+
+            }
+
+
+            if (
+                selectedYear
+            ) {
+
+                selectedYear =
+                    null;
+
+                resetSection(
+                    locationSection
+                );
+
+                resetSection(
+                    resultsSection
+                );
+
+                updateBreadcrumb();
+
+                return;
+
+            }
+
+
+            if (
+                selectedType
+            ) {
+
+                selectedType =
+                    null;
+
+                resetSection(
+                    yearSection
+                );
+
+                resetSection(
+                    locationSection
+                );
+
+                resetSection(
+                    resultsSection
+                );
+
+                updateBreadcrumb();
+
+                return;
+
+            }
+
+
+            if (
+                selectedSubject
+            ) {
+
+                selectedSubject =
+                    null;
+
+                resetSection(
+                    typeSection
+                );
+
+                resetSection(
+                    yearSection
+                );
+
+                resetSection(
+                    locationSection
+                );
+
+                resetSection(
+                    resultsSection
+                );
+
+                updateBreadcrumb();
+
+                return;
+
+            }
+
+
+            if (
+                selectedForm
+            ) {
+
+                selectedForm =
+                    null;
+
+                resetSection(
+                    subjectSection
+                );
+
+                resetSection(
+                    typeSection
+                );
+
+                resetSection(
+                    yearSection
+                );
+
+                resetSection(
+                    locationSection
+                );
+
+                resetSection(
+                    resultsSection
+                );
+
+                updateBreadcrumb();
+
+                return;
+
+            }
+
+
+            window.location.href =
+                "index.html";
+
+        }
+    );
+
+
+    /* =====================================================
+       SCROLL
+    ===================================================== */
+
+    function scrollToSection(
+        element
+    ) {
+
+        if (!element) {
+            return;
+        }
+
+
+        setTimeout(
+            function () {
+
+                element.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            },
+            80
+        );
+
+    }
+
+
+    /* =====================================================
+       FATAL ERROR
+    ===================================================== */
+
+    function showFatalError() {
+
+        formOptions.innerHTML = `
+
+            <div class="message error-message">
+
+                <div class="message-icon">
+                    ⚠️
+                </div>
+
+                <strong>
+                    Data Error
+                </strong>
+
+                Past paper data haijapatikana.
+
+                <br><br>
+
+                Hakikisha:
+
+                <br>
+
+                <b>
+                    pastpapers.data.js
+                </b>
+
+                ipo kwenye folder moja na
+                <b>pastpapers.html</b>.
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       START SYSTEM
+    ===================================================== */
+
+    loadForms();
 
 })();
