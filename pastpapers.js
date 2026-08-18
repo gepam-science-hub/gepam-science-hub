@@ -1,1298 +1,634 @@
-/* ============================================================
+/* =========================================================
    GEPAM SCIENCE HUB
    PAST PAPERS ENGINE
-   Form 1 - Form 6
-   ============================================================ */
+   ========================================================= */
 
-(function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-    "use strict";
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
 
+    const formSelect =
+        document.getElementById("formSelect");
 
-    /* ========================================================
-       1. GLOBAL STATE
-    ======================================================== */
+    const subjectSelect =
+        document.getElementById("subjectSelect");
 
-    const state = {
+    const typeSelect =
+        document.getElementById("typeSelect");
 
-        form: null,
+    const regionSelect =
+        document.getElementById("regionSelect");
 
-        subject: null,
+    const yearSelect =
+        document.getElementById("yearSelect");
 
-        type: null,
+    const schoolInput =
+        document.getElementById("schoolInput");
 
-        location: null,
+    const zoneInput =
+        document.getElementById("zoneInput");
 
-        year: null,
+    const seriesInput =
+        document.getElementById("seriesInput");
 
-        series: null,
+    const resetFilters =
+        document.getElementById("resetFilters");
 
-        search: ""
+    const papersGrid =
+        document.getElementById("papersGrid");
 
-    };
+    const papersCount =
+        document.getElementById("papersCount");
 
+    const emptyState =
+        document.getElementById("emptyState");
 
-    /* ========================================================
-       2. DOM ELEMENTS
-    ======================================================== */
 
-    const formOptions =
-        document.getElementById("formOptions");
+    /* =====================================================
+       DATA SOURCE
+       IMPORTANT:
+       Your data.js uses:
 
-    const subjectOptions =
-        document.getElementById("subjectOptions");
-
-    const typeOptions =
-        document.getElementById("typeOptions");
-
-    const locationOptions =
-        document.getElementById("locationOptions");
-
-    const yearOptions =
-        document.getElementById("yearOptions");
-
-    const seriesOptions =
-        document.getElementById("seriesOptions");
-
-    const subjectSection =
-        document.getElementById("subjectSection");
-
-    const typeSection =
-        document.getElementById("typeSection");
-
-    const locationSection =
-        document.getElementById("locationSection");
-
-    const yearSection =
-        document.getElementById("yearSection");
-
-    const seriesSection =
-        document.getElementById("seriesSection");
-
-    const searchSection =
-        document.getElementById("searchSection");
-
-    const searchInput =
-        document.getElementById("searchInput");
-
-    const paperResults =
-        document.getElementById("paperResults");
-
-    const resultCount =
-        document.getElementById("resultCount");
-
-    const backButton =
-        document.getElementById("backButton");
-
-    const menuToggle =
-        document.getElementById("menuToggle");
-
-    const mainNav =
-        document.getElementById("mainNav");
-
-
-    /* ========================================================
-       3. FORM LABELS
-    ======================================================== */
-
-    const FORM_LABELS = {
-
-        form1: "Form 1",
-
-        form2: "Form 2",
-
-        form3: "Form 3",
-
-        form4: "Form 4",
-
-        form5: "Form 5",
-
-        form6: "Form 6"
-
-    };
-
-
-    /* ========================================================
-       4. SUBJECT LABELS
-    ======================================================== */
-
-    const SUBJECT_LABELS = {
-
-        physics: "Physics",
-
-        chemistry: "Chemistry"
-
-    };
-
-
-    /* ========================================================
-       5. TYPE LABELS
-    ======================================================== */
-
-    const TYPE_LABELS = {
-
-        midterm: "Midterm",
-
-        terminal: "Terminal",
-
-        annual: "Annual",
-
-        joint: "Joint",
-
-        mock: "Mock",
-
-        pre_necta: "Pre-NECTA",
-
-        necta: "NECTA",
-
-        acsee: "ACSEE",
-
-        o_level: "O-Level",
-
-        other: "Other"
-
-    };
-
-
-    /* ========================================================
-       6. REGION LABELS
-    ======================================================== */
-
-    const REGION_LABELS = {
-
-        dar_es_salaam: "Dar es Salaam",
-
-        dodoma: "Dodoma",
-
-        arusha: "Arusha",
-
-        mbeya: "Mbeya",
-
-        kagera: "Kagera",
-
-        shinyanga: "Shinyanga",
-
-        mwanza: "Mwanza",
-
-        morogoro: "Morogoro",
-
-        tanga: "Tanga",
-
-        singida: "Singida",
-
-        tabora: "Tabora",
-
-        kigoma: "Kigoma",
-
-        rukwa: "Rukwa",
-
-        iringa: "Iringa",
-
-        mtwara: "Mtwara",
-
-        lindi: "Lindi",
-
-        pwani: "Pwani",
-
-        njombe: "Njombe",
-
-        katavi: "Katavi",
-
-        simiyu: "Simiyu",
-
-        geita: "Geita",
-
-        mara: "Mara",
-
-        manyara: "Manyara",
-
-        songwe: "Songwe",
-
-        zanzibar: "Zanzibar",
-
-        necta: "NECTA"
-
-    };
-
-
-    /* ========================================================
-       7. SAFE DATA ACCESS
-    ======================================================== */
+       pastPaperConfig = {
+           form1: {
+               physics: [],
+               chemistry: []
+           },
+           form2: {},
+           ...
+       }
+       ===================================================== */
 
     function getDatabase() {
 
-        /*
-         * Your existing data.js should expose:
-         *
-         * const pastPaperConfig = {...};
-         *
-         * or
-         *
-         * var pastPaperConfig = {...};
-         *
-         */
-
         if (
-            typeof pastPaperConfig !== "undefined"
-            &&
+            typeof pastPaperConfig !== "undefined" &&
             pastPaperConfig
         ) {
-
             return pastPaperConfig;
-
         }
 
-
         console.error(
-            "GEPAM: pastPaperConfig was not found."
+            "GEPAM ERROR: pastPaperConfig was not found."
         );
 
         return {};
-
     }
 
 
-    /* ========================================================
-       8. NORMALIZE VALUE
-    ======================================================== */
+    /* =====================================================
+       FORMATTING
+       ===================================================== */
 
-    function normalize(value) {
+    function formatText(value) {
 
-        return String(value ?? "")
-            .trim()
-            .toLowerCase();
+        if (
+            value === undefined ||
+            value === null ||
+            value === ""
+        ) {
+            return "";
+        }
 
+        return String(value)
+            .replace(/_/g, " ")
+            .replace(/\b\w/g, function (letter) {
+                return letter.toUpperCase();
+            });
     }
 
 
-    /* ========================================================
-       9. GET FORM DATA
-    ======================================================== */
+    function formatType(type) {
 
-    function getFormData(form) {
+        const names = {
+
+            pre_necta: "Pre-NECTA",
+
+            acsee: "NECTA / ACSEE",
+
+            necta: "NECTA",
+
+            mock: "Mock",
+
+            joint: "Joint",
+
+            annual: "Annual",
+
+            terminal: "Terminal",
+
+            midterm: "Midterm",
+
+            monthly: "Monthly",
+
+            weekly: "Weekly"
+
+        };
+
+        return names[type] || formatText(type);
+    }
+
+
+    function formatSubject(subject) {
+
+        if (subject === "physics") {
+            return "Physics";
+        }
+
+        if (subject === "chemistry") {
+            return "Chemistry";
+        }
+
+        return formatText(subject);
+    }
+
+
+    /* =====================================================
+       GET ALL PAPERS FOR SELECTED FORM
+       ===================================================== */
+
+    function getFormPapers(form) {
 
         const db = getDatabase();
 
-        return db[form] || {};
+        if (
+            !form ||
+            !db[form] ||
+            typeof db[form] !== "object"
+        ) {
+            return [];
+        }
 
-    }
+        const papers = [];
 
+        Object.keys(db[form]).forEach(function (subject) {
 
-    /* ========================================================
-       10. GET PAPERS
-    ======================================================== */
+            const subjectPapers =
+                db[form][subject];
 
-    function getPapers(form, subject) {
-
-        const formData =
-            getFormData(form);
-
-        const papers =
-            formData[subject];
-
-        return Array.isArray(papers)
-            ? papers
-            : [];
-
-    }
-
-
-    /* ========================================================
-       11. GET ALL PAPERS FROM SELECTED FORM
-    ======================================================== */
-
-    function getAllFormPapers(form) {
-
-        const formData =
-            getFormData(form);
-
-        let all = [];
-
-        Object.keys(formData).forEach(subject => {
-
-            if (
-                Array.isArray(formData[subject])
-            ) {
-
-                all = all.concat(
-                    formData[subject]
-                );
-
+            if (!Array.isArray(subjectPapers)) {
+                return;
             }
+
+            subjectPapers.forEach(function (paper) {
+
+                if (!paper || typeof paper !== "object") {
+                    return;
+                }
+
+                papers.push({
+
+                    ...paper,
+
+                    subject: paper.subject || subject
+
+                });
+
+            });
 
         });
 
-        return all;
-
+        return papers;
     }
 
 
-    /* ========================================================
-       12. UNIQUE VALUES
-    ======================================================== */
+    /* =====================================================
+       UNIQUE VALUES
+       ===================================================== */
 
-    function uniqueValues(values) {
+    function uniqueValues(papers, property) {
 
         return [
             ...new Set(
-                values
-                    .filter(
-                        value =>
-                            value !== undefined
-                            &&
-                            value !== null
-                            &&
-                            String(value).trim() !== ""
-                    )
-                    .map(value => String(value))
+                papers
+                    .map(function (paper) {
+                        return paper[property];
+                    })
+                    .filter(function (value) {
+                        return (
+                            value !== undefined &&
+                            value !== null &&
+                            value !== ""
+                        );
+                    })
             )
         ];
 
     }
 
 
-    /* ========================================================
-       13. SORT YEARS
-    ======================================================== */
+    /* =====================================================
+       UPDATE SUBJECT FILTER
+       ===================================================== */
 
-    function sortYears(values) {
+    function updateSubjects() {
 
-        return uniqueValues(values)
-            .sort(
-                (a, b) =>
-                    Number(b) - Number(a)
-            );
+        const form =
+            formSelect.value;
 
-    }
+        const papers =
+            getFormPapers(form);
 
-
-    /* ========================================================
-       14. CLEAR DOWNSTREAM SELECTIONS
-    ======================================================== */
-
-    function clearAfter(level) {
-
-        if (level === "form") {
-
-            state.subject = null;
-            state.type = null;
-            state.location = null;
-            state.year = null;
-            state.series = null;
-
-        }
-
-        if (level === "subject") {
-
-            state.type = null;
-            state.location = null;
-            state.year = null;
-            state.series = null;
-
-        }
-
-        if (level === "type") {
-
-            state.location = null;
-            state.year = null;
-            state.series = null;
-
-        }
-
-        if (level === "location") {
-
-            state.year = null;
-            state.series = null;
-
-        }
-
-        if (level === "year") {
-
-            state.series = null;
-
-        }
-
-    }
-
-
-    /* ========================================================
-       15. SHOW / HIDE SECTION
-    ======================================================== */
-
-    function show(element) {
-
-        if (element) {
-
-            element.hidden = false;
-
-        }
-
-    }
-
-
-    function hide(element) {
-
-        if (element) {
-
-            element.hidden = true;
-
-        }
-
-    }
-
-
-    /* ========================================================
-       16. CREATE OPTION BUTTON
-    ======================================================== */
-
-    function createOptionButton(
-        label,
-        value,
-        selected,
-        onClick
-    ) {
-
-        const button =
-            document.createElement("button");
-
-        button.type = "button";
-
-        button.className =
-            "option-btn";
-
-        if (selected) {
-
-            button.classList.add(
-                "selected"
-            );
-
-        }
-
-        button.textContent = label;
-
-        button.addEventListener(
-            "click",
-            () => onClick(value)
-        );
-
-        return button;
-
-    }
-
-
-    /* ========================================================
-       17. RENDER FORM OPTIONS
-    ======================================================== */
-
-    function renderForms() {
-
-        formOptions.innerHTML = "";
-
-        Object.keys(FORM_LABELS)
-            .forEach(form => {
-
-                const button =
-                    createOptionButton(
-                        FORM_LABELS[form],
-                        form,
-                        state.form === form,
-                        selectForm
-                    );
-
-                formOptions.appendChild(
-                    button
-                );
-
-            });
-
-    }
-
-
-    /* ========================================================
-       18. SELECT FORM
-    ======================================================== */
-
-    function selectForm(form) {
-
-        state.form = form;
-
-        clearAfter("form");
-
-        renderForms();
-
-        renderSubjects();
-
-        hide(typeSection);
-        hide(locationSection);
-        hide(yearSection);
-        hide(seriesSection);
-
-        clearResults();
-
-    }
-
-
-    /* ========================================================
-       19. RENDER SUBJECTS
-    ======================================================== */
-
-    function renderSubjects() {
-
-        subjectOptions.innerHTML = "";
-
-        const formData =
-            getFormData(state.form);
+        subjectSelect.innerHTML =
+            `<option value="">All Subjects</option>`;
 
         const subjects =
-            Object.keys(formData)
-                .filter(
-                    subject =>
-                        Array.isArray(
-                            formData[subject]
-                        )
-                );
+            uniqueValues(papers, "subject")
+                .sort();
 
-        if (!subjects.length) {
+        subjects.forEach(function (subject) {
 
-            hide(subjectSection);
+            const option =
+                document.createElement("option");
 
-            return;
+            option.value = subject;
 
-        }
+            option.textContent =
+                formatSubject(subject);
 
-        show(subjectSection);
-
-        subjects.forEach(subject => {
-
-            const label =
-                SUBJECT_LABELS[subject]
-                ||
-                prettify(subject);
-
-            const button =
-                createOptionButton(
-                    label,
-                    subject,
-                    state.subject === subject,
-                    selectSubject
-                );
-
-            subjectOptions.appendChild(
-                button
-            );
+            subjectSelect.appendChild(option);
 
         });
 
     }
 
 
-    /* ========================================================
-       20. SELECT SUBJECT
-    ======================================================== */
+    /* =====================================================
+       UPDATE TYPE FILTER
+       ===================================================== */
 
-    function selectSubject(subject) {
+    function updateTypes() {
 
-        state.subject = subject;
+        const form =
+            formSelect.value;
 
-        clearAfter("subject");
+        const subject =
+            subjectSelect.value;
 
-        renderSubjects();
+        let papers =
+            getFormPapers(form);
 
-        renderTypes();
+        if (subject) {
 
-        hide(locationSection);
-        hide(yearSection);
-        hide(seriesSection);
+            papers =
+                papers.filter(function (paper) {
 
-        clearResults();
+                    return paper.subject === subject;
 
-    }
-
-
-    /* ========================================================
-       21. GET CURRENT PAPERS
-    ======================================================== */
-
-    function getCurrentPapers() {
-
-        if (
-            !state.form
-            ||
-            !state.subject
-        ) {
-
-            return [];
+                });
 
         }
 
-        return getPapers(
-            state.form,
-            state.subject
-        );
-
-    }
-
-
-    /* ========================================================
-       22. RENDER TYPES
-    ======================================================== */
-
-    function renderTypes() {
-
-        typeOptions.innerHTML = "";
-
-        const papers =
-            getCurrentPapers();
+        typeSelect.innerHTML =
+            `<option value="">All Types</option>`;
 
         const types =
-            uniqueValues(
-                papers.map(
-                    paper => paper.type
-                )
-            );
+            uniqueValues(papers, "type")
+                .sort();
 
-        if (!types.length) {
+        types.forEach(function (type) {
 
-            hide(typeSection);
+            const option =
+                document.createElement("option");
 
-            return;
+            option.value = type;
 
-        }
+            option.textContent =
+                formatType(type);
 
-        show(typeSection);
-
-        types.forEach(type => {
-
-            const label =
-                TYPE_LABELS[
-                    normalize(type)
-                ]
-                ||
-                prettify(type);
-
-            const button =
-                createOptionButton(
-                    label,
-                    type,
-                    state.type === type,
-                    selectType
-                );
-
-            typeOptions.appendChild(
-                button
-            );
+            typeSelect.appendChild(option);
 
         });
 
     }
 
 
-    /* ========================================================
-       23. SELECT TYPE
-    ======================================================== */
+    /* =====================================================
+       UPDATE REGION FILTER
+       ===================================================== */
 
-    function selectType(type) {
+    function updateRegions() {
 
-        state.type = type;
+        const form =
+            formSelect.value;
 
-        clearAfter("type");
+        const subject =
+            subjectSelect.value;
 
-        renderTypes();
-
-        renderLocations();
-
-        hide(yearSection);
-        hide(seriesSection);
-
-        clearResults();
-
-    }
-
-
-    /* ========================================================
-       24. GET TYPE PAPERS
-    ======================================================== */
-
-    function getTypePapers() {
-
-        return getCurrentPapers()
-            .filter(
-                paper =>
-                    normalize(paper.type)
-                    ===
-                    normalize(state.type)
-            );
-
-    }
-
-
-    /* ========================================================
-       25. LOCATION KEY
-    ======================================================== */
-
-    function getLocationKey(paper) {
-
-        /*
-         * Priority:
-         *
-         * school
-         * zone
-         * region
-         */
-
-        if (
-            paper.school
-            &&
-            String(paper.school).trim()
-        ) {
-
-            return "school:" +
-                String(paper.school);
-
-        }
-
-        if (
-            paper.zone
-            &&
-            String(paper.zone).trim()
-        ) {
-
-            return "zone:" +
-                String(paper.zone);
-
-        }
-
-        if (
-            paper.region
-            &&
-            String(paper.region).trim()
-        ) {
-
-            return "region:" +
-                String(paper.region);
-
-        }
-
-        return "all";
-
-    }
-
-
-    /* ========================================================
-       26. LOCATION LABEL
-    ======================================================== */
-
-    function getLocationLabel(paper) {
-
-        if (
-            paper.school
-            &&
-            String(paper.school).trim()
-        ) {
-
-            return "School: " +
-                paper.school;
-
-        }
-
-        if (
-            paper.zone
-            &&
-            String(paper.zone).trim()
-        ) {
-
-            return "Zone: " +
-                paper.zone;
-
-        }
-
-        if (
-            paper.region
-            &&
-            String(paper.region).trim()
-        ) {
-
-            return (
-                REGION_LABELS[
-                    normalize(paper.region)
-                ]
-                ||
-                prettify(paper.region)
-            );
-
-        }
-
-        return "All Locations";
-
-    }
-
-
-    /* ========================================================
-       27. RENDER LOCATIONS
-    ======================================================== */
-
-    function renderLocations() {
-
-        locationOptions.innerHTML = "";
-
-        const papers =
-            getTypePapers();
-
-        if (!papers.length) {
-
-            hide(locationSection);
-
-            return;
-
-        }
-
-        /*
-         * Build unique locations.
-         */
-
-        const locationMap =
-            new Map();
-
-        papers.forEach(paper => {
-
-            const key =
-                getLocationKey(paper);
-
-            if (
-                !locationMap.has(key)
-            ) {
-
-                locationMap.set(
-                    key,
-                    getLocationLabel(paper)
-                );
-
-            }
-
-        });
-
-
-        show(locationSection);
-
-
-        /*
-         * Add All option only when
-         * there is more than one location.
-         */
-
-        if (
-            locationMap.size > 1
-        ) {
-
-            const allButton =
-                createOptionButton(
-                    "All Locations",
-                    "all",
-                    state.location === "all",
-                    selectLocation
-                );
-
-            locationOptions.appendChild(
-                allButton
-            );
-
-        }
-
-
-        [...locationMap.entries()]
-            .sort(
-                (a, b) =>
-                    a[1].localeCompare(
-                        b[1]
-                    )
-            )
-            .forEach(
-                ([key, label]) => {
-
-                    const button =
-                        createOptionButton(
-                            label,
-                            key,
-                            state.location === key,
-                            selectLocation
-                        );
-
-                    locationOptions.appendChild(
-                        button
-                    );
-
-                }
-            );
-
-    }
-
-
-    /* ========================================================
-       28. SELECT LOCATION
-    ======================================================== */
-
-    function selectLocation(location) {
-
-        state.location = location;
-
-        clearAfter("location");
-
-        renderLocations();
-
-        renderYears();
-
-        hide(seriesSection);
-
-        clearResults();
-
-    }
-
-
-    /* ========================================================
-       29. FILTER LOCATION
-    ======================================================== */
-
-    function filterByLocation(
-        papers
-    ) {
-
-        if (
-            !state.location
-            ||
-            state.location === "all"
-        ) {
-
-            return papers;
-
-        }
-
-        return papers.filter(
-            paper =>
-                getLocationKey(paper)
-                ===
-                state.location
-        );
-
-    }
-
-
-    /* ========================================================
-       30. RENDER YEARS
-    ======================================================== */
-
-    function renderYears() {
-
-        yearOptions.innerHTML = "";
+        const type =
+            typeSelect.value;
 
         let papers =
-            filterByLocation(
-                getTypePapers()
-            );
+            getFormPapers(form);
+
+
+        if (subject) {
+
+            papers =
+                papers.filter(function (paper) {
+
+                    return paper.subject === subject;
+
+                });
+
+        }
+
+
+        if (type) {
+
+            papers =
+                papers.filter(function (paper) {
+
+                    return paper.type === type;
+
+                });
+
+        }
+
+
+        regionSelect.innerHTML =
+            `<option value="">All Regions</option>`;
+
+
+        const regions =
+            uniqueValues(papers, "region")
+                .sort();
+
+
+        regions.forEach(function (region) {
+
+            const option =
+                document.createElement("option");
+
+            option.value = region;
+
+            option.textContent =
+                formatText(region);
+
+            regionSelect.appendChild(option);
+
+        });
+
+    }
+
+
+    /* =====================================================
+       UPDATE YEAR FILTER
+       ===================================================== */
+
+    function updateYears() {
+
+        const form =
+            formSelect.value;
+
+        const subject =
+            subjectSelect.value;
+
+        const type =
+            typeSelect.value;
+
+        const region =
+            regionSelect.value;
+
+
+        let papers =
+            getFormPapers(form);
+
+
+        if (subject) {
+
+            papers =
+                papers.filter(function (paper) {
+
+                    return paper.subject === subject;
+
+                });
+
+        }
+
+
+        if (type) {
+
+            papers =
+                papers.filter(function (paper) {
+
+                    return paper.type === type;
+
+                });
+
+        }
+
+
+        if (region) {
+
+            papers =
+                papers.filter(function (paper) {
+
+                    return paper.region === region;
+
+                });
+
+        }
+
+
+        yearSelect.innerHTML =
+            `<option value="">All Years</option>`;
+
 
         const years =
-            sortYears(
-                papers.map(
-                    paper => paper.year
-                )
-            );
+            uniqueValues(papers, "year")
+                .sort(function (a, b) {
+                    return Number(b) - Number(a);
+                });
 
-        if (!years.length) {
 
-            hide(yearSection);
+        years.forEach(function (year) {
 
-            renderSeries();
+            const option =
+                document.createElement("option");
 
-            return;
+            option.value = year;
 
-        }
+            option.textContent = year;
 
-        show(yearSection);
-
-        years.forEach(year => {
-
-            const button =
-                createOptionButton(
-                    year,
-                    year,
-                    String(state.year)
-                    ===
-                    String(year),
-                    selectYear
-                );
-
-            yearOptions.appendChild(
-                button
-            );
+            yearSelect.appendChild(option);
 
         });
 
     }
 
 
-    /* ========================================================
-       31. SELECT YEAR
-    ======================================================== */
+    /* =====================================================
+       FILTER PAPERS
+       ===================================================== */
 
-    function selectYear(year) {
+    function getFilteredPapers() {
 
-        state.year = year;
+        const form =
+            formSelect.value;
 
-        clearAfter("year");
-
-        renderYears();
-
-        renderSeries();
-
-        clearResults();
-
-    }
-
-
-    /* ========================================================
-       32. FILTER YEAR
-    ======================================================== */
-
-    function filterByYear(
-        papers
-    ) {
-
-        if (!state.year) {
-
-            return papers;
-
+        if (!form) {
+            return [];
         }
 
-        return papers.filter(
-            paper =>
-                String(paper.year)
-                ===
-                String(state.year)
-        );
-
-    }
-
-
-    /* ========================================================
-       33. RENDER SERIES
-    ======================================================== */
-
-    function renderSeries() {
-
-        seriesOptions.innerHTML = "";
 
         let papers =
-            filterByYear(
-                filterByLocation(
-                    getTypePapers()
-                )
-            );
+            getFormPapers(form);
 
+
+        const subject =
+            subjectSelect.value;
+
+        const type =
+            typeSelect.value;
+
+        const region =
+            regionSelect.value;
+
+        const year =
+            yearSelect.value;
+
+        const school =
+            schoolInput.value
+                .trim()
+                .toLowerCase();
+
+        const zone =
+            zoneInput.value
+                .trim()
+                .toLowerCase();
 
         const series =
-            uniqueValues(
-                papers.map(
-                    paper => paper.series
-                )
-            );
+            seriesInput.value
+                .trim()
+                .toLowerCase();
 
 
-        /*
-         * If no series exists,
-         * hide the section.
-         */
+        /* SUBJECT */
 
-        if (!series.length) {
+        if (subject) {
 
-            hide(seriesSection);
+            papers =
+                papers.filter(function (paper) {
 
-            renderResults();
+                    return paper.subject === subject;
 
-            return;
+                });
 
         }
 
 
-        show(seriesSection);
+        /* TYPE */
 
+        if (type) {
 
-        /*
-         * All Series option.
-         */
+            papers =
+                papers.filter(function (paper) {
 
-        if (series.length > 1) {
+                    return paper.type === type;
 
-            const allButton =
-                createOptionButton(
-                    "All Series",
-                    "all",
-                    state.series === "all",
-                    selectSeries
-                );
-
-            seriesOptions.appendChild(
-                allButton
-            );
+                });
 
         }
 
 
-        series
-            .sort(
-                (a, b) =>
-                    a.localeCompare(b)
-            )
-            .forEach(
-                value => {
+        /* REGION */
 
-                    const button =
-                        createOptionButton(
-                            value,
-                            value,
-                            state.series === value,
-                            selectSeries
-                        );
+        if (region) {
 
-                    seriesOptions.appendChild(
-                        button
-                    );
+            papers =
+                papers.filter(function (paper) {
 
-                }
-            );
+                    return paper.region === region;
 
-    }
-
-
-    /* ========================================================
-       34. SELECT SERIES
-    ======================================================== */
-
-    function selectSeries(series) {
-
-        state.series = series;
-
-        renderSeries();
-
-        renderResults();
-
-    }
-
-
-    /* ========================================================
-       35. FILTER SERIES
-    ======================================================== */
-
-    function filterBySeries(
-        papers
-    ) {
-
-        if (
-            !state.series
-            ||
-            state.series === "all"
-        ) {
-
-            return papers;
+                });
 
         }
 
-        return papers.filter(
-            paper =>
-                String(
-                    paper.series ?? ""
-                )
-                ===
-                String(
-                    state.series
-                )
-        );
 
-    }
+        /* YEAR */
 
+        if (year) {
 
-    /* ========================================================
-       36. SEARCH
-    ======================================================== */
+            papers =
+                papers.filter(function (paper) {
 
-    function filterBySearch(
-        papers
-    ) {
+                    return String(paper.year) ===
+                        String(year);
 
-        const query =
-            normalize(
-                state.search
-            );
-
-        if (!query) {
-
-            return papers;
+                });
 
         }
 
-        return papers.filter(
-            paper => {
 
-                const text =
-                    [
+        /* SCHOOL */
 
-                        paper.title,
+        if (school) {
 
-                        paper.type,
+            papers =
+                papers.filter(function (paper) {
 
-                        paper.region,
+                    return String(
+                        paper.school || ""
+                    )
+                    .toLowerCase()
+                    .includes(school);
 
-                        paper.school,
+                });
 
-                        paper.zone,
-
-                        paper.series,
-
-                        paper.year
-
-                    ]
-                    .filter(Boolean)
-                    .join(" ");
-
-                return normalize(text)
-                    .includes(query);
-
-            }
-        );
-
-    }
+        }
 
 
-    /* ========================================================
-       37. GET FINAL PAPERS
-    ======================================================== */
+        /* ZONE */
 
-    function getFinalPapers() {
+        if (zone) {
 
-        let papers =
-            getTypePapers();
+            papers =
+                papers.filter(function (paper) {
 
+                    return String(
+                        paper.zone || ""
+                    )
+                    .toLowerCase()
+                    .includes(zone);
 
-        papers =
-            filterByLocation(
-                papers
-            );
+                });
 
-
-        papers =
-            filterByYear(
-                papers
-            );
+        }
 
 
-        papers =
-            filterBySeries(
-                papers
-            );
+        /* SERIES */
+
+        if (series) {
+
+            papers =
+                papers.filter(function (paper) {
+
+                    return String(
+                        paper.series || ""
+                    )
+                    .toLowerCase()
+                    .includes(series);
+
+                });
+
+        }
 
 
-        papers =
-            filterBySearch(
-                papers
-            );
+        /* SORT */
+
+        papers.sort(function (a, b) {
+
+            const yearA =
+                Number(a.year) || 0;
+
+            const yearB =
+                Number(b.year) || 0;
+
+            return yearB - yearA;
+
+        });
 
 
         return papers;
@@ -1300,120 +636,46 @@
     }
 
 
-    /* ========================================================
-       38. RENDER RESULTS
-    ======================================================== */
+    /* =====================================================
+       PDF PATH
+       ===================================================== */
 
-    function renderResults() {
+    function getPdfUrl(file) {
 
-        const papers =
-            getFinalPapers();
-
-
-        /*
-         * Search should appear
-         * once user reaches type.
-         */
-
-        if (
-            state.type
-        ) {
-
-            show(searchSection);
-
-        } else {
-
-            hide(searchSection);
-
+        if (!file) {
+            return "#";
         }
 
-
-        paperResults.innerHTML = "";
-
-
-        resultCount.textContent =
-            `${papers.length} ${
-                papers.length === 1
-                    ? "paper"
-                    : "papers"
-            }`;
-
-
-        if (!papers.length) {
-
-            paperResults.innerHTML = `
-
-                <div class="empty-state">
-
-                    <strong>
-                        No papers found
-                    </strong>
-
-                    Try another
-                    year, region,
-                    school, zone or series.
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
         /*
-         * Sort newest first.
+         * Your paths are already relative to the
+         * GitHub Pages website root.
+         *
+         * Example:
+         * papers/form6/physics/...
          */
 
-        papers.sort(
-            (a, b) => {
+        let cleanPath =
+            String(file)
+                .replace(/^\/+/, "");
 
-                const yearDiff =
-                    Number(b.year || 0)
-                    -
-                    Number(a.year || 0);
+        /*
+         * Encode only spaces.
+         * We DO NOT rename your files.
+         */
 
-                if (yearDiff !== 0) {
+        cleanPath =
+            cleanPath.replace(/ /g, "%20");
 
-                    return yearDiff;
-
-                }
-
-                return String(
-                    a.title || ""
-                ).localeCompare(
-                    String(
-                        b.title || ""
-                    )
-                );
-
-            }
-        );
-
-
-        papers.forEach(
-            paper => {
-
-                paperResults.appendChild(
-                    createPaperCard(
-                        paper
-                    )
-                );
-
-            }
-        );
+        return cleanPath;
 
     }
 
 
-    /* ========================================================
-       39. CREATE PAPER CARD
-    ======================================================== */
+    /* =====================================================
+       CREATE PAPER CARD
+       ===================================================== */
 
-    function createPaperCard(
-        paper
-    ) {
+    function createPaperCard(paper) {
 
         const card =
             document.createElement("article");
@@ -1423,132 +685,156 @@
 
 
         const title =
-            paper.title
-            ||
+            paper.title ||
             "Examination Paper";
 
 
-        const typeLabel =
-            TYPE_LABELS[
-                normalize(
-                    paper.type
-                )
-            ]
-            ||
-            prettify(
-                paper.type
-            );
+        const year =
+            paper.year ||
+            "";
 
 
-        const regionLabel =
+        const subject =
+            formatSubject(paper.subject);
+
+
+        const type =
+            formatType(paper.type);
+
+
+        const region =
             paper.region
-                ? (
-                    REGION_LABELS[
-                        normalize(
-                            paper.region
-                        )
-                    ]
-                    ||
-                    prettify(
-                        paper.region
-                    )
-                )
+                ? formatText(paper.region)
                 : "";
 
 
-        const location =
+        const school =
             paper.school
-                ? `School: ${escapeHTML(
-                    paper.school
-                )}`
-                : paper.zone
-                    ? `Zone: ${escapeHTML(
-                        paper.zone
-                    )}`
-                    : regionLabel
-                        ? escapeHTML(
-                            regionLabel
-                        )
-                        : "";
+                ? formatText(paper.school)
+                : "";
+
+
+        const zone =
+            paper.zone
+                ? formatText(paper.zone)
+                : "";
 
 
         const series =
             paper.series
-                ? escapeHTML(
-                    paper.series
-                )
+                ? formatText(paper.series)
                 : "";
+
+
+        const pdfUrl =
+            getPdfUrl(paper.file);
+
+
+        let extraMeta = "";
+
+
+        if (school) {
+
+            extraMeta += `
+                <span class="paper-tag">
+                    🏫 ${school}
+                </span>
+            `;
+
+        }
+
+
+        if (zone) {
+
+            extraMeta += `
+                <span class="paper-tag">
+                    🗺️ ${zone}
+                </span>
+            `;
+
+        }
+
+
+        if (series) {
+
+            extraMeta += `
+                <span class="paper-tag">
+                    📑 ${series}
+                </span>
+            `;
+
+        }
 
 
         card.innerHTML = `
 
-            <div class="paper-icon">
-                📄
+            <div class="paper-top">
+
+                <div class="paper-icon">
+                    ${
+                        paper.subject === "chemistry"
+                            ? "⚗️"
+                            : "⚛️"
+                    }
+                </div>
+
+                ${
+                    year
+                        ? `<div class="paper-year">
+                              ${year}
+                           </div>`
+                        : ""
+                }
+
             </div>
 
-            <h3>
-                ${escapeHTML(title)}
+
+            <h3 class="paper-title">
+                ${title}
             </h3>
+
 
             <div class="paper-meta">
 
                 ${
-                    typeLabel
-                    ? `
-                        <span class="meta">
-                            ${escapeHTML(
-                                typeLabel
-                            )}
-                        </span>
-                    `
-                    : ""
+                    subject
+                        ? `<span class="paper-tag">
+                              📚 ${subject}
+                           </span>`
+                        : ""
                 }
 
                 ${
-                    paper.year
-                    ? `
-                        <span class="meta">
-                            ${escapeHTML(
-                                paper.year
-                            )}
-                        </span>
-                    `
-                    : ""
+                    type
+                        ? `<span class="paper-tag">
+                              📝 ${type}
+                           </span>`
+                        : ""
                 }
 
                 ${
-                    location
-                    ? `
-                        <span class="meta">
-                            ${location}
-                        </span>
-                    `
-                    : ""
+                    region
+                        ? `<span class="paper-tag">
+                              📍 ${region}
+                           </span>`
+                        : ""
                 }
 
-                ${
-                    series
-                    ? `
-                        <span class="meta">
-                            ${series}
-                        </span>
-                    `
-                    : ""
-                }
+                ${extraMeta}
 
             </div>
+
 
             <div class="paper-actions">
 
                 <a
-                    class="open-btn"
-                    href="${safeURL(
-                        paper.file
-                    )}"
+                    class="open-paper-btn"
+                    href="${pdfUrl}"
                     target="_blank"
-                    rel="noopener"
-                >
-                    Open Paper
+                    rel="noopener">
+
+                    📄 Open Paper
+
                 </a>
 
             </div>
@@ -1561,283 +847,289 @@
     }
 
 
-    /* ========================================================
-       40. CLEAR RESULTS
-    ======================================================== */
+    /* =====================================================
+       RENDER
+       ===================================================== */
 
-    function clearResults() {
+    function renderPapers() {
 
-        renderResults();
-
-    }
-
-
-    /* ========================================================
-       41. PRETTIFY
-    ======================================================== */
-
-    function prettify(value) {
-
-        return String(value ?? "")
-            .replace(/_/g, " ")
-            .replace(/\b\w/g, char =>
-                char.toUpperCase()
-            );
-
-    }
+        const papers =
+            getFilteredPapers();
 
 
-    /* ========================================================
-       42. ESCAPE HTML
-    ======================================================== */
-
-    function escapeHTML(value) {
-
-        return String(value ?? "")
-            .replace(
-                /[&<>"']/g,
-                char => ({
-                    "&": "&amp;",
-                    "<": "&lt;",
-                    ">": "&gt;",
-                    '"': "&quot;",
-                    "'": "&#039;"
-
-                }[char])
-            );
-
-    }
+        papersGrid.innerHTML = "";
 
 
-    /* ========================================================
-       43. SAFE URL
-    ======================================================== */
+        papersCount.textContent =
+            `${papers.length} ${
+                papers.length === 1
+                    ? "paper"
+                    : "papers"
+            }`;
 
-    function safeURL(value) {
 
-        if (!value) {
+        if (!formSelect.value) {
 
-            return "#";
+            emptyState.style.display =
+                "block";
+
+            emptyState.innerHTML = `
+
+                <div class="empty-icon">
+                    📚
+                </div>
+
+                <h3>
+                    Select a Form
+                </h3>
+
+                <p>
+                    Choose Form 1 to Form 6
+                    to view available papers.
+                </p>
+
+            `;
+
+            return;
 
         }
 
-        /*
-         * These are your own GitHub Pages
-         * relative PDF paths.
-         *
-         * We preserve them exactly.
-         */
 
-        return String(value);
+        if (papers.length === 0) {
 
-    }
+            emptyState.style.display =
+                "block";
 
-
-    /* ========================================================
-       44. BACK BUTTON
-    ======================================================== */
-
-    backButton.addEventListener(
-        "click",
-        function () {
-
-            /*
-             * history.back() behaves like
-             * the browser's own Back button.
-             */
-
-            if (
-                window.history.length > 1
-            ) {
-
-                window.history.back();
-
-            } else {
-
-                window.location.href =
-                    "index.html";
-
-            }
+            return;
 
         }
-    );
 
 
-    /* ========================================================
-       45. MOBILE MENU
-    ======================================================== */
-
-    menuToggle.addEventListener(
-        "click",
-        function () {
-
-            const opened =
-                mainNav.classList.toggle(
-                    "open"
-                );
+        emptyState.style.display =
+            "none";
 
 
-            menuToggle.setAttribute(
-                "aria-expanded",
-                String(opened)
-            );
+        papers.forEach(function (paper) {
 
-        }
-    );
-
-
-    /* ========================================================
-       46. CLOSE MOBILE MENU
-       WHEN LINK IS CLICKED
-    ======================================================== */
-
-    mainNav
-        .querySelectorAll("a")
-        .forEach(link => {
-
-            link.addEventListener(
-                "click",
-                () => {
-
-                    mainNav.classList.remove(
-                        "open"
-                    );
-
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                }
+            papersGrid.appendChild(
+                createPaperCard(paper)
             );
 
         });
 
+    }
 
-    /* ========================================================
-       47. SEARCH INPUT
-    ======================================================== */
 
-    searchInput.addEventListener(
+    /* =====================================================
+       REFRESH FILTERS
+       ===================================================== */
+
+    function refreshFilters() {
+
+        updateSubjects();
+
+        updateTypes();
+
+        updateRegions();
+
+        updateYears();
+
+        renderPapers();
+
+    }
+
+
+    /* =====================================================
+       FORM CHANGE
+       ===================================================== */
+
+    formSelect.addEventListener(
+        "change",
+        function () {
+
+            subjectSelect.value = "";
+
+            typeSelect.value = "";
+
+            regionSelect.value = "";
+
+            yearSelect.value = "";
+
+            refreshFilters();
+
+        }
+    );
+
+
+    /* =====================================================
+       SUBJECT CHANGE
+       ===================================================== */
+
+    subjectSelect.addEventListener(
+        "change",
+        function () {
+
+            const oldType =
+                typeSelect.value;
+
+            updateTypes();
+
+            /*
+             * Keep type if still available.
+             */
+
+            const availableTypes =
+                [...typeSelect.options]
+                    .map(function (option) {
+                        return option.value;
+                    });
+
+
+            if (
+                availableTypes.includes(oldType)
+            ) {
+
+                typeSelect.value =
+                    oldType;
+
+            }
+
+
+            updateRegions();
+
+            updateYears();
+
+            renderPapers();
+
+        }
+    );
+
+
+    /* =====================================================
+       TYPE CHANGE
+       ===================================================== */
+
+    typeSelect.addEventListener(
+        "change",
+        function () {
+
+            updateRegions();
+
+            updateYears();
+
+            renderPapers();
+
+        }
+    );
+
+
+    /* =====================================================
+       REGION CHANGE
+       ===================================================== */
+
+    regionSelect.addEventListener(
+        "change",
+        function () {
+
+            updateYears();
+
+            renderPapers();
+
+        }
+    );
+
+
+    /* =====================================================
+       YEAR CHANGE
+       ===================================================== */
+
+    yearSelect.addEventListener(
+        "change",
+        function () {
+
+            renderPapers();
+
+        }
+    );
+
+
+    /* =====================================================
+       TEXT FILTERS
+       ===================================================== */
+
+    schoolInput.addEventListener(
         "input",
+        renderPapers
+    );
+
+
+    zoneInput.addEventListener(
+        "input",
+        renderPapers
+    );
+
+
+    seriesInput.addEventListener(
+        "input",
+        renderPapers
+    );
+
+
+    /* =====================================================
+       RESET
+       ===================================================== */
+
+    resetFilters.addEventListener(
+        "click",
         function () {
 
-            state.search =
-                this.value;
+            formSelect.value = "";
 
-            renderResults();
+            subjectSelect.innerHTML =
+                `<option value="">
+                    All Subjects
+                 </option>`;
+
+            typeSelect.innerHTML =
+                `<option value="">
+                    All Types
+                 </option>`;
+
+            regionSelect.innerHTML =
+                `<option value="">
+                    All Regions
+                 </option>`;
+
+            yearSelect.innerHTML =
+                `<option value="">
+                    All Years
+                 </option>`;
+
+            schoolInput.value = "";
+
+            zoneInput.value = "";
+
+            seriesInput.value = "";
+
+            renderPapers();
 
         }
     );
 
 
-    /* ========================================================
-       48. BROWSER BACK / FORWARD
-    ======================================================== */
+    /* =====================================================
+       INITIAL STATE
+       ===================================================== */
 
-    window.addEventListener(
-        "popstate",
-        function () {
+    renderPapers();
 
-            renderAll();
 
-        }
+    /* =====================================================
+       DEBUG MESSAGE
+       ===================================================== */
+
+    console.log(
+        "GEPAM Past Papers Engine loaded successfully."
     );
 
-
-    /* ========================================================
-       49. RENDER ALL
-    ======================================================== */
-
-    function renderAll() {
-
-        renderForms();
-
-        if (state.form) {
-
-            renderSubjects();
-
-        }
-
-        if (
-            state.form
-            &&
-            state.subject
-        ) {
-
-            renderTypes();
-
-        }
-
-        if (
-            state.form
-            &&
-            state.subject
-            &&
-            state.type
-        ) {
-
-            renderLocations();
-
-        }
-
-        if (
-            state.form
-            &&
-            state.subject
-            &&
-            state.type
-            &&
-            state.location
-        ) {
-
-            renderYears();
-
-        }
-
-        if (
-            state.form
-            &&
-            state.subject
-            &&
-            state.type
-        ) {
-
-            renderResults();
-
-        }
-
-    }
-
-
-    /* ========================================================
-       50. INITIALIZE
-    ======================================================== */
-
-    function init() {
-
-        document.getElementById(
-            "currentYear"
-        ).textContent =
-            new Date().getFullYear();
-
-
-        hide(subjectSection);
-        hide(typeSection);
-        hide(locationSection);
-        hide(yearSection);
-        hide(seriesSection);
-        hide(searchSection);
-
-
-        renderForms();
-
-        renderResults();
-
-    }
-
-
-    init();
-
-
-})();
+});
