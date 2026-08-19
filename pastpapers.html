@@ -8,6 +8,12 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
+<meta name="description"
+      content="GEPAM Science Hub Past Papers - Physics and Chemistry examination papers from Form 1 to Form 6.">
+
+<meta name="theme-color"
+      content="#0d47a1">
+
 <title>GEPAM Science Hub | Past Papers</title>
 
 <link rel="icon"
@@ -17,24 +23,36 @@
 <link rel="stylesheet"
       href="style.css">
 
+
+<!-- =====================================================
+     PAST PAPERS DATA
+     MUHIMU: DATA INAPAKIWA KWANZA
+====================================================== -->
+
+<script src="pastpapers.data.js" defer></script>
+
+
 <style>
 
 /* =========================================================
    PAST PAPERS PAGE
-   Independent colours from NOTES page
 ========================================================= */
 
 :root {
 
     --primary: #1769aa;
     --primary-dark: #0d47a1;
+
     --secondary: #00a6a6;
+
     --accent: #ff9800;
 
     --light-blue: #eef7ff;
+
     --light-teal: #eafafa;
 
     --text: #172033;
+
     --muted: #687386;
 
     --white: #ffffff;
@@ -79,6 +97,7 @@ body {
     color: var(--text);
 
     overflow-x: hidden;
+
 }
 
 
@@ -266,7 +285,8 @@ body {
 
 .page-hero h1 {
 
-    margin: 0 0 8px;
+    margin:
+        0 0 8px;
 
     font-size: 30px;
 
@@ -432,6 +452,45 @@ body {
     color: var(--muted);
 
     line-height: 1.6;
+
+}
+
+
+/* =========================================================
+   DATA STATUS
+========================================================= */
+
+.data-status {
+
+    display: none;
+
+    margin:
+        0 0
+        20px;
+
+    padding:
+        13px
+        15px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+}
+
+
+.data-status.error {
+
+    display: block;
+
+    background: #ffebee;
+
+    border:
+        1px solid #ffcdd2;
+
+    color: #b71c1c;
 
 }
 
@@ -687,6 +746,30 @@ body {
 }
 
 
+.type-card:nth-child(4)::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            #00695c,
+            #26a69a
+        );
+
+}
+
+
+.type-card:nth-child(5)::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            #283593,
+            #5c6bc0
+        );
+
+}
+
+
 /* =========================================================
    REGION / YEAR
 ========================================================= */
@@ -771,7 +854,7 @@ body {
 
 .pdf-card {
 
-    min-height: 180px;
+    min-height: 190px;
 
 }
 
@@ -1103,7 +1186,7 @@ footer strong {
 
 
 /* =========================================================
-   SMALL ANIMATION
+   ANIMATION
 ========================================================= */
 
 @keyframes fadeIn {
@@ -1235,9 +1318,15 @@ footer strong {
     </button>
 
 
-    <!-- ===================================================
-         DYNAMIC NAVIGATION
-    ==================================================== -->
+    <!-- DATA ERROR -->
+
+    <div
+        id="dataStatus"
+        class="data-status">
+    </div>
+
+
+    <!-- DYNAMIC NAVIGATION -->
 
     <div
         id="stepContainer">
@@ -1365,36 +1454,15 @@ footer strong {
 
 
 <!-- =======================================================
-     PAST PAPERS NAVIGATION
+     NAVIGATION SCRIPT
 ======================================================= -->
 
 <script>
 
-/*
-=============================================================
- GEPAM SCIENCE HUB
- PAST PAPERS NAVIGATION
-
- STRUCTURE:
-
- FORM
-   ↓
- SUBJECT
-   ↓
- TYPE
-   ↓
- REGION
-   ↓
- YEAR
-   ↓
- PDF
-
- IMPORTANT:
- HII HTML INAJENGA NAVIGATION YENYEWE.
- DATA YA PDF TUTAUNGANISHA BAADAYE
- KUPITIA pastpapers.data.js
-=============================================================
-*/
+/* =========================================================
+   GEPAM SCIENCE HUB
+   PAST PAPERS ENGINE
+========================================================= */
 
 
 /* =========================================================
@@ -1437,6 +1505,12 @@ const breadcrumb =
 const backButton =
     document.getElementById(
         "backButton"
+    );
+
+
+const dataStatus =
+    document.getElementById(
+        "dataStatus"
     );
 
 
@@ -1656,6 +1730,65 @@ const years = [
 
 
 /* =========================================================
+   NORMALIZE
+========================================================= */
+
+function normalize(value) {
+
+    return String(
+        value ?? ""
+    )
+    .trim()
+    .toLowerCase()
+    .replace(
+        /[\s_-]+/g,
+        "_"
+    );
+
+}
+
+
+/* =========================================================
+   DATA CHECK
+========================================================= */
+
+function checkDataFile() {
+
+    if (
+        !Array.isArray(
+            window.pastPapers
+        )
+    ) {
+
+        dataStatus.className =
+            "data-status error";
+
+        dataStatus.innerHTML = `
+            ⚠️ <strong>Past Papers database
+            haijapakiwa.</strong><br>
+            Hakikisha faili
+            <strong>pastpapers.data.js</strong>
+            lipo kwenye folder moja na
+            pastpapers.html.
+        `;
+
+        return false;
+
+    }
+
+
+    dataStatus.className =
+        "data-status";
+
+    dataStatus.innerHTML =
+        "";
+
+    return true;
+
+}
+
+
+/* =========================================================
    RENDER FORMS
 ========================================================= */
 
@@ -1771,9 +1904,7 @@ function renderForms() {
    OPEN FORM
 ========================================================= */
 
-function openForm(
-    formId
-) {
+function openForm(formId) {
 
     currentState.level =
         "subjects";
@@ -1795,7 +1926,6 @@ function openForm(
 
 
     pushNavigationState();
-
 
     renderSubjects();
 
@@ -1918,9 +2048,7 @@ function renderSubjects() {
    OPEN SUBJECT
 ========================================================= */
 
-function openSubject(
-    subjectId
-) {
+function openSubject(subjectId) {
 
     currentState.level =
         "types";
@@ -2048,9 +2176,7 @@ function renderTypes() {
    OPEN TYPE
 ========================================================= */
 
-function openType(
-    typeId
-) {
+function openType(typeId) {
 
     currentState.level =
         "regions";
@@ -2167,9 +2293,7 @@ function renderRegions() {
    OPEN REGION
 ========================================================= */
 
-function openRegion(
-    regionId
-) {
+function openRegion(regionId) {
 
     currentState.level =
         "years";
@@ -2282,9 +2406,7 @@ function renderYears() {
    OPEN YEAR
 ========================================================= */
 
-function openYear(
-    year
-) {
+function openYear(year) {
 
     currentState.level =
         "papers";
@@ -2296,6 +2418,79 @@ function openYear(
     pushNavigationState();
 
     renderPapers();
+
+}
+
+
+/* =========================================================
+   GET MATCHING PAPERS
+========================================================= */
+
+function getMatchingPapers() {
+
+    if (
+        !Array.isArray(
+            window.pastPapers
+        )
+    ) {
+
+        return [];
+
+    }
+
+
+    return window.pastPapers.filter(
+        paper => {
+
+            return (
+
+                normalize(
+                    paper.form
+                ) ===
+                normalize(
+                    currentState.form
+                )
+
+                &&
+
+                normalize(
+                    paper.subject
+                ) ===
+                normalize(
+                    currentState.subject
+                )
+
+                &&
+
+                normalize(
+                    paper.type
+                ) ===
+                normalize(
+                    currentState.type
+                )
+
+                &&
+
+                normalize(
+                    paper.region
+                ) ===
+                normalize(
+                    currentState.region
+                )
+
+                &&
+
+                String(
+                    paper.year
+                ) ===
+                String(
+                    currentState.year
+                )
+
+            );
+
+        }
+    );
 
 }
 
@@ -2385,11 +2580,17 @@ function renderPapers() {
                         </div>
 
                         <h3>
-                            ${paper.title}
+                            ${escapeHTML(
+                                paper.title ||
+                                "Past Paper"
+                            )}
                         </h3>
 
                         <p>
-                            ${paper.description || ""}
+                            ${escapeHTML(
+                                paper.description ||
+                                ""
+                            )}
                         </p>
 
                     </div>
@@ -2431,94 +2632,10 @@ function renderPapers() {
 
 
 /* =========================================================
-   GET PAPERS FROM DATA FILE
-========================================================= */
-
-function getMatchingPapers() {
-
-    /*
-    ---------------------------------------------------------
-    HAPA TUNASOMA window.pastPapers
-    ILIYOPO KUTOKA pastpapers.data.js.
-
-    Tutaifanyia kazi baada ya HTML hii.
-    ---------------------------------------------------------
-    */
-
-    if (
-        !Array.isArray(
-            window.pastPapers
-        )
-    ) {
-
-        return [];
-
-    }
-
-
-    return window.pastPapers.filter(
-        paper => {
-
-            return (
-
-                normalize(
-                    paper.form
-                ) ===
-                normalize(
-                    currentState.form
-                )
-
-                &&
-
-                normalize(
-                    paper.subject
-                ) ===
-                normalize(
-                    currentState.subject
-                )
-
-                &&
-
-                normalize(
-                    paper.type
-                ) ===
-                normalize(
-                    currentState.type
-                )
-
-                &&
-
-                normalize(
-                    paper.region
-                ) ===
-                normalize(
-                    currentState.region
-                )
-
-                &&
-
-                String(
-                    paper.year
-                ) ===
-                String(
-                    currentState.year
-                )
-
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
    OPEN PDF
 ========================================================= */
 
-function openPDF(
-    file
-) {
+function openPDF(file) {
 
     if (!file) {
 
@@ -2533,43 +2650,21 @@ function openPDF(
 
     window.open(
         file,
-        "_blank"
+        "_blank",
+        "noopener"
     );
 
 }
 
 
 /* =========================================================
-   NORMALIZE DATA
+   ESCAPE JAVASCRIPT
 ========================================================= */
 
-function normalize(
-    value
-) {
+function escapeJS(value) {
 
     return String(
         value ?? ""
-    )
-    .trim()
-    .toLowerCase()
-    .replace(
-        /[\s_-]+/g,
-        "_"
-    );
-
-}
-
-
-/* =========================================================
-   ESCAPE
-========================================================= */
-
-function escapeJS(
-    value
-) {
-
-    return String(
-        value
     )
     .replaceAll(
         "\\",
@@ -2578,6 +2673,47 @@ function escapeJS(
     .replaceAll(
         "'",
         "\\'"
+    )
+    .replaceAll(
+        "\n",
+        "\\n"
+    )
+    .replaceAll(
+        "\r",
+        "\\r"
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value) {
+
+    return String(
+        value ?? ""
+    )
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+    .replaceAll(
+        "'",
+        "&#039;"
     );
 
 }
@@ -2705,7 +2841,7 @@ function updateBreadcrumb() {
                         <span class="
                             breadcrumb-item
                         ">
-                            ${item}
+                            ${escapeHTML(item)}
                         </span>
                     `;
 
@@ -2723,7 +2859,7 @@ function updateBreadcrumb() {
                     <span class="
                         breadcrumb-item
                     ">
-                        ${item}
+                        ${escapeHTML(item)}
                     </span>
 
                 `;
@@ -2735,7 +2871,7 @@ function updateBreadcrumb() {
 
 
 /* =========================================================
-   HISTORY NAVIGATION
+   HISTORY
 ========================================================= */
 
 function pushNavigationState() {
@@ -2751,10 +2887,9 @@ function pushNavigationState() {
 }
 
 
-/*
-Browser/Android BACK button:
-restore previous navigation level.
-*/
+/* =========================================================
+   BROWSER / ANDROID BACK
+========================================================= */
 
 window.addEventListener(
     "popstate",
@@ -2783,7 +2918,7 @@ window.addEventListener(
 
 
 /* =========================================================
-   RENDER CURRENT LEVEL
+   CURRENT LEVEL
 ========================================================= */
 
 function renderCurrentLevel() {
@@ -2903,9 +3038,7 @@ function toggleMenu() {
    SIDEBAR DROPDOWN
 ========================================================= */
 
-function toggleDropdown(
-    button
-) {
+function toggleDropdown(button) {
 
     const container =
         button.nextElementSibling;
@@ -2937,14 +3070,6 @@ function toggleDropdown(
 
 function initialize() {
 
-    /*
-    ---------------------------------------------------------
-    Muhimu:
-    initial page ina state yake.
-    Hii inasaidia Back button kufanya kazi vizuri.
-    ---------------------------------------------------------
-    */
-
     history.replaceState(
         {
             level: "forms",
@@ -2959,6 +3084,8 @@ function initialize() {
     );
 
 
+    checkDataFile();
+
     renderForms();
 
 }
@@ -2971,6 +3098,16 @@ function initialize() {
 initialize();
 
 </script>
+
+
+<!-- =======================================================
+     DATA LOAD FALLBACK
+     
+     Kwa sababu script ya data ina defer, script ya
+     navigation pia ipo chini ya body. Browser itakuwa
+     tayari imefanya deferred scripts kabla ya parsing
+     kukamilika, hivyo window.pastPapers inapaswa kuwepo.
+======================================================= -->
 
 </body>
 
