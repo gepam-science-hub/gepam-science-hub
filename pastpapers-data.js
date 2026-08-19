@@ -489,7 +489,7 @@ const pastPapers = [
   {
     "form":"form4",
     "subject":"physics",
-    "title":"Physics1",
+    "title":"Physics 1",
     "type":"mock",
     "region":"dar_es_salaam",
     "year":2026,
@@ -499,7 +499,7 @@ const pastPapers = [
   {
     "form":"form4",
     "subject":"physics",
-    "title":"Physics2A",
+    "title":"Physics 2A",
     "type":"mock",
     "region":"dar_es_salaam",
     "year":2026,
@@ -509,7 +509,7 @@ const pastPapers = [
   {
     "form":"form4",
     "subject":"physics",
-    "title":"Physics1",
+    "title":"Physics 1",
     "type":"mock",
     "region":"dar_es_salaam",
     "year":2025,
@@ -519,7 +519,7 @@ const pastPapers = [
   {
     "form":"form4",
     "subject":"physics",
-    "title":"Physics2A",
+    "title":"Physics 2A",
     "type":"mock",
     "region":"dar_es_salaam",
     "year":2025,
@@ -529,7 +529,7 @@ const pastPapers = [
   {
     "form":"form4",
     "subject":"physics",
-    "title":"Physics2B",
+    "title":"Physics 2B",
     "type":"mock",
     "region":"dar_es_salaam",
     "year":2025,
