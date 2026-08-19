@@ -623,10 +623,81 @@ const pastPapers = {
 
 /* =========================================================
    EXPORT TO WINDOW
+   COMPATIBILITY WITH PASTPAPERS.HTML
 ========================================================= */
 
-window.pastPaperConfig =
-    pastPaperConfig;
+window.pastPaperConfig = pastPaperConfig;
+
+/*
+    HTML ya Past Papers inahitaji window.pastPapers
+    iwe ARRAY.
+
+    Data yetu ya msingi imepangwa hivi:
+
+    form1
+       physics: [...]
+       chemistry: [...]
+
+    form2
+       physics: [...]
+       chemistry: [...]
+
+    ...
+
+    Hapa tunabadilisha automatically kuwa:
+
+    [
+       {
+          form: "form1",
+          subject: "physics",
+          title: "...",
+          type: "...",
+          region: "...",
+          year: 2026,
+          file: "..."
+       }
+    ]
+*/
 
 window.pastPapers =
-    pastPapers;
+    Object.entries(pastPapers)
+        .flatMap(
+            ([form, subjects]) =>
+
+                Object.entries(subjects)
+                    .flatMap(
+                        ([subject, papers]) =>
+
+                            papers.map(
+                                paper => ({
+
+                                    ...paper,
+
+                                    form:
+                                        form,
+
+                                    subject:
+                                        subject
+
+                                })
+                            )
+
+                    )
+
+        );
+
+
+/* =========================================================
+   DATABASE READY CHECK
+========================================================= */
+
+console.log(
+    "GEPAM Past Papers Database Loaded:",
+    window.pastPapers.length,
+    "papers"
+);
+
+console.log(
+    "GEPAM Past Papers Config:",
+    window.pastPaperConfig
+);
