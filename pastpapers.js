@@ -1235,27 +1235,12 @@ function renderForms() {
         let i = 1;
         i <= 6;
         i++
-    ) {
-
-        const icons = [
-            "📘",
-            "📗",
-            "📙",
-            "📕",
-            "📔",
-            "📓"
-        ];
-
-
+    ) 
         html += `
 
             <div class="selection-card">
 
                 <div>
-
-                    <div class="subject-icon">
-                        ${icons[i - 1]}
-                    </div>
 
                     <h3>
                         Form ${i}
