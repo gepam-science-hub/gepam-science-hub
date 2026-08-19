@@ -1,9 +1,8 @@
 /* =========================================================
    GEPAM SCIENCE HUB
    PAST PAPERS NAVIGATION ENGINE
-   =========================================================
 
-   NAVIGATION:
+   ORDER:
 
    FORM
       ↓
@@ -19,15 +18,12 @@
       ↓
    PDF
 
-   DATA SOURCE:
-
-   window.pastPapers
-   window.pastPaperConfig
-
    IMPORTANT:
-   HATUWEKI DATA YA PAPERS HUMU.
-   TUNASOMA DATA ILIYOPO KWENYE
-   pastpapers.data.js
+   This file reads:
+   window.pastPaperConfig
+   window.pastPapers
+
+   from pastpapers.data.js
 ========================================================= */
 
 
@@ -35,7 +31,7 @@
    GLOBAL STATE
 ========================================================= */
 
-const PP = {
+const PP_STATE = {
 
     level: "forms",
 
@@ -52,1218 +48,153 @@ const PP = {
 };
 
 
-
 /* =========================================================
-   DOM ELEMENTS
+   DOM
 ========================================================= */
 
-let container;
-let breadcrumb;
-let backButton;
-let errorBox;
-let errorText;
-let loadingBox;
+const ppContent =
+    document.getElementById("ppContent");
 
+const ppBreadcrumb =
+    document.getElementById("ppBreadcrumb");
 
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        container =
-            document.getElementById(
-                "stepContainer"
-            );
-
-        breadcrumb =
-            document.getElementById(
-                "breadcrumb"
-            );
-
-        backButton =
-            document.getElementById(
-                "backButton"
-            );
-
-        errorBox =
-            document.getElementById(
-                "errorMessage"
-            );
-
-        errorText =
-            document.getElementById(
-                "errorText"
-            );
-
-        loadingBox =
-            document.getElementById(
-                "loadingMessage"
-            );
-
-
-        /*
-        -----------------------------------------------------
-        CHECK DATA
-        -----------------------------------------------------
-        */
-
-        if (
-            !window.pastPapers ||
-            typeof window.pastPapers !== "object"
-        ) {
-
-            showDataError(
-                "pastpapers.data.js haijasomeka au window.pastPapers haipo."
-            );
-
-            return;
-
-        }
-
-
-        /*
-        -----------------------------------------------------
-        HIDE ERROR
-        -----------------------------------------------------
-        */
-
-        hideDataError();
-
-
-        /*
-        -----------------------------------------------------
-        INITIAL HISTORY STATE
-        -----------------------------------------------------
-        */
-
-        history.replaceState(
-            {
-                level: "forms",
-                form: null,
-                subject: null,
-                type: null,
-                region: null,
-                year: null
-            },
-            "",
-            window.location.href
-        );
-
-
-        /*
-        -----------------------------------------------------
-        READ URL FORM IF AVAILABLE
-        -----------------------------------------------------
-        */
-
-        const params =
-            new URLSearchParams(
-                window.location.search
-            );
-
-        const requestedForm =
-            params.get("form");
-
-
-        /*
-        -----------------------------------------------------
-        IF FORM WAS PASSED IN URL
-        -----------------------------------------------------
-        */
-
-        if (
-            requestedForm &&
-            getFormData(requestedForm)
-        ) {
-
-            PP.level =
-                "subjects";
-
-            PP.form =
-                requestedForm;
-
-
-            history.replaceState(
-                {
-                    level: "subjects",
-                    form: requestedForm,
-                    subject: null,
-                    type: null,
-                    region: null,
-                    year: null
-                },
-                "",
-                window.location.href
-            );
-
-
-            renderSubjects();
-
-        }
-
-        else {
-
-            renderForms();
-
-        }
-
-
-        /*
-        -----------------------------------------------------
-        BACK BUTTON
-        -----------------------------------------------------
-        */
-
-        if (backButton) {
-
-            backButton.addEventListener(
-                "click",
-                function () {
-
-                    goBack();
-
-                }
-            );
-
-        }
-
-    }
-);
-
+const ppBack =
+    document.getElementById("ppBack");
 
 
 /* =========================================================
-   DATA VALIDATION
+   BASIC CHECK
 ========================================================= */
 
-function getFormData(
-    formId
-) {
+function ppCheckData() {
 
     if (
-        !window.pastPapers
+        typeof window.pastPapers !== "object" ||
+        window.pastPapers === null
     ) {
 
-        return null;
-
-    }
-
-
-    return (
-        window.pastPapers[
-            formId
-        ] || null
-    );
-
-}
-
-
-
-/* =========================================================
-   GET SUBJECT DATA
-========================================================= */
-
-function getSubjectData(
-    formId,
-    subjectId
-) {
-
-    const form =
-        getFormData(
-            formId
+        ppShowError(
+            "pastpapers.data.js haijasomeka au window.pastPapers haipo."
         );
 
-
-    if (!form) {
-
-        return [];
+        return false;
 
     }
 
 
-    return (
-        form[
-            subjectId
-        ] || []
-    );
+    return true;
 
 }
 
 
-
 /* =========================================================
-   NORMALIZE TEXT
+   START
 ========================================================= */
 
-function normalize(
-    value
-) {
+function ppStart() {
 
-    return String(
-        value ?? ""
-    )
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, "_")
-    .replace(/-/g, "_");
-
-}
-
-
-
-/* =========================================================
-   DISPLAY FORM NAME
-========================================================= */
-
-function formName(
-    formId
-) {
-
-    const match =
-        String(formId)
-            .match(/form(\d+)/i);
-
-
-    if (match) {
-
-        return "Form " +
-            match[1];
-
-    }
-
-
-    return String(
-        formId
-    );
-
-}
-
-
-
-/* =========================================================
-   DISPLAY SUBJECT NAME
-========================================================= */
-
-function subjectName(
-    subjectId
-) {
-
-    const key =
-        normalize(
-            subjectId
-        );
-
-
-    if (
-        key === "physics"
-    ) {
-
-        return "Physics";
-
-    }
-
-
-    if (
-        key === "chemistry"
-    ) {
-
-        return "Chemistry";
-
-    }
-
-
-    return String(
-        subjectId
-    )
-    .replace(
-        /_/g,
-        " "
-    )
-    .replace(
-        /\b\w/g,
-        function (letter) {
-
-            return letter.toUpperCase();
-
-        }
-    );
-
-}
-
-
-
-/* =========================================================
-   DISPLAY TYPE NAME
-========================================================= */
-
-function typeName(
-    type
-) {
-
-    const key =
-        normalize(
-            type
-        );
-
-
-    const names = {
-
-        "annual":
-            "Annual Examination",
-
-        "midterm":
-            "Midterm Examination",
-
-        "terminal":
-            "Terminal Examination",
-
-        "joint":
-            "Joint Examination",
-
-        "ftna":
-            "FTNA",
-
-        "necta":
-            "NECTA",
-
-        "acsee":
-            "ACSEE",
-
-        "mock":
-            "Mock Examination",
-
-        "pre_necta":
-            "Pre-NECTA",
-
-        "pre_necta_exam":
-            "Pre-NECTA Examination"
-
-    };
-
-
-    return (
-        names[key] ||
-        String(type)
-            .replace(
-                /_/g,
-                " "
-            )
-            .replace(
-                /\b\w/g,
-                function (letter) {
-
-                    return letter.toUpperCase();
-
-                }
-            )
-    );
-
-}
-
-
-
-/* =========================================================
-   DISPLAY REGION NAME
-========================================================= */
-
-function regionName(
-    region
-) {
-
-    const key =
-        normalize(
-            region
-        );
-
-
-    const names = {
-
-        "dar_es_salaam":
-            "Dar es Salaam",
-
-        "dodoma":
-            "Dodoma",
-
-        "arusha":
-            "Arusha",
-
-        "mbeya":
-            "Mbeya",
-
-        "kagera":
-            "Kagera",
-
-        "shinyanga":
-            "Shinyanga",
-
-        "necta":
-            "NECTA"
-
-    };
-
-
-    return (
-        names[key] ||
-        String(region)
-            .replace(
-                /_/g,
-                " "
-            )
-            .replace(
-                /\b\w/g,
-                function (letter) {
-
-                    return letter.toUpperCase();
-
-                }
-            )
-    );
-
-}
-
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(
-    value
-) {
-
-    return String(
-        value ?? ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
-
-
-
-/* =========================================================
-   ESCAPE JS VALUE
-========================================================= */
-
-function escapeJS(
-    value
-) {
-
-    return String(
-        value ?? ""
-    )
-    .replace(
-        /\\/g,
-        "\\\\"
-    )
-    .replace(
-        /'/g,
-        "\\'"
-    )
-    .replace(
-        /\n/g,
-        "\\n"
-    )
-    .replace(
-        /\r/g,
-        "\\r"
-    );
-
-}
-
-
-
-/* =========================================================
-   GET UNIQUE VALUES
-========================================================= */
-
-function uniqueValues(
-    papers,
-    property
-) {
-
-    const values =
-        papers
-            .map(
-                function (paper) {
-
-                    return paper
-                        ? paper[property]
-                        : null;
-
-                }
-            )
-            .filter(
-                function (value) {
-
-                    return (
-                        value !== null &&
-                        value !== undefined &&
-                        String(value).trim() !== ""
-                    );
-
-                }
-            );
-
-
-    return [
-        ...new Set(
-            values.map(
-                function (value) {
-
-                    return String(
-                        value
-                    );
-
-                }
-            )
-        )
-    ];
-
-}
-
-
-
-/* =========================================================
-   SORT YEARS
-========================================================= */
-
-function sortYears(
-    years
-) {
-
-    return years.sort(
-        function (a, b) {
-
-            return Number(b) -
-                   Number(a);
-
-        }
-    );
-
-}
-
-
-
-/* =========================================================
-   SORT TEXT
-========================================================= */
-
-function sortText(
-    values
-) {
-
-    return values.sort(
-        function (a, b) {
-
-            return String(a)
-                .localeCompare(
-                    String(b),
-                    undefined,
-                    {
-                        sensitivity:
-                            "base"
-                    }
-                );
-
-        }
-    );
-
-}
-
-
-
-/* =========================================================
-   SET BREADCRUMB
-========================================================= */
-
-function updateBreadcrumb() {
-
-    if (!breadcrumb) {
-
+    if (!ppCheckData()) {
         return;
-
     }
 
 
-    const parts = [
-        {
-            text:
-                "Past Papers"
-        }
-    ];
+    PP_STATE.level = "forms";
+
+    PP_STATE.form = null;
+    PP_STATE.subject = null;
+    PP_STATE.type = null;
+    PP_STATE.region = null;
+    PP_STATE.year = null;
 
 
-    if (
-        PP.form
-    ) {
-
-        parts.push({
-            text:
-                formName(
-                    PP.form
-                )
-        });
-
-    }
-
-
-    if (
-        PP.subject
-    ) {
-
-        parts.push({
-            text:
-                subjectName(
-                    PP.subject
-                )
-        });
-
-    }
-
-
-    if (
-        PP.type
-    ) {
-
-        parts.push({
-            text:
-                typeName(
-                    PP.type
-                )
-        });
-
-    }
-
-
-    if (
-        PP.region
-    ) {
-
-        parts.push({
-            text:
-                regionName(
-                    PP.region
-                )
-        });
-
-    }
-
-
-    if (
-        PP.year
-    ) {
-
-        parts.push({
-            text:
-                String(
-                    PP.year
-                )
-        });
-
-    }
-
-
-    breadcrumb.innerHTML =
-        parts.map(
-            function (
-                item,
-                index
-            ) {
-
-                if (
-                    index === 0
-                ) {
-
-                    return `
-                        <span>
-                            ${escapeHTML(
-                                item.text
-                            )}
-                        </span>
-                    `;
-
-                }
-
-
-                return `
-                    <span class="separator">
-                        ›
-                    </span>
-
-                    <span>
-                        ${escapeHTML(
-                            item.text
-                        )}
-                    </span>
-                `;
-
-            }
-        ).join("");
+    ppRenderForms();
 
 }
 
 
-
 /* =========================================================
-   UPDATE BACK BUTTON
+   FORM 1 - 6
 ========================================================= */
 
-function updateBackButton() {
+function ppRenderForms() {
 
-    if (!backButton) {
+    PP_STATE.level = "forms";
 
-        return;
-
-    }
-
-
-    if (
-        PP.level ===
-        "forms"
-    ) {
-
-        backButton.style.display =
-            "none";
-
-    }
-
-    else {
-
-        backButton.style.display =
-            "inline-flex";
-
-    }
-
-}
+    PP_STATE.form = null;
+    PP_STATE.subject = null;
+    PP_STATE.type = null;
+    PP_STATE.region = null;
+    PP_STATE.year = null;
 
 
-
-/* =========================================================
-   PUSH HISTORY
-========================================================= */
-
-function navigate(
-    state
-) {
-
-    history.pushState(
-        state,
-        "",
-        window.location.href
-    );
-
-}
+    ppBack.style.display = "none";
 
 
-
-/* =========================================================
-   RENDER FORMS
-========================================================= */
-
-function renderForms() {
-
-    PP.level =
-        "forms";
-
-    PP.form =
-        null;
-
-    PP.subject =
-        null;
-
-    PP.type =
-        null;
-
-    PP.region =
-        null;
-
-    PP.year =
-        null;
-
-
-    updateBreadcrumb();
-
-    updateBackButton();
-
-
-    const forms = [
-        "form1",
-        "form2",
-        "form3",
-        "form4",
-        "form5",
-        "form6"
-    ];
+    ppSetBreadcrumb([
+        "📚 Past Papers"
+    ]);
 
 
     let html = `
 
-        <div class="step-title">
+        <div class="pp-step">
+
+            <div class="pp-step-number">
+                1
+            </div>
 
             <h2>
-                🎓 Chagua Kidato
+                Chagua Kidato
             </h2>
 
             <p>
-                Chagua kidato kupata
-                Past Papers za Physics
-                na Chemistry.
+                Chagua kidato unachotaka kupata
+                past papers.
             </p>
 
         </div>
 
-        <div class="selection-grid">
+        <div class="pp-grid">
 
     `;
 
 
-    forms.forEach(
-        function (
-            formId
-        ) {
-
-            html += `
-
-                <div class="selection-card form-card">
-
-                    <div class="card-icon">
-                        🎓
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            ${formName(
-                                formId
-                            )}
-                        </h3>
-
-                        <p>
-                            Physics & Chemistry
-                            Past Papers
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="open-btn"
-                        type="button"
-                        onclick="
-                            openForm(
-                                '${escapeJS(
-                                    formId
-                                )}'
-                            )
-                        ">
-
-                        FUNGUA
-                        ${formName(
-                            formId
-                        ).toUpperCase()}
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    html += `
-
-        </div>
-
-    `;
-
-
-    container.innerHTML =
-        html;
-
-}
-
-
-
-/* =========================================================
-   OPEN FORM
-========================================================= */
-
-function openForm(
-    formId
-) {
-
-    if (
-        !getFormData(
-            formId
-        )
+    for (
+        let i = 1;
+        i <= 6;
+        i++
     ) {
 
-        showDataError(
-            "Data ya " +
-            formName(
-                formId
-            ) +
-            " haijapatikana kwenye pastpapers.data.js."
-        );
+        const formId =
+            "form" + i;
 
-        return;
-
-    }
-
-
-    PP.level =
-        "subjects";
-
-    PP.form =
-        formId;
-
-    PP.subject =
-        null;
-
-    PP.type =
-        null;
-
-    PP.region =
-        null;
-
-    PP.year =
-        null;
-
-
-    navigate({
-
-        level:
-            "subjects",
-
-        form:
-            formId,
-
-        subject:
-            null,
-
-        type:
-            null,
-
-        region:
-            null,
-
-        year:
-            null
-
-    });
-
-
-    renderSubjects();
-
-}
-
-
-
-/* =========================================================
-   RENDER SUBJECTS
-========================================================= */
-
-function renderSubjects() {
-
-    updateBreadcrumb();
-
-    updateBackButton();
-
-
-    const form =
-        getFormData(
-            PP.form
-        );
-
-
-    if (!form) {
-
-        renderForms();
-
-        return;
-
-    }
-
-
-    const subjects =
-        Object.keys(
-            form
-        );
-
-
-    /*
-    ---------------------------------------------------------
-    FILTER ONLY ACTUAL SUBJECTS
-    ---------------------------------------------------------
-    */
-
-    const validSubjects =
-        subjects.filter(
-            function (
-                subject
-            ) {
-
-                return Array.isArray(
-                    form[
-                        subject
-                    ]
-                );
-
-            }
-        );
-
-
-    let html = `
-
-        <div class="step-title">
-
-            <h2>
-                📚 ${formName(
-                    PP.form
-                )}
-            </h2>
-
-            <p>
-                Chagua somo unalotaka
-                kuona Past Papers.
-            </p>
-
-        </div>
-
-        <div class="selection-grid">
-
-    `;
-
-
-    validSubjects.forEach(
-        function (
-            subjectId
-        ) {
-
-            const papers =
-                getSubjectData(
-                    PP.form,
-                    subjectId
-                );
-
-
-            const icon =
-                normalize(
-                    subjectId
-                ) === "physics"
-                ? "⚛️"
-                : "🧪";
-
-
-            html += `
-
-                <div class="selection-card subject-card">
-
-                    <div class="card-icon">
-                        ${icon}
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            ${escapeHTML(
-                                subjectName(
-                                    subjectId
-                                )
-                            )}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(
-                                formName(
-                                    PP.form
-                                )
-                            )}
-                            —
-                            Past Papers
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="open-btn"
-                        type="button"
-                        onclick="
-                            openSubject(
-                                '${escapeJS(
-                                    subjectId
-                                )}'
-                            )
-                        ">
-
-                        FUNGUA
-                        ${escapeHTML(
-                            subjectName(
-                                subjectId
-                            ).toUpperCase()
-                        )}
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    if (
-        validSubjects.length === 0
-    ) {
 
         html += `
 
-            <div class="status-box empty-box">
+            <article class="pp-card">
 
-                <div class="status-icon">
-                    📚
+                <div class="pp-card-icon">
+                    📘
                 </div>
 
                 <h3>
-                    Hakuna Subject
+                    Form ${i}
                 </h3>
 
                 <p>
-                    Hakuna Physics au Chemistry
-                    records zilizopatikana
-                    kwenye ${escapeHTML(
-                        formName(
-                            PP.form
-                        )
-                    )}.
+                    Physics & Chemistry
+                    Past Papers
                 </p>
 
-            </div>
+                <button
+                    class="pp-open"
+                    onclick="ppOpenForm('${formId}')">
+
+                    FUNGUA FORM ${i}
+
+                </button>
+
+            </article>
 
         `;
 
@@ -1277,211 +208,280 @@ function renderSubjects() {
     `;
 
 
-    container.innerHTML =
+    ppContent.innerHTML =
         html;
 
 }
 
 
-
 /* =========================================================
-   OPEN SUBJECT
+   OPEN FORM
 ========================================================= */
 
-function openSubject(
-    subjectId
+function ppOpenForm(
+    form
 ) {
 
-    const papers =
-        getSubjectData(
-            PP.form,
-            subjectId
-        );
-
-
     if (
-        !Array.isArray(
-            papers
-        )
+        !window.pastPapers[form]
     ) {
+
+        ppShowEmpty(
+            `Hakuna past paper data ya Form ${form.replace("form", "")}.`
+        );
 
         return;
 
     }
 
 
-    PP.level =
-        "types";
+    PP_STATE.level =
+        "subjects";
 
-    PP.subject =
-        subjectId;
+    PP_STATE.form =
+        form;
 
-    PP.type =
+    PP_STATE.subject =
         null;
 
-    PP.region =
+    PP_STATE.type =
         null;
 
-    PP.year =
+    PP_STATE.region =
+        null;
+
+    PP_STATE.year =
         null;
 
 
-    navigate({
-
-        level:
-            "types",
-
-        form:
-            PP.form,
-
-        subject:
-            subjectId,
-
-        type:
-            null,
-
-        region:
-            null,
-
-        year:
-            null
-
-    });
-
-
-    renderTypes();
+    ppRenderSubjects();
 
 }
 
 
-
 /* =========================================================
-   RENDER TYPES
+   SUBJECT
 ========================================================= */
 
-function renderTypes() {
+function ppRenderSubjects() {
 
-    updateBreadcrumb();
+    ppBack.style.display =
+        "inline-flex";
 
-    updateBackButton();
+
+    ppSetBreadcrumb([
+        "📚 Past Papers",
+        ppFormName(PP_STATE.form)
+    ]);
 
 
-    const papers =
-        getSubjectData(
-            PP.form,
-            PP.subject
+    const formData =
+        window.pastPapers[
+            PP_STATE.form
+        ];
+
+
+    let subjects = [];
+
+
+    if (
+        formData &&
+        typeof formData === "object"
+    ) {
+
+        subjects =
+            Object.keys(formData);
+
+    }
+
+
+    /*
+    =========================================================
+    FILTER ONLY PHYSICS & CHEMISTRY
+    =========================================================
+    */
+
+    subjects =
+        subjects.filter(
+            subject =>
+                subject.toLowerCase() === "physics" ||
+                subject.toLowerCase() === "chemistry"
         );
 
 
+    let html = `
+
+        <div class="pp-step">
+
+            <div class="pp-step-number">
+                2
+            </div>
+
+            <h2>
+                ${ppFormName(PP_STATE.form)}
+            </h2>
+
+            <p>
+                Chagua subject.
+            </p>
+
+        </div>
+
+        <div class="pp-grid">
+
+    `;
+
+
+    if (
+        subjects.length === 0
+    ) {
+
+        html += `
+
+            <div class="pp-empty">
+
+                ⚠️ Hakuna subjects
+                zilizopatikana kwenye
+                ${ppFormName(PP_STATE.form)}.
+
+            </div>
+
+        `;
+
+    }
+
+
+    subjects.forEach(
+        subject => {
+
+            const icon =
+                subject.toLowerCase() === "physics"
+                ? "⚛️"
+                : "🧪";
+
+
+            html += `
+
+                <article class="pp-card">
+
+                    <div class="pp-card-icon">
+                        ${icon}
+                    </div>
+
+                    <h3>
+                        ${ppTitle(subject)}
+                    </h3>
+
+                    <p>
+                        ${ppFormName(PP_STATE.form)}
+                        ${ppTitle(subject)}
+                        examination papers.
+                    </p>
+
+                    <button
+                        class="pp-open"
+                        onclick="ppOpenSubject('${ppEscape(subject)}')">
+
+                        FUNGUA ${ppTitle(subject).toUpperCase()}
+
+                    </button>
+
+                </article>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+        </div>
+
+    `;
+
+
+    ppContent.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   OPEN SUBJECT
+========================================================= */
+
+function ppOpenSubject(
+    subject
+) {
+
+    PP_STATE.level =
+        "types";
+
+    PP_STATE.subject =
+        subject;
+
+    PP_STATE.type =
+        null;
+
+    PP_STATE.region =
+        null;
+
+    PP_STATE.year =
+        null;
+
+
+    ppRenderTypes();
+
+}
+
+
+/* =========================================================
+   TYPE
+========================================================= */
+
+function ppRenderTypes() {
+
+    ppSetBreadcrumb([
+        "📚 Past Papers",
+        ppFormName(PP_STATE.form),
+        ppTitle(PP_STATE.subject)
+    ]);
+
+
+    const papers =
+        ppGetSubjectPapers();
+
+
     const types =
-        sortText(
-            uniqueValues(
-                papers,
-                "type"
+        ppUnique(
+            papers.map(
+                paper => paper.type
             )
         );
 
 
     let html = `
 
-        <div class="step-title">
+        <div class="pp-step">
+
+            <div class="pp-step-number">
+                3
+            </div>
 
             <h2>
-                📝 ${escapeHTML(
-                    subjectName(
-                        PP.subject
-                    )
-                )}
+                ${ppTitle(PP_STATE.subject)}
             </h2>
 
             <p>
-                Chagua aina ya
-                examination paper.
+                Chagua aina ya examination paper.
             </p>
 
         </div>
 
-        <div class="selection-grid">
+        <div class="pp-grid">
 
     `;
-
-
-    types.forEach(
-        function (
-            type
-        ) {
-
-            const typePapers =
-                papers.filter(
-                    function (
-                        paper
-                    ) {
-
-                        return normalize(
-                            paper.type
-                        ) === normalize(
-                            type
-                        );
-
-                    }
-                );
-
-
-            html += `
-
-                <div class="selection-card type-card">
-
-                    <div class="card-icon">
-                        📝
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            ${escapeHTML(
-                                typeName(
-                                    type
-                                )
-                            )}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(
-                                subjectName(
-                                    PP.subject
-                                )
-                            )}
-                            —
-                            ${escapeHTML(
-                                formName(
-                                    PP.form
-                                )
-                            )}
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="open-btn"
-                        type="button"
-                        onclick="
-                            openType(
-                                '${escapeJS(
-                                    type
-                                )}'
-                            )
-                        ">
-
-                        FUNGUA TYPE
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
 
 
     if (
@@ -1490,36 +490,52 @@ function renderTypes() {
 
         html += `
 
-            <div class="status-box empty-box">
+            <div class="pp-empty">
 
-                <div class="status-icon">
-                    📄
-                </div>
-
-                <h3>
-                    Hakuna Papers
-                </h3>
-
-                <p>
-                    ${escapeHTML(
-                        subjectName(
-                            PP.subject
-                        )
-                    )}
-                    haina papers
-                    zilizowekwa kwenye
-                    ${escapeHTML(
-                        formName(
-                            PP.form
-                        )
-                    )}.
-                </p>
+                ⚠️ Hakuna paper type
+                iliyopatikana.
 
             </div>
 
         `;
 
     }
+
+
+    types.forEach(
+        type => {
+
+            html += `
+
+                <article class="pp-card">
+
+                    <div class="pp-card-icon">
+                        📝
+                    </div>
+
+                    <h3>
+                        ${ppTypeName(type)}
+                    </h3>
+
+                    <p>
+                        ${ppTitle(PP_STATE.subject)}
+                        — ${ppTypeName(type)}
+                    </p>
+
+                    <button
+                        class="pp-open"
+                        onclick="ppOpenType('${ppEscape(type)}')">
+
+                        FUNGUA
+
+                    </button>
+
+                </article>
+
+            `;
+
+        }
+    );
 
 
     html += `
@@ -1529,187 +545,95 @@ function renderTypes() {
     `;
 
 
-    container.innerHTML =
+    ppContent.innerHTML =
         html;
 
 }
-
 
 
 /* =========================================================
    OPEN TYPE
 ========================================================= */
 
-function openType(
+function ppOpenType(
     type
 ) {
 
-    PP.level =
+    PP_STATE.level =
         "regions";
 
-    PP.type =
+    PP_STATE.type =
         type;
 
-    PP.region =
+    PP_STATE.region =
         null;
 
-    PP.year =
+    PP_STATE.year =
         null;
 
 
-    navigate({
-
-        level:
-            "regions",
-
-        form:
-            PP.form,
-
-        subject:
-            PP.subject,
-
-        type:
-            type,
-
-        region:
-            null,
-
-        year:
-            null
-
-    });
-
-
-    renderRegions();
+    ppRenderRegions();
 
 }
 
 
-
 /* =========================================================
-   RENDER REGIONS
+   REGION
 ========================================================= */
 
-function renderRegions() {
+function ppRenderRegions() {
 
-    updateBreadcrumb();
-
-    updateBackButton();
+    ppSetBreadcrumb([
+        "📚 Past Papers",
+        ppFormName(PP_STATE.form),
+        ppTitle(PP_STATE.subject),
+        ppTypeName(PP_STATE.type)
+    ]);
 
 
     const papers =
-        getSubjectData(
-            PP.form,
-            PP.subject
-        );
-
-
-    const filtered =
-        papers.filter(
-            function (
-                paper
-            ) {
-
-                return (
-                    normalize(
+        ppGetSubjectPapers()
+            .filter(
+                paper =>
+                    ppNormalize(
                         paper.type
                     ) ===
-                    normalize(
-                        PP.type
+                    ppNormalize(
+                        PP_STATE.type
                     )
-                );
-
-            }
-        );
+            );
 
 
     const regions =
-        sortText(
-            uniqueValues(
-                filtered,
-                "region"
+        ppUnique(
+            papers.map(
+                paper => paper.region
             )
         );
 
 
     let html = `
 
-        <div class="step-title">
+        <div class="pp-step">
+
+            <div class="pp-step-number">
+                4
+            </div>
 
             <h2>
-                📍 ${escapeHTML(
-                    typeName(
-                        PP.type
-                    )
-                )}
+                Chagua Mkoa
             </h2>
 
             <p>
-                Chagua mkoa
-                wenye papers.
+                Chagua mkoa wenye papers
+                unazotaka.
             </p>
 
         </div>
 
-        <div class="selection-grid">
+        <div class="pp-grid">
 
     `;
-
-
-    regions.forEach(
-        function (
-            region
-        ) {
-
-            html += `
-
-                <div class="selection-card region-card">
-
-                    <div class="card-icon">
-                        📍
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            ${escapeHTML(
-                                regionName(
-                                    region
-                                )
-                            )}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(
-                                typeName(
-                                    PP.type
-                                )
-                            )}
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="open-btn"
-                        type="button"
-                        onclick="
-                            openRegion(
-                                '${escapeJS(
-                                    region
-                                )}'
-                            )
-                        ">
-
-                        FUNGUA MKOA
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
 
 
     if (
@@ -1718,27 +642,53 @@ function renderRegions() {
 
         html += `
 
-            <div class="status-box empty-box">
+            <div class="pp-empty">
 
-                <div class="status-icon">
-                    📍
-                </div>
-
-                <h3>
-                    Hakuna Mkoa
-                </h3>
-
-                <p>
-                    Hakuna paper
-                    iliyopatikana
-                    kwa aina hii.
-                </p>
+                ⚠️ Hakuna mkoa
+                uliopatikana kwa
+                ${ppTypeName(PP_STATE.type)}.
 
             </div>
 
         `;
 
     }
+
+
+    regions.forEach(
+        region => {
+
+            html += `
+
+                <article class="pp-card">
+
+                    <div class="pp-card-icon">
+                        📍
+                    </div>
+
+                    <h3>
+                        ${ppRegionName(region)}
+                    </h3>
+
+                    <p>
+                        ${ppTypeName(PP_STATE.type)}
+                        papers
+                    </p>
+
+                    <button
+                        class="pp-open"
+                        onclick="ppOpenRegion('${ppEscape(region)}')">
+
+                        FUNGUA
+
+                    </button>
+
+                </article>
+
+            `;
+
+        }
+    );
 
 
     html += `
@@ -1748,194 +698,94 @@ function renderRegions() {
     `;
 
 
-    container.innerHTML =
+    ppContent.innerHTML =
         html;
 
 }
-
 
 
 /* =========================================================
    OPEN REGION
 ========================================================= */
 
-function openRegion(
+function ppOpenRegion(
     region
 ) {
 
-    PP.level =
+    PP_STATE.level =
         "years";
 
-    PP.region =
+    PP_STATE.region =
         region;
 
-    PP.year =
+    PP_STATE.year =
         null;
 
 
-    navigate({
-
-        level:
-            "years",
-
-        form:
-            PP.form,
-
-        subject:
-            PP.subject,
-
-        type:
-            PP.type,
-
-        region:
-            region,
-
-        year:
-            null
-
-    });
-
-
-    renderYears();
+    ppRenderYears();
 
 }
 
 
-
 /* =========================================================
-   RENDER YEARS
+   YEAR
 ========================================================= */
 
-function renderYears() {
+function ppRenderYears() {
 
-    updateBreadcrumb();
-
-    updateBackButton();
+    ppSetBreadcrumb([
+        "📚 Past Papers",
+        ppFormName(PP_STATE.form),
+        ppTitle(PP_STATE.subject),
+        ppTypeName(PP_STATE.type),
+        ppRegionName(PP_STATE.region)
+    ]);
 
 
     const papers =
-        getSubjectData(
-            PP.form,
-            PP.subject
-        );
-
-
-    const filtered =
-        papers.filter(
-            function (
-                paper
-            ) {
-
-                return (
-
-                    normalize(
-                        paper.type
-                    ) ===
-                    normalize(
-                        PP.type
-                    )
-
+        ppGetSubjectPapers()
+            .filter(
+                paper =>
+                    ppNormalize(paper.type) ===
+                        ppNormalize(PP_STATE.type)
                     &&
-
-                    normalize(
-                        paper.region
-                    ) ===
-                    normalize(
-                        PP.region
-                    )
-
-                );
-
-            }
-        );
+                    ppNormalize(paper.region) ===
+                        ppNormalize(PP_STATE.region)
+            );
 
 
     const years =
-        sortYears(
-            uniqueValues(
-                filtered,
-                "year"
+        ppUnique(
+            papers.map(
+                paper => Number(paper.year)
             )
+        )
+        .sort(
+            (a, b) => b - a
         );
 
 
     let html = `
 
-        <div class="step-title">
+        <div class="pp-step">
+
+            <div class="pp-step-number">
+                5
+            </div>
 
             <h2>
-                📅 ${escapeHTML(
-                    regionName(
-                        PP.region
-                    )
-                )}
+                Chagua Mwaka
             </h2>
 
             <p>
-                Chagua mwaka.
+                Chagua mwaka wa examination paper.
             </p>
 
         </div>
 
-        <div class="selection-grid">
+        <div class="pp-grid">
 
     `;
-
-
-    years.forEach(
-        function (
-            year
-        ) {
-
-            html += `
-
-                <div class="selection-card year-card">
-
-                    <div class="card-icon">
-                        📅
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            ${escapeHTML(
-                                year
-                            )}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(
-                                typeName(
-                                    PP.type
-                                )
-                            )}
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="open-btn"
-                        type="button"
-                        onclick="
-                            openYear(
-                                '${escapeJS(
-                                    year
-                                )}'
-                            )
-                        ">
-
-                        FUNGUA ${escapeHTML(
-                            year
-                        )}
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
 
 
     if (
@@ -1944,25 +794,10 @@ function renderYears() {
 
         html += `
 
-            <div class="status-box empty-box">
+            <div class="pp-empty">
 
-                <div class="status-icon">
-                    📅
-                </div>
-
-                <h3>
-                    Hakuna Mwaka
-                </h3>
-
-                <p>
-                    Hakuna paper
-                    iliyowekwa kwa
-                    ${escapeHTML(
-                        regionName(
-                            PP.region
-                        )
-                    )}.
-                </p>
+                ⚠️ Hakuna miaka
+                iliyopatikana.
 
             </div>
 
@@ -1971,296 +806,14 @@ function renderYears() {
     }
 
 
-    html += `
+    years.forEach(
+        year => {
 
-        </div>
+            html += `
 
-    `;
+                <article class="pp-card">
 
-
-    container.innerHTML =
-        html;
-
-}
-
-
-
-/* =========================================================
-   OPEN YEAR
-========================================================= */
-
-function openYear(
-    year
-) {
-
-    PP.level =
-        "papers";
-
-    PP.year =
-        String(
-            year
-        );
-
-
-    navigate({
-
-        level:
-            "papers",
-
-        form:
-            PP.form,
-
-        subject:
-            PP.subject,
-
-        type:
-            PP.type,
-
-        region:
-            PP.region,
-
-        year:
-            PP.year
-
-    });
-
-
-    renderPapers();
-
-}/* =========================================================
-   GEPAM SCIENCE HUB
-   PAST PAPERS NAVIGATION ENGINE
-   JS — SEHEMU YA 2
-   ========================================================= */
-
-
-/* =========================================================
-   STEP 5
-   REGION
-========================================================= */
-
-function renderRegions() {
-
-    const regions = getAvailableRegions();
-
-    updateBreadcrumb();
-
-    let html = `
-
-        <div class="step-title">
-
-            <h2>
-                📍 Chagua Mkoa
-            </h2>
-
-            <p>
-                Chagua mkoa wenye mitihani
-                unayotaka.
-            </p>
-
-        </div>
-
-        <div class="selection-grid">
-
-    `;
-
-
-    if (regions.length === 0) {
-
-        html += `
-
-            <div class="empty-card">
-
-                <div class="empty-icon">
-                    📂
-                </div>
-
-                <h3>
-                    Hakuna Mkoa
-                </h3>
-
-                <p>
-                    Hakuna papers zilizowekwa
-                    kwa uchaguzi huu.
-                </p>
-
-            </div>
-
-        `;
-
-    }
-
-
-    regions.forEach(region => {
-
-        html += `
-
-            <div class="selection-card region-card">
-
-                <div>
-
-                    <div class="card-icon">
-                        📍
-                    </div>
-
-                    <h3>
-                        ${formatRegion(region)}
-                    </h3>
-
-                    <p>
-                        Fungua papers za
-                        ${formatRegion(region)}.
-                    </p>
-
-                </div>
-
-                <button
-                    class="open-btn"
-                    onclick="openRegion('${escapeValue(region)}')">
-
-                    FUNGUA MKOA
-
-                </button>
-
-            </div>
-
-        `;
-
-    });
-
-
-    html += `
-
-        </div>
-
-    `;
-
-    container.innerHTML = html;
-}
-
-
-/* =========================================================
-   GET AVAILABLE REGIONS
-========================================================= */
-
-function getAvailableRegions() {
-
-    const papers =
-        getCurrentPaperList();
-
-    const regions = [];
-
-    papers.forEach(paper => {
-
-        if (
-            paper.region &&
-            !regions.includes(
-                paper.region
-            )
-        ) {
-
-            regions.push(
-                paper.region
-            );
-
-        }
-
-    });
-
-    return regions.sort();
-
-}
-
-
-/* =========================================================
-   OPEN REGION
-========================================================= */
-
-function openRegion(region) {
-
-    currentState.level =
-        "years";
-
-    currentState.region =
-        region;
-
-    currentState.year =
-        null;
-
-    pushNavigationState();
-
-    renderYears();
-
-}
-
-
-/* =========================================================
-   STEP 6
-   YEAR
-========================================================= */
-
-function renderYears() {
-
-    const years =
-        getAvailableYears();
-
-    updateBreadcrumb();
-
-    let html = `
-
-        <div class="step-title">
-
-            <h2>
-                📅 Chagua Mwaka
-            </h2>
-
-            <p>
-                Chagua mwaka wa
-                examination paper.
-            </p>
-
-        </div>
-
-        <div class="selection-grid">
-
-    `;
-
-
-    if (years.length === 0) {
-
-        html += `
-
-            <div class="empty-card">
-
-                <div class="empty-icon">
-                    📅
-                </div>
-
-                <h3>
-                    Hakuna Mwaka
-                </h3>
-
-                <p>
-                    Hakuna papers zilizowekwa
-                    kwa mkoa huu.
-                </p>
-
-            </div>
-
-        `;
-
-    }
-
-
-    years.forEach(year => {
-
-        html += `
-
-            <div class="selection-card year-card">
-
-                <div>
-
-                    <div class="card-icon">
+                    <div class="pp-card-icon">
                         📅
                     </div>
 
@@ -2269,25 +822,28 @@ function renderYears() {
                     </h3>
 
                     <p>
-                        Examination papers
-                        za mwaka ${year}.
+                        ${ppRegionName(
+                            PP_STATE.region
+                        )}
+                        — ${ppTypeName(
+                            PP_STATE.type
+                        )}
                     </p>
 
-                </div>
+                    <button
+                        class="pp-open"
+                        onclick="ppOpenYear(${year})">
 
-                <button
-                    class="open-btn"
-                    onclick="openYear(${year})">
+                        FUNGUA ${year}
 
-                    FUNGUA ${year}
+                    </button>
 
-                </button>
+                </article>
 
-            </div>
+            `;
 
-        `;
-
-    });
+        }
+    );
 
 
     html += `
@@ -2296,41 +852,9 @@ function renderYears() {
 
     `;
 
-    container.innerHTML = html;
-}
 
-
-/* =========================================================
-   GET AVAILABLE YEARS
-========================================================= */
-
-function getAvailableYears() {
-
-    const papers =
-        getCurrentPaperList();
-
-    const years = [];
-
-    papers.forEach(paper => {
-
-        if (
-            paper.year &&
-            !years.includes(
-                Number(paper.year)
-            )
-        ) {
-
-            years.push(
-                Number(paper.year)
-            );
-
-        }
-
-    });
-
-    return years.sort(
-        (a, b) => b - a
-    );
+    ppContent.innerHTML =
+        html;
 
 }
 
@@ -2339,71 +863,89 @@ function getAvailableYears() {
    OPEN YEAR
 ========================================================= */
 
-function openYear(year) {
+function ppOpenYear(
+    year
+) {
 
-    currentState.level =
+    PP_STATE.level =
         "papers";
 
-    currentState.year =
+    PP_STATE.year =
         Number(year);
 
-    pushNavigationState();
 
-    renderPapers();
+    ppRenderPapers();
 
 }
 
 
 /* =========================================================
-   STEP 7
-   PAPERS / PDF
+   FINAL PAPERS
 ========================================================= */
 
-function renderPapers() {
+function ppRenderPapers() {
+
+    ppSetBreadcrumb([
+        "📚 Past Papers",
+        ppFormName(PP_STATE.form),
+        ppTitle(PP_STATE.subject),
+        ppTypeName(PP_STATE.type),
+        ppRegionName(PP_STATE.region),
+        String(PP_STATE.year)
+    ]);
+
 
     const papers =
-        getCurrentPaperList();
+        ppGetSubjectPapers()
+            .filter(
+                paper =>
+                    ppNormalize(paper.type) ===
+                        ppNormalize(PP_STATE.type)
+                    &&
+                    ppNormalize(paper.region) ===
+                        ppNormalize(PP_STATE.region)
+                    &&
+                    Number(paper.year) ===
+                        Number(PP_STATE.year)
+            );
 
-    updateBreadcrumb();
 
     let html = `
 
-        <div class="step-title">
+        <div class="pp-step">
+
+            <div class="pp-step-number">
+                6
+            </div>
 
             <h2>
-                📚 Examination Papers
+                Papers
             </h2>
 
             <p>
-                Chagua paper unayotaka
-                kufungua.
+                ${ppTitle(PP_STATE.subject)}
+                — ${ppTypeName(PP_STATE.type)}
+                — ${ppRegionName(PP_STATE.region)}
+                — ${PP_STATE.year}
             </p>
 
         </div>
 
-        <div class="papers-list">
+        <div class="pp-grid">
 
     `;
 
 
-    if (papers.length === 0) {
+    if (
+        papers.length === 0
+    ) {
 
         html += `
 
-            <div class="empty-card">
+            <div class="pp-empty">
 
-                <div class="empty-icon">
-                    📄
-                </div>
-
-                <h3>
-                    Hakuna Paper
-                </h3>
-
-                <p>
-                    Hakuna PDF inayopatikana
-                    kwa uchaguzi huu.
-                </p>
+                ⚠️ Hakuna paper
+                iliyopatikana.
 
             </div>
 
@@ -2412,65 +954,71 @@ function renderPapers() {
     }
 
 
-    papers.forEach((paper, index) => {
+    papers.forEach(
+        paper => {
 
-        html += `
+            const file =
+                String(
+                    paper.file || ""
+                );
 
-            <div class="paper-card">
 
-                <div class="paper-number">
-                    ${index + 1}
-                </div>
+            const title =
+                paper.title ||
+                `${ppTitle(PP_STATE.subject)} Paper`;
 
-                <div class="paper-info">
 
-                    <h3>
-                        ${paper.title || "Examination Paper"}
-                    </h3>
+            html += `
 
-                    <div class="paper-meta">
+                <article class="pp-card pp-pdf">
 
-                        <span>
-                            📚 ${formatSubject(
-                                currentState.subject
-                            )}
-                        </span>
-
-                        <span>
-                            📝 ${formatType(
-                                currentState.type
-                            )}
-                        </span>
-
-                        <span>
-                            📍 ${formatRegion(
-                                currentState.region
-                            )}
-                        </span>
-
-                        <span>
-                            📅 ${paper.year}
-                        </span>
-
+                    <div class="pp-card-icon">
+                        📄
                     </div>
 
-                </div>
+                    <h3>
+                        ${ppSafeText(title)}
+                    </h3>
 
-                <a
-                    class="pdf-btn"
-                    href="${paper.file}"
-                    target="_blank"
-                    rel="noopener">
+                    <p>
+                        ${ppTitle(PP_STATE.subject)}
+                        <br>
+                        ${ppTypeName(PP_STATE.type)}
+                        <br>
+                        ${ppRegionName(PP_STATE.region)}
+                        — ${PP_STATE.year}
+                    </p>
 
-                    📄 FUNGUA PDF
+                    ${
+                        file
+                        ?
+                        `
+                        <button
+                            class="pp-open"
+                            onclick="ppOpenPDF('${ppEscape(file)}')">
 
-                </a>
+                            📄 FUNGUA PDF
 
-            </div>
+                        </button>
+                        `
+                        :
+                        `
+                        <button
+                            class="pp-open"
+                            disabled>
 
-        `;
+                            PDF HAIPO
 
-    });
+                        </button>
+                        `
+                    }
+
+                </article>
+
+            `;
+
+        }
+    );
 
 
     html += `
@@ -2479,18 +1027,70 @@ function renderPapers() {
 
     `;
 
-    container.innerHTML = html;
+
+    ppContent.innerHTML =
+        html;
+
 }
 
 
 /* =========================================================
-   GET CURRENT PAPER LIST
+   OPEN PDF
 ========================================================= */
 
-function getCurrentPaperList() {
+function ppOpenPDF(
+    file
+) {
 
     if (
-        !window.pastPapers
+        !file
+    ) {
+
+        alert(
+            "PDF file haijawekwa kwenye data."
+        );
+
+        return;
+
+    }
+
+
+    /*
+    =========================================================
+    GITHUB PAGES
+
+    File path mfano:
+
+    papers/form6/chemistry/...
+    
+    Kwa hiyo tunafungua moja kwa moja
+    kutoka kwenye root ya website.
+    =========================================================
+    */
+
+    const cleanFile =
+        file
+            .replace(/^\/+/, "");
+
+
+    window.open(
+        cleanFile,
+        "_blank",
+        "noopener"
+    );
+
+}
+
+
+/* =========================================================
+   GET SUBJECT PAPERS
+========================================================= */
+
+function ppGetSubjectPapers() {
+
+    if (
+        !PP_STATE.form ||
+        !PP_STATE.subject
     ) {
 
         return [];
@@ -2498,15 +1098,15 @@ function getCurrentPaperList() {
     }
 
 
-    const form =
-        currentState.form;
-
-    const subject =
-        currentState.subject;
+    const formData =
+        window.pastPapers[
+            PP_STATE.form
+        ];
 
 
     if (
-        !window.pastPapers[form]
+        !formData ||
+        typeof formData !== "object"
     ) {
 
         return [];
@@ -2514,8 +1114,30 @@ function getCurrentPaperList() {
     }
 
 
-    let papers =
-        window.pastPapers[form][subject];
+    const subjectKey =
+        Object.keys(formData)
+            .find(
+                key =>
+                    ppNormalize(key) ===
+                    ppNormalize(
+                        PP_STATE.subject
+                    )
+            );
+
+
+    if (
+        !subjectKey
+    ) {
+
+        return [];
+
+    }
+
+
+    const papers =
+        formData[
+            subjectKey
+        ];
 
 
     if (
@@ -2527,317 +1149,166 @@ function getCurrentPaperList() {
     }
 
 
-    /*
-    =========================================================
-    FILTER TYPE
-    =========================================================
-    */
-
-    if (
-        currentState.type
-    ) {
-
-        papers =
-            papers.filter(
-                paper =>
-                    String(
-                        paper.type
-                    ).toLowerCase()
-                    ===
-                    String(
-                        currentState.type
-                    ).toLowerCase()
-            );
-
-    }
-
-
-    /*
-    =========================================================
-    FILTER REGION
-    =========================================================
-    */
-
-    if (
-        currentState.region
-    ) {
-
-        papers =
-            papers.filter(
-                paper =>
-                    String(
-                        paper.region
-                    ).toLowerCase()
-                    ===
-                    String(
-                        currentState.region
-                    ).toLowerCase()
-            );
-
-    }
-
-
-    /*
-    =========================================================
-    FILTER YEAR
-    =========================================================
-    */
-
-    if (
-        currentState.year
-    ) {
-
-        papers =
-            papers.filter(
-                paper =>
-                    Number(
-                        paper.year
-                    )
-                    ===
-                    Number(
-                        currentState.year
-                    )
-            );
-
-    }
-
-
     return papers;
 
 }
 
 
 /* =========================================================
-   BREADCRUMB
+   UNIQUE VALUES
 ========================================================= */
 
-function updateBreadcrumb() {
+function ppUnique(
+    array
+) {
 
-    const parts = [
-        "Past Papers"
+    return [
+        ...new Set(
+            array
+                .filter(
+                    value =>
+                        value !== undefined &&
+                        value !== null &&
+                        String(value).trim() !== ""
+                )
+        )
     ];
 
-
-    if (
-        currentState.form
-    ) {
-
-        parts.push(
-            formatForm(
-                currentState.form
-            )
-        );
-
-    }
+}
 
 
-    if (
-        currentState.subject
-    ) {
+/* =========================================================
+   NORMALIZE
+========================================================= */
 
-        parts.push(
-            formatSubject(
-                currentState.subject
-            )
-        );
+function ppNormalize(
+    value
+) {
 
-    }
-
-
-    if (
-        currentState.type
-    ) {
-
-        parts.push(
-            formatType(
-                currentState.type
-            )
-        );
-
-    }
-
-
-    if (
-        currentState.region
-    ) {
-
-        parts.push(
-            formatRegion(
-                currentState.region
-            )
-        );
-
-    }
-
-
-    if (
-        currentState.year
-    ) {
-
-        parts.push(
-            String(
-                currentState.year
-            )
-        );
-
-    }
-
-
-    breadcrumb.innerHTML =
-        parts.map(
-            (part, index) => {
-
-                if (
-                    index === 0
-                ) {
-
-                    return `
-                        <span>
-                            ${part}
-                        </span>
-                    `;
-
-                }
-
-
-                return `
-
-                    <span class="separator">
-                        ›
-                    </span>
-
-                    <span>
-                        ${part}
-                    </span>
-
-                `;
-
-            }
-        ).join("");
+    return String(
+        value || ""
+    )
+        .trim()
+        .toLowerCase()
+        .replace(/[\s-]+/g, "_");
 
 }
 
 
 /* =========================================================
-   FORMAT FORM
+   FORM NAME
 ========================================================= */
 
-function formatForm(form) {
+function ppFormName(
+    form
+) {
 
-    return String(form)
+    const number =
+        String(form || "")
+            .replace(
+                /[^0-9]/g,
+                ""
+            );
+
+
+    return number
+        ? `Form ${number}`
+        : "Form";
+
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+function ppTitle(
+    value
+) {
+
+    const text =
+        String(value || "");
+
+
+    if (
+        !text
+    ) {
+
+        return "";
+
+    }
+
+
+    return text
         .replace(
-            "form",
-            "Form "
+            /_/g,
+            " "
+        )
+        .replace(
+            /\b\w/g,
+            letter =>
+                letter.toUpperCase()
         );
 
 }
 
 
 /* =========================================================
-   FORMAT SUBJECT
+   TYPE NAME
 ========================================================= */
 
-function formatSubject(subject) {
-
-    if (
-        !subject
-    ) {
-
-        return "";
-
-    }
-
-
-    return subject
-        .charAt(0)
-        .toUpperCase()
-        +
-        subject
-            .slice(1)
-            .toLowerCase();
-
-}
-
-
-/* =========================================================
-   FORMAT TYPE
-========================================================= */
-
-function formatType(type) {
-
-    if (
-        !type
-    ) {
-
-        return "";
-
-    }
-
+function ppTypeName(
+    type
+) {
 
     const names = {
 
         annual:
-            "Annual",
+            "Annual Examination",
 
         midterm:
-            "Midterm",
+            "Midterm Examination",
 
         terminal:
-            "Terminal",
+            "Terminal Examination",
 
         joint:
-            "Joint",
-
-        ftna:
-            "FTNA",
+            "Joint Examination",
 
         mock:
-            "Mock",
+            "Mock Examination",
 
         pre_necta:
-            "Pre-NECTA",
+            "Pre-NECTA Examination",
+
+        ftna:
+            "FTNA Examination",
 
         acsee:
-            "ACSEE",
-
-        necta:
-            "NECTA"
+            "ACSEE Examination"
 
     };
 
 
-    return names[
-        String(type).toLowerCase()
-    ]
-    ||
-    String(type)
-        .replaceAll(
-            "_",
-            " "
-        )
-        .replace(
-            /^\w/,
-            c =>
-                c.toUpperCase()
-        );
+    const key =
+        ppNormalize(type);
+
+
+    return (
+        names[key] ||
+        ppTitle(type)
+    );
 
 }
 
 
 /* =========================================================
-   FORMAT REGION
+   REGION NAME
 ========================================================= */
 
-function formatRegion(region) {
-
-    if (
-        !region
-    ) {
-
-        return "";
-
-    }
-
+function ppRegionName(
+    region
+) {
 
     const names = {
 
@@ -2859,81 +1330,122 @@ function formatRegion(region) {
         shinyanga:
             "Shinyanga",
 
+        mwanza:
+            "Mwanza",
+
+        morogoro:
+            "Morogoro",
+
+        tanga:
+            "Tanga",
+
+        kigoma:
+            "Kigoma",
+
+        tabora:
+            "Tabora",
+
+        singida:
+            "Singida",
+
+        rukwa:
+            "Rukwa",
+
+        katavi:
+            "Katavi",
+
+        lindi:
+            "Lindi",
+
+        mtwara:
+            "Mtwara",
+
+        pwani:
+            "Pwani",
+
+        coast:
+            "Coast",
+
+        mara:
+            "Mara",
+
+        manyara:
+            "Manyara",
+
+        njombe:
+            "Njombe",
+
+        iringa:
+            "Iringa",
+
+        songwe:
+            "Songwe",
+
+        tanzania:
+            "Tanzania",
+
         necta:
             "NECTA"
 
     };
 
 
-    return names[
-        String(region).toLowerCase()
-    ]
-    ||
-    String(region)
-        .replaceAll(
-            "_",
-            " "
-        )
-        .replace(
-            /\b\w/g,
-            c =>
-                c.toUpperCase()
-        );
-
-}
+    const key =
+        ppNormalize(region);
 
 
-/* =========================================================
-   ESCAPE VALUE
-========================================================= */
-
-function escapeValue(value) {
-
-    return String(value)
-        .replaceAll(
-            "\\",
-            "\\\\"
-        )
-        .replaceAll(
-            "'",
-            "\\'"
-        );
-
-}
-
-
-/* =========================================================
-   NAVIGATION HISTORY
-========================================================= */
-
-function pushNavigationState() {
-
-    history.pushState(
-        {
-            level:
-                currentState.level,
-
-            form:
-                currentState.form,
-
-            subject:
-                currentState.subject,
-
-            type:
-                currentState.type,
-
-            region:
-                currentState.region,
-
-            year:
-                currentState.year
-
-        },
-
-        "",
-
-        window.location.href
+    return (
+        names[key] ||
+        ppTitle(region)
     );
+
+}
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+function ppSetBreadcrumb(
+    parts
+) {
+
+    ppBreadcrumb.innerHTML =
+        parts
+            .map(
+                (
+                    part,
+                    index
+                ) => {
+
+                    if (
+                        index === 0
+                    ) {
+
+                        return `
+                            <span>
+                                ${ppSafeText(part)}
+                            </span>
+                        `;
+
+                    }
+
+
+                    return `
+
+                        <span class="arrow">
+                            ›
+                        </span>
+
+                        <span>
+                            ${ppSafeText(part)}
+                        </span>
+
+                    `;
+
+                }
+            )
+            .join("");
 
 }
 
@@ -2942,22 +1454,54 @@ function pushNavigationState() {
    BACK BUTTON
 ========================================================= */
 
-function goBack() {
+function ppGoBack() {
 
-    if (
-        currentState.level ===
-        "forms"
+    switch (
+        PP_STATE.level
     ) {
 
-        window.location.href =
-            "index.html";
+        case "subjects":
 
-        return;
+            ppRenderForms();
+
+            break;
+
+
+        case "types":
+
+            ppRenderSubjects();
+
+            break;
+
+
+        case "regions":
+
+            ppRenderTypes();
+
+            break;
+
+
+        case "years":
+
+            ppRenderRegions();
+
+            break;
+
+
+        case "papers":
+
+            ppRenderYears();
+
+            break;
+
+
+        default:
+
+            ppRenderForms();
+
+            break;
 
     }
-
-
-    history.back();
 
 }
 
@@ -2968,173 +1512,156 @@ function goBack() {
 
 window.addEventListener(
     "popstate",
-    function(event) {
+    function() {
 
-        const state =
-            event.state;
-
-
-        if (
-            !state
-        ) {
-
-            currentState = {
-
-                level:
-                    "forms",
-
-                form:
-                    null,
-
-                subject:
-                    null,
-
-                type:
-                    null,
-
-                region:
-                    null,
-
-                year:
-                    null
-
-            };
-
-            renderForms();
-
-            return;
-
-        }
-
-
-        currentState = {
-
-            level:
-                state.level ||
-                "forms",
-
-            form:
-                state.form ||
-                null,
-
-            subject:
-                state.subject ||
-                null,
-
-            type:
-                state.type ||
-                null,
-
-            region:
-                state.region ||
-                null,
-
-            year:
-                state.year ||
-                null
-
-        };
-
-
-        switch (
-            currentState.level
-        ) {
-
-            case "forms":
-
-                renderForms();
-
-                break;
-
-
-            case "subjects":
-
-                renderSubjects();
-
-                break;
-
-
-            case "types":
-
-                renderTypes();
-
-                break;
-
-
-            case "regions":
-
-                renderRegions();
-
-                break;
-
-
-            case "years":
-
-                renderYears();
-
-                break;
-
-
-            case "papers":
-
-                renderPapers();
-
-                break;
-
-
-            default:
-
-                renderForms();
-
-        }
+        ppGoBack();
 
     }
 );
 
 
 /* =========================================================
-   INITIAL HISTORY STATE
+   ERROR
 ========================================================= */
 
-if (
-    !history.state ||
-    !history.state.level
+function ppShowError(
+    message
 ) {
 
-    history.replaceState(
+    ppContent.innerHTML = `
 
-        {
-            level:
-                "forms",
+        <div class="pp-error">
 
-            form:
-                null,
+            <strong>
+                ⚠️ Past Paper Data Error
+            </strong>
 
-            subject:
-                null,
+            <p>
+                ${ppSafeText(message)}
+            </p>
 
-            type:
-                null,
+            <p>
+                Hakikisha files hizi zipo
+                kwenye folder moja:
+            </p>
 
-            region:
-                null,
+            <ul>
 
-            year:
-                null
+                <li>
+                    pastpapers.html
+                </li>
 
-        },
+                <li>
+                    pastpapers.data.js
+                </li>
 
-        "",
+                <li>
+                    pastpapers.js
+                </li>
 
-        window.location.href
+            </ul>
 
-    );
+        </div>
+
+    `;
 
 }
 
 
 /* =========================================================
-   START APPLICATION
+   EMPTY
 ========================================================= */
 
-initializePastPapers();
+function ppShowEmpty(
+    message
+) {
+
+    ppContent.innerHTML = `
+
+        <div class="pp-empty">
+
+            ⚠️ ${ppSafeText(message)}
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   SAFE TEXT
+========================================================= */
+
+function ppSafeText(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   ESCAPE FOR INLINE JS
+========================================================= */
+
+function ppEscape(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+        .replace(
+            /'/g,
+            "\\'"
+        );
+
+}
+
+
+/* =========================================================
+   START ENGINE
+========================================================= */
+
+if (
+    document.readyState === "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        ppStart
+    );
+
+} else {
+
+    ppStart();
+
+}
