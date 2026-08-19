@@ -587,6 +587,34 @@ body {
 }
 
 
+/* =========================================================
+   CARD ICON
+========================================================= */
+
+.card-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background:
+        var(--light-blue);
+
+    font-size: 28px;
+
+    margin-bottom: 14px;
+
+}
+
+
 .selection-card h3 {
 
     margin:
@@ -625,6 +653,14 @@ body {
 }
 
 
+.form-card .card-icon {
+
+    background:
+        #e8f3ff;
+
+}
+
+
 /* =========================================================
    SUBJECT CARDS
 ========================================================= */
@@ -649,6 +685,22 @@ body {
             #00897b,
             #26a69a
         );
+
+}
+
+
+.physics-card .card-icon {
+
+    background:
+        #e6f1ff;
+
+}
+
+
+.chemistry-card .card-icon {
+
+    background:
+        #e5f8f5;
 
 }
 
@@ -1397,7 +1449,7 @@ footer strong {
         All Rights Reserved.
     </p>
 
-      </footer><!-- =======================================================
+                  </footer><!-- =======================================================
      NAVIGATION SCRIPT
 ======================================================= -->
 
@@ -1460,7 +1512,6 @@ const dataStatus =
 
 /* =========================================================
    FORM DATA
-   ICONS ZIMEONDOLEWA
 ========================================================= */
 
 const forms = [
@@ -1500,7 +1551,6 @@ const forms = [
 
 /* =========================================================
    SUBJECT DATA
-   ICONS ZIMEONDOLEWA
 ========================================================= */
 
 const subjects = [
@@ -1522,7 +1572,6 @@ const subjects = [
 
 /* =========================================================
    PAPER TYPES
-   ICONS ZIMEONDOLEWA
 ========================================================= */
 
 const paperTypes = [
@@ -1567,7 +1616,6 @@ const paperTypes = [
 
 /* =========================================================
    REGIONS
-   ICONS ZIMEONDOLEWA
 ========================================================= */
 
 const regions = [
@@ -1689,7 +1737,6 @@ function checkDataFile() {
         dataStatus.innerHTML = `
             ⚠️ <strong>Past Papers database
             haijapakiwa.</strong><br>
-
             Hakikisha faili
             <strong>pastpapers-data.js</strong>
             lipo kwenye folder moja na
@@ -2264,6 +2311,10 @@ function renderYears() {
 
                     <div>
 
+                        <div class="card-icon">
+                            📅
+                        </div>
+
                         <h3>
                             ${year}
                         </h3>
@@ -2323,10 +2374,7 @@ function openYear(year) {
 
     renderPapers();
 
-}
-
-
-/* =========================================================
+}/* =========================================================
    GET MATCHING PAPERS
 ========================================================= */
 
@@ -2532,7 +2580,8 @@ function renderPapers() {
     stepContainer.innerHTML =
         html;
 
-}<script>
+}
+
 
 /* =========================================================
    OPEN PDF
@@ -3004,7 +3053,13 @@ initialize();
 
 
 <!-- =======================================================
-     END OF PAST PAPERS PAGE
+     DATA LOAD FALLBACK
+=======================================================
+
+     Kwa sababu script ya data inapakiwa kabla ya
+     navigation script, window.pastPapers inapaswa
+     kuwepo wakati initialize() inaitwa.
+
 ======================================================= -->
 
 </body>
