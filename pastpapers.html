@@ -9,12 +9,12 @@
 <link rel="icon" type="image/png" href="file_00000000f17471f4b8f76a744122207a.png">
 <link rel="stylesheet" href="style.css">
 <!-- =====================================================
-     PAST PAPERS DATA & CONFIG
+     PAST PAPERS DATA (MUHIMU: INAPAKIWA KWANZA)
 ====================================================== -->
 <script src="pastpapers.data.js"></script>
 <style>
 /* =========================================================
-   PAST PAPERS PAGE STYLE
+   PAST PAPERS PAGE
 ========================================================= */
 :root {
     --primary: #1769aa;
@@ -65,19 +65,13 @@ body {
     background: linear-gradient(135deg, #0d47a1, #1769aa 55%, #00a6a6);
     color: white; box-shadow: 0 12px 30px rgba(13, 71, 161, 0.22); margin-bottom: 25px;
 }
-.hero-icon {
-    width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;
-    background: rgba(255,255,255,0.15); border-radius: 16px; font-size: 32px; margin-bottom: 15px;
-}
+.hero-icon { width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; font-size: 32px; margin-bottom: 15px; }
 .page-hero h1 { margin: 0 0 8px; font-size: 30px; }
 .page-hero p { margin: 0; line-height: 1.7; color: #e8f4ff; }
 .breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 10px 0 18px; font-size: 14px; }
 .breadcrumb-item { padding: 6px 10px; border-radius: 20px; background: #e9f3fb; color: var(--primary-dark); font-weight: 700; }
 .breadcrumb-separator { color: #9aa7b5; font-weight: bold; }
-.back-btn {
-    display: none; align-items: center; gap: 8px; padding: 10px 16px; margin-bottom: 20px;
-    border: none; border-radius: 9px; background: #263746; color: white; font-weight: 700; cursor: pointer;
-}
+.back-btn { display: none; align-items: center; gap: 8px; padding: 10px 16px; margin-bottom: 20px; border: none; border-radius: 9px; background: #263746; color: white; font-weight: 700; cursor: pointer; }
 .back-btn:hover { background: #172631; }
 .step-header { margin: 10px 0 20px; }
 .step-number { display: inline-block; padding: 6px 10px; border-radius: 20px; background: #dff6f6; color: #007c7c; font-size: 12px; font-weight: 800; margin-bottom: 8px; }
@@ -86,11 +80,7 @@ body {
 .data-status { display: none; margin: 0 0 20px; padding: 13px 15px; border-radius: 10px; font-size: 14px; font-weight: 700; }
 .data-status.error { display: block; background: #ffebee; border: 1px solid #ffcdd2; color: #b71c1c; }
 .selection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
-.selection-card {
-    position: relative; background: rgba(255,255,255,0.98); border: 1px solid var(--border);
-    border-radius: 16px; padding: 22px; min-height: 185px; display: flex; flex-direction: column;
-    justify-content: space-between; box-shadow: var(--shadow); overflow: hidden; transition: transform .2s ease, box-shadow .2s ease;
-}
+.selection-card { position: relative; background: rgba(255,255,255,0.98); border: 1px solid var(--border); border-radius: 16px; padding: 22px; min-height: 185px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow); overflow: hidden; transition: transform .2s ease, box-shadow .2s ease; }
 .selection-card::before { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
 .selection-card:hover { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(23,105,170,0.15); }
 .card-icon { width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; border-radius: 15px; background: var(--light-blue); font-size: 28px; margin-bottom: 14px; }
@@ -102,10 +92,7 @@ body {
 .chemistry-card::before { background: linear-gradient(90deg, #00897b, #26a69a); }
 .physics-card .card-icon { background: #e6f1ff; }
 .chemistry-card .card-icon { background: #e5f8f5; }
-.open-btn {
-    width: 100%; padding: 12px 14px; margin-top: 18px; border: none; border-radius: 9px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-size: 14px; font-weight: 800; cursor: pointer; transition: transform .15s ease, opacity .15s ease;
-}
+.open-btn { width: 100%; padding: 12px 14px; margin-top: 18px; border: none; border-radius: 9px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-size: 14px; font-weight: 800; cursor: pointer; transition: transform .15s ease, opacity .15s ease; }
 .open-btn:hover { transform: scale(1.02); opacity: .92; }
 .pdf-card { min-height: 190px; }
 .pdf-card::before { background: linear-gradient(90deg, #b71c1c, #ef5350); }
@@ -139,7 +126,9 @@ footer strong { color: white; }
 </style>
 </head>
 <body>
-
+<!-- =======================================================
+     HEADER
+======================================================= -->
 <header class="nav-header">
     <div class="logo-area">
         <img src="file_00000000f17471f4b8f76a744122207a.png" alt="GEPAM Science Hub Logo">
@@ -151,24 +140,40 @@ footer strong { color: white; }
     <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">☰</button>
 </header>
 
+<!-- =======================================================
+     MAIN
+======================================================= -->
 <main class="main-container">
+    <!-- HERO -->
     <section class="page-hero">
         <div class="hero-icon">📚</div>
         <h1>Past Papers</h1>
         <p>Find Physics and Chemistry examination papers from Form 1 to Form 6.</p>
     </section>
 
+    <!-- BREADCRUMB -->
     <div class="breadcrumb" id="breadcrumb">
         <span class="breadcrumb-item">Past Papers</span>
     </div>
 
+    <!-- BACK -->
     <button id="backButton" class="back-btn" onclick="goBack()">← RUDI NYUMA</button>
+
+    <!-- DATA ERROR CONTAINER -->
     <div id="dataStatus" class="data-status"></div>
+
+    <!-- DYNAMIC NAVIGATION -->
     <div id="stepContainer"></div>
 </main>
 
+<!-- =======================================================
+     SIDEBAR OVERLAY
+======================================================= -->
 <div id="menuOverlay" class="overlay" onclick="toggleMenu()"></div>
 
+<!-- =======================================================
+     SIDEBAR
+======================================================= -->
 <aside id="sidebarMenu" class="sidebar">
     <button class="close-btn" onclick="toggleMenu()">✕</button>
     <nav class="sidebar-links">
@@ -188,416 +193,54 @@ footer strong { color: white; }
     </nav>
 </aside>
 
+<!-- =======================================================
+     FOOTER
+======================================================= -->
 <footer>
     <strong>GEPAM Science Hub</strong><br>
     <span>Making Science Easy</span>
     <p>© 2026 GEPAM Science Hub. All Rights Reserved.</p>
 </footer>
+<!-- =======================================================
+     NAVIGATION ENGINE & DATA FIX SCRIPT
+======================================================= -->
 <script>
-let currentState = {
-    level: "forms",
-    form: null,
-    subject: null,
-    type: null,
-    branch: null, // "necta_ftna" / "regions" / "direct_years"
-    subCategory: null, // Mkoa au "NECTA"/"FTNA"
-    year: null
-};
-
-const stepContainer = document.getElementById("stepContainer");
-const breadcrumb = document.getElementById("breadcrumb");
-const backButton = document.getElementById("backButton");
-const dataStatus = document.getElementById("dataStatus");
-
-function normalize(value) {
-    return String(value ?? "").trim().toLowerCase().replace(/[\s_-]+/g, "_");
-}
-
-function checkDataFile() {
-    if (!window.pastPapers || typeof window.pastPapers !== 'object') {
-        dataStatus.className = "data-status error";
-        dataStatus.innerHTML = `
-            ⚠️ <strong>Past Papers database haijapakiwa au ina kosa.</strong><br>
-            Hakikisha faili <strong>pastpapers.data.js</strong> lipo kwenye folder moja na pastpapers.html na halina makosa ya JavaScript.
+function checkDatabaseLoaded() {
+    const statusDiv = document.getElementById("dataStatus");
+    // FIX: Tunakagua window.pastPapers kama ipo (yenyewe ni Object sio Array)
+    if (!window.pastPapers || typeof window.pastPapers !== "object") {
+        statusDiv.className = "data-status error";
+        statusDiv.innerHTML = `
+            ⚠️ <strong>Past Papers database haijapakiwa.</strong><br>
+            Hakikisha faili <strong>pastpapers.data.js</strong> lipo kwenye folder moja na pastpapers.html.
         `;
         return false;
     }
-    dataStatus.className = "data-status";
-    dataStatus.innerHTML = "";
     return true;
 }
 
-function renderForms() {
-    currentState = { level: "forms", form: null, subject: null, type: null, branch: null, subCategory: null, year: null };
-    updateBreadcrumb();
-    backButton.style.display = "none";
-    
-    const forms = [
-        { id: "form1", name: "Form 1", icon: "📘" },
-        { id: "form2", name: "Form 2", icon: "📗" },
-        { id: "form3", name: "Form 3", icon: "📙" },
-        { id: "form4", name: "Form 4", icon: "📕" },
-        { id: "form5", name: "Form 5", icon: "📔" },
-        { id: "form6", name: "Form 6", icon: "📓" }
-    ];
-
-    let html = `
-        <div class="step-header">
-            <span class="step-number">STEP 1</span>
-            <h2>Chagua Kidato</h2>
-            <p>Chagua kidato unachotaka kupata Past Papers.</p>
-        </div>
-        <div class="selection-grid">
-    `;
-    forms.forEach(form => {
-        html += `
-            <div class="selection-card form-card">
-                <div>
-                    <div class="card-icon">${form.icon}</div>
-                    <h3>${form.name}</h3>
-                    <p>Physics & Chemistry Past Papers</p>
-                </div>
-                <button class="open-btn" onclick="openForm('${form.id}')">FUNGUA ${form.name.toUpperCase()}</button>
-            </div>
-        `;
-    });
-    html += `</div>`;
-    stepContainer.innerHTML = html;
-}
-
-function openForm(formId) {
-    currentState.level = "subjects";
-    currentState.form = formId;
-    pushNavigationState();
-    renderSubjects();
-}
-
-function renderSubjects() {
-    updateBreadcrumb();
-    backButton.style.display = "inline-flex";
-    
-    let html = `
-        <div class="step-header">
-            <span class="step-number">STEP 2</span>
-            <h2>${currentState.form.replace('form', 'Form ')}</h2>
-            <p>Chagua somo.</p>
-        </div>
-        <div class="selection-grid">
-            <div class="selection-card physics-card">
-                <div><div class="card-icon">⚛️</div><h3>Physics</h3><p>Physics Past Papers</p></div>
-                <button class="open-btn" onclick="openSubject('physics')">FUNGUA PHYSICS</button>
-            </div>
-            <div class="selection-card chemistry-card">
-                <div><div class="card-icon">🧪</div><h3>Chemistry</h3><p>Chemistry Past Papers</p></div>
-                <button class="open-btn" onclick="openSubject('chemistry')">FUNGUA CHEMISTRY</button>
-            </div>
-        </div>
-    `;
-    stepContainer.innerHTML = html;
-}
-
-function openSubject(subjectId) {
-    currentState.level = "types";
-    currentState.subject = subjectId;
-    pushNavigationState();
-    renderTypes();
-}
-
-function renderTypes() {
-    updateBreadcrumb();
-    
-    let availableTypes = new Set();
-    if (window.pastPapers && window.pastPapers[currentState.form] && window.pastPapers[currentState.form][currentState.subject]) {
-        window.pastPapers[currentState.form][currentState.subject].forEach(p => {
-            if (p.type) availableTypes.add(p.type);
-        });
-    }
-
-    const typeDetails = {
-        annual: { name: "Annual Examination", icon: "🏆", desc: "Annual examination papers." },
-        terminal: { name: "Terminal Examination", icon: "📈", desc: "Terminal examination papers." },
-        midterm: { name: "Midterm Examination", icon: "📝", desc: "Midterm examination papers." },
-        joint: { name: "Joint Examination", icon: "🤝", desc: "Joint examination papers." },
-        mock: { name: "Mock Examination", icon: "📋", desc: "Mock examination papers." },
-        pre_necta: { name: "Pre-NECTA", icon: "🎯", desc: "Pre-NECTA examination papers." },
-        necta: { name: "NECTA", icon: "🎓", desc: "NECTA national examination papers." },
-        ftna: { name: "FTNA", icon: "🎖️", desc: "FTNA national examination papers." }
-    };
-
-    let html = `
-        <div class="step-header">
-            <span class="step-number">STEP 3</span>
-            <h2>Aina ya Mtihani</h2>
-            <p>Chagua aina ya Past Paper.</p>
-        </div>
-        <div class="selection-grid">
-    `;
-
-    if (availableTypes.size === 0) {
-        html += `
-            <div class="empty-card">
-                <div class="empty-card-icon">📂</div>
-                <h3>Hakuna papers</h3>
-                <p>Hakuna mitihani iliyopatikana kwenye database kwa somo hili.</p>
-            </div>
-        `;
-    } else {
-        availableTypes.forEach(typeId => {
-            const detail = typeDetails[typeId] || { name: typeId.toUpperCase(), icon: "📚", desc: "Past examination papers." };
-            html += `
-                <div class="selection-card type-card">
-                    <div>
-                        <div class="card-icon">${detail.icon}</div>
-                        <h3>${detail.name}</h3>
-                        <p>${detail.desc}</p>
-                    </div>
-                    <button class="open-btn" onclick="openType('${typeId}')">FUNGUA</button>
-                </div>
-            `;
-        });
-    }
-    
-    html += `</div>`;
-    stepContainer.innerHTML = html;
-}
-function openType(typeId) {
-    currentState.type = typeId;
-    
-    let list = [];
-    if (window.pastPapers && window.pastPapers[currentState.form] && window.pastPapers[currentState.form][currentState.subject]) {
-        list = window.pastPapers[currentState.form][currentState.subject].filter(p => normalize(p.type) === normalize(typeId));
-    }
-
-    const hasRegions = list.some(p => p.region && normalize(p.region) !== 'necta');
-    const isNectaOrFtna = (normalize(typeId) === 'necta' || normalize(typeId) === 'ftna' || normalize(typeId) === 'acsee');
-
-    if (isNectaOrFtna) {
-        currentState.level = "subCategories";
-        currentState.branch = "necta_ftna";
-    } else if (hasRegions) {
-        currentState.level = "subCategories";
-        currentState.branch = "regions";
-    } else {
-        currentState.level = "years";
-        currentState.branch = "direct_years";
-        currentState.subCategory = null;
-    }
-
-    pushNavigationState();
-    if (currentState.level === "subCategories") {
-        renderSubCategories();
-    } else {
-        renderYears();
-    }
-}
-
-function renderSubCategories() {
-    updateBreadcrumb();
-    let title = currentState.branch === "regions" ? "Chagua Mkoa" : "Mifumo ya Mitihani";
-    let desc = currentState.branch === "regions" ? "Chagua mkoa wenye mitihani unayotafuta." : "Chagua bodi ya mtihani.";
-    
-    let html = `
-        <div class="step-header">
-            <span class="step-number">STEP 4</span>
-            <h2>${title}</h2>
-            <p>${desc}</p>
-        </div>
-        <div class="selection-grid">
-    `;
-
-    let items = new Set();
-    if (window.pastPapers && window.pastPapers[currentState.form] && window.pastPapers[currentState.form][currentState.subject]) {
-        const list = window.pastPapers[currentState.form][currentState.subject].filter(p => normalize(p.type) === normalize(currentState.type));
-        list.forEach(p => {
-            if (currentState.branch === "regions" && p.region) {
-                items.add(p.region);
-            } else if (currentState.branch === "necta_ftna") {
-                items.add(currentState.type.toUpperCase());
-            }
-        });
-    }
-
-    items.forEach(item => {
-        let displayTitle = item.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-        let icon = currentState.branch === "regions" ? "📍" : "🎓";
-        html += `
-            <div class="selection-card region-card">
-                <div>
-                    <div class="card-icon">${icon}</div>
-                    <h3>${displayTitle}</h3>
-                    <p>Fungua kuona miaka iliyopo.</p>
-                </div>
-                <button class="open-btn" onclick="openSubCategory('${item}')">FUNGUA</button>
-            </div>
-        `;
-    });
-
-    html += `</div>`;
-    stepContainer.innerHTML = html;
-}
-
-function openSubCategory(subCat) {
-    currentState.level = "years";
-    currentState.subCategory = subCat;
-    pushNavigationState();
-    renderYears();
-}
-
-function renderYears() {
-    updateBreadcrumb();
-    let html = `
-        <div class="step-header">
-            <span class="step-number">STEP 5</span>
-            <h2>Chagua Mwaka</h2>
-            <p>Chagua mwaka wa mtihani uliochapishwa.</p>
-        </div>
-        <div class="selection-grid">
-    `;
-
-    let availableYears = new Set();
-    if (window.pastPapers && window.pastPapers[currentState.form] && window.pastPapers[currentState.form][currentState.subject]) {
-        let list = window.pastPapers[currentState.form][currentState.subject].filter(p => normalize(p.type) === normalize(currentState.type));
-        if (currentState.branch === "regions" && currentState.subCategory) {
-            list = list.filter(p => normalize(p.region) === normalize(currentState.subCategory));
-        }
-        list.forEach(p => { if (p.year) availableYears.add(String(p.year)); });
-    }
-
-    let sortedYears = Array.from(availableYears).sort((a,b) => b - a);
-
-    if (sortedYears.length === 0) {
-        html += `
-            <div class="empty-card">
-                <div class="empty-card-icon">📅</div>
-                <h3>Hakuna miaka</h3>
-                <p>Hakuna data ya mwaka iliyounganishwa hapa.</p>
-            </div>
-        `;
-    } else {
-        sortedYears.forEach(year => {
-            html += `
-                <div class="selection-card year-card">
-                    <div>
-                        <div class="card-icon">📅</div>
-                        <h3>${year}</h3>
-                        <p>Papers za mwaka ${year}</p>
-                    </div>
-                    <button class="open-btn" onclick="openYear('${year}')">FUNGUA</button>
-                </div>
-            `;
-        });
-    }
-
-    html += `</div>`;
-    stepContainer.innerHTML = html;
-}
-
-function openYear(year) {
-    currentState.level = "papers";
-    currentState.year = year;
-    pushNavigationState();
-    renderPapers();
-}
-
-function renderPapers() {
-    updateBreadcrumb();
-    let filteredPapers = [];
-    if (window.pastPapers && window.pastPapers[currentState.form] && window.pastPapers[currentState.form][currentState.subject]) {
-        filteredPapers = window.pastPapers[currentState.form][currentState.subject].filter(p => {
-            let match = normalize(p.type) === normalize(currentState.type) && String(p.year) === String(currentState.year);
-            if (match && currentState.branch === "regions" && currentState.subCategory) {
-                match = normalize(p.region) === normalize(currentState.subCategory);
-            }
-            return match;
-        });
-    }
-
-    let html = `
-        <div class="step-header">
-            <span class="step-number">FINAL STEP</span>
-            <h2>Papers Zilizopo</h2>
-            <p>Bofya kitufe cha kufungua ili usome PDF.</p>
-        </div>
-        <div class="selection-grid">
-    `;
-
-    if (filteredPapers.length === 0) {
-        html += `
-            <div class="empty-card">
-                <div class="empty-card-icon">📂</div>
-                <h3>Hakuna paper iliyopatikana</h3>
-                <p>Marekebisho yanaendelea kuweka faili hili.</p>
-            </div>
-        `;
-    } else {
-        filteredPapers.forEach(paper => {
-            html += `
-                <div class="selection-card pdf-card">
-                    <div>
-                        <div class="card-icon pdf-icon">📄</div>
-                        <h3>${escapeHTML(paper.title || "Past Paper")}</h3>
-                        <p>${paper.region ? 'Mkoa/Bodi: ' + paper.region.toUpperCase() : 'General Paper'}</p>
-                    </div>
-                    <button class="open-btn pdf-button" onclick="openPDF('${escapeJS(paper.file)}')">📄 FUNGUA PDF</button>
-                </div>
-            `;
-        });
-    }
-
-    html += `</div>`;
-    stepContainer.innerHTML = html;
-}
-
-function openPDF(file) {
-    if (!file) { alert("PDF file haijawekwa vizuri kwenye database."); return; }
-    window.open(file, "_blank", "noopener");
-}
-
-function escapeJS(value) { return String(value ?? "").replaceAll("\\", "\\\\").replaceAll("'", "\\'").replaceAll("\n", "\\n"); }
-function escapeHTML(value) { return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;"); }
-
-function updateBreadcrumb() {
-    const items = ["Past Papers"];
-    if (currentState.form) items.push(currentState.form.replace('form', 'Form '));
-    if (currentState.subject) items.push(currentState.subject.charAt(0).toUpperCase() + currentState.subject.slice(1));
-    if (currentState.type) items.push(currentState.type.toUpperCase());
-    if (currentState.subCategory) items.push(currentState.subCategory.replace(/_/g, ' ').toUpperCase());
-    if (currentState.year) items.push(currentState.year);
-
-    breadcrumb.innerHTML = items.map((item, index) => {
-        if (index === 0) return `<span class="breadcrumb-item">${escapeHTML(item)}</span>`;
-        return `<span class="breadcrumb-separator">›</span><span class="breadcrumb-item">${escapeHTML(item)}</span>`;
-    }).join("");
-}
-
-function pushNavigationState() { history.pushState({ ...currentState }, "", window.location.href); }
-
-window.addEventListener("popstate", function(event) {
-    if (event.state) { currentState = { ...event.state }; renderCurrentLevel(); } else { renderForms(); }
+// Kukimbiza ukaguzi DOM ikimaliza kupakia
+document.addEventListener("DOMContentLoaded", function() {
+    checkDatabaseLoaded();
 });
 
-function renderCurrentLevel() {
-    backButton.style.display = currentState.level === "forms" ? "none" : "inline-flex";
-    switch (currentState.level) {
-        case "forms": renderForms(); break;
-        case "subjects": renderSubjects(); break;
-        case "types": renderTypes(); break;
-        case "subCategories": renderSubCategories(); break;
-        case "years": renderYears(); break;
-        case "papers": renderPapers(); break;
-        default: renderForms();
-    }
+// Sidebar dynamic control toggles
+function toggleMenu() {
+    const sidebar = document.getElementById("sidebarMenu");
+    const overlay = document.getElementById("menuOverlay");
+    sidebar.classList.toggle("active");
+    overlay.style.display = sidebar.classList.contains("active") ? "block" : "none";
 }
-
-function goBack() { if (currentState.level === "forms") { window.location.href = "index.html"; return; } history.back(); }
-function toggleMenu() { const sidebar = document.getElementById("sidebarMenu"); const overlay = document.getElementById("menuOverlay"); sidebar.classList.toggle("active"); overlay.style.display = sidebar.classList.contains("active") ? "block" : "none"; }
-function toggleDropdown(button) { const container = button.nextElementSibling; if (!container) return; container.style.display = container.style.display === "block" ? "none" : "block"; }
-
-function initialize() {
-    history.replaceState({ level: "forms", form: null, subject: null, type: null, branch: null, subCategory: null, year: null }, "", window.location.href);
-    if (checkDataFile()) { renderForms(); }
+function toggleDropdown(button) {
+    const container = button.nextElementSibling;
+    if (!container) return;
+    container.style.display = container.style.display === "block" ? "none" : "block";
 }
-initialize();
 </script>
+
+<!-- =======================================================
+     KUITA ENGINE YAKO KUU (HAPA NDIPO MLANGO ULIPOFUNGWA)
+======================================================= -->
+<script src="pastpapers.js"></script>
 </body>
 </html>
