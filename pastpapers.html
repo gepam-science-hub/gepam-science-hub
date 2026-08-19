@@ -3,1133 +3,914 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <title>GEPAM Science Hub | Past Papers</title>
+<title>GEPAM Science Hub | Past Papers</title>
 
-    <link rel="icon"
-          type="image/png"
-          href="file_00000000f17471f4b8f76a744122207a.png">
+<link rel="icon"
+      type="image/png"
+      href="file_00000000f17471f4b8f76a744122207a.png">
 
+<style>
 
-    <style>
+/* =========================================================
+   RESET
+========================================================= */
 
-        /* =====================================================
-           GEPAM SCIENCE HUB - PAST PAPERS
-           DISTINCT DESIGN FROM NOTES
-        ===================================================== */
+* {
+    box-sizing: border-box;
+}
 
-        * {
-            box-sizing: border-box;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f7ff;
+    color: #172033;
+    overflow-x: hidden;
+}
 
-        body {
-            margin: 0;
-            padding: 0;
 
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
+/* =========================================================
+   HEADER
+========================================================= */
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #f4f7ff 0%,
-                    #eef2ff 50%,
-                    #ffffff 100%
-                );
+.nav-header {
 
-            color: #172033;
+    width: 100%;
 
-            min-height: 100vh;
+    display: flex;
 
-            overflow-x: hidden;
-        }
+    justify-content: space-between;
 
+    align-items: center;
 
-        /* =====================================================
-           HEADER
-        ===================================================== */
+    padding: 14px 20px;
 
-        .pp-header {
+    background:
+        linear-gradient(
+            135deg,
+            #071a52,
+            #123d8f
+        );
 
-            position: sticky;
+    color: white;
 
-            top: 0;
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.18);
 
-            z-index: 5000;
+    position: sticky;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #172554,
-                    #1e3a8a,
-                    #2563eb
-                );
+    top: 0;
 
-            color: white;
+    z-index: 9000;
+}
 
-            box-shadow:
-                0 4px 18px
-                rgba(15, 23, 42, 0.20);
-        }
+.logo-area {
 
+    display: flex;
 
-        .pp-header-inner {
+    align-items: center;
 
-            max-width: 1100px;
+    gap: 10px;
+}
 
-            margin: auto;
+.logo-area img {
 
-            padding:
-                13px 18px;
+    width: 42px;
 
-            display: flex;
+    height: 42px;
 
-            align-items: center;
+    object-fit: contain;
 
-            justify-content: space-between;
-        }
+    background: white;
 
+    border-radius: 50%;
 
-        .pp-brand {
+    padding: 3px;
+}
 
-            display: flex;
+.logo-title {
 
-            align-items: center;
+    font-size: 18px;
 
-            gap: 10px;
-        }
+    font-weight: 800;
 
+    letter-spacing: .2px;
+}
 
-        .pp-brand img {
+.logo-subtitle {
 
-            width: 42px;
+    display: block;
 
-            height: 42px;
+    font-size: 11px;
 
-            object-fit: contain;
+    font-weight: normal;
 
-            border-radius: 10px;
+    opacity: .8;
 
-            background: white;
+    margin-top: 2px;
+}
 
-            padding: 3px;
-        }
+.menu-toggle {
 
+    border: none;
 
-        .pp-brand-text {
+    background: rgba(255,255,255,.12);
 
-            display: flex;
+    color: white;
 
-            flex-direction: column;
+    font-size: 27px;
 
-            line-height: 1.15;
-        }
+    width: 45px;
 
+    height: 42px;
 
-        .pp-brand-name {
+    border-radius: 9px;
 
-            font-size: 18px;
+    cursor: pointer;
+}
 
-            font-weight: 800;
+.menu-toggle:hover {
 
-            letter-spacing: .2px;
-        }
+    background: rgba(255,255,255,.22);
+}
 
 
-        .pp-brand-tagline {
+/* =========================================================
+   MAIN
+========================================================= */
 
-            font-size: 11px;
+.main-container {
 
-            opacity: .85;
+    max-width: 1050px;
 
-            margin-top: 3px;
-        }
+    margin: 0 auto;
 
+    padding: 28px 20px 70px;
+}
 
-        .pp-menu-btn {
 
-            width: 43px;
+/* =========================================================
+   HERO
+========================================================= */
 
-            height: 43px;
+.page-header {
 
-            border: none;
+    text-align: center;
 
-            border-radius: 12px;
+    margin-bottom: 25px;
 
-            background:
-                rgba(255,255,255,.15);
+    padding: 30px 20px;
 
-            color: white;
+    border-radius: 18px;
 
-            font-size: 24px;
+    background:
+        linear-gradient(
+            135deg,
+            #0b2c73,
+            #1764c0
+        );
 
-            cursor: pointer;
+    color: white;
 
-            display: flex;
+    box-shadow:
+        0 10px 28px rgba(13,54,120,.22);
+}
 
-            align-items: center;
+.page-header .hero-icon {
 
-            justify-content: center;
-        }
+    font-size: 42px;
 
+    margin-bottom: 5px;
+}
 
-        .pp-menu-btn:hover {
+.page-header h1 {
 
-            background:
-                rgba(255,255,255,.25);
-        }
+    margin: 5px 0 8px;
 
+    font-size: 30px;
+}
 
-        /* =====================================================
-           HERO
-        ===================================================== */
+.page-header p {
 
-        .pp-hero {
+    margin: 0;
 
-            max-width: 1100px;
+    color: #e5efff;
 
-            margin: 0 auto;
+    line-height: 1.6;
 
-            padding:
-                35px 18px 20px;
+    font-size: 15px;
+}
 
-            text-align: center;
-        }
 
+/* =========================================================
+   BREADCRUMB
+========================================================= */
 
-        .pp-hero-badge {
+.breadcrumb {
 
-            display: inline-block;
+    display: flex;
 
-            padding:
-                7px 13px;
+    align-items: center;
 
-            border-radius: 30px;
+    flex-wrap: wrap;
 
-            background:
-                #dbeafe;
+    gap: 7px;
 
-            color:
-                #1d4ed8;
+    padding: 12px 15px;
 
-            font-size: 12px;
+    margin-bottom: 18px;
 
-            font-weight: 800;
+    background: white;
 
-            letter-spacing: .5px;
+    border: 1px solid #dce6f7;
 
-            margin-bottom: 12px;
-        }
+    border-radius: 10px;
 
+    box-shadow:
+        0 3px 10px rgba(20,50,100,.05);
 
-        .pp-hero h1 {
+    font-size: 14px;
 
-            margin:
-                0 0 10px;
+    color: #53627a;
+}
 
-            font-size: 31px;
+.breadcrumb .current {
 
-            color:
-                #172554;
-        }
+    color: #0b3d91;
 
+    font-weight: 800;
+}
 
-        .pp-hero p {
+.breadcrumb .separator {
 
-            max-width: 650px;
+    color: #9aa8bc;
 
-            margin:
-                0 auto;
+    font-weight: bold;
+}
 
-            color:
-                #64748b;
 
-            line-height: 1.65;
+/* =========================================================
+   BACK BUTTON
+========================================================= */
 
-            font-size: 15px;
-        }
+.back-btn {
 
+    display: none;
 
-        /* =====================================================
-           MAIN
-        ===================================================== */
+    align-items: center;
 
-        .pp-main {
+    justify-content: center;
 
-            width: 100%;
+    gap: 7px;
 
-            max-width: 1100px;
+    padding: 11px 18px;
 
-            margin: auto;
+    margin-bottom: 20px;
 
-            padding:
-                5px 18px 60px;
-        }
+    border: none;
 
+    border-radius: 9px;
 
-        /* =====================================================
-           BREADCRUMB
-        ===================================================== */
+    background: #172033;
 
-        .pp-breadcrumb {
+    color: white;
 
-            display: flex;
+    font-size: 14px;
 
-            flex-wrap: wrap;
+    font-weight: bold;
 
-            align-items: center;
+    cursor: pointer;
+}
 
-            gap: 7px;
+.back-btn:hover {
 
-            margin:
-                10px 0 18px;
+    background: #0b3d91;
+}
 
-            padding:
-                12px 15px;
 
-            background:
-                white;
+/* =========================================================
+   STEP
+========================================================= */
 
-            border:
-                1px solid #dbe4f0;
+.step-title {
 
-            border-radius: 13px;
+    text-align: center;
 
-            box-shadow:
-                0 3px 12px
-                rgba(30, 58, 138, .06);
+    margin: 20px 0 22px;
+}
 
-            font-size: 13px;
+.step-badge {
 
-            color:
-                #64748b;
-        }
+    display: inline-block;
 
+    padding: 6px 12px;
 
-        .pp-breadcrumb strong {
+    border-radius: 20px;
 
-            color:
-                #1e40af;
-        }
+    background: #e3edff;
 
+    color: #0b4fa3;
 
-        .pp-breadcrumb .arrow {
+    font-size: 12px;
 
-            color:
-                #94a3b8;
+    font-weight: 800;
 
-            font-weight:
-                bold;
-        }
+    margin-bottom: 8px;
+}
 
+.step-title h2 {
 
-        /* =====================================================
-           BACK BUTTON
-        ===================================================== */
+    margin: 5px 0 7px;
 
-        .pp-back {
+    font-size: 25px;
 
-            display: none;
+    color: #122044;
+}
 
-            align-items: center;
+.step-title p {
 
-            gap: 7px;
+    margin: 0;
 
-            padding:
-                10px 15px;
+    color: #68758a;
 
-            margin-bottom:
-                18px;
+    font-size: 14px;
 
-            border: none;
+    line-height: 1.5;
+}
 
-            border-radius: 10px;
 
-            background:
-                #172554;
+/* =========================================================
+   CARD GRID
+========================================================= */
 
-            color: white;
+.selection-grid {
 
-            font-weight: 700;
+    display: grid;
 
-            cursor: pointer;
-        }
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(225px, 1fr)
+        );
 
+    gap: 18px;
+}
 
-        .pp-back:hover {
 
-            background:
-                #1e40af;
-        }
+/* =========================================================
+   MAIN CARD
+========================================================= */
 
+.selection-card {
 
-        /* =====================================================
-           STEP CARD
-        ===================================================== */
+    position: relative;
 
-        .pp-step {
+    overflow: hidden;
 
-            background:
-                rgba(255,255,255,.95);
+    background: white;
 
-            border:
-                1px solid #dbe4f0;
+    border: 1px solid #dbe5f4;
 
-            border-radius: 18px;
+    border-radius: 14px;
 
-            padding:
-                22px;
+    padding: 22px;
 
-            box-shadow:
-                0 8px 25px
-                rgba(30, 58, 138, .08);
+    min-height: 165px;
 
-            margin-bottom:
-                25px;
-        }
+    display: flex;
 
+    flex-direction: column;
 
-        .pp-step-heading {
+    justify-content: space-between;
 
-            text-align: center;
+    box-shadow:
+        0 5px 16px rgba(19,53,100,.07);
 
-            margin-bottom:
-                22px;
-        }
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
 
+.selection-card::before {
 
-        .pp-step-number {
+    content: "";
 
-            display: inline-flex;
+    position: absolute;
 
-            align-items: center;
+    left: 0;
 
-            justify-content: center;
+    top: 0;
 
-            width: 35px;
+    width: 100%;
 
-            height: 35px;
+    height: 5px;
 
-            border-radius: 50%;
+    background:
+        linear-gradient(
+            90deg,
+            #ff6b35,
+            #ffb703
+        );
+}
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #2563eb,
-                    #4f46e5
-                );
+.selection-card:hover {
 
-            color: white;
+    transform: translateY(-4px);
 
-            font-size: 15px;
+    border-color: #b9cceb;
 
-            font-weight: 800;
+    box-shadow:
+        0 10px 25px rgba(19,53,100,.13);
+}
 
-            margin-bottom: 8px;
-        }
+.card-icon {
 
+    font-size: 34px;
 
-        .pp-step-heading h2 {
+    margin-bottom: 8px;
+}
 
-            margin:
-                0 0 7px;
+.selection-card h3 {
 
-            font-size: 23px;
+    margin: 0 0 8px;
 
-            color:
-                #172554;
-        }
+    color: #172033;
 
+    font-size: 19px;
+}
 
-        .pp-step-heading p {
+.selection-card p {
 
-            margin: 0;
+    margin: 0;
 
-            color:
-                #64748b;
+    color: #68758a;
 
-            font-size: 14px;
+    line-height: 1.55;
 
-            line-height: 1.5;
-        }
+    font-size: 14px;
+}
 
 
-        /* =====================================================
-           SELECTION GRID
-        ===================================================== */
+/* =========================================================
+   OPEN BUTTON
+========================================================= */
 
-        .pp-grid {
+.open-btn {
 
-            display: grid;
+    width: 100%;
 
-            grid-template-columns:
-                repeat(
-                    auto-fit,
-                    minmax(220px, 1fr)
-                );
+    padding: 12px;
 
-            gap: 17px;
-        }
+    margin-top: 17px;
 
+    border: none;
 
-        /* =====================================================
-           FORM / SUBJECT / TYPE / REGION / YEAR CARD
-        ===================================================== */
+    border-radius: 9px;
 
-        .pp-card {
+    background:
+        linear-gradient(
+            135deg,
+            #ff6b35,
+            #f4511e
+        );
 
-            position: relative;
+    color: white;
 
-            overflow: hidden;
+    font-weight: 800;
 
-            background:
-                linear-gradient(
-                    145deg,
-                    #ffffff,
-                    #f8fbff
-                );
+    font-size: 13px;
 
-            border:
-                1px solid #dbe4f0;
+    cursor: pointer;
 
-            border-radius: 16px;
+    transition: .2s ease;
+}
 
-            padding:
-                21px;
+.open-btn:hover {
 
-            min-height:
-                155px;
+    transform: scale(1.01);
 
-            display: flex;
+    background:
+        linear-gradient(
+            135deg,
+            #e95422,
+            #d94112
+        );
+}
 
-            flex-direction: column;
 
-            justify-content:
-                space-between;
+/* =========================================================
+   SUBJECT COLORS
+========================================================= */
 
-            box-shadow:
-                0 5px 15px
-                rgba(30, 58, 138, .07);
+.physics-card::before {
 
-            transition:
-                transform .22s ease,
-                box-shadow .22s ease,
-                border-color .22s ease;
-        }
+    background:
+        linear-gradient(
+            90deg,
+            #5e35b1,
+            #8e5de7
+        );
+}
 
+.chemistry-card::before {
 
-        .pp-card::before {
+    background:
+        linear-gradient(
+            90deg,
+            #00897b,
+            #26a69a
+        );
+}
 
-            content: "";
 
-            position: absolute;
+/* =========================================================
+   TYPE COLORS
+========================================================= */
 
-            top: 0;
+.type-card::before {
 
-            left: 0;
+    background:
+        linear-gradient(
+            90deg,
+            #ff6b35,
+            #ffb703
+        );
+}
 
-            width: 100%;
 
-            height: 5px;
+/* =========================================================
+   REGION COLORS
+========================================================= */
 
-            background:
-                linear-gradient(
-                    90deg,
-                    #2563eb,
-                    #7c3aed
-                );
-        }
+.region-card::before {
 
+    background:
+        linear-gradient(
+            90deg,
+            #0077b6,
+            #00b4d8
+        );
+}
 
-        .pp-card:hover {
 
-            transform:
-                translateY(-4px);
+/* =========================================================
+   YEAR COLORS
+========================================================= */
 
-            border-color:
-                #93c5fd;
+.year-card::before {
 
-            box-shadow:
-                0 12px 25px
-                rgba(37, 99, 235, .14);
-        }
+    background:
+        linear-gradient(
+            90deg,
+            #d81b60,
+            #ec407a
+        );
+}
 
 
-        .pp-icon {
+/* =========================================================
+   PAPER CARD
+========================================================= */
 
-            font-size: 34px;
+.paper-card {
 
-            margin-bottom:
-                8px;
-        }
+    min-height: 185px;
+}
 
+.paper-card::before {
 
-        .pp-card h3 {
+    background:
+        linear-gradient(
+            90deg,
+            #263238,
+            #546e7a
+        );
+}
 
-            margin:
-                0 0 7px;
+.paper-title {
 
-            font-size: 18px;
+    font-size: 17px !important;
 
-            color:
-                #172554;
-        }
+    line-height: 1.4;
 
+    color: #15233d !important;
+}
 
-        .pp-card p {
+.pdf-btn {
 
-            margin:
-                0;
+    width: 100%;
 
-            color:
-                #64748b;
+    padding: 12px;
 
-            font-size: 13px;
+    margin-top: 15px;
 
-            line-height: 1.5;
-        }
+    border: none;
 
+    border-radius: 9px;
 
-        /* =====================================================
-           OPEN BUTTON
-        ===================================================== */
+    background:
+        linear-gradient(
+            135deg,
+            #e53935,
+            #b71c1c
+        );
 
-        .pp-open-btn {
+    color: white;
 
-            width: 100%;
+    font-weight: 800;
 
-            margin-top:
-                16px;
+    font-size: 13px;
 
-            padding:
-                11px 13px;
+    cursor: pointer;
 
-            border: none;
+    text-decoration: none;
 
-            border-radius: 10px;
+    display: block;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #2563eb,
-                    #4f46e5
-                );
+    text-align: center;
+}
 
-            color: white;
+.pdf-btn:hover {
 
-            font-size: 13px;
+    background:
+        linear-gradient(
+            135deg,
+            #c62828,
+            #8e0000
+        );
+}
 
-            font-weight: 800;
 
-            cursor: pointer;
+/* =========================================================
+   EMPTY
+========================================================= */
 
-            transition:
-                transform .2s ease,
-                filter .2s ease;
-        }
+.empty-card {
 
+    grid-column: 1 / -1;
 
-        .pp-open-btn:hover {
+    text-align: center;
 
-            filter:
-                brightness(1.08);
+    padding: 35px 20px;
 
-            transform:
-                translateY(-1px);
-        }
+    background: white;
 
+    border: 1px solid #dce5f3;
 
-        /* =====================================================
-           PAPER CARD
-        ===================================================== */
+    border-radius: 14px;
+}
 
-        .pp-paper-card {
+.empty-card .empty-icon {
 
-            background:
-                white;
+    font-size: 42px;
 
-            border:
-                1px solid #dbe4f0;
+    margin-bottom: 10px;
+}
 
-            border-radius: 15px;
+.empty-card h3 {
 
-            padding:
-                18px;
+    margin: 5px 0 8px;
 
-            display: flex;
+    color: #25324a;
+}
 
-            align-items: center;
+.empty-card p {
 
-            justify-content: space-between;
+    color: #6c788b;
 
-            gap: 15px;
+    line-height: 1.6;
+}
 
-            box-shadow:
-                0 5px 15px
-                rgba(30,58,138,.06);
 
-            transition:
-                transform .2s ease,
-                box-shadow .2s ease;
-        }
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
+.sidebar {
 
-        .pp-paper-card:hover {
+    position: fixed;
 
-            transform:
-                translateY(-2px);
+    top: 0;
 
-            box-shadow:
-                0 9px 20px
-                rgba(30,58,138,.10);
-        }
+    right: -310px;
 
+    width: 290px;
 
-        .pp-paper-info {
+    height: 100%;
 
-            display: flex;
+    background: white;
 
-            align-items: center;
+    box-shadow:
+        -8px 0 25px rgba(0,0,0,.18);
 
-            gap: 13px;
+    transition:
+        right .3s ease;
 
-            min-width: 0;
-        }
+    z-index: 10001;
 
+    padding: 20px;
 
-        .pp-paper-icon {
+    overflow-y: auto;
+}
 
-            flex-shrink: 0;
+.sidebar.active {
 
-            width: 45px;
+    right: 0;
+}
 
-            height: 45px;
+.close-btn {
 
-            display: flex;
+    float: right;
 
-            align-items: center;
+    width: 40px;
 
-            justify-content: center;
+    height: 40px;
 
-            border-radius: 12px;
+    border: none;
 
-            background:
-                #dbeafe;
+    border-radius: 8px;
 
-            font-size: 22px;
-        }
+    background: #f1f4f9;
 
+    color: #172033;
 
-        .pp-paper-info h3 {
+    font-size: 22px;
 
-            margin:
-                0 0 5px;
+    cursor: pointer;
+}
 
-            font-size: 15px;
+.sidebar-brand {
 
-            color:
-                #172554;
-        }
+    clear: both;
 
+    padding-top: 55px;
 
-        .pp-paper-info p {
+    padding-bottom: 25px;
 
-            margin: 0;
+    text-align: center;
+}
 
-            font-size: 12px;
+.sidebar-brand strong {
 
-            color:
-                #64748b;
-        }
+    display: block;
 
+    color: #0b3d91;
 
-        .pp-pdf-btn {
+    font-size: 18px;
+}
 
-            flex-shrink: 0;
+.sidebar-brand span {
 
-            padding:
-                10px 15px;
+    color: #718096;
 
-            border: none;
+    font-size: 12px;
+}
 
-            border-radius: 9px;
+.sidebar-links {
 
-            background:
-                #dc2626;
+    display: flex;
 
-            color: white;
+    flex-direction: column;
 
-            text-decoration: none;
+    gap: 8px;
+}
 
-            font-size: 12px;
+.sidebar-links a {
 
-            font-weight: 800;
-        }
+    display: block;
 
+    padding: 13px;
 
-        .pp-pdf-btn:hover {
+    text-decoration: none;
 
-            background:
-                #b91c1c;
-        }
+    color: #26334a;
 
+    font-weight: bold;
 
-        /* =====================================================
-           EMPTY STATE
-        ===================================================== */
+    border-radius: 9px;
+}
 
-        .pp-empty {
+.sidebar-links a:hover {
 
-            text-align: center;
+    background: #eef4ff;
 
-            padding:
-                35px 20px;
+    color: #0b4fa3;
+}
 
-            background:
-                #f8fafc;
 
-            border:
-                1px dashed #cbd5e1;
+/* =========================================================
+   OVERLAY
+========================================================= */
 
-            border-radius:
-                14px;
+.overlay {
 
-            color:
-                #64748b;
-        }
+    display: none;
 
+    position: fixed;
 
-        .pp-empty-icon {
+    inset: 0;
 
-            font-size:
-                40px;
+    background: rgba(5,18,40,.55);
 
-            margin-bottom:
-                10px;
-        }
+    z-index: 10000;
+}
 
 
-        .pp-empty h3 {
+/* =========================================================
+   FOOTER
+========================================================= */
 
-            margin:
-                0 0 7px;
+footer {
 
-            color:
-                #334155;
-        }
+    margin-top: 20px;
 
+    padding: 28px 20px;
 
-        .pp-empty p {
+    background: #071a35;
 
-            margin:
-                0;
+    color: #dce7f8;
 
-            font-size:
-                13px;
+    text-align: center;
 
-            line-height:
-                1.6;
-        }
+    font-size: 13px;
+}
 
+footer strong {
 
-        /* =====================================================
-           SIDEBAR
-        ===================================================== */
+    color: white;
 
-        .pp-overlay {
+    font-size: 15px;
+}
 
-            display: none;
 
-            position: fixed;
+/* =========================================================
+   MOBILE
+========================================================= */
 
-            inset: 0;
+@media (max-width: 600px) {
 
-            background:
-                rgba(15,23,42,.55);
+    .nav-header {
 
-            z-index: 9000;
-        }
+        padding: 12px 15px;
+    }
 
+    .logo-title {
 
-        .pp-sidebar {
+        font-size: 16px;
+    }
 
-            position: fixed;
+    .main-container {
 
-            top: 0;
+        padding: 20px 14px 55px;
+    }
 
-            right: -310px;
+    .page-header {
 
-            width: 290px;
+        padding: 25px 16px;
+    }
 
-            height: 100vh;
+    .page-header h1 {
 
-            background:
-                #ffffff;
+        font-size: 25px;
+    }
 
-            z-index: 10000;
+    .selection-grid {
 
-            box-shadow:
-                -8px 0 25px
-                rgba(15,23,42,.20);
+        grid-template-columns: 1fr;
 
-            transition:
-                right .3s ease;
+        gap: 14px;
+    }
 
-            padding:
-                22px;
+    .selection-card {
 
-            overflow-y: auto;
-        }
+        min-height: 150px;
 
+        padding: 19px;
+    }
 
-        .pp-sidebar.active {
+    .step-title h2 {
 
-            right: 0;
-        }
+        font-size: 22px;
+    }
 
+    .breadcrumb {
 
-        .pp-close {
+        font-size: 12px;
+    }
 
-            float: right;
+}
 
-            border: none;
-
-            background:
-                #eef2ff;
-
-            color:
-                #1e3a8a;
-
-            width: 40px;
-
-            height: 40px;
-
-            border-radius: 10px;
-
-            font-size: 20px;
-
-            cursor: pointer;
-        }
-
-
-        .pp-sidebar-brand {
-
-            clear: both;
-
-            padding-top:
-                55px;
-
-            padding-bottom:
-                25px;
-
-            border-bottom:
-                1px solid #e5e7eb;
-
-            margin-bottom:
-                15px;
-        }
-
-
-        .pp-sidebar-brand strong {
-
-            display: block;
-
-            font-size: 18px;
-
-            color:
-                #172554;
-        }
-
-
-        .pp-sidebar-brand span {
-
-            font-size: 12px;
-
-            color:
-                #64748b;
-        }
-
-
-        .pp-nav-link {
-
-            display: block;
-
-            width: 100%;
-
-            padding:
-                13px 14px;
-
-            margin:
-                5px 0;
-
-            border-radius: 10px;
-
-            text-decoration: none;
-
-            color:
-                #334155;
-
-            font-weight: 700;
-
-            font-size: 14px;
-        }
-
-
-        .pp-nav-link:hover {
-
-            background:
-                #eff6ff;
-
-            color:
-                #1d4ed8;
-        }
-
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
-        .pp-footer {
-
-            background:
-                #111827;
-
-            color:
-                #cbd5e1;
-
-            text-align: center;
-
-            padding:
-                28px 18px;
-
-            margin-top:
-                30px;
-
-            font-size:
-                13px;
-        }
-
-
-        .pp-footer strong {
-
-            color:
-                white;
-        }
-
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (max-width: 650px) {
-
-            .pp-header-inner {
-
-                padding:
-                    11px 14px;
-            }
-
-
-            .pp-brand-name {
-
-                font-size: 16px;
-            }
-
-
-            .pp-brand-tagline {
-
-                font-size: 10px;
-            }
-
-
-            .pp-brand img {
-
-                width: 38px;
-
-                height: 38px;
-            }
-
-
-            .pp-hero {
-
-                padding:
-                    28px 15px 15px;
-            }
-
-
-            .pp-hero h1 {
-
-                font-size: 25px;
-            }
-
-
-            .pp-main {
-
-                padding:
-                    5px 13px 45px;
-            }
-
-
-            .pp-step {
-
-                padding:
-                    17px;
-
-                border-radius:
-                    15px;
-            }
-
-
-            .pp-grid {
-
-                grid-template-columns:
-                    1fr;
-            }
-
-
-            .pp-card {
-
-                min-height:
-                    140px;
-            }
-
-
-            .pp-paper-card {
-
-                align-items:
-                    flex-start;
-
-                flex-direction:
-                    column;
-            }
-
-
-            .pp-paper-info {
-
-                width:
-                    100%;
-            }
-
-
-            .pp-pdf-btn {
-
-                width:
-                    100%;
-
-                text-align:
-                    center;
-            }
-
-        }
-
-    </style>
+</style>
 
 </head>
 
@@ -1137,171 +918,122 @@
 <body>
 
 
-<!-- =====================================================
+<!-- ========================================================
      HEADER
-===================================================== -->
+========================================================= -->
 
-<header class="pp-header">
+<header class="nav-header">
 
-    <div class="pp-header-inner">
+    <div class="logo-area">
 
-        <div class="pp-brand">
+        <img
+            src="file_00000000f17471f4b8f76a744122207a.png"
+            alt="GEPAM Logo">
 
-            <img
-                src="file_00000000f17471f4b8f76a744122207a.png"
-                alt="GEPAM Logo">
+        <div>
 
-            <div class="pp-brand-text">
-
-                <span class="pp-brand-name">
-                    GEPAM Science Hub
-                </span>
-
-                <span class="pp-brand-tagline">
-                    Making Science Easy
-                </span>
-
+            <div class="logo-title">
+                GEPAM Science Hub
             </div>
+
+            <span class="logo-subtitle">
+                Making Science Easy
+            </span>
 
         </div>
 
-
-        <button
-            class="pp-menu-btn"
-            onclick="openPPMenu()"
-            aria-label="Open menu">
-
-            ☰
-
-        </button>
-
     </div>
+
+
+    <button
+        class="menu-toggle"
+        onclick="toggleMenu()"
+        aria-label="Open menu">
+
+        ☰
+
+    </button>
 
 </header>
 
 
-<!-- =====================================================
-     HERO
-===================================================== -->
-
-<section class="pp-hero">
-
-    <span class="pp-hero-badge">
-        📚 NECTA • SCHOOL EXAMS • REVISION
-    </span>
-
-
-    <h1>
-        Past Papers
-    </h1>
-
-
-    <p>
-        Find Physics and Chemistry examination
-        papers from Form 1 to Form 6.
-        Chagua hatua kwa hatua mpaka ufikie
-        paper na kufungua PDF.
-    </p>
-
-</section>
-
-
-<!-- =====================================================
+<!-- ========================================================
      MAIN
-===================================================== -->
+========================================================= -->
 
-<main class="pp-main">
+<main class="main-container">
 
 
-    <!-- BREADCRUMB -->
+    <section class="page-header">
+
+        <div class="hero-icon">
+            📚
+        </div>
+
+        <h1>
+            Past Papers
+        </h1>
+
+        <p>
+            Find Physics and Chemistry examination
+            papers from Form 1 to Form 6.
+        </p>
+
+    </section>
+
 
     <div
-        class="pp-breadcrumb"
-        id="ppBreadcrumb">
+        class="breadcrumb"
+        id="breadcrumb">
 
-        <strong>
+        <span class="current">
             Past Papers
-        </strong>
+        </span>
 
     </div>
 
 
-    <!-- BACK BUTTON -->
-
     <button
-        class="pp-back"
-        id="ppBackButton"
-        onclick="ppGoBack()">
+        id="backButton"
+        class="back-btn"
+        onclick="goBack()">
 
         ← RUDI NYUMA
 
     </button>
 
 
-    <!-- =================================================
-         DYNAMIC CONTENT
-    ================================================== -->
-
-    <div id="ppApp">
-
-        <!-- pastpapers.js itaweka content hapa -->
-
-        <div class="pp-step">
-
-            <div class="pp-step-heading">
-
-                <div class="pp-step-number">
-                    1
-                </div>
-
-                <h2>
-                    Past Papers
-                </h2>
-
-                <p>
-                    Loading...
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
+    <div id="stepContainer"></div>
 
 
 </main>
 
 
-<!-- =====================================================
-     SIDEBAR OVERLAY
-===================================================== -->
+<!-- ========================================================
+     SIDEBAR
+========================================================= -->
 
 <div
-    class="pp-overlay"
-    id="ppOverlay"
-    onclick="closePPMenu()">
+    class="overlay"
+    id="menuOverlay"
+    onclick="toggleMenu()">
 </div>
 
 
-<!-- =====================================================
-     SIDEBAR
-===================================================== -->
-
 <aside
-    class="pp-sidebar"
-    id="ppSidebar">
-
+    class="sidebar"
+    id="sidebarMenu">
 
     <button
-        class="pp-close"
-        onclick="closePPMenu()">
+        class="close-btn"
+        onclick="toggleMenu()">
 
         ✕
 
     </button>
 
 
-    <div class="pp-sidebar-brand">
+    <div class="sidebar-brand">
 
         <strong>
             GEPAM Science Hub
@@ -1314,148 +1046,67 @@
     </div>
 
 
-    <a
-        class="pp-nav-link"
-        href="index.html">
+    <nav class="sidebar-links">
 
-        🏠 Home
+        <a href="index.html">
+            🏠 Home
+        </a>
 
-    </a>
+        <a href="about.html">
+            ℹ️ About Us
+        </a>
 
+        <a href="notes.html">
+            📝 Notes
+        </a>
 
-    <a
-        class="pp-nav-link"
-        href="about.html">
+        <a href="pastpapers.html">
+            📚 Past Papers
+        </a>
 
-        ℹ️ About Us
+        <a href="contact.html">
+            📞 Contact
+        </a>
 
-    </a>
-
-
-    <a
-        class="pp-nav-link"
-        href="notes.html">
-
-        📝 Notes
-
-    </a>
-
-
-    <a
-        class="pp-nav-link"
-        href="pastpapers.html">
-
-        📚 Past Papers
-
-    </a>
-
-
-    <a
-        class="pp-nav-link"
-        href="contact.html">
-
-        📞 Contact
-
-    </a>
-
+    </nav>
 
 </aside>
 
 
-<!-- =====================================================
+<!-- ========================================================
      FOOTER
-===================================================== -->
+========================================================= -->
 
-<footer class="pp-footer">
+<footer>
 
     <strong>
         GEPAM Science Hub
     </strong>
 
-    <br>
+    <p>
+        Making Science Easy
+    </p>
 
-    Making Science Easy
-
-    <br><br>
-
-    © 2026 GEPAM Science Hub.
-    All Rights Reserved.
+    <p>
+        © 2026 GEPAM Science Hub.
+        All Rights Reserved.
+    </p>
 
 </footer>
 
 
-<!-- =====================================================
+<!-- ========================================================
      IMPORTANT SCRIPT ORDER
-     
-     DATA FIRST
-     ENGINE SECOND
-
-     defer keeps this execution order.
-===================================================== -->
+========================================================= -->
 
 <script
-    defer
-    src="pastpapers.data.js">
+    src="pastpapers.data.js"
+    defer>
 </script>
-
 
 <script
-    defer
-    src="pastpapers.js">
-</script>
-
-
-<!-- =====================================================
-     SIDEBAR SCRIPT
-===================================================== -->
-
-<script>
-
-function openPPMenu() {
-
-    const sidebar =
-        document.getElementById(
-            "ppSidebar"
-        );
-
-    const overlay =
-        document.getElementById(
-            "ppOverlay"
-        );
-
-
-    sidebar.classList.add(
-        "active"
-    );
-
-    overlay.style.display =
-        "block";
-
-}
-
-
-function closePPMenu() {
-
-    const sidebar =
-        document.getElementById(
-            "ppSidebar"
-        );
-
-    const overlay =
-        document.getElementById(
-            "ppOverlay"
-        );
-
-
-    sidebar.classList.remove(
-        "active"
-    );
-
-    overlay.style.display =
-        "none";
-
-}
-
+    src="pastpapers.js"
+    defer>
 </script>
 
 
