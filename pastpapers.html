@@ -5,983 +5,30 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>GEPAM Science Hub | Past Papers</title>
 
-    <link rel="icon"
-          type="image/png"
-          href="file_00000000f17471f4b8f76a744122207a.png">
-
-    <!-- Existing main stylesheet -->
-    <link rel="stylesheet"
-          href="style.css">
-
-    <style>
-
-        /* =====================================================
-           GEPAM PAST PAPERS
-           BLUE + ORANGE DESIGN
-           DIFFERENT FROM NOTES GREEN DESIGN
-        ===================================================== */
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            color: #1e293b;
-            overflow-x: hidden;
-        }
-
-
-        /* =====================================================
-           HEADER
-        ===================================================== */
-
-        .pp-header {
-
-            max-width: 1000px;
-            margin: 0 auto;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 14px 20px;
-
-            background: #ffffff;
-
-            border-bottom: 1px solid #dce3ec;
-
-        }
-
-
-        .pp-logo-area {
-
-            display: flex;
-            align-items: center;
-
-            gap: 10px;
-
-        }
-
-
-        .pp-logo-area img {
-
-            width: 42px;
-            height: 42px;
-
-            object-fit: contain;
-
-        }
-
-
-        .pp-logo-text {
-
-            display: flex;
-            flex-direction: column;
-
-        }
-
-
-        .pp-logo-title {
-
-            font-size: 18px;
-            font-weight: 800;
-
-            color: #123b66;
-
-        }
-
-
-        .pp-logo-subtitle {
-
-            font-size: 12px;
-
-            color: #64748b;
-
-            margin-top: 2px;
-
-        }
-
-
-        .pp-menu-button {
-
-            width: 44px;
-            height: 44px;
-
-            border: none;
-
-            background: #123b66;
-
-            color: #ffffff;
-
-            border-radius: 8px;
-
-            font-size: 24px;
-
-            cursor: pointer;
-
-        }
-
-
-        .pp-menu-button:hover {
-
-            background: #0d2d4d;
-
-        }
-
-
-        /* =====================================================
-           MAIN
-        ===================================================== */
-
-        .pp-main {
-
-            max-width: 1000px;
-
-            margin: 0 auto;
-
-            padding: 25px 20px 70px;
-
-        }
-
-
-        /* =====================================================
-           HERO
-        ===================================================== */
-
-        .pp-hero {
-
-            text-align: center;
-
-            padding: 25px 15px 20px;
-
-        }
-
-
-        .pp-hero-icon {
-
-            width: 70px;
-            height: 70px;
-
-            margin: 0 auto 14px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 18px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #123b66,
-                    #1e5d91
-                );
-
-            color: #ffffff;
-
-            font-size: 36px;
-
-            box-shadow:
-                0 8px 20px
-                rgba(18,59,102,0.20);
-
-        }
-
-
-        .pp-hero h1 {
-
-            margin: 0 0 8px;
-
-            font-size: 29px;
-
-            color: #123b66;
-
-        }
-
-
-        .pp-hero p {
-
-            margin: 0 auto;
-
-            max-width: 650px;
-
-            color: #64748b;
-
-            line-height: 1.6;
-
-        }
-
-
-        /* =====================================================
-           BREADCRUMB
-        ===================================================== */
-
-        .pp-breadcrumb {
-
-            display: flex;
-
-            flex-wrap: wrap;
-
-            align-items: center;
-
-            gap: 6px;
-
-            margin: 10px 0 18px;
-
-            padding: 12px 15px;
-
-            background: #ffffff;
-
-            border-left: 4px solid #f28c28;
-
-            border-radius: 7px;
-
-            box-shadow:
-                0 3px 10px
-                rgba(15,23,42,0.05);
-
-            font-size: 14px;
-
-        }
-
-
-        .pp-breadcrumb-item {
-
-            font-weight: 700;
-
-            color: #123b66;
-
-        }
-
-
-        .pp-breadcrumb-separator {
-
-            color: #94a3b8;
-
-            font-size: 18px;
-
-        }
-
-
-        /* =====================================================
-           BACK BUTTON
-        ===================================================== */
-
-        .pp-back {
-
-            display: none;
-
-            align-items: center;
-
-            gap: 7px;
-
-            padding: 11px 17px;
-
-            margin-bottom: 18px;
-
-            border: none;
-
-            border-radius: 7px;
-
-            background: #123b66;
-
-            color: #ffffff;
-
-            font-size: 14px;
-
-            font-weight: 700;
-
-            cursor: pointer;
-
-        }
-
-
-        .pp-back:hover {
-
-            background: #0d2d4d;
-
-        }
-
-
-        /* =====================================================
-           STEP HEADER
-        ===================================================== */
-
-        .pp-step {
-
-            text-align: center;
-
-            margin: 15px 0 22px;
-
-        }
-
-
-        .pp-step-number {
-
-            display: inline-flex;
-
-            align-items: center;
-            justify-content: center;
-
-            width: 34px;
-            height: 34px;
-
-            margin-bottom: 8px;
-
-            border-radius: 50%;
-
-            background: #f28c28;
-
-            color: #ffffff;
-
-            font-size: 15px;
-
-            font-weight: 800;
-
-        }
-
-
-        .pp-step h2 {
-
-            margin: 0 0 7px;
-
-            color: #123b66;
-
-            font-size: 24px;
-
-        }
-
-
-        .pp-step p {
-
-            margin: 0;
-
-            color: #64748b;
-
-            line-height: 1.5;
-
-        }
-
-
-        /* =====================================================
-           CARD GRID
-        ===================================================== */
-
-        .pp-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(
-                    auto-fit,
-                    minmax(220px, 1fr)
-                );
-
-            gap: 18px;
-
-        }
-
-
-        /* =====================================================
-           MAIN CARD
-        ===================================================== */
-
-        .pp-card {
-
-            position: relative;
-
-            background: #ffffff;
-
-            border: 1px solid #dfe6ef;
-
-            border-top: 5px solid #123b66;
-
-            border-radius: 10px;
-
-            padding: 22px;
-
-            min-height: 160px;
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content: space-between;
-
-            box-shadow:
-                0 5px 14px
-                rgba(15,23,42,0.07);
-
-            transition:
-                transform .2s ease,
-                box-shadow .2s ease;
-
-        }
-
-
-        .pp-card:hover {
-
-            transform: translateY(-4px);
-
-            box-shadow:
-                0 10px 22px
-                rgba(15,23,42,0.11);
-
-        }
-
-
-        .pp-card-icon {
-
-            font-size: 34px;
-
-            margin-bottom: 8px;
-
-        }
-
-
-        .pp-card h3 {
-
-            margin: 0 0 8px;
-
-            color: #123b66;
-
-            font-size: 19px;
-
-        }
-
-
-        .pp-card p {
-
-            margin: 0;
-
-            color: #64748b;
-
-            font-size: 14px;
-
-            line-height: 1.5;
-
-        }
-
-
-        /* =====================================================
-           CARD BUTTON
-        ===================================================== */
-
-        .pp-open-btn {
-
-            width: 100%;
-
-            margin-top: 18px;
-
-            padding: 12px 14px;
-
-            border: none;
-
-            border-radius: 7px;
-
-            background: #f28c28;
-
-            color: #ffffff;
-
-            font-size: 14px;
-
-            font-weight: 800;
-
-            cursor: pointer;
-
-        }
-
-
-        .pp-open-btn:hover {
-
-            background: #d97415;
-
-        }
-
-
-        /* =====================================================
-           FORM CARDS
-        ===================================================== */
-
-        .pp-form-card {
-
-            border-top-color: #123b66;
-
-        }
-
-
-        .pp-form-number {
-
-            display: inline-flex;
-
-            align-items: center;
-            justify-content: center;
-
-            width: 46px;
-            height: 46px;
-
-            margin-bottom: 12px;
-
-            border-radius: 12px;
-
-            background: #e8f0f8;
-
-            color: #123b66;
-
-            font-size: 20px;
-
-            font-weight: 900;
-
-        }
-
-
-        /* =====================================================
-           SUBJECT CARDS
-        ===================================================== */
-
-        .pp-subject-card {
-
-            min-height: 175px;
-
-        }
-
-
-        .pp-physics {
-
-            border-top-color: #155e9e;
-
-        }
-
-
-        .pp-chemistry {
-
-            border-top-color: #e97817;
-
-        }
-
-
-        /* =====================================================
-           TYPE CARDS
-        ===================================================== */
-
-        .pp-type-card {
-
-            min-height: 165px;
-
-        }
-
-
-        .pp-type-icon {
-
-            font-size: 32px;
-
-            margin-bottom: 10px;
-
-        }
-
-
-        /* =====================================================
-           REGION CARDS
-        ===================================================== */
-
-        .pp-region-card {
-
-            min-height: 150px;
-
-            border-top-color: #607d9b;
-
-        }
-
-
-        /* =====================================================
-           YEAR CARDS
-        ===================================================== */
-
-        .pp-year-card {
-
-            min-height: 130px;
-
-            text-align: center;
-
-            border-top-color: #f28c28;
-
-        }
-
-
-        .pp-year-card .pp-open-btn {
-
-            margin-top: 15px;
-
-        }
-
-
-        /* =====================================================
-           PAPER CARDS
-        ===================================================== */
-
-        .pp-paper-card {
-
-            border-top-color: #123b66;
-
-            min-height: 180px;
-
-        }
-
-
-        .pp-paper-title {
-
-            font-size: 18px;
-
-            font-weight: 800;
-
-            color: #123b66;
-
-            margin-bottom: 10px;
-
-        }
-
-
-        .pp-paper-meta {
-
-            display: flex;
-
-            flex-wrap: wrap;
-
-            gap: 7px;
-
-            margin-top: 10px;
-
-        }
-
-
-        .pp-badge {
-
-            display: inline-block;
-
-            padding: 5px 9px;
-
-            border-radius: 5px;
-
-            background: #eef3f8;
-
-            color: #486581;
-
-            font-size: 12px;
-
-            font-weight: 700;
-
-        }
-
-
-        .pp-pdf-btn {
-
-            width: 100%;
-
-            margin-top: 18px;
-
-            padding: 13px;
-
-            border: none;
-
-            border-radius: 7px;
-
-            background: #123b66;
-
-            color: #ffffff;
-
-            text-decoration: none;
-
-            text-align: center;
-
-            font-size: 14px;
-
-            font-weight: 800;
-
-            display: block;
-
-        }
-
-
-        .pp-pdf-btn:hover {
-
-            background: #0d2d4d;
-
-        }
-
-
-        /* =====================================================
-           EMPTY STATE
-        ===================================================== */
-
-        .pp-empty {
-
-            padding: 35px 20px;
-
-            background: #ffffff;
-
-            border: 1px solid #e1e7ef;
-
-            border-radius: 10px;
-
-            text-align: center;
-
-            box-shadow:
-                0 4px 12px
-                rgba(15,23,42,0.05);
-
-        }
-
-
-        .pp-empty-icon {
-
-            font-size: 45px;
-
-            margin-bottom: 10px;
-
-        }
-
-
-        .pp-empty h3 {
-
-            margin: 0 0 8px;
-
-            color: #123b66;
-
-        }
-
-
-        .pp-empty p {
-
-            color: #64748b;
-
-            line-height: 1.6;
-
-        }
-
-
-        /* =====================================================
-           SIDEBAR
-        ===================================================== */
-
-        .pp-overlay {
-
-            display: none;
-
-            position: fixed;
-
-            inset: 0;
-
-            background:
-                rgba(15,23,42,0.55);
-
-            z-index: 9998;
-
-        }
-
-
-        .pp-sidebar {
-
-            position: fixed;
-
-            top: 0;
-            right: -300px;
-
-            width: 285px;
-
-            height: 100vh;
-
-            padding: 20px;
-
-            background: #ffffff;
-
-            box-shadow:
-                -7px 0 22px
-                rgba(0,0,0,0.15);
-
-            z-index: 9999;
-
-            transition:
-                right .3s ease;
-
-            overflow-y: auto;
-
-        }
-
-
-        .pp-sidebar.active {
-
-            right: 0;
-
-        }
-
-
-        .pp-close {
-
-            float: right;
-
-            border: none;
-
-            background: none;
-
-            font-size: 25px;
-
-            color: #123b66;
-
-            cursor: pointer;
-
-        }
-
-
-        .pp-sidebar-links {
-
-            clear: both;
-
-            padding-top: 45px;
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 8px;
-
-        }
-
-
-        .pp-sidebar-links a {
-
-            display: block;
-
-            padding: 13px;
-
-            text-decoration: none;
-
-            color: #243b53;
-
-            font-weight: 700;
-
-            border-radius: 7px;
-
-        }
-
-
-        .pp-sidebar-links a:hover {
-
-            background: #edf3f8;
-
-            color: #123b66;
-
-        }
-
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
-        .pp-footer {
-
-            margin-top: 40px;
-
-            padding: 28px 20px;
-
-            background: #123b66;
-
-            color: #ffffff;
-
-            text-align: center;
-
-        }
-
-
-        .pp-footer p {
-
-            margin: 0;
-
-            font-size: 14px;
-
-        }
-
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (max-width: 600px) {
-
-            .pp-main {
-
-                padding:
-                    18px 14px 55px;
-
-            }
-
-
-            .pp-header {
-
-                padding:
-                    12px 15px;
-
-            }
-
-
-            .pp-hero {
-
-                padding:
-                    20px 5px;
-
-            }
-
-
-            .pp-hero h1 {
-
-                font-size: 24px;
-
-            }
-
-
-            .pp-step h2 {
-
-                font-size: 21px;
-
-            }
-
-
-            .pp-grid {
-
-                grid-template-columns: 1fr;
-
-                gap: 15px;
-
-            }
-
-
-            .pp-card {
-
-                min-height: 145px;
-
-                padding: 20px;
-
-            }
-
-
-            .pp-logo-title {
-
-                font-size: 16px;
-
-            }
-
-        }
-
-    </style>
+    <link
+        rel="icon"
+        type="image/png"
+        href="file_00000000f17471f4b8f76a744122207a.png"
+    >
+
+    <!-- COMMON SITE STYLE -->
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <!-- PAST PAPERS STYLE -->
+    <link
+        rel="stylesheet"
+        href="pastpapers.css"
+    >
 
 </head>
 
@@ -989,27 +36,28 @@
 <body>
 
 
-<!-- ========================================================
+<!-- ======================================================
      HEADER
-========================================================= -->
+====================================================== -->
 
-<header class="pp-header">
+<header class="gp-header">
 
-    <div class="pp-logo-area">
+    <div class="gp-brand">
 
         <img
             src="file_00000000f17471f4b8f76a744122207a.png"
-            alt="GEPAM Science Hub Logo">
+            alt="GEPAM Science Hub Logo"
+        >
 
-        <div class="pp-logo-text">
+        <div class="gp-brand-text">
 
-            <div class="pp-logo-title">
+            <strong>
                 GEPAM Science Hub
-            </div>
+            </strong>
 
-            <div class="pp-logo-subtitle">
+            <span>
                 Making Science Easy
-            </div>
+            </span>
 
         </div>
 
@@ -1017,143 +65,65 @@
 
 
     <button
-        class="pp-menu-button"
-        onclick="togglePPMenu()"
-        aria-label="Open menu">
-
+        class="gp-menu-btn"
+        id="menuButton"
+        onclick="toggleMenu()"
+        aria-label="Open menu"
+    >
         ☰
-
     </button>
 
 </header>
 
 
 
-<!-- ========================================================
-     MAIN
-========================================================= -->
+<!-- ======================================================
+     SIDEBAR
+====================================================== -->
 
-<main class="pp-main">
+<div
+    class="gp-overlay"
+    id="menuOverlay"
+    onclick="toggleMenu()"
+></div>
 
 
-    <!-- HERO -->
+<aside
+    class="gp-sidebar"
+    id="sidebarMenu"
+>
 
-    <section class="pp-hero">
+    <button
+        class="gp-close-btn"
+        onclick="toggleMenu()"
+    >
+        ✕
+    </button>
 
-        <div class="pp-hero-icon">
-            📚
+
+    <div class="gp-sidebar-brand">
+
+        <img
+            src="file_00000000f17471f4b8f76a744122207a.png"
+            alt="GEPAM"
+        >
+
+        <div>
+
+            <strong>
+                GEPAM Science Hub
+            </strong>
+
+            <span>
+                Making Science Easy
+            </span>
+
         </div>
-
-        <h1>
-            Past Papers
-        </h1>
-
-        <p>
-            Find Physics and Chemistry examination
-            papers from Form 1 to Form 6.
-        </p>
-
-    </section>
-
-
-
-    <!-- ====================================================
-         BREADCRUMB
-    ===================================================== -->
-
-    <div
-        class="pp-breadcrumb"
-        id="ppBreadcrumb">
-
-        <span class="pp-breadcrumb-item">
-            Past Papers
-        </span>
 
     </div>
 
 
-
-    <!-- ====================================================
-         BACK
-    ===================================================== -->
-
-    <button
-        id="ppBackButton"
-        class="pp-back"
-        onclick="ppGoBack()">
-
-        ← RUDI NYUMA
-
-    </button>
-
-
-
-    <!-- ====================================================
-         DYNAMIC NAVIGATION
-         
-         IMPORTANT:
-
-         HTML HII INA CONTAINER TU.
-
-         JavaScript ITAINGIZA:
-
-         FORM
-           ↓
-         SUBJECT
-           ↓
-         TYPE
-           ↓
-         REGION
-           ↓
-         YEAR
-           ↓
-         PDF
-    ===================================================== -->
-
-    <section
-        id="ppStepContainer">
-
-        <!-- Form 1 - Form 6 zitawekwa hapa
-             na pastpapers.js -->
-
-    </section>
-
-
-</main>
-
-
-
-<!-- ========================================================
-     SIDEBAR OVERLAY
-========================================================= -->
-
-<div
-    id="ppOverlay"
-    class="pp-overlay"
-    onclick="togglePPMenu()">
-</div>
-
-
-
-<!-- ========================================================
-     SIDEBAR
-========================================================= -->
-
-<aside
-    id="ppSidebar"
-    class="pp-sidebar">
-
-
-    <button
-        class="pp-close"
-        onclick="togglePPMenu()">
-
-        ✕
-
-    </button>
-
-
-    <nav class="pp-sidebar-links">
+    <nav class="gp-sidebar-links">
 
         <a href="index.html">
             🏠 Home
@@ -1167,7 +137,10 @@
             📝 Notes
         </a>
 
-        <a href="pastpapers.html">
+        <a
+            href="pastpapers.html"
+            class="active"
+        >
             📚 Past Papers
         </a>
 
@@ -1181,19 +154,114 @@
 
 
 
-<!-- ========================================================
-     FOOTER
-========================================================= -->
+<!-- ======================================================
+     HERO
+====================================================== -->
 
-<footer class="pp-footer">
+<section class="gp-hero">
+
+    <div class="gp-hero-icon">
+        📚
+    </div>
+
+    <div>
+
+        <div class="gp-hero-label">
+            NECTA • SCHOOL EXAMS • REVISION
+        </div>
+
+        <h1>
+            Past Papers
+        </h1>
+
+        <p>
+            Find Physics and Chemistry examination
+            papers from Form 1 to Form 6.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ======================================================
+     MAIN
+====================================================== -->
+
+<main class="gp-main">
+
+
+    <!-- BREADCRUMB -->
+
+    <div
+        class="gp-breadcrumb"
+        id="breadcrumb"
+    >
+
+        <span>
+            📚 Past Papers
+        </span>
+
+    </div>
+
+
+    <!-- BACK -->
+
+    <button
+        class="gp-back-btn"
+        id="backButton"
+        onclick="goBack()"
+    >
+        ← RUDI NYUMA
+    </button>
+
+
+    <!-- STEP CONTENT -->
+
+    <section
+        id="stepContainer"
+        class="gp-content"
+    >
+
+        <!-- JavaScript will load content here -->
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+
+<footer class="gp-footer">
+
+    <div class="gp-footer-brand">
+
+        <img
+            src="file_00000000f17471f4b8f76a744122207a.png"
+            alt="GEPAM"
+        >
+
+        <div>
+
+            <strong>
+                GEPAM Science Hub
+            </strong>
+
+            <span>
+                Making Science Easy
+            </span>
+
+        </div>
+
+    </div>
+
 
     <p>
-        GEPAM Science Hub
-        <br>
-        Making Science Easy
-    </p>
-
-    <p style="margin-top:10px;">
         © 2026 GEPAM Science Hub.
         All Rights Reserved.
     </p>
@@ -1202,68 +270,51 @@
 
 
 
-<!-- ========================================================
+<!-- ======================================================
      DATA
      
-     LOAD FIRST
-========================================================= -->
+     MUHIMU:
+     DATA JS IJE KWANZA.
+====================================================== -->
 
 <script src="pastpapers.data.js"></script>
 
 
-
-<!-- ========================================================
-     NAVIGATION
-     
-     LOAD SECOND
-========================================================= -->
+<!-- ======================================================
+     NAVIGATION ENGINE
+====================================================== -->
 
 <script src="pastpapers.js"></script>
 
 
 
-<!-- ========================================================
-     SIDEBAR
-========================================================= -->
-
 <script>
 
-function togglePPMenu() {
+/* ========================================================
+   SIDEBAR
+======================================================== */
+
+function toggleMenu() {
 
     const sidebar =
-        document.getElementById(
-            "ppSidebar"
-        );
+        document.getElementById("sidebarMenu");
 
     const overlay =
-        document.getElementById(
-            "ppOverlay"
-        );
+        document.getElementById("menuOverlay");
 
 
-    const active =
-        sidebar.classList.contains(
-            "active"
-        );
+    sidebar.classList.toggle("active");
 
 
-    if (active) {
+    if (
+        sidebar.classList.contains("active")
+    ) {
 
-        sidebar.classList.remove(
-            "active"
-        );
-
-        overlay.style.display =
-            "none";
+        overlay.classList.add("active");
 
     } else {
 
-        sidebar.classList.add(
-            "active"
-        );
-
-        overlay.style.display =
-            "block";
+        overlay.classList.remove("active");
 
     }
 
