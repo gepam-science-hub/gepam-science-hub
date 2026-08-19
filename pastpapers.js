@@ -1373,22 +1373,11 @@ function renderSubjects() {
     subjects.forEach(
         subject => {
 
-            const icon =
-                subject ===
-                "physics"
-                ? "⚛️"
-                : "🧪";
-
-
             html += `
 
                 <div class="selection-card subject-card">
 
                     <div>
-
-                        <div class="subject-icon">
-                            ${icon}
-                        </div>
 
                         <h3>
                             ${subject
