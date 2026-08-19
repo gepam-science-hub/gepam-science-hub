@@ -620,5 +620,6 @@ const pastPapers = {
        ]
    }
  };
+
 window.pastPaperConfig = pastPaperConfig;
 window.pastPapers = pastPapers;
