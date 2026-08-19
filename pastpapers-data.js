@@ -1,7 +1,7 @@
 /* =========================================================
    GEPAM SCIENCE HUB - PAST PAPERS DATABASE (data.js)
    ========================================================= */
-window.pastPapers = {
+const localDatabase = {
     form1: {
         physics: [
             {
@@ -207,3 +207,6 @@ window.pastPapers = {
         ]
     }
 };
+
+// hapa ndipo window inapounganishwa chini kabisa ya database yako mkuu:
+window.pastPapers = localDatabase;
