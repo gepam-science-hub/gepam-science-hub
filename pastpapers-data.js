@@ -488,12 +488,52 @@ const pastPapers = [
 
   {
     "form":"form4",
-    "subject":"physics",
+    "subject":"physics1",
     "title":"Physics Mock Examination",
     "type":"mock",
     "region":"dar_es_salaam",
     "year":2026,
     "file":"papers/form4/physics/mock/dar_es_salaam/2026/physics_mock_2026.pdf"
+  },
+
+  {
+    "form":"form4",
+    "subject":"physics2A",
+    "title":"Physics Mock Examination",
+    "type":"mock",
+    "region":"dar_es_salaam",
+    "year":2026,
+    "file":"papers/form4/physics/mock/dar_es_salaam/2026/physics_mock_2026.pdf"
+  },
+
+  {
+    "form":"form4",
+    "subject":"physics1",
+    "title":"Physics Mock Examination",
+    "type":"mock",
+    "region":"dar_es_salaam",
+    "year":2025,
+    "file":"papers/form4/physics/mock/dar_es_salaam/2025/F4_dsm_mock_2025_phys1&Marking_scheme_GEPAM_hub.pdf"
+  },
+
+  {
+    "form":"form4",
+    "subject":"physics2A",
+    "title":"Physics Mock Examination",
+    "type":"mock",
+    "region":"dar_es_salaam",
+    "year":2025,
+    "file":"papers/form4/physics/mock/dar_es_salaam/2025/F4_dsm_mock_2025_phy2A&Marking_scheme_GEPAM_hub.pdf"
+  },
+
+  {
+    "form":"form4",
+    "subject":"physics2B",
+    "title":"Physics Mock Examination",
+    "type":"mock",
+    "region":"dar_es_salaam",
+    "year":2025,
+    "file":"papers/form4/physics/mock/dar_es_salaam/2025/F4_dsm_mock_2025_phy2B&Marking_scheme_GEPAM_hub.pdf"
   },
 
   {
