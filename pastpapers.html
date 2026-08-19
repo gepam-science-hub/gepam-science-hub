@@ -26,7 +26,6 @@
 
 <!-- =====================================================
      PAST PAPERS DATA
-     MUHIMU: DATA INAPAKIWA KWANZA
 ====================================================== -->
 
 <script src="pastpapers-data.js"></script>
@@ -588,34 +587,6 @@ body {
 }
 
 
-/* =========================================================
-   CARD ICON
-========================================================= */
-
-.card-icon {
-
-    width: 55px;
-
-    height: 55px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 15px;
-
-    background:
-        var(--light-blue);
-
-    font-size: 28px;
-
-    margin-bottom: 14px;
-
-}
-
-
 .selection-card h3 {
 
     margin:
@@ -654,14 +625,6 @@ body {
 }
 
 
-.form-card .card-icon {
-
-    background:
-        #e8f3ff;
-
-}
-
-
 /* =========================================================
    SUBJECT CARDS
 ========================================================= */
@@ -686,22 +649,6 @@ body {
             #00897b,
             #26a69a
         );
-
-}
-
-
-.physics-card .card-icon {
-
-    background:
-        #e6f1ff;
-
-}
-
-
-.chemistry-card .card-icon {
-
-    background:
-        #e5f8f5;
 
 }
 
@@ -1450,10 +1397,7 @@ footer strong {
         All Rights Reserved.
     </p>
 
-</footer>
-
-
-<!-- =======================================================
+      </footer><!-- =======================================================
      NAVIGATION SCRIPT
 ======================================================= -->
 
@@ -1516,44 +1460,39 @@ const dataStatus =
 
 /* =========================================================
    FORM DATA
+   ICONS ZIMEONDOLEWA
 ========================================================= */
 
 const forms = [
 
     {
         id: "form1",
-        name: "Form 1",
-        
+        name: "Form 1"
     },
 
     {
         id: "form2",
-        name: "Form 2",
-        
+        name: "Form 2"
     },
 
     {
         id: "form3",
-        name: "Form 3",
-        
+        name: "Form 3"
     },
 
     {
         id: "form4",
-        name: "Form 4",
-        
+        name: "Form 4"
     },
 
     {
         id: "form5",
-        name: "Form 5",
-        
+        name: "Form 5"
     },
 
     {
         id: "form6",
-        name: "Form 6",
-        
+        name: "Form 6"
     }
 
 ];
@@ -1561,6 +1500,7 @@ const forms = [
 
 /* =========================================================
    SUBJECT DATA
+   ICONS ZIMEONDOLEWA
 ========================================================= */
 
 const subjects = [
@@ -1582,6 +1522,7 @@ const subjects = [
 
 /* =========================================================
    PAPER TYPES
+   ICONS ZIMEONDOLEWA
 ========================================================= */
 
 const paperTypes = [
@@ -1626,80 +1567,69 @@ const paperTypes = [
 
 /* =========================================================
    REGIONS
+   ICONS ZIMEONDOLEWA
 ========================================================= */
 
 const regions = [
 
     {
         id: "arusha",
-        name: "Arusha",
-        icon: "📍"
+        name: "Arusha"
     },
 
     {
         id: "dar_es_salaam",
-        name: "Dar es Salaam",
-        icon: "📍"
+        name: "Dar es Salaam"
     },
 
     {
         id: "dodoma",
-        name: "Dodoma",
-        icon: "📍"
+        name: "Dodoma"
     },
 
     {
         id: "geita",
-        name: "Geita",
-        icon: "📍"
+        name: "Geita"
     },
 
     {
         id: "iringa",
-        name: "Iringa",
-        icon: "📍"
+        name: "Iringa"
     },
 
     {
         id: "kagera",
-        name: "Kagera",
-        icon: "📍"
+        name: "Kagera"
     },
 
     {
         id: "kigoma",
-        name: "Kigoma",
-        icon: "📍"
+        name: "Kigoma"
     },
 
     {
         id: "kilimanjaro",
-        name: "Kilimanjaro",
-        icon: "📍"
+        name: "Kilimanjaro"
     },
 
     {
         id: "mbeya",
-        name: "Mbeya",
-        icon: "📍"
+        name: "Mbeya"
     },
 
     {
         id: "morogoro",
-        name: "Morogoro",
-        icon: "📍"
+        name: "Morogoro"
     },
 
     {
         id: "mwanza",
-        name: "Mwanza",
-        icon: "📍"
+        name: "Mwanza"
     },
 
     {
         id: "tanga",
-        name: "Tanga",
-        icon: "📍"
+        name: "Tanga"
     }
 
 ];
@@ -1759,8 +1689,9 @@ function checkDataFile() {
         dataStatus.innerHTML = `
             ⚠️ <strong>Past Papers database
             haijapakiwa.</strong><br>
+
             Hakikisha faili
-            <strong>pastpapers.data.js</strong>
+            <strong>pastpapers-data.js</strong>
             lipo kwenye folder moja na
             pastpapers.html.
         `;
@@ -1845,10 +1776,6 @@ function renderForms() {
                 ">
 
                     <div>
-
-                        <div class="card-icon">
-                            ${form.icon}
-                        </div>
 
                         <h3>
                             ${form.name}
@@ -1989,10 +1916,6 @@ function renderSubjects() {
 
                     <div>
 
-                        <div class="card-icon">
-                            ${subject.icon}
-                        </div>
-
                         <h3>
                             ${subject.name}
                         </h3>
@@ -2120,10 +2043,6 @@ function renderTypes() {
 
                     <div>
 
-                        <div class="card-icon">
-                            ${type.icon}
-                        </div>
-
                         <h3>
                             ${type.name}
                         </h3>
@@ -2236,10 +2155,6 @@ function renderRegions() {
 
                     <div>
 
-                        <div class="card-icon">
-                            ${region.icon}
-                        </div>
-
                         <h3>
                             ${region.name}
                         </h3>
@@ -2348,10 +2263,6 @@ function renderYears() {
                 ">
 
                     <div>
-
-                        <div class="card-icon">
-                            📅
-                        </div>
 
                         <h3>
                             ${year}
@@ -2621,8 +2532,7 @@ function renderPapers() {
     stepContainer.innerHTML =
         html;
 
-}
-
+}<script>
 
 /* =========================================================
    OPEN PDF
@@ -3094,14 +3004,9 @@ initialize();
 
 
 <!-- =======================================================
-     DATA LOAD FALLBACK
-     
-     Kwa sababu script ya data ina defer, script ya
-     navigation pia ipo chini ya body. Browser itakuwa
-     tayari imefanya deferred scripts kabla ya parsing
-     kukamilika, hivyo window.pastPapers inapaswa kuwepo.
+     END OF PAST PAPERS PAGE
 ======================================================= -->
 
 </body>
 
-    </html>
+</html>
