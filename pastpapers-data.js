@@ -621,5 +621,12 @@ const pastPapers = {
    }
  };
 
-window.pastPaperConfig = pastPaperConfig;
-window.pastPapers = pastPapers;
+/* =========================================================
+   EXPORT TO WINDOW
+========================================================= */
+
+window.pastPaperConfig =
+    pastPaperConfig;
+
+window.pastPapers =
+    pastPapers;
