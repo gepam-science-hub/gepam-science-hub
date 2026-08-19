@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -13,13 +14,11 @@
       type="image/png"
       href="file_00000000f17471f4b8f76a744122207a.png">
 
-<link rel="stylesheet"
-      href="style.css">
-
 <style>
 
 /* =========================================================
-   BASIC
+   GEPAM PAST PAPERS
+   DIFFERENT COLOUR THEME FROM NOTES
 ========================================================= */
 
 * {
@@ -32,16 +31,16 @@ body {
 
     font-family: Arial, sans-serif;
 
-    background: #fafafa;
+    background: #f4f7fb;
 
-    color: #222;
+    color: #172033;
 
     overflow-x: hidden;
 }
 
 
 /* =========================================================
-   TOP NAVIGATION
+   HEADER
 ========================================================= */
 
 .nav-header {
@@ -52,17 +51,17 @@ body {
 
     align-items: center;
 
-    max-width: 1000px;
+    max-width: 1050px;
 
     margin: 0 auto;
 
-    padding: 15px 20px;
+    padding: 14px 20px;
 
-    background: #fff;
+    background: #ffffff;
 
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #dfe6f1;
+
 }
-
 
 .logo-area {
 
@@ -71,16 +70,16 @@ body {
     align-items: center;
 
     gap: 10px;
-}
 
+}
 
 .logo-area img {
 
-    height: 40px;
+    height: 42px;
 
     width: auto;
-}
 
+}
 
 .logo-title {
 
@@ -88,140 +87,34 @@ body {
 
     font-size: 18px;
 
-    color: #222;
-}
+    color: #16213e;
 
+}
 
 .menu-toggle {
 
-    font-size: 28px;
-
-    background: none;
-
     border: none;
+
+    background: #eef3ff;
+
+    color: #243b75;
+
+    width: 44px;
+
+    height: 44px;
+
+    border-radius: 10px;
+
+    font-size: 25px;
 
     cursor: pointer;
 
-    color: #333;
 }
 
+.menu-toggle:hover {
 
-/* =========================================================
-   SIDEBAR
-========================================================= */
+    background: #dfe8ff;
 
-.sidebar {
-
-    position: fixed;
-
-    top: 0;
-
-    right: -290px;
-
-    width: 280px;
-
-    height: 100%;
-
-    background: #fff;
-
-    box-shadow:
-        -5px 0 15px rgba(0,0,0,0.12);
-
-    transition: right 0.3s ease;
-
-    z-index: 10000;
-
-    padding: 20px;
-
-    overflow-y: auto;
-}
-
-
-.sidebar.active {
-
-    right: 0;
-}
-
-
-.close-btn {
-
-    font-size: 24px;
-
-    background: none;
-
-    border: none;
-
-    cursor: pointer;
-
-    color: #333;
-
-    float: right;
-
-    padding: 5px 10px;
-}
-
-
-.sidebar-links {
-
-    margin-top: 55px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 10px;
-}
-
-
-.sidebar-links a {
-
-    display: block;
-
-    width: 100%;
-
-    padding: 12px;
-
-    text-decoration: none;
-
-    color: #333;
-
-    font-weight: bold;
-
-    font-size: 16px;
-
-    border-radius: 5px;
-}
-
-
-.sidebar-links a:hover {
-
-    background: #f4f4f4;
-
-    color: #00a500;
-}
-
-
-/* =========================================================
-   OVERLAY
-========================================================= */
-
-.overlay {
-
-    display: none;
-
-    position: fixed;
-
-    top: 0;
-
-    left: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    background: rgba(0,0,0,0.45);
-
-    z-index: 9999;
 }
 
 
@@ -231,16 +124,17 @@ body {
 
 .main-container {
 
-    max-width: 1000px;
+    max-width: 1050px;
 
     margin: 0 auto;
 
-    padding: 25px 20px 60px;
+    padding: 28px 20px 60px;
+
 }
 
 
 /* =========================================================
-   PAGE HEADER
+   HERO
 ========================================================= */
 
 .page-header {
@@ -248,22 +142,37 @@ body {
     text-align: center;
 
     margin-bottom: 25px;
+
 }
 
+.page-header .main-icon {
+
+    font-size: 48px;
+
+    margin-bottom: 5px;
+
+}
 
 .page-header h1 {
 
-    margin-bottom: 8px;
+    margin: 5px 0 8px;
 
-    font-size: 28px;
+    font-size: 30px;
+
+    color: #172554;
+
 }
-
 
 .page-header p {
 
-    color: #666;
+    margin: 0 auto;
+
+    max-width: 650px;
+
+    color: #667085;
 
     line-height: 1.6;
+
 }
 
 
@@ -279,27 +188,37 @@ body {
 
     flex-wrap: wrap;
 
-    gap: 6px;
+    gap: 7px;
 
     margin-bottom: 20px;
 
+    padding: 12px 15px;
+
+    background: #ffffff;
+
+    border-left: 4px solid #5b4bdb;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 3px 10px rgba(24, 39, 75, 0.06);
+
     font-size: 14px;
 
-    color: #666;
 }
-
 
 .breadcrumb span {
 
     font-weight: bold;
 
-    color: #333;
-}
+    color: #344054;
 
+}
 
 .breadcrumb .separator {
 
-    color: #aaa;
+    color: #98a2b3;
+
 }
 
 
@@ -315,64 +234,88 @@ body {
 
     justify-content: center;
 
-    gap: 8px;
+    gap: 7px;
 
     padding: 11px 18px;
 
-    background: #333;
-
-    color: #fff;
+    margin-bottom: 20px;
 
     border: none;
 
-    border-radius: 6px;
+    border-radius: 8px;
 
-    cursor: pointer;
+    background: #273c75;
 
-    font-size: 15px;
+    color: white;
 
     font-weight: bold;
 
-    margin-bottom: 20px;
+    font-size: 14px;
 
-    text-decoration: none;
+    cursor: pointer;
+
 }
-
 
 .back-btn:hover {
 
-    background: #222;
+    background: #1d2d5c;
+
 }
 
 
 /* =========================================================
-   STEP TITLE
+   STEP
 ========================================================= */
 
 .step-title {
 
     text-align: center;
 
-    margin: 20px 0;
+    margin: 15px 0 22px;
+
 }
 
+.step-number {
 
-.step-title h2 {
+    display: inline-block;
+
+    padding: 5px 10px;
 
     margin-bottom: 8px;
 
-    font-size: 24px;
+    background: #e9e5ff;
+
+    color: #5b4bdb;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
 }
 
+.step-title h2 {
+
+    margin: 5px 0 8px;
+
+    color: #172554;
+
+    font-size: 25px;
+
+}
 
 .step-title p {
 
-    color: #666;
+    margin: 0;
+
+    color: #667085;
+
 }
 
 
 /* =========================================================
-   SELECTION GRID
+   GRID
 ========================================================= */
 
 .selection-grid {
@@ -384,27 +327,26 @@ body {
 
     gap: 18px;
 
-    margin-top: 20px;
 }
 
 
 /* =========================================================
-   SELECTION CARD
+   CARD
 ========================================================= */
 
 .selection-card {
 
-    background: #fff;
+    position: relative;
 
-    border: 1px solid #e5e5e5;
+    background: #ffffff;
 
-    border-top: 5px solid #00c300;
+    border: 1px solid #dce3ef;
 
-    border-radius: 9px;
+    border-radius: 13px;
 
     padding: 22px;
 
-    min-height: 150px;
+    min-height: 155px;
 
     display: flex;
 
@@ -413,50 +355,196 @@ body {
     justify-content: space-between;
 
     box-shadow:
-        0 4px 10px rgba(0,0,0,0.05);
+        0 5px 15px rgba(24, 39, 75, 0.07);
 
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+
+    overflow: hidden;
+
 }
 
+.selection-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 5px;
+
+    background: #5b4bdb;
+
+}
 
 .selection-card:hover {
 
-    transform: translateY(-3px);
+    transform: translateY(-4px);
+
+    border-color: #b9b0f5;
 
     box-shadow:
-        0 7px 15px rgba(0,0,0,0.08);
-}
+        0 10px 25px rgba(24, 39, 75, 0.12);
 
+}
 
 .selection-card h3 {
 
-    margin-top: 0;
+    margin: 4px 0 9px;
+
+    color: #172554;
 
     font-size: 19px;
-}
 
+}
 
 .selection-card p {
 
-    color: #666;
+    margin: 0;
 
-    line-height: 1.5;
+    color: #667085;
 
     font-size: 14px;
+
+    line-height: 1.55;
+
 }
 
 
 /* =========================================================
-   CARD ICON
+   FORM CARDS
 ========================================================= */
 
-.card-icon {
+.form-card {
 
-    font-size: 34px;
+    min-height: 165px;
 
-    margin-bottom: 8px;
+}
+
+.form-icon {
+
+    font-size: 38px;
+
+    margin-bottom: 5px;
+
+}
+
+
+/* =========================================================
+   SUBJECT CARDS
+========================================================= */
+
+.subject-card {
+
+    min-height: 180px;
+
+}
+
+.subject-icon {
+
+    font-size: 40px;
+
+    margin-bottom: 5px;
+
+}
+
+
+/* =========================================================
+   TYPE CARDS
+========================================================= */
+
+.type-card {
+
+    min-height: 165px;
+
+}
+
+.type-icon {
+
+    font-size: 35px;
+
+    margin-bottom: 5px;
+
+}
+
+
+/* =========================================================
+   REGION CARDS
+========================================================= */
+
+.region-card {
+
+    min-height: 150px;
+
+}
+
+.region-icon {
+
+    font-size: 32px;
+
+    margin-bottom: 5px;
+
+}
+
+
+/* =========================================================
+   YEAR CARDS
+========================================================= */
+
+.year-card {
+
+    min-height: 145px;
+
+}
+
+.year-number {
+
+    font-size: 35px;
+
+    font-weight: bold;
+
+    color: #5b4bdb;
+
+    margin-bottom: 5px;
+
+}
+
+
+/* =========================================================
+   PAPER CARD
+========================================================= */
+
+.paper-card {
+
+    min-height: 190px;
+
+}
+
+.paper-icon {
+
+    font-size: 36px;
+
+    margin-bottom: 7px;
+
+}
+
+.paper-title {
+
+    color: #172554;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    line-height: 1.4;
+
 }
 
 
@@ -470,13 +558,15 @@ body {
 
     padding: 12px;
 
-    background: #00c300;
-
-    color: #fff;
+    margin-top: 15px;
 
     border: none;
 
-    border-radius: 5px;
+    border-radius: 8px;
+
+    background: #5b4bdb;
+
+    color: #ffffff;
 
     font-weight: bold;
 
@@ -484,29 +574,14 @@ body {
 
     cursor: pointer;
 
-    margin-top: 15px;
-}
+    transition: background .2s ease;
 
+}
 
 .open-btn:hover {
 
-    background: #00a500;
-}
+    background: #4938bd;
 
-
-/* =========================================================
-   PAPER CARD
-========================================================= */
-
-.paper-card {
-
-    border-top-color: #007bff;
-}
-
-
-.paper-card:hover {
-
-    border-top-color: #0056b3;
 }
 
 
@@ -516,77 +591,284 @@ body {
 
 .pdf-btn {
 
-    display: block;
-
     width: 100%;
 
-    padding: 12px;
+    padding: 13px;
 
-    background: #007bff;
+    margin-top: 15px;
 
-    color: #fff;
+    border: none;
 
-    text-align: center;
+    border-radius: 8px;
 
-    text-decoration: none;
+    background: #e85d04;
 
-    border-radius: 5px;
+    color: white;
 
     font-weight: bold;
 
     font-size: 14px;
 
-    margin-top: 15px;
-}
+    cursor: pointer;
 
+}
 
 .pdf-btn:hover {
 
-    background: #0056b3;
+    background: #c94d00;
+
 }
 
 
 /* =========================================================
-   YEAR CARD
+   DIFFERENT TYPE COLOURS
 ========================================================= */
 
-.year-card {
+.type-acsee::before {
 
-    border-top-color: #ff9800;
+    background: #e85d04;
+
 }
 
+.type-necta::before {
 
-.year-card:hover {
+    background: #2563eb;
 
-    border-top-color: #e68900;
+}
+
+.type-mock::before {
+
+    background: #7c3aed;
+
+}
+
+.type-pre::before {
+
+    background: #0891b2;
+
+}
+
+.type-joint::before {
+
+    background: #db2777;
+
+}
+
+.type-midterm::before {
+
+    background: #16a34a;
+
+}
+
+.type-terminal::before {
+
+    background: #ca8a04;
+
+}
+
+.type-annual::before {
+
+    background: #dc2626;
+
+}
+
+.type-ftna::before {
+
+    background: #0f766e;
+
 }
 
 
 /* =========================================================
-   REGION CARD
+   EMPTY / ERROR
 ========================================================= */
 
-.region-card {
+.message-card {
 
-    border-top-color: #00a500;
-}
+    background: #ffffff;
 
+    border: 1px solid #dce3ef;
 
-/* =========================================================
-   EMPTY
-========================================================= */
+    border-radius: 13px;
 
-.empty-card {
+    padding: 30px 22px;
 
     text-align: center;
 
-    border-top-color: #777;
+    box-shadow:
+        0 5px 15px rgba(24,39,75,.07);
+
+}
+
+.message-icon {
+
+    font-size: 45px;
+
+    margin-bottom: 10px;
+
+}
+
+.message-card h3 {
+
+    color: #172554;
+
+    margin: 5px 0 10px;
+
+}
+
+.message-card p {
+
+    color: #667085;
+
+    line-height: 1.6;
+
 }
 
 
-.empty-card h3 {
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
-    color: #555;
+.sidebar {
+
+    position: fixed;
+
+    top: 0;
+
+    right: -300px;
+
+    width: 285px;
+
+    height: 100%;
+
+    background: #ffffff;
+
+    box-shadow:
+        -8px 0 25px rgba(0,0,0,.15);
+
+    transition: right .3s ease;
+
+    z-index: 10000;
+
+    padding: 20px;
+
+    overflow-y: auto;
+
+}
+
+.sidebar.active {
+
+    right: 0;
+
+}
+
+.close-btn {
+
+    float: right;
+
+    border: none;
+
+    background: #eef3ff;
+
+    color: #273c75;
+
+    border-radius: 8px;
+
+    font-size: 22px;
+
+    width: 40px;
+
+    height: 40px;
+
+    cursor: pointer;
+
+}
+
+.sidebar-links {
+
+    margin-top: 58px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+.sidebar-links a,
+.dropdown-btn {
+
+    display: block;
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #344054;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
+
+.sidebar-links a:hover,
+.dropdown-btn:hover {
+
+    background: #eef3ff;
+
+    color: #4c3cc6;
+
+}
+
+.dropdown-container {
+
+    display: none;
+
+    padding-left: 10px;
+
+    border-left: 3px solid #5b4bdb;
+
+}
+
+.dropdown-container a {
+
+    font-size: 14px;
+
+    font-weight: normal;
+
+}
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.overlay {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(12, 20, 40, .48);
+
+    z-index: 9999;
+
 }
 
 
@@ -594,17 +876,24 @@ body {
    FOOTER
 ========================================================= */
 
-.site-footer {
+footer {
+
+    margin-top: 35px;
+
+    padding: 30px 20px;
 
     text-align: center;
 
-    padding: 30px;
+    background: #172554;
 
-    background: #222;
+    color: white;
 
-    color: #fff;
+}
 
-    margin-top: 40px;
+footer strong {
+
+    color: #d9d4ff;
+
 }
 
 
@@ -616,34 +905,38 @@ body {
 
     .main-container {
 
-        padding:
-            20px
-            15px
-            50px;
-    }
+        padding: 22px 15px 50px;
 
+    }
 
     .page-header h1 {
 
-        font-size: 24px;
+        font-size: 25px;
+
     }
 
+    .page-header .main-icon {
 
-    .step-title h2 {
+        font-size: 42px;
 
-        font-size: 21px;
     }
-
 
     .selection-grid {
 
         grid-template-columns: 1fr;
-    }
 
+    }
 
     .selection-card {
 
-        min-height: 145px;
+        min-height: 150px;
+
+    }
+
+    .breadcrumb {
+
+        font-size: 13px;
+
     }
 
 }
@@ -656,11 +949,11 @@ body {
 <body>
 
 
-<!-- ========================================================
-     TOP HEADER
-========================================================= -->
+<!-- =======================================================
+     HEADER
+======================================================= -->
 
-<div class="nav-header">
+<header class="nav-header">
 
     <div class="logo-area">
 
@@ -683,20 +976,24 @@ body {
 
     </button>
 
-</div>
+</header>
 
 
-<!-- ========================================================
+<!-- =======================================================
      MAIN
-========================================================= -->
+======================================================= -->
 
 <main class="main-container">
 
 
-    <div class="page-header">
+    <section class="page-header">
+
+        <div class="main-icon">
+            📚
+        </div>
 
         <h1>
-            📚 Past Papers
+            Past Papers
         </h1>
 
         <p>
@@ -704,10 +1001,8 @@ body {
             papers from Form 1 to Form 6.
         </p>
 
-    </div>
+    </section>
 
-
-    <!-- BREADCRUMB -->
 
     <div
         class="breadcrumb"
@@ -720,8 +1015,6 @@ body {
     </div>
 
 
-    <!-- BACK -->
-
     <button
         class="back-btn"
         id="backButton"
@@ -732,17 +1025,15 @@ body {
     </button>
 
 
-    <!-- CONTENT -->
-
     <div id="stepContainer"></div>
 
 
 </main>
 
 
-<!-- ========================================================
-     SIDEBAR OVERLAY
-========================================================= -->
+<!-- =======================================================
+     SIDEBAR
+======================================================= -->
 
 <div
     class="overlay"
@@ -751,14 +1042,9 @@ body {
 </div>
 
 
-<!-- ========================================================
-     SIDEBAR
-========================================================= -->
-
-<div
+<aside
     class="sidebar"
     id="sidebarMenu">
-
 
     <button
         class="close-btn"
@@ -771,52 +1057,36 @@ body {
 
     <div class="sidebar-links">
 
-
         <a href="index.html">
-
             🏠 Home
-
         </a>
-
 
         <a href="about.html">
-
             ℹ️ About Us
-
         </a>
-
 
         <a href="notes.html">
-
             📝 Notes
-
         </a>
-
 
         <a href="pastpapers.html">
-
             📚 Past Papers
-
         </a>
-
 
         <a href="contact.html">
-
             📞 Contact
-
         </a>
-
 
     </div>
 
-</div>
+</aside>
 
 
-<!-- ========================================================
+<!-- =======================================================
      FOOTER
-========================================================= -->
+======================================================= -->
 
-<footer class="site-footer">
+<footer>
 
     <strong>
         GEPAM Science Hub
@@ -834,1482 +1104,21 @@ body {
 </footer>
 
 
-<!-- ========================================================
-     DATA
-========================================================= -->
-
-<script src="pastpapers.data.js"></script>
-
-
-<!-- ========================================================
-     NAVIGATION
-========================================================= -->
-
-<script>
-
-/*
-=============================================================
- GEPAM SCIENCE HUB
- PAST PAPERS NAVIGATION
-
- STRUCTURE:
-
- FORM
-   ↓
- SUBJECT
-   ↓
- TYPE
-   ↓
- REGION
-   ↓
- YEAR
-   ↓
- PDF
-
-
- NO OLD / NEW SYLLABUS
-=============================================================
-*/
-
-
-/* =========================================================
-   STATE
-========================================================= */
-
-let currentState = {
-
-    level: "forms",
-
-    form: null,
-
-    subject: null,
-
-    type: null,
-
-    region: null,
-
-    year: null
-
-};
-
-
-/* =========================================================
-   ELEMENTS
-========================================================= */
-
-const container =
-    document.getElementById(
-        "stepContainer"
-    );
-
-
-const breadcrumb =
-    document.getElementById(
-        "breadcrumb"
-    );
-
-
-const backButton =
-    document.getElementById(
-        "backButton"
-    );
-
-
-/* =========================================================
-   NORMALIZE DATA
-========================================================= */
-
-function getPastPaperDatabase() {
-
-    /*
-    ---------------------------------------------------------
-    Tunatumia window.pastPapers kutoka
-    pastpapers.data.js
-    ---------------------------------------------------------
-    */
-
-    if (
-        window.pastPapers &&
-        typeof window.pastPapers === "object"
-    ) {
-
-        return window.pastPapers;
-
-    }
-
-
-    return {};
-
-}
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-function initialize() {
-
-    currentState = {
-
-        level: "forms",
-
-        form: null,
-
-        subject: null,
-
-        type: null,
-
-        region: null,
-
-        year: null
-
-    };
-
-
-    renderForms();
-
-}
-
-
-/* =========================================================
-   RENDER FORMS
-========================================================= */
-
-function renderForms() {
-
-    currentState.level =
-        "forms";
-
-
-    currentState.form =
-        null;
-
-    currentState.subject =
-        null;
-
-    currentState.type =
-        null;
-
-    currentState.region =
-        null;
-
-    currentState.year =
-        null;
-
-
-    updateBreadcrumb();
-
-
-    backButton.style.display =
-        "none";
-
-
-    let html = `
-
-        <div class="step-title">
-
-            <h2>
-                🎓 Chagua Kidato
-            </h2>
-
-            <p>
-                Chagua kidato unachotaka
-                kupata past papers.
-            </p>
-
-        </div>
-
-
-        <div class="selection-grid">
-
-    `;
-
-
-    for (
-        let i = 1;
-        i <= 6;
-        i++
-    ) {
-
-        html += `
-
-            <div class="selection-card">
-
-                <div>
-
-                    <div class="card-icon">
-                        📚
-                    </div>
-
-                    <h3>
-                        Form ${i}
-                    </h3>
-
-                    <p>
-                        Physics & Chemistry
-                        Past Papers
-                    </p>
-
-                </div>
-
-
-                <button
-                    class="open-btn"
-                    onclick="openForm('form${i}')">
-
-                    FUNGUA FORM ${i}
-
-                </button>
-
-            </div>
-
-        `;
-
-    }
-
-
-    html += `
-
-        </div>
-
-    `;
-
-
-    container.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   OPEN FORM
-========================================================= */
-
-function openForm(form) {
-
-    currentState.level =
-        "subjects";
-
-    currentState.form =
-        form;
-
-    currentState.subject =
-        null;
-
-    currentState.type =
-        null;
-
-    currentState.region =
-        null;
-
-    currentState.year =
-        null;
-
-
-    renderSubjects();
-
-}
-
-
-/* =========================================================
-   RENDER SUBJECTS
-========================================================= */
-
-function renderSubjects() {
-
-    updateBreadcrumb();
-
-
-    backButton.style.display =
-        "inline-flex";
-
-
-    let html = `
-
-        <div class="step-title">
-
-            <h2>
-                📚 ${formatForm(
-                    currentState.form
-                )}
-            </h2>
-
-            <p>
-                Chagua subject.
-            </p>
-
-        </div>
-
-
-        <div class="selection-grid">
-
-    `;
-
-
-    html += `
-
-        <div class="selection-card">
-
-            <div>
-
-                <div class="card-icon">
-                    ⚛️
-                </div>
-
-                <h3>
-                    Physics
-                </h3>
-
-                <p>
-                    Physics examination
-                    papers.
-                </p>
-
-            </div>
-
-
-            <button
-                class="open-btn"
-                onclick="openSubject('physics')">
-
-                FUNGUA PHYSICS
-
-            </button>
-
-        </div>
-
-
-        <div class="selection-card">
-
-            <div>
-
-                <div class="card-icon">
-                    🧪
-                </div>
-
-                <h3>
-                    Chemistry
-                </h3>
-
-                <p>
-                    Chemistry examination
-                    papers.
-                </p>
-
-            </div>
-
-
-            <button
-                class="open-btn"
-                onclick="openSubject('chemistry')">
-
-                FUNGUA CHEMISTRY
-
-            </button>
-
-        </div>
-
-    `;
-
-
-    html += `
-
-        </div>
-
-    `;
-
-
-    container.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   OPEN SUBJECT
-========================================================= */
-
-function openSubject(subject) {
-
-    currentState.level =
-        "types";
-
-    currentState.subject =
-        subject;
-
-    currentState.type =
-        null;
-
-    currentState.region =
-        null;
-
-    currentState.year =
-        null;
-
-
-    renderTypes();
-
-}
-
-
-/* =========================================================
-   GET PAPERS
-========================================================= */
-
-function getCurrentPapers() {
-
-    const db =
-        getPastPaperDatabase();
-
-
-    const formData =
-        db[
-            currentState.form
-        ];
-
-
-    if (!formData) {
-
-        return [];
-
-    }
-
-
-    const subjectData =
-        formData[
-            currentState.subject
-        ];
-
-
-    if (!Array.isArray(subjectData)) {
-
-        return [];
-
-    }
-
-
-    return subjectData;
-
-}
-
-
-/* =========================================================
-   RENDER TYPES
-========================================================= */
-
-function renderTypes() {
-
-    updateBreadcrumb();
-
-
-    const papers =
-        getCurrentPapers();
-
-
-    const types =
-        [...new Set(
-
-            papers
-
-                .map(
-                    paper =>
-                        paper.type
-                )
-
-                .filter(Boolean)
-
-        )];
-
-
-    let html = `
-
-        <div class="step-title">
-
-            <h2>
-                📝 Exam Type
-            </h2>
-
-            <p>
-                Chagua aina ya mtihani.
-            </p>
-
-        </div>
-
-
-        <div class="selection-grid">
-
-    `;
-
-
-    if (
-        types.length === 0
-    ) {
-
-        html += emptyMessage();
-
-    }
-
-
-    types.forEach(
-        type => {
-
-            html += `
-
-                <div class="selection-card">
-
-                    <div>
-
-                        <div class="card-icon">
-                            📝
-                        </div>
-
-                        <h3>
-                            ${formatType(type)}
-                        </h3>
-
-                        <p>
-                            ${capitalize(
-                                currentState.subject
-                            )}
-                            ${formatType(type)}
-                            examination papers.
-                        </p>
-
-                    </div>
-
-
-                    <button
-                        class="open-btn"
-                        onclick="openType('${escapeJS(type)}')">
-
-                        FUNGUA
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    html += `
-
-        </div>
-
-    `;
-
-
-    container.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   OPEN TYPE
-========================================================= */
-
-function openType(type) {
-
-    currentState.level =
-        "regions";
-
-    currentState.type =
-        type;
-
-    currentState.region =
-        null;
-
-    currentState.year =
-        null;
-
-
-    renderRegions();
-
-}
-
-
-/* =========================================================
-   RENDER REGIONS
-========================================================= */
-
-function renderRegions() {
-
-    updateBreadcrumb();
-
-
-    const papers =
-        getCurrentPapers();
-
-
-    const regions =
-        [
-            ...new Set(
-
-                papers
-
-                    .filter(
-                        paper =>
-                            paper.type ===
-                            currentState.type
-                    )
-
-                    .map(
-                        paper =>
-                            paper.region
-                    )
-
-                    .filter(Boolean)
-
-            )
-        ];
-
-
-    let html = `
-
-        <div class="step-title">
-
-            <h2>
-                📍 Region
-            </h2>
-
-            <p>
-                Chagua mkoa.
-            </p>
-
-        </div>
-
-
-        <div class="selection-grid">
-
-    `;
-
-
-    if (
-        regions.length === 0
-    ) {
-
-        html += emptyMessage();
-
-    }
-
-
-    regions
-        .sort()
-        .forEach(
-            region => {
-
-                html += `
-
-                    <div class="selection-card region-card">
-
-                        <div>
-
-                            <div class="card-icon">
-                                📍
-                            </div>
-
-                            <h3>
-                                ${formatRegion(
-                                    region
-                                )}
-                            </h3>
-
-                            <p>
-                                Past papers
-                                kutoka
-                                ${formatRegion(
-                                    region
-                                )}.
-                            </p>
-
-                        </div>
-
-
-                        <button
-                            class="open-btn"
-                            onclick="openRegion('${escapeJS(region)}')">
-
-                            FUNGUA
-
-                        </button>
-
-                    </div>
-
-                `;
-
-            }
-        );
-
-
-    html += `
-
-        </div>
-
-    `;
-
-
-    container.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   OPEN REGION
-========================================================= */
-
-function openRegion(region) {
-
-    currentState.level =
-        "years";
-
-    currentState.region =
-        region;
-
-    currentState.year =
-        null;
-
-
-    renderYears();
-
-}
-
-
-/* =========================================================
-   RENDER YEARS
-========================================================= */
-
-function renderYears() {
-
-    updateBreadcrumb();
-
-
-    const papers =
-        getCurrentPapers();
-
-
-    const years =
-        [
-            ...new Set(
-
-                papers
-
-                    .filter(
-                        paper =>
-                            paper.type ===
-                            currentState.type
-                    )
-
-                    .filter(
-                        paper =>
-                            paper.region ===
-                            currentState.region
-                    )
-
-                    .map(
-                        paper =>
-                            paper.year
-                    )
-
-                    .filter(Boolean)
-
-            )
-        ]
-        .sort(
-            (a,b) =>
-                b - a
-        );
-
-
-    let html = `
-
-        <div class="step-title">
-
-            <h2>
-                📅 Year
-            </h2>
-
-            <p>
-                Chagua mwaka.
-            </p>
-
-        </div>
-
-
-        <div class="selection-grid">
-
-    `;
-
-
-    if (
-        years.length === 0
-    ) {
-
-        html += emptyMessage();
-
-    }
-
-
-    years.forEach(
-        year => {
-
-            html += `
-
-                <div class="selection-card year-card">
-
-                    <div>
-
-                        <div class="card-icon">
-                            📅
-                        </div>
-
-                        <h3>
-                            ${year}
-                        </h3>
-
-                        <p>
-                            Examination papers
-                            for ${year}.
-                        </p>
-
-                    </div>
-
-
-                    <button
-                        class="open-btn"
-                        onclick="openYear(${year})">
-
-                        FUNGUA ${year}
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    html += `
-
-        </div>
-
-    `;
-
-
-    container.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   OPEN YEAR
-========================================================= */
-
-function openYear(year) {
-
-    currentState.level =
-        "papers";
-
-    currentState.year =
-        Number(year);
-
-
-    renderPapers();
-
-}
-
-
-/* =========================================================
-   RENDER PAPERS
-========================================================= */
-
-function renderPapers() {
-
-    updateBreadcrumb();
-
-
-    const papers =
-        getCurrentPapers()
-            .filter(
-                paper =>
-                    paper.type ===
-                    currentState.type
-            )
-            .filter(
-                paper =>
-                    paper.region ===
-                    currentState.region
-            )
-            .filter(
-                paper =>
-                    Number(
-                        paper.year
-                    ) ===
-                    Number(
-                        currentState.year
-                    )
-            );
-
-
-    let html = `
-
-        <div class="step-title">
-
-            <h2>
-                📄 ${currentState.year}
-            </h2>
-
-            <p>
-                Chagua paper unayotaka
-                kufungua.
-            </p>
-
-        </div>
-
-
-        <div class="selection-grid">
-
-    `;
-
-
-    if (
-        papers.length === 0
-    ) {
-
-        html += emptyMessage();
-
-    }
-
-
-    papers.forEach(
-        (paper, index) => {
-
-            html += `
-
-                <div class="selection-card paper-card">
-
-                    <div>
-
-                        <div class="card-icon">
-                            📄
-                        </div>
-
-                        <h3>
-                            ${paper.title ||
-                            "Past Paper"}
-                        </h3>
-
-                        <p>
-                            ${formatForm(
-                                currentState.form
-                            )}
-                            —
-                            ${capitalize(
-                                currentState.subject
-                            )}
-                            —
-                            ${formatType(
-                                currentState.type
-                            )}
-                        </p>
-
-                    </div>
-
-
-                    <a
-                        class="pdf-btn"
-                        href="${escapeAttribute(
-                            paper.file
-                        )}"
-                        target="_blank"
-                        rel="noopener">
-
-                        📄 OPEN PDF
-
-                    </a>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    html += `
-
-        </div>
-
-    `;
-
-
-    container.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   EMPTY MESSAGE
-========================================================= */
-
-function emptyMessage() {
-
-    return `
-
-        <div class="selection-card empty-card">
-
-            <div>
-
-                <div class="card-icon">
-                    📂
-                </div>
-
-                <h3>
-                    Hakuna papers bado
-                </h3>
-
-                <p>
-                    Hakuna past paper
-                    iliyowekwa kwenye
-                    category hii.
-                </p>
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   BREADCRUMB
-========================================================= */
-
-function updateBreadcrumb() {
-
-    let parts = [
-        "Past Papers"
-    ];
-
-
-    if (
-        currentState.form
-    ) {
-
-        parts.push(
-            formatForm(
-                currentState.form
-            )
-        );
-
-    }
-
-
-    if (
-        currentState.subject
-    ) {
-
-        parts.push(
-            capitalize(
-                currentState.subject
-            )
-        );
-
-    }
-
-
-    if (
-        currentState.type
-    ) {
-
-        parts.push(
-            formatType(
-                currentState.type
-            )
-        );
-
-    }
-
-
-    if (
-        currentState.region
-    ) {
-
-        parts.push(
-            formatRegion(
-                currentState.region
-            )
-        );
-
-    }
-
-
-    if (
-        currentState.year
-    ) {
-
-        parts.push(
-            String(
-                currentState.year
-            )
-        );
-
-    }
-
-
-    breadcrumb.innerHTML =
-        parts.map(
-            (
-                part,
-                index
-            ) => {
-
-                if (
-                    index === 0
-                ) {
-
-                    return `
-                        <span>
-                            ${part}
-                        </span>
-                    `;
-
-                }
-
-
-                return `
-
-                    <span class="separator">
-                        ›
-                    </span>
-
-                    <span>
-                        ${part}
-                    </span>
-
-                `;
-
-            }
-        ).join("");
-
-}
-
-
-/* =========================================================
-   BACK
-========================================================= */
-
-function goBack() {
-
-    switch (
-        currentState.level
-    ) {
-
-
-        case "forms":
-
-            window.location.href =
-                "index.html";
-
-            break;
-
-
-        case "subjects":
-
-            renderForms();
-
-            break;
-
-
-        case "types":
-
-            currentState.level =
-                "subjects";
-
-            currentState.subject =
-                null;
-
-            renderSubjects();
-
-            break;
-
-
-        case "regions":
-
-            currentState.level =
-                "types";
-
-            currentState.type =
-                null;
-
-            renderTypes();
-
-            break;
-
-
-        case "years":
-
-            currentState.level =
-                "regions";
-
-            currentState.region =
-                null;
-
-            renderRegions();
-
-            break;
-
-
-        case "papers":
-
-            currentState.level =
-                "years";
-
-            currentState.year =
-                null;
-
-            renderYears();
-
-            break;
-
-    }
-
-}
-
-
-/* =========================================================
-   FORMATTING
-========================================================= */
-
-function capitalize(value) {
-
-    if (!value) {
-
-        return "";
-
-    }
-
-
-    return String(value)
-        .charAt(0)
-        .toUpperCase()
-        +
-        String(value)
-            .slice(1);
-
-}
-
-
-/* =========================================================
-   FORM
-========================================================= */
-
-function formatForm(form) {
-
-    return String(form)
-        .replace(
-            "form",
-            "Form "
-        );
-
-}
-
-
-/* =========================================================
-   TYPE
-========================================================= */
-
-function formatType(type) {
-
-    const names = {
-
-        "midterm":
-            "Midterm",
-
-        "terminal":
-            "Terminal",
-
-        "annual":
-            "Annual",
-
-        "joint":
-            "Joint",
-
-        "ftna":
-            "FTNA",
-
-        "mock":
-            "Mock",
-
-        "pre_necta":
-            "Pre-NECTA",
-
-        "acsee":
-            "ACSEE"
-
-    };
-
-
-    return names[type]
-        ||
-        String(type)
-            .replaceAll(
-                "_",
-                " "
-            )
-            .replace(
-                /\b\w/g,
-                char =>
-                    char.toUpperCase()
-            );
-
-}
-
-
-/* =========================================================
-   REGION
-========================================================= */
-
-function formatRegion(region) {
-
-    const names = {
-
-        "dar_es_salaam":
-            "Dar es Salaam",
-
-        "dodoma":
-            "Dodoma",
-
-        "arusha":
-            "Arusha",
-
-        "mbeya":
-            "Mbeya",
-
-        "kagera":
-            "Kagera",
-
-        "shinyanga":
-            "Shinyanga",
-
-        "necta":
-            "NECTA"
-
-    };
-
-
-    return names[region]
-        ||
-        String(region)
-            .replaceAll(
-                "_",
-                " "
-            )
-            .replace(
-                /\b\w/g,
-                char =>
-                    char.toUpperCase()
-            );
-
-}
-
-
-/* =========================================================
-   ESCAPE JS
-========================================================= */
-
-function escapeJS(value) {
-
-    return String(value)
-        .replaceAll(
-            "\\",
-            "\\\\"
-        )
-        .replaceAll(
-            "'",
-            "\\'"
-        );
-
-}
-
-
-/* =========================================================
-   ESCAPE ATTRIBUTE
-========================================================= */
-
-function escapeAttribute(value) {
-
-    return String(value)
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-        .replaceAll(
-            ">",
-            "&gt;"
-        );
-
-}
-
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
-
-function toggleMenu() {
-
-    const sidebar =
-        document.getElementById(
-            "sidebarMenu"
-        );
-
-
-    const overlay =
-        document.getElementById(
-            "menuOverlay"
-        );
-
-
-    sidebar.classList.toggle(
-        "active"
-    );
-
-
-    overlay.style.display =
-        sidebar.classList.contains(
-            "active"
-        )
-        ? "block"
-        : "none";
-
-}
-
-
-/* =========================================================
-   START
-========================================================= */
-
-initialize();
-
+<!-- =======================================================
+     IMPORTANT SCRIPT ORDER
+======================================================= -->
+
+<script
+    src="pastpapers.data.js"
+    defer>
+</script>
+
+<script
+    src="pastpapers.js"
+    defer>
 </script>
 
 
 </body>
+
 </html>
