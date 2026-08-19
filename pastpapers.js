@@ -1,4 +1,4 @@
-/* ============================================================
+/* =========================================================
    GEPAM SCIENCE HUB
    PAST PAPERS NAVIGATION ENGINE
 
@@ -14,24 +14,21 @@
       ↓
    YEAR
       ↓
-   PAPERS
-      ↓
    PDF
 
    IMPORTANT:
-   - DO NOT PUT PAPER DATA HERE.
-   - DATA COMES FROM pastpapers.data.js
-   - EXPECTED:
-       window.pastPapers
-       window.pastPaperConfig
-============================================================ */
+   - Haitumii idadi ya papers.
+   - Haitaki old/new syllabus.
+   - Inatumia window.pastPapers.
+   - Inajaribu kusoma structures tofauti za data.
+========================================================= */
 
 
-/* ============================================================
+/* =========================================================
    GLOBAL STATE
-============================================================ */
+========================================================= */
 
-const PPState = {
+let currentState = {
 
     level: "forms",
 
@@ -48,11 +45,11 @@ const PPState = {
 };
 
 
-/* ============================================================
+/* =========================================================
    ELEMENTS
-============================================================ */
+========================================================= */
 
-const stepContainer =
+const container =
     document.getElementById("stepContainer");
 
 const breadcrumb =
@@ -62,14 +59,677 @@ const backButton =
     document.getElementById("backButton");
 
 
-/* ============================================================
-   CHECK DATA
-============================================================ */
+/* =========================================================
+   DATA
+========================================================= */
 
-function checkPastPaperData() {
+let papers = [];
+
+
+/* =========================================================
+   FORM CONFIG
+========================================================= */
+
+const forms = {
+
+    form1: {
+        name: "Form 1",
+        icon: "📘"
+    },
+
+    form2: {
+        name: "Form 2",
+        icon: "📗"
+    },
+
+    form3: {
+        name: "Form 3",
+        icon: "📙"
+    },
+
+    form4: {
+        name: "Form 4",
+        icon: "📕"
+    },
+
+    form5: {
+        name: "Form 5",
+        icon: "📔"
+    },
+
+    form6: {
+        name: "Form 6",
+        icon: "📓"
+    }
+
+};
+
+
+/* =========================================================
+   NORMALIZE TEXT
+========================================================= */
+
+function cleanText(value) {
 
     if (
-        !window.pastPapers
+        value === undefined ||
+        value === null
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+        .trim();
+
+}
+
+
+/* =========================================================
+   NORMALIZE FORM
+========================================================= */
+
+function normalizeForm(value) {
+
+    const text =
+        cleanText(value).toLowerCase();
+
+
+    if (!text) {
+
+        return "";
+
+    }
+
+
+    const match =
+        text.match(/form[\s_-]*(1|2|3|4|5|6)/i);
+
+
+    if (match) {
+
+        return "form" + match[1];
+
+    }
+
+
+    const numberMatch =
+        text.match(/^([1-6])$/);
+
+
+    if (numberMatch) {
+
+        return "form" + numberMatch[1];
+
+    }
+
+
+    return text;
+
+}
+
+
+/* =========================================================
+   NORMALIZE SUBJECT
+========================================================= */
+
+function normalizeSubject(value) {
+
+    const text =
+        cleanText(value).toLowerCase();
+
+
+    if (
+        text.includes("physics") ||
+        text.includes("phy")
+    ) {
+
+        return "Physics";
+
+    }
+
+
+    if (
+        text.includes("chemistry") ||
+        text.includes("chem")
+    ) {
+
+        return "Chemistry";
+
+    }
+
+
+    return cleanText(value);
+
+}
+
+
+/* =========================================================
+   NORMALIZE TYPE
+========================================================= */
+
+function normalizeType(value) {
+
+    const text =
+        cleanText(value)
+            .toLowerCase()
+            .replace(/[_-]+/g, " ")
+            .trim();
+
+
+    if (!text) {
+
+        return "";
+
+    }
+
+
+    if (text.includes("annual")) {
+
+        return "Annual";
+
+    }
+
+
+    if (text.includes("terminal")) {
+
+        return "Terminal";
+
+    }
+
+
+    if (text.includes("midterm")) {
+
+        return "Midterm";
+
+    }
+
+
+    if (text.includes("mock")) {
+
+        return "Mock";
+
+    }
+
+
+    if (text.includes("joint")) {
+
+        return "Joint";
+
+    }
+
+
+    if (
+        text.includes("pre necta") ||
+        text.includes("prenecta") ||
+        text.includes("pre-necta")
+    ) {
+
+        return "Pre-NECTA";
+
+    }
+
+
+    if (
+        text === "necta" ||
+        text.includes("necta")
+    ) {
+
+        return "NECTA";
+
+    }
+
+
+    return cleanText(value);
+
+}
+
+
+/* =========================================================
+   FIND VALUE FROM OBJECT
+========================================================= */
+
+function getFirstValue(
+    object,
+    keys
+) {
+
+    if (
+        !object ||
+        typeof object !== "object"
+    ) {
+
+        return "";
+
+    }
+
+
+    for (
+        const key of keys
+    ) {
+
+        if (
+            object[key] !== undefined &&
+            object[key] !== null &&
+            object[key] !== ""
+        ) {
+
+            return object[key];
+
+        }
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =========================================================
+   EXTRACT FORM FROM FILE PATH
+========================================================= */
+
+function formFromPath(file) {
+
+    const path =
+        cleanText(file)
+            .toLowerCase();
+
+
+    const match =
+        path.match(
+            /form[\s_-]*(1|2|3|4|5|6)/
+        );
+
+
+    if (match) {
+
+        return "form" + match[1];
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =========================================================
+   EXTRACT SUBJECT FROM FILE PATH
+========================================================= */
+
+function subjectFromPath(file) {
+
+    const path =
+        cleanText(file)
+            .toLowerCase();
+
+
+    if (
+        path.includes("/physics/") ||
+        path.includes("\\physics\\") ||
+        path.includes("physics")
+    ) {
+
+        return "Physics";
+
+    }
+
+
+    if (
+        path.includes("/chemistry/") ||
+        path.includes("\\chemistry\\") ||
+        path.includes("chemistry")
+    ) {
+
+        return "Chemistry";
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =========================================================
+   NORMALIZE RECORD
+========================================================= */
+
+function normalizeRecord(record) {
+
+    if (
+        !record ||
+        typeof record !== "object"
+    ) {
+
+        return null;
+
+    }
+
+
+    const file =
+        getFirstValue(
+            record,
+            [
+                "file",
+                "pdf",
+                "url",
+                "path",
+                "href",
+                "download"
+            ]
+        );
+
+
+    if (!file) {
+
+        return null;
+
+    }
+
+
+    let form =
+        getFirstValue(
+            record,
+            [
+                "form",
+                "class",
+                "level",
+                "grade"
+            ]
+        );
+
+
+    let subject =
+        getFirstValue(
+            record,
+            [
+                "subject",
+                "subj"
+            ]
+        );
+
+
+    let type =
+        getFirstValue(
+            record,
+            [
+                "type",
+                "paperType",
+                "paper_type",
+                "category",
+                "examType",
+                "exam_type"
+            ]
+        );
+
+
+    let region =
+        getFirstValue(
+            record,
+            [
+                "region",
+                "mkoa",
+                "location"
+            ]
+        );
+
+
+    let year =
+        getFirstValue(
+            record,
+            [
+                "year",
+                "Year"
+            ]
+        );
+
+
+    const title =
+        getFirstValue(
+            record,
+            [
+                "title",
+                "name",
+                "paper",
+                "label"
+            ]
+        );
+
+
+    /* -----------------------------------------------------
+       FALLBACK FROM FILE PATH
+    ----------------------------------------------------- */
+
+    if (!form) {
+
+        form =
+            formFromPath(file);
+
+    }
+
+
+    if (!subject) {
+
+        subject =
+            subjectFromPath(file);
+
+    }
+
+
+    /* -----------------------------------------------------
+       IF TITLE CONTAINS SUBJECT
+    ----------------------------------------------------- */
+
+    if (!subject && title) {
+
+        subject =
+            normalizeSubject(title);
+
+    }
+
+
+    /* -----------------------------------------------------
+       IF TYPE IS MISSING, CHECK PATH/TITLE
+    ----------------------------------------------------- */
+
+    if (!type) {
+
+        type =
+            normalizeType(
+                file + " " + title
+            );
+
+    }
+
+
+    /* -----------------------------------------------------
+       RETURN
+    ----------------------------------------------------- */
+
+    return {
+
+        form:
+            normalizeForm(form),
+
+        subject:
+            normalizeSubject(subject),
+
+        type:
+            normalizeType(type),
+
+        region:
+            cleanText(region),
+
+        year:
+            cleanText(year),
+
+        title:
+            title ||
+            "Past Paper",
+
+        file:
+            String(file)
+
+    };
+
+}
+
+
+/* =========================================================
+   FLATTEN DATA
+========================================================= */
+
+function flattenData(
+    value,
+    output = []
+) {
+
+    if (!value) {
+
+        return output;
+
+    }
+
+
+    if (Array.isArray(value)) {
+
+        value.forEach(
+            item => {
+
+                if (
+                    item &&
+                    typeof item === "object" &&
+                    !Array.isArray(item)
+                ) {
+
+                    const record =
+                        normalizeRecord(item);
+
+
+                    if (record) {
+
+                        output.push(record);
+
+                    }
+
+
+                    /*
+                     * Also search nested arrays/objects.
+                     */
+
+                    Object.keys(item)
+                        .forEach(key => {
+
+                            const child =
+                                item[key];
+
+
+                            if (
+                                child &&
+                                typeof child === "object"
+                            ) {
+
+                                flattenData(
+                                    child,
+                                    output
+                                );
+
+                            }
+
+                        });
+
+                }
+
+                else if (
+                    Array.isArray(item)
+                ) {
+
+                    flattenData(
+                        item,
+                        output
+                    );
+
+                }
+
+            }
+        );
+
+
+        return output;
+
+    }
+
+
+    if (
+        typeof value === "object"
+    ) {
+
+        /*
+         * Try object itself as record.
+         */
+
+        const record =
+            normalizeRecord(value);
+
+
+        if (record) {
+
+            output.push(record);
+
+        }
+
+
+        /*
+         * Search children.
+         */
+
+        Object.keys(value)
+            .forEach(key => {
+
+                const child =
+                    value[key];
+
+
+                if (
+                    child &&
+                    typeof child === "object"
+                ) {
+
+                    flattenData(
+                        child,
+                        output
+                    );
+
+                }
+
+            });
+
+    }
+
+
+    return output;
+
+}
+
+
+/* =========================================================
+   LOAD DATA
+========================================================= */
+
+function loadData() {
+
+    /*
+     * Check if data exists.
+     */
+
+    if (
+        typeof window.pastPapers ===
+        "undefined"
     ) {
 
         showDataError();
@@ -78,26 +738,92 @@ function checkPastPaperData() {
 
     }
 
+
+    papers = [];
+
+
+    flattenData(
+        window.pastPapers,
+        papers
+    );
+
+
+    /*
+     * Remove duplicates.
+     */
+
+    const seen =
+        new Set();
+
+
+    papers =
+        papers.filter(
+            paper => {
+
+                const key =
+                    [
+                        paper.form,
+                        paper.subject,
+                        paper.type,
+                        paper.region,
+                        paper.year,
+                        paper.file
+                    ].join("|");
+
+
+                if (
+                    seen.has(key)
+                ) {
+
+                    return false;
+
+                }
+
+
+                seen.add(key);
+
+                return true;
+
+            }
+        );
+
+
+    if (
+        papers.length === 0
+    ) {
+
+        showDataError(
+            "Data imeonekana lakini hakuna PDF records zilizopatikana."
+        );
+
+        return false;
+
+    }
+
+
     return true;
 
 }
 
 
-/* ============================================================
+/* =========================================================
    DATA ERROR
-============================================================ */
+========================================================= */
 
-function showDataError() {
+function showDataError(
+    message
+) {
 
-    if (!stepContainer) {
-        return;
-    }
+    const text =
+        message ||
+        "pastpapers.data.js haijasomeka au window.pastPapers haipo.";
 
-    stepContainer.innerHTML = `
 
-        <div class="data-error-card">
+    container.innerHTML = `
 
-            <div class="data-error-icon">
+        <div class="gp-error-card">
+
+            <div class="gp-error-icon">
                 ⚠️
             </div>
 
@@ -106,30 +832,30 @@ function showDataError() {
             </h2>
 
             <p>
-                <strong>
-                    pastpapers.data.js
-                </strong>
-                haijasomeka au data yake haijapatikana.
+                ${text}
             </p>
 
-            <div class="data-error-files">
+            <div class="gp-error-files">
 
-                <p>
-                    Hakikisha files hizi zipo
-                    kwenye folder moja:
-                </p>
+                <strong>
+                    Hakikisha files hizi zipo:
+                </strong>
 
-                <code>
+                <span>
                     pastpapers.html
-                </code>
+                </span>
 
-                <code>
+                <span>
                     pastpapers.data.js
-                </code>
+                </span>
 
-                <code>
+                <span>
                     pastpapers.js
-                </code>
+                </span>
+
+                <span>
+                    pastpapers.css
+                </span>
 
             </div>
 
@@ -137,591 +863,124 @@ function showDataError() {
 
     `;
 
-    if (backButton) {
-        backButton.style.display = "none";
-    }
+
+    backButton.style.display =
+        "none";
 
 }
 
 
-/* ============================================================
-   UTILITY
-============================================================ */
-
-function safeText(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-
-    }
-
-    return String(value);
-
-}
-
-
-function cleanName(value) {
-
-    return safeText(value)
-        .replaceAll("_", " ")
-        .replaceAll("-", " ")
-        .replace(/\s+/g, " ")
-        .trim();
-
-}
-
-
-function titleCase(value) {
-
-    return cleanName(value)
-        .replace(/\b\w/g, function(letter) {
-
-            return letter.toUpperCase();
-
-        });
-
-}
-
-
-function normalize(value) {
-
-    return safeText(value)
-        .trim()
-        .toLowerCase()
-        .replace(/\s+/g, "_")
-        .replace(/-/g, "_");
-
-}
-
-
-/* ============================================================
-   GET CONFIG
-============================================================ */
-
-function getConfig() {
-
-    if (
-        window.pastPaperConfig &&
-        typeof window.pastPaperConfig === "object"
-    ) {
-
-        return window.pastPaperConfig;
-
-    }
-
-    return null;
-
-}
-
-
-/* ============================================================
-   GET ALL PAPERS
-============================================================ */
-
-function getAllPapers() {
-
-    if (
-        !Array.isArray(window.pastPapers)
-    ) {
-
-        return [];
-
-    }
-
-    return window.pastPapers;
-
-}
-
-
-/* ============================================================
-   GET FORM VALUE
-============================================================ */
-
-function getFormValue(paper) {
-
-    return (
-        paper.form ||
-        paper.level ||
-        paper.class ||
-        paper.formLevel ||
-        paper.form_id ||
-        ""
-    );
-
-}
-
-
-/* ============================================================
-   GET SUBJECT VALUE
-============================================================ */
-
-function getSubjectValue(paper) {
-
-    return (
-        paper.subject ||
-        paper.subjectName ||
-        ""
-    );
-
-}
-
-
-/* ============================================================
-   GET TYPE VALUE
-============================================================ */
-
-function getTypeValue(paper) {
-
-    return (
-        paper.type ||
-        paper.paperType ||
-        paper.category ||
-        ""
-    );
-
-}
-
-
-/* ============================================================
-   GET REGION VALUE
-============================================================ */
-
-function getRegionValue(paper) {
-
-    return (
-        paper.region ||
-        paper.mkoa ||
-        paper.location ||
-        ""
-    );
-
-}
-
-
-/* ============================================================
-   GET YEAR VALUE
-============================================================ */
-
-function getYearValue(paper) {
-
-    return (
-        paper.year ||
-        paper.examYear ||
-        paper.mwaka ||
-        ""
-    );
-
-}
-
-
-/* ============================================================
-   GET FILE VALUE
-============================================================ */
-
-function getFileValue(paper) {
-
-    return (
-        paper.file ||
-        paper.url ||
-        paper.pdf ||
-        paper.path ||
-        paper.href ||
-        ""
-    );
-
-}
-
-
-/* ============================================================
-   GET TITLE
-============================================================ */
-
-function getPaperTitle(paper) {
-
-    return (
-        paper.title ||
-        paper.name ||
-        paper.paper ||
-        "Past Paper"
-    );
-
-}
-
-
-/* ============================================================
-   FORM MATCH
-============================================================ */
-
-function matchesForm(paper, formId) {
-
-    const value =
-        normalize(getFormValue(paper));
-
-    const target =
-        normalize(formId);
-
-    if (
-        value === target
-    ) {
-
-        return true;
-
-    }
-
-    if (
-        value === target.replace("form", "")
-    ) {
-
-        return true;
-
-    }
-
-    if (
-        value === "form_" +
-        target.replace("form", "")
-    ) {
-
-        return true;
-
-    }
-
-    if (
-        value === "form " +
-        target.replace("form", "")
-    ) {
-
-        return true;
-
-    }
-
-    return false;
-
-}
-
-
-/* ============================================================
-   GENERIC UNIQUE VALUES
-============================================================ */
-
-function uniqueValues(
-    papers,
-    getter
-) {
-
-    const values = [];
-
-    papers.forEach(function(paper) {
-
-        const value =
-            getter(paper);
-
-        if (
-            value === null ||
-            value === undefined ||
-            value === ""
-        ) {
-
-            return;
-
-        }
-
-        const exists =
-            values.some(function(existing) {
-
-                return normalize(existing) ===
-                       normalize(value);
-
-            });
-
-        if (!exists) {
-
-            values.push(value);
-
-        }
-
-    });
-
-    return values;
-
-}
-
-
-/* ============================================================
-   FILTER PAPERS
-============================================================ */
-
-function filterPapers() {
-
-    let papers =
-        getAllPapers();
-
-
-    /* FORM */
-
-    if (
-        PPState.form
-    ) {
-
-        papers =
-            papers.filter(function(paper) {
-
-                return matchesForm(
-                    paper,
-                    PPState.form
-                );
-
-            });
-
-    }
-
-
-    /* SUBJECT */
-
-    if (
-        PPState.subject
-    ) {
-
-        const target =
-            normalize(PPState.subject);
-
-        papers =
-            papers.filter(function(paper) {
-
-                return normalize(
-                    getSubjectValue(paper)
-                ) === target;
-
-            });
-
-    }
-
-
-    /* TYPE */
-
-    if (
-        PPState.type
-    ) {
-
-        const target =
-            normalize(PPState.type);
-
-        papers =
-            papers.filter(function(paper) {
-
-                return normalize(
-                    getTypeValue(paper)
-                ) === target;
-
-            });
-
-    }
-
-
-    /* REGION */
-
-    if (
-        PPState.region
-    ) {
-
-        const target =
-            normalize(PPState.region);
-
-        papers =
-            papers.filter(function(paper) {
-
-                return normalize(
-                    getRegionValue(paper)
-                ) === target;
-
-            });
-
-    }
-
-
-    /* YEAR */
-
-    if (
-        PPState.year
-    ) {
-
-        const target =
-            String(PPState.year);
-
-        papers =
-            papers.filter(function(paper) {
-
-                return String(
-                    getYearValue(paper)
-                ) === target;
-
-            });
-
-    }
-
-
-    return papers;
-
-}
-
-
-/* ============================================================
-   HISTORY
-============================================================ */
-
-function saveHistory() {
-
-    history.pushState(
-        {
-            level:
-                PPState.level,
-
-            form:
-                PPState.form,
-
-            subject:
-                PPState.subject,
-
-            type:
-                PPState.type,
-
-            region:
-                PPState.region,
-
-            year:
-                PPState.year
-
-        },
-
-        "",
-
-        window.location.href
-    );
-
-}
-
-
-/* ============================================================
-   UPDATE BREADCRUMB
-============================================================ */
+/* =========================================================
+   BREADCRUMB
+========================================================= */
 
 function updateBreadcrumb() {
 
-    if (!breadcrumb) {
-        return;
-    }
-
-
-    const parts = [];
-
-
-    parts.push("Past Papers");
+    const parts = [
+        "📚 Past Papers"
+    ];
 
 
     if (
-        PPState.form
+        currentState.form
     ) {
 
         parts.push(
-            titleCase(PPState.form)
+            forms[
+                currentState.form
+            ]?.name ||
+            currentState.form
         );
 
     }
 
 
     if (
-        PPState.subject
+        currentState.subject
     ) {
 
         parts.push(
-            titleCase(PPState.subject)
+            currentState.subject
         );
 
     }
 
 
     if (
-        PPState.type
+        currentState.type
     ) {
 
         parts.push(
-            titleCase(PPState.type)
+            currentState.type
         );
 
     }
 
 
     if (
-        PPState.region
+        currentState.region
     ) {
 
         parts.push(
-            titleCase(PPState.region)
+            currentState.region
         );
 
     }
 
 
     if (
-        PPState.year
+        currentState.year
     ) {
 
         parts.push(
-            PPState.year
+            currentState.year
         );
 
     }
 
 
     breadcrumb.innerHTML =
-        parts.map(function(part, index) {
+        parts.map(
+            (part, index) => {
 
-            if (
-                index === 0
-            ) {
+                if (
+                    index === 0
+                ) {
+
+                    return `
+                        <span class="current">
+                            ${part}
+                        </span>
+                    `;
+
+                }
+
 
                 return `
+                    <span class="separator">
+                        ›
+                    </span>
+
                     <span>
                         ${part}
                     </span>
                 `;
 
             }
-
-
-            return `
-
-                <span class="separator">
-                    ›
-                </span>
-
-                <span>
-                    ${part}
-                </span>
-
-            `;
-
-        }).join("");
+        ).join("");
 
 }
 
 
-/* ============================================================
+/* =========================================================
    BACK BUTTON
-============================================================ */
+========================================================= */
 
 function updateBackButton() {
 
-    if (!backButton) {
-        return;
-    }
-
-
     if (
-        PPState.level === "forms"
+        currentState.level ===
+        "forms"
     ) {
 
         backButton.style.display =
@@ -737,81 +996,27 @@ function updateBackButton() {
 }
 
 
-/* ============================================================
-   CARD
-============================================================ */
-
-function createCard(
-    icon,
-    title,
-    description,
-    buttonText,
-    onclick,
-    extraClass = ""
-) {
-
-    return `
-
-        <div class="
-            selection-card
-            past-paper-card
-            ${extraClass}
-        ">
-
-            <div>
-
-                <div class="paper-card-icon">
-                    ${icon}
-                </div>
-
-                <h3>
-                    ${title}
-                </h3>
-
-                <p>
-                    ${description}
-                </p>
-
-            </div>
-
-            <button
-                class="open-btn"
-                onclick="${onclick}">
-
-                ${buttonText}
-
-            </button>
-
-        </div>
-
-    `;
-
-}
-
-
-/* ============================================================
+/* =========================================================
    RENDER FORMS
-============================================================ */
+========================================================= */
 
 function renderForms() {
 
-    PPState.level =
-        "forms";
+    currentState = {
 
-    PPState.form =
-        null;
+        level: "forms",
 
-    PPState.subject =
-        null;
+        form: null,
 
-    PPState.type =
-        null;
+        subject: null,
 
-    PPState.region =
-        null;
+        type: null,
 
-    PPState.year =
-        null;
+        region: null,
+
+        year: null
+
+    };
 
 
     updateBreadcrumb();
@@ -821,36 +1026,31 @@ function renderForms() {
 
     let html = `
 
-        <div class="step-title">
+        <div class="gp-step-header">
 
-            <div class="step-number">
+            <div class="gp-step-number">
                 1
             </div>
 
-            <h2>
-                Chagua Kidato
-            </h2>
+            <div>
 
-            <p>
-                Chagua kidato unachotaka
-                kupata Past Papers.
-            </p>
+                <h2>
+                    Chagua Kidato
+                </h2>
+
+                <p>
+                    Chagua kidato unachotaka
+                    kupata Past Papers.
+                </p>
+
+            </div>
 
         </div>
 
-        <div class="selection-grid">
+
+        <div class="gp-selection-grid">
 
     `;
-
-
-    const icons = [
-        "📘",
-        "📗",
-        "📙",
-        "📕",
-        "📔",
-        "📓"
-    ];
 
 
     for (
@@ -859,22 +1059,57 @@ function renderForms() {
         i++
     ) {
 
-        const form =
+        const formId =
             "form" + i;
 
-        html += createCard(
 
-            icons[i - 1],
+        const form =
+            forms[formId];
 
-            "Form " + i,
 
-            "Physics & Chemistry Past Papers",
+        html += `
 
-            "FUNGUA FORM " + i,
+            <article
+                class="gp-card gp-form-card"
+            >
 
-            `openForm('${form}')`
+                <div class="gp-card-icon">
 
-        );
+                    ${form.icon}
+
+                </div>
+
+
+                <div class="gp-card-body">
+
+                    <h3>
+                        ${form.name}
+                    </h3>
+
+                    <p>
+                        Physics & Chemistry
+                        Past Papers
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="gp-open-btn"
+                    onclick="openForm('${formId}')"
+                >
+
+                    FUNGUA FORM ${i}
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+            </article>
+
+        `;
 
     }
 
@@ -886,47 +1121,101 @@ function renderForms() {
     `;
 
 
-    stepContainer.innerHTML =
+    container.innerHTML =
         html;
 
 }
 
 
-/* ============================================================
+/* =========================================================
    OPEN FORM
-============================================================ */
+========================================================= */
 
-function openForm(form) {
+function openForm(
+    form
+) {
 
-    PPState.level =
+    currentState.level =
         "subjects";
 
-    PPState.form =
+    currentState.form =
         form;
 
-    PPState.subject =
+    currentState.subject =
         null;
 
-    PPState.type =
+    currentState.type =
         null;
 
-    PPState.region =
+    currentState.region =
         null;
 
-    PPState.year =
+    currentState.year =
         null;
 
 
-    saveHistory();
+    history.pushState(
+        currentState,
+        "",
+        "#form=" + form
+    );
+
 
     renderSubjects();
 
 }
 
 
-/* ============================================================
+/* =========================================================
+   GET SUBJECTS FOR FORM
+========================================================= */
+
+function getSubjects(
+    form
+) {
+
+    const set =
+        new Set();
+
+
+    papers.forEach(
+        paper => {
+
+            if (
+                paper.form === form &&
+                paper.subject
+            ) {
+
+                set.add(
+                    paper.subject
+                );
+
+            }
+
+        }
+    );
+
+
+    /*
+     * We only display subjects that
+     * actually have records.
+     *
+     * If your data has Physics and
+     * Chemistry, both appear.
+     */
+
+    return Array.from(set)
+        .sort(
+            (a, b) =>
+                a.localeCompare(b)
+        );
+
+}
+
+
+/* =========================================================
    RENDER SUBJECTS
-============================================================ */
+========================================================= */
 
 function renderSubjects() {
 
@@ -935,37 +1224,39 @@ function renderSubjects() {
     updateBackButton();
 
 
-    const papers =
-        filterOnlyForm();
-
-
     const subjects =
-        uniqueValues(
-            papers,
-            getSubjectValue
+        getSubjects(
+            currentState.form
         );
 
 
     let html = `
 
-        <div class="step-title">
+        <div class="gp-step-header">
 
-            <div class="step-number">
+            <div class="gp-step-number">
                 2
             </div>
 
-            <h2>
-                Chagua Subject
-            </h2>
+            <div>
 
-            <p>
-                ${titleCase(PPState.form)}
-                — Chagua somo.
-            </p>
+                <h2>
+                    Chagua Subject
+                </h2>
+
+                <p>
+                    ${forms[
+                        currentState.form
+                    ]?.name || ""}
+                    — Chagua somo.
+                </p>
+
+            </div>
 
         </div>
 
-        <div class="selection-grid">
+
+        <div class="gp-selection-grid">
 
     `;
 
@@ -974,104 +1265,163 @@ function renderSubjects() {
         subjects.length === 0
     ) {
 
-        html += emptyCard(
-            "Hakuna Subject",
-            "Hakuna Past Paper iliyopatikana kwa Form hii."
+        html += emptyMessage(
+            "Hakuna subject yenye papers iliyopatikana kwenye data ya kidato hiki."
         );
 
     }
 
 
-    subjects.forEach(function(subject) {
+    subjects.forEach(
+        subject => {
 
-        const icon =
-            normalize(subject)
-                .includes("physics")
-                ? "⚛️"
-                : "🧪";
+            const icon =
+                subject === "Physics"
+                    ? "⚛️"
+                    : subject === "Chemistry"
+                        ? "🧪"
+                        : "📚";
 
 
-        html += createCard(
+            html += `
 
-            icon,
+                <article
+                    class="gp-card gp-subject-card"
+                >
 
-            titleCase(subject),
+                    <div class="gp-card-icon">
+                        ${icon}
+                    </div>
 
-            "Past Papers za " +
-            titleCase(subject),
+                    <div class="gp-card-body">
 
-            "FUNGUA " +
-            titleCase(subject).toUpperCase(),
+                        <h3>
+                            ${escapeHtml(subject)}
+                        </h3>
 
-            `openSubject('${escapeJS(subject)}')`
+                        <p>
+                            Chagua aina ya
+                            Past Paper.
+                        </p>
 
-        );
+                    </div>
 
-    });
+                    <button
+                        class="gp-open-btn"
+                        onclick="openSubject('${escapeJs(subject)}')"
+                    >
+
+                        FUNGUA ${escapeHtml(
+                            subject.toUpperCase()
+                        )}
+
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+                </article>
+
+            `;
+
+        }
+    );
 
 
     html += `
+
         </div>
+
     `;
 
 
-    stepContainer.innerHTML =
+    container.innerHTML =
         html;
 
 }
 
 
-/* ============================================================
-   FILTER ONLY FORM
-============================================================ */
-
-function filterOnlyForm() {
-
-    return getAllPapers()
-        .filter(function(paper) {
-
-            return matchesForm(
-                paper,
-                PPState.form
-            );
-
-        });
-
-}
-
-
-/* ============================================================
+/* =========================================================
    OPEN SUBJECT
-============================================================ */
+========================================================= */
 
-function openSubject(subject) {
+function openSubject(
+    subject
+) {
 
-    PPState.level =
+    currentState.level =
         "types";
 
-    PPState.subject =
+    currentState.subject =
         subject;
 
-    PPState.type =
+    currentState.type =
         null;
 
-    PPState.region =
+    currentState.region =
         null;
 
-    PPState.year =
+    currentState.year =
         null;
 
 
-    saveHistory();
+    history.pushState(
+        currentState,
+        "",
+        "#form=" +
+        currentState.form +
+        "&subject=" +
+        encodeURIComponent(subject)
+    );
+
 
     renderTypes();
 
 }
 
 
-/* ============================================================
+/* =========================================================
+   GET TYPES
+========================================================= */
+
+function getTypes() {
+
+    const set =
+        new Set();
+
+
+    papers.forEach(
+        paper => {
+
+            if (
+                paper.form ===
+                    currentState.form &&
+
+                paper.subject ===
+                    currentState.subject &&
+
+                paper.type
+            ) {
+
+                set.add(
+                    paper.type
+                );
+
+            }
+
+        }
+    );
+
+
+    return Array.from(set);
+
+}
+
+
+/* =========================================================
    RENDER TYPES
-============================================================ */
+========================================================= */
 
 function renderTypes() {
 
@@ -1080,36 +1430,35 @@ function renderTypes() {
     updateBackButton();
 
 
-    const papers =
-        filterPapers();
-
-
     const types =
-        uniqueValues(
-            papers,
-            getTypeValue
-        );
+        getTypes();
 
 
     let html = `
 
-        <div class="step-title">
+        <div class="gp-step-header">
 
-            <div class="step-number">
+            <div class="gp-step-number">
                 3
             </div>
 
-            <h2>
-                Chagua Aina ya Paper
-            </h2>
+            <div>
 
-            <p>
-                Chagua aina ya examination paper.
-            </p>
+                <h2>
+                    Chagua Aina ya Paper
+                </h2>
+
+                <p>
+                    Chagua aina ya mtihani
+                    unaotafuta.
+                </p>
+
+            </div>
 
         </div>
 
-        <div class="selection-grid">
+
+        <div class="gp-selection-grid">
 
     `;
 
@@ -1118,75 +1467,157 @@ function renderTypes() {
         types.length === 0
     ) {
 
-        html += emptyCard(
-            "Hakuna Paper",
-            "Hakuna aina ya Past Paper iliyopatikana kwa subject hii."
+        html += emptyMessage(
+            "Hakuna aina ya paper iliyopatikana kwa subject hii."
         );
 
     }
 
 
-    types.forEach(function(type) {
+    types.forEach(
+        type => {
 
-        html += createCard(
+            html += `
 
-            "📝",
+                <article
+                    class="gp-card gp-type-card"
+                >
 
-            titleCase(type),
+                    <div class="gp-card-icon">
+                        📝
+                    </div>
 
-            "Past Papers — " +
-            titleCase(type),
+                    <div class="gp-card-body">
 
-            "FUNGUA " +
-            titleCase(type).toUpperCase(),
+                        <h3>
+                            ${escapeHtml(type)}
+                        </h3>
 
-            `openType('${escapeJS(type)}')`
+                        <p>
+                            Fungua papers za
+                            ${escapeHtml(type)}.
+                        </p>
 
-        );
+                    </div>
 
-    });
+                    <button
+                        class="gp-open-btn"
+                        onclick="openType('${escapeJs(type)}')"
+                    >
+
+                        FUNGUA ${escapeHtml(
+                            type.toUpperCase()
+                        )}
+
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+                </article>
+
+            `;
+
+        }
+    );
 
 
     html += `
+
         </div>
+
     `;
 
 
-    stepContainer.innerHTML =
+    container.innerHTML =
         html;
 
 }
 
 
-/* ============================================================
+/* =========================================================
    OPEN TYPE
-============================================================ */
+========================================================= */
 
-function openType(type) {
+function openType(
+    type
+) {
 
-    PPState.level =
+    currentState.level =
         "regions";
 
-    PPState.type =
+    currentState.type =
         type;
 
-    PPState.region =
+    currentState.region =
         null;
 
-    PPState.year =
+    currentState.year =
         null;
 
 
-    saveHistory();
+    history.pushState(
+        currentState,
+        "",
+        "#type=" +
+        encodeURIComponent(type)
+    );
+
 
     renderRegions();
 
 }
 
 
-/* ============================================================
+/* =========================================================
+   GET REGIONS
+========================================================= */
+
+function getRegions() {
+
+    const set =
+        new Set();
+
+
+    papers.forEach(
+        paper => {
+
+            if (
+                paper.form ===
+                    currentState.form &&
+
+                paper.subject ===
+                    currentState.subject &&
+
+                paper.type ===
+                    currentState.type &&
+
+                paper.region
+            ) {
+
+                set.add(
+                    paper.region
+                );
+
+            }
+
+        }
+    );
+
+
+    return Array.from(set)
+        .sort(
+            (a, b) =>
+                a.localeCompare(b)
+        );
+
+}
+
+
+/* =========================================================
    RENDER REGIONS
-============================================================ */
+========================================================= */
 
 function renderRegions() {
 
@@ -1195,36 +1626,35 @@ function renderRegions() {
     updateBackButton();
 
 
-    const papers =
-        filterPapers();
-
-
     const regions =
-        uniqueValues(
-            papers,
-            getRegionValue
-        );
+        getRegions();
 
 
     let html = `
 
-        <div class="step-title">
+        <div class="gp-step-header">
 
-            <div class="step-number">
+            <div class="gp-step-number">
                 4
             </div>
 
-            <h2>
-                Chagua Mkoa
-            </h2>
+            <div>
 
-            <p>
-                Chagua mkoa wa Past Paper.
-            </p>
+                <h2>
+                    Chagua Mkoa
+                </h2>
+
+                <p>
+                    Chagua mkoa wenye
+                    Past Papers.
+                </p>
+
+            </div>
 
         </div>
 
-        <div class="selection-grid">
+
+        <div class="gp-selection-grid">
 
     `;
 
@@ -1233,81 +1663,156 @@ function renderRegions() {
         regions.length === 0
     ) {
 
-        html += emptyCard(
-            "Hakuna Mkoa",
-            "Hakuna Past Paper yenye mkoa kwa uchaguzi huu."
+        html += emptyMessage(
+            "Hakuna mikoa iliyopatikana kwa uchaguzi huu."
         );
 
     }
 
 
-    regions
-        .sort(function(a, b) {
+    regions.forEach(
+        region => {
 
-            return titleCase(a)
-                .localeCompare(
-                    titleCase(b)
-                );
+            html += `
 
-        })
-        .forEach(function(region) {
+                <article
+                    class="gp-card gp-region-card"
+                >
 
-            html += createCard(
+                    <div class="gp-card-icon">
+                        📍
+                    </div>
 
-                "📍",
+                    <div class="gp-card-body">
 
-                titleCase(region),
+                        <h3>
+                            ${escapeHtml(region)}
+                        </h3>
 
-                "Past Papers kutoka " +
-                titleCase(region),
+                        <p>
+                            Past Papers za
+                            mkoa huu.
+                        </p>
 
-                "FUNGUA " +
-                titleCase(region).toUpperCase(),
+                    </div>
 
-                `openRegion('${escapeJS(region)}')`
+                    <button
+                        class="gp-open-btn"
+                        onclick="openRegion('${escapeJs(region)}')"
+                    >
 
-            );
+                        FUNGUA MOA
 
-        });
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+                </article>
+
+            `;
+
+        }
+    );
 
 
     html += `
+
         </div>
+
     `;
 
 
-    stepContainer.innerHTML =
+    container.innerHTML =
         html;
 
 }
 
 
-/* ============================================================
+/* =========================================================
    OPEN REGION
-============================================================ */
+========================================================= */
 
-function openRegion(region) {
+function openRegion(
+    region
+) {
 
-    PPState.level =
+    currentState.level =
         "years";
 
-    PPState.region =
+    currentState.region =
         region;
 
-    PPState.year =
+    currentState.year =
         null;
 
 
-    saveHistory();
+    history.pushState(
+        currentState,
+        "",
+        "#region=" +
+        encodeURIComponent(region)
+    );
+
 
     renderYears();
 
 }
 
 
-/* ============================================================
+/* =========================================================
+   GET YEARS
+========================================================= */
+
+function getYears() {
+
+    const set =
+        new Set();
+
+
+    papers.forEach(
+        paper => {
+
+            if (
+                paper.form ===
+                    currentState.form &&
+
+                paper.subject ===
+                    currentState.subject &&
+
+                paper.type ===
+                    currentState.type &&
+
+                paper.region ===
+                    currentState.region &&
+
+                paper.year
+            ) {
+
+                set.add(
+                    String(paper.year)
+                );
+
+            }
+
+        }
+    );
+
+
+    return Array.from(set)
+        .sort(
+            (a, b) =>
+                Number(b) -
+                Number(a)
+        );
+
+}
+
+
+/* =========================================================
    RENDER YEARS
-============================================================ */
+========================================================= */
 
 function renderYears() {
 
@@ -1316,46 +1821,35 @@ function renderYears() {
     updateBackButton();
 
 
-    const papers =
-        filterPapers();
-
-
     const years =
-        uniqueValues(
-            papers,
-            getYearValue
-        );
-
-
-    years.sort(function(a, b) {
-
-        return Number(b) -
-               Number(a);
-
-    });
+        getYears();
 
 
     let html = `
 
-        <div class="step-title">
+        <div class="gp-step-header">
 
-            <div class="step-number">
+            <div class="gp-step-number">
                 5
             </div>
 
-            <h2>
-                Chagua Mwaka
-            </h2>
+            <div>
 
-            <p>
-                ${titleCase(PPState.region)}
-                —
-                Chagua mwaka.
-            </p>
+                <h2>
+                    Chagua Mwaka
+                </h2>
+
+                <p>
+                    Chagua mwaka wa
+                    Past Paper.
+                </p>
+
+            </div>
 
         </div>
 
-        <div class="selection-grid">
+
+        <div class="gp-selection-grid">
 
     `;
 
@@ -1364,69 +1858,138 @@ function renderYears() {
         years.length === 0
     ) {
 
-        html += emptyCard(
-            "Hakuna Mwaka",
-            "Hakuna mwaka wa Past Paper uliopatikana."
+        html += emptyMessage(
+            "Hakuna mwaka uliopatikana kwa uchaguzi huu."
         );
 
     }
 
 
-    years.forEach(function(year) {
+    years.forEach(
+        year => {
 
-        html += createCard(
+            html += `
 
-            "📅",
+                <article
+                    class="gp-card gp-year-card"
+                >
 
-            String(year),
+                    <div class="gp-card-icon">
+                        📅
+                    </div>
 
-            "Past Papers za mwaka " +
-            year,
+                    <div class="gp-card-body">
 
-            "FUNGUA " +
-            year,
+                        <h3>
+                            ${escapeHtml(year)}
+                        </h3>
 
-            `openYear('${escapeJS(String(year))}')`
+                        <p>
+                            Papers za mwaka
+                            ${escapeHtml(year)}.
+                        </p>
 
-        );
+                    </div>
 
-    });
+                    <button
+                        class="gp-open-btn"
+                        onclick="openYear('${escapeJs(year)}')"
+                    >
+
+                        FUNGUA ${escapeHtml(year)}
+
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+                </article>
+
+            `;
+
+        }
+    );
 
 
     html += `
+
         </div>
+
     `;
 
 
-    stepContainer.innerHTML =
+    container.innerHTML =
         html;
 
 }
 
 
-/* ============================================================
+/* =========================================================
    OPEN YEAR
-============================================================ */
+========================================================= */
 
-function openYear(year) {
+function openYear(
+    year
+) {
 
-    PPState.level =
+    currentState.level =
         "papers";
 
-    PPState.year =
+    currentState.year =
         year;
 
 
-    saveHistory();
+    history.pushState(
+        currentState,
+        "",
+        "#year=" +
+        encodeURIComponent(year)
+    );
+
 
     renderPapers();
 
 }
 
 
-/* ============================================================
-   RENDER PAPERS
-============================================================ */
+/* =========================================================
+   GET PAPERS
+========================================================= */
+
+function getSelectedPapers() {
+
+    return papers.filter(
+        paper => {
+
+            return (
+
+                paper.form ===
+                    currentState.form &&
+
+                paper.subject ===
+                    currentState.subject &&
+
+                paper.type ===
+                    currentState.type &&
+
+                paper.region ===
+                    currentState.region &&
+
+                String(paper.year) ===
+                    String(currentState.year)
+
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   RENDER FINAL PDF LIST
+========================================================= */
 
 function renderPapers() {
 
@@ -1435,281 +1998,177 @@ function renderPapers() {
     updateBackButton();
 
 
-    const papers =
-        filterPapers();
+    const selected =
+        getSelectedPapers();
 
 
     let html = `
 
-        <div class="step-title">
+        <div class="gp-step-header">
 
-            <div class="step-number">
+            <div class="gp-step-number">
                 6
             </div>
 
-            <h2>
-                Papers
-            </h2>
-
-            <p>
-                Chagua paper unayotaka
-                kufungua.
-            </p>
-
-        </div>
-
-        <div class="selection-grid">
-
-    `;
-
-
-    if (
-        papers.length === 0
-    ) {
-
-        html += emptyCard(
-            "Hakuna Papers",
-            "Hakuna PDF iliyopatikana kwa uchaguzi huu."
-        );
-
-    }
-
-
-    papers.forEach(function(paper, index) {
-
-        const title =
-            getPaperTitle(paper);
-
-        const file =
-            getFileValue(paper);
-
-
-        html += `
-
-            <div class="
-                selection-card
-                paper-file-card
-            ">
-
-                <div>
-
-                    <div class="paper-card-icon">
-                        📄
-                    </div>
-
-                    <h3>
-                        ${escapeHTML(title)}
-                    </h3>
-
-                    <p>
-                        ${titleCase(
-                            getSubjectValue(paper)
-                        )}
-                        —
-                        ${titleCase(
-                            getTypeValue(paper)
-                        )}
-                        —
-                        ${getYearValue(paper)}
-                    </p>
-
-                </div>
-
-                ${
-                    file
-                    ? `
-
-                        <button
-                            class="open-btn pdf-btn"
-                            onclick="
-                                openPDF(
-                                    '${escapeJS(file)}'
-                                )
-                            ">
-
-                            📄 FUNGUA PDF
-
-                        </button>
-
-                    `
-                    :
-                    `
-
-                        <button
-                            class="open-btn"
-                            disabled>
-
-                            PDF HAIPO
-
-                        </button>
-
-                    `
-                }
-
-            </div>
-
-        `;
-
-    });
-
-
-    html += `
-        </div>
-    `;
-
-
-    stepContainer.innerHTML =
-        html;
-
-}
-
-
-/* ============================================================
-   OPEN PDF
-============================================================ */
-
-function openPDF(file) {
-
-    if (
-        !file
-    ) {
-
-        alert(
-            "PDF haijapatikana."
-        );
-
-        return;
-
-    }
-
-
-    /*
-       Kama file inaanza na http/https,
-       tumia moja kwa moja.
-    */
-
-    if (
-        /^https?:\/\//i.test(file)
-    ) {
-
-        window.open(
-            file,
-            "_blank"
-        );
-
-        return;
-
-    }
-
-
-    /*
-       Kama ni relative path kama:
-
-       papers/form6/physics/...
-       
-       tunatengeneza URL sahihi
-       kulingana na location ya website.
-    */
-
-    const cleanFile =
-        String(file)
-            .replace(/^\/+/, "");
-
-
-    const pdfURL =
-        new URL(
-            cleanFile,
-            window.location.origin +
-            window.location.pathname
-        ).href;
-
-
-    window.open(
-        pdfURL,
-        "_blank"
-    );
-
-}
-
-
-/* ============================================================
-   EMPTY CARD
-============================================================ */
-
-function emptyCard(
-    title,
-    message
-) {
-
-    return `
-
-        <div class="
-            selection-card
-            empty-card
-        ">
-
             <div>
 
-                <div class="paper-card-icon">
-                    📂
-                </div>
-
-                <h3>
-                    ${title}
-                </h3>
+                <h2>
+                    Past Papers
+                </h2>
 
                 <p>
-                    ${message}
+                    Chagua PDF unayotaka
+                    kufungua.
                 </p>
 
             </div>
 
         </div>
 
+
+        <div class="gp-paper-list">
+
+    `;
+
+
+    if (
+        selected.length === 0
+    ) {
+
+        html += emptyMessage(
+            "Hakuna PDF iliyopatikana kwa uchaguzi huu."
+        );
+
+    }
+
+
+    selected.forEach(
+        (paper, index) => {
+
+            html += `
+
+                <article
+                    class="gp-paper-card"
+                >
+
+                    <div class="gp-paper-icon">
+                        📄
+                    </div>
+
+
+                    <div class="gp-paper-info">
+
+                        <h3>
+                            ${escapeHtml(
+                                paper.title
+                            )}
+                        </h3>
+
+                        <div class="gp-paper-meta">
+
+                            <span>
+                                ${escapeHtml(
+                                    paper.subject
+                                )}
+                            </span>
+
+                            <span>
+                                ${escapeHtml(
+                                    paper.type
+                                )}
+                            </span>
+
+                            <span>
+                                ${escapeHtml(
+                                    paper.region
+                                )}
+                            </span>
+
+                            <span>
+                                ${escapeHtml(
+                                    paper.year
+                                )}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        class="gp-pdf-btn"
+                        href="${escapeAttribute(
+                            paper.file
+                        )}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        📄 OPEN PDF
+
+                    </a>
+
+                </article>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+        </div>
+
+    `;
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   EMPTY MESSAGE
+========================================================= */
+
+function emptyMessage(
+    message
+) {
+
+    return `
+
+        <div class="gp-empty-card">
+
+            <div class="gp-empty-icon">
+                📂
+            </div>
+
+            <h3>
+                Hakuna Papers
+            </h3>
+
+            <p>
+                ${escapeHtml(message)}
+            </p>
+
+        </div>
+
     `;
 
 }
 
 
-/* ============================================================
-   HTML ESCAPE
-============================================================ */
-
-function escapeHTML(value) {
-
-    return safeText(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-
-}
-
-
-/* ============================================================
-   JAVASCRIPT ESCAPE
-============================================================ */
-
-function escapeJS(value) {
-
-    return safeText(value)
-        .replaceAll("\\", "\\\\")
-        .replaceAll("'", "\\'")
-        .replaceAll("\n", "\\n")
-        .replaceAll("\r", "\\r");
-
-}
-
-
-/* ============================================================
-   BACK BUTTON CLICK
-============================================================ */
+/* =========================================================
+   BACK NAVIGATION
+========================================================= */
 
 function goBack() {
 
     if (
-        PPState.level === "forms"
+        currentState.level ===
+        "forms"
     ) {
 
         window.location.href =
@@ -1725,9 +2184,9 @@ function goBack() {
 }
 
 
-/* ============================================================
+/* =========================================================
    POPSTATE
-============================================================ */
+========================================================= */
 
 window.addEventListener(
     "popstate",
@@ -1737,9 +2196,7 @@ window.addEventListener(
             event.state;
 
 
-        if (
-            !state
-        ) {
+        if (!state) {
 
             renderForms();
 
@@ -1748,29 +2205,33 @@ window.addEventListener(
         }
 
 
-        PPState.level =
-            state.level ||
-            "forms";
+        currentState = {
 
-        PPState.form =
-            state.form ||
-            null;
+            level:
+                state.level ||
+                "forms",
 
-        PPState.subject =
-            state.subject ||
-            null;
+            form:
+                state.form ||
+                null,
 
-        PPState.type =
-            state.type ||
-            null;
+            subject:
+                state.subject ||
+                null,
 
-        PPState.region =
-            state.region ||
-            null;
+            type:
+                state.type ||
+                null,
 
-        PPState.year =
-            state.year ||
-            null;
+            region:
+                state.region ||
+                null,
+
+            year:
+                state.year ||
+                null
+
+        };
 
 
         renderCurrentLevel();
@@ -1779,14 +2240,14 @@ window.addEventListener(
 );
 
 
-/* ============================================================
+/* =========================================================
    RENDER CURRENT LEVEL
-============================================================ */
+========================================================= */
 
 function renderCurrentLevel() {
 
     switch (
-        PPState.level
+        currentState.level
     ) {
 
         case "forms":
@@ -1796,4 +2257,177 @@ function renderCurrentLevel() {
             break;
 
 
-       
+        case "subjects":
+
+            renderSubjects();
+
+            break;
+
+
+        case "types":
+
+            renderTypes();
+
+            break;
+
+
+        case "regions":
+
+            renderRegions();
+
+            break;
+
+
+        case "years":
+
+            renderYears();
+
+            break;
+
+
+        case "papers":
+
+            renderPapers();
+
+            break;
+
+
+        default:
+
+            renderForms();
+
+    }
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   ESCAPE JS
+========================================================= */
+
+function escapeJs(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+        .replaceAll(
+            "\\",
+            "\\\\"
+        )
+        .replaceAll(
+            "'",
+            "\\'"
+        )
+        .replaceAll(
+            "\n",
+            "\\n"
+        )
+        .replaceAll(
+            "\r",
+            "\\r"
+        );
+
+}
+
+
+/* =========================================================
+   ESCAPE ATTRIBUTE
+========================================================= */
+
+function escapeAttribute(
+    value
+) {
+
+    return escapeHtml(value);
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+function initializePastPapers() {
+
+    const loaded =
+        loadData();
+
+
+    if (!loaded) {
+
+        return;
+
+    }
+
+
+    /*
+     * Start at Form 1–6.
+     */
+
+    history.replaceState(
+        {
+            level: "forms",
+
+            form: null,
+
+            subject: null,
+
+            type: null,
+
+            region: null,
+
+            year: null
+
+        },
+        "",
+        window.location.href
+    );
+
+
+    renderForms();
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+initializePastPapers();
