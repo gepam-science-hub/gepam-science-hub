@@ -1577,10 +1577,17 @@ const subjects = [
 const paperTypes = [
 
     {
-        id: "annual",
-        name: "Annual Examination",
+        id: "midterm",
+        name: "Midterm Examination",
         description:
-            "Annual examination papers."
+            "Midterm examination papers."
+    },
+
+    {
+        id: "terminal",
+        name: "Terminal Examination",
+        description:
+            "Terminal examination papers."
     },
 
     {
@@ -1611,15 +1618,14 @@ const paperTypes = [
             "NECTA national examination papers."
     },
 
-      {
-    id: "ftna",
-    name: "FTNA",
-    description:
-        "FTNA national examination papers."
-}
+    {
+        id: "ftna",
+        name: "FTNA",
+        description:
+            "FTNA national examination papers."
+    }
 
 ];
-
 
 /* =========================================================
    REGIONS
@@ -2086,22 +2092,122 @@ function renderTypes() {
 
 
     const availablePaperTypes =
+    const availablePaperTypes =
     paperTypes.filter(
         type => {
 
-            /*
-             * FTNA ni ya Form 2 tu
-             */
+            const form =
+                currentState.form;
+
+
+            /* =========================
+               FORM 1
+            ========================= */
+
             if (
-                type.id === "ftna" &&
-                currentState.form !== "form2"
+                form === "form1"
             ) {
 
-                return false;
+                return [
+                    "midterm",
+                    "terminal",
+                    "joint"
+                ].includes(type.id);
 
             }
 
-            return true;
+
+            /* =========================
+               FORM 2
+            ========================= */
+
+            if (
+                form === "form2"
+            ) {
+
+                return [
+                    "midterm",
+                    "terminal",
+                    "joint",
+                    "ftna"
+                ].includes(type.id);
+
+            }
+
+
+            /* =========================
+               FORM 3
+            ========================= */
+
+            if (
+                form === "form3"
+            ) {
+
+                return [
+                    "midterm",
+                    "terminal",
+                    "joint"
+                ].includes(type.id);
+
+            }
+
+
+            /* =========================
+               FORM 4
+            ========================= */
+
+            if (
+                form === "form4"
+            ) {
+
+                return [
+                    "midterm",
+                    "terminal",
+                    "mock",
+                    "pre_necta",
+                    "necta"
+                ].includes(type.id);
+
+            }
+
+
+            /* =========================
+               FORM 5
+            ========================= */
+
+            if (
+                form === "form5"
+            ) {
+
+                return [
+                    "midterm",
+                    "terminal",
+                    "joint"
+                ].includes(type.id);
+
+            }
+
+
+            /* =========================
+               FORM 6
+            ========================= */
+
+            if (
+                form === "form6"
+            ) {
+
+                return [
+                    "midterm",
+                    "terminal",
+                    "mock",
+                    "pre_necta",
+                    "necta"
+                ].includes(type.id);
+
+            }
+
+
+            return false;
 
         }
     );
@@ -2109,7 +2215,6 @@ function renderTypes() {
 
 availablePaperTypes.forEach(
     type => {
-
             html += `
 
                 <div class="
