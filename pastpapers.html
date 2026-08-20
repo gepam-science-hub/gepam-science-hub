@@ -999,6 +999,7 @@ const paperTypes = [
 
 ];
 
+
 /* =========================================================
    REGIONS
 ========================================================= */
@@ -1238,10 +1239,6 @@ function renderForms() {
 
                 <div>
 
-                    <div class="card-icon">
-                        📘
-                    </div>
-
                     <h3>
                         ${form.name}
                     </h3>
@@ -1358,16 +1355,6 @@ function renderSubjects() {
 
                 <div>
 
-                    <div class="card-icon">
-
-                        ${
-                            subject.id === "physics"
-                            ? "⚛️"
-                            : "🧪"
-                        }
-
-                    </div>
-
                     <h3>
                         ${subject.name}
                     </h3>
@@ -1423,6 +1410,7 @@ function openSubject(subjectId) {
     renderTypes();
 
 }
+
 
 /* =========================================================
    RENDER TYPES
@@ -1751,10 +1739,6 @@ function renderRegions() {
 
             <div class="empty-card">
 
-                <div class="empty-card-icon">
-                    📂
-                </div>
-
                 <h3>
                     Hakuna mkoa
                 </h3>
@@ -1780,10 +1764,6 @@ function renderRegions() {
             ">
 
                 <div>
-
-                    <div class="card-icon">
-                        📍
-                    </div>
 
                     <h3>
                         ${region.name}
@@ -1933,10 +1913,6 @@ function renderYears() {
         html += `
 
             <div class="empty-card">
-
-                <div class="empty-card-icon">
-                    📅
-                </div>
 
                 <h3>
                     Hakuna mwaka
@@ -2179,10 +2155,6 @@ function renderPapers() {
 
             <div class="empty-card">
 
-                <div class="empty-card-icon">
-                    📂
-                </div>
-
                 <h3>
                     Hakuna paper iliyopatikana
                 </h3>
@@ -2208,13 +2180,6 @@ function renderPapers() {
             ">
 
                 <div>
-
-                    <div class="
-                        card-icon
-                        pdf-icon
-                    ">
-                        📄
-                    </div>
 
                     <h3>
                         ${escapeHTML(
@@ -2245,7 +2210,7 @@ function renderPapers() {
                         )
                     ">
 
-                    📄 FUNGUA PDF
+                    FUNGUA PDF
 
                 </button>
 
