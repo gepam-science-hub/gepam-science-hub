@@ -944,53 +944,60 @@ const paperTypes = [
     {
         id: "midterm",
         name: "Midterm Examination",
-        description: "Midterm examination papers."
+        description:
+            "Midterm examination papers."
     },
 
     {
         id: "terminal",
         name: "Terminal Examination",
-        description: "Terminal examination papers."
+        description:
+            "Terminal examination papers."
     },
 
     {
         id: "annual",
         name: "Annual Examination",
-        description: "Annual examination papers."
+        description:
+            "Annual examination papers."
     },
 
     {
         id: "joint",
         name: "Joint Examination",
-        description: "Joint examination papers."
+        description:
+            "Joint examination papers."
     },
 
     {
         id: "mock",
         name: "Mock Examination",
-        description: "Mock examination papers."
+        description:
+            "Mock examination papers."
     },
 
     {
         id: "pre_necta",
         name: "Pre-NECTA",
-        description: "Pre-NECTA examination papers."
+        description:
+            "Pre-NECTA examination papers."
     },
 
     {
         id: "necta",
         name: "NECTA",
-        description: "NECTA national examination papers."
+        description:
+            "NECTA national examination papers."
     },
 
     {
         id: "ftna",
         name: "FTNA",
-        description: "FTNA national examination papers."
+        description:
+            "FTNA national examination papers."
     }
 
 ];
-
 
 /* =========================================================
    REGIONS
@@ -1417,7 +1424,6 @@ function openSubject(subjectId) {
 
 }
 
-
 /* =========================================================
    RENDER TYPES
 ========================================================= */
@@ -1431,10 +1437,9 @@ function renderTypes() {
                 currentState.subject
         );
 
-    const availablePaperTypes =
-        getAvailableTypes();
 
     updateBreadcrumb();
+
 
     let html = `
 
@@ -1460,77 +1465,200 @@ function renderTypes() {
 
     `;
 
-    if (availablePaperTypes.length === 0) {
 
-        html += `
+    /* =====================================================
+       CHAGUA PAPER TYPES KULINGANA NA FORM
+    ===================================================== */
 
-            <div class="empty-card">
+    const availablePaperTypes =
+        paperTypes.filter(
+            type => {
 
-                <div class="empty-card-icon">
-                    📂
-                </div>
+                const form =
+                    currentState.form;
 
-                <h3>
-                    Hakuna aina ya paper
-                </h3>
 
-                <p>
-                    Hakuna Past Paper iliyowekwa
-                    kwenye database kwa uchaguzi huu.
-                </p>
+                /* =========================
+                   FORM 1
+                ========================= */
 
-            </div>
+                if (
+                    form === "form1"
+                ) {
 
-        `;
+                    return [
+                        "midterm",
+                        "terminal",
+                        "joint"
+                    ].includes(
+                        type.id
+                    );
 
-    }
+                }
 
-    availablePaperTypes.forEach(type => {
 
-        html += `
+                /* =========================
+                   FORM 2
+                ========================= */
 
-            <div class="
-                selection-card
-                type-card
-            ">
+                if (
+                    form === "form2"
+                ) {
 
-                <div>
+                    return [
+                        "midterm",
+                        "terminal",
+                        "joint",
+                        "ftna"
+                    ].includes(
+                        type.id
+                    );
 
-                    <div class="card-icon">
-                        📝
+                }
+
+
+                /* =========================
+                   FORM 3
+                ========================= */
+
+                if (
+                    form === "form3"
+                ) {
+
+                    return [
+                        "midterm",
+                        "terminal",
+                        "annual",
+                        "joint"
+                    ].includes(
+                        type.id
+                    );
+
+                }
+
+
+                /* =========================
+                   FORM 4
+                ========================= */
+
+                if (
+                    form === "form4"
+                ) {
+
+                    return [
+                        "midterm",
+                        "terminal",
+                        "mock",
+                        "joint",
+                        "pre_necta",
+                        "necta"
+                    ].includes(
+                        type.id
+                    );
+
+                }
+
+
+                /* =========================
+                   FORM 5
+                ========================= */
+
+                if (
+                    form === "form5"
+                ) {
+
+                    return [
+                        "midterm",
+                        "terminal",
+                        "annual",
+                        "joint"
+                    ].includes(
+                        type.id
+                    );
+
+                }
+
+
+                /* =========================
+                   FORM 6
+                ========================= */
+
+                if (
+                    form === "form6"
+                ) {
+
+                    return [
+                        "midterm",
+                        "terminal",
+                        "mock",
+                        "pre_necta",
+                        "necta"
+                    ].includes(
+                        type.id
+                    );
+
+                }
+
+
+                return false;
+
+            }
+        );
+
+
+    /* =====================================================
+       DISPLAY PAPER TYPE CARDS
+    ===================================================== */
+
+    availablePaperTypes.forEach(
+        type => {
+
+            html += `
+
+                <div class="
+                    selection-card
+                    type-card
+                ">
+
+                    <div>
+
+                        <h3>
+                            ${type.name}
+                        </h3>
+
+                        <p>
+                            ${type.description}
+                        </p>
+
                     </div>
 
-                    <h3>
-                        ${type.name}
-                    </h3>
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openType(
+                                '${type.id}'
+                            )
+                        ">
 
-                    <p>
-                        ${type.description}
-                    </p>
+                        FUNGUA
+
+                    </button>
 
                 </div>
 
-                <button
-                    class="open-btn"
-                    onclick="
-                        openType('${type.id}')
-                    ">
+            `;
 
-                    FUNGUA
+        }
+    );
 
-                </button>
-
-            </div>
-
-        `;
-
-    });
 
     html += `
         </div>
     `;
 
-    stepContainer.innerHTML = html;
+
+    stepContainer.innerHTML =
+        html;
 
 }
 
