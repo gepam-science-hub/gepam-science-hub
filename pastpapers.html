@@ -1609,7 +1609,14 @@ const paperTypes = [
         name: "NECTA",
         description:
             "NECTA national examination papers."
-    }
+    },
+
+      {
+    id: "ftna",
+    name: "FTNA",
+    description:
+        "FTNA national examination papers."
+}
 
 ];
 
@@ -2137,9 +2144,6 @@ function renderTypes() {
 
 function openType(typeId) {
 
-    currentState.level =
-        "regions";
-
     currentState.type =
         typeId;
 
@@ -2149,6 +2153,35 @@ function openType(typeId) {
     currentState.year =
         null;
 
+
+    /*
+     * NECTA na FTNA hazitumii mkoa.
+     * Zinaenda moja kwa moja kwenye miaka.
+     */
+
+    if (
+        typeId === "necta" ||
+        typeId === "ftna"
+    ) {
+
+        currentState.level =
+            "years";
+
+        pushNavigationState();
+
+        renderYears();
+
+        return;
+
+    }
+
+
+    /*
+     * Aina nyingine bado zinatumia mkoa.
+     */
+
+    currentState.level =
+        "regions";
 
     pushNavigationState();
 
@@ -2423,21 +2456,26 @@ function getMatchingPapers() {
 
                 &&
 
-                normalize(
-                    paper.region
-                ) ===
-                normalize(
-                    currentState.region
-                )
+(
+    currentState.type === "necta" ||
+    currentState.type === "ftna" ||
 
-                &&
+    normalize(
+        paper.region
+    ) ===
+    normalize(
+        currentState.region
+    )
+)
 
-                String(
-                    paper.year
-                ) ===
-                String(
-                    currentState.year
-                )
+&&
+
+String(
+    paper.year
+) ===
+String(
+    currentState.year
+)
 
             );
 
