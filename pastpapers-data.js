@@ -539,6 +539,16 @@ const pastPapers = [
   {
     "form":"form4",
     "subject":"physics",
+    "title":"Physics 1",
+    "type":"mock",
+    "region":"shinyanga",
+    "year":2024,
+    "file":"papers/form4/physics/mock/2024/F4_shy_mock_2024_phy1.pdf"
+  },
+
+  {
+    "form":"form4",
+    "subject":"physics",
     "title":"Physics Joint Examination",
     "type":"joint",
     "region":"arusha",
@@ -579,11 +589,21 @@ const pastPapers = [
   {
     "form":"form4",
     "subject":"physics",
-    "title":"Physics NECTA Examination",
+    "title":"Physics 1",
     "type":"necta",
     "region":"necta",
     "year":2025,
-    "file":"papers/form4/physics/necta/2025/physics_2025.pdf"
+    "file":"papers/form4/physics/necta/2025/F4_necta_2025_phy1.pdf"
+  },
+  
+  {
+    "form":"form4",
+    "subject":"physics",
+    "title":"Physics 2A",
+    "type":"necta",
+    "region":"necta",
+    "year":2025,
+    "file":"papers/form4/physics/necta/2025/F4_necta_2025_phy2a.pdf"
   },
 
   {
@@ -669,11 +689,21 @@ const pastPapers = [
   {
     "form":"form4",
     "subject":"chemistry",
-    "title":"Chemistry NECTA Examination",
+    "title":"Chemistry 1",
     "type":"necta",
     "region":"necta",
     "year":2025,
-    "file":"papers/form4/chemistry/necta/2025/chemistry_2025.pdf"
+    "file":"papers/form4/chemistry/necta/2025/F4_necta_2025_chem1.pdf"
+  },
+
+  {
+    "form":"form4",
+    "subject":"chemistry",
+    "title":"Chemistry 2A",
+    "type":"necta",
+    "region":"necta",
+    "year":2025,
+    "file":"papers/form4/chemistry/necta/2025/F4_necta_2025_chem2a.pdf"
   },
 
   {
