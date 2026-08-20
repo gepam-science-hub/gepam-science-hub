@@ -2085,8 +2085,30 @@ function renderTypes() {
     `;
 
 
-    paperTypes.forEach(
+    const availablePaperTypes =
+    paperTypes.filter(
         type => {
+
+            /*
+             * FTNA ni ya Form 2 tu
+             */
+            if (
+                type.id === "ftna" &&
+                currentState.form !== "form2"
+            ) {
+
+                return false;
+
+            }
+
+            return true;
+
+        }
+    );
+
+
+availablePaperTypes.forEach(
+    type => {
 
             html += `
 
