@@ -5,7 +5,7 @@ const pastPaperRegions = [
   { id: "arusha", name: "Arusha" },
   { id: "dar_es_salaam", name: "Dar es Salaam" },
   { id: "dodoma", name: "Dodoma" },
-  { id: "geita", name: "Geita" },
+  { id: "shinyanga", name: "Shinyanga" },
   { id: "iringa", name: "Iringa" },
   { id: "kagera", name: "Kagera" },
   { id: "kigoma", name: "Kigoma" },
