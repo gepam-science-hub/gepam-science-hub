@@ -204,7 +204,7 @@ const pastPapers = [
   {
     "form":"form2",
     "subject":"physics",
-    "title":"Physics FTNA Exam",
+    "title":"Physics",
     "type":"ftna",
     "region":"necta",
     "year":2025,
@@ -291,7 +291,7 @@ const pastPapers = [
   {
     "form":"form2",
     "subject":"chemistry",
-    "title":"Chemistry FTNA Exam",
+    "title":"Chemistry",
     "type":"ftna",
     "region":"necta",
     "year":2025,
