@@ -208,7 +208,7 @@ const pastPapers = [
     "type":"ftna",
     "region":"necta",
     "year":2025,
-    "file":"papers/form2/physics/necta_2025.pdf"
+    "file":"papers/form2/physics/necta/2025/F2_Physics_Necta_2025-Gepam_Hub.pdf"
   },
   {
     "form":"form2",
@@ -295,7 +295,7 @@ const pastPapers = [
     "type":"ftna",
     "region":"necta",
     "year":2025,
-    "file":"papers/form2/chemistry/dsm_2025.pdf"
+    "file":"papers/form2/chemistry/necta/2025/F2_Chemistry_Necta_2025-Gepam_Hub.pdf"
   },
   {
     "form":"form2",
