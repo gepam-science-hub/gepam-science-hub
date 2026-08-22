@@ -37,11 +37,6 @@
     --white: #ffffff;
     --border: #dce5ee;
     --shadow: 0 8px 25px rgba(23,105,170,.10);
-
-    /* EXAMINATION SERIES */
-    --series-primary: #8e24aa;
-    --series-secondary: #d81b60;
-    --series-light: #fff0fa;
 }
 
 * {
@@ -55,7 +50,6 @@ html {
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-
     background:
         linear-gradient(
             180deg,
@@ -63,7 +57,6 @@ body {
             #ffffff 55%,
             #f5faff 100%
         );
-
     color: var(--text);
     overflow-x: hidden;
 }
@@ -73,69 +66,57 @@ body {
 ========================================================= */
 
 .nav-header {
-
     width: 100%;
     max-width: 1050px;
     margin: 0 auto;
     padding: 14px 20px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     background: #ffffff;
     border-bottom: 1px solid var(--border);
 }
 
 .logo-area {
-
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
 .logo-area img {
-
     width: 42px;
     height: 42px;
     object-fit: contain;
 }
 
 .logo-text {
-
     display: flex;
     flex-direction: column;
 }
 
 .logo-title {
-
     font-size: 18px;
     font-weight: 800;
     color: var(--primary-dark);
 }
 
 .logo-subtitle {
-
     font-size: 11px;
     color: var(--muted);
     margin-top: 2px;
 }
 
 .menu-toggle {
-
     width: 45px;
     height: 42px;
-
     border: none;
     border-radius: 10px;
-
     background:
         linear-gradient(
             135deg,
             var(--primary),
             var(--secondary)
         );
-
     color: white;
     font-size: 24px;
     cursor: pointer;
@@ -146,11 +127,9 @@ body {
 ========================================================= */
 
 .main-container {
-
     width: 100%;
     max-width: 1050px;
     margin: 0 auto;
-
     padding: 25px 20px 60px;
 }
 
@@ -159,10 +138,8 @@ body {
 ========================================================= */
 
 .page-hero {
-
     padding: 32px 25px;
     border-radius: 20px;
-
     background:
         linear-gradient(
             135deg,
@@ -170,45 +147,19 @@ body {
             #1769aa 55%,
             #00a6a6
         );
-
     color: white;
-
     box-shadow:
         0 12px 30px
         rgba(13,71,161,.22);
-
     margin-bottom: 25px;
 }
 
-/*
-   ICON YA HERO IMEBAKI.
-   Tuliondoa ICON ZA CARDS.
-*/
-
-.hero-icon {
-
-    width: 60px;
-    height: 60px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: rgba(255,255,255,.15);
-    border-radius: 16px;
-
-    font-size: 32px;
-    margin-bottom: 15px;
-}
-
 .page-hero h1 {
-
     margin: 0 0 8px;
     font-size: 30px;
 }
 
 .page-hero p {
-
     margin: 0;
     line-height: 1.7;
     color: #e8f4ff;
@@ -219,32 +170,23 @@ body {
 ========================================================= */
 
 .breadcrumb {
-
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-
     gap: 6px;
-
     margin: 10px 0 18px;
-
     font-size: 14px;
 }
 
 .breadcrumb-item {
-
     padding: 6px 10px;
-
     border-radius: 20px;
-
     background: #e9f3fb;
     color: var(--primary-dark);
-
     font-weight: 700;
 }
 
 .breadcrumb-separator {
-
     color: #9aa7b5;
     font-weight: bold;
 }
@@ -254,184 +196,70 @@ body {
 ========================================================= */
 
 .back-btn {
-
     display: none;
-
     align-items: center;
     gap: 8px;
-
     padding: 10px 16px;
     margin-bottom: 20px;
-
     border: none;
     border-radius: 9px;
-
     background: #263746;
     color: white;
-
     font-weight: 700;
     cursor: pointer;
 }
 
 .back-btn:hover {
-
     background: #172631;
 }
 
 /* =========================================================
-   STEP HEADER
+   STEP
 ========================================================= */
 
 .step-header {
-
     margin: 10px 0 20px;
 }
 
 .step-number {
-
     display: inline-block;
-
     padding: 6px 10px;
-
     border-radius: 20px;
-
     background: #dff6f6;
     color: #007c7c;
-
     font-size: 12px;
     font-weight: 800;
-
     margin-bottom: 8px;
 }
 
 .step-header h2 {
-
     margin: 0 0 7px;
     font-size: 25px;
 }
 
 .step-header p {
-
     margin: 0;
-
     color: var(--muted);
-
     line-height: 1.6;
 }
 
 /* =========================================================
-   EXAMINATION SERIES HEADER
-========================================================= */
-
-.series-section {
-
-    margin-top: 35px;
-    padding-top: 30px;
-
-    border-top:
-        2px solid #ead7ef;
-}
-
-.series-heading {
-
-    margin-bottom: 18px;
-    padding: 20px;
-
-    border-radius: 16px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #fff7ff,
-            #fff0f7
-        );
-
-    border:
-        1px solid #ead1e9;
-}
-
-.series-heading h2 {
-
-    margin: 0 0 7px;
-
-    color: var(--series-primary);
-
-    font-size: 23px;
-}
-
-.series-heading p {
-
-    margin: 0;
-
-    color: var(--muted);
-
-    line-height: 1.6;
-}
-
-.series-card {
-
-    border-color: #ead1e9;
-
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff,
-            #fff9fd
-        );
-}
-
-.series-card::before {
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--series-primary),
-            var(--series-secondary)
-        );
-}
-
-.series-card h3 {
-
-    color: #6a1b72;
-}
-
-.series-button {
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--series-primary),
-            var(--series-secondary)
-        );
-}
-
-/* =========================================================
-   DATA STATUS
+   STATUS
 ========================================================= */
 
 .data-status {
-
     display: none;
-
     margin: 0 0 20px;
-
     padding: 13px 15px;
-
     border-radius: 10px;
-
     font-size: 14px;
     font-weight: 700;
 }
 
 .data-status.error {
-
     display: block;
-
     background: #ffebee;
-
-    border:
-        1px solid #ffcdd2;
-
+    border: 1px solid #ffcdd2;
     color: #b71c1c;
 }
 
@@ -440,15 +268,12 @@ body {
 ========================================================= */
 
 .selection-grid {
-
     display: grid;
-
     grid-template-columns:
         repeat(
             auto-fit,
             minmax(220px, 1fr)
         );
-
     gap: 18px;
 }
 
@@ -457,46 +282,29 @@ body {
 ========================================================= */
 
 .selection-card {
-
     position: relative;
-
-    background:
-        rgba(255,255,255,.98);
-
-    border:
-        1px solid var(--border);
-
+    background: rgba(255,255,255,.98);
+    border: 1px solid var(--border);
     border-radius: 16px;
-
     padding: 22px;
-
     min-height: 185px;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
     box-shadow: var(--shadow);
-
     overflow: hidden;
-
     transition:
         transform .2s ease,
         box-shadow .2s ease;
 }
 
 .selection-card::before {
-
     content: "";
-
     position: absolute;
-
     left: 0;
     top: 0;
-
     width: 100%;
     height: 5px;
-
     background:
         linear-gradient(
             90deg,
@@ -506,47 +314,30 @@ body {
 }
 
 .selection-card:hover {
-
     transform: translateY(-5px);
-
     box-shadow:
         0 14px 30px
         rgba(23,105,170,.15);
 }
 
 .selection-card h3 {
-
     margin: 0 0 8px;
-
     font-size: 20px;
-
     color: #17324d;
 }
 
 .selection-card p {
-
     margin: 0;
-
     color: var(--muted);
-
     line-height: 1.55;
-
     font-size: 14px;
 }
 
-/*
-   MUHIMU:
-   HAKUNA .card-icon HAPA.
-   ICON ZA CARDS ZIMEONDOLEWA.
-*/
-
 .form-card {
-
     min-height: 180px;
 }
 
 .form-card::before {
-
     background:
         linear-gradient(
             90deg,
@@ -556,7 +347,6 @@ body {
 }
 
 .physics-card::before {
-
     background:
         linear-gradient(
             90deg,
@@ -566,7 +356,6 @@ body {
 }
 
 .chemistry-card::before {
-
     background:
         linear-gradient(
             90deg,
@@ -576,7 +365,6 @@ body {
 }
 
 .region-card::before {
-
     background:
         linear-gradient(
             90deg,
@@ -586,7 +374,6 @@ body {
 }
 
 .year-card::before {
-
     background:
         linear-gradient(
             90deg,
@@ -596,7 +383,6 @@ body {
 }
 
 .type-card::before {
-
     background:
         linear-gradient(
             90deg,
@@ -606,44 +392,84 @@ body {
 }
 
 /* =========================================================
+   EXAMINATION SERIES
+========================================================= */
+
+.series-card::before {
+    background:
+        linear-gradient(
+            90deg,
+            #ad1457,
+            #7b1fa2
+        );
+}
+
+.series-card {
+    min-height: 180px;
+}
+
+.series-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-top: 14px;
+}
+
+.series-item {
+    width: 100%;
+    padding: 11px 13px;
+    border: 1px solid #e1d5eb;
+    border-radius: 9px;
+    background: #faf6fc;
+    color: #5b176d;
+    font-weight: 800;
+    text-align: left;
+    cursor: pointer;
+    transition:
+        background .15s ease,
+        transform .15s ease;
+}
+
+.series-item:hover {
+    background: #f0e3f5;
+    transform: translateX(3px);
+}
+
+.series-empty {
+    padding: 18px;
+    border-radius: 10px;
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    color: #7a5600;
+}
+
+/* =========================================================
    OPEN BUTTON
 ========================================================= */
 
 .open-btn {
-
     width: 100%;
-
     padding: 12px 14px;
-
     margin-top: 18px;
-
     border: none;
-
     border-radius: 9px;
-
     background:
         linear-gradient(
             135deg,
             var(--primary),
             var(--secondary)
         );
-
     color: white;
-
     font-size: 14px;
     font-weight: 800;
-
     cursor: pointer;
-
     transition:
         transform .15s ease,
         opacity .15s ease;
 }
 
 .open-btn:hover {
-
     transform: scale(1.02);
-
     opacity: .92;
 }
 
@@ -652,12 +478,10 @@ body {
 ========================================================= */
 
 .pdf-card {
-
-    min-height: 175px;
+    min-height: 190px;
 }
 
 .pdf-card::before {
-
     background:
         linear-gradient(
             90deg,
@@ -667,7 +491,6 @@ body {
 }
 
 .pdf-button {
-
     background:
         linear-gradient(
             135deg,
@@ -681,32 +504,21 @@ body {
 ========================================================= */
 
 .empty-card {
-
     grid-column: 1 / -1;
-
     padding: 30px;
-
     text-align: center;
-
     border-radius: 15px;
-
     background: #fff8e1;
-
-    border:
-        1px solid #ffe082;
+    border: 1px solid #ffe082;
 }
 
 .empty-card h3 {
-
     margin: 0 0 8px;
-
     color: #7a5600;
 }
 
 .empty-card p {
-
     margin: 0;
-
     color: #8b6a20;
 }
 
@@ -715,124 +527,80 @@ body {
 ========================================================= */
 
 .overlay {
-
     display: none;
-
     position: fixed;
-
     inset: 0;
-
-    background:
-        rgba(0,0,0,.48);
-
+    background: rgba(0,0,0,.48);
     z-index: 9998;
 }
 
 .sidebar {
-
     position: fixed;
-
     top: 0;
     right: -310px;
-
     width: 290px;
     height: 100vh;
-
     background: white;
-
     z-index: 9999;
-
     box-shadow:
         -8px 0 25px
         rgba(0,0,0,.18);
-
     padding: 20px;
-
-    transition:
-        right .3s ease;
-
+    transition: right .3s ease;
     overflow-y: auto;
 }
 
 .sidebar.active {
-
     right: 0;
 }
 
 .close-btn {
-
     float: right;
-
     width: 40px;
     height: 40px;
-
     border: none;
     border-radius: 9px;
-
     background: #edf2f7;
-
     font-size: 20px;
-
     cursor: pointer;
 }
 
 .sidebar-links {
-
     clear: both;
-
     padding-top: 35px;
-
     display: flex;
     flex-direction: column;
-
     gap: 8px;
 }
 
 .sidebar-links a,
 .dropdown-btn {
-
     width: 100%;
-
     padding: 13px;
-
     border: none;
     border-radius: 9px;
-
     background: white;
-
     text-align: left;
-
     text-decoration: none;
-
     color: #253444;
-
     font-weight: 700;
-
     font-size: 15px;
-
     cursor: pointer;
 }
 
 .sidebar-links a:hover,
 .dropdown-btn:hover {
-
     background: #edf6ff;
-
     color: var(--primary-dark);
 }
 
 .dropdown-container {
-
     display: none;
-
     padding-left: 12px;
-
-    border-left:
-        3px solid var(--secondary);
+    border-left: 3px solid var(--secondary);
 }
 
 .dropdown-container a {
-
     font-size: 14px;
     font-weight: 600;
 }
@@ -842,20 +610,14 @@ body {
 ========================================================= */
 
 footer {
-
     margin-top: 30px;
-
     padding: 30px 20px;
-
     text-align: center;
-
     background: #102a43;
-
     color: #dcecff;
 }
 
 footer strong {
-
     color: white;
 }
 
@@ -866,39 +628,28 @@ footer strong {
 @media (max-width: 600px) {
 
     .main-container {
-
-        padding:
-            18px
-            14px
-            45px;
+        padding: 18px 14px 45px;
     }
 
     .page-hero {
-
         padding: 25px 20px;
-
         border-radius: 16px;
     }
 
     .page-hero h1 {
-
         font-size: 25px;
     }
 
     .selection-grid {
-
         grid-template-columns: 1fr;
-
         gap: 14px;
     }
 
     .selection-card {
-
-        min-height: 165px;
+        min-height: 170px;
     }
 
     .step-header h2 {
-
         font-size: 22px;
     }
 
@@ -911,24 +662,19 @@ footer strong {
 @keyframes fadeIn {
 
     from {
-
         opacity: 0;
-        transform:
-            translateY(8px);
+        transform: translateY(8px);
     }
 
     to {
-
         opacity: 1;
-        transform:
-            translateY(0);
+        transform: translateY(0);
     }
+
 }
 
 #stepContainer {
-
-    animation:
-        fadeIn .25s ease;
+    animation: fadeIn .25s ease;
 }
 
 </style>
@@ -970,13 +716,10 @@ footer strong {
 
 </header>
 
+
 <main class="main-container">
 
 <section class="page-hero">
-
-    <div class="hero-icon">
-        📚
-    </div>
 
     <h1>
         Past Papers
@@ -989,6 +732,7 @@ footer strong {
 
 </section>
 
+
 <div
     class="breadcrumb"
     id="breadcrumb">
@@ -999,6 +743,7 @@ footer strong {
 
 </div>
 
+
 <button
     id="backButton"
     class="back-btn"
@@ -1008,20 +753,26 @@ footer strong {
 
 </button>
 
+
 <div
     id="dataStatus"
     class="data-status">
 </div>
 
-<div id="stepContainer"></div>
+
+<div
+    id="stepContainer">
+</div>
 
 </main>
+
 
 <div
     id="menuOverlay"
     class="overlay"
     onclick="toggleMenu()">
 </div>
+
 
 <aside
     id="sidebarMenu"
@@ -1038,18 +789,18 @@ footer strong {
     <nav class="sidebar-links">
 
         <a href="index.html">
-            🏠 Home
+            Home
         </a>
 
         <a href="about.html">
-            ℹ️ About Us
+            About Us
         </a>
 
         <button
             class="dropdown-btn"
             onclick="toggleDropdown(this)">
 
-            📝 Notes
+            Notes
             <span>▼</span>
 
         </button>
@@ -1083,16 +834,17 @@ footer strong {
         </div>
 
         <a href="pastpapers.html">
-            📚 Past Papers
+            Past Papers
         </a>
 
         <a href="contact.html">
-            📞 Contact
+            Contact
         </a>
 
     </nav>
 
 </aside>
+
 
 <footer>
 
@@ -1113,40 +865,13 @@ footer strong {
 
 </footer>
 
+
 <script>
 
 /* =========================================================
    GEPAM SCIENCE HUB
    PAST PAPERS ENGINE
-   FINAL STRUCTURE
 ========================================================= */
-
-/*
-    FORM STRUCTURE
-
-    Form
-      ↓
-    Subject
-      ↓
-    Examination Type
-      ↓
-    School / Region / Year
-      ↓
-    Papers
-
-
-    EXAMINATION SERIES
-
-    Examination Series
-      ↓
-    Series
-      ↓
-    Form
-      ↓
-    Subject
-      ↓
-    Paper
-*/
 
 
 /* =========================================================
@@ -1155,17 +880,19 @@ footer strong {
 
 let currentState = {
 
-    level: "home",
-
-    section: null,
+    level: "forms",
 
     form: null,
 
     subject: null,
 
-    type: null,
+    category: null,
+
+    organization: null,
 
     series: null,
+
+    type: null,
 
     region: null,
 
@@ -1181,24 +908,16 @@ let currentState = {
 ========================================================= */
 
 const stepContainer =
-    document.getElementById(
-        "stepContainer"
-    );
+    document.getElementById("stepContainer");
 
 const breadcrumb =
-    document.getElementById(
-        "breadcrumb"
-    );
+    document.getElementById("breadcrumb");
 
 const backButton =
-    document.getElementById(
-        "backButton"
-    );
+    document.getElementById("backButton");
 
 const dataStatus =
-    document.getElementById(
-        "dataStatus"
-    );
+    document.getElementById("dataStatus");
 
 
 /* =========================================================
@@ -1262,157 +981,6 @@ const subjects = [
 
 
 /* =========================================================
-   PAPER TYPES
-========================================================= */
-
-const paperTypes = [
-
-    {
-        id: "midterm",
-        name: "Midterm Examination",
-        description:
-            "Midterm examination papers."
-    },
-
-    {
-        id: "terminal",
-        name: "Terminal Examination",
-        description:
-            "Terminal examination papers."
-    },
-
-    {
-        id: "annual",
-        name: "Annual Examination",
-        description:
-            "Annual examination papers."
-    },
-
-    {
-        id: "joint",
-        name: "Joint Examination",
-        description:
-            "Joint examination papers."
-    },
-
-    {
-        id: "mock",
-        name: "Mock Examination",
-        description:
-            "Mock examination papers."
-    },
-
-    {
-        id: "pre_necta",
-        name: "Pre-NECTA",
-        description:
-            "Pre-NECTA examination papers."
-    },
-
-    {
-        id: "necta",
-        name: "NECTA",
-        description:
-            "NECTA national examination papers."
-    },
-
-    {
-        id: "ftna",
-        name: "FTNA",
-        description:
-            "FTNA national examination papers."
-    }
-
-];
-
-
-/* =========================================================
-   REGIONS
-========================================================= */
-
-const regions = [
-
-    {
-        id: "arusha",
-        name: "Arusha"
-    },
-
-    {
-        id: "dar_es_salaam",
-        name: "Dar es Salaam"
-    },
-
-    {
-        id: "dodoma",
-        name: "Dodoma"
-    },
-
-    {
-        id: "shinyanga",
-        name: "Shinyanga"
-    },
-
-    {
-        id: "iringa",
-        name: "Iringa"
-    },
-
-    {
-        id: "kagera",
-        name: "Kagera"
-    },
-
-    {
-        id: "kigoma",
-        name: "Kigoma"
-    },
-
-    {
-        id: "kilimanjaro",
-        name: "Kilimanjaro"
-    },
-
-    {
-        id: "mbeya",
-        name: "Mbeya"
-    },
-
-    {
-        id: "morogoro",
-        name: "Morogoro"
-    },
-
-    {
-        id: "mwanza",
-        name: "Mwanza"
-    },
-
-    {
-        id: "tanga",
-        name: "Tanga"
-    }
-
-];
-
-
-/* =========================================================
-   YEARS
-========================================================= */
-
-const years = [
-
-    "2026",
-    "2025",
-    "2024",
-    "2023",
-    "2022",
-    "2021",
-    "2020"
-
-];
-
-
-/* =========================================================
    NORMALIZE
 ========================================================= */
 
@@ -1427,53 +995,206 @@ function normalize(value) {
 
 
 /* =========================================================
-   DATABASE
+   GET DATA
 ========================================================= */
 
-function getDatabase() {
+function getPapers() {
 
-    if (
-        Array.isArray(
-            window.pastPapers
-        )
-    ) {
-
-        return window.pastPapers;
-
-    }
-
-    return [];
+    return Array.isArray(window.pastPapers)
+        ? window.pastPapers
+        : [];
 
 }
 
 
 /* =========================================================
-   DATA CHECK
+   FLEXIBLE FIELD READER
+========================================================= */
+
+function getField(
+    paper,
+    names
+) {
+
+    for (
+        const name of names
+    ) {
+
+        if (
+            paper &&
+            paper[name] !== undefined &&
+            paper[name] !== null &&
+            String(paper[name]).trim() !== ""
+        ) {
+
+            return paper[name];
+
+        }
+
+    }
+
+    return "";
+
+}
+
+
+/* =========================================================
+   ORGANIZATION NAME
+========================================================= */
+
+function getOrganization(
+    paper
+) {
+
+    return getField(
+        paper,
+        [
+            "organization",
+            "organisation",
+            "examOrganization",
+            "examOrganisation",
+            "seriesOrganization",
+            "seriesOrganisation",
+            "examSeries",
+            "seriesGroup",
+            "seriesProvider"
+        ]
+    );
+
+}
+
+
+/* =========================================================
+   SERIES NAME
+========================================================= */
+
+function getSeries(
+    paper
+) {
+
+    return getField(
+        paper,
+        [
+            "series",
+            "seriesName",
+            "series_name",
+            "examSeriesName",
+            "seriesTitle",
+            "seriesNumber"
+        ]
+    );
+
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+function getCategory(
+    paper
+) {
+
+    return normalize(
+        getField(
+            paper,
+            [
+                "category",
+                "paperCategory",
+                "examCategory"
+            ]
+        )
+    );
+
+}
+
+
+/* =========================================================
+   SCHOOL
+========================================================= */
+
+function getSchool(
+    paper
+) {
+
+    return getField(
+        paper,
+        [
+            "school",
+            "schoolName",
+            "school_name",
+            "institution"
+        ]
+    );
+
+}
+
+
+/* =========================================================
+   FORM MATCH
+========================================================= */
+
+function matchesForm(
+    paper
+) {
+
+    return (
+        normalize(
+            getField(
+                paper,
+                ["form", "level", "class"]
+            )
+        )
+        ===
+        normalize(currentState.form)
+    );
+
+}
+
+
+/* =========================================================
+   SUBJECT MATCH
+========================================================= */
+
+function matchesSubject(
+    paper
+) {
+
+    return (
+        normalize(
+            getField(
+                paper,
+                ["subject"]
+            )
+        )
+        ===
+        normalize(currentState.subject)
+    );
+
+}
+
+
+/* =========================================================
+   CHECK DATA FILE
 ========================================================= */
 
 function checkDataFile() {
 
     if (
-        !Array.isArray(
-            window.pastPapers
-        )
+        !Array.isArray(window.pastPapers)
     ) {
 
         dataStatus.className =
             "data-status error";
 
         dataStatus.innerHTML = `
-
-            ⚠️ <strong>Past Papers database
-            haijapakiwa.</strong>
-
-            <br><br>
+            <strong>Past Papers database
+            haijapakiwa.</strong><br><br>
 
             Hakikisha faili
             <strong>pastpapers-data.js</strong>
             lipo kwenye folder moja na
             <strong>pastpapers.html</strong>.
-
         `;
 
         return false;
@@ -1491,24 +1212,26 @@ function checkDataFile() {
 
 
 /* =========================================================
-   HOME
+   RENDER FORMS
 ========================================================= */
 
-function renderHome() {
+function renderForms() {
 
     currentState = {
 
-        level: "home",
-
-        section: null,
+        level: "forms",
 
         form: null,
 
         subject: null,
 
-        type: null,
+        category: null,
+
+        organization: null,
 
         series: null,
+
+        type: null,
 
         region: null,
 
@@ -1520,8 +1243,7 @@ function renderHome() {
 
     updateBreadcrumb();
 
-    backButton.style.display =
-        "none";
+    backButton.style.display = "none";
 
 
     let html = `
@@ -1529,16 +1251,16 @@ function renderHome() {
         <div class="step-header">
 
             <span class="step-number">
-                PAST PAPERS
+                STEP 1
             </span>
 
             <h2>
-                Chagua Sehemu
+                Chagua Kidato
             </h2>
 
             <p>
-                Chagua Form yako au
-                Examination Series.
+                Chagua kidato unachotaka
+                kupata Past Papers.
             </p>
 
         </div>
@@ -1548,352 +1270,56 @@ function renderHome() {
     `;
 
 
-    forms.forEach(form => {
+    forms.forEach(
+        form => {
 
-        html += `
+            html += `
 
-            <div class="
-                selection-card
-                form-card
-            ">
+                <div class="
+                    selection-card
+                    form-card
+                ">
 
-                <div>
+                    <div>
 
-                    <h3>
-                        ${form.name}
-                    </h3>
+                        <h3>
+                            ${form.name}
+                        </h3>
 
-                    <p>
-                        Physics & Chemistry
-                        Past Papers
-                    </p>
+                        <p>
+                            Physics & Chemistry
+                            Past Papers
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openForm(
+                                '${form.id}'
+                            )
+                        ">
+
+                        FUNGUA
+                        ${form.name.toUpperCase()}
+
+                    </button>
 
                 </div>
 
-                <button
-                    class="open-btn"
-                    onclick="
-                        openForm(
-                            '${form.id}'
-                        )
-                    ">
+            `;
 
-                    FUNGUA
-                    ${form.name.toUpperCase()}
-
-                </button>
-
-            </div>
-
-        `;
-
-    });
+        }
+    );
 
 
     html += `
-
         </div>
-
-        <section class="series-section">
-
-            <div class="series-heading">
-
-                <h2>
-                    EXAMINATION SERIES
-                </h2>
-
-                <p>
-                    Chagua Examination Series
-                    kupata mitihani yake.
-                </p>
-
-            </div>
-
-            <div
-                id="seriesHomeGrid"
-                class="selection-grid">
-            </div>
-
-        </section>
-
     `;
 
 
     stepContainer.innerHTML =
-        html;
-
-
-    renderSeriesHome();
-
-}
-
-
-/* =========================================================
-   GET SERIES FROM DATABASE
-========================================================= */
-
-function getSeriesList() {
-
-    const database =
-        getDatabase();
-
-    const found = [];
-
-    database.forEach(
-        paper => {
-
-            const series =
-                paper.series ??
-                paper.examinationSeries ??
-                paper.examSeries ??
-                paper.seriesName;
-
-            if (!series) {
-                return;
-            }
-
-            const key =
-                normalize(series);
-
-            if (
-                key &&
-                !found.some(
-                    item =>
-                        item.id === key
-                )
-            ) {
-
-                found.push({
-
-                    id: key,
-
-                    name: String(series)
-
-                });
-
-            }
-
-        }
-    );
-
-
-    /*
-       Series hizi ni kuhakikisha
-       makubaliano yetu yanaonekana
-       endapo data tayari imezibeba.
-    */
-
-    const preferredSeries = [
-
-        "ISESE",
-        "JEPGOS",
-        "TAHOSSA",
-        "CSSC",
-        "OHONGSS",
-        "KIPSSA",
-        "CASAU"
-
-    ];
-
-
-    preferredSeries.forEach(
-        preferred => {
-
-            const key =
-                normalize(preferred);
-
-            const exists =
-                found.some(
-                    item =>
-                        item.id === key
-                );
-
-            if (!exists) {
-
-                const hasData =
-                    database.some(
-                        paper =>
-                            normalize(
-                                paper.series ??
-                                paper.examinationSeries ??
-                                paper.examSeries ??
-                                paper.seriesName
-                            ) === key
-                    );
-
-                if (hasData) {
-
-                    found.push({
-
-                        id: key,
-
-                        name: preferred
-
-                    });
-
-                }
-
-            }
-
-        }
-    );
-
-
-    return found.sort(
-        (a,b) => {
-
-            const ai =
-                preferredSeriesIndex(
-                    a.name
-                );
-
-            const bi =
-                preferredSeriesIndex(
-                    b.name
-                );
-
-            if (ai !== bi) {
-                return ai - bi;
-            }
-
-            return a.name.localeCompare(
-                b.name
-            );
-
-        }
-    );
-
-}
-
-
-function preferredSeriesIndex(
-    name
-) {
-
-    const list = [
-
-        "ISESE",
-        "JEPGOS",
-        "TAHOSSA",
-        "CSSC",
-        "OHONGSS",
-        "KIPSSA",
-        "CASAU"
-
-    ];
-
-    const index =
-        list.findIndex(
-            item =>
-                normalize(item) ===
-                normalize(name)
-        );
-
-    return index === -1
-        ? 999
-        : index;
-
-}
-
-
-/* =========================================================
-   RENDER SERIES HOME
-========================================================= */
-
-function renderSeriesHome() {
-
-    const container =
-        document.getElementById(
-            "seriesHomeGrid"
-        );
-
-    if (!container) {
-        return;
-    }
-
-
-    const series =
-        getSeriesList();
-
-
-    if (series.length === 0) {
-
-        container.innerHTML = `
-
-            <div class="empty-card">
-
-                <h3>
-                    Hakuna Examination Series
-                </h3>
-
-                <p>
-                    Examination Series
-                    zitaonekana baada ya
-                    kuwekwa kwenye
-                    pastpapers-data.js.
-                </p>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    let html = "";
-
-
-    series.forEach(item => {
-
-        html += `
-
-            <div class="
-                selection-card
-                series-card
-            ">
-
-                <div>
-
-                    <h3>
-                        ${escapeHTML(
-                            item.name
-                        )}
-                    </h3>
-
-                    <p>
-                        Examination Series
-                        Past Papers
-                    </p>
-
-                </div>
-
-                <button
-                    class="
-                        open-btn
-                        series-button
-                    "
-                    onclick="
-                        openSeries(
-                            '${escapeJS(
-                                item.id
-                            )}'
-                        )
-                    ">
-
-                    FUNGUA
-
-                </button>
-
-            </div>
-
-        `;
-
-    });
-
-
-    container.innerHTML =
         html;
 
 }
@@ -1903,13 +1329,12 @@ function renderSeriesHome() {
    OPEN FORM
 ========================================================= */
 
-function openForm(formId) {
+function openForm(
+    formId
+) {
 
     currentState.level =
         "subjects";
-
-    currentState.section =
-        "forms";
 
     currentState.form =
         formId;
@@ -1917,10 +1342,16 @@ function openForm(formId) {
     currentState.subject =
         null;
 
-    currentState.type =
+    currentState.category =
+        null;
+
+    currentState.organization =
         null;
 
     currentState.series =
+        null;
+
+    currentState.type =
         null;
 
     currentState.region =
@@ -1955,7 +1386,7 @@ function renderSubjects() {
 
     if (!form) {
 
-        renderHome();
+        renderForms();
 
         return;
 
@@ -2055,11 +1486,17 @@ function openSubject(
     subjectId
 ) {
 
-    currentState.level =
-        "types";
-
     currentState.subject =
         subjectId;
+
+    currentState.category =
+        null;
+
+    currentState.organization =
+        null;
+
+    currentState.series =
+        null;
 
     currentState.type =
         null;
@@ -2073,28 +1510,79 @@ function openSubject(
     currentState.year =
         null;
 
+
+    currentState.level =
+        "categories";
+
+
     pushNavigationState();
 
-    renderTypes();
+    renderCategories();
 
 }
 
 
 /* =========================================================
-   RENDER TYPES
+   RENDER CATEGORIES
 ========================================================= */
 
-function renderTypes() {
+function renderCategories() {
 
-    const subject =
-        subjects.find(
-            item =>
-                item.id ===
-                currentState.subject
+    updateBreadcrumb();
+
+
+    const papers =
+        getPapers().filter(
+            paper =>
+                matchesForm(paper) &&
+                matchesSubject(paper)
         );
 
 
-    updateBreadcrumb();
+    /*
+       Categories zilizopo kwenye data.
+    */
+
+    const categories = [];
+
+
+    papers.forEach(
+        paper => {
+
+            const category =
+                getCategory(paper);
+
+            if (
+                category &&
+                !categories.includes(category)
+            ) {
+
+                categories.push(
+                    category
+                );
+
+            }
+
+        }
+    );
+
+
+    /*
+       Examination Series iwepo
+       kama data ina organizations/series.
+    */
+
+    const hasSeries =
+        papers.some(
+            paper =>
+                getOrganization(
+                    paper
+                ) !== ""
+                ||
+                getSeries(
+                    paper
+                ) !== ""
+        );
 
 
     let html = `
@@ -2106,14 +1594,12 @@ function renderTypes() {
             </span>
 
             <h2>
-                ${subject
-                    ? subject.name
-                    : "Subject"}
+                ${currentState.subject
+                    .toUpperCase()}
             </h2>
 
             <p>
-                Chagua aina ya
-                Past Paper.
+                Chagua aina ya Past Papers.
             </p>
 
         </div>
@@ -2123,24 +1609,44 @@ function renderTypes() {
     `;
 
 
-    const available =
-        getAvailablePaperTypes();
+    /*
+       EXAMINATION SERIES
+    */
 
-
-    if (available.length === 0) {
+    if (hasSeries) {
 
         html += `
 
-            <div class="empty-card">
+            <div class="
+                selection-card
+                series-card
+            ">
 
-                <h3>
-                    Hakuna aina ya mtihani
-                </h3>
+                <div>
 
-                <p>
-                    Hakuna paper iliyowekwa
-                    kwa uchaguzi huu.
-                </p>
+                    <h3>
+                        Examination Series
+                    </h3>
+
+                    <p>
+                        Mitihani ya examination
+                        series kama ISESE,
+                        TAHOSSA, JEPGOS,
+                        CSSC na nyingine
+                        zilizopo kwenye database.
+                    </p>
+
+                </div>
+
+                <button
+                    class="open-btn"
+                    onclick="
+                        openSeriesOrganizations()
+                    ">
+
+                    FUNGUA
+
+                </button>
 
             </div>
 
@@ -2149,8 +1655,118 @@ function renderTypes() {
     }
 
 
-    available.forEach(
+    /*
+       SCHOOL / REGION BASED
+    */
+
+    if (
+        papers.length > 0
+    ) {
+
+        html += `
+
+            <div class="
+                selection-card
+                region-card
+            ">
+
+                <div>
+
+                    <h3>
+                        School & Regional Examinations
+                    </h3>
+
+                    <p>
+                        Mitihani inayotegemea
+                        shule, wilaya, mkoa au
+                        eneo husika.
+                    </p>
+
+                </div>
+
+                <button
+                    class="open-btn"
+                    onclick="
+                        openSchoolRegional()
+                    ">
+
+                    FUNGUA
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /*
+       STANDARD TYPES
+    */
+
+    const standardTypes = [
+        {
+            id: "midterm",
+            name: "Midterm Examination"
+        },
+        {
+            id: "terminal",
+            name: "Terminal Examination"
+        },
+        {
+            id: "annual",
+            name: "Annual Examination"
+        },
+        {
+            id: "joint",
+            name: "Joint Examination"
+        },
+        {
+            id: "mock",
+            name: "Mock Examination"
+        },
+        {
+            id: "pre_necta",
+            name: "Pre-NECTA"
+        },
+        {
+            id: "necta",
+            name: "NECTA"
+        },
+        {
+            id: "ftna",
+            name: "FTNA"
+        }
+    ];
+
+
+    /*
+       Types zinazoonekana tu
+       kama data ina hizo types.
+    */
+
+    standardTypes.forEach(
         type => {
+
+            const exists =
+                papers.some(
+                    paper =>
+                        normalize(
+                            getField(
+                                paper,
+                                ["type"]
+                            )
+                        )
+                        ===
+                        normalize(type.id)
+                );
+
+
+            if (!exists) {
+                return;
+            }
+
 
             html += `
 
@@ -2166,7 +1782,8 @@ function renderTypes() {
                         </h3>
 
                         <p>
-                            ${type.description}
+                            ${type.name}
+                            papers.
                         </p>
 
                     </div>
@@ -2174,7 +1791,7 @@ function renderTypes() {
                     <button
                         class="open-btn"
                         onclick="
-                            openType(
+                            openStandardType(
                                 '${type.id}'
                             )
                         ">
@@ -2191,6 +1808,32 @@ function renderTypes() {
     );
 
 
+    if (
+        !hasSeries &&
+        papers.length === 0
+    ) {
+
+        html += `
+
+            <div class="empty-card">
+
+                <h3>
+                    Hakuna papers
+                </h3>
+
+                <p>
+                    Hakuna Past Papers
+                    zilizowekwa kwa
+                    uchaguzi huu bado.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
     html += `
         </div>
     `;
@@ -2203,85 +1846,81 @@ function renderTypes() {
 
 
 /* =========================================================
-   AVAILABLE PAPER TYPES
+   EXAMINATION ORGANIZATIONS
 ========================================================= */
 
-function getAvailablePaperTypes() {
+function openSeriesOrganizations() {
 
-    const database =
-        getDatabase();
+    currentState.level =
+        "seriesOrganizations";
 
+    currentState.category =
+        "examination_series";
+
+    currentState.organization =
+        null;
+
+    currentState.series =
+        null;
+
+    pushNavigationState();
+
+    renderSeriesOrganizations();
+
+}
+
+
+/* =========================================================
+   GET SERIES ORGANIZATIONS
+========================================================= */
+
+function getSeriesOrganizations() {
 
     const found = [];
 
+    getPapers()
+        .filter(
+            paper =>
+                matchesForm(paper) &&
+                matchesSubject(paper)
+        )
+        .forEach(
+            paper => {
 
-    database.forEach(
-        paper => {
-
-            if (
-
-                normalize(
-                    paper.form
-                ) !==
-                normalize(
-                    currentState.form
-                )
-
-                ||
-
-                normalize(
-                    paper.subject
-                ) !==
-                normalize(
-                    currentState.subject
-                )
-
-            ) {
-
-                return;
-
-            }
+                const organization =
+                    getOrganization(
+                        paper
+                    );
 
 
-            /*
-               Series si sehemu ya
-               ordinary paper types.
-            */
+                if (
+                    organization &&
+                    !found.some(
+                        item =>
+                            normalize(
+                                item
+                            )
+                            ===
+                            normalize(
+                                organization
+                            )
+                    )
+                ) {
 
-            const hasSeries =
-                paper.series ||
-                paper.examinationSeries ||
-                paper.examSeries ||
-                paper.seriesName;
+                    found.push(
+                        organization
+                    );
 
-            if (hasSeries) {
-                return;
-            }
-
-
-            const type =
-                normalize(
-                    paper.type
-                );
-
-
-            if (
-                type &&
-                !found.includes(type)
-            ) {
-
-                found.push(type);
+                }
 
             }
-
-        }
-    );
+        );
 
 
-    return paperTypes.filter(
-        type =>
-            found.includes(
-                normalize(type.id)
+    return found.sort(
+        (a,b) =>
+            String(a).localeCompare(
+                String(b)
             )
     );
 
@@ -2289,211 +1928,17 @@ function getAvailablePaperTypes() {
 
 
 /* =========================================================
-   OPEN TYPE
+   RENDER SERIES ORGANIZATIONS
 ========================================================= */
 
-function openType(typeId) {
-
-    currentState.type =
-        typeId;
-
-    currentState.region =
-        null;
-
-    currentState.school =
-        null;
-
-    currentState.year =
-        null;
-
-
-    /*
-       NECTA na FTNA
-       hazihitaji Region/School.
-    */
-
-    if (
-
-        typeId === "necta" ||
-
-        typeId === "ftna"
-
-    ) {
-
-        currentState.level =
-            "years";
-
-        pushNavigationState();
-
-        renderYears();
-
-        return;
-
-    }
-
-
-    /*
-       Aina nyingine:
-       tunaangalia kwanza kama
-       data ina School au Region.
-    */
-
-    const route =
-        determinePaperRoute();
-
-
-    if (
-        route === "school"
-    ) {
-
-        currentState.level =
-            "schools";
-
-        pushNavigationState();
-
-        renderSchools();
-
-        return;
-
-    }
-
-
-    if (
-        route === "region"
-    ) {
-
-        currentState.level =
-            "regions";
-
-        pushNavigationState();
-
-        renderRegions();
-
-        return;
-
-    }
-
-
-    currentState.level =
-        "years";
-
-    pushNavigationState();
-
-    renderYears();
-
-}
-
-
-/* =========================================================
-   DETERMINE ROUTE
-========================================================= */
-
-function determinePaperRoute() {
-
-    const papers =
-        getDatabase().filter(
-            paper => {
-
-                return (
-
-                    normalize(
-                        paper.form
-                    ) ===
-                    normalize(
-                        currentState.form
-                    )
-
-                    &&
-
-                    normalize(
-                        paper.subject
-                    ) ===
-                    normalize(
-                        currentState.subject
-                    )
-
-                    &&
-
-                    normalize(
-                        paper.type
-                    ) ===
-                    normalize(
-                        currentState.type
-                    )
-
-                );
-
-            }
-        );
-
-
-    const hasSchool =
-        papers.some(
-            paper =>
-                String(
-                    paper.school ??
-                    paper.schoolName ??
-                    ""
-                ).trim() !== ""
-        );
-
-
-    const hasRegion =
-        papers.some(
-            paper =>
-                String(
-                    paper.region ??
-                    ""
-                ).trim() !== ""
-        );
-
-
-    /*
-       School ndiyo priority
-       pale paper ina school.
-    */
-
-    if (hasSchool) {
-
-        return "school";
-
-    }
-
-
-    if (hasRegion) {
-
-        return "region";
-
-    }
-
-
-    return "year";
-
-}
-
-
-/* =========================================================
-   GET SCHOOL NAME
-========================================================= */
-
-function getSchoolValue(paper) {
-
-    return String(
-        paper.school ??
-        paper.schoolName ??
-        ""
-    ).trim();
-
-}
-
-
-/* =========================================================
-   RENDER SCHOOLS
-========================================================= */
-
-function renderSchools() {
+function renderSeriesOrganizations() {
 
     updateBreadcrumb();
+
+
+    const organizations =
+        getSeriesOrganizations();
+
 
     let html = `
 
@@ -2504,12 +1949,12 @@ function renderSchools() {
             </span>
 
             <h2>
-                Chagua Shule
+                Examination Series
             </h2>
 
             <p>
-                Chagua shule yenye
-                Past Papers unazotafuta.
+                Chagua examination series
+                unayotaka.
             </p>
 
         </div>
@@ -2519,23 +1964,22 @@ function renderSchools() {
     `;
 
 
-    const schools =
-        getAvailableSchools();
-
-
-    if (schools.length === 0) {
+    if (
+        organizations.length === 0
+    ) {
 
         html += `
 
             <div class="empty-card">
 
                 <h3>
-                    Hakuna shule
+                    Hakuna Examination Series
                 </h3>
 
                 <p>
-                    Hakuna paper ya shule
-                    iliyowekwa kwa uchaguzi huu.
+                    Hakuna examination series
+                    iliyowekwa kwa uchaguzi
+                    huu bado.
                 </p>
 
             </div>
@@ -2545,26 +1989,30 @@ function renderSchools() {
     }
 
 
-    schools.forEach(
-        school => {
+    organizations.forEach(
+        organization => {
 
             html += `
 
                 <div class="
                     selection-card
-                    region-card
+                    series-card
                 ">
 
                     <div>
 
                         <h3>
                             ${escapeHTML(
-                                school
+                                organization
                             )}
                         </h3>
 
                         <p>
-                            School Past Papers
+                            Chagua series
+                            ndani ya
+                            ${escapeHTML(
+                                organization
+                            )}.
                         </p>
 
                     </div>
@@ -2572,9 +2020,9 @@ function renderSchools() {
                     <button
                         class="open-btn"
                         onclick="
-                            openSchool(
+                            openOrganization(
                                 '${escapeJS(
-                                    school
+                                    organization
                                 )}'
                             )
                         ">
@@ -2603,112 +2051,765 @@ function renderSchools() {
 
 
 /* =========================================================
-   AVAILABLE SCHOOLS
+   OPEN ORGANIZATION
 ========================================================= */
 
-function getAvailableSchools() {
+function openOrganization(
+    organization
+) {
+
+    currentState.level =
+        "series";
+
+    currentState.organization =
+        organization;
+
+    currentState.series =
+        null;
+
+    pushNavigationState();
+
+    renderSeries();
+
+}
+
+
+/* =========================================================
+   GET SERIES
+========================================================= */
+
+function getAvailableSeries() {
 
     const found = [];
 
 
-    getDatabase().forEach(
-        paper => {
+    getPapers()
+        .filter(
+            paper => {
 
-            if (
+                return (
 
-                normalize(
-                    paper.form
-                ) !==
-                normalize(
-                    currentState.form
-                )
+                    matchesForm(paper)
 
-                ||
+                    &&
 
-                normalize(
-                    paper.subject
-                ) !==
-                normalize(
-                    currentState.subject
-                )
+                    matchesSubject(paper)
 
-                ||
+                    &&
 
-                normalize(
-                    paper.type
-                ) !==
-                normalize(
-                    currentState.type
-                )
+                    normalize(
+                        getOrganization(
+                            paper
+                        )
+                    )
+                    ===
+                    normalize(
+                        currentState.organization
+                    )
 
-            ) {
-
-                return;
-
-            }
-
-
-            const school =
-                getSchoolValue(
-                    paper
                 );
 
+            }
+        )
+        .forEach(
+            paper => {
 
-            if (
-                school &&
-                !found.includes(school)
-            ) {
+                const series =
+                    getSeries(
+                        paper
+                    );
 
-                found.push(school);
+
+                if (
+                    series &&
+                    !found.some(
+                        item =>
+                            normalize(
+                                item
+                            )
+                            ===
+                            normalize(
+                                series
+                            )
+                    )
+                ) {
+
+                    found.push(
+                        series
+                    );
+
+                }
 
             }
+        );
+
+
+    return sortSeries(
+        found
+    );
+
+}
+
+
+/* =========================================================
+   SERIES SORTING
+========================================================= */
+
+function sortSeries(
+    seriesList
+) {
+
+    return seriesList.sort(
+        (a,b) => {
+
+            const aNumber =
+                extractSeriesNumber(a);
+
+            const bNumber =
+                extractSeriesNumber(b);
+
+
+            if (
+                aNumber !== null &&
+                bNumber !== null
+            ) {
+
+                return (
+                    aNumber -
+                    bNumber
+                );
+
+            }
+
+
+            if (
+                aNumber !== null
+            ) {
+
+                return -1;
+
+            }
+
+
+            if (
+                bNumber !== null
+            ) {
+
+                return 1;
+
+            }
+
+
+            return String(a)
+                .localeCompare(
+                    String(b)
+                );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   EXTRACT SERIES NUMBER
+========================================================= */
+
+function extractSeriesNumber(
+    value
+) {
+
+    const text =
+        String(value ?? "")
+            .toLowerCase();
+
+
+    const match =
+        text.match(
+            /(?:series|s(?:eries)?)[\s._-]*(\d+)/
+        );
+
+
+    if (match) {
+
+        return Number(
+            match[1]
+        );
+
+    }
+
+
+    const numeric =
+        text.match(
+            /(?:^|\s)(\d+)(?:\s|$)/
+        );
+
+
+    if (numeric) {
+
+        return Number(
+            numeric[1]
+        );
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =========================================================
+   RENDER SERIES
+========================================================= */
+
+function renderSeries() {
+
+    updateBreadcrumb();
+
+
+    const seriesList =
+        getAvailableSeries();
+
+
+    let html = `
+
+        <div class="step-header">
+
+            <span class="step-number">
+                STEP 5
+            </span>
+
+            <h2>
+                ${escapeHTML(
+                    currentState.organization
+                )}
+            </h2>
+
+            <p>
+                Chagua series.
+                Ukichagua series,
+                PDF itafunguka moja kwa moja.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    if (
+        seriesList.length === 0
+    ) {
+
+        html += `
+
+            <div class="empty-card">
+
+                <h3>
+                    Hakuna Series
+                </h3>
+
+                <p>
+                    Hakuna series iliyowekwa
+                    kwa examination hii.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    seriesList.forEach(
+        series => {
+
+            html += `
+
+                <div class="
+                    selection-card
+                    series-card
+                ">
+
+                    <div>
+
+                        <h3>
+                            ${escapeHTML(
+                                formatSeriesName(
+                                    series
+                                )
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                currentState.organization
+                            )}
+                            -
+                            ${escapeHTML(
+                                forms.find(
+                                    f =>
+                                        f.id ===
+                                        currentState.form
+                                )?.name || ""
+                            )}
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openSeriesPDF(
+                                '${escapeJS(
+                                    series
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA PDF
+
+                    </button>
+
+                </div>
+
+            `;
 
         }
     );
 
 
-    return found.sort(
-        (a,b) =>
-            a.localeCompare(b)
-    );
+    html += `
+        </div>
+    `;
+
+
+    stepContainer.innerHTML =
+        html;
 
 }
 
 
 /* =========================================================
-   OPEN SCHOOL
+   FORMAT SERIES NAME
 ========================================================= */
 
-function openSchool(school) {
+function formatSeriesName(
+    series
+) {
 
-    currentState.school =
-        school;
+    const text =
+        String(series ?? "")
+            .trim();
+
+
+    const match =
+        text.match(
+            /^series[\s._-]*(\d+)$/i
+        );
+
+
+    if (match) {
+
+        const number =
+            Number(
+                match[1]
+            );
+
+
+        const words = [
+            "",
+            "One",
+            "Two",
+            "Three",
+            "Four",
+            "Five",
+            "Six",
+            "Seven",
+            "Eight",
+            "Nine",
+            "Ten"
+        ];
+
+
+        if (
+            words[number]
+        ) {
+
+            return (
+                "Series " +
+                words[number]
+            );
+
+        }
+
+    }
+
+
+    return text;
+
+}
+
+
+/* =========================================================
+   OPEN SERIES PDF DIRECTLY
+========================================================= */
+
+function openSeriesPDF(
+    series
+) {
+
+    const papers =
+        getPapers().filter(
+            paper => {
+
+                return (
+
+                    matchesForm(paper)
+
+                    &&
+
+                    matchesSubject(paper)
+
+                    &&
+
+                    normalize(
+                        getOrganization(
+                            paper
+                        )
+                    )
+                    ===
+                    normalize(
+                        currentState.organization
+                    )
+
+                    &&
+
+                    normalize(
+                        getSeries(
+                            paper
+                        )
+                    )
+                    ===
+                    normalize(
+                        series
+                    )
+
+                );
+
+            }
+        );
+
+
+    /*
+       Ikiwa kuna PDF moja,
+       fungua moja kwa moja.
+    */
+
+    if (
+        papers.length === 1
+    ) {
+
+        openPDF(
+            getField(
+                papers[0],
+                ["file", "pdf", "url"]
+            )
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Ikiwa kuna papers nyingi
+       za subject hiyo ndani ya
+       series moja, zinaonekana
+       hapa ili mtumiaji achague
+       paper husika.
+    */
+
+    currentState.level =
+        "seriesPapers";
+
+    currentState.series =
+        series;
+
+    pushNavigationState();
+
+    renderSeriesPapers();
+
+}
+
+
+/* =========================================================
+   RENDER SERIES PAPERS
+========================================================= */
+
+function renderSeriesPapers() {
+
+    updateBreadcrumb();
+
+
+    const papers =
+        getPapers().filter(
+            paper => {
+
+                return (
+
+                    matchesForm(paper)
+
+                    &&
+
+                    matchesSubject(paper)
+
+                    &&
+
+                    normalize(
+                        getOrganization(
+                            paper
+                        )
+                    )
+                    ===
+                    normalize(
+                        currentState.organization
+                    )
+
+                    &&
+
+                    normalize(
+                        getSeries(
+                            paper
+                        )
+                    )
+                    ===
+                    normalize(
+                        currentState.series
+                    )
+
+                );
+
+            }
+        );
+
+
+    let html = `
+
+        <div class="step-header">
+
+            <span class="step-number">
+                STEP 6
+            </span>
+
+            <h2>
+                ${escapeHTML(
+                    currentState.organization
+                )}
+                -
+                ${escapeHTML(
+                    formatSeriesName(
+                        currentState.series
+                    )
+                )}
+            </h2>
+
+            <p>
+                Chagua paper.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    papers.forEach(
+        paper => {
+
+            const file =
+                getField(
+                    paper,
+                    ["file", "pdf", "url"]
+                );
+
+
+            html += `
+
+                <div class="
+                    selection-card
+                    pdf-card
+                ">
+
+                    <div>
+
+                        <h3>
+                            ${escapeHTML(
+                                paper.title ||
+                                "Past Paper"
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                paper.description ||
+                                ""
+                            )}
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="
+                            open-btn
+                            pdf-button
+                        "
+                        onclick="
+                            openPDF(
+                                '${escapeJS(
+                                    file
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA PDF
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    if (
+        papers.length === 0
+    ) {
+
+        html += `
+
+            <div class="empty-card">
+
+                <h3>
+                    Hakuna PDF
+                </h3>
+
+                <p>
+                    Hakuna PDF iliyounganishwa
+                    na series hii.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    html += `
+        </div>
+    `;
+
+
+    stepContainer.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   SCHOOL / REGIONAL
+========================================================= */
+
+function openSchoolRegional() {
+
+    currentState.level =
+        "regions";
+
+    currentState.category =
+        "school_regional";
+
+    currentState.organization =
+        null;
+
+    currentState.series =
+        null;
+
+    currentState.type =
+        null;
 
     currentState.region =
+        null;
+
+    currentState.school =
         null;
 
     currentState.year =
         null;
 
-    currentState.level =
-        "years";
-
     pushNavigationState();
 
-    renderYears();
+    renderRegions();
 
 }
 
 
 /* =========================================================
-   GET REGION VALUE
+   REGIONS
 ========================================================= */
 
-function getRegionValue(paper) {
+function getAvailableRegions() {
 
-    return String(
-        paper.region ?? ""
-    ).trim();
+    const found = [];
+
+
+    getPapers()
+        .filter(
+            paper =>
+                matchesForm(paper) &&
+                matchesSubject(paper)
+        )
+        .forEach(
+            paper => {
+
+                const region =
+                    getField(
+                        paper,
+                        ["region"]
+                    );
+
+
+                if (
+                    region &&
+                    !found.some(
+                        item =>
+                            normalize(item)
+                            ===
+                            normalize(region)
+                    )
+                ) {
+
+                    found.push(
+                        region
+                    );
+
+                }
+
+            }
+        );
+
+
+    return found.sort(
+        (a,b) =>
+            String(a).localeCompare(
+                String(b)
+            )
+    );
 
 }
 
@@ -2720,6 +2821,11 @@ function getRegionValue(paper) {
 function renderRegions() {
 
     updateBreadcrumb();
+
+
+    const regionsList =
+        getAvailableRegions();
+
 
     let html = `
 
@@ -2734,8 +2840,8 @@ function renderRegions() {
             </h2>
 
             <p>
-                Chagua mkoa wenye
-                papers unazotafuta.
+                Chagua mkoa wenye papers
+                unazotafuta.
             </p>
 
         </div>
@@ -2745,35 +2851,7 @@ function renderRegions() {
     `;
 
 
-    const availableRegions =
-        getAvailableRegions();
-
-
-    if (
-        availableRegions.length === 0
-    ) {
-
-        html += `
-
-            <div class="empty-card">
-
-                <h3>
-                    Hakuna mkoa
-                </h3>
-
-                <p>
-                    Hakuna paper iliyowekwa
-                    kwa aina hii bado.
-                </p>
-
-            </div>
-
-        `;
-
-    }
-
-
-    availableRegions.forEach(
+    regionsList.forEach(
         region => {
 
             html += `
@@ -2787,14 +2865,14 @@ function renderRegions() {
 
                         <h3>
                             ${escapeHTML(
-                                region.name
+                                region
                             )}
                         </h3>
 
                         <p>
                             Past Papers za
                             ${escapeHTML(
-                                region.name
+                                region
                             )}
                         </p>
 
@@ -2805,7 +2883,7 @@ function renderRegions() {
                         onclick="
                             openRegion(
                                 '${escapeJS(
-                                    region.id
+                                    region
                                 )}'
                             )
                         ">
@@ -2822,6 +2900,30 @@ function renderRegions() {
     );
 
 
+    if (
+        regionsList.length === 0
+    ) {
+
+        html += `
+
+            <div class="empty-card">
+
+                <h3>
+                    Hakuna mkoa
+                </h3>
+
+                <p>
+                    Hakuna paper iliyowekwa
+                    kwa mkoa huu bado.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
     html += `
         </div>
     `;
@@ -2834,133 +2936,18 @@ function renderRegions() {
 
 
 /* =========================================================
-   AVAILABLE REGIONS
-========================================================= */
-
-function getAvailableRegions() {
-
-    const ids = [];
-
-
-    getDatabase().forEach(
-        paper => {
-
-            if (
-
-                normalize(
-                    paper.form
-                ) !==
-                normalize(
-                    currentState.form
-                )
-
-                ||
-
-                normalize(
-                    paper.subject
-                ) !==
-                normalize(
-                    currentState.subject
-                )
-
-                ||
-
-                normalize(
-                    paper.type
-                ) !==
-                normalize(
-                    currentState.type
-                )
-
-            ) {
-
-                return;
-
-            }
-
-
-            const region =
-                normalize(
-                    getRegionValue(
-                        paper
-                    )
-                );
-
-
-            if (
-                region &&
-                !ids.includes(region)
-            ) {
-
-                ids.push(region);
-
-            }
-
-        }
-    );
-
-
-    /*
-       Kama region haipo kwenye
-       static list, bado tunaweza
-       kuionyesha kutoka kwenye data.
-    */
-
-    const result = [];
-
-
-    ids.forEach(
-        id => {
-
-            const known =
-                regions.find(
-                    region =>
-                        normalize(
-                            region.id
-                        ) === id
-                );
-
-
-            result.push(
-                known
-                ? known
-                : {
-                    id: id,
-                    name: id
-                        .replace(
-                            /_/g,
-                            " "
-                        )
-                        .replace(
-                            /\b\w/g,
-                            c =>
-                                c.toUpperCase()
-                        )
-                }
-            );
-
-        }
-    );
-
-
-    return result.sort(
-        (a,b) =>
-            a.name.localeCompare(
-                b.name
-            )
-    );
-
-}
-
-
-/* =========================================================
    OPEN REGION
 ========================================================= */
 
-function openRegion(regionId) {
+function openRegion(
+    region
+) {
+
+    currentState.level =
+        "years";
 
     currentState.region =
-        regionId;
+        region;
 
     currentState.school =
         null;
@@ -2968,12 +2955,83 @@ function openRegion(regionId) {
     currentState.year =
         null;
 
-    currentState.level =
-        "years";
-
     pushNavigationState();
 
     renderYears();
+
+}
+
+
+/* =========================================================
+   YEARS
+========================================================= */
+
+function getAvailableYears() {
+
+    const found = [];
+
+
+    getPapers()
+        .filter(
+            paper => {
+
+                return (
+
+                    matchesForm(paper)
+
+                    &&
+
+                    matchesSubject(paper)
+
+                    &&
+
+                    normalize(
+                        getField(
+                            paper,
+                            ["region"]
+                        )
+                    )
+                    ===
+                    normalize(
+                        currentState.region
+                    )
+
+                );
+
+            }
+        )
+        .forEach(
+            paper => {
+
+                const year =
+                    getField(
+                        paper,
+                        ["year"]
+                    );
+
+
+                if (
+                    year &&
+                    !found.includes(
+                        String(year)
+                    )
+                ) {
+
+                    found.push(
+                        String(year)
+                    );
+
+                }
+
+            }
+        );
+
+
+    return found.sort(
+        (a,b) =>
+            Number(b) -
+            Number(a)
+    );
 
 }
 
@@ -2987,7 +3045,7 @@ function renderYears() {
     updateBreadcrumb();
 
 
-    const availableYears =
+    const years =
         getAvailableYears();
 
 
@@ -3004,8 +3062,7 @@ function renderYears() {
             </h2>
 
             <p>
-                Chagua mwaka wa
-                Past Paper.
+                Chagua mwaka wa Past Paper.
             </p>
 
         </div>
@@ -3015,31 +3072,7 @@ function renderYears() {
     `;
 
 
-    if (
-        availableYears.length === 0
-    ) {
-
-        html += `
-
-            <div class="empty-card">
-
-                <h3>
-                    Hakuna mwaka
-                </h3>
-
-                <p>
-                    Hakuna paper iliyowekwa
-                    kwa uchaguzi huu.
-                </p>
-
-            </div>
-
-        `;
-
-    }
-
-
-    availableYears.forEach(
+    years.forEach(
         year => {
 
             html += `
@@ -3088,6 +3121,30 @@ function renderYears() {
     );
 
 
+    if (
+        years.length === 0
+    ) {
+
+        html += `
+
+            <div class="empty-card">
+
+                <h3>
+                    Hakuna mwaka
+                </h3>
+
+                <p>
+                    Hakuna paper iliyowekwa
+                    kwa uchaguzi huu.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
     html += `
         </div>
     `;
@@ -3100,127 +3157,12 @@ function renderYears() {
 
 
 /* =========================================================
-   AVAILABLE YEARS
-========================================================= */
-
-function getAvailableYears() {
-
-    const found = [];
-
-
-    getDatabase().forEach(
-        paper => {
-
-            if (
-
-                normalize(
-                    paper.form
-                ) !==
-                normalize(
-                    currentState.form
-                )
-
-                ||
-
-                normalize(
-                    paper.subject
-                ) !==
-                normalize(
-                    currentState.subject
-                )
-
-                ||
-
-                normalize(
-                    paper.type
-                ) !==
-                normalize(
-                    currentState.type
-                )
-
-            ) {
-
-                return;
-
-            }
-
-
-            if (
-                currentState.school
-            ) {
-
-                if (
-                    normalize(
-                        getSchoolValue(
-                            paper
-                        )
-                    ) !==
-                    normalize(
-                        currentState.school
-                    )
-                ) {
-
-                    return;
-
-                }
-
-            }
-
-
-            if (
-                currentState.region
-            ) {
-
-                if (
-                    normalize(
-                        getRegionValue(
-                            paper
-                        )
-                    ) !==
-                    normalize(
-                        currentState.region
-                    )
-                ) {
-
-                    return;
-
-                }
-
-            }
-
-
-            const year =
-                String(
-                    paper.year ?? ""
-                ).trim();
-
-
-            if (
-                year &&
-                !found.includes(year)
-            ) {
-
-                found.push(year);
-
-            }
-
-        }
-    );
-
-
-    return found.sort(
-        (a,b) =>
-            Number(b) - Number(a)
-    );
-
-}
-
-
-/* =========================================================
    OPEN YEAR
 ========================================================= */
 
-function openYear(year) {
+function openYear(
+    year
+) {
 
     currentState.level =
         "papers";
@@ -3236,105 +3178,93 @@ function openYear(year) {
 
 
 /* =========================================================
+   STANDARD TYPE
+========================================================= */
+
+function openStandardType(
+    typeId
+) {
+
+    currentState.type =
+        typeId;
+
+    currentState.level =
+        "regions";
+
+    currentState.region =
+        null;
+
+    currentState.year =
+        null;
+
+    pushNavigationState();
+
+    renderRegions();
+
+}
+
+
+/* =========================================================
    MATCHING PAPERS
 ========================================================= */
 
 function getMatchingPapers() {
 
-    return getDatabase().filter(
-        paper => {
+    return getPapers()
+        .filter(
+            paper => {
 
-            if (
+                return (
 
-                normalize(
-                    paper.form
-                ) !==
-                normalize(
-                    currentState.form
-                )
+                    matchesForm(paper)
 
-                ||
+                    &&
 
-                normalize(
-                    paper.subject
-                ) !==
-                normalize(
-                    currentState.subject
-                )
+                    matchesSubject(paper)
 
-                ||
+                    &&
 
-                normalize(
-                    paper.type
-                ) !==
-                normalize(
-                    currentState.type
-                )
-
-                ||
-
-                String(
-                    paper.year ?? ""
-                ) !==
-                String(
-                    currentState.year
-                )
-
-            ) {
-
-                return false;
-
-            }
-
-
-            if (
-                currentState.school
-            ) {
-
-                if (
                     normalize(
-                        getSchoolValue(
-                            paper
+                        getField(
+                            paper,
+                            ["region"]
                         )
-                    ) !==
-                    normalize(
-                        currentState.school
                     )
-                ) {
-
-                    return false;
-
-                }
-
-            }
-
-
-            if (
-                currentState.region
-            ) {
-
-                if (
-                    normalize(
-                        getRegionValue(
-                            paper
-                        )
-                    ) !==
+                    ===
                     normalize(
                         currentState.region
                     )
-                ) {
 
-                    return false;
+                    &&
 
-                }
+                    normalize(
+                        getField(
+                            paper,
+                            ["type"]
+                        )
+                    )
+                    ===
+                    normalize(
+                        currentState.type
+                    )
+
+                    &&
+
+                    String(
+                        getField(
+                            paper,
+                            ["year"]
+                        )
+                    )
+                    ===
+                    String(
+                        currentState.year
+                    )
+
+                );
 
             }
-
-
-            return true;
-
-        }
-    );
+        );
 
 }
 
@@ -3376,6 +3306,66 @@ function renderPapers() {
     `;
 
 
+    papers.forEach(
+        paper => {
+
+            const file =
+                getField(
+                    paper,
+                    ["file", "pdf", "url"]
+                );
+
+
+            html += `
+
+                <div class="
+                    selection-card
+                    pdf-card
+                ">
+
+                    <div>
+
+                        <h3>
+                            ${escapeHTML(
+                                paper.title ||
+                                "Past Paper"
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                paper.description ||
+                                ""
+                            )}
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="
+                            open-btn
+                            pdf-button
+                        "
+                        onclick="
+                            openPDF(
+                                '${escapeJS(
+                                    file
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA PDF
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
     if (
         papers.length === 0
     ) {
@@ -3400,59 +3390,6 @@ function renderPapers() {
     }
 
 
-    papers.forEach(
-        paper => {
-
-            html += `
-
-                <div class="
-                    selection-card
-                    pdf-card
-                ">
-
-                    <div>
-
-                        <h3>
-                            ${escapeHTML(
-                                paper.title ||
-                                "Past Paper"
-                            )}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(
-                                paper.description ||
-                                ""
-                            )}
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="
-                            open-btn
-                            pdf-button
-                        "
-                        onclick="
-                            openPDF(
-                                '${escapeJS(
-                                    paper.file
-                                )}'
-                            )
-                        ">
-
-                        FUNGUA PDF
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
     html += `
         </div>
     `;
@@ -3465,663 +3402,12 @@ function renderPapers() {
 
 
 /* =========================================================
-   EXAMINATION SERIES
+   OPEN PDF
 ========================================================= */
 
-function openSeries(seriesId) {
-
-    currentState.level =
-        "seriesForms";
-
-    currentState.section =
-        "series";
-
-    currentState.series =
-        seriesId;
-
-    currentState.form =
-        null;
-
-    currentState.subject =
-        null;
-
-    currentState.type =
-        null;
-
-    currentState.region =
-        null;
-
-    currentState.school =
-        null;
-
-    currentState.year =
-        null;
-
-    pushNavigationState();
-
-    renderSeriesForms();
-
-}
-
-
-/* =========================================================
-   GET SERIES PAPERS
-========================================================= */
-
-function getSeriesPapers() {
-
-    return getDatabase().filter(
-        paper => {
-
-            const series =
-                paper.series ??
-                paper.examinationSeries ??
-                paper.examSeries ??
-                paper.seriesName;
-
-            return (
-                normalize(series) ===
-                normalize(
-                    currentState.series
-                )
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   RENDER SERIES FORMS
-========================================================= */
-
-function renderSeriesForms() {
-
-    updateBreadcrumb();
-
-    backButton.style.display =
-        "inline-flex";
-
-
-    const papers =
-        getSeriesPapers();
-
-
-    const foundForms = [];
-
-
-    papers.forEach(
-        paper => {
-
-            const form =
-                normalize(
-                    paper.form
-                );
-
-            if (
-                form &&
-                !foundForms.includes(form)
-            ) {
-
-                foundForms.push(form);
-
-            }
-
-        }
-    );
-
-
-    let html = `
-
-        <div class="step-header">
-
-            <span class="step-number">
-                EXAMINATION SERIES
-            </span>
-
-            <h2>
-                ${escapeHTML(
-                    getSeriesDisplayName()
-                )}
-            </h2>
-
-            <p>
-                Chagua kidato cha
-                Examination Series.
-            </p>
-
-        </div>
-
-        <div class="selection-grid">
-
-    `;
-
-
-    const sortedForms =
-        forms.filter(
-            form =>
-                foundForms.includes(
-                    normalize(form.id)
-                )
-        );
-
-
-    if (
-        sortedForms.length === 0
-    ) {
-
-        html += `
-
-            <div class="empty-card">
-
-                <h3>
-                    Hakuna Form
-                </h3>
-
-                <p>
-                    Hakuna papers za
-                    ${escapeHTML(
-                        getSeriesDisplayName()
-                    )}
-                    kwenye database.
-                </p>
-
-            </div>
-
-        `;
-
-    }
-
-
-    sortedForms.forEach(
-        form => {
-
-            html += `
-
-                <div class="
-                    selection-card
-                    series-card
-                ">
-
-                    <div>
-
-                        <h3>
-                            ${form.name}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(
-                                getSeriesDisplayName()
-                            )}
-                            Examination
-                            Series
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="
-                            open-btn
-                            series-button
-                        "
-                        onclick="
-                            openSeriesForm(
-                                '${form.id}'
-                            )
-                        ">
-
-                        FUNGUA
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    html += `
-        </div>
-    `;
-
-
-    stepContainer.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   SERIES DISPLAY NAME
-========================================================= */
-
-function getSeriesDisplayName() {
-
-    const paper =
-        getSeriesPapers()[0];
-
-    if (!paper) {
-
-        return currentState.series;
-
-    }
-
-
-    return String(
-        paper.series ??
-        paper.examinationSeries ??
-        paper.examSeries ??
-        paper.seriesName ??
-        currentState.series
-    );
-
-}
-
-
-/* =========================================================
-   OPEN SERIES FORM
-========================================================= */
-
-function openSeriesForm(formId) {
-
-    currentState.level =
-        "seriesSubjects";
-
-    currentState.form =
-        formId;
-
-    currentState.subject =
-        null;
-
-    currentState.year =
-        null;
-
-    pushNavigationState();
-
-    renderSeriesSubjects();
-
-}
-
-
-/* =========================================================
-   RENDER SERIES SUBJECTS
-========================================================= */
-
-function renderSeriesSubjects() {
-
-    updateBreadcrumb();
-
-
-    const papers =
-        getSeriesPapers().filter(
-            paper =>
-                normalize(
-                    paper.form
-                ) ===
-                normalize(
-                    currentState.form
-                )
-        );
-
-
-    const foundSubjects = [];
-
-
-    papers.forEach(
-        paper => {
-
-            const subject =
-                normalize(
-                    paper.subject
-                );
-
-            if (
-                subject &&
-                !foundSubjects.includes(
-                    subject
-                )
-            ) {
-
-                foundSubjects.push(
-                    subject
-                );
-
-            }
-
-        }
-    );
-
-
-    let html = `
-
-        <div class="step-header">
-
-            <span class="step-number">
-                SERIES SUBJECT
-            </span>
-
-            <h2>
-                ${escapeHTML(
-                    getSeriesDisplayName()
-                )}
-                -
-                ${escapeHTML(
-                    getFormName(
-                        currentState.form
-                    )
-                )}
-            </h2>
-
-            <p>
-                Chagua somo.
-            </p>
-
-        </div>
-
-        <div class="selection-grid">
-
-    `;
-
-
-    const availableSubjects =
-        subjects.filter(
-            subject =>
-                foundSubjects.includes(
-                    normalize(
-                        subject.id
-                    )
-                )
-        );
-
-
-    if (
-        availableSubjects.length === 0
-    ) {
-
-        html += `
-
-            <div class="empty-card">
-
-                <h3>
-                    Hakuna subjects
-                </h3>
-
-                <p>
-                    Hakuna subject
-                    iliyowekwa kwa series hii.
-                </p>
-
-            </div>
-
-        `;
-
-    }
-
-
-    availableSubjects.forEach(
-        subject => {
-
-            html += `
-
-                <div class="
-                    selection-card
-                    ${
-                        subject.className
-                    }
-                    series-card
-                ">
-
-                    <div>
-
-                        <h3>
-                            ${subject.name}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(
-                                getSeriesDisplayName()
-                            )}
-                            -
-                            ${escapeHTML(
-                                getFormName(
-                                    currentState.form
-                                )
-                            )}
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="open-btn"
-                        onclick="
-                            openSeriesSubject(
-                                '${subject.id}'
-                            )
-                        ">
-
-                        FUNGUA
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    html += `
-        </div>
-    `;
-
-
-    stepContainer.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   OPEN SERIES SUBJECT
-========================================================= */
-
-function openSeriesSubject(
-    subjectId
+function openPDF(
+    file
 ) {
-
-    currentState.level =
-        "seriesPapers";
-
-    currentState.subject =
-        subjectId;
-
-    pushNavigationState();
-
-    renderSeriesPapers();
-
-}
-
-
-/* =========================================================
-   RENDER SERIES PAPERS
-========================================================= */
-
-function renderSeriesPapers() {
-
-    updateBreadcrumb();
-
-
-    const papers =
-        getSeriesPapers().filter(
-            paper => {
-
-                return (
-
-                    normalize(
-                        paper.form
-                    ) ===
-                    normalize(
-                        currentState.form
-                    )
-
-                    &&
-
-                    normalize(
-                        paper.subject
-                    ) ===
-                    normalize(
-                        currentState.subject
-                    )
-
-                );
-
-            }
-        );
-
-
-    let html = `
-
-        <div class="step-header">
-
-            <span class="step-number">
-                SERIES PAPERS
-            </span>
-
-            <h2>
-                ${escapeHTML(
-                    getSeriesDisplayName()
-                )}
-            </h2>
-
-            <p>
-                Chagua paper unayotaka
-                kufungua.
-            </p>
-
-        </div>
-
-        <div class="selection-grid">
-
-    `;
-
-
-    if (
-        papers.length === 0
-    ) {
-
-        html += `
-
-            <div class="empty-card">
-
-                <h3>
-                    Hakuna paper
-                </h3>
-
-                <p>
-                    Hakuna paper
-                    iliyowekwa kwa uchaguzi huu.
-                </p>
-
-            </div>
-
-        `;
-
-    }
-
-
-    papers.forEach(
-        paper => {
-
-            html += `
-
-                <div class="
-                    selection-card
-                    pdf-card
-                ">
-
-                    <div>
-
-                        <h3>
-                            ${escapeHTML(
-                                paper.title ||
-                                "Past Paper"
-                            )}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(
-                                paper.description ||
-                                ""
-                            )}
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="
-                            open-btn
-                            pdf-button
-                        "
-                        onclick="
-                            openPDF(
-                                '${escapeJS(
-                                    paper.file
-                                )}'
-                            )
-                        ">
-
-                        FUNGUA PDF
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    html += `
-        </div>
-    `;
-
-
-    stepContainer.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function getFormName(formId) {
-
-    const form =
-        forms.find(
-            item =>
-                item.id ===
-                formId
-        );
-
-    return form
-        ? form.name
-        : formId;
-
-}
-
-
-/* =========================================================
-   PDF
-========================================================= */
-
-function openPDF(file) {
 
     if (!file) {
 
@@ -4132,6 +3418,7 @@ function openPDF(file) {
         return;
 
     }
+
 
     window.open(
         file,
@@ -4146,7 +3433,9 @@ function openPDF(file) {
    ESCAPE JS
 ========================================================= */
 
-function escapeJS(value) {
+function escapeJS(
+    value
+) {
 
     return String(value ?? "")
         .replaceAll(
@@ -4173,7 +3462,9 @@ function escapeJS(value) {
    ESCAPE HTML
 ========================================================= */
 
-function escapeHTML(value) {
+function escapeHTML(
+    value
+) {
 
     return String(value ?? "")
         .replaceAll(
@@ -4212,36 +3503,24 @@ function updateBreadcrumb() {
 
 
     if (
-        currentState.section ===
-        "series"
-    ) {
-
-        items.push(
-            "Examination Series"
-        );
-
-        if (
-            currentState.series
-        ) {
-
-            items.push(
-                getSeriesDisplayName()
-            );
-
-        }
-
-    }
-
-
-    if (
         currentState.form
     ) {
 
-        items.push(
-            getFormName(
-                currentState.form
-            )
-        );
+        const form =
+            forms.find(
+                item =>
+                    item.id ===
+                    currentState.form
+            );
+
+
+        if (form) {
+
+            items.push(
+                form.name
+            );
+
+        }
 
     }
 
@@ -4257,6 +3536,7 @@ function updateBreadcrumb() {
                     currentState.subject
             );
 
+
         if (subject) {
 
             items.push(
@@ -4269,33 +3549,36 @@ function updateBreadcrumb() {
 
 
     if (
-        currentState.type
+        currentState.category ===
+        "examination_series"
     ) {
 
-        const type =
-            paperTypes.find(
-                item =>
-                    item.id ===
-                    currentState.type
-            );
-
-        if (type) {
-
-            items.push(
-                type.name
-            );
-
-        }
+        items.push(
+            "Examination Series"
+        );
 
     }
 
 
     if (
-        currentState.school
+        currentState.organization
     ) {
 
         items.push(
-            currentState.school
+            currentState.organization
+        );
+
+    }
+
+
+    if (
+        currentState.series
+    ) {
+
+        items.push(
+            formatSeriesName(
+                currentState.series
+            )
         );
 
     }
@@ -4305,22 +3588,8 @@ function updateBreadcrumb() {
         currentState.region
     ) {
 
-        const region =
-            regions.find(
-                item =>
-                    normalize(
-                        item.id
-                    ) ===
-                    normalize(
-                        currentState.region
-                    )
-            );
-
-
         items.push(
-            region
-                ? region.name
-                : currentState.region
+            currentState.region
         );
 
     }
@@ -4339,24 +3608,23 @@ function updateBreadcrumb() {
 
     breadcrumb.innerHTML =
         items.map(
-            (item,index) => {
+            (
+                item,
+                index
+            ) => {
 
                 if (
                     index === 0
                 ) {
 
                     return `
-
                         <span class="
                             breadcrumb-item
                         ">
-
                             ${escapeHTML(
                                 item
                             )}
-
                         </span>
-
                     `;
 
                 }
@@ -4373,11 +3641,9 @@ function updateBreadcrumb() {
                     <span class="
                         breadcrumb-item
                     ">
-
                         ${escapeHTML(
                             item
                         )}
-
                     </span>
 
                 `;
@@ -4423,9 +3689,10 @@ window.addEventListener(
 
             renderCurrentLevel();
 
-        } else {
+        }
+        else {
 
-            renderHome();
+            renderForms();
 
         }
 
@@ -4443,9 +3710,9 @@ function renderCurrentLevel() {
         currentState.level
     ) {
 
-        case "home":
+        case "forms":
 
-            renderHome();
+            renderForms();
 
             break;
 
@@ -4457,16 +3724,30 @@ function renderCurrentLevel() {
             break;
 
 
-        case "types":
+        case "categories":
 
-            renderTypes();
+            renderCategories();
 
             break;
 
 
-        case "schools":
+        case "seriesOrganizations":
 
-            renderSchools();
+            renderSeriesOrganizations();
+
+            break;
+
+
+        case "series":
+
+            renderSeries();
+
+            break;
+
+
+        case "seriesPapers":
+
+            renderSeriesPapers();
 
             break;
 
@@ -4492,30 +3773,9 @@ function renderCurrentLevel() {
             break;
 
 
-        case "seriesForms":
-
-            renderSeriesForms();
-
-            break;
-
-
-        case "seriesSubjects":
-
-            renderSeriesSubjects();
-
-            break;
-
-
-        case "seriesPapers":
-
-            renderSeriesPapers();
-
-            break;
-
-
         default:
 
-            renderHome();
+            renderForms();
 
     }
 
@@ -4530,7 +3790,7 @@ function goBack() {
 
     if (
         currentState.level ===
-        "home"
+        "forms"
     ) {
 
         window.location.href =
@@ -4539,6 +3799,7 @@ function goBack() {
         return;
 
     }
+
 
     history.back();
 
@@ -4555,6 +3816,7 @@ function toggleMenu() {
         document.getElementById(
             "sidebarMenu"
         );
+
 
     const overlay =
         document.getElementById(
@@ -4617,17 +3879,19 @@ function initialize() {
 
     history.replaceState(
         {
-            level: "home",
-
-            section: null,
+            level: "forms",
 
             form: null,
 
             subject: null,
 
-            type: null,
+            category: null,
+
+            organization: null,
 
             series: null,
+
+            type: null,
 
             region: null,
 
@@ -4650,7 +3914,7 @@ function initialize() {
     }
 
 
-    renderHome();
+    renderForms();
 
 }
 
