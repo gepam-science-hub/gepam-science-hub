@@ -1,45 +1,95 @@
 // ============================================================
-// GEPAM SCIENCE HUB
-// PAST PAPERS MASTER DATABASE
+// GEPAM SCIENCE HUB - PAST PAPERS DATABASE
 // FORM 1 - FORM 6
 // PHYSICS + CHEMISTRY + BIOLOGY
 //
 // SYSTEM:
-// 1. SCHOOL BASED EXAMS  -> school
-// 2. REGIONAL/JOIN EXAMS -> region
-// 3. NATIONAL EXAMS      -> necta
+// 1. NECTA / FTNA       -> National
+// 2. ISESE              -> Series / Organiser
+// 3. SCHOOL             -> Specific School
+// 4. JOINT              -> District / Zone / Association
+// 5. REGIONAL           -> Region
+// 6. MOCK               -> Region / Zone / District / School
+// 7. PRE-NECTA          -> Region / Zone / School / Association
+// 8. MIDTERM            -> School / District / Region
+// 9. TERMINAL           -> School / District / Region
+// 10. ANNUAL            -> School / District / Region
+// 11. MONTHLY           -> Specific School
+// 12. SPECIAL           -> Special Schools / Association
 //
 // IMPORTANT:
-// Usibuni path ya PDF.
-// Weka file path halisi ya PDF iliyopo kwenye repository.
+// "school" papers are NOT treated as regional papers.
 // ============================================================
 
 
-/* ============================================================
-   REGIONS
-============================================================ */
+
+// ============================================================
+// REGIONS
+// ============================================================
 
 const pastPaperRegions = [
 
     { id: "arusha", name: "Arusha" },
+
     { id: "dar_es_salaam", name: "Dar es Salaam" },
+
     { id: "dodoma", name: "Dodoma" },
-    { id: "shinyanga", name: "Shinyanga" },
+
+    { id: "geita", name: "Geita" },
+
     { id: "iringa", name: "Iringa" },
+
     { id: "kagera", name: "Kagera" },
+
+    { id: "katavi", name: "Katavi" },
+
     { id: "kigoma", name: "Kigoma" },
+
     { id: "kilimanjaro", name: "Kilimanjaro" },
+
+    { id: "lindi", name: "Lindi" },
+
+    { id: "manyara", name: "Manyara" },
+
+    { id: "mara", name: "Mara" },
+
     { id: "mbeya", name: "Mbeya" },
+
     { id: "morogoro", name: "Morogoro" },
+
+    { id: "mtwara", name: "Mtwara" },
+
     { id: "mwanza", name: "Mwanza" },
-    { id: "tanga", name: "Tanga" }
+
+    { id: "njombe", name: "Njombe" },
+
+    { id: "pwani", name: "Pwani" },
+
+    { id: "rukwa", name: "Rukwa" },
+
+    { id: "ruvuma", name: "Ruvuma" },
+
+    { id: "shinyanga", name: "Shinyanga" },
+
+    { id: "simiyu", name: "Simiyu" },
+
+    { id: "singida", name: "Singida" },
+
+    { id: "songwe", name: "Songwe" },
+
+    { id: "tabora", name: "Tabora" },
+
+    { id: "tanga", name: "Tanga" },
+
+    { id: "zanzibar", name: "Zanzibar" }
 
 ];
 
 
-/* ============================================================
-   YEARS
-============================================================ */
+
+// ============================================================
+// YEARS
+// ============================================================
 
 const pastPaperYears = [
 
@@ -54,9 +104,116 @@ const pastPaperYears = [
 ];
 
 
-/* ============================================================
-   SUBJECTS
-============================================================ */
+
+// ============================================================
+// PAPER TYPES
+// ============================================================
+
+const pastPaperTypes = [
+
+    {
+        id: "monthly",
+        name: "Monthly Test",
+        scope: "school"
+    },
+
+    {
+        id: "midterm",
+        name: "Midterm Examination",
+        scope: "school_or_joint"
+    },
+
+    {
+        id: "terminal",
+        name: "Terminal Examination",
+        scope: "school_or_joint"
+    },
+
+    {
+        id: "annual",
+        name: "Annual Examination",
+        scope: "school_or_joint"
+    },
+
+    {
+        id: "joint",
+        name: "Joint Examination",
+        scope: "joint"
+    },
+
+    {
+        id: "mock",
+        name: "Mock Examination",
+        scope: "regional_or_zone_or_school"
+    },
+
+    {
+        id: "pre_mock",
+        name: "Pre-Mock Examination",
+        scope: "regional_or_zone_or_school"
+    },
+
+    {
+        id: "pre_necta",
+        name: "Pre-NECTA Examination",
+        scope: "regional_or_zone_or_school"
+    },
+
+    {
+        id: "isese",
+        name: "ISESE",
+        scope: "series"
+    },
+
+    {
+        id: "special",
+        name: "Special Examination",
+        scope: "association_or_school"
+    },
+
+    {
+        id: "association",
+        name: "Association Examination",
+        scope: "association"
+    },
+
+    {
+        id: "syndicate",
+        name: "Syndicate Examination",
+        scope: "association"
+    },
+
+    {
+        id: "opening_test",
+        name: "Opening Test",
+        scope: "school_or_series"
+    },
+
+    {
+        id: "competence",
+        name: "Competence Examination",
+        scope: "association"
+    },
+
+    {
+        id: "ftna",
+        name: "FTNA",
+        scope: "national"
+    },
+
+    {
+        id: "necta",
+        name: "NECTA",
+        scope: "national"
+    }
+
+];
+
+
+
+// ============================================================
+// SUBJECTS
+// ============================================================
 
 const pastPaperSubjects = [
 
@@ -78,232 +235,48 @@ const pastPaperSubjects = [
 ];
 
 
-/* ============================================================
-   EXAMINATION TYPES
-============================================================
 
-   scope:
-
-   school
-   -> Exam inayotegemea shule
-
-   region
-   -> Exam inayotegemea mkoa / joint / regional
-
-   national
-   -> NECTA / FTNA
-
-============================================================ */
-
-const pastPaperTypes = [
-
-    /* SCHOOL BASED */
-
-    {
-        id: "monthly",
-        name: "Monthly Test",
-        description: "Monthly school examination.",
-        scope: "school"
-    },
-
-    {
-        id: "opening",
-        name: "Opening Examination",
-        description: "Opening school examination.",
-        scope: "school"
-    },
-
-    {
-        id: "midterm",
-        name: "Midterm Examination",
-        description: "Midterm school examination.",
-        scope: "school"
-    },
-
-    {
-        id: "terminal",
-        name: "Terminal Examination",
-        description: "Terminal school examination.",
-        scope: "school"
-    },
-
-    {
-        id: "annual",
-        name: "Annual Examination",
-        description: "Annual school examination.",
-        scope: "school"
-    },
-
-    {
-        id: "internal",
-        name: "Internal School Examination",
-        description: "Examination prepared by an individual school.",
-        scope: "school"
-    },
+// ============================================================
+// HELPER FORMAT
+// ============================================================
+//
+// scope:
+// "national"
+// "region"
+// "district"
+// "school"
+// "series"
+// "association"
+// "zone"
+//
+// school:
+// Specific school name if applicable.
+//
+// organiser:
+// Organisation / district / zone / association.
+//
+// series:
+// ISESE S01, S02 etc.
+//
+// paper:
+// Paper 1, 2A, 2B, 3A, 3B etc.
+//
+// ============================================================
 
 
-    /* JOINT / INTER-SCHOOL */
-
-    {
-        id: "joint",
-        name: "Joint Examination",
-        description: "Joint examination prepared by several schools or institutions.",
-        scope: "region"
-    },
-
-    {
-        id: "isese",
-        name: "ISESE",
-        description: "Inter Secondary Schools Examination Series.",
-        scope: "region"
-    },
-
-    {
-        id: "jiepSS",
-        name: "JIEPSS",
-        description: "Joint examination series for private secondary schools.",
-        scope: "region"
-    },
-
-
-    /* MOCK / PREPARATION */
-
-    {
-        id: "mock",
-        name: "Mock Examination",
-        description: "Mock examination papers.",
-        scope: "region"
-    },
-
-    {
-        id: "pre_mock",
-        name: "Pre-Mock Examination",
-        description: "Pre-mock examination papers.",
-        scope: "region"
-    },
-
-    {
-        id: "pre_necta",
-        name: "Pre-NECTA",
-        description: "Pre-NECTA examination papers.",
-        scope: "region"
-    },
-
-
-    /* NATIONAL */
-
-    {
-        id: "ftna",
-        name: "FTNA",
-        description: "Form Two National Assessment examination.",
-        scope: "national"
-    },
-
-    {
-        id: "necta",
-        name: "NECTA",
-        description: "NECTA national examination papers.",
-        scope: "national"
-    }
-
-];
-
-
-/* ============================================================
-   SCHOOL EXAMINATION DATABASE
-============================================================
-
-   HAPA NDIPO TUNATENGANISHA SCHOOL NA REGION.
-
-   Mfano:
-
-   school: "Jina la Shule"
-
-   Hakuna region inayotumika kwa school-based paper.
-
-============================================================ */
-
-const pastPaperSchools = [
-
-    // ========================================================
-    // EXAMPLE STRUCTURE ONLY
-    // ========================================================
-
-    /*
-    {
-        id: "example_school",
-        name: "Example Secondary School",
-        region: "dodoma"
-    }
-    */
-
-];
-
-
-/* ============================================================
-   PAST PAPERS
-============================================================ */
 
 const pastPapers = [
 
-
-    // ========================================================
     // ========================================================
     // FORM 1 - PHYSICS
     // ========================================================
-    // ========================================================
-
-
-    {
-        form: "form1",
-        subject: "physics",
-        title: "Physics Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dar_es_salaam",
-        year: 2026,
-        file: "papers/form1/physics/dsm_2026.pdf"
-    },
-
-    {
-        form: "form1",
-        subject: "physics",
-        title: "Physics Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dar_es_salaam",
-        year: 2025,
-        file: "papers/form1/physics/dsm_2025.pdf"
-    },
-
-    {
-        form: "form1",
-        subject: "physics",
-        title: "Physics Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dar_es_salaam",
-        year: 2024,
-        file: "papers/form1/physics/dsm_2024.pdf"
-    },
-
-    {
-        form: "form1",
-        subject: "physics",
-        title: "Physics Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dar_es_salaam",
-        year: 2023,
-        file: "papers/form1/physics/dsm_2023.pdf"
-    },
 
     {
         form: "form1",
         subject: "physics",
         title: "Physics Midterm Examination",
         type: "midterm",
-        scope: "school",
+        scope: "region",
         region: "dodoma",
         year: 2026,
         file: "papers/form1/physics/dom_2026.pdf"
@@ -314,7 +287,7 @@ const pastPapers = [
         subject: "physics",
         title: "Physics Terminal Examination",
         type: "terminal",
-        scope: "school",
+        scope: "region",
         region: "arusha",
         year: 2025,
         file: "papers/form1/physics/aru_2025.pdf"
@@ -336,79 +309,35 @@ const pastPapers = [
         subject: "physics",
         title: "Physics Annual Examination",
         type: "annual",
-        scope: "school",
-        region: "kagera",
-        year: 2025,
-        file: "papers/form1/physics/kag_2025.pdf"
+        scope: "region",
+        region: "dar_es_salaam",
+        year: 2026,
+        file: "papers/form1/physics/dsm_2026.pdf"
     },
 
     {
         form: "form1",
         subject: "physics",
-        title: "Physics Midterm Examination",
-        type: "midterm",
-        scope: "school",
-        region: "shinyanga",
-        year: 2026,
-        file: "papers/form1/physics/shy_2026.pdf"
+        title: "Physics Annual Examination",
+        type: "annual",
+        scope: "region",
+        region: "dar_es_salaam",
+        year: 2025,
+        file: "papers/form1/physics/dsm_2025.pdf"
     },
+
 
 
     // ========================================================
     // FORM 1 - CHEMISTRY
     // ========================================================
 
-
-    {
-        form: "form1",
-        subject: "chemistry",
-        title: "Chemistry Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dar_es_salaam",
-        year: 2026,
-        file: "papers/form1/chemistry/dsm_2026.pdf"
-    },
-
-    {
-        form: "form1",
-        subject: "chemistry",
-        title: "Chemistry Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dar_es_salaam",
-        year: 2025,
-        file: "papers/form1/chemistry/dsm_2025.pdf"
-    },
-
-    {
-        form: "form1",
-        subject: "chemistry",
-        title: "Chemistry Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dar_es_salaam",
-        year: 2024,
-        file: "papers/form1/chemistry/dsm_2024.pdf"
-    },
-
-    {
-        form: "form1",
-        subject: "chemistry",
-        title: "Chemistry Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dar_es_salaam",
-        year: 2023,
-        file: "papers/form1/chemistry/dsm_2023.pdf"
-    },
-
     {
         form: "form1",
         subject: "chemistry",
         title: "Chemistry Midterm Examination",
         type: "midterm",
-        scope: "school",
+        scope: "region",
         region: "dodoma",
         year: 2026,
         file: "papers/form1/chemistry/dom_2026.pdf"
@@ -419,7 +348,7 @@ const pastPapers = [
         subject: "chemistry",
         title: "Chemistry Terminal Examination",
         type: "terminal",
-        scope: "school",
+        scope: "region",
         region: "arusha",
         year: 2025,
         file: "papers/form1/chemistry/aru_2025.pdf"
@@ -436,35 +365,31 @@ const pastPapers = [
         file: "papers/form1/chemistry/mby_2026.pdf"
     },
 
+    {
+        form: "form1",
+        subject: "chemistry",
+        title: "Chemistry Annual Examination",
+        type: "annual",
+        scope: "region",
+        region: "dar_es_salaam",
+        year: 2026,
+        file: "papers/form1/chemistry/dsm_2026.pdf"
+    },
+
+
 
     // ========================================================
     // FORM 1 - BIOLOGY
     // ========================================================
-    //
-    // Biology imewezeshwa hapa.
-    // Weka PDF halisi utakazokuwa nazo.
-    //
+    // Biology imeongezwa.
+    // PDF halisi zitaongezwa hapa.
     // ========================================================
 
-
-    /*
-    {
-        form: "form1",
-        subject: "biology",
-        title: "Biology Monthly Test",
-        type: "monthly",
-        scope: "school",
-        school: "school_id",
-        year: 2026,
-        file: "papers/form1/biology/monthly/school/year/file.pdf"
-    },
-    */
 
 
     // ========================================================
     // FORM 2 - PHYSICS
     // ========================================================
-
 
     {
         form: "form2",
@@ -491,31 +416,9 @@ const pastPapers = [
     {
         form: "form2",
         subject: "physics",
-        title: "Physics FTNA Examination",
-        type: "ftna",
-        scope: "national",
-        region: "necta",
-        year: 2024,
-        file: "papers/form2/physics/necta_2024.pdf"
-    },
-
-    {
-        form: "form2",
-        subject: "physics",
-        title: "Physics FTNA Examination",
-        type: "ftna",
-        scope: "national",
-        region: "necta",
-        year: 2023,
-        file: "papers/form2/physics/necta_2023.pdf"
-    },
-
-    {
-        form: "form2",
-        subject: "physics",
         title: "Physics Midterm Examination",
         type: "midterm",
-        scope: "school",
+        scope: "region",
         region: "dodoma",
         year: 2026,
         file: "papers/form2/physics/dom_2026.pdf"
@@ -526,7 +429,7 @@ const pastPapers = [
         subject: "physics",
         title: "Physics Terminal Examination",
         type: "terminal",
-        scope: "school",
+        scope: "region",
         region: "arusha",
         year: 2025,
         file: "papers/form2/physics/aru_2025.pdf"
@@ -543,33 +446,11 @@ const pastPapers = [
         file: "papers/form2/physics/mby_2026.pdf"
     },
 
-    {
-        form: "form2",
-        subject: "physics",
-        title: "Physics Joint Examination",
-        type: "joint",
-        scope: "region",
-        region: "dodoma",
-        year: 2025,
-        file: "papers/form2/physics/dom_2025.pdf"
-    },
-
-    {
-        form: "form2",
-        subject: "physics",
-        title: "Physics Joint Examination",
-        type: "joint",
-        scope: "region",
-        region: "dar_es_salaam",
-        year: 2026,
-        file: "papers/form2/physics/dsm_2026.pdf"
-    },
 
 
     // ========================================================
     // FORM 2 - CHEMISTRY
     // ========================================================
-
 
     {
         form: "form2",
@@ -596,31 +477,9 @@ const pastPapers = [
     {
         form: "form2",
         subject: "chemistry",
-        title: "Chemistry FTNA Examination",
-        type: "ftna",
-        scope: "national",
-        region: "necta",
-        year: 2024,
-        file: "papers/form2/chemistry/necta_2024.pdf"
-    },
-
-    {
-        form: "form2",
-        subject: "chemistry",
-        title: "Chemistry FTNA Examination",
-        type: "ftna",
-        scope: "national",
-        region: "necta",
-        year: 2023,
-        file: "papers/form2/chemistry/necta_2023.pdf"
-    },
-
-    {
-        form: "form2",
-        subject: "chemistry",
         title: "Chemistry Midterm Examination",
         type: "midterm",
-        scope: "school",
+        scope: "region",
         region: "dodoma",
         year: 2026,
         file: "papers/form2/chemistry/dom_2026.pdf"
@@ -631,70 +490,70 @@ const pastPapers = [
         subject: "chemistry",
         title: "Chemistry Terminal Examination",
         type: "terminal",
-        scope: "school",
+        scope: "region",
         region: "arusha",
         year: 2025,
         file: "papers/form2/chemistry/aru_2025.pdf"
     },
 
-    {
-        form: "form2",
-        subject: "chemistry",
-        title: "Chemistry Joint Examination",
-        type: "joint",
-        scope: "region",
-        region: "mbeya",
-        year: 2026,
-        file: "papers/form2/chemistry/mby_2026.pdf"
-    },
 
 
     // ========================================================
     // FORM 2 - BIOLOGY
     // ========================================================
-
-
-    /*
-    ISESE EXAMPLE STRUCTURE:
+    // ISESE inaweza kutumika kwa Form 2 Biology.
+    // Source verification: ISESE Form Two 2026 ina Biology,
+    // Chemistry na Physics.
+    // ========================================================
 
     {
         form: "form2",
         subject: "biology",
         title: "Biology ISESE Series 01",
         type: "isese",
-        scope: "region",
-        region: "dar_es_salaam",
+        scope: "series",
+        organiser: "ISESE",
+        series: "S01",
         year: 2026,
-        series: "01",
-        file: "papers/form2/biology/isese/2026/series01/biology.pdf"
+        file: "papers/form2/biology/isese/2026/S01/biology.pdf"
     },
 
     {
         form: "form2",
-        subject: "biology",
-        title: "Biology ISESE Series 01 Marking Scheme",
+        subject: "chemistry",
+        title: "Chemistry ISESE Series 01",
         type: "isese",
-        scope: "region",
-        region: "dar_es_salaam",
+        scope: "series",
+        organiser: "ISESE",
+        series: "S01",
         year: 2026,
-        series: "01",
-        documentType: "marking_scheme",
-        file: "papers/form2/biology/isese/2026/series01/biology_ms.pdf"
-    }
-    */
+        file: "papers/form2/chemistry/isese/2026/S01/chemistry.pdf"
+    },
+
+    {
+        form: "form2",
+        subject: "physics",
+        title: "Physics ISESE Opening Test",
+        type: "opening_test",
+        scope: "series",
+        organiser: "ISESE",
+        series: "Opening Test",
+        year: 2026,
+        file: "papers/form2/physics/isese/2026/opening-test/physics.pdf"
+    },
+
 
 
     // ========================================================
     // FORM 3 - PHYSICS
     // ========================================================
 
-
     {
         form: "form3",
         subject: "physics",
         title: "Physics Annual Examination",
         type: "annual",
-        scope: "school",
+        scope: "region",
         region: "dar_es_salaam",
         year: 2026,
         file: "papers/form3/physics/dsm_2026.pdf"
@@ -703,42 +562,9 @@ const pastPapers = [
     {
         form: "form3",
         subject: "physics",
-        title: "Physics Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dar_es_salaam",
-        year: 2025,
-        file: "papers/form3/physics/dsm_2025.pdf"
-    },
-
-    {
-        form: "form3",
-        subject: "physics",
-        title: "Physics Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dar_es_salaam",
-        year: 2024,
-        file: "papers/form3/physics/dsm_2024.pdf"
-    },
-
-    {
-        form: "form3",
-        subject: "physics",
-        title: "Physics Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dar_es_salaam",
-        year: 2023,
-        file: "papers/form3/physics/dsm_2023.pdf"
-    },
-
-    {
-        form: "form3",
-        subject: "physics",
         title: "Physics Midterm Examination",
         type: "midterm",
-        scope: "school",
+        scope: "region",
         region: "dodoma",
         year: 2026,
         file: "papers/form3/physics/dom_2026.pdf"
@@ -749,7 +575,7 @@ const pastPapers = [
         subject: "physics",
         title: "Physics Terminal Examination",
         type: "terminal",
-        scope: "school",
+        scope: "region",
         region: "arusha",
         year: 2025,
         file: "papers/form3/physics/aru_2025.pdf"
@@ -767,17 +593,17 @@ const pastPapers = [
     },
 
 
+
     // ========================================================
     // FORM 3 - CHEMISTRY
     // ========================================================
-
 
     {
         form: "form3",
         subject: "chemistry",
         title: "Chemistry Annual Examination",
         type: "annual",
-        scope: "school",
+        scope: "region",
         region: "dar_es_salaam",
         year: 2026,
         file: "papers/form3/chemistry/dsm_2026.pdf"
@@ -786,42 +612,9 @@ const pastPapers = [
     {
         form: "form3",
         subject: "chemistry",
-        title: "Chemistry Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dar_es_salaam",
-        year: 2025,
-        file: "papers/form3/chemistry/dsm_2025.pdf"
-    },
-
-    {
-        form: "form3",
-        subject: "chemistry",
-        title: "Chemistry Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dar_es_salaam",
-        year: 2024,
-        file: "papers/form3/chemistry/dsm_2024.pdf"
-    },
-
-    {
-        form: "form3",
-        subject: "chemistry",
-        title: "Chemistry Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dar_es_salaam",
-        year: 2023,
-        file: "papers/form3/chemistry/dsm_2023.pdf"
-    },
-
-    {
-        form: "form3",
-        subject: "chemistry",
         title: "Chemistry Midterm Examination",
         type: "midterm",
-        scope: "school",
+        scope: "region",
         region: "dodoma",
         year: 2026,
         file: "papers/form3/chemistry/dom_2026.pdf"
@@ -832,34 +625,52 @@ const pastPapers = [
         subject: "chemistry",
         title: "Chemistry Terminal Examination",
         type: "terminal",
-        scope: "school",
+        scope: "region",
         region: "arusha",
         year: 2025,
         file: "papers/form3/chemistry/aru_2025.pdf"
     },
 
+
+
+    // ========================================================
+    // FORM 3 - BIOLOGY
+    // ========================================================
+
     {
         form: "form3",
-        subject: "chemistry",
-        title: "Chemistry Joint Examination",
-        type: "joint",
-        scope: "region",
-        region: "mbeya",
+        subject: "biology",
+        title: "Biology Midterm Examination",
+        type: "midterm",
+        scope: "school",
+        school: "SCHOOL_NAME_HERE",
         year: 2026,
-        file: "papers/form3/chemistry/mby_2026.pdf"
+        file: "papers/form3/biology/school/2026/biology.pdf"
     },
+
+    {
+        form: "form3",
+        subject: "biology",
+        title: "Biology Monthly Test",
+        type: "monthly",
+        scope: "school",
+        school: "SCHOOL_NAME_HERE",
+        year: 2026,
+        file: "papers/form3/biology/monthly/2026/biology.pdf"
+    },
+
 
 
     // ========================================================
     // FORM 4 - PHYSICS
-    // MOCK / JOINT / PRE-NECTA / NECTA
+    // PAPER 1 / 2A / 2B
     // ========================================================
-
 
     {
         form: "form4",
         subject: "physics",
         title: "Physics 1",
+        paper: "1",
         type: "mock",
         scope: "region",
         region: "dar_es_salaam",
@@ -871,6 +682,7 @@ const pastPapers = [
         form: "form4",
         subject: "physics",
         title: "Physics 2A",
+        paper: "2A",
         type: "mock",
         scope: "region",
         region: "dar_es_salaam",
@@ -882,6 +694,7 @@ const pastPapers = [
         form: "form4",
         subject: "physics",
         title: "Physics 2B",
+        paper: "2B",
         type: "mock",
         scope: "region",
         region: "dar_es_salaam",
@@ -937,6 +750,7 @@ const pastPapers = [
         form: "form4",
         subject: "physics",
         title: "Physics 1",
+        paper: "1",
         type: "necta",
         scope: "national",
         region: "necta",
@@ -948,6 +762,7 @@ const pastPapers = [
         form: "form4",
         subject: "physics",
         title: "Physics 2A",
+        paper: "2A",
         type: "necta",
         scope: "national",
         region: "necta",
@@ -955,38 +770,17 @@ const pastPapers = [
         file: "papers/form4/physics/necta/2025/F4_necta_2025_phy2a.pdf"
     },
 
-    {
-        form: "form4",
-        subject: "physics",
-        title: "Physics NECTA Examination",
-        type: "necta",
-        scope: "national",
-        region: "necta",
-        year: 2024,
-        file: "papers/form4/physics/necta/2024/physics_2024.pdf"
-    },
-
-    {
-        form: "form4",
-        subject: "physics",
-        title: "Physics NECTA Examination",
-        type: "necta",
-        scope: "national",
-        region: "necta",
-        year: 2023,
-        file: "papers/form4/physics/necta/2023/physics_2023.pdf"
-    },
 
 
     // ========================================================
     // FORM 4 - CHEMISTRY
     // ========================================================
 
-
     {
         form: "form4",
         subject: "chemistry",
-        title: "Chemistry Mock Examination",
+        title: "Chemistry 1",
+        paper: "1",
         type: "mock",
         scope: "region",
         region: "arusha",
@@ -997,7 +791,8 @@ const pastPapers = [
     {
         form: "form4",
         subject: "chemistry",
-        title: "Chemistry Mock Examination",
+        title: "Chemistry 1",
+        paper: "1",
         type: "mock",
         scope: "region",
         region: "dodoma",
@@ -1019,17 +814,6 @@ const pastPapers = [
     {
         form: "form4",
         subject: "chemistry",
-        title: "Chemistry Joint Examination",
-        type: "joint",
-        scope: "region",
-        region: "dodoma",
-        year: 2026,
-        file: "papers/form4/chemistry/joint/dodoma/2026/chemistry_joint_2026.pdf"
-    },
-
-    {
-        form: "form4",
-        subject: "chemistry",
         title: "Chemistry Pre-NECTA Examination",
         type: "pre_necta",
         scope: "region",
@@ -1041,18 +825,8 @@ const pastPapers = [
     {
         form: "form4",
         subject: "chemistry",
-        title: "Chemistry Pre-NECTA Examination",
-        type: "pre_necta",
-        scope: "region",
-        region: "dodoma",
-        year: 2026,
-        file: "papers/form4/chemistry/pre_necta/dodoma/2026/chemistry_prenecta_2026.pdf"
-    },
-
-    {
-        form: "form4",
-        subject: "chemistry",
         title: "Chemistry 1",
+        paper: "1",
         type: "necta",
         scope: "national",
         region: "necta",
@@ -1064,6 +838,7 @@ const pastPapers = [
         form: "form4",
         subject: "chemistry",
         title: "Chemistry 2A",
+        paper: "2A",
         type: "necta",
         scope: "national",
         region: "necta",
@@ -1071,73 +846,119 @@ const pastPapers = [
         file: "papers/form4/chemistry/necta/2025/F4_necta_2025_chem2a.pdf"
     },
 
-    {
-        form: "form4",
-        subject: "chemistry",
-        title: "Chemistry NECTA Examination",
-        type: "necta",
-        scope: "national",
-        region: "necta",
-        year: 2024,
-        file: "papers/form4/chemistry/necta/2024/chemistry_2024.pdf"
-    },
-
-    {
-        form: "form4",
-        subject: "chemistry",
-        title: "Chemistry NECTA Examination",
-        type: "necta",
-        scope: "national",
-        region: "necta",
-        year: 2023,
-        file: "papers/form4/chemistry/necta/2023/chemistry_2023.pdf"
-    },
 
 
     // ========================================================
     // FORM 4 - BIOLOGY
+    // PAPER 1 / 2A / 2B
     // ========================================================
 
-    /*
     {
         form: "form4",
         subject: "biology",
-        title: "Biology 1 ISESE Series 01",
-        type: "isese",
-        scope: "region",
-        region: "dar_es_salaam",
-        year: 2026,
-        series: "01",
+        title: "Biology 1",
         paper: "1",
-        file: "papers/form4/biology/isese/2026/series01/biology1.pdf"
+        type: "isese",
+        scope: "series",
+        organiser: "ISESE",
+        series: "S01",
+        year: 2026,
+        file: "papers/form4/biology/isese/2026/S01/biology1.pdf"
     },
 
     {
         form: "form4",
         subject: "biology",
-        title: "Biology 1 ISESE Series 01 Marking Scheme",
-        type: "isese",
-        scope: "region",
-        region: "dar_es_salaam",
+        title: "Biology 1",
+        paper: "1",
+        type: "mock",
+        scope: "school",
+        school: "SCHOOL_NAME_HERE",
         year: 2026,
-        series: "01",
-        documentType: "marking_scheme",
-        file: "papers/form4/biology/isese/2026/series01/biology1_ms.pdf"
-    }
-    */
+        file: "papers/form4/biology/mock/school/2026/biology1.pdf"
+    },
+
+    {
+        form: "form4",
+        subject: "biology",
+        title: "Biology 2A",
+        paper: "2A",
+        type: "mock",
+        scope: "school",
+        school: "SCHOOL_NAME_HERE",
+        year: 2026,
+        file: "papers/form4/biology/mock/school/2026/biology2a.pdf"
+    },
+
+    {
+        form: "form4",
+        subject: "biology",
+        title: "Biology 2B",
+        paper: "2B",
+        type: "mock",
+        scope: "school",
+        school: "SCHOOL_NAME_HERE",
+        year: 2026,
+        file: "papers/form4/biology/mock/school/2026/biology2b.pdf"
+    },
+
+
+
+    // ========================================================
+    // FORM 4 - ISESE
+    // ========================================================
+
+    {
+        form: "form4",
+        subject: "physics",
+        title: "Physics 1 ISESE Series 01",
+        paper: "1",
+        type: "isese",
+        scope: "series",
+        organiser: "ISESE",
+        series: "S01",
+        year: 2026,
+        file: "papers/form4/physics/isese/2026/S01/physics1.pdf"
+    },
+
+    {
+        form: "form4",
+        subject: "chemistry",
+        title: "Chemistry 1 ISESE Series 01",
+        paper: "1",
+        type: "isese",
+        scope: "series",
+        organiser: "ISESE",
+        series: "S01",
+        year: 2026,
+        file: "papers/form4/chemistry/isese/2026/S01/chemistry1.pdf"
+    },
+
+    {
+        form: "form4",
+        subject: "biology",
+        title: "Biology 1 ISESE Series 01",
+        paper: "1",
+        type: "isese",
+        scope: "series",
+        organiser: "ISESE",
+        series: "S01",
+        year: 2026,
+        file: "papers/form4/biology/isese/2026/S01/biology1.pdf"
+    },
+
 
 
     // ========================================================
     // FORM 5 - PHYSICS
     // ========================================================
 
-
     {
         form: "form5",
         subject: "physics",
         title: "Physics Annual Examination",
         type: "annual",
-        scope: "school",
+        scope: "region",
         region: "dar_es_salaam",
         year: 2026,
         file: "papers/form5/physics/dsm_2026.pdf"
@@ -1148,32 +969,10 @@ const pastPapers = [
         subject: "physics",
         title: "Physics Annual Examination",
         type: "annual",
-        scope: "school",
+        scope: "region",
         region: "dar_es_salaam",
         year: 2025,
         file: "papers/form5/physics/dsm_2025.pdf"
-    },
-
-    {
-        form: "form5",
-        subject: "physics",
-        title: "Physics Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dar_es_salaam",
-        year: 2024,
-        file: "papers/form5/physics/dsm_2024.pdf"
-    },
-
-    {
-        form: "form5",
-        subject: "physics",
-        title: "Physics Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dodoma",
-        year: 2026,
-        file: "papers/form5/physics/dom_2026.pdf"
     },
 
     {
@@ -1188,17 +987,17 @@ const pastPapers = [
     },
 
 
+
     // ========================================================
     // FORM 5 - CHEMISTRY
     // ========================================================
-
 
     {
         form: "form5",
         subject: "chemistry",
         title: "Chemistry Annual Examination",
         type: "annual",
-        scope: "school",
+        scope: "region",
         region: "dar_es_salaam",
         year: 2026,
         file: "papers/form5/chemistry/dsm_2026.pdf"
@@ -1209,21 +1008,10 @@ const pastPapers = [
         subject: "chemistry",
         title: "Chemistry Annual Examination",
         type: "annual",
-        scope: "school",
+        scope: "region",
         region: "dar_es_salaam",
         year: 2025,
         file: "papers/form5/chemistry/dsm_2025.pdf"
-    },
-
-    {
-        form: "form5",
-        subject: "chemistry",
-        title: "Chemistry Annual Examination",
-        type: "annual",
-        scope: "school",
-        region: "dodoma",
-        year: 2026,
-        file: "papers/form5/chemistry/dom_2026.pdf"
     },
 
     {
@@ -1238,34 +1026,45 @@ const pastPapers = [
     },
 
 
+
     // ========================================================
     // FORM 5 - BIOLOGY
     // ========================================================
 
+    {
+        form: "form5",
+        subject: "biology",
+        title: "Biology Monthly Test",
+        type: "monthly",
+        scope: "school",
+        school: "SCHOOL_NAME_HERE",
+        year: 2026,
+        file: "papers/form5/biology/monthly/2026/biology.pdf"
+    },
 
-    /*
     {
         form: "form5",
         subject: "biology",
         title: "Biology Annual Examination",
         type: "annual",
         scope: "school",
-        school: "school_id",
+        school: "SCHOOL_NAME_HERE",
         year: 2026,
-        file: "papers/form5/biology/annual/school/2026/biology.pdf"
-    }
-    */
+        file: "papers/form5/biology/annual/2026/biology.pdf"
+    },
+
 
 
     // ========================================================
     // FORM 6 - PHYSICS
+    // PAPER 1 / 2 / 3A / 3B
     // ========================================================
-
 
     {
         form: "form6",
         subject: "physics",
         title: "Physics 1 (Theory)",
+        paper: "1",
         type: "necta",
         scope: "national",
         region: "necta",
@@ -1277,6 +1076,7 @@ const pastPapers = [
         form: "form6",
         subject: "physics",
         title: "Physics 2",
+        paper: "2",
         type: "necta",
         scope: "national",
         region: "necta",
@@ -1288,6 +1088,7 @@ const pastPapers = [
         form: "form6",
         subject: "physics",
         title: "Physics 3A",
+        paper: "3A",
         type: "necta",
         scope: "national",
         region: "necta",
@@ -1299,6 +1100,7 @@ const pastPapers = [
         form: "form6",
         subject: "physics",
         title: "Physics 3B",
+        paper: "3B",
         type: "necta",
         scope: "national",
         region: "necta",
@@ -1307,15 +1109,16 @@ const pastPapers = [
     },
 
 
+
     // ========================================================
     // FORM 6 - CHEMISTRY
     // ========================================================
-
 
     {
         form: "form6",
         subject: "chemistry",
         title: "Chemistry 1 (Theory)",
+        paper: "1",
         type: "necta",
         scope: "national",
         region: "necta",
@@ -1327,6 +1130,7 @@ const pastPapers = [
         form: "form6",
         subject: "chemistry",
         title: "Chemistry 2",
+        paper: "2",
         type: "necta",
         scope: "national",
         region: "necta",
@@ -1338,6 +1142,7 @@ const pastPapers = [
         form: "form6",
         subject: "chemistry",
         title: "Chemistry 3A",
+        paper: "3A",
         type: "necta",
         scope: "national",
         region: "necta",
@@ -1349,6 +1154,7 @@ const pastPapers = [
         form: "form6",
         subject: "chemistry",
         title: "Chemistry 3B",
+        paper: "3B",
         type: "necta",
         scope: "national",
         region: "necta",
@@ -1357,143 +1163,262 @@ const pastPapers = [
     },
 
 
+
     // ========================================================
     // FORM 6 - BIOLOGY
+    // PAPER 1 / 2 / 3
     // ========================================================
-
-
-    /*
-    ISESE / PRE-NECTA STRUCTURE:
 
     {
         form: "form6",
         subject: "biology",
-        title: "Biology 1 ISESE Pre-NECTA",
-        type: "isese",
-        scope: "region",
-        region: "dar_es_salaam",
-        year: 2026,
-        series: "01",
+        title: "Biology 1",
         paper: "1",
-        file: "papers/form6/biology/isese_pre_necta/2026/series01/biology1.pdf"
+        type: "isese",
+        scope: "series",
+        organiser: "ISESE",
+        series: "S01",
+        year: 2025,
+        file: "papers/form6/biology/isese/2025/S01/biology1.pdf"
     },
 
     {
         form: "form6",
         subject: "biology",
-        title: "Biology 2 ISESE Pre-NECTA",
-        type: "isese",
-        scope: "region",
-        region: "dar_es_salaam",
-        year: 2026,
-        series: "01",
+        title: "Biology 2",
         paper: "2",
-        file: "papers/form6/biology/isese_pre_necta/2026/series01/biology2.pdf"
+        type: "isese",
+        scope: "series",
+        organiser: "ISESE",
+        series: "S01",
+        year: 2025,
+        file: "papers/form6/biology/isese/2025/S01/biology2.pdf"
+    },
+
+    {
+        form: "form6",
+        subject: "biology",
+        title: "Biology 1",
+        paper: "1",
+        type: "special",
+        scope: "association",
+        organiser: "Special Schools",
+        year: 2025,
+        file: "papers/form6/biology/special-schools/2025/biology1.pdf"
+    },
+
+    {
+        form: "form6",
+        subject: "biology",
+        title: "Biology 2",
+        paper: "2",
+        type: "special",
+        scope: "association",
+        organiser: "Special Schools",
+        year: 2025,
+        file: "papers/form6/biology/special-schools/2025/biology2.pdf"
+    },
+
+
+
+    // ========================================================
+    // SCHOOL-BASED EXAMINATION EXAMPLES
+    // ========================================================
+    //
+    // HIZI NDIZO MUUNDO TUNAOITAKA:
+    //
+    // SCHOOL -> sio REGION
+    //
+    // Utabadilisha SCHOOL_NAME_HERE kuwa jina la shule
+    // na kuweka path ya PDF halisi.
+    //
+    // ========================================================
+
+    {
+        form: "form1",
+        subject: "biology",
+        title: "Biology Monthly Test",
+        type: "monthly",
+        scope: "school",
+        school: "SCHOOL_NAME_HERE",
+        year: 2026,
+        file: "papers/form1/biology/monthly/2026/biology.pdf"
+    },
+
+    {
+        form: "form2",
+        subject: "biology",
+        title: "Biology Terminal Examination",
+        type: "terminal",
+        scope: "school",
+        school: "SCHOOL_NAME_HERE",
+        year: 2026,
+        file: "papers/form2/biology/terminal/2026/biology.pdf"
+    },
+
+    {
+        form: "form3",
+        subject: "physics",
+        title: "Physics Monthly Test",
+        type: "monthly",
+        scope: "school",
+        school: "SCHOOL_NAME_HERE",
+        year: 2026,
+        file: "papers/form3/physics/monthly/2026/physics.pdf"
+    },
+
+    {
+        form: "form4",
+        subject: "chemistry",
+        title: "Chemistry Monthly Test",
+        type: "monthly",
+        scope: "school",
+        school: "SCHOOL_NAME_HERE",
+        year: 2026,
+        file: "papers/form4/chemistry/monthly/2026/chemistry.pdf"
+    },
+
+    {
+        form: "form5",
+        subject: "biology",
+        title: "Biology Midterm Examination",
+        type: "midterm",
+        scope: "school",
+        school: "SCHOOL_NAME_HERE",
+        year: 2026,
+        file: "papers/form5/biology/midterm/2026/biology.pdf"
+    },
+
+    {
+        form: "form6",
+        subject: "physics",
+        title: "Physics Monthly Test",
+        type: "monthly",
+        scope: "school",
+        school: "SCHOOL_NAME_HERE",
+        year: 2026,
+        file: "papers/form6/physics/monthly/2026/physics.pdf"
+    },
+
+
+
+    // ========================================================
+    // DISTRICT / JOINT EXAMINATION EXAMPLES
+    // ========================================================
+
+    {
+        form: "form3",
+        subject: "biology",
+        title: "Biology Joint Terminal Examination",
+        type: "joint",
+        scope: "district",
+        organiser: "Busega District Council",
+        district: "busega",
+        region: "simiyu",
+        year: 2026,
+        file: "papers/form3/biology/joint/busega/2026/biology.pdf"
+    },
+
+    {
+        form: "form3",
+        subject: "chemistry",
+        title: "Chemistry Joint Terminal Examination",
+        type: "joint",
+        scope: "district",
+        organiser: "Busega District Council",
+        district: "busega",
+        region: "simiyu",
+        year: 2026,
+        file: "papers/form3/chemistry/joint/busega/2026/chemistry.pdf"
+    },
+
+    {
+        form: "form3",
+        subject: "physics",
+        title: "Physics Joint Terminal Examination",
+        type: "joint",
+        scope: "district",
+        organiser: "Busega District Council",
+        district: "busega",
+        region: "simiyu",
+        year: 2026,
+        file: "papers/form3/physics/joint/busega/2026/physics.pdf"
+    },
+
+
+
+    // ========================================================
+    // SPECIAL / ASSOCIATION EXAMS
+    // ========================================================
+
+    {
+        form: "form6",
+        subject: "physics",
+        title: "Physics Special Schools Examination",
+        type: "special",
+        scope: "association",
+        organiser: "Special Schools",
+        year: 2025,
+        file: "papers/form6/physics/special-schools/2025/physics.pdf"
+    },
+
+    {
+        form: "form6",
+        subject: "chemistry",
+        title: "Chemistry Special Schools Examination",
+        type: "special",
+        scope: "association",
+        organiser: "Special Schools",
+        year: 2025,
+        file: "papers/form6/chemistry/special-schools/2025/chemistry.pdf"
+    },
+
+
+
+    // ========================================================
+    // ASSOCIATION / JOINT EXAM
+    // ========================================================
+
+    {
+        form: "form6",
+        subject: "biology",
+        title: "Biology Joint Mock Examination",
+        type: "mock",
+        scope: "association",
+        organiser: "Association Examination",
+        year: 2026,
+        file: "papers/form6/biology/association/2026/biology.pdf"
+    },
+
+    {
+        form: "form6",
+        subject: "physics",
+        title: "Physics Joint Mock Examination",
+        type: "mock",
+        scope: "association",
+        organiser: "Association Examination",
+        year: 2026,
+        file: "papers/form6/physics/association/2026/physics.pdf"
+    },
+
+    {
+        form: "form6",
+        subject: "chemistry",
+        title: "Chemistry Joint Mock Examination",
+        type: "mock",
+        scope: "association",
+        organiser: "Association Examination",
+        year: 2026,
+        file: "papers/form6/chemistry/association/2026/chemistry.pdf"
     }
-    */
 
 ];
 
 
-/* ============================================================
-   CONFIGURATION FOR EACH FORM
-============================================================ */
 
-const pastPaperFormConfig = {
-
-    form1: {
-        subjects: [
-            "physics",
-            "chemistry",
-            "biology"
-        ]
-    },
-
-    form2: {
-        subjects: [
-            "physics",
-            "chemistry",
-            "biology"
-        ]
-    },
-
-    form3: {
-        subjects: [
-            "physics",
-            "chemistry",
-            "biology"
-        ]
-    },
-
-    form4: {
-        subjects: [
-            "physics",
-            "chemistry",
-            "biology"
-        ]
-    },
-
-    form5: {
-        subjects: [
-            "physics",
-            "chemistry",
-            "biology"
-        ]
-    },
-
-    form6: {
-        subjects: [
-            "physics",
-            "chemistry",
-            "biology"
-        ]
-    }
-
-};
-
-
-/* ============================================================
-   HELPER
-============================================================ */
-
-function getPastPaperType(typeId) {
-
-    return pastPaperTypes.find(
-        type => type.id === typeId
-    );
-
-}
-
-
-/* ============================================================
-   HELPER
-============================================================ */
-
-function getPastPaperSubject(subjectId) {
-
-    return pastPaperSubjects.find(
-        subject => subject.id === subjectId
-    );
-
-}
-
-
-/* ============================================================
-   HELPER
-============================================================ */
-
-function getPastPaperRegion(regionId) {
-
-    return pastPaperRegions.find(
-        region => region.id === regionId
-    );
-
-}
-
-
-/* ============================================================
-   MAKE DATABASE AVAILABLE
-============================================================ */
+// ============================================================
+// MAKE DATABASE AVAILABLE TO pastpapers.html
+// ============================================================
 
 window.pastPapers = pastPapers;
 
@@ -1501,16 +1426,6 @@ window.pastPaperRegions = pastPaperRegions;
 
 window.pastPaperYears = pastPaperYears;
 
-window.pastPaperSubjects = pastPaperSubjects;
-
 window.pastPaperTypes = pastPaperTypes;
 
-window.pastPaperSchools = pastPaperSchools;
-
-window.pastPaperFormConfig = pastPaperFormConfig;
-
-window.getPastPaperType = getPastPaperType;
-
-window.getPastPaperSubject = getPastPaperSubject;
-
-window.getPastPaperRegion = getPastPaperRegion;
+window.pastPaperSubjects = pastPaperSubjects;
