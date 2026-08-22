@@ -9,7 +9,7 @@
       content="width=device-width, initial-scale=1.0">
 
 <meta name="description"
-      content="GEPAM Science Hub Past Papers - Physics and Chemistry examination papers from Form 1 to Form 6.">
+      content="GEPAM Science Hub Past Papers - Physics, Chemistry and Biology examination papers from Form 1 to Form 6.">
 
 <meta name="theme-color"
       content="#0d47a1">
@@ -23,7 +23,6 @@
 <link rel="stylesheet"
       href="style.css">
 
-<!-- PAST PAPERS DATABASE -->
 <script src="pastpapers-data.js"></script>
 
 <style>
@@ -62,7 +61,10 @@ body {
     overflow-x: hidden;
 }
 
-/* HEADER */
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .nav-header {
     width: 100%;
@@ -121,7 +123,10 @@ body {
     cursor: pointer;
 }
 
-/* MAIN */
+
+/* =========================================================
+   MAIN
+========================================================= */
 
 .main-container {
     width: 100%;
@@ -130,7 +135,10 @@ body {
     padding: 25px 20px 60px;
 }
 
-/* HERO */
+
+/* =========================================================
+   HERO
+========================================================= */
 
 .page-hero {
     padding: 32px 25px;
@@ -149,18 +157,6 @@ body {
     margin-bottom: 25px;
 }
 
-.hero-icon {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,.15);
-    border-radius: 16px;
-    font-size: 32px;
-    margin-bottom: 15px;
-}
-
 .page-hero h1 {
     margin: 0 0 8px;
     font-size: 30px;
@@ -172,7 +168,10 @@ body {
     color: #e8f4ff;
 }
 
-/* BREADCRUMB */
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
 
 .breadcrumb {
     display: flex;
@@ -196,7 +195,10 @@ body {
     font-weight: bold;
 }
 
-/* BACK */
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
 
 .back-btn {
     display: none;
@@ -216,7 +218,10 @@ body {
     background: #172631;
 }
 
-/* STEP */
+
+/* =========================================================
+   STEP
+========================================================= */
 
 .step-header {
     margin: 10px 0 20px;
@@ -244,7 +249,10 @@ body {
     line-height: 1.6;
 }
 
-/* DATA STATUS */
+
+/* =========================================================
+   DATA STATUS
+========================================================= */
 
 .data-status {
     display: none;
@@ -262,7 +270,10 @@ body {
     color: #b71c1c;
 }
 
-/* GRID */
+
+/* =========================================================
+   GRID
+========================================================= */
 
 .selection-grid {
     display: grid;
@@ -274,7 +285,10 @@ body {
     gap: 18px;
 }
 
-/* CARD */
+
+/* =========================================================
+   CARD
+========================================================= */
 
 .selection-card {
     position: relative;
@@ -328,22 +342,13 @@ body {
     font-size: 14px;
 }
 
-/* ICON */
 
-.card-icon {
-    width: 55px;
-    height: 55px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 15px;
-    background: var(--light-blue);
-    font-size: 28px;
-    margin-bottom: 14px;
-}
+/* =========================================================
+   FORM
+========================================================= */
 
 .form-card {
-    min-height: 205px;
+    min-height: 190px;
 }
 
 .form-card::before {
@@ -354,6 +359,11 @@ body {
             #00a6a6
         );
 }
+
+
+/* =========================================================
+   SUBJECTS
+========================================================= */
 
 .physics-card::before {
     background:
@@ -373,13 +383,19 @@ body {
         );
 }
 
-.physics-card .card-icon {
-    background: #e6f1ff;
+.biology-card::before {
+    background:
+        linear-gradient(
+            90deg,
+            #2e7d32,
+            #66bb6a
+        );
 }
 
-.chemistry-card .card-icon {
-    background: #e5f8f5;
-}
+
+/* =========================================================
+   REGION
+========================================================= */
 
 .region-card::before {
     background:
@@ -390,6 +406,11 @@ body {
         );
 }
 
+
+/* =========================================================
+   YEAR
+========================================================= */
+
 .year-card::before {
     background:
         linear-gradient(
@@ -398,6 +419,11 @@ body {
             #5c6bc0
         );
 }
+
+
+/* =========================================================
+   TYPE
+========================================================= */
 
 .type-card::before {
     background:
@@ -408,7 +434,24 @@ body {
         );
 }
 
-/* OPEN BUTTON */
+
+/* =========================================================
+   SCHOOL
+========================================================= */
+
+.school-card::before {
+    background:
+        linear-gradient(
+            90deg,
+            #ef6c00,
+            #ffa726
+        );
+}
+
+
+/* =========================================================
+   OPEN BUTTON
+========================================================= */
 
 .open-btn {
     width: 100%;
@@ -436,7 +479,10 @@ body {
     opacity: .92;
 }
 
-/* PDF */
+
+/* =========================================================
+   PDF
+========================================================= */
 
 .pdf-card {
     min-height: 190px;
@@ -451,10 +497,6 @@ body {
         );
 }
 
-.pdf-icon {
-    background: #ffebee;
-}
-
 .pdf-button {
     background:
         linear-gradient(
@@ -464,7 +506,10 @@ body {
         );
 }
 
-/* EMPTY */
+
+/* =========================================================
+   EMPTY
+========================================================= */
 
 .empty-card {
     grid-column: 1 / -1;
@@ -473,11 +518,6 @@ body {
     border-radius: 15px;
     background: #fff8e1;
     border: 1px solid #ffe082;
-}
-
-.empty-card-icon {
-    font-size: 40px;
-    margin-bottom: 10px;
 }
 
 .empty-card h3 {
@@ -490,7 +530,10 @@ body {
     color: #8b6a20;
 }
 
-/* SIDEBAR */
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
 .overlay {
     display: none;
@@ -571,7 +614,10 @@ body {
     font-weight: 600;
 }
 
-/* FOOTER */
+
+/* =========================================================
+   FOOTER
+========================================================= */
 
 footer {
     margin-top: 30px;
@@ -585,7 +631,10 @@ footer strong {
     color: white;
 }
 
-/* MOBILE */
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 600px) {
 
@@ -617,7 +666,10 @@ footer strong {
 
 }
 
-/* ANIMATION */
+
+/* =========================================================
+   ANIMATION
+========================================================= */
 
 @keyframes fadeIn {
 
@@ -644,6 +696,10 @@ footer strong {
 
 <body>
 
+
+<!-- =======================================================
+     HEADER
+======================================================= -->
 
 <header class="nav-header">
 
@@ -679,26 +735,28 @@ footer strong {
 </header>
 
 
+<!-- =======================================================
+     MAIN
+======================================================= -->
+
 <main class="main-container">
 
 
 <section class="page-hero">
-
-    <div class="hero-icon">
-        📚
-    </div>
 
     <h1>
         Past Papers
     </h1>
 
     <p>
-        Find Physics and Chemistry examination
-        papers from Form 1 to Form 6.
+        Find Physics, Chemistry and Biology
+        examination papers from Form 1 to Form 6.
     </p>
 
 </section>
 
+
+<!-- BREADCRUMB -->
 
 <div
     class="breadcrumb"
@@ -711,6 +769,8 @@ footer strong {
 </div>
 
 
+<!-- BACK -->
+
 <button
     id="backButton"
     class="back-btn"
@@ -721,11 +781,15 @@ footer strong {
 </button>
 
 
+<!-- DATA STATUS -->
+
 <div
     id="dataStatus"
     class="data-status">
 </div>
 
+
+<!-- DYNAMIC CONTENT -->
 
 <div
     id="stepContainer">
@@ -735,12 +799,20 @@ footer strong {
 </main>
 
 
+<!-- =======================================================
+     MENU OVERLAY
+======================================================= -->
+
 <div
     id="menuOverlay"
     class="overlay"
     onclick="toggleMenu()">
 </div>
 
+
+<!-- =======================================================
+     SIDEBAR
+======================================================= -->
 
 <aside
     id="sidebarMenu"
@@ -757,18 +829,18 @@ footer strong {
     <nav class="sidebar-links">
 
         <a href="index.html">
-            🏠 Home
+            Home
         </a>
 
         <a href="about.html">
-            ℹ️ About Us
+            About Us
         </a>
 
         <button
             class="dropdown-btn"
             onclick="toggleDropdown(this)">
 
-            📝 Notes
+            Notes
             <span>▼</span>
 
         </button>
@@ -802,17 +874,21 @@ footer strong {
         </div>
 
         <a href="pastpapers.html">
-            📚 Past Papers
+            Past Papers
         </a>
 
         <a href="contact.html">
-            📞 Contact
+            Contact
         </a>
 
     </nav>
 
 </aside>
 
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
 
 <footer>
 
@@ -839,6 +915,7 @@ footer strong {
 /* =========================================================
    GEPAM SCIENCE HUB
    PAST PAPERS ENGINE
+   PHYSICS + CHEMISTRY + BIOLOGY
 ========================================================= */
 
 
@@ -849,10 +926,17 @@ footer strong {
 let currentState = {
 
     level: "forms",
+
     form: null,
+
     subject: null,
+
     type: null,
+
     region: null,
+
+    school: null,
+
     year: null
 
 };
@@ -930,6 +1014,12 @@ const subjects = [
         id: "chemistry",
         name: "Chemistry",
         className: "chemistry-card"
+    },
+
+    {
+        id: "biology",
+        name: "Biology",
+        className: "biology-card"
     }
 
 ];
@@ -995,6 +1085,13 @@ const paperTypes = [
         name: "FTNA",
         description:
             "FTNA national examination papers."
+    },
+
+    {
+        id: "special_school",
+        name: "Special School",
+        description:
+            "Examination papers prepared for specific schools."
     }
 
 ];
@@ -1112,7 +1209,7 @@ function checkDataFile() {
             "data-status error";
 
         dataStatus.innerHTML = `
-            ⚠️ <strong>Past Papers database
+            <strong>Past Papers database
             haijapakiwa.</strong><br><br>
 
             Hakikisha faili
@@ -1136,7 +1233,7 @@ function checkDataFile() {
 
 
 /* =========================================================
-   AVAILABLE TYPES FROM DATABASE
+   AVAILABLE TYPES
 ========================================================= */
 
 function getAvailableTypes() {
@@ -1150,6 +1247,7 @@ function getAvailableTypes() {
     window.pastPapers.forEach(paper => {
 
         if (
+
             normalize(paper.form) ===
             normalize(currentState.form)
 
@@ -1157,6 +1255,7 @@ function getAvailableTypes() {
 
             normalize(paper.subject) ===
             normalize(currentState.subject)
+
         ) {
 
             const type =
@@ -1197,6 +1296,7 @@ function renderForms() {
         subject: null,
         type: null,
         region: null,
+        school: null,
         year: null
 
     };
@@ -1228,6 +1328,7 @@ function renderForms() {
 
     `;
 
+
     forms.forEach(form => {
 
         html += `
@@ -1244,8 +1345,8 @@ function renderForms() {
                     </h3>
 
                     <p>
-                        Physics & Chemistry
-                        Past Papers
+                        Physics, Chemistry &
+                        Biology Past Papers
                     </p>
 
                 </div>
@@ -1267,9 +1368,11 @@ function renderForms() {
 
     });
 
+
     html += `
         </div>
     `;
+
 
     stepContainer.innerHTML = html;
 
@@ -1283,10 +1386,17 @@ function renderForms() {
 function openForm(formId) {
 
     currentState.level = "subjects";
+
     currentState.form = formId;
+
     currentState.subject = null;
+
     currentState.type = null;
+
     currentState.region = null;
+
+    currentState.school = null;
+
     currentState.year = null;
 
     pushNavigationState();
@@ -1317,10 +1427,12 @@ function renderSubjects() {
 
     }
 
+
     updateBreadcrumb();
 
     backButton.style.display =
         "inline-flex";
+
 
     let html = `
 
@@ -1343,6 +1455,7 @@ function renderSubjects() {
         <div class="selection-grid">
 
     `;
+
 
     subjects.forEach(subject => {
 
@@ -1384,9 +1497,11 @@ function renderSubjects() {
 
     });
 
+
     html += `
         </div>
     `;
+
 
     stepContainer.innerHTML = html;
 
@@ -1400,9 +1515,15 @@ function renderSubjects() {
 function openSubject(subjectId) {
 
     currentState.level = "types";
+
     currentState.subject = subjectId;
+
     currentState.type = null;
+
     currentState.region = null;
+
+    currentState.school = null;
+
     currentState.year = null;
 
     pushNavigationState();
@@ -1427,6 +1548,10 @@ function renderTypes() {
 
 
     updateBreadcrumb();
+
+
+    const availablePaperTypes =
+        getAvailableTypes();
 
 
     let html = `
@@ -1454,149 +1579,30 @@ function renderTypes() {
     `;
 
 
-    /* =====================================================
-       CHAGUA PAPER TYPES KULINGANA NA FORM
-    ===================================================== */
+    if (
+        availablePaperTypes.length === 0
+    ) {
 
-    const availablePaperTypes =
-        paperTypes.filter(
-            type => {
+        html += `
 
-                const form =
-                    currentState.form;
+            <div class="empty-card">
 
+                <h3>
+                    Hakuna aina ya mtihani
+                </h3>
 
-                /* =========================
-                   FORM 1
-                ========================= */
+                <p>
+                    Hakuna Past Paper
+                    iliyowekwa kwa somo hili
+                    bado.
+                </p>
 
-                if (
-                    form === "form1"
-                ) {
+            </div>
 
-                    return [
-                        "midterm",
-                        "terminal",
-                        "joint"
-                    ].includes(
-                        type.id
-                    );
+        `;
 
-                }
+    }
 
-
-                /* =========================
-                   FORM 2
-                ========================= */
-
-                if (
-                    form === "form2"
-                ) {
-
-                    return [
-                        "midterm",
-                        "terminal",
-                        "joint",
-                        "ftna"
-                    ].includes(
-                        type.id
-                    );
-
-                }
-
-
-                /* =========================
-                   FORM 3
-                ========================= */
-
-                if (
-                    form === "form3"
-                ) {
-
-                    return [
-                        "midterm",
-                        "terminal",
-                        "annual",
-                        "joint"
-                    ].includes(
-                        type.id
-                    );
-
-                }
-
-
-                /* =========================
-                   FORM 4
-                ========================= */
-
-                if (
-                    form === "form4"
-                ) {
-
-                    return [
-                        "midterm",
-                        "terminal",
-                        "mock",
-                        "joint",
-                        "pre_necta",
-                        "necta"
-                    ].includes(
-                        type.id
-                    );
-
-                }
-
-
-                /* =========================
-                   FORM 5
-                ========================= */
-
-                if (
-                    form === "form5"
-                ) {
-
-                    return [
-                        "midterm",
-                        "terminal",
-                        "annual",
-                        "joint"
-                    ].includes(
-                        type.id
-                    );
-
-                }
-
-
-                /* =========================
-                   FORM 6
-                ========================= */
-
-                if (
-                    form === "form6"
-                ) {
-
-                    return [
-                        "midterm",
-                        "terminal",
-                        "mock",
-                        "pre_necta",
-                        "necta"
-                    ].includes(
-                        type.id
-                    );
-
-                }
-
-
-                return false;
-
-            }
-        );
-
-
-    /* =====================================================
-       DISPLAY PAPER TYPE CARDS
-    ===================================================== */
 
     availablePaperTypes.forEach(
         type => {
@@ -1658,11 +1664,41 @@ function renderTypes() {
 function openType(typeId) {
 
     currentState.type = typeId;
+
     currentState.region = null;
+
+    currentState.school = null;
+
     currentState.year = null;
 
+
     /*
-       NECTA na FTNA hazitumii mkoa.
+       SPECIAL SCHOOL
+       ----------------
+       Haitumii mkoa.
+       Inaenda kwenye shule husika.
+    */
+
+    if (
+        typeId === "special_school"
+    ) {
+
+        currentState.level =
+            "schools";
+
+        pushNavigationState();
+
+        renderSchools();
+
+        return;
+
+    }
+
+
+    /*
+       NECTA NA FTNA
+       ----------------
+       Hazitumii mkoa.
        Zinaenda moja kwa moja Year.
     */
 
@@ -1671,7 +1707,8 @@ function openType(typeId) {
         typeId === "ftna"
     ) {
 
-        currentState.level = "years";
+        currentState.level =
+            "years";
 
         pushNavigationState();
 
@@ -1681,15 +1718,505 @@ function openType(typeId) {
 
     }
 
+
     /*
-       Aina nyingine hutumia Region.
+       AINA NYINGINE
+       ----------------
+       Zinatumiwa kwa Mkoa.
     */
 
-    currentState.level = "regions";
+    currentState.level =
+        "regions";
 
     pushNavigationState();
 
     renderRegions();
+
+}
+
+
+/* =========================================================
+   RENDER SCHOOLS
+========================================================= */
+
+function renderSchools() {
+
+    updateBreadcrumb();
+
+
+    const availableSchools =
+        getAvailableSchools();
+
+
+    let html = `
+
+        <div class="step-header">
+
+            <span class="step-number">
+                STEP 4
+            </span>
+
+            <h2>
+                Chagua Shule
+            </h2>
+
+            <p>
+                Chagua shule yenye
+                Past Papers unazotafuta.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    if (
+        availableSchools.length === 0
+    ) {
+
+        html += `
+
+            <div class="empty-card">
+
+                <h3>
+                    Hakuna shule
+                </h3>
+
+                <p>
+                    Hakuna Past Paper ya
+                    Special School iliyowekwa
+                    bado.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    availableSchools.forEach(
+        school => {
+
+            html += `
+
+                <div class="
+                    selection-card
+                    school-card
+                ">
+
+                    <div>
+
+                        <h3>
+                            ${escapeHTML(
+                                school.name
+                            )}
+                        </h3>
+
+                        <p>
+                            Special School
+                            Past Papers
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openSchool(
+                                '${escapeJS(
+                                    school.id
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+        </div>
+    `;
+
+
+    stepContainer.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   GET AVAILABLE SCHOOLS
+========================================================= */
+
+function getAvailableSchools() {
+
+    if (
+        !Array.isArray(
+            window.pastPapers
+        )
+    ) {
+
+        return [];
+
+    }
+
+
+    const schools = [];
+
+
+    window.pastPapers.forEach(
+        paper => {
+
+            if (
+
+                normalize(
+                    paper.form
+                ) ===
+                normalize(
+                    currentState.form
+                )
+
+                &&
+
+                normalize(
+                    paper.subject
+                ) ===
+                normalize(
+                    currentState.subject
+                )
+
+                &&
+
+                normalize(
+                    paper.type
+                ) ===
+                "special_school"
+
+            ) {
+
+                /*
+                   Tunakubali school
+                   kutoka kwenye database.
+                */
+
+                const schoolId =
+                    normalize(
+                        paper.schoolId ||
+                        paper.school ||
+                        ""
+                    );
+
+
+                const schoolName =
+                    String(
+                        paper.schoolName ||
+                        paper.school ||
+                        schoolId
+                    ).trim();
+
+
+                if (
+                    schoolId &&
+                    !schools.some(
+                        item =>
+                            item.id ===
+                            schoolId
+                    )
+                ) {
+
+                    schools.push({
+
+                        id: schoolId,
+
+                        name:
+                            schoolName
+
+                    });
+
+                }
+
+            }
+
+        }
+    );
+
+
+    return schools.sort(
+        (a,b) =>
+            a.name.localeCompare(
+                b.name
+            )
+    );
+
+}
+
+
+/* =========================================================
+   OPEN SCHOOL
+========================================================= */
+
+function openSchool(schoolId) {
+
+    currentState.level =
+        "papers";
+
+    currentState.school =
+        normalize(schoolId);
+
+    currentState.year = null;
+
+    pushNavigationState();
+
+    renderSchoolPapers();
+
+}
+
+
+/* =========================================================
+   GET SPECIAL SCHOOL PAPERS
+========================================================= */
+
+function getSpecialSchoolPapers() {
+
+    if (
+        !Array.isArray(
+            window.pastPapers
+        )
+    ) {
+
+        return [];
+
+    }
+
+
+    return window.pastPapers.filter(
+        paper => {
+
+            return (
+
+                normalize(
+                    paper.form
+                ) ===
+                normalize(
+                    currentState.form
+                )
+
+                &&
+
+                normalize(
+                    paper.subject
+                ) ===
+                normalize(
+                    currentState.subject
+                )
+
+                &&
+
+                normalize(
+                    paper.type
+                ) ===
+                "special_school"
+
+                &&
+
+                normalize(
+                    paper.schoolId ||
+                    paper.school ||
+                    ""
+                ) ===
+                normalize(
+                    currentState.school
+                )
+
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   RENDER SPECIAL SCHOOL PAPERS
+========================================================= */
+
+function renderSchoolPapers() {
+
+    updateBreadcrumb();
+
+
+    const papers =
+        getSpecialSchoolPapers();
+
+
+    const school =
+        getSelectedSchoolName();
+
+
+    let html = `
+
+        <div class="step-header">
+
+            <span class="step-number">
+                STEP 5
+            </span>
+
+            <h2>
+                ${escapeHTML(
+                    school
+                )}
+            </h2>
+
+            <p>
+                Hizi ni Past Papers
+                zinazohusiana na shule hii.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    if (
+        papers.length === 0
+    ) {
+
+        html += `
+
+            <div class="empty-card">
+
+                <h3>
+                    Hakuna PDF
+                </h3>
+
+                <p>
+                    Hakuna PDF iliyowekwa
+                    kwa shule hii bado.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    papers.forEach(
+        paper => {
+
+            html += `
+
+                <div class="
+                    selection-card
+                    pdf-card
+                ">
+
+                    <div>
+
+                        <h3>
+                            ${escapeHTML(
+                                paper.title ||
+                                "Past Paper"
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                buildPaperDescription(
+                                    paper
+                                )
+                            )}
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="
+                            open-btn
+                            pdf-button
+                        "
+                        onclick="
+                            openPDF(
+                                '${escapeJS(
+                                    paper.file
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA PDF
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+        </div>
+    `;
+
+
+    stepContainer.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   SELECTED SCHOOL NAME
+========================================================= */
+
+function getSelectedSchoolName() {
+
+    const papers =
+        getSpecialSchoolPapers();
+
+
+    if (
+        papers.length > 0
+    ) {
+
+        return String(
+            papers[0].schoolName ||
+            papers[0].school ||
+            currentState.school
+        ).trim();
+
+    }
+
+
+    const schools =
+        getAvailableSchools();
+
+
+    const school =
+        schools.find(
+            item =>
+                item.id ===
+                currentState.school
+        );
+
+
+    return school
+        ? school.name
+        : currentState.school;
 
 }
 
@@ -1725,15 +2252,14 @@ function renderRegions() {
 
     `;
 
-    /*
-       Tunaonyesha mikoa yote iliyopo
-       kwenye pastpapers-data.js.
-    */
 
     const availableRegions =
         getAvailableRegions();
 
-    if (availableRegions.length === 0) {
+
+    if (
+        availableRegions.length === 0
+    ) {
 
         html += `
 
@@ -1754,47 +2280,54 @@ function renderRegions() {
 
     }
 
-    availableRegions.forEach(region => {
 
-        html += `
+    availableRegions.forEach(
+        region => {
 
-            <div class="
-                selection-card
-                region-card
-            ">
+            html += `
 
-                <div>
+                <div class="
+                    selection-card
+                    region-card
+                ">
 
-                    <h3>
-                        ${region.name}
-                    </h3>
+                    <div>
 
-                    <p>
-                        Past Papers za
-                        ${region.name}
-                    </p>
+                        <h3>
+                            ${region.name}
+                        </h3>
+
+                        <p>
+                            Past Papers za
+                            ${region.name}
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openRegion(
+                                '${region.id}'
+                            )
+                        ">
+
+                        FUNGUA
+
+                    </button>
 
                 </div>
 
-                <button
-                    class="open-btn"
-                    onclick="
-                        openRegion('${region.id}')
-                    ">
+            `;
 
-                    FUNGUA
+        }
+    );
 
-                </button>
-
-            </div>
-
-        `;
-
-    });
 
     html += `
         </div>
     `;
+
 
     stepContainer.innerHTML = html;
 
@@ -1807,52 +2340,91 @@ function renderRegions() {
 
 function getAvailableRegions() {
 
-    if (!Array.isArray(window.pastPapers)) {
+    if (
+        !Array.isArray(
+            window.pastPapers
+        )
+    ) {
+
         return [];
+
     }
+
 
     const ids = [];
 
-    window.pastPapers.forEach(paper => {
 
-        if (
-
-            normalize(paper.form) ===
-            normalize(currentState.form)
-
-            &&
-
-            normalize(paper.subject) ===
-            normalize(currentState.subject)
-
-            &&
-
-            normalize(paper.type) ===
-            normalize(currentState.type)
-
-        ) {
-
-            const region =
-                normalize(paper.region);
+    window.pastPapers.forEach(
+        paper => {
 
             if (
-                region &&
-                region !== "necta" &&
-                !ids.includes(region)
+
+                normalize(
+                    paper.form
+                ) ===
+                normalize(
+                    currentState.form
+                )
+
+                &&
+
+                normalize(
+                    paper.subject
+                ) ===
+                normalize(
+                    currentState.subject
+                )
+
+                &&
+
+                normalize(
+                    paper.type
+                ) ===
+                normalize(
+                    currentState.type
+                )
+
             ) {
 
-                ids.push(region);
+                const region =
+                    normalize(
+                        paper.region
+                    );
+
+
+                if (
+
+                    region &&
+
+                    region !== "necta" &&
+
+                    region !== "special_school" &&
+
+                    !ids.includes(
+                        region
+                    )
+
+                ) {
+
+                    ids.push(
+                        region
+                    );
+
+                }
 
             }
 
         }
+    );
 
-    });
 
-    return regions.filter(region =>
-        ids.includes(
-            normalize(region.id)
-        )
+    return regions.filter(
+        region =>
+            ids.includes(
+                normalize(
+                    region.id
+                )
+            )
     );
 
 }
@@ -1864,9 +2436,17 @@ function getAvailableRegions() {
 
 function openRegion(regionId) {
 
-    currentState.level = "years";
-    currentState.region = regionId;
-    currentState.year = null;
+    currentState.level =
+        "years";
+
+    currentState.region =
+        regionId;
+
+    currentState.school =
+        null;
+
+    currentState.year =
+        null;
 
     pushNavigationState();
 
@@ -1882,6 +2462,7 @@ function openRegion(regionId) {
 function renderYears() {
 
     updateBreadcrumb();
+
 
     let html = `
 
@@ -1905,10 +2486,14 @@ function renderYears() {
 
     `;
 
+
     const availableYears =
         getAvailableYears();
 
-    if (availableYears.length === 0) {
+
+    if (
+        availableYears.length === 0
+    ) {
 
         html += `
 
@@ -1929,51 +2514,54 @@ function renderYears() {
 
     }
 
-    availableYears.forEach(year => {
 
-        html += `
+    availableYears.forEach(
+        year => {
 
-            <div class="
-                selection-card
-                year-card
-            ">
+            html += `
 
-                <div>
+                <div class="
+                    selection-card
+                    year-card
+                ">
 
-                    <div class="card-icon">
-                        📅
+                    <div>
+
+                        <h3>
+                            ${year}
+                        </h3>
+
+                        <p>
+                            Papers za mwaka
+                            ${year}
+                        </p>
+
                     </div>
 
-                    <h3>
-                        ${year}
-                    </h3>
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openYear(
+                                '${year}'
+                            )
+                        ">
 
-                    <p>
-                        Papers za mwaka
-                        ${year}
-                    </p>
+                        FUNGUA
+
+                    </button>
 
                 </div>
 
-                <button
-                    class="open-btn"
-                    onclick="
-                        openYear('${year}')
-                    ">
+            `;
 
-                    FUNGUA
+        }
+    );
 
-                </button>
-
-            </div>
-
-        `;
-
-    });
 
     html += `
         </div>
     `;
+
 
     stepContainer.innerHTML = html;
 
@@ -1986,59 +2574,107 @@ function renderYears() {
 
 function getAvailableYears() {
 
-    if (!Array.isArray(window.pastPapers)) {
+    if (
+        !Array.isArray(
+            window.pastPapers
+        )
+    ) {
+
         return [];
+
     }
+
 
     const found = [];
 
-    window.pastPapers.forEach(paper => {
 
-        if (
-
-            normalize(paper.form) ===
-            normalize(currentState.form)
-
-            &&
-
-            normalize(paper.subject) ===
-            normalize(currentState.subject)
-
-            &&
-
-            normalize(paper.type) ===
-            normalize(currentState.type)
-
-            &&
-
-            (
-                currentState.type === "necta" ||
-                currentState.type === "ftna" ||
-                normalize(paper.region) ===
-                normalize(currentState.region)
-            )
-
-        ) {
-
-            const year =
-                String(paper.year);
+    window.pastPapers.forEach(
+        paper => {
 
             if (
-                year &&
-                !found.includes(year)
+
+                normalize(
+                    paper.form
+                ) ===
+                normalize(
+                    currentState.form
+                )
+
+                &&
+
+                normalize(
+                    paper.subject
+                ) ===
+                normalize(
+                    currentState.subject
+                )
+
+                &&
+
+                normalize(
+                    paper.type
+                ) ===
+                normalize(
+                    currentState.type
+                )
+
+                &&
+
+                (
+
+                    currentState.type ===
+                    "necta"
+
+                    ||
+
+                    currentState.type ===
+                    "ftna"
+
+                    ||
+
+                    normalize(
+                        paper.region
+                    ) ===
+                    normalize(
+                        currentState.region
+                    )
+
+                )
+
             ) {
 
-                found.push(year);
+                const year =
+                    String(
+                        paper.year
+                    );
+
+
+                if (
+
+                    year &&
+
+                    !found.includes(
+                        year
+                    )
+
+                ) {
+
+                    found.push(
+                        year
+                    );
+
+                }
 
             }
 
         }
+    );
 
-    });
 
     return found.sort(
         (a,b) =>
-            Number(b) - Number(a)
+            Number(b) -
+            Number(a)
     );
 
 }
@@ -2050,8 +2686,11 @@ function getAvailableYears() {
 
 function openYear(year) {
 
-    currentState.level = "papers";
-    currentState.year = String(year);
+    currentState.level =
+        "papers";
+
+    currentState.year =
+        String(year);
 
     pushNavigationState();
 
@@ -2067,45 +2706,77 @@ function openYear(year) {
 function getMatchingPapers() {
 
     if (
-        !Array.isArray(window.pastPapers)
+        !Array.isArray(
+            window.pastPapers
+        )
     ) {
 
         return [];
 
     }
 
+
     return window.pastPapers.filter(
         paper => {
 
             return (
 
-                normalize(paper.form) ===
-                normalize(currentState.form)
-
-                &&
-
-                normalize(paper.subject) ===
-                normalize(currentState.subject)
-
-                &&
-
-                normalize(paper.type) ===
-                normalize(currentState.type)
-
-                &&
-
-                (
-                    currentState.type === "necta" ||
-                    currentState.type === "ftna" ||
-
-                    normalize(paper.region) ===
-                    normalize(currentState.region)
+                normalize(
+                    paper.form
+                ) ===
+                normalize(
+                    currentState.form
                 )
 
                 &&
 
-                String(paper.year) ===
-                String(currentState.year)
+                normalize(
+                    paper.subject
+                ) ===
+                normalize(
+                    currentState.subject
+                )
+
+                &&
+
+                normalize(
+                    paper.type
+                ) ===
+                normalize(
+                    currentState.type
+                )
+
+                &&
+
+                (
+
+                    currentState.type ===
+                    "necta"
+
+                    ||
+
+                    currentState.type ===
+                    "ftna"
+
+                    ||
+
+                    normalize(
+                        paper.region
+                    ) ===
+                    normalize(
+                        currentState.region
+                    )
+
+                )
+
+                &&
+
+                String(
+                    paper.year
+                ) ===
+                String(
+                    currentState.year
+                )
 
             );
 
@@ -2116,15 +2787,17 @@ function getMatchingPapers() {
 
 
 /* =========================================================
-   RENDER PAPERS
+   RENDER NORMAL PAPERS
 ========================================================= */
 
 function renderPapers() {
 
     updateBreadcrumb();
 
+
     const papers =
         getMatchingPapers();
+
 
     let html = `
 
@@ -2149,7 +2822,10 @@ function renderPapers() {
 
     `;
 
-    if (papers.length === 0) {
+
+    if (
+        papers.length === 0
+    ) {
 
         html += `
 
@@ -2170,61 +2846,132 @@ function renderPapers() {
 
     }
 
-    papers.forEach(paper => {
 
-        html += `
+    papers.forEach(
+        paper => {
 
-            <div class="
-                selection-card
-                pdf-card
-            ">
+            html += `
 
-                <div>
+                <div class="
+                    selection-card
+                    pdf-card
+                ">
 
-                    <h3>
-                        ${escapeHTML(
-                            paper.title ||
-                            "Past Paper"
-                        )}
-                    </h3>
+                    <div>
 
-                    <p>
-                        ${escapeHTML(
-                            paper.description ||
-                            ""
-                        )}
-                    </p>
+                        <h3>
+                            ${escapeHTML(
+                                paper.title ||
+                                "Past Paper"
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                buildPaperDescription(
+                                    paper
+                                )
+                            )}
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="
+                            open-btn
+                            pdf-button
+                        "
+                        onclick="
+                            openPDF(
+                                '${escapeJS(
+                                    paper.file
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA PDF
+
+                    </button>
 
                 </div>
 
-                <button
-                    class="
-                        open-btn
-                        pdf-button
-                    "
-                    onclick="
-                        openPDF(
-                            '${escapeJS(
-                                paper.file
-                            )}'
-                        )
-                    ">
+            `;
 
-                    FUNGUA PDF
+        }
+    );
 
-                </button>
-
-            </div>
-
-        `;
-
-    });
 
     html += `
         </div>
     `;
 
-    stepContainer.innerHTML = html;
+
+    stepContainer.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   PAPER DESCRIPTION
+========================================================= */
+
+function buildPaperDescription(paper) {
+
+    const parts = [];
+
+
+    if (paper.year) {
+
+        parts.push(
+            String(
+                paper.year
+            )
+        );
+
+    }
+
+
+    if (
+        paper.region &&
+        normalize(
+            paper.region
+        ) !== "necta"
+    ) {
+
+        const region =
+            regions.find(
+                item =>
+                    normalize(
+                        item.id
+                    ) ===
+                    normalize(
+                        paper.region
+                    )
+            );
+
+
+        if (region) {
+
+            parts.push(
+                region.name
+            );
+
+        }
+
+    }
+
+
+    if (paper.schoolName) {
+
+        parts.push(
+            paper.schoolName
+        );
+
+    }
+
+
+    return parts.join(" • ");
 
 }
 
@@ -2245,6 +2992,7 @@ function openPDF(file) {
 
     }
 
+
     window.open(
         file,
         "_blank",
@@ -2261,10 +3009,22 @@ function openPDF(file) {
 function escapeJS(value) {
 
     return String(value ?? "")
-        .replaceAll("\\", "\\\\")
-        .replaceAll("'", "\\'")
-        .replaceAll("\n", "\\n")
-        .replaceAll("\r", "\\r");
+        .replaceAll(
+            "\\",
+            "\\\\"
+        )
+        .replaceAll(
+            "'",
+            "\\'"
+        )
+        .replaceAll(
+            "\n",
+            "\\n"
+        )
+        .replaceAll(
+            "\r",
+            "\\r"
+        );
 
 }
 
@@ -2276,11 +3036,26 @@ function escapeJS(value) {
 function escapeHTML(value) {
 
     return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
@@ -2295,7 +3070,10 @@ function updateBreadcrumb() {
         "Past Papers"
     ];
 
-    if (currentState.form) {
+
+    if (
+        currentState.form
+    ) {
 
         const form =
             forms.find(
@@ -2304,13 +3082,21 @@ function updateBreadcrumb() {
                     currentState.form
             );
 
+
         if (form) {
-            items.push(form.name);
+
+            items.push(
+                form.name
+            );
+
         }
 
     }
 
-    if (currentState.subject) {
+
+    if (
+        currentState.subject
+    ) {
 
         const subject =
             subjects.find(
@@ -2319,13 +3105,21 @@ function updateBreadcrumb() {
                     currentState.subject
             );
 
+
         if (subject) {
-            items.push(subject.name);
+
+            items.push(
+                subject.name
+            );
+
         }
 
     }
 
-    if (currentState.type) {
+
+    if (
+        currentState.type
+    ) {
 
         const type =
             paperTypes.find(
@@ -2334,13 +3128,21 @@ function updateBreadcrumb() {
                     currentState.type
             );
 
+
         if (type) {
-            items.push(type.name);
+
+            items.push(
+                type.name
+            );
+
         }
 
     }
 
-    if (currentState.region) {
+
+    if (
+        currentState.region
+    ) {
 
         const region =
             regions.find(
@@ -2349,13 +3151,32 @@ function updateBreadcrumb() {
                     currentState.region
             );
 
+
         if (region) {
-            items.push(region.name);
+
+            items.push(
+                region.name
+            );
+
         }
 
     }
 
-    if (currentState.year) {
+
+    if (
+        currentState.school
+    ) {
+
+        items.push(
+            getSelectedSchoolName()
+        );
+
+    }
+
+
+    if (
+        currentState.year
+    ) {
 
         items.push(
             currentState.year
@@ -2363,34 +3184,49 @@ function updateBreadcrumb() {
 
     }
 
+
     breadcrumb.innerHTML =
         items.map(
             (item,index) => {
 
-                if (index === 0) {
+                if (
+                    index === 0
+                ) {
 
                     return `
+
                         <span class="
                             breadcrumb-item
                         ">
-                            ${escapeHTML(item)}
+
+                            ${escapeHTML(
+                                item
+                            )}
+
                         </span>
+
                     `;
 
                 }
+
 
                 return `
 
                     <span class="
                         breadcrumb-separator
                     ">
+
                         ›
                     </span>
 
                     <span class="
                         breadcrumb-item
                     ">
-                        ${escapeHTML(item)}
+
+                        ${escapeHTML(
+                            item
+                        )}
+
                     </span>
 
                 `;
@@ -2426,7 +3262,9 @@ window.addEventListener(
     "popstate",
     function(event) {
 
-        if (event.state) {
+        if (
+            event.state
+        ) {
 
             currentState = {
                 ...event.state
@@ -2455,30 +3293,67 @@ function renderCurrentLevel() {
     ) {
 
         case "forms":
+
             renderForms();
+
             break;
+
 
         case "subjects":
+
             renderSubjects();
+
             break;
+
 
         case "types":
+
             renderTypes();
+
             break;
+
 
         case "regions":
+
             renderRegions();
+
             break;
+
+
+        case "schools":
+
+            renderSchools();
+
+            break;
+
 
         case "years":
+
             renderYears();
+
             break;
+
 
         case "papers":
-            renderPapers();
+
+            if (
+                currentState.type ===
+                "special_school"
+            ) {
+
+                renderSchoolPapers();
+
+            } else {
+
+                renderPapers();
+
+            }
+
             break;
 
+
         default:
+
             renderForms();
 
     }
@@ -2504,6 +3379,7 @@ function goBack() {
 
     }
 
+
     history.back();
 
 }
@@ -2520,14 +3396,17 @@ function toggleMenu() {
             "sidebarMenu"
         );
 
+
     const overlay =
         document.getElementById(
             "menuOverlay"
         );
 
+
     sidebar.classList.toggle(
         "active"
     );
+
 
     overlay.style.display =
         sidebar.classList.contains(
@@ -2548,13 +3427,18 @@ function toggleDropdown(button) {
     const container =
         button.nextElementSibling;
 
+
     if (!container) {
+
         return;
+
     }
+
 
     const open =
         container.style.display ===
         "block";
+
 
     container.style.display =
         open
@@ -2573,19 +3457,35 @@ function initialize() {
     history.replaceState(
         {
             level: "forms",
+
             form: null,
+
             subject: null,
+
             type: null,
+
             region: null,
+
+            school: null,
+
             year: null
+
         },
+
         "",
+
         window.location.href
     );
 
-    if (!checkDataFile()) {
+
+    if (
+        !checkDataFile()
+    ) {
+
         return;
+
     }
+
 
     renderForms();
 
