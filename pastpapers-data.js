@@ -1084,7 +1084,30 @@ const pastPapers = [
     "markingScheme":""
 },
 
+{
+    form: "form6",
+    subject: "physics 1",
+    title: "Physics 1 Mock Exam",
+    type: "mock",
+    region: "dodoma",
+    year: 2023,
 
+    file: "papers/form6/physics/mock/dodoma/2023/F6_Physics1_Mock_2023_Dodoma_Gepam_hub.pdf",
+    "markingScheme":""
+},
+
+{
+    form: "form6",
+    subject: "physics 2",
+    title: "Physics 2 Mock Exam",
+    type: "mock",
+    region: "dodoma",
+    year: 2023,
+
+    file: "papers/form6/physics/mock/dodoma/2023/F6_Physics2_Mock_2023_Dodoma_Gepam_hub.pdf",
+    "markingScheme":""
+},
+    
 // ============================================================
 // FORM 6 - CHEMISTRY
 // ============================================================
