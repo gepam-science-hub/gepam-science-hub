@@ -489,6 +489,17 @@ const pastPapers = [
 },
 
 {
+    form: "form2",
+    subject: "chemistry",
+    title: "Chemistry Terminal Exam",
+    type: "terminal",
+    region: "morogoro",
+    year: 2026,
+    file: "papers/form2/chemistry/terminal/morogoro/2026/F2_Chemistry_Terminal_Exam_2026_Morogoro_Gepam_hub.pdf",
+    markingScheme: "papers/form2/chemistry/terminal/morogoro/2026/Chemistry_Marking_scheme.pdf"
+},
+    
+{
     "form":"form2",
     "subject":"chemistry",
     "title":"Chemistry Terminal Exam",
