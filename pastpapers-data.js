@@ -371,6 +371,19 @@ const pastPapers = [
     "markingScheme":""
 },
 
+    {
+    form: "form2",
+    subject: "physics",
+    title: "Physics Terminal Exam",
+    type: "terminal",
+    region: "morogoro",
+    year: 2026,
+
+    file: "papers/form2/physics/terminal/morogoro/2026/F2_Physics_Terminal_Exam_2026_Morogoro_Gepam_hub.pdf",
+
+    markingScheme: "papers/form2/physics/terminal/morogoro/2026/Physics_Marking_scheme.pdf"
+},
+
 {
     "form":"form2",
     "subject":"physics",
