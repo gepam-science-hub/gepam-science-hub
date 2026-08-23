@@ -1094,7 +1094,7 @@ const pastPapers = [
     file: "papers/form6/physics/mock/dodoma/2023/F6_Physics1_Mock_2023_Dodoma_Gepam_hub.pdf",
     "markingScheme":""
 },
-
+    
 {
     form: "form6",
     subject: "physics",
@@ -1102,7 +1102,40 @@ const pastPapers = [
     type: "mock",
     region: "dodoma",
     year: 2023,
-    file: "papers/form6/physics/mock/dodoma/2023/F6_Physics2_Mock_2023_Dodoma_Gepam_hub.pdf",
+    file: "papers/form6/physics/mock/dodoma/2023/F6_Physics1_Mock_2023_Dodoma_Gepam_hub.pdf",
+    "markingScheme":""
+},
+    
+{
+    form: "form6",
+    subject: "physics",
+    title: "Physics 1 (Theory)",
+    type: "mock",
+    region: "dar_es_salaam",
+    year: 2024,
+    file: "papers/form6/physics/mock/dar_es_salaam/2024/Form_6_Phys1_Mock_2024_Dar_es_salaam_Gepam_hub.pdf",
+    "markingScheme":""
+},
+
+{
+    form: "form6",
+    subject: "physics",
+    title: "Physics 3A",
+    type: "mock",
+    region: "dar_es_salaam",
+    year: 2024,
+    file: "papers/form6/physics/mock/dar_es_salaam/2024/Form_6_Phys3A_Mock_2024_Dar_es_salaam_Gepam_hub.pdf",
+    "markingScheme":""
+},
+    
+{
+    form: "form6",
+    subject: "physics",
+    title: "Physics 3B",
+    type: "mock",
+    region: "dar_es_salaam",
+    year: 2024,
+    file: "papers/form6/physics/mock/dar_es_salaam/2024/F6_Phys3B_Mock_2024_Dar_es_salaam_Gepam_hub.pdf",
     "markingScheme":""
 },
     
@@ -1154,6 +1187,71 @@ const pastPapers = [
     "markingScheme":""
 },
 
+{
+    form: "form6",
+    subject: "chemistry",
+    title: "Chemistry 1 (Theory)",
+    type: "mock",
+    region: "dar_es_salaam",
+    year: 2025,
+    file: "papers/form6/chemistry/mock/dar_es_salaam/2025/F6_Chemistry1_Mock_2025_Dar_es_salaam_Gepam_hub.pdf",
+    "markingScheme":""
+},
+
+{
+    form: "form6",
+    subject: "chemistry",
+    title: "Chemistry 2",
+    type: "mock",
+    region: "dar_es_salaam",
+    year: 2025,
+    file: "papers/form6/chemistry/mock/dar_es_salaam/2025/Form_6_Chemistry2_Mock_2025_Dar_es_salaam_Gepam_hub.pdf",
+    "markingScheme":""
+},
+    
+{
+    form: "form6",
+    subject: "chemistry",
+    title: "Chemistry 3A",
+    type: "mock",
+    region: "dar_es_salaam",
+    year: 2025,
+    file: "papers/form6/chemistry/mock/dar_es_salaam/2025/F6_Chemistry3A_Mock_2025_Dar_es_salaam_Gepam_hub.pdf",
+    "markingScheme":""
+},
+
+{
+    form: "form6",
+    subject: "chemistry",
+    title: "Chemistry 1 (Theory)",
+    type: "mock",
+    region: "dar_es_salaam",
+    year: 2024,
+    file: "papers/form6/chemistry/mock/dar_es_salaam/2024/F6_Chemistry1_Mock_2024_Dar_es_salaam_Gepam_hub.pdf",
+    "markingScheme":""
+},
+
+{
+    form: "form6",
+    subject: "chemistry",
+    title: "Chemistry 3A",
+    type: "mock",
+    region: "dar_es_salaam",
+    year: 2024,
+    file: "papers/form6/chemistry/mock/dar_es_salaam/2024/Form_6_Chemistry3A_Mock_2024_Dar_es_salaam_Gepam_hub.pdf",
+    "markingScheme":""
+},
+    
+{
+    form: "form6",
+    subject: "chemistry",
+    title: "Chemistry 3B",
+    type: "mock",
+    region: "dar_es_salaam",
+    year: 2024,
+    file: "papers/form6/chemistry/mock/dar_es_salaam/2024/F6_Chemistry3B_Mock_2024_Dar_es_salaam_Gepam_hub.pdf",
+    "markingScheme":""
+},
 
 // ============================================================
 // SPECIAL EXAMINATIONS
