@@ -9,27 +9,24 @@
 <link rel="icon" type="image/png" href="file_00000000f17471f4b8f76a744122207a.png">
 <style>
 /* =========================================================
-   GEPAM SCIENCE HUB
-   PAST PAPERS PAGE
+   GEPAM SCIENCE HUB - PAST PAPERS PAGE
 ========================================================= */
 :root {
     --primary: #1769aa;
     --primary-dark: #0d47a1;
     --secondary: #00a6a6;
+    --accent: #ff9800;
     --light-blue: #eef7ff;
     --text: #172033;
     --muted: #687386;
     --white: #ffffff;
     --border: #dce5ee;
-    --shadow: 0 8px 25px rgba(23,105,170,.10);
+    --shadow: 0 8px 25px rgba(23, 105, 170, 0.10);
     /* SPECIAL EXAMINATION COLORS */
     --special-primary: #7b1fa2;
     --special-secondary: #e91e63;
     --special-light: #fff0f8;
 }
-/* =========================================================
-   GLOBAL
-========================================================= */
 * {
     box-sizing: border-box;
 }
@@ -92,7 +89,7 @@ body {
     cursor: pointer;
 }
 /* =========================================================
-   MAIN
+   MAIN CONTAINER
 ========================================================= */
 .main-container {
     width: 100%;
@@ -101,14 +98,14 @@ body {
     padding: 25px 20px 60px;
 }
 /* =========================================================
-   HERO
+   HERO LAYOUT
 ========================================================= */
 .page-hero {
     padding: 32px 25px;
     border-radius: 20px;
     background: linear-gradient(135deg, #0d47a1, #1769aa 55%, #00a6a6);
     color: white;
-    box-shadow: 0 12px 30px rgba(13,71,161,.22);
+    box-shadow: 0 12px 30px rgba(13, 71, 161, 0.22);
     margin-bottom: 25px;
 }
 .hero-icon {
@@ -117,7 +114,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255,255,255,.15);
+    background: rgba(255,255,255,0.15);
     border-radius: 16px;
     font-size: 32px;
     margin-bottom: 15px;
@@ -132,7 +129,7 @@ body {
     color: #e8f4ff;
 }
 /* =========================================================
-   BREADCRUMB
+   ELEMENTS
 ========================================================= */
 .breadcrumb {
     display: flex;
@@ -220,7 +217,7 @@ body {
 }
 .selection-card {
     position: relative;
-    background: rgba(255,255,255,.98);
+    background: rgba(255,255,255,0.98);
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 22px;
@@ -243,7 +240,7 @@ body {
 }
 .selection-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 14px 30px rgba(23,105,170,.15);
+    box-shadow: 0 14px 30px rgba(23,105,170,0.15);
 }
 .selection-card h3 {
     margin: 0 0 8px;
@@ -309,7 +306,8 @@ footer strong { color: white; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 #stepContainer { animation: fadeIn .25s ease; }
 </style>
-<script src="pastpapers-data.js"></script>
+<!-- MUHIMU: Faili la kwanza la data linapakiwa hapa -->
+<script src="pastpapers.data.js"></script>
 </head>
 <body>
 <header class="nav-header">
@@ -324,6 +322,7 @@ footer strong { color: white; }
 </header>
 
 <main class="main-container">
+    <!-- HERO SECTION ILIYORUDISHWA NDANI YA MAIN CONTAINER ILI ISIFUTIWE -->
     <section class="page-hero">
         <div class="hero-icon">📚</div>
         <h1>Past Papers</h1>
@@ -336,6 +335,8 @@ footer strong { color: white; }
 
     <button id="backButton" class="back-btn" onclick="goBack()">← RUDI NYUMA</button>
     <div id="dataStatus" class="data-status"></div>
+    
+    <!-- CHOMBO CHETU CHA DYNAMIC AMBACHO JAVASCRIPT ITAWEKA GRIDS -->
     <div id="stepContainer"></div>
 </main>
 
@@ -377,10 +378,16 @@ const backButton = document.getElementById("backButton");
 const dataStatus = document.getElementById("dataStatus");
 
 const forms = [
-    { id: "form1", name: "Form 1" }, { id: "form2", name: "Form 2" },
-    { id: "form3", name: "Form 3" }, { id: "form4", name: "Form 4" },
-    { id: "form5", name: "Form 5" }, { id: "form6", name: "Form 6" }
+    { id: "form1", name: "Form 1", icon: "📘" },
+    { id: "form2", name: "Form 2", icon: "📗" },
+    { id: "form3", name: "Form 3", icon: "orange_book" }, /* Fallback icon */
+    { id: "form4", name: "Form 4", icon: "📕" },
+    { id: "form5", name: "Form 5", icon: "📔" },
+    { id: "form6", name: "Form 6", icon: "📓" }
 ];
+
+/* Ikirekebishwa kufuatana na icons zako asilia */
+forms[2].icon = "📙"; 
 
 const subjects = [
     { id: "physics", name: "Physics", icon: "⚛️", className: "physics-card" },
@@ -400,18 +407,20 @@ const paperTypes = [
 ];
 
 const specialExaminations = [
-    { id: "isese", name: "ISESE", icon: "🏆" }, { id: "jepgos", name: "JEPGOS", icon: "🎓" },
-    { id: "tahossa", name: "TAHOSSA", icon: "📘" }, { id: "cssc", name: "CSSC", icon: "🏫" },
+    { id: "isese", name: "ISESE", icon: "🏆" },
+    { id: "jepgos", name: "JEPGOS", icon: "🎓" },
+    { id: "tahossa", name: "TAHOSSA", icon: "📘" },
+    { id: "cssc", name: "CSSC", icon: "🏫" },
     { id: "special_school", name: "SPECIAL SCHOOL", icon: "⭐" }
 ];
 
 const regions = [
-    { id: "arusha", name: "Arusha" }, { id: "dar_es_salaam", name: "Dar es Salaam" },
-    { id: "dodoma", name: "Dodoma" }, { id: "shinyanga", name: "Shinyanga" },
-    { id: "iringa", name: "Iringa" }, { id: "kagera", name: "Kagera" },
-    { id: "kigoma", name: "Kigoma" }, { id: "kilimanjaro", name: "Kilimanjaro" },
-    { id: "mbeya", name: "Mbeya" }, { id: "morogoro", name: "Morogoro" },
-    { id: "mwanza", name: "Mwanza" }, { id: "tanga", name: "Tanga" }
+    { id: "arusha", name: "Arusha", icon: "📍" }, { id: "dar_es_salaam", name: "Dar es Salaam", icon: "📍" },
+    { id: "dodoma", name: "Dodoma", icon: "📍" }, { id: "shinyanga", name: "Shinyanga", icon: "📍" },
+    { id: "iringa", name: "Iringa", icon: "📍" }, { id: "kagera", name: "Kagera", icon: "📍" },
+    { id: "kigoma", name: "Kigoma", icon: "📍" }, { id: "kilimanjaro", name: "Kilimanjaro", icon: "📍" },
+    { id: "mbeya", name: "Mbeya", icon: "📍" }, { id: "morogoro", name: "Morogoro", icon: "📍" },
+    { id: "mwanza", name: "Mwanza", icon: "📍" }, { id: "tanga", name: "Tanga", icon: "📍" }
 ];
 
 function normalize(value) { return String(value ?? "").trim().toLowerCase().replace(/[\s_-]+/g, "_"); }
@@ -424,7 +433,7 @@ function getSeriesValue(paper) { return paper.series || paper.seriesName || pape
 function checkDataFile() {
     if (!Array.isArray(window.pastPapers)) {
         dataStatus.className = "data-status error";
-        dataStatus.innerHTML = `⚠️ <strong>Database haijapakiwa.</strong><br><br>Hakikisha faili jina la <strong>pastpapers-data.js</strong> lipo folder moja na hii peji.`;
+        dataStatus.innerHTML = `⚠️ <strong>Database haijapakiwa kabisa.</strong><br><br>Hakikisha faili lako linaitwa kwa herufi sahihi za <strong>pastpapers.data.js</strong> na lipo folder moja na faili hili.`;
         return false;
     }
     dataStatus.className = "data-status"; dataStatus.innerHTML = ""; return true;
@@ -439,7 +448,7 @@ function renderForms() {
     forms.forEach(form => {
         html += `
             <div class="selection-card form-card">
-                <div><div class="card-icon">📚</div><h3>${form.name}</h3><p>Physics, Chemistry & Biology Past Papers</p></div>
+                <div><div class="card-icon">${form.icon}</div><h3>${form.name}</h3><p>Physics, Chemistry & Biology Past Papers</p></div>
                 <button class="open-btn" onclick="openForm('${form.id}')">FUNGUA ${form.name.toUpperCase()}</button>
             </div>
         `;
@@ -504,7 +513,7 @@ function renderTypes() {
     const subject = subjects.find(item => item.id === currentState.subject);
     updateBreadcrumb();
     let html = `
-        <div class="step-header"><span class="step-number">STEP 3</span><h2>${subject ? subject.name : "Subject"}</h2><p>Chagua aina ya Past Paper iliyopo kwenye hifadhi.</p></div>
+        <div class="step-header"><span class="step-number">STEP 3</span><h2>${subject ? subject.name : "Subject"}</h2><p>Chagua aina ya Past Paper iliyopo kwenye hifadhi wetu.</p></div>
         <div class="selection-grid">
     `;
     const currentPapers = getNormalPapers();
@@ -730,7 +739,12 @@ function renderCurrentLevel() {
 function goBack() { if (currentState.level === "forms") { window.location.href = "index.html"; return; } history.back(); }
 function toggleMenu() { const sidebar = document.getElementById("sidebarMenu"); const overlay = document.getElementById("menuOverlay"); sidebar.classList.toggle("active"); overlay.style.display = sidebar.classList.contains("active") ? "block" : "none"; }
 function toggleDropdown(button) { const container = button.nextElementSibling; if (!container) return; container.style.display = container.style.display === "block" ? "none" : "block"; }
-function initialize() { history.replaceState({ level: "forms", form: null, subject: null, type: null, region: null, school: null, year: null, special: null, series: null }, "", window.location.href); if (!checkDataFile()) return; renderForms(); }
+
+function initialize() { 
+    history.replaceState({ level: "forms", form: null, subject: null, type: null, region: null, school: null, year: null, special: null, series: null }, "", window.location.href); 
+    if (!checkDataFile()) return; 
+    renderForms(); 
+}
 initialize();
 </script>
 </body>
