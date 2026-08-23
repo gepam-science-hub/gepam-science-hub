@@ -1087,11 +1087,10 @@ const pastPapers = [
 {
     form: "form6",
     subject: "physics",
-    title: "Physics 1 Mock Exam",
+    title: "Physics 1 (Theory)",
     type: "mock",
     region: "dodoma",
     year: 2023,
-
     file: "papers/form6/physics/mock/dodoma/2023/F6_Physics1_Mock_2023_Dodoma_Gepam_hub.pdf",
     "markingScheme":""
 },
@@ -1099,11 +1098,10 @@ const pastPapers = [
 {
     form: "form6",
     subject: "physics",
-    title: "Physics 2 Mock Exam",
+    title: "Physics 2",
     type: "mock",
     region: "dodoma",
     year: 2023,
-
     file: "papers/form6/physics/mock/dodoma/2023/F6_Physics2_Mock_2023_Dodoma_Gepam_hub.pdf",
     "markingScheme":""
 },
