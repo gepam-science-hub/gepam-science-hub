@@ -9,7 +9,8 @@
 <link rel="icon" type="image/png" href="file_00000000f17471f4b8f76a744122207a.png">
 <style>
 /* =========================================================
-   GEPAM SCIENCE HUB - PAST PAPERS PAGE
+   GEPAM SCIENCE HUB
+   PAST PAPERS PAGE
 ========================================================= */
 :root {
     --primary: #1769aa;
@@ -26,8 +27,15 @@
     --special-secondary: #e91e63;
     --special-light: #fff0f8;
 }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* =========================================================
+   GLOBAL
+========================================================= */
+* {
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -35,7 +43,9 @@ body {
     color: var(--text);
     overflow-x: hidden;
 }
-/* HEADER */
+/* =========================================================
+   HEADER
+========================================================= */
 .nav-header {
     width: 100%;
     max-width: 1050px;
@@ -47,60 +57,206 @@ body {
     background: #ffffff;
     border-bottom: 1px solid var(--border);
 }
-.logo-area { display: flex; align-items: center; gap: 10px; }
-.logo-area img { width: 42px; height: 42px; object-fit: contain; }
-.logo-text { display: flex; flex-direction: column; }
-.logo-title { font-size: 18px; font-weight: 800; color: var(--primary-dark); }
-.logo-subtitle { font-size: 11px; color: var(--muted); margin-top: 2px; }
-.menu-toggle {
-    width: 45px; height: 42px; border: none; border-radius: 10px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white; font-size: 24px; cursor: pointer;
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-/* MAIN CONTAINER */
-.main-container { width: 100%; max-width: 1050px; margin: 0 auto; padding: 25px 20px 60px; }
+.logo-area img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+.logo-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary-dark);
+}
+.logo-subtitle {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+.menu-toggle {
+    width: 45px;
+    height: 42px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+/* =========================================================
+   MAIN
+========================================================= */
+.main-container {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 25px 20px 60px;
+}
+/* =========================================================
+   HERO
+========================================================= */
 .page-hero {
-    padding: 32px 25px; border-radius: 20px;
+    padding: 32px 25px;
+    border-radius: 20px;
     background: linear-gradient(135deg, #0d47a1, #1769aa 55%, #00a6a6);
-    color: white; box-shadow: 0 12px 30px rgba(13,71,161,.22); margin-bottom: 25px;
+    color: white;
+    box-shadow: 0 12px 30px rgba(13,71,161,.22);
+    margin-bottom: 25px;
 }
 .hero-icon {
-    width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;
-    background: rgba(255,255,255,.15); border-radius: 16px; font-size: 32px; margin-bottom: 15px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,.15);
+    border-radius: 16px;
+    font-size: 32px;
+    margin-bottom: 15px;
 }
-.page-hero h1 { margin: 0 0 8px; font-size: 30px; }
-.page-hero p { margin: 0; line-height: 1.7; color: #e8f4ff; }
-/* BREADCRUMB & BUTTONS */
-.breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 10px 0 18px; font-size: 14px; }
-.breadcrumb-item { padding: 6px 10px; border-radius: 20px; background: #e9f3fb; color: var(--primary-dark); font-weight: 700; }
-.breadcrumb-separator { color: #9aa7b5; font-weight: bold; }
-.breadcrumb-special { background: #f7e7ff; color: var(--special-primary); }
+.page-hero h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
+}
+.page-hero p {
+    margin: 0;
+    line-height: 1.7;
+    color: #e8f4ff;
+}
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 10px 0 18px;
+    font-size: 14px;
+}
+.breadcrumb-item {
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: #e9f3fb;
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+.breadcrumb-separator {
+    color: #9aa7b5;
+    font-weight: bold;
+}
+.breadcrumb-special {
+    background: #f7e7ff;
+    color: var(--special-primary);
+}
 .back-btn {
-    display: none; align-items: center; gap: 8px; padding: 10px 16px; margin-bottom: 20px;
-    border: none; border-radius: 9px; background: #263746; color: white; font-weight: 700; cursor: pointer;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 9px;
+    background: #263746;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
 }
-.back-btn:hover { background: #172631; }
-
-/* STEP HEADERS */
-.step-header { margin: 10px 0 20px; }
-.step-number { display: inline-block; padding: 6px 10px; border-radius: 20px; background: #dff6f6; color: #007c7c; font-size: 12px; font-weight: 800; margin-bottom: 8px; }
-.step-header h2 { margin: 0 0 7px; font-size: 25px; }
-.step-header p { margin: 0; color: var(--muted); line-height: 1.6; }
-.special-step .step-number { background: #f5dcff; color: var(--special-primary); }
-
-/* GRID & CARDS */
-.selection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+.back-btn:hover {
+    background: #172631;
+}
+.step-header {
+    margin: 10px 0 20px;
+}
+.step-number {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: #dff6f6;
+    color: #007c7c;
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+.step-header h2 {
+    margin: 0 0 7px;
+    font-size: 25px;
+}
+.step-header p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.6;
+}
+.special-step .step-number {
+    background: #f5dcff;
+    color: var(--special-primary);
+}
+.data-status {
+    display: none;
+    margin: 0 0 20px;
+    padding: 13px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+}
+.data-status.error {
+    display: block;
+    background: #ffebee;
+    border: 1px solid #ffcdd2;
+    color: #b71c1c;
+}
+.selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
 .selection-card {
-    position: relative; background: rgba(255,255,255,.98); border: 1px solid var(--border);
-    border-radius: 16px; padding: 22px; min-height: 185px; display: flex; flex-direction: column;
-    justify-content: space-between; box-shadow: var(--shadow); overflow: hidden; transition: transform .2s ease, box-shadow .2s ease;
+    position: relative;
+    background: rgba(255,255,255,.98);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    min-height: 185px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform .2s ease, box-shadow .2s ease;
 }
-.selection-card::before { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
-.selection-card:hover { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(23,105,170,.15); }
-.selection-card h3 { margin: 0 0 8px; font-size: 20px; color: #17324d; }
-.selection-card p { margin: 0; color: var(--muted); line-height: 1.55; font-size: 14px; }
-
-/* CARD VARIANTS */
+.selection-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+.selection-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 30px rgba(23,105,170,.15);
+}
+.selection-card h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    color: #17324d;
+}
+.selection-card p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.55;
+    font-size: 14px;
+}
+.form-card { min-height: 205px; }
 .form-card::before { background: linear-gradient(90deg, #1769aa, #00a6a6); }
 .physics-card::before { background: linear-gradient(90deg, #1565c0, #42a5f5); }
 .chemistry-card::before { background: linear-gradient(90deg, #00897b, #26a69a); }
@@ -112,8 +268,6 @@ body {
 .year-card::before { background: linear-gradient(90deg, #283593, #5c6bc0); }
 .type-card::before { background: linear-gradient(90deg, #7b1fa2, #ab47bc); }
 .school-card::before { background: linear-gradient(90deg, #ef6c00, #ffa726); }
-
-/* SPECIAL CARDS */
 .special-section { margin-top: 35px; }
 .special-section-header { margin-bottom: 18px; }
 .special-section-header h2 { margin: 0 0 7px; color: var(--special-primary); font-size: 25px; }
@@ -125,12 +279,7 @@ body {
 .series-card { background: linear-gradient(145deg, #ffffff, #fff8fc); border-color: #e7cfee; }
 .series-card::before { background: linear-gradient(90deg, #8e24aa, #ec407a); }
 .card-icon { width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; border-radius: 15px; background: var(--light-blue); font-size: 28px; margin-bottom: 14px; }
-
-/* PAPERS BUTTONS */
-.open-btn {
-    width: 100%; padding: 12px 14px; margin-top: 18px; border: none; border-radius: 9px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-size: 14px; font-weight: 800; cursor: pointer; transition: transform .15s ease, opacity .15s ease;
-}
+.open-btn { width: 100%; padding: 12px 14px; margin-top: 18px; border: none; border-radius: 9px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-size: 14px; font-weight: 800; cursor: pointer; transition: transform .15s ease, opacity .15s ease; }
 .open-btn:hover { transform: scale(1.02); opacity: .92; }
 .special-button { background: linear-gradient(135deg, var(--special-primary), var(--special-secondary)); }
 .pdf-card { min-height: 210px; }
@@ -141,10 +290,6 @@ body {
 .view-pdf { background: linear-gradient(135deg, #c62828, #ef5350); }
 .download-pdf { background: linear-gradient(135deg, #1565c0, #42a5f5); }
 .marking-button { width: 100% !important; margin-top: 8px; background: linear-gradient(135deg, #2e7d32, #66bb6a); }
-
-/* OTHER UTILITIES */
-.data-status { display: none; margin: 0 0 20px; padding: 13px 15px; border-radius: 10px; font-size: 14px; font-weight: 700; }
-.data-status.error { display: block; background: #ffebee; border: 1px solid #ffcdd2; color: #b71c1c; }
 .empty-card { grid-column: 1 / -1; padding: 30px; text-align: center; border-radius: 15px; background: #fff8e1; border: 1px solid #ffe082; }
 .empty-card-icon { font-size: 40px; margin-bottom: 10px; }
 .empty-card h3 { margin: 0 0 8px; color: #7a5600; }
@@ -160,22 +305,13 @@ body {
 .dropdown-container a { font-size: 14px; font-weight: 600; }
 footer { margin-top: 30px; padding: 30px 20px; text-align: center; background: #102a43; color: #dcecff; }
 footer strong { color: white; }
-
-@media (max-width: 600px) {
-    .main-container { padding: 18px 14px 45px; }
-    .page-hero { padding: 25px 20px; border-radius: 16px; }
-    .page-hero h1 { font-size: 25px; }
-    .selection-grid { grid-template-columns: 1fr; gap: 14px; }
-    .selection-card { min-height: 175px; }
-    .step-header h2 { font-size: 22px; }
-}
+@media (max-width: 600px) { .main-container { padding: 18px 14px 45px; } .page-hero { padding: 25px 20px; border-radius: 16px; } .page-hero h1 { font-size: 25px; } .selection-grid { grid-template-columns: 1fr; gap: 14px; } .selection-card { min-height: 175px; } .step-header h2 { font-size: 22px; } .pdf-actions { grid-template-columns: 1fr 1fr; } }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 #stepContainer { animation: fadeIn .25s ease; }
 </style>
 <script src="pastpapers-data.js"></script>
 </head>
 <body>
-
 <header class="nav-header">
     <div class="logo-area">
         <img src="file_00000000f17471f4b8f76a744122207a.png" alt="GEPAM Science Hub Logo">
@@ -188,6 +324,12 @@ footer strong { color: white; }
 </header>
 
 <main class="main-container">
+    <section class="page-hero">
+        <div class="hero-icon">📚</div>
+        <h1>Past Papers</h1>
+        <p>Find Physics, Chemistry and Biology examination papers from Form 1 to Form 6, together with Special Examinations.</p>
+    </section>
+
     <div class="breadcrumb" id="breadcrumb">
         <span class="breadcrumb-item">Past Papers</span>
     </div>
@@ -196,6 +338,8 @@ footer strong { color: white; }
     <div id="dataStatus" class="data-status"></div>
     <div id="stepContainer"></div>
 </main>
+
+<div id="menuOverlay" class="overlay" onclick="toggleMenu()"></div>
 
 <aside id="sidebarMenu" class="sidebar">
     <button class="close-btn" onclick="toggleMenu()">✕</button>
@@ -222,9 +366,6 @@ footer strong { color: white; }
     <p>© 2026 GEPAM Science Hub. All Rights Reserved.</p>
 </footer>
 <script>
-/* =========================================================
-   GEPAM SCIENCE HUB - PAST PAPERS ENGINE (DYNAMIC ENGINE)
-========================================================= */
 let currentState = {
     level: "forms", form: null, subject: null, type: null,
     region: null, school: null, year: null, special: null, series: null
@@ -236,12 +377,9 @@ const backButton = document.getElementById("backButton");
 const dataStatus = document.getElementById("dataStatus");
 
 const forms = [
-    { id: "form1", name: "Form 1" },
-    { id: "form2", name: "Form 2" },
-    { id: "form3", name: "Form 3" },
-    { id: "form4", name: "Form 4" },
-    { id: "form5", name: "Form 5" },
-    { id: "form6", name: "Form 6" }
+    { id: "form1", name: "Form 1" }, { id: "form2", name: "Form 2" },
+    { id: "form3", name: "Form 3" }, { id: "form4", name: "Form 4" },
+    { id: "form5", name: "Form 5" }, { id: "form6", name: "Form 6" }
 ];
 
 const subjects = [
@@ -262,10 +400,8 @@ const paperTypes = [
 ];
 
 const specialExaminations = [
-    { id: "isese", name: "ISESE", icon: "🏆" },
-    { id: "jepgos", name: "JEPGOS", icon: "🎓" },
-    { id: "tahossa", name: "TAHOSSA", icon: "📘" },
-    { id: "cssc", name: "CSSC", icon: "🏫" },
+    { id: "isese", name: "ISESE", icon: "🏆" }, { id: "jepgos", name: "JEPGOS", icon: "🎓" },
+    { id: "tahossa", name: "TAHOSSA", icon: "📘" }, { id: "cssc", name: "CSSC", icon: "🏫" },
     { id: "special_school", name: "SPECIAL SCHOOL", icon: "⭐" }
 ];
 
@@ -278,17 +414,12 @@ const regions = [
     { id: "mwanza", name: "Mwanza" }, { id: "tanga", name: "Tanga" }
 ];
 
-function normalize(value) {
-    return String(value ?? "").trim().toLowerCase().replace(/[\s_-]+/g, "_");
-}
-
-function escapeHTML(value) {
-    return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
-}
-
-function escapeJS(value) {
-    return String(value ?? "").replaceAll("\\", "\\\\").replaceAll("'", "\\'").replaceAll("\n", "\\n").replaceAll("\r", "\\r");
-}
+function normalize(value) { return String(value ?? "").trim().toLowerCase().replace(/[\s_-]+/g, "_"); }
+function escapeHTML(value) { return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;"); }
+function escapeJS(value) { return String(value ?? "").replaceAll("\\", "\\\\").replaceAll("'", "\\'").replaceAll("\n", "\\n").replaceAll("\r", "\\r"); }
+function isSpecialPaper(paper) { return !!(paper.special || paper.specialExam || paper.examinationSeries || normalize(paper.category) === "special"); }
+function getSpecialName(paper) { return paper.special || paper.specialExam || paper.examinationSeries || paper.organization || paper.organisation || ""; }
+function getSeriesValue(paper) { return paper.series || paper.seriesName || paper.examSeries || ""; }
 
 function checkDataFile() {
     if (!Array.isArray(window.pastPapers)) {
@@ -296,120 +427,69 @@ function checkDataFile() {
         dataStatus.innerHTML = `⚠️ <strong>Database haijapakiwa.</strong><br><br>Hakikisha faili jina la <strong>pastpapers-data.js</strong> lipo folder moja na hii peji.`;
         return false;
     }
-    dataStatus.className = "data-status";
-    dataStatus.innerHTML = "";
-    return true;
-}
-
-function isSpecialPaper(paper) {
-    return !!(paper.special || paper.specialExam || paper.examinationSeries || normalize(paper.category) === "special");
-}
-
-function getSpecialName(paper) {
-    return paper.special || paper.specialExam || paper.examinationSeries || paper.organization || paper.organisation || "";
-}
-
-function getSeriesValue(paper) {
-    return paper.series || paper.seriesName || paper.examSeries || "";
+    dataStatus.className = "data-status"; dataStatus.innerHTML = ""; return true;
 }
 function renderForms() {
     currentState = { level: "forms", form: null, subject: null, type: null, region: null, school: null, year: null, special: null, series: null };
-    updateBreadcrumb();
-    backButton.style.display = "none";
-    
+    updateBreadcrumb(); backButton.style.display = "none";
     let html = `
-        <div class="step-header">
-            <span class="step-number">STEP 1</span>
-            <h2>Chagua Kidato</h2>
-            <p>Chagua kidato unachotaka kupata Past Papers.</p>
-        </div>
+        <div class="step-header"><span class="step-number">STEP 1</span><h2>Chagua Kidato</h2><p>Chagua kidato unachotaka kupata Past Papers.</p></div>
         <div class="selection-grid">
     `;
-    
     forms.forEach(form => {
         html += `
             <div class="selection-card form-card">
-                <div>
-                    <div class="card-icon">📚</div>
-                    <h3>${form.name}</h3>
-                    <p>Physics, Chemistry & Biology Past Papers</p>
-                </div>
+                <div><div class="card-icon">📚</div><h3>${form.name}</h3><p>Physics, Chemistry & Biology Past Papers</p></div>
                 <button class="open-btn" onclick="openForm('${form.id}')">FUNGUA ${form.name.toUpperCase()}</button>
             </div>
         `;
     });
-    
     html += `
         </div>
         <section class="special-section">
-            <div class="special-section-header">
-                <h2>⭐ SPECIAL EXAMINATIONS</h2>
-                <p>Mitihani maalum inayojitegemea bila kuchagua Form kwanza.</p>
-            </div>
+            <div class="special-section-header"><h2>⭐ SPECIAL EXAMINATIONS</h2><p>Mitihani maalum inayojitegemea bila kuchagua Form kwanza.</p></div>
             <div class="selection-grid">
     `;
-    
     specialExaminations.forEach(special => {
         html += `
             <div class="selection-card special-card">
-                <div>
-                    <div class="special-icon">${special.icon}</div>
-                    <h3>${special.name}</h3>
-                    <p>${special.name} Examination Series</p>
-                </div>
+                <div><div class="special-icon">${special.icon}</div><h3>${special.name}</h3><p>${special.name} Examination Series</p></div>
                 <button class="open-btn special-button" onclick="openSpecial('${special.id}')">FUNGUA</button>
             </div>
         `;
     });
-    
-    html += `</div></section>`;
-    stepContainer.innerHTML = html;
+    html += `</div></section>`; stepContainer.innerHTML = html;
 }
 
 function openForm(formId) {
     currentState.level = "subjects"; currentState.form = formId;
-    currentState.subject = null; currentState.type = null; currentState.region = null;
-    currentState.school = null; currentState.year = null; currentState.special = null; currentState.series = null;
-    pushNavigationState();
-    renderSubjects();
+    currentState.subject = null; currentState.type = null; currentState.region = null; currentState.school = null; currentState.year = null; currentState.special = null; currentState.series = null;
+    pushNavigationState(); renderSubjects();
 }
 
 function renderSubjects() {
     const form = forms.find(item => item.id === currentState.form);
     if (!form) { renderForms(); return; }
-    updateBreadcrumb();
-    backButton.style.display = "inline-flex";
-    
+    updateBreadcrumb(); backButton.style.display = "inline-flex";
     let html = `
-        <div class="step-header">
-            <span class="step-number">STEP 2</span>
-            <h2>${form.name}</h2>
-            <p>Chagua somo husika.</p>
-        </div>
+        <div class="step-header"><span class="step-number">STEP 2</span><h2>${form.name}</h2><p>Chagua somo husika.</p></div>
         <div class="selection-grid">
     `;
-    
     subjects.forEach(subject => {
         html += `
             <div class="selection-card ${subject.className}">
-                <div>
-                    <div class="card-icon">${subject.icon}</div>
-                    <h3>${subject.name}</h3>
-                    <p>${form.name} ${subject.name} Past Papers</p>
-                </div>
+                <div><div class="card-icon">${subject.icon}</div><h3>${subject.name}</h3><p>${form.name} ${subject.name} Past Papers</p></div>
                 <button class="open-btn" onclick="openSubject('${subject.id}')">FUNGUA ${subject.name.toUpperCase()}</button>
             </div>
         `;
     });
-    html += `</div>`;
-    stepContainer.innerHTML = html;
+    html += `</div>`; stepContainer.innerHTML = html;
 }
 
 function openSubject(subjectId) {
     currentState.level = "types"; currentState.subject = subjectId;
     currentState.type = null; currentState.region = null; currentState.school = null; currentState.year = null;
-    pushNavigationState();
-    renderTypes();
+    pushNavigationState(); renderTypes();
 }
 
 function getNormalPapers() {
@@ -423,174 +503,101 @@ function getNormalPapers() {
 function renderTypes() {
     const subject = subjects.find(item => item.id === currentState.subject);
     updateBreadcrumb();
-    
     let html = `
-        <div class="step-header">
-            <span class="step-number">STEP 3</span>
-            <h2>${subject ? subject.name : "Subject"}</h2>
-            <p>Chagua aina ya Past Paper iliyopo kwenye database wetu.</p>
-        </div>
+        <div class="step-header"><span class="step-number">STEP 3</span><h2>${subject ? subject.name : "Subject"}</h2><p>Chagua aina ya Past Paper iliyopo kwenye hifadhi.</p></div>
         <div class="selection-grid">
     `;
-    
     const currentPapers = getNormalPapers();
     const uniqueTypesInDatabase = [...new Set(currentPapers.map(p => normalize(p.type)))];
-    
     const availableTypes = paperTypes.filter(type => uniqueTypesInDatabase.includes(normalize(type.id)));
     
     if (availableTypes.length === 0) {
         html += `<div class="empty-card"><div class="empty-card-icon">📚</div><h3>Bado Hakuna Papers</h3><p>Hakuna aina ya mtihani iliyopatikana kwa somo hili bado.</p></div>`;
     }
-    
     availableTypes.forEach(type => {
         html += `
             <div class="selection-card type-card">
-                <div>
-                    <h3>${type.name}</h3>
-                    <p>${type.description}</p>
-                </div>
+                <div><h3>${type.name}</h3><p>${type.description}</p></div>
                 <button class="open-btn" onclick="openType('${type.id}')">FUNGUA</button>
             </div>
         `;
     });
-    html += `</div>`;
-    stepContainer.innerHTML = html;
+    html += `</div>`; stepContainer.innerHTML = html;
 }
 function openType(typeId) {
-    currentState.type = typeId;
-    currentState.region = null;
-    currentState.school = null;
-    currentState.year = null;
-
+    currentState.type = typeId; currentState.region = null; currentState.school = null; currentState.year = null;
     const currentPapers = getNormalPapers().filter(p => normalize(p.type) === normalize(typeId));
-
-    const hasSchoolData = currentPapers.some(paper => 
-        paper.school || paper.schoolName || paper.institution || paper.organization || paper.organisation
-    );
-
+    const hasSchoolData = currentPapers.some(paper => paper.school || paper.schoolName || paper.institution || paper.organization || paper.organisation);
     const hasRegionData = currentPapers.some(paper => paper.region && normalize(paper.region) !== "necta" && normalize(paper.region) !== "ftna");
 
     if (hasSchoolData) {
-        currentState.level = "schools";
-        pushNavigationState();
-        renderSchools();
+        currentState.level = "schools"; pushNavigationState(); renderSchools();
     } else if (hasRegionData) {
-        currentState.level = "regions";
-        pushNavigationState();
-        renderRegions();
+        currentState.level = "regions"; pushNavigationState(); renderRegions();
     } else {
-        currentState.level = "years";
-        pushNavigationState();
-        renderYears();
+        currentState.level = "years"; pushNavigationState(); renderYears();
     }
 }
 
-function getFilteredNormalPapers() {
-    return getNormalPapers().filter(paper => normalize(paper.type) === normalize(currentState.type));
-}
+function getFilteredNormalPapers() { return getNormalPapers().filter(paper => normalize(paper.type) === normalize(currentState.type)); }
 
 function renderSchools() {
-    updateBreadcrumb();
-    const papers = getFilteredNormalPapers();
-    const schools = [];
-    
+    updateBreadcrumb(); const papers = getFilteredNormalPapers(); const schools = [];
     papers.forEach(paper => {
         const school = paper.school || paper.schoolName || paper.institution || paper.organisation || paper.organization;
-        if (school && !schools.some(item => normalize(item.id) === normalize(school))) {
-            schools.push({ id: school, name: school });
-        }
+        if (school && !schools.some(item => normalize(item.id) === normalize(school))) schools.push({ id: school, name: school });
     });
-    
     let html = `
         <div class="step-header"><span class="step-number">STEP 4</span><h2>Chagua Shule</h2><p>Chagua shule iliyotoa mtihani huu.</p></div>
         <div class="selection-grid">
     `;
-    
-    if (schools.length === 0) {
-        html += `<div class="empty-card"><h3>Hakuna shule</h3><p>Maudhui ya Shule hayakufanikiwa kupatikana.</p></div>`;
-    }
-    
     schools.forEach(school => {
         html += `
             <div class="selection-card school-card">
-                <div>
-                    <div class="card-icon">🏫</div>
-                    <h3>${escapeHTML(school.name)}</h3>
-                    <p>${escapeHTML(getTypeName(currentState.type))}</p>
-                </div>
+                <div><div class="card-icon">🏫</div><h3>${escapeHTML(school.name)}</h3><p>${escapeHTML(getTypeName(currentState.type))}</p></div>
                 <button class="open-btn" onclick="openSchool('${escapeJS(school.id)}')">FUNGUA</button>
             </div>
         `;
     });
-    html += `</div>`;
-    stepContainer.innerHTML = html;
+    html += `</div>`; stepContainer.innerHTML = html;
 }
 
-function openSchool(schoolId) {
-    currentState.level = "years"; currentState.school = schoolId; currentState.region = null; currentState.year = null;
-    pushNavigationState();
-    renderYears();
-}
+function openSchool(schoolId) { currentState.level = "years"; currentState.school = schoolId; currentState.region = null; currentState.year = null; pushNavigationState(); renderYears(); }
 
 function renderRegions() {
-    updateBreadcrumb();
-    const papers = getFilteredNormalPapers();
-    const foundRegions = [];
-    
+    updateBreadcrumb(); const papers = getFilteredNormalPapers(); const foundRegions = [];
     papers.forEach(paper => {
         if (paper.region) {
             const rNorm = normalize(paper.region);
-            if (rNorm !== "necta" && rNorm !== "ftna" && !foundRegions.includes(rNorm)) {
-                foundRegions.push(rNorm);
-            }
+            if (rNorm !== "necta" && rNorm !== "ftna" && !foundRegions.includes(rNorm)) foundRegions.push(rNorm);
         }
     });
-    
     const availableRegions = regions.filter(r => foundRegions.includes(normalize(r.id)));
-    
     let html = `
         <div class="step-header"><span class="step-number">STEP 4</span><h2>Chagua Mkoa</h2><p>Chagua mkoa wenye papers unazotafuta.</p></div>
         <div class="selection-grid">
     `;
-    
-    if (availableRegions.length === 0) {
-        html += `<div class="empty-card"><h3>Hakuna Mkoa</h3><p>Hakuna papers zilizopangwa kikanda au kimkoa hapa.</p></div>`;
-    }
-    
     availableRegions.forEach(region => {
         html += `
             <div class="selection-card region-card">
-                <div>
-                    <div class="card-icon">📍</div>
-                    <h3>${region.name}</h3>
-                    <p>Past Papers za ${region.name}</p>
-                </div>
+                <div><div class="card-icon">📍</div><h3>${region.name}</h3><p>Past Papers za ${region.name}</p></div>
                 <button class="open-btn" onclick="openRegion('${region.id}')">FUNGUA</button>
             </div>
         `;
     });
-    html += `</div>`;
-    stepContainer.innerHTML = html;
+    html += `</div>`; stepContainer.innerHTML = html;
 }
 
-function openRegion(regionId) {
-    currentState.level = "years"; currentState.region = regionId; currentState.school = null; currentState.year = null;
-    pushNavigationState();
-    renderYears();
-}
+function openRegion(regionId) { currentState.level = "years"; currentState.region = regionId; currentState.school = null; currentState.year = null; pushNavigationState(); renderYears(); }
 
 function getAvailableYears() {
-    const papers = getFilteredNormalPapers();
-    const found = [];
-    
+    const papers = getFilteredNormalPapers(); const found = [];
     papers.forEach(paper => {
         if (currentState.school) {
             const school = paper.school || paper.schoolName || paper.institution || paper.organisation || paper.organization;
             if (normalize(school) !== normalize(currentState.school)) return;
         }
-        if (currentState.region) {
-            if (normalize(paper.region) !== normalize(currentState.region)) return;
-        }
+        if (currentState.region) { if (normalize(paper.region) !== normalize(currentState.region)) return; }
         const year = String(paper.year ?? "");
         if (year && !found.includes(year)) found.push(year);
     });
@@ -598,39 +605,23 @@ function getAvailableYears() {
 }
 
 function renderYears() {
-    updateBreadcrumb();
-    const availableYears = getAvailableYears();
-    
+    updateBreadcrumb(); const availableYears = getAvailableYears();
     let html = `
         <div class="step-header"><span class="step-number">STEP 5</span><h2>Chagua Mwaka</h2><p>Chagua mwaka wa Past Paper.</p></div>
         <div class="selection-grid">
     `;
-    
-    if (availableYears.length === 0) {
-        html += `<div class="empty-card"><div class="empty-card-icon">📅</div><h3>Hakuna mwaka</h3><p>Mihula ya miaka haijapatikana.</p></div>`;
-    }
-    
     availableYears.forEach(year => {
         html += `
             <div class="selection-card year-card">
-                <div>
-                    <div class="card-icon">📅</div>
-                    <h3>${year}</h3>
-                    <p>Papers za mwaka ${year}</p>
-                </div>
+                <div><div class="card-icon">📅</div><h3>${year}</h3><p>Papers za mwaka ${year}</p></div>
                 <button class="open-btn" onclick="openYear('${year}')">FUNGUA</button>
             </div>
         `;
     });
-    html += `</div>`;
-    stepContainer.innerHTML = html;
+    html += `</div>`; stepContainer.innerHTML = html;
 }
 
-function openYear(year) {
-    currentState.level = "papers"; currentState.year = String(year);
-    pushNavigationState();
-    renderPapers();
-}
+function openYear(year) { currentState.level = "papers"; currentState.year = String(year); pushNavigationState(); renderPapers(); }
 
 function getMatchingPapers() {
     const papers = getFilteredNormalPapers().filter(p => String(p.year) === String(currentState.year));
@@ -640,185 +631,87 @@ function getMatchingPapers() {
             return normalize(s) === normalize(currentState.school);
         });
     }
-    if (currentState.region) {
-        return papers.filter(p => normalize(p.region) === normalize(currentState.region));
-    }
+    if (currentState.region) return papers.filter(p => normalize(p.region) === normalize(currentState.region));
     return papers;
 }
 
 function renderPapers() {
-    updateBreadcrumb();
-    const papers = getMatchingPapers();
-    
+    updateBreadcrumb(); const papers = getMatchingPapers();
     let html = `
         <div class="step-header"><span class="step-number">STEP 6</span><h2>Papers</h2><p>Chagua paper unayotaka kufungua au kupakua.</p></div>
         <div class="selection-grid">
     `;
-    
-    if (papers.length === 0) {
-        html += `<div class="empty-card"><h3>Hakuna paper iliyopatikana</h3><p>Hakuna PDF iliyounganishwa hapa bado.</p></div>`;
-    }
-    
     papers.forEach((paper, index) => { html += renderPaperCard(paper, index); });
-    html += `</div>`;
-    stepContainer.innerHTML = html;
+    html += `</div>`; stepContainer.innerHTML = html;
 }
 
 function renderPaperCard(paper, index) {
     const file = paper.file || paper.pdf || paper.pdfFile || "";
     const markingFile = paper.markingFile || paper.markingScheme || paper.marking || paper.marking_scheme || paper.markingGuide || paper.marking_guide || "";
-    const title = paper.title || "Past Paper";
-    const description = paper.description || "";
-    
+    const title = paper.title || "Past Paper"; const description = paper.description || "";
     let html = `<div class="selection-card pdf-card"><div><div class="card-icon pdf-icon">📄</div><h3>${escapeHTML(title)}</h3><p>${escapeHTML(description)}</p></div>`;
-    
     if (file) {
-        html += `<div class="pdf-actions">
-            <button class="view-pdf" onclick="openPDF('${escapeJS(file)}')">👁 VIEW PDF</button>
-            <button class="download-pdf" onclick="downloadPDF('${escapeJS(file)}')">⬇ DOWNLOAD</button>
-        </div>`;
-    } else {
-        html += `<button class="open-btn pdf-button" disabled>PDF HAIPO</button>`;
-    }
-    
-    if (markingFile) {
-        html += `<button class="marking-button open-btn" onclick="openPDF('${escapeJS(markingFile)}')">✅ MARKING GUIDE</button>`;
-    }
-    html += `</div>`;
-    return html;
+        html += `<div class="pdf-actions"><button class="view-pdf" onclick="openPDF('${escapeJS(file)}')">👁 VIEW PDF</button><button class="download-pdf" onclick="downloadPDF('${escapeJS(file)}')">⬇ DOWNLOAD</button></div>`;
+    } else { html += `<button class="open-btn pdf-button" disabled>PDF HAIPO</button>`; }
+    if (markingFile) html += `<button class="marking-button open-btn" onclick="openPDF('${escapeJS(markingFile)}')">✅ MARKING GUIDE</button>`;
+    html += `</div>`; return html;
 }
-
-function openPDF(file) {
-    if (!file) { alert("PDF file haijawekwa kwenye database."); return; }
-    window.open(file, "_blank", "noopener");
-}
-
-function downloadPDF(file) {
-    if (!file) { alert("PDF file haijawekwa kwenye database."); return; }
-    const link = document.createElement("a");
-    link.href = file; link.download = ""; link.target = "_blank"; link.rel = "noopener";
-    document.body.appendChild(link); link.click(); document.body.removeChild(link);
-}
+function openPDF(file) { if (!file) { alert("PDF file haijawekwa kwenye database."); return; } window.open(file, "_blank", "noopener"); }
+function downloadPDF(file) { if (!file) { alert("PDF file haijawekwa kwenye database."); return; } const link = document.createElement("a"); link.href = file; link.download = ""; link.target = "_blank"; link.rel = "noopener"; document.body.appendChild(link); link.click(); document.body.removeChild(link); }
 function openSpecial(specialId) {
-    currentState.level = "specialSeries"; currentState.special = specialId;
-    currentState.series = null; currentState.form = null; currentState.subject = null;
-    currentState.type = null; currentState.region = null; currentState.school = null; currentState.year = null;
-    pushNavigationState();
-    renderSpecialSeries();
+    currentState.level = "specialSeries"; currentState.special = specialId; currentState.series = null; currentState.form = null; currentState.subject = null; currentState.type = null; currentState.region = null; currentState.school = null; currentState.year = null;
+    pushNavigationState(); renderSpecialSeries();
 }
 
 function getSpecialPapers() {
     if (!Array.isArray(window.pastPapers)) return [];
-    return window.pastPapers.filter(paper => {
-        if (!isSpecialPaper(paper)) return false;
-        return normalize(getSpecialName(paper)) === normalize(currentState.special);
-    });
+    return window.pastPapers.filter(paper => isSpecialPaper(paper) && normalize(getSpecialName(paper)) === normalize(currentState.special));
 }
 
 function renderSpecialSeries() {
-    updateBreadcrumb();
-    backButton.style.display = "inline-flex";
-    const papers = getSpecialPapers();
-    const seriesList = [];
-    
+    updateBreadcrumb(); backButton.style.display = "inline-flex";
+    const papers = getSpecialPapers(); const seriesList = [];
     papers.forEach(paper => {
         const series = getSeriesValue(paper);
-        if (series && !seriesList.some(item => normalize(item.id) === normalize(series))) {
-            seriesList.push({ id: series, name: series });
-        }
+        if (series && !seriesList.some(item => normalize(item.id) === normalize(series))) seriesList.push({ id: series, name: series });
     });
-    
     let html = `
-        <div class="step-header special-step">
-            <span class="step-number">SPECIAL EXAMINATION</span>
-            <h2>${escapeHTML(getSpecialDisplayName(currentState.special))}</h2>
-            <p>Chagua Examination Series.</p>
-        </div>
+        <div class="step-header special-step"><span class="step-number">SPECIAL EXAMINATION</span><h2>${escapeHTML(getSpecialDisplayName(currentState.special))}</h2><p>Chagua Examination Series.</p></div>
         <div class="selection-grid">
     `;
-    
     if (seriesList.length === 0 && papers.length > 0) {
-        html += `<div class="empty-card"><h3>Papers za Ziada</h3><p>Zinaonyeshwa moja kwa moja bila mfululizo.</p></div></div>`;
+        html += `<div class="empty-card"><h3>Papers za Ziada</h3><p>Zinaonyeshwa moja kwa moja.</p></div></div>`;
         stepContainer.innerHTML = html;
-        setTimeout(() => { renderSpecialPapersDirect(papers); }, 0);
-        return;
-    } else if (seriesList.length === 0) {
-        html += `<div class="empty-card"><h3>Hakuna Series</h3><p>Bado hakuna papers zozote zilizowekwa hapa.</p></div>`;
+        setTimeout(() => { renderSpecialPapersDirect(papers); }, 0); return;
     }
-    
     seriesList.forEach(series => {
-        html += `
-            <div class="selection-card series-card">
-                <div>
-                    <div class="special-icon">📑</div>
-                    <h3>${escapeHTML(series.name)}</h3>
-                    <p>Examination Series</p>
-                </div>
-                <button class="open-btn special-button" onclick="openSpecialSeries('${escapeJS(series.id)}')">FUNGUA</button>
-            </div>
-        `;
+        html += `<div class="selection-card series-card"><div><div class="special-icon">📑</div><h3>${escapeHTML(series.name)}</h3><p>Examination Series</p></div><button class="open-btn special-button" onclick="openSpecialSeries('${escapeJS(series.id)}')">FUNGUA</button></div>`;
     });
-    html += `</div>`;
-    stepContainer.innerHTML = html;
+    html += `</div>`; stepContainer.innerHTML = html;
 }
 
-function getSpecialDisplayName(id) {
-    const item = specialExaminations.find(special => normalize(special.id) === normalize(id));
-    return item ? item.name : id;
-}
-
-function openSpecialSeries(seriesId) {
-    currentState.level = "specialPapers"; currentState.series = seriesId;
-    pushNavigationState();
-    renderSpecialPapers();
-}
-
-function renderSpecialPapers() {
-    updateBreadcrumb();
-    const papers = getSpecialPapers().filter(p => normalize(getSeriesValue(p)) === normalize(currentState.series));
-    renderSpecialPapersDirect(papers);
-}
-
+function getSpecialDisplayName(id) { const item = specialExaminations.find(special => normalize(special.id) === normalize(id)); return item ? item.name : id; }
+function openSpecialSeries(seriesId) { currentState.level = "specialPapers"; currentState.series = seriesId; pushNavigationState(); renderSpecialPapers(); }
+function renderSpecialPapers() { updateBreadcrumb(); const papers = getSpecialPapers().filter(p => normalize(getSeriesValue(p)) === normalize(currentState.series)); renderSpecialPapersDirect(papers); }
 function renderSpecialPapersDirect(papers) {
     let html = `
-        <div class="step-header special-step">
-            <span class="step-number">PAPERS LIST</span>
-            <h2>${escapeHTML(getSpecialDisplayName(currentState.special))} - ${escapeHTML(currentState.series || "General")}</h2>
-            <p>Chagua paper yako kwa ajili ya usomaji au kupakua.</p>
-        </div>
+        <div class="step-header special-step"><span class="step-number">PAPERS LIST</span><h2>${escapeHTML(getSpecialDisplayName(currentState.special))} - ${escapeHTML(currentState.series || "General")}</h2><p>Chagua paper yako.</p></div>
         <div class="selection-grid">
     `;
-    
-    if (papers.length === 0) {
-        html += `<div class="empty-card"><h3>Hakuna paper</h3><p>Maudhui ya mitihani hayajapatikana kwenye hifadhi.</p></div>`;
-    }
-    
     papers.forEach((paper, index) => { html += renderPaperCard(paper, index); });
-    html += `</div>`;
-    stepContainer.innerHTML = html;
+    html += `</div>`; stepContainer.innerHTML = html;
 }
 
 function updateBreadcrumb() {
     const items = [{ text: "Past Papers", special: false }];
-    
-    if (currentState.special) { items.push({ text: getSpecialDisplayName(currentState.special), special: true }); }
-    else if (currentState.form) {
-        const form = forms.find(item => item.id === currentState.form);
-        if (form) items.push({ text: form.name, special: false });
-    }
-    if (currentState.subject) {
-        const subject = subjects.find(item => item.id === currentState.subject);
-        if (subject) items.push({ text: subject.name, special: false });
-    }
+    if (currentState.special) items.push({ text: getSpecialDisplayName(currentState.special), special: true });
+    else if (currentState.form) { const form = forms.find(item => item.id === currentState.form); if (form) items.push({ text: form.name, special: false }); }
+    if (currentState.subject) { const subject = subjects.find(item => item.id === currentState.subject); if (subject) items.push({ text: subject.name, special: false }); }
     if (currentState.type) items.push({ text: getTypeName(currentState.type), special: false });
     if (currentState.school) items.push({ text: currentState.school, special: false });
-    if (currentState.region) {
-        const region = regions.find(item => item.id === currentState.region);
-        if (region) items.push({ text: region.name, special: false });
-    }
+    if (currentState.region) { const region = regions.find(item => item.id === currentState.region); if (region) items.push({ text: region.name, special: false }); }
     if (currentState.series) items.push({ text: currentState.series, special: true });
     if (currentState.year) items.push({ text: currentState.year, special: false });
-    
     breadcrumb.innerHTML = items.map((item, index) => {
         const cls = item.special ? "breadcrumb-item breadcrumb-special" : "breadcrumb-item";
         if (index === 0) return `<span class="${cls}">${escapeHTML(item.text)}</span>`;
@@ -826,57 +719,18 @@ function updateBreadcrumb() {
     }).join("");
 }
 
-function getTypeName(typeId) {
-    const type = paperTypes.find(item => item.id === typeId);
-    return type ? type.name : typeId;
-}
-
+function getTypeName(typeId) { const type = paperTypes.find(item => item.id === typeId); return type ? type.name : typeId; }
 function pushNavigationState() { history.pushState({ ...currentState }, "", window.location.href); }
-
-window.addEventListener("popstate", function(event) {
-    if (event.state) { currentState = { ...event.state }; renderCurrentLevel(); } 
-    else { renderForms(); }
-});
-
+window.addEventListener("popstate", function(event) { if (event.state) { currentState = { ...event.state }; renderCurrentLevel(); } else { renderForms(); } });
 function renderCurrentLevel() {
     switch (currentState.level) {
-        case "forms": renderForms(); break;
-        case "subjects": renderSubjects(); break;
-        case "types": renderTypes(); break;
-        case "schools": renderSchools(); break;
-        case "regions": renderRegions(); break;
-        case "years": renderYears(); break;
-        case "papers": renderPapers(); break;
-        case "specialSeries": renderSpecialSeries(); break;
-        case "specialPapers": renderSpecialPapers(); break;
-        default: renderForms();
+        case "forms": renderForms(); break; case "subjects": renderSubjects(); break; case "types": renderTypes(); break; case "schools": renderSchools(); break; case "regions": renderRegions(); break; case "years": renderYears(); break; case "papers": renderPapers(); break; case "specialSeries": renderSpecialSeries(); break; case "specialPapers": renderSpecialPapers(); break; default: renderForms();
     }
 }
-
-function goBack() {
-    if (currentState.level === "forms") { window.location.href = "index.html"; return; }
-    history.back();
-}
-
-function toggleMenu() {
-    const sidebar = document.getElementById("sidebarMenu");
-    const overlay = document.getElementById("menuOverlay");
-    sidebar.classList.toggle("active");
-    overlay.style.display = sidebar.classList.contains("active") ? "block" : "none";
-}
-
-function toggleDropdown(button) {
-    const container = button.nextElementSibling;
-    if (!container) return;
-    container.style.display = container.style.display === "block" ? "none" : "block";
-}
-
-function initialize() {
-    history.replaceState({ level: "forms", form: null, subject: null, type: null, region: null, school: null, year: null, special: null, series: null }, "", window.location.href);
-    if (!checkDataFile()) return;
-    renderForms();
-}
-
+function goBack() { if (currentState.level === "forms") { window.location.href = "index.html"; return; } history.back(); }
+function toggleMenu() { const sidebar = document.getElementById("sidebarMenu"); const overlay = document.getElementById("menuOverlay"); sidebar.classList.toggle("active"); overlay.style.display = sidebar.classList.contains("active") ? "block" : "none"; }
+function toggleDropdown(button) { const container = button.nextElementSibling; if (!container) return; container.style.display = container.style.display === "block" ? "none" : "block"; }
+function initialize() { history.replaceState({ level: "forms", form: null, subject: null, type: null, region: null, school: null, year: null, special: null, series: null }, "", window.location.href); if (!checkDataFile()) return; renderForms(); }
 initialize();
 </script>
 </body>
