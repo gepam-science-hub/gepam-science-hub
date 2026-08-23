@@ -306,7 +306,8 @@ footer strong { color: white; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 #stepContainer { animation: fadeIn .25s ease; }
 </style>
-<!-- MUHIMU: Faili la kwanza la data linapakiwa hapa -->
+
+<!-- KUREKEBISHA NA DASHI: Faili sahihi la data sasa linasomwa hapa mapema -->
 <script src="pastpapers-data.js"></script>
 </head>
 <body>
@@ -322,7 +323,6 @@ footer strong { color: white; }
 </header>
 
 <main class="main-container">
-    <!-- HERO SECTION ILIYORUDISHWA NDANI YA MAIN CONTAINER ILI ISIFUTIWE -->
     <section class="page-hero">
         <div class="hero-icon">📚</div>
         <h1>Past Papers</h1>
@@ -336,7 +336,6 @@ footer strong { color: white; }
     <button id="backButton" class="back-btn" onclick="goBack()">← RUDI NYUMA</button>
     <div id="dataStatus" class="data-status"></div>
     
-    <!-- CHOMBO CHETU CHA DYNAMIC AMBACHO JAVASCRIPT ITAWEKA GRIDS -->
     <div id="stepContainer"></div>
 </main>
 
@@ -380,14 +379,11 @@ const dataStatus = document.getElementById("dataStatus");
 const forms = [
     { id: "form1", name: "Form 1", icon: "📘" },
     { id: "form2", name: "Form 2", icon: "📗" },
-    { id: "form3", name: "Form 3", icon: "orange_book" }, /* Fallback icon */
+    { id: "form3", name: "Form 3", icon: "📙" },
     { id: "form4", name: "Form 4", icon: "📕" },
     { id: "form5", name: "Form 5", icon: "📔" },
     { id: "form6", name: "Form 6", icon: "📓" }
 ];
-
-/* Ikirekebishwa kufuatana na icons zako asilia */
-forms[2].icon = "📙"; 
 
 const subjects = [
     { id: "physics", name: "Physics", icon: "⚛️", className: "physics-card" },
@@ -433,7 +429,7 @@ function getSeriesValue(paper) { return paper.series || paper.seriesName || pape
 function checkDataFile() {
     if (!Array.isArray(window.pastPapers)) {
         dataStatus.className = "data-status error";
-        dataStatus.innerHTML = `⚠️ <strong>Database haijapakiwa kabisa.</strong><br><br>Hakikisha faili lako linaitwa kwa herufi sahihi za <strong>pastpapers.data.js</strong> na lipo folder moja na faili hili.`;
+        dataStatus.innerHTML = `⚠️ <strong>Database haijapakiwa kabisa.</strong><br><br>Hakikisha faili lako linaitwa kwa herufi sahihi za <strong>pastpapers-data.js</strong> na lipo folder moja na faili hili.`;
         return false;
     }
     dataStatus.className = "data-status"; dataStatus.innerHTML = ""; return true;
@@ -448,7 +444,8 @@ function renderForms() {
     forms.forEach(form => {
         html += `
             <div class="selection-card form-card">
-                <div><div class="card-icon">${form.icon}</div><h3>${form.name}</h3><p>Physics, Chemistry & Biology Past Papers</p></div>
+                <div><div class="card-icon">${form.icon}</div>
+                <h3>${form.name}</h3><p>Physics, Chemistry & Biology Past Papers</p></div>
                 <button class="open-btn" onclick="openForm('${form.id}')">FUNGUA ${form.name.toUpperCase()}</button>
             </div>
         `;
@@ -513,7 +510,7 @@ function renderTypes() {
     const subject = subjects.find(item => item.id === currentState.subject);
     updateBreadcrumb();
     let html = `
-        <div class="step-header"><span class="step-number">STEP 3</span><h2>${subject ? subject.name : "Subject"}</h2><p>Chagua aina ya Past Paper iliyopo kwenye hifadhi wetu.</p></div>
+        <div class="step-header"><span class="step-number">STEP 3</span><h2>${subject ? subject.name : "Subject"}</h2><p>Chagua aina ya Past Paper iliyopo kwenye hifadhi yetu.</p></div>
         <div class="selection-grid">
     `;
     const currentPapers = getNormalPapers();
@@ -745,7 +742,11 @@ function initialize() {
     if (!checkDataFile()) return; 
     renderForms(); 
 }
-initialize();
+
+/* KUREKEBISHA UPANDAJI: Inasubiri kivinjari kimalize kabisa kupakia pastpapers-data.js */
+document.addEventListener("DOMContentLoaded", function() {
+    initialize();
+});
 </script>
 </body>
 </html>
