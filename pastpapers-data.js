@@ -1087,22 +1087,11 @@ const pastPapers = [
 {
     form: "form6",
     subject: "physics",
-    title: "Physics 1 (Theory)",
-    type: "mock",
-    region: "dodoma",
-    year: 2023,
-    file: "papers/form6/physics/mock/dodoma/2023/F6_Physics1_Mock_2023_Dodoma_Gepam_hub.pdf",
-    "markingScheme":""
-},
-    
-{
-    form: "form6",
-    subject: "physics",
     title: "Physics 2",
     type: "mock",
-    region: "dodoma",
-    year: 2023,
-    file: "papers/form6/physics/mock/dodoma/2023/F6_Physics1_Mock_2023_Dodoma_Gepam_hub.pdf",
+    region: "dar_es_salaam",
+    year: 2025,
+    file: "papers/form6/physics/mock/dar_es_salaam/2025/Form_6_Physics2_Mock_2025_Dar_es_salaam_Gepam_hub.pdf",
     "markingScheme":""
 },
     
@@ -1136,6 +1125,28 @@ const pastPapers = [
     region: "dar_es_salaam",
     year: 2024,
     file: "papers/form6/physics/mock/dar_es_salaam/2024/F6_Phys3B_Mock_2024_Dar_es_salaam_Gepam_hub.pdf",
+    "markingScheme":""
+},
+
+{
+    form: "form6",
+    subject: "physics",
+    title: "Physics 1 (Theory)",
+    type: "mock",
+    region: "dodoma",
+    year: 2023,
+    file: "papers/form6/physics/mock/dodoma/2023/F6_Physics1_Mock_2023_Dodoma_Gepam_hub.pdf",
+    "markingScheme":""
+},
+    
+{
+    form: "form6",
+    subject: "physics",
+    title: "Physics 2",
+    type: "mock",
+    region: "dodoma",
+    year: 2023,
+    file: "papers/form6/physics/mock/dodoma/2023/F6_Physics1_Mock_2023_Dodoma_Gepam_hub.pdf",
     "markingScheme":""
 },
     
