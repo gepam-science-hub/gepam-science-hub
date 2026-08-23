@@ -1086,7 +1086,7 @@ const pastPapers = [
 
 {
     form: "form6",
-    subject: "physics 1",
+    subject: "physics",
     title: "Physics 1 Mock Exam",
     type: "mock",
     region: "dodoma",
@@ -1098,7 +1098,7 @@ const pastPapers = [
 
 {
     form: "form6",
-    subject: "physics 2",
+    subject: "physics",
     title: "Physics 2 Mock Exam",
     type: "mock",
     region: "dodoma",
