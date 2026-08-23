@@ -187,19 +187,15 @@ footer strong { color: white; }
     <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">☰</button>
 </header>
 
-<section class="page-hero">
-    <div class="hero-icon">📚</div>
-    <h1>Past Papers</h1>
-    <p>Find Physics, Chemistry and Biology examination papers from Form 1 to Form 6, together with Special Examinations.</p>
-</section>
+<main class="main-container">
+    <div class="breadcrumb" id="breadcrumb">
+        <span class="breadcrumb-item">Past Papers</span>
+    </div>
 
-<div class="breadcrumb" id="breadcrumb">
-    <span class="breadcrumb-item">Past Papers</span>
-</div>
-
-<button id="backButton" class="back-btn" onclick="goBack()">← RUDI NYUMA</button>
-<div id="dataStatus" class="data-status"></div>
-<div id="stepContainer"></div>
+    <button id="backButton" class="back-btn" onclick="goBack()">← RUDI NYUMA</button>
+    <div id="dataStatus" class="data-status"></div>
+    <div id="stepContainer"></div>
+</main>
 
 <aside id="sidebarMenu" class="sidebar">
     <button class="close-btn" onclick="toggleMenu()">✕</button>
