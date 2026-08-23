@@ -1,68 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-<meta name="description"
-      content="GEPAM Science Hub Past Papers - Physics, Chemistry and Biology examination papers from Form 1 to Form 6.">
+<meta
+    name="description"
+    content="GEPAM Science Hub Past Papers - Physics and Chemistry examination papers from Form 1 to Form 6."
+>
 
-<meta name="theme-color"
-      content="#0d47a1">
+<meta
+    name="theme-color"
+    content="#0d47a1"
+>
 
 <title>GEPAM Science Hub | Past Papers</title>
 
-<link rel="icon"
-      type="image/png"
-      href="file_00000000f17471f4b8f76a744122207a.png">
+<link
+    rel="icon"
+    type="image/png"
+    href="file_00000000f17471f4b8f76a744122207a.png"
+>
 
-<link rel="stylesheet"
-      href="style.css">
+<link
+    rel="stylesheet"
+    href="style.css"
+>
 
-<script src="pastpapers-data.js"></script>
+<!-- =====================================================
+     PAST PAPERS DATABASE
+     THIS FILE MUST BE IN THE SAME FOLDER
+===================================================== -->
+
+<script src="./pastpapers-data.js"></script>
 
 <style>
 
-/* =========================================================
+/* =====================================================
    GEPAM SCIENCE HUB
    PAST PAPERS PAGE
-========================================================= */
+===================================================== */
 
 :root {
-
     --primary: #1769aa;
     --primary-dark: #0d47a1;
-
     --secondary: #00a6a6;
-
     --light-blue: #eef7ff;
-
     --text: #172033;
     --muted: #687386;
-
     --white: #ffffff;
-
     --border: #dce5ee;
 
+    --success: #087f5b;
+    --success-bg: #e8f8f2;
+
+    --danger: #c62828;
+    --danger-bg: #ffebee;
+
+    --purple: #7b1fa2;
+    --purple-bg: #f7eafa;
+
+    --orange: #ef6c00;
+    --orange-bg: #fff3e6;
+
     --shadow:
-        0 8px 25px
-        rgba(23,105,170,.10);
-
-    /* SPECIAL EXAMINATION COLORS */
-    --special-primary: #7b1fa2;
-    --special-secondary: #e91e63;
-    --special-light: #fff0f8;
-
+        0 8px 25px rgba(23,105,170,.10);
 }
 
 
-/* =========================================================
+/* =====================================================
    GLOBAL
-========================================================= */
+===================================================== */
 
 * {
     box-sizing: border-box;
@@ -73,7 +86,6 @@ html {
 }
 
 body {
-
     margin: 0;
 
     font-family:
@@ -92,13 +104,12 @@ body {
     color: var(--text);
 
     overflow-x: hidden;
-
 }
 
 
-/* =========================================================
+/* =====================================================
    HEADER
-========================================================= */
+===================================================== */
 
 .nav-header {
 
@@ -119,10 +130,9 @@ body {
     background: #ffffff;
 
     border-bottom:
-        1px solid
-        var(--border);
-
+        1px solid var(--border);
 }
+
 
 .logo-area {
 
@@ -131,8 +141,8 @@ body {
     align-items: center;
 
     gap: 10px;
-
 }
+
 
 .logo-area img {
 
@@ -141,16 +151,16 @@ body {
     height: 42px;
 
     object-fit: contain;
-
 }
+
 
 .logo-text {
 
     display: flex;
 
     flex-direction: column;
-
 }
+
 
 .logo-title {
 
@@ -158,21 +168,19 @@ body {
 
     font-weight: 800;
 
-    color:
-        var(--primary-dark);
-
+    color: var(--primary-dark);
 }
+
 
 .logo-subtitle {
 
     font-size: 11px;
 
-    color:
-        var(--muted);
+    color: var(--muted);
 
     margin-top: 2px;
-
 }
+
 
 .menu-toggle {
 
@@ -196,13 +204,12 @@ body {
     font-size: 24px;
 
     cursor: pointer;
-
 }
 
 
-/* =========================================================
+/* =====================================================
    MAIN
-========================================================= */
+===================================================== */
 
 .main-container {
 
@@ -216,13 +223,12 @@ body {
         25px
         20px
         60px;
-
 }
 
 
-/* =========================================================
+/* =====================================================
    HERO
-========================================================= */
+===================================================== */
 
 .page-hero {
 
@@ -247,8 +253,8 @@ body {
         rgba(13,71,161,.22);
 
     margin-bottom: 25px;
-
 }
+
 
 .hero-icon {
 
@@ -270,17 +276,19 @@ body {
     font-size: 32px;
 
     margin-bottom: 15px;
-
 }
+
 
 .page-hero h1 {
 
     margin:
-        0 0 8px;
+        0
+        0
+        8px;
 
     font-size: 30px;
-
 }
+
 
 .page-hero p {
 
@@ -288,15 +296,13 @@ body {
 
     line-height: 1.7;
 
-    color:
-        #e8f4ff;
-
+    color: #e8f4ff;
 }
 
 
-/* =========================================================
+/* =====================================================
    BREADCRUMB
-========================================================= */
+===================================================== */
 
 .breadcrumb {
 
@@ -309,11 +315,13 @@ body {
     gap: 6px;
 
     margin:
-        10px 0 18px;
+        10px
+        0
+        18px;
 
     font-size: 14px;
-
 }
+
 
 .breadcrumb-item {
 
@@ -323,42 +331,25 @@ body {
 
     border-radius: 20px;
 
-    background:
-        #e9f3fb;
+    background: #e9f3fb;
 
-    color:
-        var(--primary-dark);
+    color: var(--primary-dark);
 
     font-weight: 700;
-
 }
+
 
 .breadcrumb-separator {
 
-    color:
-        #9aa7b5;
+    color: #9aa7b5;
 
     font-weight: bold;
-
 }
 
 
-/* SPECIAL BREADCRUMB */
-
-.breadcrumb-special {
-
-    background:
-        #f7e7ff;
-
-    color:
-        var(--special-primary);
-
-}
-
-
-/* =========================================================
+/* =====================================================
    BACK BUTTON
-========================================================= */
+===================================================== */
 
 .back-btn {
 
@@ -378,35 +369,34 @@ body {
 
     border-radius: 9px;
 
-    background:
-        #263746;
+    background: #263746;
 
     color: white;
 
     font-weight: 700;
 
     cursor: pointer;
-
 }
+
 
 .back-btn:hover {
 
-    background:
-        #172631;
-
+    background: #172631;
 }
 
 
-/* =========================================================
+/* =====================================================
    STEP HEADER
-========================================================= */
+===================================================== */
 
 .step-header {
 
     margin:
-        10px 0 20px;
-
+        10px
+        0
+        20px;
 }
+
 
 .step-number {
 
@@ -418,99 +408,94 @@ body {
 
     border-radius: 20px;
 
-    background:
-        #dff6f6;
+    background: #dff6f6;
 
-    color:
-        #007c7c;
+    color: #007c7c;
 
     font-size: 12px;
 
     font-weight: 800;
 
     margin-bottom: 8px;
-
 }
+
 
 .step-header h2 {
 
     margin:
-        0 0 7px;
+        0
+        0
+        7px;
 
     font-size: 25px;
-
 }
+
 
 .step-header p {
 
     margin: 0;
 
-    color:
-        var(--muted);
+    color: var(--muted);
 
     line-height: 1.6;
-
 }
 
 
-/* =========================================================
-   SPECIAL STEP HEADER
-========================================================= */
-
-.special-step .step-number {
-
-    background:
-        #f5dcff;
-
-    color:
-        var(--special-primary);
-
-}
-
-
-/* =========================================================
-   DATA ERROR
-========================================================= */
+/* =====================================================
+   DATA STATUS
+===================================================== */
 
 .data-status {
 
     display: none;
 
-    margin:
-        0 0 20px;
+    margin-bottom: 20px;
 
     padding:
-        13px
-        15px;
+        14px
+        16px;
 
     border-radius: 10px;
 
     font-size: 14px;
 
-    font-weight: 700;
+    line-height: 1.6;
 
+    font-weight: 600;
 }
+
 
 .data-status.error {
 
     display: block;
 
-    background:
-        #ffebee;
+    background: #ffebee;
 
     border:
         1px solid
         #ffcdd2;
 
-    color:
-        #b71c1c;
-
+    color: #b71c1c;
 }
 
 
-/* =========================================================
+.data-status.success {
+
+    display: block;
+
+    background: var(--success-bg);
+
+    border:
+        1px solid
+        #b7ead7;
+
+    color: var(--success);
+}
+
+
+/* =====================================================
    GRID
-========================================================= */
+===================================================== */
 
 .selection-grid {
 
@@ -523,13 +508,12 @@ body {
         );
 
     gap: 18px;
-
 }
 
 
-/* =========================================================
+/* =====================================================
    CARD
-========================================================= */
+===================================================== */
 
 .selection-card {
 
@@ -554,16 +538,15 @@ body {
 
     justify-content: space-between;
 
-    box-shadow:
-        var(--shadow);
+    box-shadow: var(--shadow);
 
     overflow: hidden;
 
     transition:
         transform .2s ease,
         box-shadow .2s ease;
-
 }
+
 
 .selection-card::before {
 
@@ -585,8 +568,8 @@ body {
             var(--primary),
             var(--secondary)
         );
-
 }
+
 
 .selection-card:hover {
 
@@ -596,293 +579,37 @@ body {
     box-shadow:
         0 14px 30px
         rgba(23,105,170,.15);
-
 }
+
 
 .selection-card h3 {
 
     margin:
-        0 0 8px;
+        0
+        0
+        8px;
 
     font-size: 20px;
 
-    color:
-        #17324d;
-
+    color: #17324d;
 }
+
 
 .selection-card p {
 
     margin: 0;
 
-    color:
-        var(--muted);
+    color: var(--muted);
 
     line-height: 1.55;
 
     font-size: 14px;
-
 }
 
 
-/* =========================================================
-   FORM CARD
-========================================================= */
-
-.form-card {
-
-    min-height: 205px;
-
-}
-
-.form-card::before {
-
-    background:
-        linear-gradient(
-            90deg,
-            #1769aa,
-            #00a6a6
-        );
-
-}
-
-
-/* =========================================================
-   SUBJECT CARDS
-========================================================= */
-
-.physics-card::before {
-
-    background:
-        linear-gradient(
-            90deg,
-            #1565c0,
-            #42a5f5
-        );
-
-}
-
-.chemistry-card::before {
-
-    background:
-        linear-gradient(
-            90deg,
-            #00897b,
-            #26a69a
-        );
-
-}
-
-.biology-card::before {
-
-    background:
-        linear-gradient(
-            90deg,
-            #2e7d32,
-            #66bb6a
-        );
-
-}
-
-.physics-card .card-icon {
-
-    background:
-        #e6f1ff;
-
-}
-
-.chemistry-card .card-icon {
-
-    background:
-        #e5f8f5;
-
-}
-
-.biology-card .card-icon {
-
-    background:
-        #eaf7ea;
-
-}
-
-
-/* =========================================================
-   NORMAL TYPE CARDS
-========================================================= */
-
-.region-card::before {
-
-    background:
-        linear-gradient(
-            90deg,
-            #00695c,
-            #26a69a
-        );
-
-}
-
-.year-card::before {
-
-    background:
-        linear-gradient(
-            90deg,
-            #283593,
-            #5c6bc0
-        );
-
-}
-
-.type-card::before {
-
-    background:
-        linear-gradient(
-            90deg,
-            #7b1fa2,
-            #ab47bc
-        );
-
-}
-
-.school-card::before {
-
-    background:
-        linear-gradient(
-            90deg,
-            #ef6c00,
-            #ffa726
-        );
-
-}
-
-
-/* =========================================================
-   SPECIAL EXAMINATION CARDS
-========================================================= */
-
-.special-section {
-
-    margin-top:
-        35px;
-
-}
-
-.special-section-header {
-
-    margin-bottom:
-        18px;
-
-}
-
-.special-section-header h2 {
-
-    margin: 0 0 7px;
-
-    color:
-        var(--special-primary);
-
-    font-size: 25px;
-
-}
-
-.special-section-header p {
-
-    margin: 0;
-
-    color:
-        var(--muted);
-
-}
-
-.special-card {
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #fff7fc
-        );
-
-    border:
-        1px solid
-        #ead2f2;
-
-}
-
-.special-card::before {
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--special-primary),
-            var(--special-secondary)
-        );
-
-}
-
-.special-card h3 {
-
-    color:
-        #5a176f;
-
-}
-
-.special-icon {
-
-    width: 55px;
-
-    height: 55px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 15px;
-
-    background:
-        var(--special-light);
-
-    font-size: 28px;
-
-    margin-bottom: 14px;
-
-}
-
-
-/* =========================================================
-   SERIES CARD
-========================================================= */
-
-.series-card {
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #fff8fc
-        );
-
-    border-color:
-        #e7cfee;
-
-}
-
-.series-card::before {
-
-    background:
-        linear-gradient(
-            90deg,
-            #8e24aa,
-            #ec407a
-        );
-
-}
-
-
-/* =========================================================
+/* =====================================================
    ICON
-========================================================= */
+===================================================== */
 
 .card-icon {
 
@@ -904,13 +631,146 @@ body {
     font-size: 28px;
 
     margin-bottom: 14px;
-
 }
 
 
-/* =========================================================
+/* =====================================================
+   FORM CARDS
+===================================================== */
+
+.form-card {
+
+    min-height: 205px;
+}
+
+
+.form-card::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            #1769aa,
+            #00a6a6
+        );
+}
+
+
+/* =====================================================
+   SUBJECT CARDS
+===================================================== */
+
+.physics-card::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            #1565c0,
+            #42a5f5
+        );
+}
+
+
+.chemistry-card::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            #00897b,
+            #26a69a
+        );
+}
+
+
+.physics-card .card-icon {
+
+    background: #e6f1ff;
+}
+
+
+.chemistry-card .card-icon {
+
+    background: #e5f8f5;
+}
+
+
+/* =====================================================
+   TYPE CARDS
+===================================================== */
+
+.type-card::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            #7b1fa2,
+            #ab47bc
+        );
+}
+
+
+/* =====================================================
+   REGION
+===================================================== */
+
+.region-card::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            #00695c,
+            #26a69a
+        );
+}
+
+
+/* =====================================================
+   SCHOOL
+===================================================== */
+
+.school-card::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            #ef6c00,
+            #ffb300
+        );
+}
+
+
+/* =====================================================
+   YEAR
+===================================================== */
+
+.year-card::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            #283593,
+            #5c6bc0
+        );
+}
+
+
+/* =====================================================
+   SPECIAL EXAM
+===================================================== */
+
+.special-card::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            #6a1b9a,
+            #ab47bc
+        );
+}
+
+
+/* =====================================================
    OPEN BUTTON
-========================================================= */
+===================================================== */
 
 .open-btn {
 
@@ -944,43 +804,27 @@ body {
     transition:
         transform .15s ease,
         opacity .15s ease;
-
 }
+
 
 .open-btn:hover {
 
     transform:
         scale(1.02);
 
-    opacity:
-        .92;
-
+    opacity: .92;
 }
 
 
-/* SPECIAL BUTTON */
-
-.special-button {
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--special-primary),
-            var(--special-secondary)
-        );
-
-}
-
-
-/* =========================================================
-   PDF CARD
-========================================================= */
+/* =====================================================
+   PAPER CARD
+===================================================== */
 
 .pdf-card {
 
-    min-height: 210px;
-
+    min-height: 215px;
 }
+
 
 .pdf-card::before {
 
@@ -990,22 +834,20 @@ body {
             #b71c1c,
             #ef5350
         );
-
 }
+
 
 .pdf-icon {
 
-    background:
-        #ffebee;
-
+    background: #ffebee;
 }
 
 
-/* =========================================================
-   PDF ACTIONS
-========================================================= */
+/* =====================================================
+   PAPER ACTIONS
+===================================================== */
 
-.pdf-actions {
+.paper-actions {
 
     display: grid;
 
@@ -1014,34 +856,64 @@ body {
 
     gap: 8px;
 
-    margin-top:
-        18px;
-
+    margin-top: 18px;
 }
 
-.pdf-actions button {
+
+.paper-actions.single {
+
+    grid-template-columns: 1fr;
+}
+
+
+.paper-btn {
 
     width: 100%;
 
     padding:
         11px
-        8px;
+        10px;
 
     border: none;
 
-    border-radius: 8px;
+    border-radius: 9px;
 
     color: white;
 
-    font-size: 12px;
+    font-size: 13px;
 
     font-weight: 800;
 
     cursor: pointer;
 
+    text-decoration: none;
+
+    text-align: center;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    transition:
+        transform .15s ease,
+        opacity .15s ease;
 }
 
-.view-pdf {
+
+.paper-btn:hover {
+
+    transform:
+        translateY(-1px);
+
+    opacity: .9;
+}
+
+
+.question-btn {
 
     background:
         linear-gradient(
@@ -1049,101 +921,105 @@ body {
             #c62828,
             #ef5350
         );
-
 }
 
-.download-pdf {
+
+.marking-btn {
 
     background:
         linear-gradient(
             135deg,
-            #1565c0,
-            #42a5f5
+            #087f5b,
+            #20a878
         );
-
 }
 
 
-/* =========================================================
-   MARKING GUIDE
-========================================================= */
+/* =====================================================
+   INFO BADGE
+===================================================== */
 
-.marking-button {
+.info-badge {
 
-    width: 100% !important;
+    display: inline-flex;
+
+    align-items: center;
+
+    width: fit-content;
+
+    padding:
+        5px
+        9px;
+
+    border-radius: 20px;
+
+    background:
+        #eef4ff;
+
+    color:
+        #34558b;
+
+    font-size: 11px;
+
+    font-weight: 800;
 
     margin-top: 8px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #2e7d32,
-            #66bb6a
-        );
-
 }
 
 
-/* =========================================================
+/* =====================================================
    EMPTY
-========================================================= */
+===================================================== */
 
 .empty-card {
 
     grid-column:
         1 / -1;
 
-    padding:
-        30px;
+    padding: 30px;
 
-    text-align:
-        center;
+    text-align: center;
 
-    border-radius:
-        15px;
+    border-radius: 15px;
 
-    background:
-        #fff8e1;
+    background: #fff8e1;
 
     border:
         1px solid
         #ffe082;
-
 }
+
 
 .empty-card-icon {
 
-    font-size:
-        40px;
+    font-size: 40px;
 
-    margin-bottom:
-        10px;
-
+    margin-bottom: 10px;
 }
+
 
 .empty-card h3 {
 
     margin:
-        0 0 8px;
+        0
+        0
+        8px;
 
-    color:
-        #7a5600;
-
+    color: #7a5600;
 }
+
 
 .empty-card p {
 
     margin: 0;
 
-    color:
-        #8b6a20;
-
+    color: #8b6a20;
 }
 
 
-/* =========================================================
+/* =====================================================
    SIDEBAR
-========================================================= */
+===================================================== */
 
 .overlay {
 
@@ -1157,8 +1033,8 @@ body {
         rgba(0,0,0,.48);
 
     z-index: 9998;
-
 }
+
 
 .sidebar {
 
@@ -1186,14 +1062,14 @@ body {
         right .3s ease;
 
     overflow-y: auto;
-
 }
+
 
 .sidebar.active {
 
     right: 0;
-
 }
+
 
 .close-btn {
 
@@ -1207,14 +1083,13 @@ body {
 
     border-radius: 9px;
 
-    background:
-        #edf2f7;
+    background: #edf2f7;
 
     font-size: 20px;
 
     cursor: pointer;
-
 }
+
 
 .sidebar-links {
 
@@ -1227,8 +1102,8 @@ body {
     flex-direction: column;
 
     gap: 8px;
-
 }
+
 
 .sidebar-links a,
 .dropdown-btn {
@@ -1254,19 +1129,17 @@ body {
     font-size: 15px;
 
     cursor: pointer;
-
 }
+
 
 .sidebar-links a:hover,
 .dropdown-btn:hover {
 
-    background:
-        #edf6ff;
+    background: #edf6ff;
 
-    color:
-        var(--primary-dark);
-
+    color: var(--primary-dark);
 }
+
 
 .dropdown-container {
 
@@ -1277,118 +1150,105 @@ body {
     border-left:
         3px solid
         var(--secondary);
-
 }
+
 
 .dropdown-container a {
 
     font-size: 14px;
 
     font-weight: 600;
-
 }
 
 
-/* =========================================================
+/* =====================================================
    FOOTER
-========================================================= */
+===================================================== */
 
 footer {
 
-    margin-top:
-        30px;
+    margin-top: 30px;
 
     padding:
-        30px 20px;
+        30px
+        20px;
 
-    text-align:
-        center;
+    text-align: center;
 
-    background:
-        #102a43;
+    background: #102a43;
 
-    color:
-        #dcecff;
-
+    color: #dcecff;
 }
+
 
 footer strong {
 
     color: white;
-
 }
 
 
-/* =========================================================
-   MOBILE
-========================================================= */
+/* =====================================================
+   LOADING
+===================================================== */
 
-@media (max-width: 600px) {
+.loading-card {
 
-    .main-container {
+    grid-column:
+        1 / -1;
 
-        padding:
-            18px
-            14px
-            45px;
+    text-align: center;
 
-    }
+    padding: 45px 20px;
 
-    .page-hero {
+    background: white;
 
-        padding:
-            25px
-            20px;
+    border:
+        1px solid
+        var(--border);
 
-        border-radius:
-            16px;
+    border-radius: 16px;
 
-    }
+    box-shadow: var(--shadow);
+}
 
-    .page-hero h1 {
 
-        font-size:
-            25px;
+.loading-spinner {
 
-    }
+    width: 42px;
 
-    .selection-grid {
+    height: 42px;
 
-        grid-template-columns:
-            1fr;
+    margin:
+        0
+        auto
+        15px;
 
-        gap:
-            14px;
+    border:
+        4px solid
+        #dcecff;
 
-    }
+    border-top-color:
+        var(--primary);
 
-    .selection-card {
+    border-radius: 50%;
 
-        min-height:
-            175px;
+    animation:
+        spin .8s linear infinite;
+}
 
-    }
 
-    .step-header h2 {
+@keyframes spin {
 
-        font-size:
-            22px;
-
-    }
-
-    .pdf-actions {
-
-        grid-template-columns:
-            1fr 1fr;
-
+    to {
+        transform: rotate(360deg);
     }
 
 }
 
 
-/* =========================================================
+/* =====================================================
    ANIMATION
-========================================================= */
+===================================================== */
 
 @keyframes fadeIn {
 
@@ -1398,7 +1258,6 @@ footer strong {
 
         transform:
             translateY(8px);
-
     }
 
     to {
@@ -1407,15 +1266,73 @@ footer strong {
 
         transform:
             translateY(0);
-
     }
 
 }
+
 
 #stepContainer {
 
     animation:
         fadeIn .25s ease;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .main-container {
+
+        padding:
+            18px
+            14px
+            45px;
+    }
+
+
+    .page-hero {
+
+        padding:
+            25px
+            20px;
+
+        border-radius: 16px;
+    }
+
+
+    .page-hero h1 {
+
+        font-size: 25px;
+    }
+
+
+    .selection-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+
+    .selection-card {
+
+        min-height: 175px;
+    }
+
+
+    .step-header h2 {
+
+        font-size: 22px;
+    }
+
+
+    .paper-actions {
+
+        grid-template-columns: 1fr;
+    }
 
 }
 
@@ -1437,7 +1354,8 @@ footer strong {
 
         <img
             src="file_00000000f17471f4b8f76a744122207a.png"
-            alt="GEPAM Science Hub Logo">
+            alt="GEPAM Science Hub Logo"
+        >
 
         <div class="logo-text">
 
@@ -1457,7 +1375,8 @@ footer strong {
     <button
         class="menu-toggle"
         onclick="toggleMenu()"
-        aria-label="Open menu">
+        aria-label="Open menu"
+    >
 
         ☰
 
@@ -1473,71 +1392,81 @@ footer strong {
 <main class="main-container">
 
 
-<section class="page-hero">
+    <!-- HERO -->
 
-    <div class="hero-icon">
-        📚
+    <section class="page-hero">
+
+        <div class="hero-icon">
+            📚
+        </div>
+
+        <h1>
+            Past Papers
+        </h1>
+
+        <p>
+            Find Physics and Chemistry examination
+            papers from Form 1 to Form 6.
+        </p>
+
+    </section>
+
+
+    <!-- BREADCRUMB -->
+
+    <div
+        class="breadcrumb"
+        id="breadcrumb"
+    >
+
+        <span class="breadcrumb-item">
+            Past Papers
+        </span>
+
     </div>
 
-    <h1>
-        Past Papers
-    </h1>
 
-    <p>
-        Find Physics, Chemistry and Biology
-        examination papers from Form 1 to Form 6,
-        together with Special Examinations.
-    </p>
+    <!-- BACK -->
 
-</section>
+    <button
+        id="backButton"
+        class="back-btn"
+        onclick="goBack()"
+    >
 
+        ← RUDI NYUMA
 
-<!-- =====================================================
-     BREADCRUMB
-===================================================== -->
-
-<div
-    class="breadcrumb"
-    id="breadcrumb">
-
-    <span class="breadcrumb-item">
-        Past Papers
-    </span>
-
-</div>
+    </button>
 
 
-<!-- =====================================================
-     BACK
-===================================================== -->
+    <!-- DATA STATUS -->
 
-<button
-    id="backButton"
-    class="back-btn"
-    onclick="goBack()">
-
-    ← RUDI NYUMA
-
-</button>
+    <div
+        id="dataStatus"
+        class="data-status"
+    >
+    </div>
 
 
-<!-- =====================================================
-     DATABASE STATUS
-===================================================== -->
+    <!-- CONTENT -->
 
-<div
-    id="dataStatus"
-    class="data-status">
-</div>
+    <div id="stepContainer">
 
+        <div class="loading-card">
 
-<!-- =====================================================
-     DYNAMIC CONTENT
-===================================================== -->
+            <div class="loading-spinner"></div>
 
-<div
-    id="stepContainer">
-</div>
+            <strong>
+                Inapakia Past Papers...
+            </strong>
+
+            <p>
+                Tafadhali subiri.
+            </p>
+
+        </div>
+
+    </div>
 
 
 </main>
@@ -1550,7 +1479,8 @@ footer strong {
 <div
     id="menuOverlay"
     class="overlay"
-    onclick="toggleMenu()">
+    onclick="toggleMenu()"
+>
 </div>
 
 
@@ -1560,11 +1490,13 @@ footer strong {
 
 <aside
     id="sidebarMenu"
-    class="sidebar">
+    class="sidebar"
+>
 
     <button
         class="close-btn"
-        onclick="toggleMenu()">
+        onclick="toggleMenu()"
+    >
 
         ✕
 
@@ -1573,9 +1505,11 @@ footer strong {
 
     <nav class="sidebar-links">
 
+
         <a href="index.html">
             🏠 Home
         </a>
+
 
         <a href="about.html">
             ℹ️ About Us
@@ -1584,10 +1518,14 @@ footer strong {
 
         <button
             class="dropdown-btn"
-            onclick="toggleDropdown(this)">
+            onclick="toggleDropdown(this)"
+        >
 
             📝 Notes
-            <span>▼</span>
+
+            <span>
+                ▼
+            </span>
 
         </button>
 
@@ -1630,6 +1568,7 @@ footer strong {
             📞 Contact
         </a>
 
+
     </nav>
 
 </aside>
@@ -1659,11 +1598,13 @@ footer strong {
 </footer>
 
 
+
 <script>
 
 /* =========================================================
    GEPAM SCIENCE HUB
    PAST PAPERS ENGINE
+   VERSION: DATA-DRIVEN
 ========================================================= */
 
 
@@ -1687,9 +1628,7 @@ let currentState = {
 
     year: null,
 
-    special: null,
-
-    series: null
+    special: null
 
 };
 
@@ -1703,15 +1642,18 @@ const stepContainer =
         "stepContainer"
     );
 
+
 const breadcrumb =
     document.getElementById(
         "breadcrumb"
     );
 
+
 const backButton =
     document.getElementById(
         "backButton"
     );
+
 
 const dataStatus =
     document.getElementById(
@@ -1720,7 +1662,7 @@ const dataStatus =
 
 
 /* =========================================================
-   FORMS
+   STATIC FORM INFORMATION
 ========================================================= */
 
 const forms = [
@@ -1759,7 +1701,7 @@ const forms = [
 
 
 /* =========================================================
-   SUBJECTS
+   SUBJECT INFORMATION
 ========================================================= */
 
 const subjects = [
@@ -1776,204 +1718,7 @@ const subjects = [
         name: "Chemistry",
         icon: "🧪",
         className: "chemistry-card"
-    },
-
-    {
-        id: "biology",
-        name: "Biology",
-        icon: "🧬",
-        className: "biology-card"
     }
-
-];
-
-
-/* =========================================================
-   PAPER TYPES
-========================================================= */
-
-const paperTypes = [
-
-    {
-        id: "midterm",
-        name: "Midterm Examination",
-        description:
-            "Midterm examination papers."
-    },
-
-    {
-        id: "terminal",
-        name: "Terminal Examination",
-        description:
-            "Terminal examination papers."
-    },
-
-    {
-        id: "annual",
-        name: "Annual Examination",
-        description:
-            "Annual examination papers."
-    },
-
-    {
-        id: "joint",
-        name: "Joint Examination",
-        description:
-            "Joint examination papers."
-    },
-
-    {
-        id: "mock",
-        name: "Mock Examination",
-        description:
-            "Mock examination papers."
-    },
-
-    {
-        id: "pre_necta",
-        name: "Pre-NECTA",
-        description:
-            "Pre-NECTA examination papers."
-    },
-
-    {
-        id: "necta",
-        name: "NECTA",
-        description:
-            "NECTA national examination papers."
-    },
-
-    {
-        id: "ftna",
-        name: "FTNA",
-        description:
-            "FTNA national examination papers."
-    }
-
-];
-
-
-/* =========================================================
-   SPECIAL EXAMINATIONS
-========================================================= */
-
-const specialExaminations = [
-
-    {
-        id: "isese",
-        name: "ISESE",
-        icon: "🏆"
-    },
-
-    {
-        id: "jepgos",
-        name: "JEPGOS",
-        icon: "🎓"
-    },
-
-    {
-        id: "tahossa",
-        name: "TAHOSSA",
-        icon: "📘"
-    },
-
-    {
-        id: "cssc",
-        name: "CSSC",
-        icon: "🏫"
-    },
-
-    {
-        id: "special_school",
-        name: "SPECIAL SCHOOL",
-        icon: "⭐"
-    }
-
-];
-
-
-/* =========================================================
-   REGIONS
-========================================================= */
-
-const regions = [
-
-    {
-        id: "arusha",
-        name: "Arusha"
-    },
-
-    {
-        id: "dar_es_salaam",
-        name: "Dar es Salaam"
-    },
-
-    {
-        id: "dodoma",
-        name: "Dodoma"
-    },
-
-    {
-        id: "shinyanga",
-        name: "Shinyanga"
-    },
-
-    {
-        id: "iringa",
-        name: "Iringa"
-    },
-
-    {
-        id: "kagera",
-        name: "Kagera"
-    },
-
-    {
-        id: "kigoma",
-        name: "Kigoma"
-    },
-
-    {
-        id: "kilimanjaro",
-        name: "Kilimanjaro"
-    },
-
-    {
-        id: "mbeya",
-        name: "Mbeya"
-    },
-
-    {
-        id: "morogoro",
-        name: "Morogoro"
-    },
-
-    {
-        id: "mwanza",
-        name: "Mwanza"
-    },
-
-    {
-        id: "tanga",
-        name: "Tanga"
-    }
-
-];
-
-
-/* =========================================================
-   YEARS
-========================================================= */
-
-const years = [
-
-    "2026",
-    "2025",
-    "2024",
-    "2023",
-    "2022",
-    "2021",
-    "2020"
 
 ];
 
@@ -1987,68 +1732,66 @@ function normalize(value) {
     return String(value ?? "")
         .trim()
         .toLowerCase()
-        .replace(
-            /[\s_-]+/g,
-            "_"
-        );
+        .replace(/[\s-]+/g, "_");
 
 }
 
 
 /* =========================================================
-   ESCAPE HTML
+   DATABASE ACCESS
 ========================================================= */
 
-function escapeHTML(value) {
+/*
+   The HTML does NOT create the database.
 
-    return String(value ?? "")
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+   It reads the database from:
+   window.pastPapers
 
-}
+   This means pastpapers-data.js remains
+   the source of truth.
+*/
+
+function getDatabase() {
+
+    if (
+        Array.isArray(
+            window.pastPapers
+        )
+    ) {
+
+        return window.pastPapers;
+
+    }
 
 
-/* =========================================================
-   ESCAPE JS
-========================================================= */
+    /*
+       Compatibility with possible
+       alternative variable names.
+    */
 
-function escapeJS(value) {
+    if (
+        Array.isArray(
+            window.pastpapers
+        )
+    ) {
 
-    return String(value ?? "")
-        .replaceAll(
-            "\\",
-            "\\\\"
+        return window.pastpapers;
+
+    }
+
+
+    if (
+        Array.isArray(
+            window.pastPapersData
         )
-        .replaceAll(
-            "'",
-            "\\'"
-        )
-        .replaceAll(
-            "\n",
-            "\\n"
-        )
-        .replaceAll(
-            "\r",
-            "\\r"
-        );
+    ) {
+
+        return window.pastPapersData;
+
+    }
+
+
+    return [];
 
 }
 
@@ -2059,32 +1802,51 @@ function escapeJS(value) {
 
 function checkDataFile() {
 
+    const data =
+        getDatabase();
+
+
     if (
-        !Array.isArray(
-            window.pastPapers
-        )
+        !Array.isArray(data) ||
+        data.length === 0
     ) {
 
         dataStatus.className =
             "data-status error";
 
+
         dataStatus.innerHTML = `
 
             ⚠️ <strong>
-            Past Papers database
-            haijapakiwa.
+                Past Papers database haijapakiwa.
             </strong>
 
             <br><br>
 
-            Hakikisha faili
-            <strong>
-            pastpapers-data.js
-            </strong>
-            lipo kwenye folder moja na
-            <strong>
-            pastpapers.html
-            </strong>.
+            Hakikisha:
+
+            <br>
+
+            1. Faili
+            <strong>pastpapers-data.js</strong>
+            lipo.
+
+            <br>
+
+            2. Jina la faili limeandikwa
+            sawasawa.
+
+            <br>
+
+            3. Faili hilo lipo kwenye
+            folder moja na
+            <strong>pastpapers.html</strong>.
+
+            <br>
+
+            4. Database ina
+            <strong>pastPapers</strong>
+            array.
 
         `;
 
@@ -2092,11 +1854,22 @@ function checkDataFile() {
 
     }
 
-    dataStatus.className =
-        "data-status";
 
-    dataStatus.innerHTML =
-        "";
+    dataStatus.className =
+        "data-status success";
+
+
+    dataStatus.innerHTML = `
+
+        ✓ Past Papers database
+        imepakiwa vizuri.
+
+        <span style="opacity:.7;">
+            (${data.length} records)
+        </span>
+
+    `;
+
 
     return true;
 
@@ -2104,76 +1877,383 @@ function checkDataFile() {
 
 
 /* =========================================================
-   CHECK SPECIAL PAPER
+   GET FORM NAME
 ========================================================= */
 
-function isSpecialPaper(paper) {
+function getFormName(id) {
 
-    return !!(
+    const form =
+        forms.find(
+            item =>
+                normalize(item.id) ===
+                normalize(id)
+        );
 
-        paper.special ||
 
-        paper.specialExam ||
+    return form
+        ? form.name
+        : String(id || "");
 
-        paper.examinationSeries ||
+}
 
-        normalize(
-            paper.category
-        ) === "special"
 
+/* =========================================================
+   GET SUBJECT
+========================================================= */
+
+function getSubject(id) {
+
+    return subjects.find(
+        item =>
+            normalize(item.id) ===
+            normalize(id)
     );
 
 }
 
 
 /* =========================================================
-   GET SPECIAL NAME
+   GET UNIQUE VALUES
 ========================================================= */
 
-function getSpecialName(paper) {
+function uniqueValues(
+    array,
+    property
+) {
+
+    const result = [];
+
+    array.forEach(item => {
+
+        const value =
+            item[property];
+
+        if (
+            value !== undefined &&
+            value !== null &&
+            String(value).trim() !== ""
+        ) {
+
+            const normalized =
+                normalize(value);
+
+            if (
+                !result.some(
+                    x =>
+                        normalize(x) ===
+                        normalized
+                )
+            ) {
+
+                result.push(value);
+
+            }
+
+        }
+
+    });
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   GET CURRENT MATCHING RECORDS
+========================================================= */
+
+function getRecordsForState() {
+
+    const data =
+        getDatabase();
+
+
+    return data.filter(
+        paper => {
+
+            if (
+                currentState.form &&
+                normalize(paper.form) !==
+                normalize(currentState.form)
+            ) {
+
+                return false;
+
+            }
+
+
+            if (
+                currentState.subject &&
+                normalize(paper.subject) !==
+                normalize(currentState.subject)
+            ) {
+
+                return false;
+
+            }
+
+
+            if (
+                currentState.type &&
+                normalize(paper.type) !==
+                normalize(currentState.type)
+            ) {
+
+                return false;
+
+            }
+
+
+            if (
+                currentState.region &&
+                normalize(paper.region) !==
+                normalize(currentState.region)
+            ) {
+
+                return false;
+
+            }
+
+
+            if (
+                currentState.school &&
+                normalize(paper.school) !==
+                normalize(currentState.school)
+            ) {
+
+                return false;
+
+            }
+
+
+            if (
+                currentState.year !== null &&
+                currentState.year !== undefined &&
+                String(paper.year) !==
+                String(currentState.year)
+            ) {
+
+                return false;
+
+            }
+
+
+            if (
+                currentState.special &&
+                normalize(paper.special) !==
+                normalize(currentState.special)
+            ) {
+
+                return false;
+
+            }
+
+
+            return true;
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   DETECT PAPER TYPES
+========================================================= */
+
+function getAvailableTypes() {
+
+    const records =
+        getDatabase().filter(
+            paper => {
+
+                return (
+
+                    normalize(paper.form) ===
+                    normalize(currentState.form)
+
+                    &&
+
+                    normalize(paper.subject) ===
+                    normalize(currentState.subject)
+
+                );
+
+            }
+        );
+
+
+    const types = [];
+
+    records.forEach(
+        paper => {
+
+            if (
+                paper.type === undefined ||
+                paper.type === null
+            ) {
+
+                return;
+
+            }
+
+
+            const value =
+                String(paper.type);
+
+
+            if (
+                !types.some(
+                    x =>
+                        normalize(x) ===
+                        normalize(value)
+                )
+            ) {
+
+                types.push(value);
+
+            }
+
+        }
+    );
+
+
+    return types;
+
+}
+
+
+/* =========================================================
+   TYPE DISPLAY NAME
+========================================================= */
+
+function typeDisplayName(type) {
+
+    const key =
+        normalize(type);
+
+
+    const names = {
+
+        midterm:
+            "Midterm Examination",
+
+        terminal:
+            "Terminal Examination",
+
+        annual:
+            "Annual Examination",
+
+        joint:
+            "Joint Examination",
+
+        mock:
+            "Mock Examination",
+
+        pre_necta:
+            "Pre-NECTA",
+
+        necta:
+            "NECTA",
+
+        ftna:
+            "FTNA",
+
+        isese:
+            "ISESE",
+
+        jepgos:
+            "JEPGOS",
+
+        tahossa:
+            "TAHOSSA",
+
+        cssc:
+            "CSSC",
+
+        special_school:
+            "Special School"
+
+    };
+
 
     return (
-
-        paper.special ||
-
-        paper.specialExam ||
-
-        paper.examinationSeries ||
-
-        paper.organization ||
-
-        paper.organisation ||
-
-        ""
-
+        names[key] ||
+        String(type)
+            .replaceAll("_", " ")
+            .replace(/\b\w/g, c =>
+                c.toUpperCase()
+            )
     );
 
 }
 
 
 /* =========================================================
-   GET SERIES
+   TYPE DESCRIPTION
 ========================================================= */
 
-function getSeriesValue(paper) {
+function typeDescription(type) {
+
+    const key =
+        normalize(type);
+
+
+    const descriptions = {
+
+        midterm:
+            "Midterm examination papers.",
+
+        terminal:
+            "Terminal examination papers.",
+
+        annual:
+            "Annual examination papers.",
+
+        joint:
+            "Joint examination papers.",
+
+        mock:
+            "Mock examination papers.",
+
+        pre_necta:
+            "Pre-NECTA examination papers.",
+
+        necta:
+            "NECTA national examination papers.",
+
+        ftna:
+            "FTNA national examination papers.",
+
+        isese:
+            "ISESE examination papers.",
+
+        jepgos:
+            "JEPGOS examination papers.",
+
+        tahossa:
+            "TAHOSSA examination papers.",
+
+        cssc:
+            "CSSC examination papers.",
+
+        special_school:
+            "Special School examination papers."
+
+    };
+
 
     return (
-
-        paper.series ||
-
-        paper.seriesName ||
-
-        paper.examSeries ||
-
-        ""
-
+        descriptions[key] ||
+        "Examination papers."
     );
 
 }
 
 
 /* =========================================================
-   RENDER HOME
+   RENDER FORMS
 ========================================================= */
 
 function renderForms() {
@@ -2194,13 +2274,13 @@ function renderForms() {
 
         year: null,
 
-        special: null,
-
-        series: null
+        special: null
 
     };
 
+
     updateBreadcrumb();
+
 
     backButton.style.display =
         "none";
@@ -2230,120 +2310,50 @@ function renderForms() {
     `;
 
 
-    forms.forEach(form => {
-
-        html += `
-
-            <div class="
-                selection-card
-                form-card
-            ">
-
-                <div>
-
-                    <div class="card-icon">
-                        📚
-                    </div>
-
-                    <h3>
-                        ${form.name}
-                    </h3>
-
-                    <p>
-                        Physics, Chemistry
-                        & Biology Past Papers
-                    </p>
-
-                </div>
-
-                <button
-                    class="open-btn"
-                    onclick="
-                        openForm(
-                            '${form.id}'
-                        )
-                    ">
-
-                    FUNGUA
-                    ${form.name.toUpperCase()}
-
-                </button>
-
-            </div>
-
-        `;
-
-    });
-
-
-    html += `
-
-        </div>
-
-        <section
-            class="special-section">
-
-            <div
-                class="special-section-header">
-
-                <h2>
-                    ⭐ SPECIAL EXAMINATIONS
-                </h2>
-
-                <p>
-                    Mitihani maalum inayojitegemea
-                    bila kuchagua Form kwanza.
-                </p>
-
-            </div>
-
-            <div class="selection-grid">
-
-    `;
-
-
-    specialExaminations.forEach(
-        special => {
+    forms.forEach(
+        form => {
 
             html += `
 
                 <div class="
                     selection-card
-                    special-card
+                    form-card
                 ">
 
                     <div>
 
-                        <div
-                            class="special-icon">
-
-                            ${special.icon}
-
+                        <div class="card-icon">
+                            📘
                         </div>
 
                         <h3>
-                            ${special.name}
+                            ${escapeHTML(
+                                form.name
+                            )}
                         </h3>
 
                         <p>
-                            ${special.name}
-                            Examination Series
+                            Physics & Chemistry
+                            Past Papers
                         </p>
 
                     </div>
 
                     <button
-                        class="
-                            open-btn
-                            special-button
-                        "
+                        class="open-btn"
                         onclick="
-                            openSpecial(
-                                '${special.id}'
+                            openForm(
+                                '${escapeJS(
+                                    form.id
+                                )}'
                             )
-                        ">
+                        "
+                    >
 
                         FUNGUA
+                        ${escapeHTML(
+                            form.name.toUpperCase()
+                        )}
 
                     </button>
 
@@ -2357,9 +2367,7 @@ function renderForms() {
 
     html += `
 
-            </div>
-
-        </section>
+        </div>
 
     `;
 
@@ -2400,8 +2408,6 @@ function openForm(formId) {
     currentState.special =
         null;
 
-    currentState.series =
-        null;
 
     pushNavigationState();
 
@@ -2416,24 +2422,14 @@ function openForm(formId) {
 
 function renderSubjects() {
 
-    const form =
-        forms.find(
-            item =>
-                item.id ===
-                currentState.form
+    const formName =
+        getFormName(
+            currentState.form
         );
 
 
-    if (!form) {
-
-        renderForms();
-
-        return;
-
-    }
-
-
     updateBreadcrumb();
+
 
     backButton.style.display =
         "inline-flex";
@@ -2448,11 +2444,13 @@ function renderSubjects() {
             </span>
 
             <h2>
-                ${form.name}
+                ${escapeHTML(
+                    formName
+                )}
             </h2>
 
             <p>
-                Chagua somo.
+                Chagua somo unalotaka.
             </p>
 
         </div>
@@ -2474,20 +2472,23 @@ function renderSubjects() {
 
                     <div>
 
-                        <div
-                            class="card-icon">
-
+                        <div class="card-icon">
                             ${subject.icon}
-
                         </div>
 
                         <h3>
-                            ${subject.name}
+                            ${escapeHTML(
+                                subject.name
+                            )}
                         </h3>
 
                         <p>
-                            ${form.name}
-                            ${subject.name}
+                            ${escapeHTML(
+                                formName
+                            )}
+                            ${escapeHTML(
+                                subject.name
+                            )}
                             Past Papers
                         </p>
 
@@ -2497,12 +2498,17 @@ function renderSubjects() {
                         class="open-btn"
                         onclick="
                             openSubject(
-                                '${subject.id}'
+                                '${escapeJS(
+                                    subject.id
+                                )}'
                             )
-                        ">
+                        "
+                    >
 
                         FUNGUA
-                        ${subject.name.toUpperCase()}
+                        ${escapeHTML(
+                            subject.name.toUpperCase()
+                        )}
 
                     </button>
 
@@ -2529,9 +2535,7 @@ function renderSubjects() {
    OPEN SUBJECT
 ========================================================= */
 
-function openSubject(
-    subjectId
-) {
+function openSubject(subjectId) {
 
     currentState.level =
         "types";
@@ -2551,112 +2555,13 @@ function openSubject(
     currentState.year =
         null;
 
+    currentState.special =
+        null;
+
+
     pushNavigationState();
 
     renderTypes();
-
-}
-
-
-/* =========================================================
-   GET TYPES FOR FORM
-========================================================= */
-
-function getTypesForCurrentForm() {
-
-    const form =
-        currentState.form;
-
-
-    /*
-       Hapa tunafuata mpangilio
-       wa mfumo tuliokubaliana.
-    */
-
-
-    if (form === "form1") {
-
-        return [
-            "midterm",
-            "terminal",
-            "annual",
-            "joint"
-        ];
-
-    }
-
-
-    if (form === "form2") {
-
-        return [
-            "midterm",
-            "terminal",
-            "joint",
-            "ftna"
-        ];
-
-    }
-
-
-    if (form === "form3") {
-
-        return [
-            "midterm",
-            "terminal",
-            "annual",
-            "joint"
-        ];
-
-    }
-
-
-    if (form === "form4") {
-
-        return [
-            "midterm",
-            "terminal",
-            "annual",
-            "joint",
-            "mock",
-            "pre_necta",
-            "necta"
-        ];
-
-    }
-
-
-    if (form === "form5") {
-
-        return [
-            "midterm",
-            "terminal",
-            "annual",
-            "joint",
-            "mock",
-            "pre_necta"
-        ];
-
-    }
-
-
-    if (form === "form6") {
-
-        return [
-            "midterm",
-            "terminal",
-            "annual",
-            "joint",
-            "mock",
-            "pre_necta",
-            "necta"
-        ];
-
-    }
-
-
-    return paperTypes.map(
-        type => type.id
-    );
 
 }
 
@@ -2668,10 +2573,8 @@ function getTypesForCurrentForm() {
 function renderTypes() {
 
     const subject =
-        subjects.find(
-            item =>
-                item.id ===
-                currentState.subject
+        getSubject(
+            currentState.subject
         );
 
 
@@ -2687,9 +2590,11 @@ function renderTypes() {
             </span>
 
             <h2>
-                ${subject
-                    ? subject.name
-                    : "Subject"}
+                ${escapeHTML(
+                    subject
+                        ? subject.name
+                        : "Subject"
+                )}
             </h2>
 
             <p>
@@ -2703,37 +2608,90 @@ function renderTypes() {
     `;
 
 
-    const allowedTypes =
-        getTypesForCurrentForm();
-
-
     const availableTypes =
-        paperTypes.filter(
-            type =>
-                allowedTypes.includes(
-                    type.id
-                )
+        getAvailableTypes();
+
+
+    if (
+        availableTypes.length === 0
+    ) {
+
+        html += emptyMessage(
+            "Hakuna aina ya paper",
+            "Hakuna paper iliyowekwa kwa Form na Subject hii bado."
         );
+
+    }
 
 
     availableTypes.forEach(
         type => {
+
+            const key =
+                normalize(type);
+
+
+            let icon = "📝";
+
+
+            if (
+                key === "necta" ||
+                key === "ftna"
+            ) {
+
+                icon = "🏛️";
+
+            }
+
+
+            if (
+                [
+                    "isese",
+                    "jepgos",
+                    "tahossa",
+                    "cssc",
+                    "special_school"
+                ].includes(key)
+            ) {
+
+                icon = "⭐";
+
+            }
+
 
             html += `
 
                 <div class="
                     selection-card
                     type-card
+                    ${[
+                        "isese",
+                        "jepgos",
+                        "tahossa",
+                        "cssc",
+                        "special_school"
+                    ].includes(key)
+                        ? "special-card"
+                        : ""
+                    }
                 ">
 
                     <div>
 
+                        <div class="card-icon">
+                            ${icon}
+                        </div>
+
                         <h3>
-                            ${type.name}
+                            ${escapeHTML(
+                                typeDisplayName(type)
+                            )}
                         </h3>
 
                         <p>
-                            ${type.description}
+                            ${escapeHTML(
+                                typeDescription(type)
+                            )}
                         </p>
 
                     </div>
@@ -2742,9 +2700,10 @@ function renderTypes() {
                         class="open-btn"
                         onclick="
                             openType(
-                                '${type.id}'
+                                '${escapeJS(type)}'
                             )
-                        ">
+                        "
+                    >
 
                         FUNGUA
 
@@ -2773,9 +2732,7 @@ function renderTypes() {
    OPEN TYPE
 ========================================================= */
 
-function openType(
-    typeId
-) {
+function openType(typeId) {
 
     currentState.type =
         typeId;
@@ -2789,28 +2746,39 @@ function openType(
     currentState.year =
         null;
 
+    currentState.special =
+        null;
+
+
+    const key =
+        normalize(typeId);
+
 
     /*
-       MIDTERM / TERMINAL / ANNUAL
-       ZINATEGEMEA SHULE.
+       SPECIAL EXAM CATEGORIES
+
+       If the data contains special
+       categories, we show them only
+       when they actually exist.
     */
 
     if (
-
-        typeId === "midterm" ||
-
-        typeId === "terminal" ||
-
-        typeId === "annual"
-
+        [
+            "isese",
+            "jepgos",
+            "tahossa",
+            "cssc",
+            "special_school"
+        ].includes(key)
     ) {
 
         currentState.level =
-            "schools";
+            "special";
+
 
         pushNavigationState();
 
-        renderSchools();
+        renderSpecialOptions();
 
         return;
 
@@ -2819,19 +2787,19 @@ function openType(
 
     /*
        NECTA / FTNA
-       HAZITUMII REGION.
+
+       No region.
+       Go directly to Year.
     */
 
     if (
-
-        typeId === "necta" ||
-
-        typeId === "ftna"
-
+        key === "necta" ||
+        key === "ftna"
     ) {
 
         currentState.level =
             "years";
+
 
         pushNavigationState();
 
@@ -2843,80 +2811,339 @@ function openType(
 
 
     /*
-       MOCK / JOINT / PRE-NECTA
-       ZINATUMIA REGION.
+       OTHER EXAM TYPES
+
+       First inspect the actual
+       data to determine whether
+       Region or School exists.
+    */
+
+    const records =
+        getRecordsForState();
+
+
+    const hasSchool =
+        records.some(
+            paper =>
+                paper.school !== undefined &&
+                paper.school !== null &&
+                String(paper.school).trim() !== ""
+        );
+
+
+    const hasRegion =
+        records.some(
+            paper =>
+                paper.region !== undefined &&
+                paper.region !== null &&
+                String(paper.region).trim() !== ""
+        );
+
+
+    if (hasSchool) {
+
+        currentState.level =
+            "schools";
+
+
+        pushNavigationState();
+
+        renderSchools();
+
+        return;
+
+    }
+
+
+    if (hasRegion) {
+
+        currentState.level =
+            "regions";
+
+
+        pushNavigationState();
+
+        renderRegions();
+
+        return;
+
+    }
+
+
+    /*
+       If the data has neither school
+       nor region, go directly to years.
     */
 
     currentState.level =
-        "regions";
+        "years";
+
 
     pushNavigationState();
 
-    renderRegions();
+    renderYears();
 
 }
 
 
 /* =========================================================
-   GET MATCHING NORMAL PAPERS
+   SPECIAL OPTIONS
 ========================================================= */
 
-function getNormalPapers() {
+function renderSpecialOptions() {
 
-    if (
-        !Array.isArray(
-            window.pastPapers
-        )
+    updateBreadcrumb();
+
+
+    let records =
+        getRecordsForState();
+
+
+    let field = null;
+
+
+    /*
+       Detect the actual field used
+       by the data.js.
+    */
+
+    const possibleFields = [
+
+        "special",
+        "school",
+        "region"
+
+    ];
+
+
+    for (
+        const fieldName
+        of possibleFields
     ) {
 
-        return [];
+        if (
+            records.some(
+                paper =>
+                    paper[fieldName] !== undefined &&
+                    paper[fieldName] !== null &&
+                    String(
+                        paper[fieldName]
+                    ).trim() !== ""
+            )
+        ) {
+
+            field = fieldName;
+
+            break;
+
+        }
 
     }
 
 
-    return window.pastPapers.filter(
-        paper => {
+    /*
+       If no category exists,
+       go directly to year.
+    */
 
-            if (
-                isSpecialPaper(paper)
-            ) {
+    if (!field) {
 
-                return false;
+        currentState.level =
+            "years";
 
-            }
+        renderYears();
+
+        return;
+
+    }
 
 
-            return (
+    const values =
+        uniqueValues(
+            records,
+            field
+        );
 
-                normalize(
-                    paper.form
-                ) ===
-                normalize(
-                    currentState.form
-                )
 
-                &&
+    let html = `
 
-                normalize(
-                    paper.subject
-                ) ===
-                normalize(
-                    currentState.subject
-                )
+        <div class="step-header">
 
-                &&
+            <span class="step-number">
+                STEP 4
+            </span>
 
-                normalize(
-                    paper.type
-                ) ===
-                normalize(
-                    currentState.type
-                )
+            <h2>
+                Chagua Category
+            </h2>
 
-            );
+            <p>
+                Chagua category inayopatikana
+                kwenye database.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    values.forEach(
+        value => {
+
+            html += `
+
+                <div class="
+                    selection-card
+                    special-card
+                ">
+
+                    <div>
+
+                        <div class="card-icon">
+                            ⭐
+                        </div>
+
+                        <h3>
+                            ${escapeHTML(
+                                value
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                typeDisplayName(
+                                    currentState.type
+                                )
+                            )}
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openSpecial(
+                                '${escapeJS(
+                                    field
+                                )}',
+                                '${escapeJS(
+                                    value
+                                )}'
+                            )
+                        "
+                    >
+
+                        FUNGUA
+
+                    </button>
+
+                </div>
+
+            `;
 
         }
     );
+
+
+    html += `
+        </div>
+    `;
+
+
+    if (
+        values.length === 0
+    ) {
+
+        html =
+            `
+            <div class="step-header">
+
+                <span class="step-number">
+                    STEP 4
+                </span>
+
+                <h2>
+                    Hakuna Category
+                </h2>
+
+                <p>
+                    Hakuna category iliyowekwa
+                    kwenye database kwa uchaguzi huu.
+                </p>
+
+            </div>
+
+            ` +
+            emptyMessage(
+                "Hakuna data",
+                "Hakuna record inayolingana na uchaguzi huu."
+            );
+
+    }
+
+
+    stepContainer.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   OPEN SPECIAL
+========================================================= */
+
+function openSpecial(
+    field,
+    value
+) {
+
+    /*
+       Store the value according to
+       the actual data field.
+    */
+
+    if (
+        field === "school"
+    ) {
+
+        currentState.school =
+            value;
+
+    }
+
+
+    if (
+        field === "region"
+    ) {
+
+        currentState.region =
+            value;
+
+    }
+
+
+    if (
+        field === "special"
+    ) {
+
+        currentState.special =
+            value;
+
+    }
+
+
+    currentState.level =
+        "years";
+
+    currentState.year =
+        null;
+
+
+    pushNavigationState();
+
+    renderYears();
 
 }
 
@@ -2929,44 +3156,16 @@ function renderSchools() {
 
     updateBreadcrumb();
 
-    const papers =
-        getNormalPapers();
+
+    const records =
+        getRecordsForState();
 
 
-    const schools = [];
-
-    papers.forEach(
-        paper => {
-
-            const school =
-                paper.school ||
-                paper.schoolName ||
-                paper.institution ||
-                paper.organisation ||
-                paper.organization;
-
-
-            if (
-                school &&
-                !schools.some(
-                    item =>
-                        normalize(item.id) ===
-                        normalize(school)
-                )
-            ) {
-
-                schools.push({
-
-                    id: school,
-
-                    name: school
-
-                });
-
-            }
-
-        }
-    );
+    const schools =
+        uniqueValues(
+            records,
+            "school"
+        );
 
 
     let html = `
@@ -2982,8 +3181,8 @@ function renderSchools() {
             </h2>
 
             <p>
-                Chagua shule iliyotoa
-                mtihani huu.
+                Chagua shule yenye
+                examination papers.
             </p>
 
         </div>
@@ -2997,112 +3196,11 @@ function renderSchools() {
         schools.length === 0
     ) {
 
-        /*
-           Fallback:
-           Kama data ya zamani haina school,
-           tunatumia region badala yake.
-        */
-
-        const fallbackRegions =
-            getAvailableRegions();
-
-
-        if (
-            fallbackRegions.length > 0
-        ) {
-
-            html += `
-
-                <div class="empty-card">
-
-                    <div
-                        class="empty-card-icon">
-                        ℹ️
-                    </div>
-
-                    <h3>
-                        School haijawekwa
-                    </h3>
-
-                    <p>
-                        Data hii haina jina la shule,
-                        hivyo mfumo unatumia Mkoa
-                        uliopo kwenye database.
-                    </p>
-
-                </div>
-
-            `;
-
-
-            fallbackRegions.forEach(
-                region => {
-
-                    html += `
-
-                        <div class="
-                            selection-card
-                            region-card
-                        ">
-
-                            <div>
-
-                                <h3>
-                                    ${region.name}
-                                </h3>
-
-                                <p>
-                                    Papers za
-                                    ${region.name}
-                                </p>
-
-                            </div>
-
-                            <button
-                                class="open-btn"
-                                onclick="
-                                    openRegion(
-                                        '${region.id}'
-                                    )
-                                ">
-
-                                FUNGUA
-
-                            </button>
-
-                        </div>
-
-                    `;
-
-                }
+        html +=
+            emptyMessage(
+                "Hakuna shule",
+                "Hakuna shule iliyowekwa kwa uchaguzi huu."
             );
-
-        } else {
-
-            html += `
-
-                <div class="empty-card">
-
-                    <div
-                        class="empty-card-icon">
-                        📚
-                    </div>
-
-                    <h3>
-                        Hakuna shule
-                    </h3>
-
-                    <p>
-                        Hakuna paper yenye
-                        taarifa ya shule kwa
-                        uchaguzi huu bado.
-                    </p>
-
-                </div>
-
-            `;
-
-        }
 
     }
 
@@ -3119,22 +3217,21 @@ function renderSchools() {
 
                     <div>
 
-                        <div
-                            class="card-icon">
+                        <div class="card-icon">
                             🏫
                         </div>
 
                         <h3>
                             ${escapeHTML(
-                                school.name
+                                school
                             )}
                         </h3>
 
                         <p>
+                            Examination papers
+                            kutoka
                             ${escapeHTML(
-                                getTypeName(
-                                    currentState.type
-                                )
+                                school
                             )}
                         </p>
 
@@ -3145,10 +3242,11 @@ function renderSchools() {
                         onclick="
                             openSchool(
                                 '${escapeJS(
-                                    school.id
+                                    school
                                 )}'
                             )
-                        ">
+                        "
+                    >
 
                         FUNGUA
 
@@ -3177,85 +3275,24 @@ function renderSchools() {
    OPEN SCHOOL
 ========================================================= */
 
-function openSchool(
-    schoolId
-) {
-
-    currentState.level =
-        "years";
+function openSchool(school) {
 
     currentState.school =
-        schoolId;
+        school;
 
     currentState.region =
         null;
 
+    currentState.level =
+        "years";
+
     currentState.year =
         null;
+
 
     pushNavigationState();
 
     renderYears();
-
-}
-
-
-/* =========================================================
-   GET AVAILABLE REGIONS
-========================================================= */
-
-function getAvailableRegions() {
-
-    const papers =
-        getNormalPapers();
-
-
-    const ids = [];
-
-
-    papers.forEach(
-        paper => {
-
-            if (
-
-                normalize(
-                    paper.region
-                ) &&
-
-                normalize(
-                    paper.region
-                ) !== "necta"
-
-            ) {
-
-                const region =
-                    normalize(
-                        paper.region
-                    );
-
-
-                if (
-                    !ids.includes(region)
-                ) {
-
-                    ids.push(region);
-
-                }
-
-            }
-
-        }
-    );
-
-
-    return regions.filter(
-        region =>
-            ids.includes(
-                normalize(
-                    region.id
-                )
-            )
-    );
 
 }
 
@@ -3269,8 +3306,15 @@ function renderRegions() {
     updateBreadcrumb();
 
 
-    const availableRegions =
-        getAvailableRegions();
+    const records =
+        getRecordsForState();
+
+
+    const regions =
+        uniqueValues(
+            records,
+            "region"
+        );
 
 
     let html = `
@@ -3298,35 +3342,19 @@ function renderRegions() {
 
 
     if (
-        availableRegions.length === 0
+        regions.length === 0
     ) {
 
-        html += `
-
-            <div class="empty-card">
-
-                <div
-                    class="empty-card-icon">
-                    📚
-                </div>
-
-                <h3>
-                    Hakuna mkoa
-                </h3>
-
-                <p>
-                    Hakuna paper iliyowekwa
-                    kwa aina hii bado.
-                </p>
-
-            </div>
-
-        `;
+        html +=
+            emptyMessage(
+                "Hakuna mkoa",
+                "Hakuna paper iliyowekwa kwa aina hii."
+            );
 
     }
 
 
-    availableRegions.forEach(
+    regions.forEach(
         region => {
 
             html += `
@@ -3338,18 +3366,21 @@ function renderRegions() {
 
                     <div>
 
-                        <div
-                            class="card-icon">
+                        <div class="card-icon">
                             📍
                         </div>
 
                         <h3>
-                            ${region.name}
+                            ${escapeHTML(
+                                region
+                            )}
                         </h3>
 
                         <p>
                             Past Papers za
-                            ${region.name}
+                            ${escapeHTML(
+                                region
+                            )}
                         </p>
 
                     </div>
@@ -3358,9 +3389,12 @@ function renderRegions() {
                         class="open-btn"
                         onclick="
                             openRegion(
-                                '${region.id}'
+                                '${escapeJS(
+                                    region
+                                )}'
                             )
-                        ">
+                        "
+                    >
 
                         FUNGUA
 
@@ -3389,150 +3423,21 @@ function renderRegions() {
    OPEN REGION
 ========================================================= */
 
-function openRegion(
-    regionId
-) {
+function openRegion(region) {
+
+    currentState.region =
+        region;
 
     currentState.level =
         "years";
 
-    currentState.region =
-        regionId;
-
-    currentState.school =
-        null;
-
     currentState.year =
         null;
+
 
     pushNavigationState();
 
     renderYears();
-
-}
-
-
-/* =========================================================
-   GET AVAILABLE YEARS
-========================================================= */
-
-function getAvailableYears() {
-
-    const papers =
-        getNormalPapers();
-
-
-    const found = [];
-
-
-    papers.forEach(
-        paper => {
-
-            /*
-               School based
-            */
-
-            if (
-                currentState.school
-            ) {
-
-                const school =
-                    paper.school ||
-                    paper.schoolName ||
-                    paper.institution ||
-                    paper.organisation ||
-                    paper.organization;
-
-
-                if (
-                    normalize(
-                        school
-                    ) !==
-                    normalize(
-                        currentState.school
-                    )
-                ) {
-
-                    return;
-
-                }
-
-            }
-
-
-            /*
-               Region based
-            */
-
-            if (
-                currentState.region
-            ) {
-
-                if (
-                    normalize(
-                        paper.region
-                    ) !==
-                    normalize(
-                        currentState.region
-                    )
-                ) {
-
-                    return;
-
-                }
-
-            }
-
-
-            /*
-               NECTA / FTNA
-            */
-
-            if (
-
-                !currentState.school &&
-
-                !currentState.region &&
-
-                !(
-                    currentState.type ===
-                    "necta" ||
-
-                    currentState.type ===
-                    "ftna"
-                )
-
-            ) {
-
-                return;
-
-            }
-
-
-            const year =
-                String(
-                    paper.year ?? ""
-                );
-
-
-            if (
-                year &&
-                !found.includes(year)
-            ) {
-
-                found.push(year);
-
-            }
-
-        }
-    );
-
-
-    return found.sort(
-        (a,b) =>
-            Number(b) -
-            Number(a)
-    );
 
 }
 
@@ -3546,8 +3451,32 @@ function renderYears() {
     updateBreadcrumb();
 
 
-    const availableYears =
-        getAvailableYears();
+    const records =
+        getRecordsForState();
+
+
+    const rawYears =
+        uniqueValues(
+            records,
+            "year"
+        );
+
+
+    const years =
+        rawYears
+            .map(
+                year =>
+                    String(year)
+            )
+            .filter(
+                year =>
+                    year !== ""
+            )
+            .sort(
+                (a,b) =>
+                    Number(b) -
+                    Number(a)
+            );
 
 
     let html = `
@@ -3555,7 +3484,7 @@ function renderYears() {
         <div class="step-header">
 
             <span class="step-number">
-                STEP 5
+                STEP ${getStepNumber()}
             </span>
 
             <h2>
@@ -3563,7 +3492,8 @@ function renderYears() {
             </h2>
 
             <p>
-                Chagua mwaka wa Past Paper.
+                Chagua mwaka wa
+                Past Paper.
             </p>
 
         </div>
@@ -3574,35 +3504,19 @@ function renderYears() {
 
 
     if (
-        availableYears.length === 0
+        years.length === 0
     ) {
 
-        html += `
-
-            <div class="empty-card">
-
-                <div
-                    class="empty-card-icon">
-                    📅
-                </div>
-
-                <h3>
-                    Hakuna mwaka
-                </h3>
-
-                <p>
-                    Hakuna paper iliyowekwa
-                    kwa uchaguzi huu.
-                </p>
-
-            </div>
-
-        `;
+        html +=
+            emptyMessage(
+                "Hakuna mwaka",
+                "Hakuna paper iliyowekwa kwa uchaguzi huu."
+            );
 
     }
 
 
-    availableYears.forEach(
+    years.forEach(
         year => {
 
             html += `
@@ -3614,18 +3528,21 @@ function renderYears() {
 
                     <div>
 
-                        <div
-                            class="card-icon">
+                        <div class="card-icon">
                             📅
                         </div>
 
                         <h3>
-                            ${year}
+                            ${escapeHTML(
+                                year
+                            )}
                         </h3>
 
                         <p>
                             Papers za mwaka
-                            ${year}
+                            ${escapeHTML(
+                                year
+                            )}
                         </p>
 
                     </div>
@@ -3634,9 +3551,12 @@ function renderYears() {
                         class="open-btn"
                         onclick="
                             openYear(
-                                '${year}'
+                                '${escapeJS(
+                                    year
+                                )}'
                             )
-                        ">
+                        "
+                    >
 
                         FUNGUA
 
@@ -3665,15 +3585,14 @@ function renderYears() {
    OPEN YEAR
 ========================================================= */
 
-function openYear(
-    year
-) {
+function openYear(year) {
 
     currentState.level =
         "papers";
 
     currentState.year =
         String(year);
+
 
     pushNavigationState();
 
@@ -3683,150 +3602,12 @@ function openYear(
 
 
 /* =========================================================
-   GET MATCHING NORMAL PAPERS
+   MATCHING PAPERS
 ========================================================= */
 
 function getMatchingPapers() {
 
-    if (
-        !Array.isArray(
-            window.pastPapers
-        )
-    ) {
-
-        return [];
-
-    }
-
-
-    return window.pastPapers.filter(
-        paper => {
-
-            if (
-                isSpecialPaper(paper)
-            ) {
-
-                return false;
-
-            }
-
-
-            if (
-                normalize(
-                    paper.form
-                ) !==
-                normalize(
-                    currentState.form
-                )
-            ) {
-
-                return false;
-
-            }
-
-
-            if (
-                normalize(
-                    paper.subject
-                ) !==
-                normalize(
-                    currentState.subject
-                )
-            ) {
-
-                return false;
-
-            }
-
-
-            if (
-                normalize(
-                    paper.type
-                ) !==
-                normalize(
-                    currentState.type
-                )
-            ) {
-
-                return false;
-
-            }
-
-
-            if (
-                String(
-                    paper.year
-                ) !==
-                String(
-                    currentState.year
-                )
-            ) {
-
-                return false;
-
-            }
-
-
-            /*
-               SCHOOL
-            */
-
-            if (
-                currentState.school
-            ) {
-
-                const school =
-                    paper.school ||
-                    paper.schoolName ||
-                    paper.institution ||
-                    paper.organisation ||
-                    paper.organization;
-
-
-                if (
-                    normalize(
-                        school
-                    ) !==
-                    normalize(
-                        currentState.school
-                    )
-                ) {
-
-                    return false;
-
-                }
-
-            }
-
-
-            /*
-               REGION
-            */
-
-            if (
-                currentState.region
-            ) {
-
-                if (
-                    normalize(
-                        paper.region
-                    ) !==
-                    normalize(
-                        currentState.region
-                    )
-                ) {
-
-                    return false;
-
-                }
-
-            }
-
-
-            return true;
-
-        }
-    );
+    return getRecordsForState();
 
 }
 
@@ -3849,7 +3630,7 @@ function renderPapers() {
         <div class="step-header">
 
             <span class="step-number">
-                STEP 6
+                STEP ${getStepNumber()}
             </span>
 
             <h2>
@@ -3857,8 +3638,8 @@ function renderPapers() {
             </h2>
 
             <p>
-                Chagua paper unayotaka
-                kufungua au kupakua.
+                Chagua Question Paper au
+                Marking Guide unayotaka.
             </p>
 
         </div>
@@ -3872,39 +3653,22 @@ function renderPapers() {
         papers.length === 0
     ) {
 
-        html += `
-
-            <div class="empty-card">
-
-                <div
-                    class="empty-card-icon">
-                    📄
-                </div>
-
-                <h3>
-                    Hakuna paper iliyopatikana
-                </h3>
-
-                <p>
-                    Hakuna PDF iliyounganishwa
-                    kwa uchaguzi huu bado.
-                </p>
-
-            </div>
-
-        `;
+        html +=
+            emptyMessage(
+                "Hakuna paper iliyopatikana",
+                "Hakuna PDF iliyounganishwa kwa uchaguzi huu bado."
+            );
 
     }
 
 
     papers.forEach(
-        (paper,index) => {
+        (paper, index) => {
 
-            html +=
-                renderPaperCard(
-                    paper,
-                    index
-                );
+            html += renderPaperCard(
+                paper,
+                index
+            );
 
         }
     );
@@ -3922,7 +3686,7 @@ function renderPapers() {
 
 
 /* =========================================================
-   PAPER CARD
+   RENDER SINGLE PAPER CARD
 ========================================================= */
 
 function renderPaperCard(
@@ -3930,25 +3694,9 @@ function renderPaperCard(
     index
 ) {
 
-    const file =
-        paper.file ||
-        paper.pdf ||
-        paper.pdfFile ||
-        "";
-
-
-    const markingFile =
-        paper.markingFile ||
-        paper.markingScheme ||
-        paper.marking ||
-        paper.marking_scheme ||
-        paper.markingGuide ||
-        paper.marking_guide ||
-        "";
-
-
     const title =
         paper.title ||
+        paper.name ||
         "Past Paper";
 
 
@@ -3957,7 +3705,165 @@ function renderPaperCard(
         "";
 
 
-    let html = `
+    const file =
+        getPaperFile(
+            paper
+        );
+
+
+    const marking =
+        getMarkingFile(
+            paper
+        );
+
+
+    const hasFile =
+        Boolean(file);
+
+
+    const hasMarking =
+        Boolean(marking);
+
+
+    let actions = "";
+
+
+    if (
+        hasFile &&
+        hasMarking
+    ) {
+
+        actions = `
+
+            <div class="paper-actions">
+
+                <button
+                    class="
+                        paper-btn
+                        question-btn
+                    "
+                    onclick="
+                        downloadPDF(
+                            '${escapeJS(file)}',
+                            '${escapeJS(title)}'
+                        )
+                    "
+                >
+
+                    📄
+                    Download PDF
+
+                </button>
+
+
+                <button
+                    class="
+                        paper-btn
+                        marking-btn
+                    "
+                    onclick="
+                        downloadPDF(
+                            '${escapeJS(marking)}',
+                            '${escapeJS(title + " Marking Guide")}'
+                        )
+                    "
+                >
+
+                    📝
+                    Marking Guide
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+    else if (
+        hasFile
+    ) {
+
+        actions = `
+
+            <div class="
+                paper-actions
+                single
+            ">
+
+                <button
+                    class="
+                        paper-btn
+                        question-btn
+                    "
+                    onclick="
+                        downloadPDF(
+                            '${escapeJS(file)}',
+                            '${escapeJS(title)}'
+                        )
+                    "
+                >
+
+                    📄
+                    Download PDF
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+    else if (
+        hasMarking
+    ) {
+
+        actions = `
+
+            <div class="
+                paper-actions
+                single
+            ">
+
+                <button
+                    class="
+                        paper-btn
+                        marking-btn
+                    "
+                    onclick="
+                        downloadPDF(
+                            '${escapeJS(marking)}',
+                            '${escapeJS(title + " Marking Guide")}'
+                        )
+                    "
+                >
+
+                    📝
+                    Download Marking Guide
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+    else {
+
+        actions = `
+
+            <div class="info-badge">
+                ⚠️ PDF haijawekwa
+            </div>
+
+        `;
+
+    }
+
+
+    return `
 
         <div class="
             selection-card
@@ -3966,12 +3872,8 @@ function renderPaperCard(
 
             <div>
 
-                <div
-                    class="card-icon
-                           pdf-icon">
-
+                <div class="card-icon pdf-icon">
                     📄
-
                 </div>
 
                 <h3>
@@ -3980,143 +3882,165 @@ function renderPaperCard(
                     )}
                 </h3>
 
-                <p>
-                    ${escapeHTML(
-                        description
-                    )}
-                </p>
+                ${
+                    description
+                        ? `
+                            <p>
+                                ${escapeHTML(
+                                    description
+                                )}
+                            </p>
+                          `
+                        : ""
+                }
 
             </div>
 
-    `;
-
-
-    if (file) {
-
-        html += `
-
-            <div
-                class="pdf-actions">
-
-                <button
-                    class="view-pdf"
-                    onclick="
-                        openPDF(
-                            '${escapeJS(
-                                file
-                            )}'
-                        )
-                    ">
-
-                    👁 VIEW PDF
-
-                </button>
-
-
-                <button
-                    class="download-pdf"
-                    onclick="
-                        downloadPDF(
-                            '${escapeJS(
-                                file
-                            )}'
-                        )
-                    ">
-
-                    ⬇ DOWNLOAD
-
-                </button>
-
-            </div>
-
-        `;
-
-    } else {
-
-        html += `
-
-            <button
-                class="open-btn
-                       pdf-button"
-                disabled>
-
-                PDF HAIPO
-
-            </button>
-
-        `;
-
-    }
-
-
-    /*
-       MARKING GUIDE
-    */
-
-    if (
-        markingFile
-    ) {
-
-        html += `
-
-            <button
-                class="
-                    marking-button
-                    open-btn
-                "
-                onclick="
-                    openPDF(
-                        '${escapeJS(
-                            markingFile
-                        )}'
-                    )
-                ">
-
-                ✅ MARKING GUIDE
-
-            </button>
-
-        `;
-
-    }
-
-
-    html += `
+            ${actions}
 
         </div>
 
     `;
 
+}
 
-    return html;
+
+/* =========================================================
+   FILE FIELD DETECTION
+========================================================= */
+
+function getPaperFile(paper) {
+
+    /*
+       Main expected field:
+       paper.file
+    */
+
+    if (
+        paper.file
+    ) {
+
+        return String(
+            paper.file
+        );
+
+    }
+
+
+    /*
+       Compatibility fields.
+    */
+
+    if (
+        paper.pdf
+    ) {
+
+        return String(
+            paper.pdf
+        );
+
+    }
+
+
+    if (
+        paper.questionPaper
+    ) {
+
+        return String(
+            paper.questionPaper
+        );
+
+    }
+
+
+    if (
+        paper.question
+    ) {
+
+        return String(
+            paper.question
+        );
+
+    }
+
+
+    return "";
 
 }
 
 
 /* =========================================================
-   OPEN PDF
+   MARKING GUIDE FIELD DETECTION
 ========================================================= */
 
-function openPDF(
-    file
-) {
+function getMarkingFile(paper) {
 
-    if (!file) {
+    /*
+       Main expected field:
+       paper.markingScheme
+    */
 
-        alert(
-            "PDF file haijawekwa kwenye database."
+    if (
+        paper.markingScheme
+    ) {
+
+        return String(
+            paper.markingScheme
         );
-
-        return;
 
     }
 
 
-    window.open(
-        file,
-        "_blank",
-        "noopener"
-    );
+    /*
+       Additional compatible
+       field names.
+    */
+
+    if (
+        paper.markingGuide
+    ) {
+
+        return String(
+            paper.markingGuide
+        );
+
+    }
+
+
+    if (
+        paper.marking
+    ) {
+
+        return String(
+            paper.marking
+        );
+
+    }
+
+
+    if (
+        paper.solution
+    ) {
+
+        return String(
+            paper.solution
+        );
+
+    }
+
+
+    if (
+        paper.answers
+    ) {
+
+        return String(
+            paper.answers
+        );
+
+    }
+
+
+    return "";
 
 }
 
@@ -4126,10 +4050,13 @@ function openPDF(
 ========================================================= */
 
 function downloadPDF(
-    file
+    file,
+    filename
 ) {
 
-    if (!file) {
+    if (
+        !file
+    ) {
 
         alert(
             "PDF file haijawekwa kwenye database."
@@ -4139,6 +4066,17 @@ function downloadPDF(
 
     }
 
+
+    /*
+       Use normal browser download
+       for local/static GitHub Pages
+       files.
+
+       If the browser does not allow
+       the download attribute because
+       of a server response, the file
+       is opened in a new tab.
+    */
 
     const link =
         document.createElement(
@@ -4150,16 +4088,18 @@ function downloadPDF(
         file;
 
 
-    link.download =
-        "";
-
-
     link.target =
         "_blank";
 
 
     link.rel =
         "noopener";
+
+
+    link.download =
+        sanitizeFilename(
+            filename
+        ) + ".pdf";
 
 
     document.body.appendChild(
@@ -4170,556 +4110,108 @@ function downloadPDF(
     link.click();
 
 
-    document.body.removeChild(
-        link
-    );
+    link.remove();
 
 }
 
 
 /* =========================================================
-   SPECIAL EXAMINATION
+   FILENAME
 ========================================================= */
 
-function openSpecial(
-    specialId
+function sanitizeFilename(
+    name
 ) {
 
-    currentState.level =
-        "specialSeries";
+    return String(
+        name || "past-paper"
+    )
 
-    currentState.special =
-        specialId;
+    .replace(
+        /[\\/:*?"<>|]+/g,
+        "_"
+    )
 
-    currentState.series =
-        null;
+    .trim()
 
-    currentState.form =
-        null;
-
-    currentState.subject =
-        null;
-
-    currentState.type =
-        null;
-
-    currentState.region =
-        null;
-
-    currentState.school =
-        null;
-
-    currentState.year =
-        null;
-
-
-    pushNavigationState();
-
-    renderSpecialSeries();
-
-}
-
-
-/* =========================================================
-   GET SPECIAL PAPERS
-========================================================= */
-
-function getSpecialPapers() {
-
-    if (
-        !Array.isArray(
-            window.pastPapers
-        )
-    ) {
-
-        return [];
-
-    }
-
-
-    return window.pastPapers.filter(
-        paper => {
-
-            if (
-                !isSpecialPaper(
-                    paper
-                )
-            ) {
-
-                return false;
-
-            }
-
-
-            const name =
-                normalize(
-                    getSpecialName(
-                        paper
-                    )
-                );
-
-
-            return (
-                name ===
-                normalize(
-                    currentState.special
-                )
-            );
-
-        }
+    .substring(
+        0,
+        100
     );
 
 }
 
 
 /* =========================================================
-   RENDER SPECIAL SERIES
+   EMPTY MESSAGE
 ========================================================= */
 
-function renderSpecialSeries() {
+function emptyMessage(
+    title,
+    message
+) {
 
-    updateBreadcrumb();
+    return `
 
-    backButton.style.display =
-        "inline-flex";
+        <div class="empty-card">
 
+            <div class="empty-card-icon">
+                📭
+            </div>
 
-    const papers =
-        getSpecialPapers();
-
-
-    const seriesList = [];
-
-
-    papers.forEach(
-        paper => {
-
-            const series =
-                getSeriesValue(
-                    paper
-                );
-
-
-            if (
-                series &&
-                !seriesList.some(
-                    item =>
-                        normalize(
-                            item.id
-                        ) ===
-                        normalize(
-                            series
-                        )
-                )
-            ) {
-
-                seriesList.push({
-
-                    id: series,
-
-                    name: series
-
-                });
-
-            }
-
-        }
-    );
-
-
-    let html = `
-
-        <div class="
-            step-header
-            special-step">
-
-            <span
-                class="step-number">
-
-                SPECIAL EXAMINATION
-
-            </span>
-
-            <h2>
-
+            <h3>
                 ${escapeHTML(
-                    getSpecialDisplayName(
-                        currentState.special
-                    )
+                    title
                 )}
-
-            </h2>
+            </h3>
 
             <p>
-                Chagua Examination Series.
+                ${escapeHTML(
+                    message
+                )}
             </p>
 
         </div>
 
-        <div class="selection-grid">
-
     `;
 
+}
 
-    if (
-        seriesList.length === 0
+
+/* =========================================================
+   STEP NUMBER
+========================================================= */
+
+function getStepNumber() {
+
+    switch (
+        currentState.level
     ) {
 
-        /*
-           Kama data ina special paper
-           bila series, ipeleke moja kwa moja
-           kwenye papers.
-        */
+        case "forms":
+            return 1;
 
-        if (
-            papers.length > 0
-        ) {
+        case "subjects":
+            return 2;
 
-            html += `
+        case "types":
+            return 3;
 
-                <div class="empty-card">
+        case "schools":
+        case "regions":
+        case "special":
+            return 4;
 
-                    <div
-                        class="empty-card-icon">
-                        📄
-                    </div>
+        case "years":
+            return 5;
 
-                    <h3>
-                        Papers za
-                        ${escapeHTML(
-                            getSpecialDisplayName(
-                                currentState.special
-                            )
-                        )}
-                    </h3>
+        case "papers":
+            return 6;
 
-                    <p>
-                        Hakuna Series
-                        iliyowekwa; papers
-                        zitaonyeshwa moja kwa moja.
-                    </p>
-
-                </div>
-
-            `;
-
-
-            html += `
-                </div>
-            `;
-
-
-            stepContainer.innerHTML =
-                html;
-
-
-            /*
-               Render papers directly
-            */
-
-            setTimeout(
-                () => {
-
-                    renderSpecialPapersDirect(
-                        papers
-                    );
-
-                },
-                0
-            );
-
-
-            return;
-
-        }
-
-
-        html += `
-
-            <div class="empty-card">
-
-                <div
-                    class="empty-card-icon">
-                    ⭐
-                </div>
-
-                <h3>
-                    Hakuna Series
-                </h3>
-
-                <p>
-                    Hakuna papers za
-                    ${escapeHTML(
-                        getSpecialDisplayName(
-                            currentState.special
-                        )
-                    )}
-                    zilizowekwa bado.
-                </p>
-
-            </div>
-
-        `;
+        default:
+            return 1;
 
     }
-
-
-    seriesList.forEach(
-        series => {
-
-            html += `
-
-                <div class="
-                    selection-card
-                    series-card
-                ">
-
-                    <div>
-
-                        <div
-                            class="
-                                special-icon
-                            ">
-
-                            📑
-
-                        </div>
-
-                        <h3>
-                            ${escapeHTML(
-                                series.name
-                            )}
-                        </h3>
-
-                        <p>
-                            Examination Series
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="
-                            open-btn
-                            special-button
-                        "
-                        onclick="
-                            openSpecialSeries(
-                                '${escapeJS(
-                                    series.id
-                                )}'
-                            )
-                        ">
-
-                        FUNGUA
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    html += `
-        </div>
-    `;
-
-
-    stepContainer.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   SPECIAL DISPLAY NAME
-========================================================= */
-
-function getSpecialDisplayName(
-    id
-) {
-
-    const item =
-        specialExaminations.find(
-            special =>
-                normalize(
-                    special.id
-                ) ===
-                normalize(id)
-        );
-
-
-    return item
-        ? item.name
-        : id;
-
-}
-
-
-/* =========================================================
-   OPEN SPECIAL SERIES
-========================================================= */
-
-function openSpecialSeries(
-    seriesId
-) {
-
-    currentState.level =
-        "specialPapers";
-
-    currentState.series =
-        seriesId;
-
-    pushNavigationState();
-
-    renderSpecialPapers();
-
-}
-
-
-/* =========================================================
-   GET SPECIAL SERIES PAPERS
-========================================================= */
-
-function getSpecialSeriesPapers() {
-
-    return getSpecialPapers().filter(
-        paper => {
-
-            return (
-                normalize(
-                    getSeriesValue(
-                        paper
-                    )
-                ) ===
-                normalize(
-                    currentState.series
-                )
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   RENDER SPECIAL PAPERS
-========================================================= */
-
-function renderSpecialPapers() {
-
-    updateBreadcrumb();
-
-
-    const papers =
-        getSpecialSeriesPapers();
-
-
-    renderSpecialPapersDirect(
-        papers
-    );
-
-}
-
-
-/* =========================================================
-   DIRECT SPECIAL PAPERS
-========================================================= */
-
-function renderSpecialPapersDirect(
-    papers
-) {
-
-    let html = `
-
-        <div class="
-            step-header
-            special-step">
-
-            <span
-                class="step-number">
-
-                STEP 3
-
-            </span>
-
-            <h2>
-                ${escapeHTML(
-                    getSpecialDisplayName(
-                        currentState.special
-                    )
-                )}
-                -
-                ${escapeHTML(
-                    currentState.series ||
-                    "Papers"
-                )}
-            </h2>
-
-            <p>
-                Chagua paper unayotaka
-                kufungua au kupakua.
-            </p>
-
-        </div>
-
-        <div class="selection-grid">
-
-    `;
-
-
-    if (
-        papers.length === 0
-    ) {
-
-        html += `
-
-            <div class="empty-card">
-
-                <div
-                    class="empty-card-icon">
-                    📄
-                </div>
-
-                <h3>
-                    Hakuna paper
-                </h3>
-
-                <p>
-                    Hakuna PDF iliyowekwa
-                    kwenye Series hii bado.
-                </p>
-
-            </div>
-
-        `;
-
-    }
-
-
-    papers.forEach(
-        (paper,index) => {
-
-            html +=
-                renderPaperCard(
-                    paper,
-                    index
-                );
-
-        }
-    );
-
-
-    html += `
-        </div>
-    `;
-
-
-    stepContainer.innerHTML =
-        html;
 
 }
 
@@ -4730,57 +4222,22 @@ function renderSpecialPapersDirect(
 
 function updateBreadcrumb() {
 
-    const items = [];
+    const items = [
 
+        "Past Papers"
 
-    items.push({
-        text:
-            "Past Papers",
-        special: false
-    });
+    ];
 
 
     if (
-        currentState.special
-    ) {
-
-        items.push({
-
-            text:
-                getSpecialDisplayName(
-                    currentState.special
-                ),
-
-            special:
-                true
-
-        });
-
-    } else if (
         currentState.form
     ) {
 
-        const form =
-            forms.find(
-                item =>
-                    item.id ===
-                    currentState.form
-            );
-
-
-        if (form) {
-
-            items.push({
-
-                text:
-                    form.name,
-
-                special:
-                    false
-
-            });
-
-        }
+        items.push(
+            getFormName(
+                currentState.form
+            )
+        );
 
     }
 
@@ -4790,24 +4247,18 @@ function updateBreadcrumb() {
     ) {
 
         const subject =
-            subjects.find(
-                item =>
-                    item.id ===
-                    currentState.subject
+            getSubject(
+                currentState.subject
             );
 
 
-        if (subject) {
+        if (
+            subject
+        ) {
 
-            items.push({
-
-                text:
-                    subject.name,
-
-                special:
-                    false
-
-            });
+            items.push(
+                subject.name
+            );
 
         }
 
@@ -4818,17 +4269,11 @@ function updateBreadcrumb() {
         currentState.type
     ) {
 
-        items.push({
-
-            text:
-                getTypeName(
-                    currentState.type
-                ),
-
-            special:
-                false
-
-        });
+        items.push(
+            typeDisplayName(
+                currentState.type
+            )
+        );
 
     }
 
@@ -4837,15 +4282,9 @@ function updateBreadcrumb() {
         currentState.school
     ) {
 
-        items.push({
-
-            text:
-                currentState.school,
-
-            special:
-                false
-
-        });
+        items.push(
+            currentState.school
+        );
 
     }
 
@@ -4854,44 +4293,20 @@ function updateBreadcrumb() {
         currentState.region
     ) {
 
-        const region =
-            regions.find(
-                item =>
-                    item.id ===
-                    currentState.region
-            );
-
-
-        if (region) {
-
-            items.push({
-
-                text:
-                    region.name,
-
-                special:
-                    false
-
-            });
-
-        }
+        items.push(
+            currentState.region
+        );
 
     }
 
 
     if (
-        currentState.series
+        currentState.special
     ) {
 
-        items.push({
-
-            text:
-                currentState.series,
-
-            special:
-                true
-
-        });
+        items.push(
+            currentState.special
+        );
 
     }
 
@@ -4900,40 +4315,53 @@ function updateBreadcrumb() {
         currentState.year
     ) {
 
-        items.push({
-
-            text:
-                currentState.year,
-
-            special:
-                false
-
-        });
+        items.push(
+            currentState.year
+        );
 
     }
 
 
     breadcrumb.innerHTML =
-        items.map(
-            (item,index) => {
+        items
+            .map(
+                (item, index) => {
 
-                const cls =
-                    item.special
-                    ? "breadcrumb-item breadcrumb-special"
-                    : "breadcrumb-item";
+                    if (
+                        index === 0
+                    ) {
 
+                        return `
 
-                if (
-                    index === 0
-                ) {
+                            <span class="
+                                breadcrumb-item
+                            ">
+
+                                ${escapeHTML(
+                                    item
+                                )}
+
+                            </span>
+
+                        `;
+
+                    }
+
 
                     return `
 
-                        <span
-                            class="${cls}">
+                        <span class="
+                            breadcrumb-separator
+                        ">
+                            ›
+                        </span>
+
+                        <span class="
+                            breadcrumb-item
+                        ">
 
                             ${escapeHTML(
-                                item.text
+                                item
                             )}
 
                         </span>
@@ -4941,55 +4369,8 @@ function updateBreadcrumb() {
                     `;
 
                 }
-
-
-                return `
-
-                    <span
-                        class="
-                            breadcrumb-separator
-                        ">
-
-                        ›
-
-                    </span>
-
-                    <span
-                        class="${cls}">
-
-                        ${escapeHTML(
-                            item.text
-                        )}
-
-                    </span>
-
-                `;
-
-            }
-        ).join("");
-
-}
-
-
-/* =========================================================
-   TYPE NAME
-========================================================= */
-
-function getTypeName(
-    typeId
-) {
-
-    const type =
-        paperTypes.find(
-            item =>
-                item.id ===
-                typeId
-        );
-
-
-    return type
-        ? type.name
-        : typeId;
+            )
+            .join("");
 
 }
 
@@ -5036,7 +4417,9 @@ window.addEventListener(
 
             renderCurrentLevel();
 
-        } else {
+        }
+
+        else {
 
             renderForms();
 
@@ -5091,6 +4474,13 @@ function renderCurrentLevel() {
             break;
 
 
+        case "special":
+
+            renderSpecialOptions();
+
+            break;
+
+
         case "years":
 
             renderYears();
@@ -5101,20 +4491,6 @@ function renderCurrentLevel() {
         case "papers":
 
             renderPapers();
-
-            break;
-
-
-        case "specialSeries":
-
-            renderSpecialSeries();
-
-            break;
-
-
-        case "specialPapers":
-
-            renderSpecialPapers();
 
             break;
 
@@ -5200,7 +4576,9 @@ function toggleDropdown(
         button.nextElementSibling;
 
 
-    if (!container) {
+    if (
+        !container
+    ) {
 
         return;
 
@@ -5214,8 +4592,83 @@ function toggleDropdown(
 
     container.style.display =
         open
-        ? "none"
-        : "block";
+            ? "none"
+            : "block";
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE JAVASCRIPT STRING
+========================================================= */
+
+function escapeJS(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+
+    .replaceAll(
+        "\\",
+        "\\\\"
+    )
+
+    .replaceAll(
+        "'",
+        "\\'"
+    )
+
+    .replaceAll(
+        "\n",
+        "\\n"
+    )
+
+    .replaceAll(
+        "\r",
+        "\\r"
+    );
 
 }
 
@@ -5229,34 +4682,21 @@ function initialize() {
     history.replaceState(
 
         {
+            level: "forms",
 
-            level:
-                "forms",
+            form: null,
 
-            form:
-                null,
+            subject: null,
 
-            subject:
-                null,
+            type: null,
 
-            type:
-                null,
+            region: null,
 
-            region:
-                null,
+            school: null,
 
-            school:
-                null,
+            year: null,
 
-            year:
-                null,
-
-            special:
-                null,
-
-            series:
-                null
-
+            special: null
         },
 
         "",
@@ -5269,6 +4709,34 @@ function initialize() {
     if (
         !checkDataFile()
     ) {
+
+        stepContainer.innerHTML = `
+
+            <div class="empty-card">
+
+                <div class="empty-card-icon">
+                    ⚠️
+                </div>
+
+                <h3>
+                    Database haijapakiwa
+                </h3>
+
+                <p>
+                    Angalia
+                    <strong>
+                        pastpapers-data.js
+                    </strong>
+                    na uhakikishe ipo kwenye
+                    folder moja na
+                    <strong>
+                        pastpapers.html
+                    </strong>.
+                </p>
+
+            </div>
+
+        `;
 
         return;
 
@@ -5286,8 +4754,8 @@ function initialize() {
 
 initialize();
 
+
 </script>
 
 </body>
-
 </html>
