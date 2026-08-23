@@ -3,312 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="GEPAM Science Hub Past Papers - Physics, Chemistry and Biology examination papers from Form 1 to Form 6.">
+<meta name="description" content="GEPAM Science Hub Past Papers - Physics and Chemistry examination papers from Form 1 to Form 6.">
 <meta name="theme-color" content="#0d47a1">
 <title>GEPAM Science Hub | Past Papers</title>
 <link rel="icon" type="image/png" href="file_00000000f17471f4b8f76a744122207a.png">
+
+<!-- VIUNGANISHI VYAKO ASILIA VYA NJE -->
+<link rel="stylesheet" href="style.css">
+<script src="pastpapers-data.js"></script>
+
 <style>
-/* =========================================================
-   GEPAM SCIENCE HUB - PAST PAPERS PAGE
-========================================================= */
-:root {
-    --primary: #1769aa;
-    --primary-dark: #0d47a1;
-    --secondary: #00a6a6;
-    --accent: #ff9800;
-    --light-blue: #eef7ff;
-    --text: #172033;
-    --muted: #687386;
-    --white: #ffffff;
-    --border: #dce5ee;
-    --shadow: 0 8px 25px rgba(23, 105, 170, 0.10);
-    /* SPECIAL EXAMINATION COLORS */
-    --special-primary: #7b1fa2;
-    --special-secondary: #e91e63;
-    --special-light: #fff0f8;
-}
-* {
-    box-sizing: border-box;
-}
-html {
-    scroll-behavior: smooth;
-}
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(180deg, #f5faff 0%, #ffffff 55%, #f5faff 100%);
-    color: var(--text);
-    overflow-x: hidden;
-}
-/* =========================================================
-   HEADER
-========================================================= */
-.nav-header {
-    width: 100%;
-    max-width: 1050px;
-    margin: 0 auto;
-    padding: 14px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #ffffff;
-    border-bottom: 1px solid var(--border);
-}
-.logo-area {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.logo-area img {
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
-}
-.logo-text {
-    display: flex;
-    flex-direction: column;
-}
-.logo-title {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--primary-dark);
-}
-.logo-subtitle {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 2px;
-}
-.menu-toggle {
-    width: 45px;
-    height: 42px;
-    border: none;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-}
-/* =========================================================
-   MAIN CONTAINER
-========================================================= */
-.main-container {
-    width: 100%;
-    max-width: 1050px;
-    margin: 0 auto;
-    padding: 25px 20px 60px;
-}
-/* =========================================================
-   HERO LAYOUT
-========================================================= */
-.page-hero {
-    padding: 32px 25px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #0d47a1, #1769aa 55%, #00a6a6);
-    color: white;
-    box-shadow: 0 12px 30px rgba(13, 71, 161, 0.22);
-    margin-bottom: 25px;
-}
-.hero-icon {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,0.15);
-    border-radius: 16px;
-    font-size: 32px;
-    margin-bottom: 15px;
-}
-.page-hero h1 {
-    margin: 0 0 8px;
-    font-size: 30px;
-}
-.page-hero p {
-    margin: 0;
-    line-height: 1.7;
-    color: #e8f4ff;
-}
-/* =========================================================
-   ELEMENTS
-========================================================= */
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin: 10px 0 18px;
-    font-size: 14px;
-}
-.breadcrumb-item {
-    padding: 6px 10px;
-    border-radius: 20px;
-    background: #e9f3fb;
-    color: var(--primary-dark);
-    font-weight: 700;
-}
-.breadcrumb-separator {
-    color: #9aa7b5;
-    font-weight: bold;
-}
-.breadcrumb-special {
-    background: #f7e7ff;
-    color: var(--special-primary);
-}
-.back-btn {
-    display: none;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 9px;
-    background: #263746;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-}
-.back-btn:hover {
-    background: #172631;
-}
-.step-header {
-    margin: 10px 0 20px;
-}
-.step-number {
-    display: inline-block;
-    padding: 6px 10px;
-    border-radius: 20px;
-    background: #dff6f6;
-    color: #007c7c;
-    font-size: 12px;
-    font-weight: 800;
-    margin-bottom: 8px;
-}
-.step-header h2 {
-    margin: 0 0 7px;
-    font-size: 25px;
-}
-.step-header p {
-    margin: 0;
-    color: var(--muted);
-    line-height: 1.6;
-}
-.special-step .step-number {
-    background: #f5dcff;
-    color: var(--special-primary);
-}
-.data-status {
-    display: none;
-    margin: 0 0 20px;
-    padding: 13px 15px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 700;
-}
-.data-status.error {
-    display: block;
-    background: #ffebee;
-    border: 1px solid #ffcdd2;
-    color: #b71c1c;
-}
-.selection-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
-}
-.selection-card {
-    position: relative;
-    background: rgba(255,255,255,0.98);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 22px;
-    min-height: 185px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    transition: transform .2s ease, box-shadow .2s ease;
-}
-.selection-card::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-}
-.selection-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 14px 30px rgba(23,105,170,0.15);
-}
-.selection-card h3 {
-    margin: 0 0 8px;
-    font-size: 20px;
-    color: #17324d;
-}
-.selection-card p {
-    margin: 0;
-    color: var(--muted);
-    line-height: 1.55;
-    font-size: 14px;
-}
-.form-card { min-height: 205px; }
-.form-card::before { background: linear-gradient(90deg, #1769aa, #00a6a6); }
-.physics-card::before { background: linear-gradient(90deg, #1565c0, #42a5f5); }
-.chemistry-card::before { background: linear-gradient(90deg, #00897b, #26a69a); }
-.biology-card::before { background: linear-gradient(90deg, #2e7d32, #66bb6a); }
-.physics-card .card-icon { background: #e6f1ff; }
-.chemistry-card .card-icon { background: #e5f8f5; }
-.biology-card .card-icon { background: #eaf7ea; }
-.region-card::before { background: linear-gradient(90deg, #00695c, #26a69a); }
-.year-card::before { background: linear-gradient(90deg, #283593, #5c6bc0); }
-.type-card::before { background: linear-gradient(90deg, #7b1fa2, #ab47bc); }
-.school-card::before { background: linear-gradient(90deg, #ef6c00, #ffa726); }
-.special-section { margin-top: 35px; }
-.special-section-header { margin-bottom: 18px; }
-.special-section-header h2 { margin: 0 0 7px; color: var(--special-primary); font-size: 25px; }
-.special-section-header p { margin: 0; color: var(--muted); }
-.special-card { background: linear-gradient(145deg, #ffffff, #fff7fc); border: 1px solid #ead2f2; }
-.special-card::before { background: linear-gradient(90deg, var(--special-primary), var(--special-secondary)); }
-.special-card h3 { color: #5a176f; }
-.special-icon { width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; border-radius: 15px; background: var(--special-light); font-size: 28px; margin-bottom: 14px; }
-.series-card { background: linear-gradient(145deg, #ffffff, #fff8fc); border-color: #e7cfee; }
-.series-card::before { background: linear-gradient(90deg, #8e24aa, #ec407a); }
-.card-icon { width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; border-radius: 15px; background: var(--light-blue); font-size: 28px; margin-bottom: 14px; }
-.open-btn { width: 100%; padding: 12px 14px; margin-top: 18px; border: none; border-radius: 9px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-size: 14px; font-weight: 800; cursor: pointer; transition: transform .15s ease, opacity .15s ease; }
-.open-btn:hover { transform: scale(1.02); opacity: .92; }
-.special-button { background: linear-gradient(135deg, var(--special-primary), var(--special-secondary)); }
-.pdf-card { min-height: 210px; }
-.pdf-card::before { background: linear-gradient(90deg, #b71c1c, #ef5350); }
-.pdf-icon { background: #ffebee; }
+/* NYONGEZA NDOGO YA RANGI ZA SPECIAL EXAMS */
+.breadcrumb-special { background: #f7e7ff; color: #7b1fa2; }
+.special-card::before { background: linear-gradient(90deg, #7b1fa2, #e91e63) !important; }
+.special-button { background: linear-gradient(135deg, #7b1fa2, #e91e63) !important; }
+.special-step .step-number { background: #f5dcff; color: #7b1fa2; }
 .pdf-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 18px; }
 .pdf-actions button { width: 100%; padding: 11px 8px; border: none; border-radius: 8px; color: white; font-size: 12px; font-weight: 800; cursor: pointer; }
 .view-pdf { background: linear-gradient(135deg, #c62828, #ef5350); }
 .download-pdf { background: linear-gradient(135deg, #1565c0, #42a5f5); }
 .marking-button { width: 100% !important; margin-top: 8px; background: linear-gradient(135deg, #2e7d32, #66bb6a); }
-.empty-card { grid-column: 1 / -1; padding: 30px; text-align: center; border-radius: 15px; background: #fff8e1; border: 1px solid #ffe082; }
-.empty-card-icon { font-size: 40px; margin-bottom: 10px; }
-.empty-card h3 { margin: 0 0 8px; color: #7a5600; }
-.empty-card p { margin: 0; color: #8b6a20; }
-.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.48); z-index: 9998; }
-.sidebar { position: fixed; top: 0; right: -310px; width: 290px; height: 100vh; background: white; z-index: 9999; box-shadow: -8px 0 25px rgba(0,0,0,.18); padding: 20px; transition: right .3s ease; overflow-y: auto; }
-.sidebar.active { right: 0; }
-.close-btn { float: right; width: 40px; height: 40px; border: none; border-radius: 9px; background: #edf2f7; font-size: 20px; cursor: pointer; }
-.sidebar-links { clear: both; padding-top: 35px; display: flex; flex-direction: column; gap: 8px; }
-.sidebar-links a, .dropdown-btn { width: 100%; padding: 13px; border: none; border-radius: 9px; background: white; text-align: left; text-decoration: none; color: #253444; font-weight: 700; font-size: 15px; cursor: pointer; }
-.sidebar-links a:hover, .dropdown-btn:hover { background: #edf6ff; color: var(--primary-dark); }
-.dropdown-container { display: none; padding-left: 12px; border-left: 3px solid var(--secondary); }
-.dropdown-container a { font-size: 14px; font-weight: 600; }
-footer { margin-top: 30px; padding: 30px 20px; text-align: center; background: #102a43; color: #dcecff; }
-footer strong { color: white; }
-@media (max-width: 600px) { .main-container { padding: 18px 14px 45px; } .page-hero { padding: 25px 20px; border-radius: 16px; } .page-hero h1 { font-size: 25px; } .selection-grid { grid-template-columns: 1fr; gap: 14px; } .selection-card { min-height: 175px; } .step-header h2 { font-size: 22px; } .pdf-actions { grid-template-columns: 1fr 1fr; } }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-#stepContainer { animation: fadeIn .25s ease; }
 </style>
-
-<!-- KUREKEBISHA NA DASHI: Faili sahihi la data sasa linasomwa hapa mapema -->
-<script src="pastpapers-data.js"></script>
 </head>
 <body>
 <header class="nav-header">
@@ -335,10 +50,8 @@ footer strong { color: white; }
 
     <button id="backButton" class="back-btn" onclick="goBack()">← RUDI NYUMA</button>
     <div id="dataStatus" class="data-status"></div>
-    
     <div id="stepContainer"></div>
 </main>
-
 <div id="menuOverlay" class="overlay" onclick="toggleMenu()"></div>
 
 <aside id="sidebarMenu" class="sidebar">
@@ -473,6 +186,7 @@ function openForm(formId) {
     pushNavigationState(); renderSubjects();
 }
 
+// ... kodi inaendelea kwenye Kipande cha 6
 function renderSubjects() {
     const form = forms.find(item => item.id === currentState.form);
     if (!form) { renderForms(); return; }
@@ -743,7 +457,7 @@ function initialize() {
     renderForms(); 
 }
 
-/* KUREKEBISHA UPANDAJI: Inasubiri kivinjari kimalize kabisa kupakia pastpapers-data.js */
+// INASUBIRI KIVINJARI KIMALIZE KUSOMA PASTPAPERS-DATA.JS ILI ISIKWAME
 document.addEventListener("DOMContentLoaded", function() {
     initialize();
 });
