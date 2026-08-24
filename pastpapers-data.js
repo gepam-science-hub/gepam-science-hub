@@ -1124,7 +1124,7 @@ const pastPapers = [
     type: "mock",
     region: "dar_es_salaam",
     year: 2024,
-    file: "papers/form6/physics/mock/dar_es_salaam/2024/F6_Phys3B_Mock_2024_Dar_es_salaam_Gepam_hub.pdf",
+    file: "papers/form6/physics/mock/dar_es_salaam/2024/Form_6_Phys3B_Mock_2024_Dar_es_salaam_Gepam_hub.pdf",
     "markingScheme":""
 },
 
@@ -1205,7 +1205,7 @@ const pastPapers = [
     type: "mock",
     region: "dar_es_salaam",
     year: 2025,
-    file: "papers/form6/chemistry/mock/dar_es_salaam/2025/F6_Chemistry1_Mock_2025_Dar_es_salaam_Gepam_hub.pdf",
+    file: "papers/form6/chemistry/mock/dar_es_salaam/2025/Form_6_Chemistry1_Mock_2025_Dar_es_salaam_Gepam_hub.pdf",
     "markingScheme":""
 },
 
@@ -1227,7 +1227,7 @@ const pastPapers = [
     type: "mock",
     region: "dar_es_salaam",
     year: 2025,
-    file: "papers/form6/chemistry/mock/dar_es_salaam/2025/F6_Chemistry3A_Mock_2025_Dar_es_salaam_Gepam_hub.pdf",
+    file: "papers/form6/chemistry/mock/dar_es_salaam/2025/Form_6_Chemistry3A_Mock_2025_Dar_es_salaam_Gepam_hub.pdf",
     "markingScheme":""
 },
 
