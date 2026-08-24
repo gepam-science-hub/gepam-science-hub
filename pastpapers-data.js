@@ -1238,7 +1238,7 @@ const pastPapers = [
     type: "mock",
     region: "dar_es_salaam",
     year: 2024,
-    file: "papers/form6/chemistry/mock/dar_es_salaam/2024/F6_Chemistry1_Mock_2024_Dar_es_salaam_Gepam_hub.pdf",
+    file: "papers/form6/chemistry/mock/dar_es_salaam/2024/Form_6_Chemistry1_Mock_2024_Dar_es_salaam_Gepam_hub.pdf",
     "markingScheme":""
 },
 
@@ -1260,7 +1260,7 @@ const pastPapers = [
     type: "mock",
     region: "dar_es_salaam",
     year: 2024,
-    file: "papers/form6/chemistry/mock/dar_es_salaam/2024/F6_Chemistry3B_Mock_2024_Dar_es_salaam_Gepam_hub.pdf",
+    file: "papers/form6/chemistry/mock/dar_es_salaam/2024/Form_6_Chemistry3B_Mock_2024_Dar_es_salaam_Gepam_hub.pdf",
     "markingScheme":""
 },
 
