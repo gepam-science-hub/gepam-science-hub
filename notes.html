@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -62,6 +63,7 @@ body {
 
 .logo-area img {
     height: 40px;
+    width: auto;
 }
 
 .logo-title {
@@ -208,7 +210,6 @@ body {
 ========================================================= */
 
 .main-container {
-
     max-width: 1000px;
 
     margin: 0 auto;
@@ -335,7 +336,6 @@ body {
 ========================================================= */
 
 .selection-grid {
-
     display: grid;
 
     grid-template-columns:
@@ -352,7 +352,6 @@ body {
 ========================================================= */
 
 .selection-card {
-
     background: #fff;
 
     border: 1px solid #e5e5e5;
@@ -380,7 +379,6 @@ body {
 }
 
 .selection-card:hover {
-
     transform: translateY(-3px);
 
     box-shadow:
@@ -388,14 +386,12 @@ body {
 }
 
 .selection-card h3 {
-
     margin-top: 0;
 
     font-size: 19px;
 }
 
 .selection-card p {
-
     color: #666;
 
     line-height: 1.5;
@@ -409,7 +405,6 @@ body {
 ========================================================= */
 
 .open-btn {
-
     width: 100%;
 
     padding: 12px;
@@ -454,13 +449,45 @@ body {
 ========================================================= */
 
 .subject-card {
-
     min-height: 170px;
 }
 
 .subject-icon {
-
     font-size: 34px;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   FULL NOTES
+========================================================= */
+
+.full-notes-card {
+    border-top-color: #0066cc;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #f8fbff
+        );
+}
+
+.full-notes-label {
+    display: inline-block;
+
+    padding: 5px 9px;
+
+    border-radius: 4px;
+
+    background: #e8f2ff;
+
+    color: #0066cc;
+
+    font-size: 12px;
+
+    font-weight: bold;
 
     margin-bottom: 8px;
 }
@@ -471,12 +498,10 @@ body {
 ========================================================= */
 
 .topic-card {
-
     min-height: 190px;
 }
 
 .topic-price {
-
     font-size: 19px;
 
     font-weight: bold;
@@ -487,7 +512,6 @@ body {
 }
 
 .buy-btn {
-
     width: 100%;
 
     padding: 12px;
@@ -513,16 +537,52 @@ body {
 
 
 /* =========================================================
+   PRACTICAL
+========================================================= */
+
+.practical-section {
+    margin-top: 30px;
+}
+
+.practical-card {
+    border-top-color: #8a2be2;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #faf7ff
+        );
+}
+
+.practical-label {
+    display: inline-block;
+
+    padding: 5px 9px;
+
+    border-radius: 4px;
+
+    background: #f0e7ff;
+
+    color: #7020b5;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
    EMPTY / FUTURE TOPICS
 ========================================================= */
 
 .topic-card.future {
-
     border-top-color: #777;
 }
 
 .future-label {
-
     display: inline-block;
 
     padding: 5px 8px;
@@ -571,6 +631,7 @@ body {
 
 </head>
 
+
 <body>
 
 
@@ -592,6 +653,7 @@ body {
 
     </div>
 
+
     <button
         class="menu-toggle"
         onclick="toggleMenu()">
@@ -610,8 +672,6 @@ body {
 <main class="main-container">
 
 
-    <!-- PAGE HEADER -->
-
     <div class="page-header">
 
         <h1>
@@ -619,25 +679,32 @@ body {
         </h1>
 
         <p>
-            Chagua kidato, syllabus, subject na topic
+            Chagua aina ya notes, kidato,
+            syllabus, subject na topic
             unayotaka kusoma.
         </p>
 
     </div>
 
 
-    <!-- BREADCRUMB -->
+    <!-- ====================================================
+         BREADCRUMB
+    ===================================================== -->
 
     <div
         class="breadcrumb"
         id="breadcrumb">
 
-        <span>Premium Notes</span>
+        <span>
+            Premium Notes
+        </span>
 
     </div>
 
 
-    <!-- BACK -->
+    <!-- ====================================================
+         BACK
+    ===================================================== -->
 
     <button
         class="back-btn"
@@ -737,6 +804,7 @@ body {
             📚 Past Papers
         </a>
 
+
         <a href="contact.html">
             📞 Contact
         </a>
@@ -768,34 +836,20 @@ body {
 
 
 <!-- ========================================================
-     PAYMENT SYSTEM
+     EXISTING PAYMENT SYSTEM
+     
+     USIGUSE.
+     FILE HII INABAKI NA PAYMENT ENGINE YAKO YA SASA.
 ========================================================= -->
 
 <script src="notes.js"></script>
 
 
 <!-- ========================================================
-     NAVIGATION SYSTEM
+     PREMIUM NOTES NAVIGATION
 ========================================================= -->
 
 <script>
-
-/*
-=============================================================
- GEPAM PREMIUM NOTES NAVIGATION
-
- LEVELS:
-
- 1. FORMS
- 2. SYLLABUS
- 3. SUBJECT
- 4. TOPICS
- 5. PAYMENT
-
- Browser/Android Back button:
- returns one level backward.
-=============================================================
-*/
 
 
 /* =========================================================
@@ -804,193 +858,825 @@ body {
 
 let currentState = {
 
-    level: "forms",
+    level: "home",
 
     form: null,
 
     syllabus: null,
 
-    subject: null
+    subject: null,
+
+    section: null
 
 };
 
 
 /* =========================================================
-   DATA
+   SYLLABUS DATA
 ========================================================= */
 
 const syllabusData = {
 
     form1: {
-
         name: "Form 1",
 
         old: {
-
             name: "Old Syllabus",
-
             subjects: [
                 "Physics",
                 "Chemistry"
             ]
-
         },
 
         new: {
-
             name: "New Syllabus",
-
             subjects: [
                 "Physics",
                 "Chemistry"
             ]
-
         }
-
     },
 
 
     form2: {
-
         name: "Form 2",
 
         old: {
-
             name: "Old Syllabus",
-
             subjects: [
                 "Physics",
                 "Chemistry"
             ]
-
         },
 
         new: {
-
             name: "New Syllabus",
-
             subjects: [
                 "Physics",
                 "Chemistry"
             ]
-
         }
-
     },
 
 
     form3: {
-
         name: "Form 3",
 
         old: {
-
             name: "Old Syllabus",
-
             subjects: [
                 "Physics",
                 "Chemistry"
             ]
-
         },
 
         new: {
-
             name: "New Syllabus",
-
             subjects: [
                 "Physics",
                 "Chemistry"
             ]
-
         }
-
     },
 
 
     form4: {
-
         name: "Form 4",
 
         old: {
-
             name: "Old Syllabus",
-
             subjects: [
                 "Physics",
                 "Chemistry"
             ]
-
         },
 
         new: {
-
             name: "New Syllabus",
-
             subjects: [
                 "Physics",
                 "Chemistry"
             ]
-
         }
-
     },
 
 
     form5: {
-
         name: "Form 5",
 
         old: {
-
             name: "Old Syllabus",
-
             subjects: [
                 "Physics",
                 "Chemistry"
             ]
-
         },
 
         new: {
-
             name: "New Syllabus",
-
             subjects: [
                 "Physics",
                 "Chemistry"
             ]
-
         }
-
     },
 
 
     form6: {
-
         name: "Form 6",
 
         old: {
-
             name: "Old Syllabus",
-
             subjects: [
                 "Physics",
                 "Chemistry"
             ]
-
         },
 
         new: {
-
             name: "New Syllabus",
-
             subjects: [
                 "Physics",
                 "Chemistry"
             ]
-
         }
+    }
+
+};
+
+
+/* =========================================================
+   TOPICS / FULL NOTES DATABASE MAPPING
+=========================================================
+
+   MUHIMU:
+
+   Payment haijaguswa.
+
+   Kila ID hapa lazima iwe ID iliyopo
+   kwenye public.notes.
+
+========================================================= */
+
+const notesData = {
+
+
+    /* =====================================================
+       FORM 1 PHYSICS
+    ===================================================== */
+
+    "form1-old-physics": {
+
+        full: {
+            id: "notes_physics_f1_full",
+            title: "Form 1 Physics — Full Notes",
+            description:
+                "Complete Form 1 Physics Premium Notes.",
+            price: 5000
+        },
+
+        topics: [
+
+            {
+                id:
+                    "notes_physics_f1_introduction",
+
+                title:
+                    "Topic 1: Introduction to Physics",
+
+                description:
+                    "Concept of physics, laboratory rules, measurements and first aid.",
+
+                price:
+                    1000
+            }
+
+        ]
+
+    },
+
+
+    "form1-new-physics": {
+
+        full: {
+            id: "notes_physics_f1_full",
+            title: "Form 1 Physics — Full Notes",
+            description:
+                "Complete Form 1 Physics Premium Notes.",
+            price: 5000
+        },
+
+        topics: [
+
+            {
+                id:
+                    "notes_physics_f1_introduction",
+
+                title:
+                    "Topic 1: Introduction to Physics",
+
+                description:
+                    "Introduction to Physics and basic scientific concepts.",
+
+                price:
+                    1000
+            }
+
+        ]
+
+    },
+
+
+    /* =====================================================
+       FORM 1 CHEMISTRY
+    ===================================================== */
+
+    "form1-old-chemistry": {
+
+        full: {
+            id: "notes_chemistry_f1_full",
+            title: "Form 1 Chemistry — Full Notes",
+            description:
+                "Complete Form 1 Chemistry Premium Notes.",
+            price: 5000
+        },
+
+        topics: [
+
+            {
+                id:
+                    "notes_chemistry_f1_introduction",
+
+                title:
+                    "Topic 1: Introduction to Chemistry",
+
+                description:
+                    "Concept, importance and application of chemistry in daily life.",
+
+                price:
+                    1000
+            }
+
+        ]
+
+    },
+
+
+    "form1-new-chemistry": {
+
+        full: {
+            id: "notes_chemistry_f1_full",
+            title: "Form 1 Chemistry — Full Notes",
+            description:
+                "Complete Form 1 Chemistry Premium Notes.",
+            price: 5000
+        },
+
+        topics: [
+
+            {
+                id:
+                    "notes_chemistry_f1_introduction",
+
+                title:
+                    "Topic 1: Introduction to Chemistry",
+
+                description:
+                    "Introduction to Chemistry and its applications.",
+
+                price:
+                    1000
+            }
+
+        ]
+
+    },
+
+
+    /* =====================================================
+       FORM 2 PHYSICS
+    ===================================================== */
+
+    "form2-old-physics": {
+
+        full: {
+            id: "notes_physics_f2_full",
+            title: "Form 2 Physics — Full Notes",
+            description:
+                "Complete Form 2 Physics Premium Notes.",
+            price: 5000
+        },
+
+        topics: [
+
+            {
+                id:
+                    "notes_physics_f2_static_electricity",
+
+                title:
+                    "Topic 1: Static Electricity",
+
+                description:
+                    "Electric charges, static electricity and lightning conductors.",
+
+                price:
+                    1500
+            }
+
+        ]
+
+    },
+
+
+    "form2-new-physics": {
+
+        full: {
+            id: "notes_physics_f2_full",
+            title: "Form 2 Physics — Full Notes",
+            description:
+                "Complete Form 2 Physics Premium Notes.",
+            price: 5000
+        },
+
+        topics: [
+
+            {
+                id:
+                    "notes_physics_f2_static_electricity",
+
+                title:
+                    "Topic 1: Static Electricity",
+
+                description:
+                    "Electric charges and applications of static electricity.",
+
+                price:
+                    1500
+            }
+
+        ]
+
+    },
+
+
+    /* =====================================================
+       FORM 2 CHEMISTRY
+    ===================================================== */
+
+    "form2-old-chemistry": {
+
+        full: {
+            id: "notes_chemistry_f2_full",
+            title: "Form 2 Chemistry — Full Notes",
+            description:
+                "Complete Form 2 Chemistry Premium Notes.",
+            price: 5000
+        },
+
+        topics: []
+
+    },
+
+
+    "form2-new-chemistry": {
+
+        full: {
+            id: "notes_chemistry_f2_full",
+            title: "Form 2 Chemistry — Full Notes",
+            description:
+                "Complete Form 2 Chemistry Premium Notes.",
+            price: 5000
+        },
+
+        topics: []
+
+    },
+
+
+    /* =====================================================
+       FORM 3 PHYSICS
+    ===================================================== */
+
+    "form3-old-physics": {
+
+        full: {
+            id: "notes_physics_f3_full",
+            title: "Form 3 Physics — Full Notes",
+            description:
+                "Complete Form 3 Physics Premium Notes.",
+            price: 5000
+        },
+
+        topics: [
+
+            {
+                id:
+                    "notes_physics_f3_linear_motion",
+
+                title:
+                    "Topic 1: Linear Motion",
+
+                description:
+                    "Distance, displacement, velocity and equations of motion.",
+
+                price:
+                    1500
+            },
+
+            {
+                id:
+                    "notes_physics_f3_light",
+
+                title:
+                    "Topic: Light Part I & II",
+
+                description:
+                    "Reflection, refraction, lenses and optical instruments.",
+
+                price:
+                    3000
+            }
+
+        ]
+
+    },
+
+
+    "form3-new-physics": {
+
+        full: {
+            id: "notes_physics_f3_full",
+            title: "Form 3 Physics — Full Notes",
+            description:
+                "Complete Form 3 Physics Premium Notes.",
+            price: 5000
+        },
+
+        topics: [
+
+            {
+                id:
+                    "notes_physics_f3_linear_motion",
+
+                title:
+                    "Topic 1: Linear Motion",
+
+                description:
+                    "Distance, displacement, velocity and equations of motion.",
+
+                price:
+                    1500
+            },
+
+            {
+                id:
+                    "notes_physics_f3_light",
+
+                title:
+                    "Topic: Light Part I & II",
+
+                description:
+                    "Reflection, refraction, lenses and optical instruments.",
+
+                price:
+                    3000
+            }
+
+        ]
+
+    },
+
+
+    /* =====================================================
+       FORM 3 CHEMISTRY
+    ===================================================== */
+
+    "form3-old-chemistry": {
+
+        full: {
+            id: "notes_chemistry_f3_full",
+            title: "Form 3 Chemistry — Full Notes",
+            description:
+                "Complete Form 3 Chemistry Premium Notes.",
+            price: 5000
+        },
+
+        topics: []
+
+    },
+
+
+    "form3-new-chemistry": {
+
+        full: {
+            id: "notes_chemistry_f3_full",
+            title: "Form 3 Chemistry — Full Notes",
+            description:
+                "Complete Form 3 Chemistry Premium Notes.",
+            price: 5000
+        },
+
+        topics: []
+
+    },
+
+
+    /* =====================================================
+       FORM 4 PHYSICS
+    ===================================================== */
+
+    "form4-old-physics": {
+
+        full: {
+            id: "notes_physics_f4_full",
+            title: "Form 4 Physics — Full Notes",
+            description:
+                "Complete Form 4 Physics Premium Notes.",
+            price: 5000
+        },
+
+        topics: [
+
+            {
+                id:
+                    "notes_physics_f4_waves",
+
+                title:
+                    "Topic 1: Waves",
+
+                description:
+                    "Mechanical waves, spectrum and related applications.",
+
+                price:
+                    1500
+            }
+
+        ]
+
+    },
+
+
+    "form4-new-physics": {
+
+        full: {
+            id: "notes_physics_f4_full",
+            title: "Form 4 Physics — Full Notes",
+            description:
+                "Complete Form 4 Physics Premium Notes.",
+            price: 5000
+        },
+
+        topics: [
+
+            {
+                id:
+                    "notes_physics_f4_waves",
+
+                title:
+                    "Topic 1: Waves",
+
+                description:
+                    "Mechanical waves, spectrum and related applications.",
+
+                price:
+                    1500
+            }
+
+        ]
+
+    },
+
+
+    /* =====================================================
+       FORM 4 CHEMISTRY
+    ===================================================== */
+
+    "form4-old-chemistry": {
+
+        full: {
+            id: "notes_chemistry_f4_full",
+            title: "Form 4 Chemistry — Full Notes",
+            description:
+                "Complete Form 4 Chemistry Premium Notes.",
+            price: 5000
+        },
+
+        topics: []
+
+    },
+
+
+    "form4-new-chemistry": {
+
+        full: {
+            id: "notes_chemistry_f4_full",
+            title: "Form 4 Chemistry — Full Notes",
+            description:
+                "Complete Form 4 Chemistry Premium Notes.",
+            price: 5000
+        },
+
+        topics: []
+
+    },
+
+
+    /* =====================================================
+       FORM 5 PHYSICS
+    ===================================================== */
+
+    "form5-old-physics": {
+
+        full: {
+            id: "notes_physics_f5_full",
+            title: "Form 5 Physics — Full Notes",
+            description:
+                "Complete Form 5 Physics Premium Notes.",
+            price: 5000
+        },
+
+        topics: [
+
+            {
+                id:
+                    "notes_physics_f5_mechanics",
+
+                title:
+                    "Topic 1: Mechanics",
+
+                description:
+                    "Dimensions, projectile motion and gravitation.",
+
+                price:
+                    2500
+            }
+
+        ]
+
+    },
+
+
+    "form5-new-physics": {
+
+        full: {
+            id: "notes_physics_f5_full",
+            title: "Form 5 Physics — Full Notes",
+            description:
+                "Complete Form 5 Physics Premium Notes.",
+            price: 5000
+        },
+
+        topics: [
+
+            {
+                id:
+                    "notes_physics_f5_mechanics",
+
+                title:
+                    "Topic 1: Mechanics",
+
+                description:
+                    "Dimensions, projectile motion and gravitation.",
+
+                price:
+                    2500
+            }
+
+        ]
+
+    },
+
+
+    /* =====================================================
+       FORM 5 CHEMISTRY
+    ===================================================== */
+
+    "form5-old-chemistry": {
+
+        full: {
+            id: "notes_chemistry_f5_full",
+            title: "Form 5 Chemistry — Full Notes",
+            description:
+                "Complete Form 5 Chemistry Premium Notes.",
+            price: 5000
+        },
+
+        topics: []
+
+    },
+
+
+    "form5-new-chemistry": {
+
+        full: {
+            id: "notes_chemistry_f5_full",
+            title: "Form 5 Chemistry — Full Notes",
+            description:
+                "Complete Form 5 Chemistry Premium Notes.",
+            price: 5000
+        },
+
+        topics: []
+
+    },
+
+
+    /* =====================================================
+       FORM 6 PHYSICS
+    ===================================================== */
+
+    "form6-old-physics": {
+
+        full: {
+            id: "notes_physics_f6_full",
+            title: "Form 6 Physics — Full Notes",
+            description:
+                "Complete Form 6 Physics Premium Notes.",
+            price: 5000
+        },
+
+        topics: [
+
+            {
+                id:
+                    "notes_physics_f6_modern_physics",
+
+                title:
+                    "Topic 1: Modern Physics",
+
+                description:
+                    "Quantum physics, atomic structure and electronics.",
+
+                price:
+                    3500
+            }
+
+        ]
+
+    },
+
+
+    "form6-new-physics": {
+
+        full: {
+            id: "notes_physics_f6_full",
+            title: "Form 6 Physics — Full Notes",
+            description:
+                "Complete Form 6 Physics Premium Notes.",
+            price: 5000
+        },
+
+        topics: [
+
+            {
+                id:
+                    "notes_physics_f6_modern_physics",
+
+                title:
+                    "Topic 1: Modern Physics",
+
+                description:
+                    "Quantum physics, atomic structure and electronics.",
+
+                price:
+                    3500
+            }
+
+        ]
+
+    },
+
+
+    /* =====================================================
+       FORM 6 CHEMISTRY
+    ===================================================== */
+
+    "form6-old-chemistry": {
+
+        full: {
+            id: "notes_chemistry_f6_full",
+            title: "Form 6 Chemistry — Full Notes",
+            description:
+                "Complete Form 6 Chemistry Premium Notes.",
+            price: 5000
+        },
+
+        topics: []
+
+    },
+
+
+    "form6-new-chemistry": {
+
+        full: {
+            id: "notes_chemistry_f6_full",
+            title: "Form 6 Chemistry — Full Notes",
+            description:
+                "Complete Form 6 Chemistry Premium Notes.",
+            price: 5000
+        },
+
+        topics: []
 
     }
 
@@ -998,364 +1684,87 @@ const syllabusData = {
 
 
 /* =========================================================
-   TOPICS
+   PRACTICAL NOTES
 
-   IDs HIZI NI ZILE TAYARI ZIPO DATABASE.
+   HIZI NI GENERAL NOTES:
+
+   O-LEVEL:
+   Physics + Chemistry
+
+   A-LEVEL:
+   Physics + Chemistry
+
+   Usiziunganishe na Form moja moja.
 ========================================================= */
 
-const topics = {
+const practicalNotes = {
 
-
-    /* =====================================================
-       FORM 1 PHYSICS
-    ===================================================== */
-
-    "form1-old-physics": [
+    olevel: [
 
         {
             id:
-                "notes_physics_f1_introduction",
+                "notes_physics_olevel_practical",
 
             title:
-                "Topic 1: Introduction to Physics",
+                "O-Level Physics Practical Notes",
 
             description:
-                "Concept of physics, laboratory rules, measurements and first aid.",
+                "General Physics practical notes for O-Level students.",
 
             price:
-                1000
-        }
-
-    ],
-
-
-    "form1-old-chemistry": [
-
-        {
-            id:
-                "notes_chemistry_f1_introduction",
-
-            title:
-                "Topic 1: Introduction to Chemistry",
-
-            description:
-                "Concept, importance and application of chemistry in daily life.",
-
-            price:
-                1000
-        }
-
-    ],
-
-
-    /*
-    ---------------------------------------------------------
-    FORM 1 NEW
-    ---------------------------------------------------------
-
-    Tutatumia records zile zile mpaka notes za
-    New Syllabus ziwekwe database tofauti.
-    */
-
-    "form1-new-physics": [
-
-        {
-            id:
-                "notes_physics_f1_introduction",
-
-            title:
-                "Topic 1: Introduction to Physics",
-
-            description:
-                "Introduction to Physics and basic scientific concepts.",
-
-            price:
-                1000
-        }
-
-    ],
-
-
-    "form1-new-chemistry": [
-
-        {
-            id:
-                "notes_chemistry_f1_introduction",
-
-            title:
-                "Topic 1: Introduction to Chemistry",
-
-            description:
-                "Introduction to Chemistry and its applications.",
-
-            price:
-                1000
-        }
-
-    ],
-
-
-    /* =====================================================
-       FORM 2
-    ===================================================== */
-
-    "form2-old-physics": [
-
-        {
-            id:
-                "notes_physics_f2_static_electricity",
-
-            title:
-                "Topic 1: Static Electricity",
-
-            description:
-                "Electric charges, static electricity and lightning conductors.",
-
-            price:
-                1500
-        }
-
-    ],
-
-
-    "form2-new-physics": [
-
-        {
-            id:
-                "notes_physics_f2_static_electricity",
-
-            title:
-                "Topic 1: Static Electricity",
-
-            description:
-                "Electric charges and applications of static electricity.",
-
-            price:
-                1500
-        }
-
-    ],
-
-
-    "form2-old-chemistry": [],
-
-    "form2-new-chemistry": [],
-
-
-    /* =====================================================
-       FORM 3
-    ===================================================== */
-
-    "form3-old-physics": [
-
-        {
-            id:
-                "notes_physics_f3_linear_motion",
-
-            title:
-                "Topic 1: Linear Motion",
-
-            description:
-                "Distance, displacement, velocity and equations of motion.",
-
-            price:
-                1500
+                5000
         },
 
+
         {
             id:
-                "notes_physics_f3_light",
+                "notes_chemistry_olevel_practical",
 
             title:
-                "Topic: Light Part I & II",
+                "O-Level Chemistry Practical Notes",
 
             description:
-                "Reflection, refraction, lenses and optical instruments.",
+                "General Chemistry practical notes for O-Level students.",
 
             price:
-                3000
+                5000
         }
 
     ],
 
 
-    "form3-new-physics": [
+    alevel: [
 
         {
             id:
-                "notes_physics_f3_linear_motion",
+                "notes_physics_alevel_practical",
 
             title:
-                "Topic 1: Linear Motion",
+                "A-Level Physics Practical Notes",
 
             description:
-                "Distance, displacement, velocity and equations of motion.",
+                "General Physics practical notes for A-Level students.",
 
             price:
-                1500
+                5000
         },
 
-        {
-            id:
-                "notes_physics_f3_light",
-
-            title:
-                "Topic: Light Part I & II",
-
-            description:
-                "Reflection, refraction, lenses and optical instruments.",
-
-            price:
-                3000
-        }
-
-    ],
-
-
-    "form3-old-chemistry": [],
-
-    "form3-new-chemistry": [],
-
-
-    /* =====================================================
-       FORM 4
-    ===================================================== */
-
-    "form4-old-physics": [
 
         {
             id:
-                "notes_physics_f4_waves",
+                "notes_chemistry_alevel_practical",
 
             title:
-                "Topic 1: Waves",
+                "A-Level Chemistry Practical Notes",
 
             description:
-                "Mechanical waves, spectrum and related applications.",
+                "General Chemistry practical notes for A-Level students.",
 
             price:
-                1500
+                5000
         }
 
-    ],
-
-
-    "form4-new-physics": [
-
-        {
-            id:
-                "notes_physics_f4_waves",
-
-            title:
-                "Topic 1: Waves",
-
-            description:
-                "Mechanical waves, spectrum and related applications.",
-
-            price:
-                1500
-        }
-
-    ],
-
-
-    "form4-old-chemistry": [],
-
-    "form4-new-chemistry": [],
-
-
-    /* =====================================================
-       FORM 5
-    ===================================================== */
-
-    "form5-old-physics": [
-
-        {
-            id:
-                "notes_physics_f5_mechanics",
-
-            title:
-                "Topic 1: Mechanics",
-
-            description:
-                "Dimensions, projectile motion and gravitation.",
-
-            price:
-                2500
-        }
-
-    ],
-
-
-    "form5-new-physics": [
-
-        {
-            id:
-                "notes_physics_f5_mechanics",
-
-            title:
-                "Topic 1: Mechanics",
-
-            description:
-                "Dimensions, projectile motion and gravitation.",
-
-            price:
-                2500
-        }
-
-    ],
-
-
-    "form5-old-chemistry": [],
-
-    "form5-new-chemistry": [],
-
-
-    /* =====================================================
-       FORM 6
-    ===================================================== */
-
-    "form6-old-physics": [
-
-        {
-            id:
-                "notes_physics_f6_modern_physics",
-
-            title:
-                "Topic 1: Modern Physics",
-
-            description:
-                "Quantum physics, atomic structure and electronics.",
-
-            price:
-                3500
-        }
-
-    ],
-
-
-    "form6-new-physics": [
-
-        {
-            id:
-                "notes_physics_f6_modern_physics",
-
-            title:
-                "Topic 1: Modern Physics",
-
-            description:
-                "Quantum physics, atomic structure and electronics.",
-
-            price:
-                3500
-        }
-
-    ],
-
-
-    "form6-old-chemistry": [],
-
-    "form6-new-chemistry": []
+    ]
 
 };
 
@@ -1369,22 +1778,17 @@ const container =
         "stepContainer"
     );
 
+
 const breadcrumb =
     document.getElementById(
         "breadcrumb"
     );
 
+
 const backButton =
     document.getElementById(
         "backButton"
     );
-
-
-/* =========================================================
-   BROWSER HISTORY
-========================================================= */
-
-let historyReady = false;
 
 
 /* =========================================================
@@ -1398,55 +1802,108 @@ function initialize() {
             window.location.search
         );
 
+
     const requestedForm =
         params.get("form");
+
 
     if (
         requestedForm &&
         syllabusData[requestedForm]
     ) {
 
-        currentState.level =
-            "syllabus";
+        currentState = {
 
-        currentState.form =
-            requestedForm;
+            level:
+                "syllabus",
+
+            form:
+                requestedForm,
+
+            syllabus:
+                null,
+
+            subject:
+                null,
+
+            section:
+                "forms"
+
+        };
+
 
         renderSyllabus();
 
-        history.replaceState(
-            {
-                level: "syllabus",
-                form: requestedForm
-            },
-            "",
-            window.location.href
-        );
-
-    } else {
-
-        currentState.level =
-            "forms";
-
-        renderForms();
 
         history.replaceState(
             {
-                level: "forms"
+                level:
+                    "syllabus",
+
+                form:
+                    requestedForm,
+
+                syllabus:
+                    null,
+
+                subject:
+                    null,
+
+                section:
+                    "forms"
+
             },
+
             "",
+
             window.location.href
         );
 
     }
 
-    historyReady = true;
+    else {
+
+        currentState = {
+
+            level:
+                "home",
+
+            form:
+                null,
+
+            syllabus:
+                null,
+
+            subject:
+                null,
+
+            section:
+                null
+
+        };
+
+
+        renderHome();
+
+
+        history.replaceState(
+            {
+                level:
+                    "home"
+            },
+
+            "",
+
+            window.location.href
+        );
+
+    }
 
 }
 
 
 /* =========================================================
-   SAVE HISTORY
+   PUSH HISTORY
 ========================================================= */
 
 function pushState(
@@ -1463,10 +1920,124 @@ function pushState(
 
 
 /* =========================================================
-   RENDER FORMS
+   RENDER HOME
 ========================================================= */
 
-function renderForms() {
+function renderHome() {
+
+    currentState.level =
+        "home";
+
+
+    currentState.form =
+        null;
+
+
+    currentState.syllabus =
+        null;
+
+
+    currentState.subject =
+        null;
+
+
+    updateBreadcrumb();
+
+
+    backButton.style.display =
+        "none";
+
+
+    let html = `
+
+        <div class="step-title">
+
+            <h2>
+                Chagua Aina ya Notes
+            </h2>
+
+            <p>
+                Chagua notes za kawaida
+                au practical notes.
+            </p>
+
+        </div>
+
+
+        <div class="selection-grid">
+
+            <div class="selection-card">
+
+                <div>
+
+                    <h3>
+                        📚 O-Level & A-Level Notes
+                    </h3>
+
+                    <p>
+                        Chagua Form 1 mpaka Form 6,
+                        syllabus, subject na topic.
+                    </p>
+
+                </div>
+
+                <button
+                    class="open-btn"
+                    onclick="openForms()">
+
+                    FUNGUA FULL NOTES
+
+                </button>
+
+            </div>
+
+
+            <div class="selection-card practical-card">
+
+                <div>
+
+                    <span class="practical-label">
+                        PRACTICAL NOTES
+                    </span>
+
+                    <h3>
+                        🧪 Practical Notes
+                    </h3>
+
+                    <p>
+                        General Physics na Chemistry
+                        Practical Notes kwa O-Level
+                        na A-Level.
+                    </p>
+
+                </div>
+
+                <button
+                    class="open-btn"
+                    onclick="openPracticalLevels()">
+
+                    FUNGUA PRACTICAL NOTES
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   OPEN FORMS
+========================================================= */
+
+function openForms() {
 
     currentState = {
 
@@ -1480,15 +2051,43 @@ function renderForms() {
             null,
 
         subject:
-            null
+            null,
+
+        section:
+            "full"
 
     };
 
 
+    pushState({
+        level:
+            "forms",
+
+        section:
+            "full"
+    });
+
+
+    renderForms();
+
+}
+
+
+/* =========================================================
+   RENDER FORMS
+========================================================= */
+
+function renderForms() {
+
+    currentState.level =
+        "forms";
+
+
     updateBreadcrumb();
 
+
     backButton.style.display =
-        "none";
+        "inline-flex";
 
 
     let html = `
@@ -1506,7 +2105,9 @@ function renderForms() {
 
         </div>
 
+
         <div class="selection-grid">
+
     `;
 
 
@@ -1518,6 +2119,7 @@ function renderForms() {
 
         const formId =
             "form" + i;
+
 
         html += `
 
@@ -1535,6 +2137,7 @@ function renderForms() {
                     </p>
 
                 </div>
+
 
                 <button
                     class="open-btn"
@@ -1572,17 +2175,24 @@ function openForm(
     formId
 ) {
 
-    currentState.level =
-        "syllabus";
+    currentState = {
 
-    currentState.form =
-        formId;
+        level:
+            "syllabus",
 
-    currentState.syllabus =
-        null;
+        form:
+            formId,
 
-    currentState.subject =
-        null;
+        syllabus:
+            null,
+
+        subject:
+            null,
+
+        section:
+            "full"
+
+    };
 
 
     pushState({
@@ -1591,7 +2201,10 @@ function openForm(
             "syllabus",
 
         form:
-            formId
+            formId,
+
+        section:
+            "full"
 
     });
 
@@ -1643,68 +2256,61 @@ function renderSyllabus() {
 
         </div>
 
+
         <div class="selection-grid">
 
-    `;
+            <div class="selection-card syllabus-old">
+
+                <div>
+
+                    <h3>
+                        📕 Old Syllabus
+                    </h3>
+
+                    <p>
+                        Notes zilizopangwa
+                        kwa Old Syllabus.
+                    </p>
+
+                </div>
 
 
-    html += `
+                <button
+                    class="open-btn"
+                    onclick="openSyllabus('old')">
 
-        <div class="selection-card syllabus-old">
+                    FUNGUA OLD SYLLABUS
 
-            <div>
-
-                <h3>
-                    📕 Old Syllabus
-                </h3>
-
-                <p>
-                    Notes zilizopangwa
-                    kwa Old Syllabus.
-                </p>
-
-            </div>
-
-            <button
-                class="open-btn"
-                onclick="openSyllabus('old')">
-
-                FUNGUA OLD SYLLABUS
-
-            </button>
-
-        </div>
-
-
-        <div class="selection-card syllabus-new">
-
-            <div>
-
-                <h3>
-                    📗 New Syllabus
-                </h3>
-
-                <p>
-                    Notes zilizopangwa
-                    kwa New Syllabus.
-                </p>
+                </button>
 
             </div>
 
-            <button
-                class="open-btn"
-                onclick="openSyllabus('new')">
 
-                FUNGUA NEW SYLLABUS
+            <div class="selection-card syllabus-new">
 
-            </button>
+                <div>
 
-        </div>
+                    <h3>
+                        📗 New Syllabus
+                    </h3>
 
-    `;
+                    <p>
+                        Notes zilizopangwa
+                        kwa New Syllabus.
+                    </p>
+
+                </div>
 
 
-    html += `
+                <button
+                    class="open-btn"
+                    onclick="openSyllabus('new')">
+
+                    FUNGUA NEW SYLLABUS
+
+                </button>
+
+            </div>
 
         </div>
 
@@ -1728,8 +2334,10 @@ function openSyllabus(
     currentState.level =
         "subjects";
 
+
     currentState.syllabus =
         syllabus;
+
 
     currentState.subject =
         null;
@@ -1744,7 +2352,10 @@ function openSyllabus(
             currentState.form,
 
         syllabus:
-            syllabus
+            syllabus,
+
+        section:
+            "full"
 
     });
 
@@ -1800,6 +2411,7 @@ function renderSubjects() {
 
         </div>
 
+
         <div class="selection-grid">
 
     `;
@@ -1829,11 +2441,13 @@ function renderSubjects() {
                         </h3>
 
                         <p>
+                            Full Notes na
                             Topic-by-topic
                             Premium Notes
                         </p>
 
                     </div>
+
 
                     <button
                         class="open-btn"
@@ -1875,6 +2489,7 @@ function openSubject(
     currentState.level =
         "topics";
 
+
     currentState.subject =
         subject;
 
@@ -1891,7 +2506,10 @@ function openSubject(
             currentState.syllabus,
 
         subject:
-            subject
+            subject,
+
+        section:
+            "full"
 
     });
 
@@ -1919,8 +2537,20 @@ function renderTopics() {
             .toLowerCase();
 
 
+    const data =
+        notesData[key];
+
+
     const list =
-        topics[key] || [];
+        data
+        ? data.topics || []
+        : [];
+
+
+    const full =
+        data
+        ? data.full
+        : null;
 
 
     let html = `
@@ -1945,70 +2575,203 @@ function renderTopics() {
 
         </div>
 
-        <div class="selection-grid">
-
     `;
 
 
-    /*
-    =========================================================
-    TOPICS ZILIZOPO
-    =========================================================
-    */
+    /* =====================================================
+       FULL NOTES
+    ===================================================== */
 
-    list.forEach(
-        topic => {
+    if (full) {
 
-            html += `
+        html += `
 
-                <div class="selection-card topic-card">
+            <div class="selection-grid">
+
+                <div class="selection-card full-notes-card">
 
                     <div>
 
+                        <span class="full-notes-label">
+                            📘 FULL NOTES
+                        </span>
+
                         <h3>
-                            ${topic.title}
+                            ${full.title}
                         </h3>
 
                         <p>
-                            ${topic.description}
+                            ${full.description}
                         </p>
 
                         <div class="topic-price">
                             TSH
                             ${Number(
-                                topic.price
+                                full.price
                             ).toLocaleString()}
                         </div>
 
                     </div>
 
+
                     <button
                         class="buy-btn"
                         onclick="buyTopic(
-                            '${escapeForAttribute(topic.id)}',
-                            '${escapeForAttribute(topic.title)}',
-                            ${topic.price}
+                            '${escapeForAttribute(full.id)}',
+                            '${escapeForAttribute(full.title)}',
+                            ${full.price}
                         )">
 
-                        NUNUA TOPIC
+                        NUNUA FULL NOTES
 
                     </button>
 
                 </div>
 
-            `;
+            </div>
 
-        }
-    );
+        `;
+
+    }
 
 
-    /*
-    =========================================================
-    IF NO RECORDS YET
-    =========================================================
-    */
+    /* =====================================================
+       TOPIC TITLE
+    ===================================================== */
 
-    if (list.length === 0) {
+    if (list.length > 0) {
+
+        html += `
+
+            <div class="step-title">
+
+                <h2>
+                    📚 Topics
+                </h2>
+
+                <p>
+                    Unaweza pia kununua
+                    topic moja moja.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       TOPICS
+    ===================================================== */
+
+    if (list.length > 0) {
+
+        html += `
+
+            <div class="selection-grid">
+
+        `;
+
+
+        list.forEach(
+            topic => {
+
+                html += `
+
+                    <div class="selection-card topic-card">
+
+                        <div>
+
+                            <h3>
+                                ${topic.title}
+                            </h3>
+
+                            <p>
+                                ${topic.description}
+                            </p>
+
+                            <div class="topic-price">
+                                TSH
+                                ${Number(
+                                    topic.price
+                                ).toLocaleString()}
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="buy-btn"
+                            onclick="buyTopic(
+                                '${escapeForAttribute(topic.id)}',
+                                '${escapeForAttribute(topic.title)}',
+                                ${topic.price}
+                            )">
+
+                            NUNUA TOPIC
+
+                        </button>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+
+        html += `
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       NO TOPICS
+    ===================================================== */
+
+    if (
+        list.length === 0 &&
+        full
+    ) {
+
+        html += `
+
+            <div class="selection-card">
+
+                <div>
+
+                    <h3>
+                        📚 Topic-by-topic Notes
+                    </h3>
+
+                    <p>
+                        Topics nyingine zitaongezwa
+                        hapa kadri notes zinavyowekwa
+                        kwenye mfumo.
+                    </p>
+
+                    <span class="future-label">
+                        MORE TOPICS COMING
+                    </span>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    if (
+        !full &&
+        list.length === 0
+    ) {
 
         html += `
 
@@ -2022,11 +2785,11 @@ function renderTopics() {
                     </h3>
 
                     <p>
-                        Topics za ${currentState.subject}
+                        Notes za ${currentState.subject}
                         kwa syllabus hii
                         zitaonekana hapa
-                        mara tu zitakapowekwa
-                        kwenye mfumo wa notes.
+                        baada ya kuwekwa
+                        kwenye database.
                     </p>
 
                     <span class="future-label">
@@ -2040,6 +2803,283 @@ function renderTopics() {
         `;
 
     }
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   PRACTICAL LEVELS
+========================================================= */
+
+function openPracticalLevels() {
+
+    currentState = {
+
+        level:
+            "practicalLevels",
+
+        form:
+            null,
+
+        syllabus:
+            null,
+
+        subject:
+            null,
+
+        section:
+            "practical"
+
+    };
+
+
+    pushState({
+
+        level:
+            "practicalLevels",
+
+        section:
+            "practical"
+
+    });
+
+
+    renderPracticalLevels();
+
+}
+
+
+/* =========================================================
+   RENDER PRACTICAL LEVELS
+========================================================= */
+
+function renderPracticalLevels() {
+
+    updateBreadcrumb();
+
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    container.innerHTML = `
+
+        <div class="step-title">
+
+            <h2>
+                🧪 Practical Notes
+            </h2>
+
+            <p>
+                Chagua kiwango cha Practical Notes.
+            </p>
+
+        </div>
+
+
+        <div class="selection-grid">
+
+            <div class="selection-card practical-card">
+
+                <div>
+
+                    <span class="practical-label">
+                        O-LEVEL
+                    </span>
+
+                    <h3>
+                        🧪 O-Level Practical Notes
+                    </h3>
+
+                    <p>
+                        General Physics na Chemistry
+                        Practical Notes kwa O-Level.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="open-btn"
+                    onclick="openPractical('olevel')">
+
+                    FUNGUA O-LEVEL
+
+                </button>
+
+            </div>
+
+
+            <div class="selection-card practical-card">
+
+                <div>
+
+                    <span class="practical-label">
+                        A-LEVEL
+                    </span>
+
+                    <h3>
+                        🔬 A-Level Practical Notes
+                    </h3>
+
+                    <p>
+                        General Physics na Chemistry
+                        Practical Notes kwa A-Level.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="open-btn"
+                    onclick="openPractical('alevel')">
+
+                    FUNGUA A-LEVEL
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   OPEN PRACTICAL
+========================================================= */
+
+function openPractical(
+    level
+) {
+
+    currentState.level =
+        "practical";
+
+
+    currentState.section =
+        level;
+
+
+    pushState({
+
+        level:
+            "practical",
+
+        section:
+            level
+
+    });
+
+
+    renderPractical();
+
+}
+
+
+/* =========================================================
+   RENDER PRACTICAL
+========================================================= */
+
+function renderPractical() {
+
+    const level =
+        currentState.section;
+
+
+    const list =
+        practicalNotes[level] || [];
+
+
+    updateBreadcrumb();
+
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    const levelName =
+        level === "olevel"
+        ? "O-Level"
+        : "A-Level";
+
+
+    let html = `
+
+        <div class="step-title">
+
+            <h2>
+                🧪 ${levelName} Practical Notes
+            </h2>
+
+            <p>
+                General practical notes
+                za Physics na Chemistry.
+            </p>
+
+        </div>
+
+
+        <div class="selection-grid">
+
+    `;
+
+
+    list.forEach(
+        note => {
+
+            html += `
+
+                <div class="selection-card practical-card topic-card">
+
+                    <div>
+
+                        <span class="practical-label">
+                            PRACTICAL NOTES
+                        </span>
+
+                        <h3>
+                            ${note.title}
+                        </h3>
+
+                        <p>
+                            ${note.description}
+                        </p>
+
+                        <div class="topic-price">
+                            TSH
+                            ${Number(
+                                note.price
+                            ).toLocaleString()}
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="buy-btn"
+                        onclick="buyTopic(
+                            '${escapeForAttribute(note.id)}',
+                            '${escapeForAttribute(note.title)}',
+                            ${note.price}
+                        )">
+
+                        NUNUA PRACTICAL NOTES
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
 
 
     html += `
@@ -2057,6 +3097,20 @@ function renderTopics() {
 
 /* =========================================================
    PAYMENT
+=========================================================
+
+   MUHIMU SANA:
+
+   HII FUNCTION HAIJABADILISHWA KIMANTIKI.
+
+   Bado inaita:
+
+   anzishaUnunuziWaNotes()
+
+   kutoka notes.js yako iliyopo.
+
+   Kwa hiyo PesaPal payment engine yako
+   haijaguswa.
 ========================================================= */
 
 function buyTopic(
@@ -2064,17 +3118,6 @@ function buyTopic(
     title,
     price
 ) {
-
-    /*
-    =========================================================
-    MUHIMU:
-
-    HAPA HATUBADILISHI PAYMENT ENGINE.
-
-    Tunaita function ile ile iliyokuwa
-    inatumika kwenye notes.html yako ya zamani.
-    =========================================================
-    */
 
     if (
         typeof anzishaUnunuziWaNotes !==
@@ -2107,7 +3150,7 @@ function goBack() {
 
     if (
         currentState.level ===
-        "forms"
+        "home"
     ) {
 
         window.location.href =
@@ -2137,7 +3180,7 @@ window.addEventListener(
 
         if (!state) {
 
-            renderForms();
+            renderHome();
 
             return;
 
@@ -2145,19 +3188,35 @@ window.addEventListener(
 
 
         currentState.level =
-            state.level || "forms";
+            state.level || "home";
+
 
         currentState.form =
             state.form || null;
 
+
         currentState.syllabus =
             state.syllabus || null;
+
 
         currentState.subject =
             state.subject || null;
 
 
+        currentState.section =
+            state.section || null;
+
+
         if (
+            currentState.level ===
+            "home"
+        ) {
+
+            renderHome();
+
+        }
+
+        else if (
             currentState.level ===
             "forms"
         ) {
@@ -2193,6 +3252,30 @@ window.addEventListener(
 
         }
 
+        else if (
+            currentState.level ===
+            "practicalLevels"
+        ) {
+
+            renderPracticalLevels();
+
+        }
+
+        else if (
+            currentState.level ===
+            "practical"
+        ) {
+
+            renderPractical();
+
+        }
+
+        else {
+
+            renderHome();
+
+        }
+
     }
 );
 
@@ -2209,14 +3292,71 @@ function updateBreadcrumb() {
 
 
     if (
-        currentState.form
+        currentState.level ===
+            "home"
+    ) {
+
+        breadcrumb.innerHTML =
+            "<span>Premium Notes</span>";
+
+        return;
+
+    }
+
+
+    if (
+        currentState.section ===
+        "practical"
     ) {
 
         parts.push(
+            "Practical Notes"
+        );
+
+    }
+
+
+    if (
+        currentState.section ===
+        "olevel"
+    ) {
+
+        parts.push(
+            "O-Level Practical"
+        );
+
+    }
+
+
+    if (
+        currentState.section ===
+        "alevel"
+    ) {
+
+        parts.push(
+            "A-Level Practical"
+        );
+
+    }
+
+
+    if (
+        currentState.form
+    ) {
+
+        const form =
             syllabusData[
                 currentState.form
-            ].name
-        );
+            ];
+
+
+        if (form) {
+
+            parts.push(
+                form.name
+            );
+
+        }
 
     }
 
@@ -2312,6 +3452,7 @@ function toggleMenu() {
             "sidebarMenu"
         );
 
+
     const overlay =
         document.getElementById(
             "menuOverlay"
@@ -2341,13 +3482,11 @@ function toggleDropdown(
     button
 ) {
 
-    const container =
+    const dropdown =
         button.nextElementSibling;
 
 
-    if (
-        !container
-    ) {
+    if (!dropdown) {
 
         return;
 
@@ -2355,11 +3494,11 @@ function toggleDropdown(
 
 
     const isOpen =
-        container.style.display ===
+        dropdown.style.display ===
         "block";
 
 
-    container.style.display =
+    dropdown.style.display =
         isOpen
         ? "none"
         : "block";
@@ -2376,4 +3515,5 @@ initialize();
 </script>
 
 </body>
+
 </html>
