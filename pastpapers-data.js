@@ -179,9 +179,9 @@ const pastPapers = [
     "subject":"physics",
     "title":"Physics Midterm Exam",
     "type":"midterm",
-    "region":"dodoma",
+    "region":"morias_sec_school",
     "year":2026,
-    "file":"papers/form1/physics/dom_2026.pdf",
+    "file":"papers/form1/physics/midterm/morias_sec_school/2026/F1_Morias_Sec_Mid_term_2026_Phys.pdf",
     "markingScheme":""
 },
 
@@ -205,6 +205,17 @@ const pastPapers = [
     "year":2026,
     "file":"papers/form1/physics/terminal/busega_dc/2026/F1_Physics_Terminal_Exam_2026_Busega_DC.pdf",
     "markingScheme":"F1_Physics_MS_2026_Busega_DS.pdf"
+},
+
+    {
+    "form":"form1",
+    "subject":"physics",
+    "title":"Physics Terminal Exam",
+    "type":"terminal",
+    "region":"moshi dc",
+    "year":2026,
+    "file":"papers/form1/physics/terminal/moshi dc/2026/Moshi_DC_FI_terminal_2026_Physics.pdf",
+    "markingScheme":""
 },
 
 {
@@ -294,9 +305,9 @@ const pastPapers = [
     "subject":"chemistry",
     "title":"Chemistry Midterm Exam",
     "type":"midterm",
-    "region":"dodoma",
+    "region":"morias_sec_school",
     "year":2026,
-    "file":"papers/form1/chemistry/dom_2026.pdf",
+    "file":"papers/form1/chemistry/midterm/morias_sec_school/2026/F1_Morias_Sec_Mid_term_2026_Chemistry.pdf",
     "markingScheme":""
 },
 
@@ -321,6 +332,17 @@ const pastPapers = [
     "file":"papers/form1/chemistry/terminal/busega_dc/2026/F1_Chemistry_Terminal_Exam_2026_Busega_DC.pdf",
     "markingScheme":"F1_Chemistry_2026_MS_Busega_DC.pdf"
 },
+
+   {
+    "form":"form1",
+    "subject":"chemistry",
+    "title":"Chemistry Terminal Exam",
+    "type":"terminal",
+    "region":"moshi dc",
+    "year":2026,
+    "file":"papers/form1/chemistry/terminal/moshi dc/2026/Moshi_DC_FI_terminal_2026_Chemistry.pdf",
+    "markingScheme":""
+}, 
 
 {
     "form":"form1",
