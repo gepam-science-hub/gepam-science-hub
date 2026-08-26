@@ -190,10 +190,10 @@ const pastPapers = [
     "subject":"physics",
     "title":"Physics Terminal Exam",
     "type":"terminal",
-    "region":"arusha",
-    "year":2025,
-    "file":"papers/form1/physics/aru_2025.pdf",
-    "markingScheme":""
+    "region":"busega dc",
+    "year":2026,
+    "file":"papers/form1/physics/F1_Physics_Terminal_Exam_2026_Busega_DC.pdf",
+    "markingScheme":"F1_Physics_MS_2026_Busega_DS.pdf"
 },
 
 {
@@ -294,10 +294,10 @@ const pastPapers = [
     "subject":"chemistry",
     "title":"Chemistry Terminal Exam",
     "type":"terminal",
-    "region":"arusha",
-    "year":2025,
-    "file":"papers/form1/chemistry/aru_2025.pdf",
-    "markingScheme":""
+    "region":"busega dc",
+    "year":2026,
+    "file":"papers/form1/chemistry/F1_Chemistry_Terminal_Exam_2026_Busega_DC.pdf",
+    "markingScheme":"F1_Chemistry_2026_MS_Busega_DC.pdf"
 },
 
 {
