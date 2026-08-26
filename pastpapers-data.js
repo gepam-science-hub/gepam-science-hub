@@ -770,6 +770,39 @@ const pastPapers = [
 {
     "form":"form4",
     "subject":"physics",
+    "title":"Physics 1",
+    "type":"mock",
+    "region":"dar_es_salaam",
+    "year":2026,
+    "file":"papers/form4/physics/mock/dar_es_salaam/2026/F4_Physics1_Mock_2026_Dsm_Gepam_hub.pdf",
+    "markingScheme":""
+},
+    
+{
+    "form":"form4",
+    "subject":"physics",
+    "title":"Physics 2A",
+    "type":"mock",
+    "region":"dar_es_salaam",
+    "year":2026,
+    "file":"papers/form4/physics/mock/dar_es_salaam/2026/F4_Physics2A_Mock_2026_Dsm.pdf",
+    "markingScheme":""
+},
+    
+{
+    "form":"form4",
+    "subject":"physics",
+    "title":"Physics 1",
+    "type":"mock",
+    "region":"zona_mock (Katavi,Mbeya,Njombe,Ruvuma na Songwe)",
+    "year":2026,
+    "file":"papers/form4/physics/mock/zonal_mock/2026/F4_physics1_zonal_mock_2026_Gepam_hub.pdf",
+    "markingScheme":""
+},
+    
+{
+    "form":"form4",
+    "subject":"physics",
     "title":"Physics Joint Examination",
     "type":"joint",
     "region":"arusha",
@@ -881,15 +914,37 @@ const pastPapers = [
     "file":"papers/form4/chemistry/mock/dodoma/2026/chemistry_mock_2026.pdf",
     "markingScheme":""
 },
+    
+{
+    "form":"form4",
+    "subject":"chemistry",
+    "title":"Chemistry 1",
+    "type":"mock",
+    "region":"dar_es_salaam",
+    "year":2026,
+    "file":"papers/form4/physics/mock/dar_es_salaam/2026/F4_Chemistry1_Mock_2026_Dsm_Gepam_hub.pdf",
+    "markingScheme":""
+},
+    
+{
+    "form":"form4",
+    "subject":"chemistry",
+    "title":"Chemistry 2A",
+    "type":"mock",
+    "region":"dar_es_salaam",
+    "year":2026,
+    "file":"papers/form4/physics/mock/dar_es_salaam/2026/F4_Chemistry2A_Mock_2026_Dsm.pdf",
+    "markingScheme":""
+},
 
 {
     "form":"form4",
     "subject":"chemistry",
-    "title":"Chemistry Joint Examination",
-    "type":"joint",
-    "region":"arusha",
+    "title":"Chemistry 1",
+    "type":"mock",
+    "region":"zona_mock (Katavi,Mbeya,Njombe,Ruvuma na Songwe)",
     "year":2026,
-    "file":"papers/form4/chemistry/joint/arusha/2026/chemistry_joint_2026.pdf",
+    "file":"papers/form4/chemistry/mock/zonal_mock/2026/F4_chemistry1_zonal_mock_2026_Gepam_hub.pdf",
     "markingScheme":""
 },
 
