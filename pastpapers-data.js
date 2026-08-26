@@ -794,7 +794,7 @@ const pastPapers = [
     "subject":"physics",
     "title":"Physics 1",
     "type":"mock",
-    "region":"zona_mock (Katavi,Mbeya,Njombe,Ruvuma na Songwe)",
+    "region":"zonal_mock (Katavi,Mbeya,Njombe,Ruvuma na Songwe)",
     "year":2026,
     "file":"papers/form4/physics/mock/zonal_mock/2026/F4_physics1_zonal_mock_2026_Gepam_hub.pdf",
     "markingScheme":""
@@ -942,7 +942,7 @@ const pastPapers = [
     "subject":"chemistry",
     "title":"Chemistry 1",
     "type":"mock",
-    "region":"zona_mock (Katavi,Mbeya,Njombe,Ruvuma na Songwe)",
+    "region":"zonal_mock (Katavi,Mbeya,Njombe,Ruvuma na Songwe)",
     "year":2026,
     "file":"papers/form4/chemistry/mock/zonal_mock/2026/F4_chemistry1_zonal_mock_2026_Gepam_hub.pdf",
     "markingScheme":""
