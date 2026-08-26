@@ -785,7 +785,7 @@ const pastPapers = [
     "type":"mock",
     "region":"dar_es_salaam",
     "year":2026,
-    "file":"papers/form4/physics/mock/dar_es_salaam/2026/F4_Physics2A_Mock_2026_Dsm.pdf",
+    "file":"papers/form4/physics/mock/dar_es_salaam/2026/F4_Phys2A_Mock_2026_Dsm.pdf",
     "markingScheme":""
 },
     
@@ -922,7 +922,7 @@ const pastPapers = [
     "type":"mock",
     "region":"dar_es_salaam",
     "year":2026,
-    "file":"papers/form4/physics/mock/dar_es_salaam/2026/F4_Chemistry1_Mock_2026_Dsm_Gepam_hub.pdf",
+    "file":"papers/form4/chemistry/mock/dar_es_salaam/2026/F4_Chemistry1_Mock_2026_Dsm_Gepam_hub.pdf",
     "markingScheme":""
 },
     
@@ -933,7 +933,7 @@ const pastPapers = [
     "type":"mock",
     "region":"dar_es_salaam",
     "year":2026,
-    "file":"papers/form4/physics/mock/dar_es_salaam/2026/F4_Chemistry2A_Mock_2026_Dsm.pdf",
+    "file":"papers/form4/chemistry/mock/dar_es_salaam/2026/F4_Chemistry2A_Mock_2026_Dsm.pdf",
     "markingScheme":""
 },
 
