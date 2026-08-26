@@ -192,7 +192,7 @@ const pastPapers = [
     "type":"terminal",
     "region":"busega dc",
     "year":2026,
-    "file":"papers/form1/physics/busega dc/2026/F1_Physics_Terminal_Exam_2026_Busega_DC.pdf",
+    "file":"papers/form1/physics/terminal/busega_dc/2026/F1_Physics_Terminal_Exam_2026_Busega_DC.pdf",
     "markingScheme":"F1_Physics_MS_2026_Busega_DS.pdf"
 },
 
@@ -296,7 +296,7 @@ const pastPapers = [
     "type":"terminal",
     "region":"busega dc",
     "year":2026,
-    "file":"papers/form1/chemistry/busega dc/2026/F1_Chemistry_Terminal_Exam_2026_Busega_DC.pdf",
+    "file":"papers/form1/chemistry/terminal/busega_dc/2026/F1_Chemistry_Terminal_Exam_2026_Busega_DC.pdf",
     "markingScheme":"F1_Chemistry_2026_MS_Busega_DC.pdf"
 },
 
