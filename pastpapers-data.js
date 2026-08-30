@@ -1365,6 +1365,18 @@ const pastPapers = [
 // ISESE
 // ============================================================
 
+    {
+    "category": "special", 
+    "specialExam": "isese", 
+    "form": "form4",
+    "subject": "physics",   
+    "title": "ISESE - Pre-NECTA One",
+    "type": "pre_necta",   
+    "year": 2026,
+    "file": "papers/special/isese/pre_necta_one.pdf",
+    "markingScheme": ""
+},
+
 {
     "category":"special",
     "specialExam":"isese",
