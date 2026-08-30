@@ -9,7 +9,7 @@
       content="width=device-width, initial-scale=1.0">
 
 <meta name="description"
-      content="GEPAM Science Hub Past Papers - Physics, Chemistry and Biology examination papers from Form 1 to Form 6, including regional, school and special examinations.">
+      content="GEPAM Science Hub Past Papers - Physics, Chemistry and Biology examination papers from Form 1 to Form 6, including regional, school, Pre-NECTA, series and special examinations.">
 
 <meta name="theme-color"
       content="#0d47a1">
@@ -58,6 +58,9 @@
 
     --orange: #ef6c00;
     --orange-light: #fff3e6;
+
+    --teal: #00796b;
+    --teal-light: #e5f8f5;
 
     --shadow:
         0 8px 25px rgba(23,105,170,.10);
@@ -596,7 +599,7 @@ body {
 }
 
 /* =========================================================
-   SUBJECT COLORS
+   CARD COLORS
 ========================================================= */
 
 .physics-card::before {
@@ -632,31 +635,6 @@ body {
 
 }
 
-.physics-card .card-icon {
-
-    background:
-        #e6f1ff;
-
-}
-
-.chemistry-card .card-icon {
-
-    background:
-        #e5f8f5;
-
-}
-
-.biology-card .card-icon {
-
-    background:
-        #eaf7ea;
-
-}
-
-/* =========================================================
-   FORM CARD
-========================================================= */
-
 .form-card::before {
 
     background:
@@ -667,10 +645,6 @@ body {
         );
 
 }
-
-/* =========================================================
-   TYPE CARD
-========================================================= */
 
 .type-card::before {
 
@@ -683,10 +657,6 @@ body {
 
 }
 
-/* =========================================================
-   REGION CARD
-========================================================= */
-
 .region-card::before {
 
     background:
@@ -697,10 +667,6 @@ body {
         );
 
 }
-
-/* =========================================================
-   SCHOOL CARD
-========================================================= */
 
 .school-card::before {
 
@@ -713,10 +679,6 @@ body {
 
 }
 
-/* =========================================================
-   YEAR CARD
-========================================================= */
-
 .year-card::before {
 
     background:
@@ -727,10 +689,6 @@ body {
         );
 
 }
-
-/* =========================================================
-   SPECIAL CARD
-========================================================= */
 
 .special-card::before {
 
@@ -743,10 +701,6 @@ body {
 
 }
 
-/* =========================================================
-   SERIES CARD
-========================================================= */
-
 .series-card::before {
 
     background:
@@ -758,17 +712,24 @@ body {
 
 }
 
-/* =========================================================
-   LOCATION CARD
-========================================================= */
-
-.location-card::before {
+.prenecta-card::before {
 
     background:
         linear-gradient(
             90deg,
-            #1565c0,
-            #00a6a6
+            #00838f,
+            #26c6da
+        );
+
+}
+
+.mode-card::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            #455a64,
+            #78909c
         );
 
 }
@@ -999,7 +960,7 @@ body {
 }
 
 /* =========================================================
-   SPECIAL INFO
+   INFO BOX
 ========================================================= */
 
 .special-info {
@@ -1341,6 +1302,7 @@ footer strong {
 
 </header>
 
+
 <!-- =========================================================
      MAIN
 ========================================================= -->
@@ -1360,11 +1322,12 @@ footer strong {
         <p>
             Find Physics, Chemistry and Biology
             examination papers from Form 1 to Form 6,
-            including regional, school and special
-            examinations.
+            including regional, school, Pre-NECTA,
+            series and special examinations.
         </p>
 
     </section>
+
 
     <div
         class="breadcrumb"
@@ -1376,6 +1339,7 @@ footer strong {
 
     </div>
 
+
     <button
         id="backButton"
         class="back-btn"
@@ -1385,14 +1349,17 @@ footer strong {
 
     </button>
 
+
     <div
         id="dataStatus"
         class="data-status">
     </div>
 
+
     <div id="stepContainer"></div>
 
 </main>
+
 
 <!-- =========================================================
      SIDEBAR OVERLAY
@@ -1403,6 +1370,7 @@ footer strong {
     class="overlay"
     onclick="toggleMenu()">
 </div>
+
 
 <!-- =========================================================
      SIDEBAR
@@ -1479,6 +1447,7 @@ footer strong {
 
 </aside>
 
+
 <!-- =========================================================
      FOOTER
 ========================================================= -->
@@ -1502,12 +1471,13 @@ footer strong {
 
 </footer>
 
+
 <script>
 
 /* =========================================================
    GEPAM SCIENCE HUB
    PAST PAPERS ENGINE
-   VERSION: DATABASE-DRIVEN
+   VERSION: FLEXIBLE DATABASE
 ========================================================= */
 
 
@@ -1518,6 +1488,8 @@ footer strong {
 let currentState = {
 
     level: "home",
+
+    mode: null,
 
     form: null,
 
@@ -1566,7 +1538,7 @@ const dataStatus =
 
 
 /* =========================================================
-   FALLBACK DATA
+   FALLBACK FORMS
 ========================================================= */
 
 const FALLBACK_FORMS = [
@@ -1604,6 +1576,10 @@ const FALLBACK_FORMS = [
 ];
 
 
+/* =========================================================
+   FALLBACK SUBJECTS
+========================================================= */
+
 const FALLBACK_SUBJECTS = [
 
     {
@@ -1629,6 +1605,10 @@ const FALLBACK_SUBJECTS = [
 
 ];
 
+
+/* =========================================================
+   FALLBACK REGIONS
+========================================================= */
 
 const FALLBACK_REGIONS = [
 
@@ -1695,6 +1675,10 @@ const FALLBACK_REGIONS = [
 ];
 
 
+/* =========================================================
+   FALLBACK SPECIAL
+========================================================= */
+
 const FALLBACK_SPECIAL = [
 
     {
@@ -1726,7 +1710,178 @@ const FALLBACK_SPECIAL = [
 
 
 /* =========================================================
-   GET DATABASE ARRAYS
+   FORMS
+========================================================= */
+
+const forms =
+    FALLBACK_FORMS;
+
+
+/* =========================================================
+   NORMALIZE
+========================================================= */
+
+function normalize(value) {
+
+    return String(
+        value ?? ""
+    )
+        .trim()
+        .toLowerCase()
+        .replace(
+            /[\s_-]+/g,
+            "_"
+        );
+
+}
+
+
+/* =========================================================
+   IS EMPTY
+========================================================= */
+
+function isEmpty(value) {
+
+    return (
+        value === undefined ||
+        value === null ||
+        String(value).trim() === ""
+    );
+
+}
+
+
+/* =========================================================
+   DISPLAY NAME
+========================================================= */
+
+function displayName(value) {
+
+    if (
+        isEmpty(value)
+    ) {
+
+        return "";
+
+    }
+
+    const stringValue =
+        String(value);
+
+
+    const knownRegion =
+        getRegions().find(
+            region =>
+                normalize(
+                    region.id
+                ) ===
+                normalize(
+                    stringValue
+                )
+        );
+
+
+    if (knownRegion) {
+
+        return knownRegion.name;
+
+    }
+
+
+    const knownSubject =
+        getSubjects().find(
+            subject =>
+                normalize(
+                    subject.id
+                ) ===
+                normalize(
+                    stringValue
+                )
+        );
+
+
+    if (knownSubject) {
+
+        return knownSubject.name;
+
+    }
+
+
+    const knownSpecial =
+        getSpecialExaminations().find(
+            item =>
+                normalize(
+                    item.id
+                ) ===
+                normalize(
+                    stringValue
+                )
+        );
+
+
+    if (knownSpecial) {
+
+        return knownSpecial.name;
+
+    }
+
+
+    return stringValue
+
+        .replaceAll(
+            "_",
+            " "
+        )
+
+        .replace(
+            /\b\w/g,
+            char =>
+                char.toUpperCase()
+        );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value) {
+
+    return String(
+        value ?? ""
+    )
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   DATABASE
 ========================================================= */
 
 function getPapers() {
@@ -1811,146 +1966,6 @@ function getSpecialExaminations() {
 
 
 /* =========================================================
-   FORMS
-========================================================= */
-
-const forms = FALLBACK_FORMS;
-
-
-/* =========================================================
-   NORMALIZE
-========================================================= */
-
-function normalize(value) {
-
-    return String(
-        value ?? ""
-    )
-        .trim()
-        .toLowerCase()
-        .replace(
-            /[\s_-]+/g,
-            "_"
-        );
-
-}
-
-
-/* =========================================================
-   DISPLAY NAME
-========================================================= */
-
-function displayName(value) {
-
-    if (
-        value === null ||
-        value === undefined ||
-        value === ""
-    ) {
-
-        return "";
-
-    }
-
-    const stringValue =
-        String(value);
-
-    const knownRegion =
-        getRegions().find(
-            region =>
-                normalize(
-                    region.id
-                ) ===
-                normalize(
-                    stringValue
-                )
-        );
-
-    if (knownRegion) {
-
-        return knownRegion.name;
-
-    }
-
-    const knownSubject =
-        getSubjects().find(
-            subject =>
-                normalize(
-                    subject.id
-                ) ===
-                normalize(
-                    stringValue
-                )
-        );
-
-    if (knownSubject) {
-
-        return knownSubject.name;
-
-    }
-
-    const knownSpecial =
-        getSpecialExaminations().find(
-            item =>
-                normalize(
-                    item.id
-                ) ===
-                normalize(
-                    stringValue
-                )
-        );
-
-    if (knownSpecial) {
-
-        return knownSpecial.name;
-
-    }
-
-    return stringValue
-        .replaceAll("_", " ")
-        .replace(
-            /\b\w/g,
-            char =>
-                char.toUpperCase()
-        );
-
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(value) {
-
-    return String(
-        value ?? ""
-    )
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
-
-}
-
-
-/* =========================================================
    DATA CHECK
 ========================================================= */
 
@@ -1989,6 +2004,7 @@ function checkDataFile() {
 
     }
 
+
     dataStatus.className =
         "data-status";
 
@@ -2007,10 +2023,46 @@ function checkDataFile() {
 function updateBreadcrumb() {
 
     const items = [
-
         "Past Papers"
-
     ];
+
+
+    if (
+        currentState.mode
+    ) {
+
+        const modeNames = {
+
+            normal:
+                "Normal Papers",
+
+            prenecta:
+                "Pre-NECTA",
+
+            series:
+                "Series Examinations",
+
+            special:
+                "Special Examinations"
+
+        };
+
+        if (
+            modeNames[
+                currentState.mode
+            ]
+        ) {
+
+            items.push(
+                modeNames[
+                    currentState.mode
+                ]
+            );
+
+        }
+
+    }
+
 
     if (
         currentState.form
@@ -2024,6 +2076,7 @@ function updateBreadcrumb() {
 
     }
 
+
     if (
         currentState.subject
     ) {
@@ -2036,6 +2089,7 @@ function updateBreadcrumb() {
 
     }
 
+
     if (
         currentState.type
     ) {
@@ -2047,6 +2101,7 @@ function updateBreadcrumb() {
         );
 
     }
+
 
     if (
         currentState.locationMode ===
@@ -2062,6 +2117,7 @@ function updateBreadcrumb() {
 
     }
 
+
     if (
         currentState.locationMode ===
         "school" &&
@@ -2076,17 +2132,6 @@ function updateBreadcrumb() {
 
     }
 
-    if (
-        currentState.year
-    ) {
-
-        items.push(
-            String(
-                currentState.year
-            )
-        );
-
-    }
 
     if (
         currentState.specialExam
@@ -2096,9 +2141,11 @@ function updateBreadcrumb() {
             displayName(
                 currentState.specialExam
             )
+
         );
 
     }
+
 
     if (
         currentState.series
@@ -2111,6 +2158,20 @@ function updateBreadcrumb() {
         );
 
     }
+
+
+    if (
+        currentState.year
+    ) {
+
+        items.push(
+            String(
+                currentState.year
+            )
+        );
+
+    }
+
 
     breadcrumb.innerHTML =
         items
@@ -2138,6 +2199,7 @@ function updateBreadcrumb() {
                         `;
 
                     }
+
 
                     return `
 
@@ -2176,6 +2238,8 @@ function renderHome() {
 
         level: "home",
 
+        mode: null,
+
         form: null,
 
         subject: null,
@@ -2196,10 +2260,13 @@ function renderHome() {
 
     };
 
+
     updateBreadcrumb();
+
 
     backButton.style.display =
         "none";
+
 
     let html = `
 
@@ -2210,13 +2277,12 @@ function renderHome() {
             </span>
 
             <h2>
-                Chagua Aina ya Mitihani
+                Chagua Aina ya Past Papers
             </h2>
 
             <p>
-                Chagua Form kupata mitihani
-                ya kawaida, au Special Examinations
-                kupata mitihani maalum.
+                Normal Papers, Pre-NECTA,
+                Series au Special Examinations.
             </p>
 
         </div>
@@ -2225,64 +2291,158 @@ function renderHome() {
 
     `;
 
-    forms.forEach(
-        form => {
 
-            html += `
+    /* =====================================================
+       NORMAL
+    ===================================================== */
 
-                <div class="
-                    selection-card
-                    form-card
+    html += `
+
+        <div class="
+            selection-card
+            form-card
+        ">
+
+            <div>
+
+                <div class="card-icon">
+                    📘
+                </div>
+
+                <h3>
+                    Normal Past Papers
+                </h3>
+
+                <p>
+                    Regional, School,
+                    Mock, Annual, Joint,
+                    Terminal na aina nyingine
+                    za kawaida.
+                </p>
+
+            </div>
+
+            <button
+                class="open-btn"
+                onclick="
+                    openNormalMode()
                 ">
 
-                    <div>
+                FUNGUA
 
-                        <div class="card-icon">
-                            📘
-                        </div>
+            </button>
 
-                        <h3>
-                            ${escapeHTML(
-                                form.name
-                            )}
-                        </h3>
+        </div>
 
-                        <p>
-                            Physics, Chemistry
-                            & Biology Past Papers
-                        </p>
+    `;
 
+
+    /* =====================================================
+       PRE NECTA
+    ===================================================== */
+
+    if (
+        getPreNectaPapers().length > 0
+    ) {
+
+        html += `
+
+            <div class="
+                selection-card
+                prenecta-card
+            ">
+
+                <div>
+
+                    <div class="card-icon">
+                        🎯
                     </div>
 
-                    <button
-                        class="open-btn"
-                        onclick="
-                            openForm(
-                                '${escapeHTML(
-                                    form.id
-                                )}'
-                            )
-                        ">
+                    <h3>
+                        Pre-NECTA
+                    </h3>
 
-                        FUNGUA
-                        ${escapeHTML(
-                            form.name
-                        ).toUpperCase()}
-
-                    </button>
+                    <p>
+                        Pre-NECTA papers
+                        zimewekwa kwenye
+                        mfumo wake binafsi.
+                    </p>
 
                 </div>
 
-            `;
+                <button
+                    class="open-btn"
+                    onclick="
+                        openPreNectaMode()
+                    ">
 
-        }
-    );
+                    FUNGUA PRE-NECTA
 
-    const specials =
-        getSpecialExaminations();
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       SERIES
+    ===================================================== */
 
     if (
-        specials.length
+        getSeriesPapers().length > 0
+    ) {
+
+        html += `
+
+            <div class="
+                selection-card
+                series-card
+            ">
+
+                <div>
+
+                    <div class="card-icon">
+                        📚
+                    </div>
+
+                    <h3>
+                        Series Examinations
+                    </h3>
+
+                    <p>
+                        Series za Form 1
+                        hadi Form 6 kulingana
+                        na papers zilizopo.
+                    </p>
+
+                </div>
+
+                <button
+                    class="open-btn"
+                    onclick="
+                        openSeriesMode()
+                    ">
+
+                    FUNGUA SERIES
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       SPECIAL
+    ===================================================== */
+
+    if (
+        getAllSpecialPapers().length > 0
     ) {
 
         html += `
@@ -2303,8 +2463,10 @@ function renderHome() {
                     </h3>
 
                     <p>
-                        ISESE, JEPGOS, TAHOSSA,
-                        CSSC na Special School.
+                        ISESE, TAHOSSA,
+                        JEPGOS, CSSC na
+                        special examinations
+                        nyingine.
                     </p>
 
                 </div>
@@ -2325,9 +2487,11 @@ function renderHome() {
 
     }
 
+
     html += `
         </div>
     `;
+
 
     stepContainer.innerHTML =
         html;
@@ -2336,36 +2500,18 @@ function renderHome() {
 
 
 /* =========================================================
-   OPEN FORM
+   NORMAL MODE
 ========================================================= */
 
-function openForm(
-    formId
-) {
+function openNormalMode() {
 
-    currentState = {
+    resetState();
 
-        level: "subjects",
+    currentState.mode =
+        "normal";
 
-        form: formId,
-
-        subject: null,
-
-        type: null,
-
-        locationMode: null,
-
-        region: null,
-
-        school: null,
-
-        year: null,
-
-        specialExam: null,
-
-        series: null
-
-    };
+    currentState.level =
+        "subjects";
 
     pushNavigationState();
 
@@ -2375,9 +2521,7 @@ function openForm(
 
 
 /* =========================================================
-   RENDER SUBJECTS
-   NOTE:
-   SUBJECT ICONS REMOVED AS REQUESTED
+   SUBJECTS
 ========================================================= */
 
 function renderSubjects() {
@@ -2387,8 +2531,10 @@ function renderSubjects() {
     backButton.style.display =
         "inline-flex";
 
+
     const subjectList =
-        getSubjects();
+        getSubjectsForCurrentMode();
+
 
     let html = `
 
@@ -2399,15 +2545,12 @@ function renderSubjects() {
             </span>
 
             <h2>
-                ${escapeHTML(
-                    displayName(
-                        currentState.form
-                    )
-                )}
+                Chagua Somo
             </h2>
 
             <p>
-                Chagua somo.
+                Chagua Physics,
+                Chemistry au Biology.
             </p>
 
         </div>
@@ -2415,6 +2558,7 @@ function renderSubjects() {
         <div class="selection-grid">
 
     `;
+
 
     subjectList.forEach(
         subject => {
@@ -2439,14 +2583,8 @@ function renderSubjects() {
 
                         <p>
                             ${escapeHTML(
-                                displayName(
-                                    currentState.form
-                                )
+                                displayModeDescription()
                             )}
-                            ${escapeHTML(
-                                subject.name
-                            )}
-                            Past Papers
                         </p>
 
                     </div>
@@ -2472,23 +2610,140 @@ function renderSubjects() {
         }
     );
 
+
     if (
         subjectList.length === 0
     ) {
 
         html += emptyCard(
             "Hakuna somo",
-            "Hakuna subject iliyowekwa kwenye database."
+            "Hakuna subject iliyowekwa kwenye database kwa uchaguzi huu."
         );
 
     }
+
 
     html += `
         </div>
     `;
 
+
     stepContainer.innerHTML =
         html;
+
+}
+
+
+/* =========================================================
+   SUBJECTS FOR CURRENT MODE
+========================================================= */
+
+function getSubjectsForCurrentMode() {
+
+    const papers =
+        getPapersForCurrentMode();
+
+
+    const ids = [];
+
+
+    papers.forEach(
+        paper => {
+
+            if (
+                isEmpty(
+                    paper.subject
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            const id =
+                String(
+                    paper.subject
+                ).trim();
+
+
+            if (
+                !ids.some(
+                    existing =>
+                        normalize(
+                            existing
+                        ) ===
+                        normalize(
+                            id
+                        )
+                )
+            ) {
+
+                ids.push(id);
+
+            }
+
+        }
+    );
+
+
+    const configured =
+        getSubjects();
+
+
+    const result =
+        [];
+
+
+    ids.forEach(
+        id => {
+
+            const found =
+                configured.find(
+                    subject =>
+                        normalize(
+                            subject.id
+                        ) ===
+                        normalize(
+                            id
+                        )
+                );
+
+
+            if (
+                found
+            ) {
+
+                result.push(
+                    found
+                );
+
+            } else {
+
+                result.push({
+
+                    id: id,
+
+                    name:
+                        displayName(
+                            id
+                        ),
+
+                    icon:
+                        "📚",
+
+                    className:
+                        ""
+
+                });
+
+            }
+
+        }
+    );
+
+
+    return result;
 
 }
 
@@ -2519,6 +2774,61 @@ function openSubject(
     currentState.year =
         null;
 
+    currentState.series =
+        null;
+
+
+    if (
+        currentState.mode ===
+        "series"
+    ) {
+
+        currentState.level =
+            "seriesSelect";
+
+        pushNavigationState();
+
+        renderSeriesSelect();
+
+        return;
+
+    }
+
+
+    if (
+        currentState.mode ===
+        "prenecta"
+    ) {
+
+        currentState.level =
+            "years";
+
+        pushNavigationState();
+
+        renderPreNectaYears();
+
+        return;
+
+    }
+
+
+    if (
+        currentState.mode ===
+        "special"
+    ) {
+
+        currentState.level =
+            "specialTypes";
+
+        pushNavigationState();
+
+        renderSpecialTypes();
+
+        return;
+
+    }
+
+
     currentState.level =
         "types";
 
@@ -2530,28 +2840,19 @@ function openSubject(
 
 
 /* =========================================================
-   GET AVAILABLE TYPES
+   NORMAL TYPES
 ========================================================= */
 
 function getAvailableTypes() {
 
     const papers =
-        getPapers();
+        getNormalPapers();
 
     const types = [];
 
+
     papers.forEach(
         paper => {
-
-            if (
-                normalize(
-                    paper.category
-                ) === "special"
-            ) {
-
-                return;
-
-            }
 
             if (
                 normalize(
@@ -2566,6 +2867,7 @@ function getAvailableTypes() {
 
             }
 
+
             if (
                 normalize(
                     paper.subject
@@ -2579,14 +2881,24 @@ function getAvailableTypes() {
 
             }
 
+
             const type =
                 String(
                     paper.type ||
                     ""
                 ).trim();
 
+
             if (
-                type &&
+                !type
+            ) {
+
+                return;
+
+            }
+
+
+            if (
                 !types.some(
                     item =>
                         normalize(
@@ -2600,7 +2912,8 @@ function getAvailableTypes() {
 
                 types.push({
 
-                    id: type,
+                    id:
+                        type,
 
                     name:
                         paper.typeName ||
@@ -2614,6 +2927,7 @@ function getAvailableTypes() {
 
         }
     );
+
 
     return types;
 
@@ -2631,8 +2945,10 @@ function renderTypes() {
     backButton.style.display =
         "inline-flex";
 
+
     const types =
         getAvailableTypes();
+
 
     let html = `
 
@@ -2656,6 +2972,7 @@ function renderTypes() {
         <div class="selection-grid">
 
     `;
+
 
     types.forEach(
         type => {
@@ -2715,6 +3032,7 @@ function renderTypes() {
         }
     );
 
+
     if (
         types.length === 0
     ) {
@@ -2726,9 +3044,11 @@ function renderTypes() {
 
     }
 
+
     html += `
         </div>
     `;
+
 
     stepContainer.innerHTML =
         html;
@@ -2738,8 +3058,6 @@ function renderTypes() {
 
 /* =========================================================
    OPEN TYPE
-   UPDATED:
-   SCHOOL + REGION CAN BOTH EXIST
 ========================================================= */
 
 function openType(
@@ -2758,38 +3076,60 @@ function openType(
     currentState.year =
         null;
 
+
     const papers =
-        getFilteredNormalPapers();
+        getNormalPapers()
+            .filter(
+                paper =>
+
+                    normalize(
+                        paper.form
+                    ) ===
+                    normalize(
+                        currentState.form
+                    )
+
+                    &&
+
+                    normalize(
+                        paper.subject
+                    ) ===
+                    normalize(
+                        currentState.subject
+                    )
+
+                    &&
+
+                    normalize(
+                        paper.type
+                    ) ===
+                    normalize(
+                        currentState.type
+                    )
+            );
 
 
     const hasSchool =
         papers.some(
             paper =>
-                paper.school !== undefined &&
-                String(
+                !isEmpty(
                     paper.school
-                ).trim() !== ""
+                )
         );
 
 
     const hasRegion =
         papers.some(
             paper =>
-                paper.region !== undefined &&
-                String(
+                !isEmpty(
                     paper.region
-                ).trim() !== "" &&
+                ) &&
                 normalize(
                     paper.region
-                ) !== "necta"
+                ) !==
+                "necta"
         );
 
-
-    /*
-       KAMA ZOTE ZIPO:
-       Mteja achague kama anataka
-       School au Regional examination.
-    */
 
     if (
         hasSchool &&
@@ -2849,9 +3189,6 @@ function openType(
     }
 
 
-    currentState.locationMode =
-        null;
-
     currentState.level =
         "years";
 
@@ -2873,6 +3210,7 @@ function renderLocationChoice() {
     backButton.style.display =
         "inline-flex";
 
+
     let html = `
 
         <div class="step-header">
@@ -2888,7 +3226,6 @@ function renderLocationChoice() {
             <p>
                 Mitihani hii inapatikana
                 kwa shule na kwa mikoa.
-                Chagua aina unayotaka.
             </p>
 
         </div>
@@ -2972,6 +3309,7 @@ function renderLocationChoice() {
 
     `;
 
+
     stepContainer.innerHTML =
         html;
 
@@ -2979,7 +3317,7 @@ function renderLocationChoice() {
 
 
 /* =========================================================
-   CHOOSE LOCATION MODE
+   CHOOSE LOCATION
 ========================================================= */
 
 function chooseLocationMode(
@@ -3015,73 +3353,2639 @@ function chooseLocationMode(
     }
 
 
-    if (
-        mode === "region"
-    ) {
+    currentState.level =
+        "regions";
 
-        currentState.level =
-            "regions";
+    pushNavigationState();
 
-        pushNavigationState();
-
-        renderRegions();
-
-        return;
-
-    }
+    renderRegions();
 
 }
 
 
 /* =========================================================
-   GET NORMAL PAPERS
+   NORMAL PAPERS
 ========================================================= */
 
-function getFilteredNormalPapers() {
+function getNormalPapers() {
 
     return getPapers().filter(
         paper => {
 
-            if (
-                normalize(
-                    paper.category
-                ) === "special"
-            ) {
-
-                return false;
-
-            }
-
-            return (
-
-                normalize(
-                    paper.form
-                ) ===
-                normalize(
-                    currentState.form
-                )
-
-                &&
-
-                normalize(
-                    paper.subject
-                ) ===
-                normalize(
-                    currentState.subject
-                )
-
-                &&
-
-                normalize(
-                    paper.type
-                ) ===
-                normalize(
-                    currentState.type
-                )
-
+            return !isSpecialPaper(
+                paper
+            )
+            &&
+            !isPreNectaPaper(
+                paper
+            )
+            &&
+            !isSeriesPaper(
+                paper
             );
 
         }
+    );
+
+}
+
+
+/* =========================================================
+   GET PAPERS FOR CURRENT MODE
+========================================================= */
+
+function getPapersForCurrentMode() {
+
+    if (
+        currentState.mode ===
+        "prenecta"
+    ) {
+
+        return getPreNectaPapers();
+
+    }
+
+
+    if (
+        currentState.mode ===
+        "series"
+    ) {
+
+        return getSeriesPapers();
+
+    }
+
+
+    if (
+        currentState.mode ===
+        "special"
+    ) {
+
+        return getAllSpecialPapers();
+
+    }
+
+
+    return getNormalPapers();
+
+}
+
+
+/* =========================================================
+   DETECT PRE-NECTA
+========================================================= */
+
+function isPreNectaPaper(
+    paper
+) {
+
+    const category =
+        normalize(
+            paper.category
+        );
+
+    const type =
+        normalize(
+            paper.type
+        );
+
+
+    return (
+
+        category ===
+            "pre_necta"
+
+        ||
+
+        category ===
+            "prenecta"
+
+        ||
+
+        category ===
+            "pre-necta"
+
+        ||
+
+        category ===
+            "pre_nego"
+
+        ||
+
+        type ===
+            "pre_necta"
+
+        ||
+
+        type ===
+            "prenecta"
+
+        ||
+
+        type ===
+            "pre_necta"
+
+    );
+
+}
+
+
+/* =========================================================
+   GET PRE-NECTA
+========================================================= */
+
+function getPreNectaPapers() {
+
+    return getPapers().filter(
+        paper =>
+            isPreNectaPaper(
+                paper
+            )
+    );
+
+}
+
+
+/* =========================================================
+   PRE-NECTA MODE
+========================================================= */
+
+function openPreNectaMode() {
+
+    resetState();
+
+    currentState.mode =
+        "prenecta";
+
+    currentState.level =
+        "forms";
+
+    pushNavigationState();
+
+    renderPreNectaForms();
+
+}
+
+
+/* =========================================================
+   PRE-NECTA FORMS
+========================================================= */
+
+function getAvailableFormsForPapers(
+    papers
+) {
+
+    const result = [];
+
+
+    papers.forEach(
+        paper => {
+
+            if (
+                isEmpty(
+                    paper.form
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            const id =
+                String(
+                    paper.form
+                ).trim();
+
+
+            if (
+                !result.some(
+                    item =>
+                        normalize(
+                            item.id
+                        ) ===
+                        normalize(
+                            id
+                        )
+                )
+            ) {
+
+                result.push({
+
+                    id: id,
+
+                    name:
+                        paper.formName ||
+                        displayName(
+                            id
+                        )
+
+                });
+
+            }
+
+        }
+    );
+
+
+    result.sort(
+        (
+            a,
+            b
+        ) => {
+
+            const aa =
+                Number(
+                    String(
+                        a.id
+                    )
+                        .replace(
+                            /\D/g,
+                            ""
+                        )
+                );
+
+            const bb =
+                Number(
+                    String(
+                        b.id
+                    )
+                        .replace(
+                            /\D/g,
+                            ""
+                        )
+                );
+
+            return aa - bb;
+
+        }
+    );
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   RENDER PRE-NECTA FORMS
+========================================================= */
+
+function renderPreNectaForms() {
+
+    updateBreadcrumb();
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    const formList =
+        getAvailableFormsForPapers(
+            getPreNectaPapers()
+        );
+
+
+    let html = `
+
+        <div class="step-header">
+
+            <span class="step-number">
+                PRE-NECTA STEP 1
+            </span>
+
+            <h2>
+                Chagua Form
+            </h2>
+
+            <p>
+                Mfumo unaonyesha Form ambazo
+                zina Pre-NECTA papers kwenye
+                database.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    formList.forEach(
+        form => {
+
+            html += `
+
+                <div class="
+                    selection-card
+                    prenecta-card
+                ">
+
+                    <div>
+
+                        <div class="card-icon">
+                            🎯
+                        </div>
+
+                        <h3>
+                            ${escapeHTML(
+                                form.name
+                            )}
+                        </h3>
+
+                        <p>
+                            Pre-NECTA
+                            Past Papers
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openModeForm(
+                                '${escapeHTML(
+                                    form.id
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    if (
+        formList.length === 0
+    ) {
+
+        html += emptyCard(
+            "Hakuna Form",
+            "Hakuna Pre-NECTA paper yenye Form kwenye database."
+        );
+
+    }
+
+
+    html += `
+        </div>
+    `;
+
+
+    stepContainer.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   OPEN MODE FORM
+========================================================= */
+
+function openModeForm(
+    formId
+) {
+
+    currentState.form =
+        formId;
+
+    currentState.subject =
+        null;
+
+    currentState.type =
+        null;
+
+    currentState.year =
+        null;
+
+    currentState.series =
+        null;
+
+
+    currentState.level =
+        "subjects";
+
+    pushNavigationState();
+
+    renderSubjects();
+
+}
+
+
+/* =========================================================
+   PRE-NECTA YEARS
+========================================================= */
+
+function renderPreNectaYears() {
+
+    updateBreadcrumb();
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    const papers =
+        getPreNectaPapers()
+            .filter(
+                paper =>
+                    normalize(
+                        paper.form
+                    ) ===
+                    normalize(
+                        currentState.form
+                    )
+
+                    &&
+
+                    normalize(
+                        paper.subject
+                    ) ===
+                    normalize(
+                        currentState.subject
+                    )
+            );
+
+
+    const years =
+        uniqueYears(
+            papers
+        );
+
+
+    let html = `
+
+        <div class="step-header">
+
+            <span class="step-number">
+                PRE-NECTA STEP 4
+            </span>
+
+            <h2>
+                Chagua Mwaka
+            </h2>
+
+            <p>
+                Chagua mwaka wa
+                Pre-NECTA examination.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    years.forEach(
+        year => {
+
+            html += `
+
+                <div class="
+                    selection-card
+                    year-card
+                ">
+
+                    <div>
+
+                        <div class="card-icon">
+                            📅
+                        </div>
+
+                        <h3>
+                            ${escapeHTML(
+                                year
+                            )}
+                        </h3>
+
+                        <p>
+                            Pre-NECTA
+                            ${escapeHTML(
+                                year
+                            )}
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openYear(
+                                '${escapeHTML(
+                                    year
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    if (
+        years.length === 0
+    ) {
+
+        html += emptyCard(
+            "Hakuna mwaka",
+            "Hakuna Pre-NECTA paper iliyowekwa kwa uchaguzi huu."
+        );
+
+    }
+
+
+    html += `
+        </div>
+    `;
+
+
+    stepContainer.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   SERIES DETECTION
+========================================================= */
+
+function isSeriesPaper(
+    paper
+) {
+
+    const category =
+        normalize(
+            paper.category
+        );
+
+
+    const type =
+        normalize(
+            paper.type
+        );
+
+
+    return (
+
+        category ===
+            "series"
+
+        ||
+
+        category ===
+            "series_examination"
+
+        ||
+
+        category ===
+            "series_exam"
+
+        ||
+
+        type ===
+            "series"
+
+        ||
+
+        type ===
+            "series_examination"
+
+    );
+
+}
+
+
+/* =========================================================
+   SERIES PAPERS
+========================================================= */
+
+function getSeriesPapers() {
+
+    return getPapers().filter(
+        paper =>
+            isSeriesPaper(
+                paper
+            )
+    );
+
+}
+
+
+/* =========================================================
+   SERIES MODE
+========================================================= */
+
+function openSeriesMode() {
+
+    resetState();
+
+    currentState.mode =
+        "series";
+
+    currentState.level =
+        "forms";
+
+    pushNavigationState();
+
+    renderSeriesForms();
+
+}
+
+
+/* =========================================================
+   SERIES FORMS
+========================================================= */
+
+function renderSeriesForms() {
+
+    updateBreadcrumb();
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    const formList =
+        getAvailableFormsForPapers(
+            getSeriesPapers()
+        );
+
+
+    let html = `
+
+        <div class="step-header">
+
+            <span class="step-number">
+                SERIES STEP 1
+            </span>
+
+            <h2>
+                Chagua Form
+            </h2>
+
+            <p>
+                Series zinajitegemea.
+                Form 1 hadi Form 6 zitaonekana
+                kulingana na database.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    formList.forEach(
+        form => {
+
+            const count =
+                getSeriesPapers()
+                    .filter(
+                        paper =>
+                            normalize(
+                                paper.form
+                            ) ===
+                            normalize(
+                                form.id
+                            )
+                    )
+                    .length;
+
+
+            html += `
+
+                <div class="
+                    selection-card
+                    series-card
+                ">
+
+                    <div>
+
+                        <div class="card-icon">
+                            📚
+                        </div>
+
+                        <h3>
+                            ${escapeHTML(
+                                form.name
+                            )}
+                        </h3>
+
+                        <p>
+                            ${count}
+                            Series paper(s)
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openModeForm(
+                                '${escapeHTML(
+                                    form.id
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    if (
+        formList.length === 0
+    ) {
+
+        html += emptyCard(
+            "Hakuna Form",
+            "Hakuna Series paper yenye Form kwenye database."
+        );
+
+    }
+
+
+    html += `
+        </div>
+    `;
+
+
+    stepContainer.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   SERIES SELECT
+========================================================= */
+
+function renderSeriesSelect() {
+
+    updateBreadcrumb();
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    const papers =
+        getSeriesPapers()
+            .filter(
+                paper =>
+
+                    normalize(
+                        paper.form
+                    ) ===
+                    normalize(
+                        currentState.form
+                    )
+
+                    &&
+
+                    normalize(
+                        paper.subject
+                    ) ===
+                    normalize(
+                        currentState.subject
+                    )
+            );
+
+
+    const series =
+        getUniqueSeries(
+            papers
+        );
+
+
+    let html = `
+
+        <div class="step-header">
+
+            <span class="step-number">
+                SERIES STEP 3
+            </span>
+
+            <h2>
+                Chagua Series
+            </h2>
+
+            <p>
+                Chagua series iliyopo kwa
+                ${escapeHTML(
+                    displayName(
+                        currentState.form
+                    )
+                )}
+                ${escapeHTML(
+                    displayName(
+                        currentState.subject
+                    )
+                )}.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    series.forEach(
+        item => {
+
+            const count =
+                papers.filter(
+                    paper =>
+                        normalize(
+                            paper.series
+                        ) ===
+                        normalize(
+                            item.id
+                        )
+                ).length;
+
+
+            html += `
+
+                <div class="
+                    selection-card
+                    series-card
+                ">
+
+                    <div>
+
+                        <div class="card-icon">
+                            📚
+                        </div>
+
+                        <h3>
+                            ${escapeHTML(
+                                item.name
+                            )}
+                        </h3>
+
+                        <p>
+                            ${count}
+                            paper(s) in this series
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openSeriesItem(
+                                '${escapeHTML(
+                                    item.id
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    if (
+        series.length === 0
+    ) {
+
+        html += emptyCard(
+            "Hakuna series",
+            "Hakuna series iliyowekwa kwa Form na subject hii."
+        );
+
+    }
+
+
+    html += `
+        </div>
+    `;
+
+
+    stepContainer.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   UNIQUE SERIES
+========================================================= */
+
+function getUniqueSeries(
+    papers
+) {
+
+    const result = [];
+
+
+    papers.forEach(
+        paper => {
+
+            if (
+                isEmpty(
+                    paper.series
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            const id =
+                String(
+                    paper.series
+                ).trim();
+
+
+            if (
+                !result.some(
+                    item =>
+                        normalize(
+                            item.id
+                        ) ===
+                        normalize(
+                            id
+                        )
+                )
+            ) {
+
+                result.push({
+
+                    id: id,
+
+                    name:
+                        paper.seriesName ||
+                        displayName(
+                            id
+                        )
+
+                });
+
+            }
+
+        }
+    );
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   OPEN SERIES
+========================================================= */
+
+function openSeriesItem(
+    seriesId
+) {
+
+    currentState.series =
+        seriesId;
+
+    currentState.year =
+        null;
+
+    currentState.level =
+        "seriesYears";
+
+    pushNavigationState();
+
+    renderSeriesYears();
+
+}
+
+
+/* =========================================================
+   SERIES YEARS
+========================================================= */
+
+function renderSeriesYears() {
+
+    updateBreadcrumb();
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    const papers =
+        getSeriesPapers()
+            .filter(
+                paper =>
+
+                    normalize(
+                        paper.form
+                    ) ===
+                    normalize(
+                        currentState.form
+                    )
+
+                    &&
+
+                    normalize(
+                        paper.subject
+                    ) ===
+                    normalize(
+                        currentState.subject
+                    )
+
+                    &&
+
+                    normalize(
+                        paper.series
+                    ) ===
+                    normalize(
+                        currentState.series
+                    )
+            );
+
+
+    const years =
+        uniqueYears(
+            papers
+        );
+
+
+    let html = `
+
+        <div class="step-header">
+
+            <span class="step-number">
+                SERIES STEP 4
+            </span>
+
+            <h2>
+                Chagua Mwaka
+            </h2>
+
+            <p>
+                Chagua mwaka wa Series
+                examination.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    years.forEach(
+        year => {
+
+            html += `
+
+                <div class="
+                    selection-card
+                    year-card
+                ">
+
+                    <div>
+
+                        <div class="card-icon">
+                            📅
+                        </div>
+
+                        <h3>
+                            ${escapeHTML(
+                                year
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                displayName(
+                                    currentState.series
+                                )
+                            )}
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openYear(
+                                '${escapeHTML(
+                                    year
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    if (
+        years.length === 0
+    ) {
+
+        html += emptyCard(
+            "Hakuna mwaka",
+            "Hakuna mwaka uliowekwa kwa Series hii."
+        );
+
+    }
+
+
+    html += `
+        </div>
+    `;
+
+
+    stepContainer.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   SPECIAL
+========================================================= */
+
+function isSpecialPaper(
+    paper
+) {
+
+    return (
+        normalize(
+            paper.category
+        ) ===
+        "special"
+    );
+
+}
+
+
+function getAllSpecialPapers() {
+
+    return getPapers().filter(
+        paper =>
+            isSpecialPaper(
+                paper
+            )
+    );
+
+}
+
+
+/* =========================================================
+   SPECIAL MENU
+========================================================= */
+
+function openSpecialMenu() {
+
+    resetState();
+
+    currentState.mode =
+        "special";
+
+    currentState.level =
+        "specialExams";
+
+    pushNavigationState();
+
+    renderSpecialMenu();
+
+}
+
+
+/* =========================================================
+   SPECIAL EXAMINATIONS
+========================================================= */
+
+function renderSpecialMenu() {
+
+    updateBreadcrumb();
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    const specials =
+        getUniqueSpecialExams();
+
+
+    let html = `
+
+        <div class="step-header">
+
+            <span class="step-number">
+                SPECIAL STEP 1
+            </span>
+
+            <h2>
+                Chagua Special Examination
+            </h2>
+
+            <p>
+                Mfumo utaonyesha Special
+                Examinations zilizopo kwenye
+                database.
+            </p>
+
+        </div>
+
+        <div class="special-info">
+
+            ⭐ Hapa hakuna ISESE pekee.
+            Mfumo unasoma kila
+            <strong>specialExam</strong>
+            iliyopo kwenye database.
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    specials.forEach(
+        special => {
+
+            const count =
+                getAllSpecialPapers()
+                    .filter(
+                        paper =>
+                            normalize(
+                                paper.specialExam
+                            ) ===
+                            normalize(
+                                special.id
+                            )
+                    ).length;
+
+
+            html += `
+
+                <div class="
+                    selection-card
+                    special-card
+                ">
+
+                    <div>
+
+                        <div class="card-icon">
+                            ⭐
+                        </div>
+
+                        <h3>
+                            ${escapeHTML(
+                                special.name
+                            )}
+                        </h3>
+
+                        <p>
+                            ${count}
+                            paper(s) available
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openSpecial(
+                                '${escapeHTML(
+                                    special.id
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    if (
+        specials.length === 0
+    ) {
+
+        html += emptyCard(
+            "Hakuna Special Examination",
+            "Hakuna paper yenye category = special kwenye database."
+        );
+
+    }
+
+
+    html += `
+        </div>
+    `;
+
+
+    stepContainer.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   UNIQUE SPECIAL EXAMS
+========================================================= */
+
+function getUniqueSpecialExams() {
+
+    const result = [];
+
+
+    getAllSpecialPapers()
+        .forEach(
+            paper => {
+
+                if (
+                    isEmpty(
+                        paper.specialExam
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                const id =
+                    String(
+                        paper.specialExam
+                    ).trim();
+
+
+                if (
+                    !result.some(
+                        item =>
+                            normalize(
+                                item.id
+                            ) ===
+                            normalize(
+                                id
+                            )
+                    )
+                ) {
+
+                    result.push({
+
+                        id: id,
+
+                        name:
+                            paper.specialExamName ||
+                            displayName(
+                                id
+                            )
+
+                    });
+
+                }
+
+            }
+        );
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   OPEN SPECIAL
+========================================================= */
+
+function openSpecial(
+    specialExam
+) {
+
+    currentState.specialExam =
+        specialExam;
+
+    currentState.form =
+        null;
+
+    currentState.subject =
+        null;
+
+    currentState.type =
+        null;
+
+    currentState.series =
+        null;
+
+    currentState.year =
+        null;
+
+
+    currentState.level =
+        "specialForms";
+
+    pushNavigationState();
+
+    renderSpecialForms();
+
+}
+
+
+/* =========================================================
+   SPECIAL FORMS
+========================================================= */
+
+function renderSpecialForms() {
+
+    updateBreadcrumb();
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    const papers =
+        getAllSpecialPapers()
+            .filter(
+                paper =>
+                    normalize(
+                        paper.specialExam
+                    ) ===
+                    normalize(
+                        currentState.specialExam
+                    )
+            );
+
+
+    const forms =
+        getAvailableFormsForPapers(
+            papers
+        );
+
+
+    /*
+       Kama special examination
+       haina Form, nenda kwenye
+       next logical level.
+    */
+
+    if (
+        forms.length === 0
+    ) {
+
+        currentState.level =
+            "specialTypes";
+
+        renderSpecialTypes();
+
+        return;
+
+    }
+
+
+    let html = `
+
+        <div class="step-header">
+
+            <span class="step-number">
+                SPECIAL STEP 2
+            </span>
+
+            <h2>
+                ${escapeHTML(
+                    displayName(
+                        currentState.specialExam
+                    )
+                )}
+            </h2>
+
+            <p>
+                Chagua Form iliyopo kwenye
+                examination hii.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    forms.forEach(
+        form => {
+
+            html += `
+
+                <div class="
+                    selection-card
+                    special-card
+                ">
+
+                    <div>
+
+                        <div class="card-icon">
+                            📘
+                        </div>
+
+                        <h3>
+                            ${escapeHTML(
+                                form.name
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                displayName(
+                                    currentState.specialExam
+                                )
+                            )}
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openSpecialForm(
+                                '${escapeHTML(
+                                    form.id
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+        </div>
+    `;
+
+
+    stepContainer.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   OPEN SPECIAL FORM
+========================================================= */
+
+function openSpecialForm(
+    formId
+) {
+
+    currentState.form =
+        formId;
+
+    currentState.subject =
+        null;
+
+    currentState.type =
+        null;
+
+    currentState.series =
+        null;
+
+    currentState.year =
+        null;
+
+    currentState.level =
+        "specialSubjects";
+
+    pushNavigationState();
+
+    renderSpecialSubjects();
+
+}
+
+
+/* =========================================================
+   SPECIAL SUBJECTS
+========================================================= */
+
+function renderSpecialSubjects() {
+
+    updateBreadcrumb();
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    const papers =
+        getAllSpecialPapers()
+            .filter(
+                paper =>
+
+                    normalize(
+                        paper.specialExam
+                    ) ===
+                    normalize(
+                        currentState.specialExam
+                    )
+
+                    &&
+
+                    normalize(
+                        paper.form
+                    ) ===
+                    normalize(
+                        currentState.form
+                    )
+            );
+
+
+    const subjects =
+        getUniqueSubjects(
+            papers
+        );
+
+
+    /*
+       Kama hakuna subject,
+       ruka moja kwa moja.
+    */
+
+    if (
+        subjects.length === 0
+    ) {
+
+        currentState.level =
+            "specialTypes";
+
+        renderSpecialTypes();
+
+        return;
+
+    }
+
+
+    if (
+        subjects.length === 1
+    ) {
+
+        currentState.subject =
+            subjects[0].id;
+
+        currentState.level =
+            "specialTypes";
+
+        renderSpecialTypes();
+
+        return;
+
+    }
+
+
+    let html = `
+
+        <div class="step-header">
+
+            <span class="step-number">
+                SPECIAL STEP 3
+            </span>
+
+            <h2>
+                Chagua Somo
+            </h2>
+
+            <p>
+                Chagua subject ya
+                ${escapeHTML(
+                    displayName(
+                        currentState.specialExam
+                    )
+                )}.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    subjects.forEach(
+        subject => {
+
+            html += `
+
+                <div class="
+                    selection-card
+                    special-card
+                ">
+
+                    <div>
+
+                        <div class="card-icon">
+                            📚
+                        </div>
+
+                        <h3>
+                            ${escapeHTML(
+                                subject.name
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                displayName(
+                                    currentState.form
+                                )
+                            )}
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openSpecialSubject(
+                                '${escapeHTML(
+                                    subject.id
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+        </div>
+    `;
+
+
+    stepContainer.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   OPEN SPECIAL SUBJECT
+========================================================= */
+
+function openSpecialSubject(
+    subjectId
+) {
+
+    currentState.subject =
+        subjectId;
+
+    currentState.type =
+        null;
+
+    currentState.series =
+        null;
+
+    currentState.year =
+        null;
+
+    currentState.level =
+        "specialTypes";
+
+    pushNavigationState();
+
+    renderSpecialTypes();
+
+}
+
+
+/* =========================================================
+   SPECIAL TYPES
+========================================================= */
+
+function renderSpecialTypes() {
+
+    updateBreadcrumb();
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    let papers =
+        getAllSpecialPapers()
+            .filter(
+                paper =>
+
+                    normalize(
+                        paper.specialExam
+                    ) ===
+                    normalize(
+                        currentState.specialExam
+                    )
+            );
+
+
+    if (
+        currentState.form
+    ) {
+
+        papers =
+            papers.filter(
+                paper =>
+                    normalize(
+                        paper.form
+                    ) ===
+                    normalize(
+                        currentState.form
+                    )
+            );
+
+    }
+
+
+    if (
+        currentState.subject
+    ) {
+
+        papers =
+            papers.filter(
+                paper =>
+                    normalize(
+                        paper.subject
+                    ) ===
+                    normalize(
+                        currentState.subject
+                    )
+            );
+
+    }
+
+
+    const types =
+        getUniqueTypes(
+            papers
+        );
+
+
+    /*
+       Kama hakuna type,
+       tunaenda years.
+    */
+
+    if (
+        types.length === 0
+    ) {
+
+        currentState.level =
+            "specialYears";
+
+        renderSpecialYears();
+
+        return;
+
+    }
+
+
+    /*
+       Kama kuna type moja tu,
+       tunai-select automatically.
+    */
+
+    if (
+        types.length === 1
+    ) {
+
+        currentState.type =
+            types[0].id;
+
+        currentState.level =
+            "specialYears";
+
+        renderSpecialYears();
+
+        return;
+
+    }
+
+
+    let html = `
+
+        <div class="step-header">
+
+            <span class="step-number">
+                SPECIAL STEP 4
+            </span>
+
+            <h2>
+                Chagua Aina ya Examination
+            </h2>
+
+            <p>
+                ISESE, TAHOSSA au Special
+                nyingine zinaweza kuwa na
+                Midterm, Terminal, Annual,
+                Series n.k.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    types.forEach(
+        type => {
+
+            html += `
+
+                <div class="
+                    selection-card
+                    type-card
+                ">
+
+                    <div>
+
+                        <div class="card-icon">
+                            📝
+                        </div>
+
+                        <h3>
+                            ${escapeHTML(
+                                type.name
+                            )}
+                        </h3>
+
+                        <p>
+                            Examination type
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openSpecialType(
+                                '${escapeHTML(
+                                    type.id
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+        </div>
+    `;
+
+
+    stepContainer.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   OPEN SPECIAL TYPE
+========================================================= */
+
+function openSpecialType(
+    typeId
+) {
+
+    currentState.type =
+        typeId;
+
+    currentState.series =
+        null;
+
+    currentState.year =
+        null;
+
+    currentState.level =
+        "specialSeriesOrYears";
+
+    pushNavigationState();
+
+    renderSpecialSeriesOrYears();
+
+}
+
+
+/* =========================================================
+   SPECIAL SERIES OR YEARS
+========================================================= */
+
+function renderSpecialSeriesOrYears() {
+
+    updateBreadcrumb();
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    let papers =
+        getSpecialWorkingPapers();
+
+
+    const series =
+        getUniqueSeries(
+            papers
+        );
+
+
+    /*
+       Kama series zipo,
+       zionyeshe.
+    */
+
+    if (
+        series.length > 0
+    ) {
+
+        let html = `
+
+            <div class="step-header">
+
+                <span class="step-number">
+                    SPECIAL STEP 5
+                </span>
+
+                <h2>
+                    Chagua Series
+                </h2>
+
+                <p>
+                    Series zilizopo kwenye
+                    examination hii.
+                </p>
+
+            </div>
+
+            <div class="selection-grid">
+
+        `;
+
+
+        series.forEach(
+            item => {
+
+                html += `
+
+                    <div class="
+                        selection-card
+                        series-card
+                    ">
+
+                        <div>
+
+                            <div class="card-icon">
+                                📚
+                            </div>
+
+                            <h3>
+                                ${escapeHTML(
+                                    item.name
+                                )}
+                            </h3>
+
+                        </div>
+
+                        <button
+                            class="open-btn"
+                            onclick="
+                                openSpecialSeries(
+                                    '${escapeHTML(
+                                        item.id
+                                    )}'
+                                )
+                            ">
+
+                            FUNGUA
+
+                        </button>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+
+        html += `
+            </div>
+        `;
+
+
+        stepContainer.innerHTML =
+            html;
+
+        return;
+
+    }
+
+
+    /*
+       Kama series hakuna,
+       nenda years.
+    */
+
+    currentState.level =
+        "specialYears";
+
+    renderSpecialYears();
+
+}
+
+
+/* =========================================================
+   OPEN SPECIAL SERIES
+========================================================= */
+
+function openSpecialSeries(
+    seriesId
+) {
+
+    currentState.series =
+        seriesId;
+
+    currentState.year =
+        null;
+
+    currentState.level =
+        "specialYears";
+
+    pushNavigationState();
+
+    renderSpecialYears();
+
+}
+
+
+/* =========================================================
+   SPECIAL YEARS
+========================================================= */
+
+function renderSpecialYears() {
+
+    updateBreadcrumb();
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    const papers =
+        getSpecialWorkingPapers();
+
+
+    const years =
+        uniqueYears(
+            papers
+        );
+
+
+    let html = `
+
+        <div class="step-header">
+
+            <span class="step-number">
+                SPECIAL STEP 6
+            </span>
+
+            <h2>
+                Chagua Mwaka
+            </h2>
+
+            <p>
+                Chagua mwaka wa examination.
+            </p>
+
+        </div>
+
+        <div class="selection-grid">
+
+    `;
+
+
+    years.forEach(
+        year => {
+
+            html += `
+
+                <div class="
+                    selection-card
+                    year-card
+                ">
+
+                    <div>
+
+                        <div class="card-icon">
+                            📅
+                        </div>
+
+                        <h3>
+                            ${escapeHTML(
+                                year
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                displayName(
+                                    currentState.specialExam
+                                )
+                            )}
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="open-btn"
+                        onclick="
+                            openYear(
+                                '${escapeHTML(
+                                    year
+                                )}'
+                            )
+                        ">
+
+                        FUNGUA
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    if (
+        years.length === 0
+    ) {
+
+        /*
+           Kama hakuna year,
+           show papers moja kwa moja.
+        */
+
+        renderSpecialPapers();
+
+        return;
+
+    }
+
+
+    html += `
+        </div>
+    `;
+
+
+    stepContainer.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   SPECIAL WORKING PAPERS
+========================================================= */
+
+function getSpecialWorkingPapers() {
+
+    let papers =
+        getAllSpecialPapers()
+            .filter(
+                paper =>
+                    normalize(
+                        paper.specialExam
+                    ) ===
+                    normalize(
+                        currentState.specialExam
+                    )
+            );
+
+
+    if (
+        currentState.form
+    ) {
+
+        papers =
+            papers.filter(
+                paper =>
+                    normalize(
+                        paper.form
+                    ) ===
+                    normalize(
+                        currentState.form
+                    )
+            );
+
+    }
+
+
+    if (
+        currentState.subject
+    ) {
+
+        papers =
+            papers.filter(
+                paper =>
+                    normalize(
+                        paper.subject
+                    ) ===
+                    normalize(
+                        currentState.subject
+                    )
+            );
+
+    }
+
+
+    if (
+        currentState.type
+    ) {
+
+        papers =
+            papers.filter(
+                paper =>
+                    normalize(
+                        paper.type
+                    ) ===
+                    normalize(
+                        currentState.type
+                    )
+            );
+
+    }
+
+
+    if (
+        currentState.series
+    ) {
+
+        papers =
+            papers.filter(
+                paper =>
+                    normalize(
+                        paper.series
+                    ) ===
+                    normalize(
+                        currentState.series
+                    )
+            );
+
+    }
+
+
+    return papers;
+
+}
+
+
+/* =========================================================
+   UNIQUE SUBJECTS
+========================================================= */
+
+function getUniqueSubjects(
+    papers
+) {
+
+    const result = [];
+
+
+    papers.forEach(
+        paper => {
+
+            if (
+                isEmpty(
+                    paper.subject
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            const id =
+                String(
+                    paper.subject
+                ).trim();
+
+
+            if (
+                !result.some(
+                    item =>
+                        normalize(
+                            item.id
+                        ) ===
+                        normalize(
+                            id
+                        )
+                )
+            ) {
+
+                result.push({
+
+                    id: id,
+
+                    name:
+                        paper.subjectName ||
+                        displayName(
+                            id
+                        )
+
+                });
+
+            }
+
+        }
+    );
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   UNIQUE TYPES
+========================================================= */
+
+function getUniqueTypes(
+    papers
+) {
+
+    const result = [];
+
+
+    papers.forEach(
+        paper => {
+
+            if (
+                isEmpty(
+                    paper.type
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            const id =
+                String(
+                    paper.type
+                ).trim();
+
+
+            if (
+                !result.some(
+                    item =>
+                        normalize(
+                            item.id
+                        ) ===
+                        normalize(
+                            id
+                        )
+                )
+            ) {
+
+                result.push({
+
+                    id: id,
+
+                    name:
+                        paper.typeName ||
+                        displayName(
+                            id
+                        )
+
+                });
+
+            }
+
+        }
+    );
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   YEARS
+========================================================= */
+
+function uniqueYears(
+    papers
+) {
+
+    const years = [];
+
+
+    papers.forEach(
+        paper => {
+
+            if (
+                isEmpty(
+                    paper.year
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            const year =
+                String(
+                    paper.year
+                ).trim();
+
+
+            if (
+                !years.includes(
+                    year
+                )
+            ) {
+
+                years.push(
+                    year
+                );
+
+            }
+
+        }
+    );
+
+
+    return years.sort(
+        (
+            a,
+            b
+        ) =>
+            Number(b) -
+            Number(a)
     );
 
 }
@@ -3094,29 +5998,31 @@ function getFilteredNormalPapers() {
 function getAvailableSchools() {
 
     const papers =
-        getFilteredNormalPapers();
+        getNormalWorkingPapers();
+
 
     const schools = [];
+
 
     papers.forEach(
         paper => {
 
             if (
-                paper.school ===
-                    undefined ||
-                String(
+                isEmpty(
                     paper.school
-                ).trim() === ""
+                )
             ) {
 
                 return;
 
             }
 
+
             const id =
                 String(
                     paper.school
                 ).trim();
+
 
             if (
                 !schools.some(
@@ -3147,7 +6053,117 @@ function getAvailableSchools() {
         }
     );
 
+
     return schools;
+
+}
+
+
+/* =========================================================
+   NORMAL WORKING PAPERS
+========================================================= */
+
+function getNormalWorkingPapers() {
+
+    let papers =
+        getNormalPapers();
+
+
+    if (
+        currentState.form
+    ) {
+
+        papers =
+            papers.filter(
+                paper =>
+                    normalize(
+                        paper.form
+                    ) ===
+                    normalize(
+                        currentState.form
+                    )
+            );
+
+    }
+
+
+    if (
+        currentState.subject
+    ) {
+
+        papers =
+            papers.filter(
+                paper =>
+                    normalize(
+                        paper.subject
+                    ) ===
+                    normalize(
+                        currentState.subject
+                    )
+            );
+
+    }
+
+
+    if (
+        currentState.type
+    ) {
+
+        papers =
+            papers.filter(
+                paper =>
+                    normalize(
+                        paper.type
+                    ) ===
+                    normalize(
+                        currentState.type
+                    )
+            );
+
+    }
+
+
+    if (
+        currentState.locationMode ===
+        "school" &&
+        currentState.school
+    ) {
+
+        papers =
+            papers.filter(
+                paper =>
+                    normalize(
+                        paper.school
+                    ) ===
+                    normalize(
+                        currentState.school
+                    )
+            );
+
+    }
+
+
+    if (
+        currentState.locationMode ===
+        "region" &&
+        currentState.region
+    ) {
+
+        papers =
+            papers.filter(
+                paper =>
+                    normalize(
+                        paper.region
+                    ) ===
+                    normalize(
+                        currentState.region
+                    )
+            );
+
+    }
+
+
+    return papers;
 
 }
 
@@ -3163,8 +6179,10 @@ function renderSchools() {
     backButton.style.display =
         "inline-flex";
 
+
     const schools =
         getAvailableSchools();
+
 
     let html = `
 
@@ -3188,6 +6206,7 @@ function renderSchools() {
         <div class="selection-grid">
 
     `;
+
 
     schools.forEach(
         school => {
@@ -3238,6 +6257,7 @@ function renderSchools() {
         }
     );
 
+
     if (
         schools.length === 0
     ) {
@@ -3249,9 +6269,11 @@ function renderSchools() {
 
     }
 
+
     html += `
         </div>
     `;
+
 
     stepContainer.innerHTML =
         html;
@@ -3269,6 +6291,9 @@ function openSchool(
 
     currentState.school =
         schoolId;
+
+    currentState.region =
+        null;
 
     currentState.year =
         null;
@@ -3290,38 +6315,41 @@ function openSchool(
 function getAvailableRegions() {
 
     const papers =
-        getFilteredNormalPapers();
+        getNormalWorkingPapers();
+
 
     const ids = [];
+
 
     papers.forEach(
         paper => {
 
             if (
-                paper.region ===
-                    undefined ||
-                String(
+                isEmpty(
                     paper.region
-                ).trim() === ""
+                )
             ) {
 
                 return;
 
             }
+
 
             const region =
                 normalize(
                     paper.region
                 );
 
+
             if (
                 region ===
-                    "necta"
+                "necta"
             ) {
 
                 return;
 
             }
+
 
             if (
                 !ids.includes(
@@ -3338,8 +6366,10 @@ function getAvailableRegions() {
         }
     );
 
+
     const configured =
         getRegions();
+
 
     const result =
         configured.filter(
@@ -3360,7 +6390,8 @@ function getAvailableRegions() {
                     region =>
                         normalize(
                             region.id
-                        ) === id
+                        ) ===
+                        id
                 )
             ) {
 
@@ -3380,6 +6411,7 @@ function getAvailableRegions() {
         }
     );
 
+
     return result;
 
 }
@@ -3396,8 +6428,10 @@ function renderRegions() {
     backButton.style.display =
         "inline-flex";
 
+
     const regionList =
         getAvailableRegions();
+
 
     let html = `
 
@@ -3421,6 +6455,7 @@ function renderRegions() {
         <div class="selection-grid">
 
     `;
+
 
     regionList.forEach(
         region => {
@@ -3474,6 +6509,7 @@ function renderRegions() {
         }
     );
 
+
     if (
         regionList.length === 0
     ) {
@@ -3485,9 +6521,11 @@ function renderRegions() {
 
     }
 
+
     html += `
         </div>
     `;
+
 
     stepContainer.innerHTML =
         html;
@@ -3523,97 +6561,24 @@ function openRegion(
 
 
 /* =========================================================
-   GET AVAILABLE YEARS
+   AVAILABLE YEARS NORMAL
 ========================================================= */
 
 function getAvailableYears() {
 
     const papers =
-        getFilteredNormalPapers();
-
-    const years = [];
-
-    papers.forEach(
-        paper => {
-
-            if (
-                currentState.locationMode ===
-                    "region"
-            ) {
-
-                if (
-                    normalize(
-                        paper.region
-                    ) !==
-                    normalize(
-                        currentState.region
-                    )
-                ) {
-
-                    return;
-
-                }
-
-            }
+        getNormalWorkingPapers();
 
 
-            if (
-                currentState.locationMode ===
-                    "school"
-            ) {
-
-                if (
-                    normalize(
-                        paper.school
-                    ) !==
-                    normalize(
-                        currentState.school
-                    )
-                ) {
-
-                    return;
-
-                }
-
-            }
-
-
-            const year =
-                String(
-                    paper.year ||
-                    ""
-                );
-
-            if (
-                year &&
-                !years.includes(
-                    year
-                )
-            ) {
-
-                years.push(
-                    year
-                );
-
-            }
-
-        }
-    );
-
-    return years.sort(
-        (
-            a,
-            b
-        ) =>
-            Number(b) -
-            Number(a)
+    return uniqueYears(
+        papers
     );
 
 }
 
 
 /* =========================================================
-   RENDER YEARS
+   RENDER YEARS NORMAL
 ========================================================= */
 
 function renderYears() {
@@ -3623,8 +6588,10 @@ function renderYears() {
     backButton.style.display =
         "inline-flex";
 
+
     const years =
         getAvailableYears();
+
 
     let html = `
 
@@ -3648,6 +6615,7 @@ function renderYears() {
         <div class="selection-grid">
 
     `;
+
 
     years.forEach(
         year => {
@@ -3701,6 +6669,7 @@ function renderYears() {
         }
     );
 
+
     if (
         years.length === 0
     ) {
@@ -3712,9 +6681,11 @@ function renderYears() {
 
     }
 
+
     html += `
         </div>
     `;
+
 
     stepContainer.innerHTML =
         html;
@@ -3733,10 +6704,49 @@ function openYear(
     currentState.year =
         String(year);
 
+
     currentState.level =
         "papers";
 
+
     pushNavigationState();
+
+
+    if (
+        currentState.mode ===
+        "special"
+    ) {
+
+        renderSpecialPapers();
+
+        return;
+
+    }
+
+
+    if (
+        currentState.mode ===
+        "series"
+    ) {
+
+        renderSeriesPapers();
+
+        return;
+
+    }
+
+
+    if (
+        currentState.mode ===
+        "prenecta"
+    ) {
+
+        renderPreNectaPapers();
+
+        return;
+
+    }
+
 
     renderPapers();
 
@@ -3744,134 +6754,40 @@ function openYear(
 
 
 /* =========================================================
-   GET MATCHING PAPERS
+   MATCH NORMAL PAPERS
 ========================================================= */
 
 function getMatchingPapers() {
 
-    return getPapers().filter(
-        paper => {
-
-            if (
-                normalize(
-                    paper.category
-                ) !==
-                "special"
-            ) {
-
-                if (
-                    normalize(
-                        paper.form
-                    ) !==
-                    normalize(
-                        currentState.form
-                    )
-                ) {
-
-                    return false;
-
-                }
+    let papers =
+        getNormalWorkingPapers();
 
 
-                if (
-                    normalize(
-                        paper.subject
-                    ) !==
-                    normalize(
-                        currentState.subject
-                    )
-                ) {
+    if (
+        currentState.year
+    ) {
 
-                    return false;
-
-                }
-
-
-                if (
-                    normalize(
-                        paper.type
-                    ) !==
-                    normalize(
-                        currentState.type
-                    )
-                ) {
-
-                    return false;
-
-                }
-
-
-                if (
+        papers =
+            papers.filter(
+                paper =>
                     String(
                         paper.year
-                    ) !==
+                    ) ===
                     String(
                         currentState.year
                     )
-                ) {
+            );
 
-                    return false;
-
-                }
+    }
 
 
-                if (
-                    currentState.locationMode ===
-                    "region"
-                ) {
-
-                    if (
-                        normalize(
-                            paper.region
-                        ) !==
-                        normalize(
-                            currentState.region
-                        )
-                    ) {
-
-                        return false;
-
-                    }
-
-                }
-
-
-                if (
-                    currentState.locationMode ===
-                    "school"
-                ) {
-
-                    if (
-                        normalize(
-                            paper.school
-                        ) !==
-                        normalize(
-                            currentState.school
-                        )
-                    ) {
-
-                        return false;
-
-                    }
-
-                }
-
-
-                return true;
-
-            }
-
-
-            return false;
-
-        }
-    );
+    return papers;
 
 }
 
 
 /* =========================================================
-   RENDER PAPERS
+   RENDER NORMAL PAPERS
 ========================================================= */
 
 function renderPapers() {
@@ -3881,24 +6797,213 @@ function renderPapers() {
     backButton.style.display =
         "inline-flex";
 
+
     const papers =
         getMatchingPapers();
+
+
+    renderPaperList(
+        papers,
+        "STEP 7",
+        "Available Papers",
+        "Chagua PDF unayotaka ku-download."
+    );
+
+}
+
+
+/* =========================================================
+   RENDER PRE-NECTA PAPERS
+========================================================= */
+
+function renderPreNectaPapers() {
+
+    updateBreadcrumb();
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    let papers =
+        getPreNectaPapers()
+            .filter(
+                paper =>
+
+                    normalize(
+                        paper.form
+                    ) ===
+                    normalize(
+                        currentState.form
+                    )
+
+                    &&
+
+                    normalize(
+                        paper.subject
+                    ) ===
+                    normalize(
+                        currentState.subject
+                    )
+
+                    &&
+
+                    String(
+                        paper.year
+                    ) ===
+                    String(
+                        currentState.year
+                    )
+            );
+
+
+    renderPaperList(
+        papers,
+        "PRE-NECTA STEP 5",
+        "Available Pre-NECTA Papers",
+        "Download Pre-NECTA examination PDF na Marking Guide kama ipo."
+    );
+
+}
+
+
+/* =========================================================
+   RENDER SERIES PAPERS
+========================================================= */
+
+function renderSeriesPapers() {
+
+    updateBreadcrumb();
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    let papers =
+        getSeriesPapers()
+            .filter(
+                paper =>
+
+                    normalize(
+                        paper.form
+                    ) ===
+                    normalize(
+                        currentState.form
+                    )
+
+                    &&
+
+                    normalize(
+                        paper.subject
+                    ) ===
+                    normalize(
+                        currentState.subject
+                    )
+
+                    &&
+
+                    normalize(
+                        paper.series
+                    ) ===
+                    normalize(
+                        currentState.series
+                    )
+
+                    &&
+
+                    String(
+                        paper.year
+                    ) ===
+                    String(
+                        currentState.year
+                    )
+            );
+
+
+    renderPaperList(
+        papers,
+        "SERIES STEP 5",
+        "Available Series Papers",
+        "Download Series examination PDF na Marking Guide kama ipo."
+    );
+
+}
+
+
+/* =========================================================
+   RENDER SPECIAL PAPERS
+========================================================= */
+
+function renderSpecialPapers() {
+
+    updateBreadcrumb();
+
+    backButton.style.display =
+        "inline-flex";
+
+
+    let papers =
+        getSpecialWorkingPapers();
+
+
+    if (
+        currentState.year
+    ) {
+
+        papers =
+            papers.filter(
+                paper =>
+                    String(
+                        paper.year
+                    ) ===
+                    String(
+                        currentState.year
+                    )
+            );
+
+    }
+
+
+    renderPaperList(
+        papers,
+        "SPECIAL STEP 7",
+        "Available Special Papers",
+        "Download examination PDF na Marking Guide kama ipo."
+    );
+
+}
+
+
+/* =========================================================
+   GENERIC PAPER LIST
+========================================================= */
+
+function renderPaperList(
+    papers,
+    step,
+    title,
+    description
+) {
 
     let html = `
 
         <div class="step-header">
 
             <span class="step-number">
-                STEP 7
+                ${escapeHTML(
+                    step
+                )}
             </span>
 
             <h2>
-                Available Papers
+                ${escapeHTML(
+                    title
+                )}
             </h2>
 
             <p>
-                Chagua PDF unayotaka
-                ku-download.
+                ${escapeHTML(
+                    description
+                )}
             </p>
 
         </div>
@@ -3907,16 +7012,18 @@ function renderPapers() {
 
     `;
 
+
     if (
         papers.length === 0
     ) {
 
         html += emptyCard(
-            "Hakuna paper iliyopatikana",
+            "Hakuna paper",
             "Hakuna PDF iliyounganishwa na uchaguzi huu bado."
         );
 
     }
+
 
     papers.forEach(
         (
@@ -3924,17 +7031,20 @@ function renderPapers() {
             index
         ) => {
 
-            html += renderPaperCard(
-                paper,
-                index
-            );
+            html +=
+                renderPaperCard(
+                    paper,
+                    index
+                );
 
         }
     );
 
+
     html += `
         </div>
     `;
+
 
     stepContainer.innerHTML =
         html;
@@ -3943,7 +7053,7 @@ function renderPapers() {
 
 
 /* =========================================================
-   RENDER PAPER CARD
+   PAPER CARD
 ========================================================= */
 
 function renderPaperCard(
@@ -4132,7 +7242,7 @@ function renderPaperCard(
 
 
 /* =========================================================
-   BUILD DESCRIPTION
+   DESCRIPTION
 ========================================================= */
 
 function buildPaperDescription(
@@ -4182,6 +7292,32 @@ function buildPaperDescription(
 
 
     if (
+        paper.specialExam
+    ) {
+
+        parts.push(
+            displayName(
+                paper.specialExam
+            )
+        );
+
+    }
+
+
+    if (
+        paper.series
+    ) {
+
+        parts.push(
+            displayName(
+                paper.series
+            )
+        );
+
+    }
+
+
+    if (
         paper.school
     ) {
 
@@ -4199,7 +7335,8 @@ function buildPaperDescription(
         paper.region &&
         normalize(
             paper.region
-        ) !== "necta"
+        ) !==
+        "necta"
     ) {
 
         parts.push(
@@ -4233,7 +7370,7 @@ function buildPaperDescription(
 
 
 /* =========================================================
-   EMPTY CARD
+   EMPTY
 ========================================================= */
 
 function emptyCard(
@@ -4269,15 +7406,57 @@ function emptyCard(
 
 
 /* =========================================================
-   SPECIAL MENU
+   MODE DESCRIPTION
 ========================================================= */
 
-function openSpecialMenu() {
+function displayModeDescription() {
+
+    if (
+        currentState.mode ===
+        "prenecta"
+    ) {
+
+        return "Pre-NECTA Past Papers";
+
+    }
+
+
+    if (
+        currentState.mode ===
+        "series"
+    ) {
+
+        return "Series Examination Papers";
+
+    }
+
+
+    if (
+        currentState.mode ===
+        "special"
+    ) {
+
+        return "Special Examination Papers";
+
+    }
+
+
+    return "Physics, Chemistry & Biology Past Papers";
+
+}
+
+
+/* =========================================================
+   RESET STATE
+========================================================= */
+
+function resetState() {
 
     currentState = {
 
-        level:
-            "special",
+        level: "home",
+
+        mode: null,
 
         form: null,
 
@@ -4299,484 +7478,8 @@ function openSpecialMenu() {
 
     };
 
-    pushNavigationState();
-
-    renderSpecialMenu();
-
 }
 
-
-/* =========================================================
-   RENDER SPECIAL MENU
-========================================================= */
-
-function renderSpecialMenu() {
-
-    updateBreadcrumb();
-
-    backButton.style.display =
-        "inline-flex";
-
-    const specials =
-        getSpecialExaminations();
-
-    let html = `
-
-        <div class="step-header">
-
-            <span class="step-number">
-                SPECIAL EXAMINATIONS
-            </span>
-
-            <h2>
-                Chagua Special Examination
-            </h2>
-
-            <p>
-                Chagua examination organisation
-                unayotaka.
-            </p>
-
-        </div>
-
-        <div class="special-info">
-
-            ⭐ Special examinations
-            hazilazimishi kuchagua Form,
-            Subject au Region.
-            Mfumo unafuata structure
-            ya database moja kwa moja.
-
-        </div>
-
-        <div class="selection-grid">
-
-    `;
-
-    specials.forEach(
-        special => {
-
-            const count =
-                getSpecialPapers(
-                    special.id
-                ).length;
-
-            html += `
-
-                <div class="
-                    selection-card
-                    special-card
-                ">
-
-                    <div>
-
-                        <div class="card-icon">
-                            ⭐
-                        </div>
-
-                        <h3>
-                            ${escapeHTML(
-                                special.name
-                            )}
-                        </h3>
-
-                        <p>
-                            ${count}
-                            examination item(s)
-                            available
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="open-btn"
-                        onclick="
-                            openSpecial(
-                                '${escapeHTML(
-                                    special.id
-                                )}'
-                            )
-                        ">
-
-                        FUNGUA
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-    html += `
-        </div>
-    `;
-
-    stepContainer.innerHTML =
-        html;
-
-}
-
-/* =========================================================
-   GET ALL SPECIAL PAPERS
-========================================================= */
-
-function getSpecialPapers(specialExam) {
-
-    return getPapers().filter(paper => {
-
-        return (
-            normalize(paper.category) === "special"
-            &&
-            normalize(paper.specialExam) ===
-            normalize(specialExam)
-        );
-
-    });
-
-}
-
-/* =========================================================
-   OPEN SPECIAL
-========================================================= */
-
-function openSpecial(specialExam) {
-
-    currentState.specialExam =
-        specialExam;
-
-    currentState.form =
-        null;
-
-    currentState.year =
-        null;
-
-    currentState.examType =
-        null;
-
-    currentState.series =
-        null;
-
-    currentState.level =
-        "form";
-
-    pushNavigationState();
-
-    renderSpecialForms();
-
-}
-
-/* =========================================================
-   GET SPECIAL SERIES
-========================================================= */
-
-function getSpecialSeries() {
-
-    const papers =
-        getSpecialPapers(
-            currentState.specialExam
-        );
-
-    const series = [];
-
-    papers.forEach(
-        paper => {
-
-            const id =
-                String(
-                    paper.series ||
-                    ""
-                ).trim();
-
-            if (
-                !id
-            ) {
-
-                return;
-
-            }
-
-            if (
-                !series.some(
-                    item =>
-                        normalize(
-                            item.id
-                        ) ===
-                        normalize(
-                            id
-                        )
-                )
-            ) {
-
-                series.push({
-
-                    id: id,
-
-                    name:
-                        paper.seriesName ||
-                        displayName(
-                            id
-                        )
-
-                });
-
-            }
-
-        }
-    );
-
-    return series;
-
-}
-
-
-/* =========================================================
-   RENDER SERIES
-========================================================= */
-
-function renderSpecialSeries() {
-
-    updateBreadcrumb();
-
-    backButton.style.display =
-        "inline-flex";
-
-    const series =
-        getSpecialSeries();
-
-    let html = `
-
-        <div class="step-header">
-
-            <span class="step-number">
-                SPECIAL STEP 4
-            </span>
-
-            <h2>
-                Series
-            </h2>
-
-            <p>
-                Chagua series ya examination.
-            </p>
-
-        </div>
-
-        <div class="selection-grid">
-
-    `;
-
-    series.forEach(item => {
-
-        html += `
-
-            <div class="
-                selection-card
-                series-card
-            ">
-
-                <div>
-
-                    <div class="card-icon">
-                        📚
-                    </div>
-
-                    <h3>
-                        ${escapeHTML(
-                            item.name
-                        )}
-                    </h3>
-
-                    <p>
-                        ${escapeHTML(
-                            displayName(
-                                currentState.form
-                            )
-                        )} -
-                        ${currentState.year}
-                    </p>
-
-                </div>
-
-                <button
-                    class="open-btn"
-                    onclick="
-                        openSpecialSeries(
-                            '${escapeHTML(
-                                item.id
-                            )}'
-                        )
-                    ">
-
-                    FUNGUA
-
-                </button>
-
-            </div>
-
-        `;
-
-    });
-
-    if (series.length === 0) {
-
-        html += emptyCard(
-            "Hakuna series",
-            "Hakuna series iliyowekwa kwa uchaguzi huu."
-        );
-
-    }
-
-    html += `
-        </div>
-    `;
-
-    stepContainer.innerHTML =
-        html;
-
-}
-
-/* =========================================================
-   OPEN SERIES
-========================================================= */
-
-function openSpecialSeries(series) {
-
-    currentState.series =
-        series;
-
-    currentState.level =
-        "papers";
-
-    pushNavigationState();
-
-    renderSpecialPapers();
-
-}
-
-/* =========================================================
-   GET MATCHING SPECIAL PAPERS
-========================================================= */
-
-function getMatchingSpecialPapers() {
-
-    return getSpecialPapers(
-        currentState.specialExam
-    ).filter(paper => {
-
-        if (
-            normalize(paper.form) !==
-            normalize(currentState.form)
-        ) {
-
-            return false;
-        }
-
-        if (
-            Number(paper.year) !==
-            Number(currentState.year)
-        ) {
-
-            return false;
-        }
-
-        if (
-            normalize(paper.examType) !==
-            normalize(currentState.examType)
-        ) {
-
-            return false;
-        }
-
-        if (
-            normalize(currentState.examType) ===
-            "series"
-        ) {
-
-            return (
-                normalize(paper.series) ===
-                normalize(currentState.series)
-            );
-
-        }
-
-        return true;
-
-    });
-
-}
-
-/* =========================================================
-   RENDER SPECIAL PAPERS
-========================================================= */
-
-function renderSpecialPapers() {
-
-    updateBreadcrumb();
-
-    backButton.style.display =
-        "inline-flex";
-
-    const papers =
-        getMatchingSpecialPapers();
-
-    let html = `
-
-        <div class="step-header">
-
-            <span class="step-number">
-                SPECIAL STEP 5
-            </span>
-
-            <h2>
-                Available Papers
-            </h2>
-
-            <p>
-                Download examination PDF
-                na Marking Guide kama ipo.
-            </p>
-
-        </div>
-
-        <div class="selection-grid">
-
-    `;
-
-    if (
-        papers.length === 0
-    ) {
-
-        html += emptyCard(
-            "Hakuna paper",
-            "Hakuna paper iliyowekwa kwa uchaguzi huu."
-        );
-
-    }
-
-    papers.forEach(
-        (
-            paper,
-            index
-        ) => {
-
-            html += renderPaperCard(
-                paper,
-                index
-            );
-
-        }
-    );
-
-    html += `
-        </div>
-    `;
-
-    stepContainer.innerHTML =
-        html;
-
-}
 
 /* =========================================================
    HISTORY
@@ -4890,28 +7593,109 @@ function renderCurrentLevel() {
 
         case "papers":
 
-            renderPapers();
+            if (
+                currentState.mode ===
+                "prenecta"
+            ) {
+
+                renderPreNectaPapers();
+
+            } else if (
+                currentState.mode ===
+                "series"
+            ) {
+
+                renderSeriesPapers();
+
+            } else if (
+                currentState.mode ===
+                "special"
+            ) {
+
+                renderSpecialPapers();
+
+            } else {
+
+                renderPapers();
+
+            }
 
             break;
 
 
-        case "special":
+        case "forms":
+
+            if (
+                currentState.mode ===
+                "series"
+            ) {
+
+                renderSeriesForms();
+
+            } else if (
+                currentState.mode ===
+                "prenecta"
+            ) {
+
+                renderPreNectaForms();
+
+            }
+
+            break;
+
+
+        case "seriesSelect":
+
+            renderSeriesSelect();
+
+            break;
+
+
+        case "seriesYears":
+
+            renderSeriesYears();
+
+            break;
+
+
+        case "specialExams":
 
             renderSpecialMenu();
 
             break;
 
 
-        case "series":
+        case "specialForms":
 
-            renderSeries();
+            renderSpecialForms();
 
             break;
 
 
-        case "specialPapers":
+        case "specialSubjects":
 
-            renderSpecialPapers();
+            renderSpecialSubjects();
+
+            break;
+
+
+        case "specialTypes":
+
+            renderSpecialTypes();
+
+            break;
+
+
+        case "specialSeriesOrYears":
+
+            renderSpecialSeriesOrYears();
+
+            break;
+
+
+        case "specialYears":
+
+            renderSpecialYears();
 
             break;
 
@@ -4943,6 +7727,7 @@ function goBack() {
 
     }
 
+
     history.back();
 
 }
@@ -4964,9 +7749,11 @@ function toggleMenu() {
             "menuOverlay"
         );
 
+
     sidebar.classList.toggle(
         "active"
     );
+
 
     overlay.style.display =
         sidebar.classList.contains(
@@ -4979,7 +7766,7 @@ function toggleMenu() {
 
 
 /* =========================================================
-   SIDEBAR DROPDOWN
+   DROPDOWN
 ========================================================= */
 
 function toggleDropdown(
@@ -4989,6 +7776,7 @@ function toggleDropdown(
     const container =
         button.nextElementSibling;
 
+
     if (
         !container
     ) {
@@ -4997,9 +7785,11 @@ function toggleDropdown(
 
     }
 
+
     const open =
         container.style.display ===
         "block";
+
 
     container.style.display =
         open
@@ -5023,12 +7813,16 @@ function initialize() {
 
     }
 
+
     history.replaceState(
 
         {
 
             level:
                 "home",
+
+            mode:
+                null,
 
             form:
                 null,
@@ -5064,6 +7858,7 @@ function initialize() {
         window.location.href
 
     );
+
 
     renderHome();
 
