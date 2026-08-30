@@ -4418,65 +4418,54 @@ function renderSpecialMenu() {
 
 }
 
-
 /* =========================================================
-   GET SPECIAL PAPERS
+   GET ALL SPECIAL PAPERS
 ========================================================= */
 
-function getSpecialPapers(
-    specialExam
-) {
+function getSpecialPapers(specialExam) {
 
-    return getPapers().filter(
-        paper => {
+    return getPapers().filter(paper => {
 
-            return (
+        return (
+            normalize(paper.category) === "special"
+            &&
+            normalize(paper.specialExam) ===
+            normalize(specialExam)
+        );
 
-                normalize(
-                    paper.category
-                ) ===
-                "special"
-
-                &&
-
-                normalize(
-                    paper.specialExam
-                ) ===
-                normalize(
-                    specialExam
-                )
-
-            );
-
-        }
-    );
+    });
 
 }
-
 
 /* =========================================================
    OPEN SPECIAL
 ========================================================= */
 
-function openSpecial(
-    specialExam
-) {
+function openSpecial(specialExam) {
 
     currentState.specialExam =
         specialExam;
+
+    currentState.form =
+        null;
+
+    currentState.year =
+        null;
+
+    currentState.examType =
+        null;
 
     currentState.series =
         null;
 
     currentState.level =
-        "series";
+        "form";
 
     pushNavigationState();
 
-    renderSeries();
+    renderSpecialForms();
 
 }
-
 
 /* =========================================================
    GET SPECIAL SERIES
@@ -4546,7 +4535,7 @@ function getSpecialSeries() {
    RENDER SERIES
 ========================================================= */
 
-function renderSeries() {
+function renderSpecialSeries() {
 
     updateBreadcrumb();
 
@@ -4561,15 +4550,11 @@ function renderSeries() {
         <div class="step-header">
 
             <span class="step-number">
-                SPECIAL STEP 2
+                SPECIAL STEP 4
             </span>
 
             <h2>
-                ${escapeHTML(
-                    displayName(
-                        currentState.specialExam
-                    )
-                )}
+                Series
             </h2>
 
             <p>
@@ -4582,66 +4567,63 @@ function renderSeries() {
 
     `;
 
-    series.forEach(
-        item => {
+    series.forEach(item => {
 
-            html += `
+        html += `
 
-                <div class="
-                    selection-card
-                    series-card
-                ">
+            <div class="
+                selection-card
+                series-card
+            ">
 
-                    <div>
+                <div>
 
-                        <div class="card-icon">
-                            📚
-                        </div>
-
-                        <h3>
-                            ${escapeHTML(
-                                item.name
-                            )}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(
-                                displayName(
-                                    currentState.specialExam
-                                )
-                            )}
-                        </p>
-
+                    <div class="card-icon">
+                        📚
                     </div>
 
-                    <button
-                        class="open-btn"
-                        onclick="
-                            openSeries(
-                                '${escapeHTML(
-                                    item.id
-                                )}'
+                    <h3>
+                        ${escapeHTML(
+                            item.name
+                        )}
+                    </h3>
+
+                    <p>
+                        ${escapeHTML(
+                            displayName(
+                                currentState.form
                             )
-                        ">
-
-                        FUNGUA
-
-                    </button>
+                        )} -
+                        ${currentState.year}
+                    </p>
 
                 </div>
 
-            `;
+                <button
+                    class="open-btn"
+                    onclick="
+                        openSpecialSeries(
+                            '${escapeHTML(
+                                item.id
+                            )}'
+                        )
+                    ">
 
-        }
-    );
+                    FUNGUA
 
-    if (
-        series.length === 0
-    ) {
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+    if (series.length === 0) {
 
         html += emptyCard(
             "Hakuna series",
-            "Hakuna series iliyowekwa kwenye database."
+            "Hakuna series iliyowekwa kwa uchaguzi huu."
         );
 
     }
@@ -4655,20 +4637,17 @@ function renderSeries() {
 
 }
 
-
 /* =========================================================
    OPEN SERIES
 ========================================================= */
 
-function openSeries(
-    seriesId
-) {
+function openSpecialSeries(series) {
 
     currentState.series =
-        seriesId;
+        series;
 
     currentState.level =
-        "specialPapers";
+        "papers";
 
     pushNavigationState();
 
@@ -4676,48 +4655,57 @@ function openSeries(
 
 }
 
-
 /* =========================================================
-   GET SPECIAL MATCHING PAPERS
+   GET MATCHING SPECIAL PAPERS
 ========================================================= */
 
 function getMatchingSpecialPapers() {
 
-    return getPapers().filter(
-        paper => {
+    return getSpecialPapers(
+        currentState.specialExam
+    ).filter(paper => {
+
+        if (
+            normalize(paper.form) !==
+            normalize(currentState.form)
+        ) {
+
+            return false;
+        }
+
+        if (
+            Number(paper.year) !==
+            Number(currentState.year)
+        ) {
+
+            return false;
+        }
+
+        if (
+            normalize(paper.examType) !==
+            normalize(currentState.examType)
+        ) {
+
+            return false;
+        }
+
+        if (
+            normalize(currentState.examType) ===
+            "series"
+        ) {
 
             return (
-
-                normalize(
-                    paper.category
-                ) ===
-                "special"
-
-                &&
-
-                normalize(
-                    paper.specialExam
-                ) ===
-                normalize(
-                    currentState.specialExam
-                )
-
-                &&
-
-                normalize(
-                    paper.series
-                ) ===
-                normalize(
-                    currentState.series
-                )
-
+                normalize(paper.series) ===
+                normalize(currentState.series)
             );
 
         }
-    );
+
+        return true;
+
+    });
 
 }
-
 
 /* =========================================================
    RENDER SPECIAL PAPERS
@@ -4738,7 +4726,7 @@ function renderSpecialPapers() {
         <div class="step-header">
 
             <span class="step-number">
-                SPECIAL STEP 3
+                SPECIAL STEP 5
             </span>
 
             <h2>
@@ -4762,7 +4750,7 @@ function renderSpecialPapers() {
 
         html += emptyCard(
             "Hakuna paper",
-            "Hakuna paper iliyowekwa kwa series hii."
+            "Hakuna paper iliyowekwa kwa uchaguzi huu."
         );
 
     }
@@ -4789,7 +4777,6 @@ function renderSpecialPapers() {
         html;
 
 }
-
 
 /* =========================================================
    HISTORY
