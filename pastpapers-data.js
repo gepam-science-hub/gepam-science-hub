@@ -1364,68 +1364,308 @@ const pastPapers = [
 },
 
 // ============================================================
+// ============================================================
 // SPECIAL EXAMINATIONS
 // ============================================================
-//
-// IMPORTANT:
-// HAPA HAKUNA form
-// HAKUNA subject
-// HAKUNA region
-// HAKUNA school
-//
-// Special → Examination → Series → PDF
-// ============================================================
-
 
 // ============================================================
-// ISESE
+// ISESE - FORM 1 - SERIES
 // ============================================================
 
 {
-    "category":"special",
-    "specialExam":"isese",
-    "title":"ISESE - Series One",
-    "type":"series",
-    "series":"series1",
-    "seriesName":"Series One",
-    "file":"papers/special/isese/series_one.pdf",
-    "markingScheme":""
+    category: "special",
+    specialExam: "isese",
+
+    form: "form1",
+    year: 2026,
+
+    examType: "series",
+    examTypeName: "Series",
+
+    series: "series1",
+    seriesName: "Series One",
+
+    title: "ISESE Form 1 - Series One - 2026",
+
+    subject: "physics",
+    subjectName: "Physics",
+
+    paper: "Physics",
+
+    file: "papers/special/isese/form1/2026/series/series1/physics.pdf",
+
+    markingScheme: ""
 },
 
 {
-    "category":"special",
-    "specialExam":"isese",
-    "title":"ISESE - Series Two",
-    "type":"series",
-    "series":"series2",
-    "seriesName":"Series Two",
-    "file":"papers/special/isese/series_two.pdf",
-    "markingScheme":""
+    category: "special",
+    specialExam: "isese",
+
+    form: "form1",
+    year: 2026,
+
+    examType: "series",
+    examTypeName: "Series",
+
+    series: "series2",
+    seriesName: "Series Two",
+
+    title: "ISESE Form 1 - Series Two - 2026",
+
+    subject: "physics",
+    subjectName: "Physics",
+
+    paper: "Physics",
+
+    file: "papers/special/isese/form1/2026/series/series2/physics.pdf",
+
+    markingScheme: ""
 },
+
+
+// ============================================================
+// ISESE - FORM 1 - MID TERM
+// ============================================================
 
 {
-    "category":"special",
-    "specialExam":"isese",
-    "title":"ISESE - Series Three",
-    "type":"series",
-    "series":"series3",
-    "seriesName":"Series Three",
-    "file":"papers/special/isese/series_three.pdf",
-    "markingScheme":""
+    category: "special",
+    specialExam: "isese",
+
+    form: "form1",
+    year: 2026,
+
+    examType: "midterm",
+    examTypeName: "Mid-Term",
+
+    series: "",
+
+    seriesName: "",
+
+    title: "ISESE Form 1 - Mid-Term - 2026",
+
+    subject: "physics",
+    subjectName: "Physics",
+
+    paper: "Physics",
+
+    file: "papers/special/isese/form1/2026/midterm/physics.pdf",
+
+    markingScheme: ""
 },
+
+
+// ============================================================
+// ISESE - FORM 2 - SERIES
+// ============================================================
 
 {
-    "category":"special",
-    "specialExam":"isese",
-    "title":"ISESE - Series Four",
-    "type":"series",
-    "series":"series4",
-    "seriesName":"Series Four",
-    "file":"papers/special/isese/series_four.pdf",
-    "markingScheme":""
+    category: "special",
+    specialExam: "isese",
+
+    form: "form2",
+    year: 2026,
+
+    examType: "series",
+    examTypeName: "Series",
+
+    series: "series1",
+    seriesName: "Series One",
+
+    title: "ISESE Form 2 - Series One - 2026",
+
+    subject: "physics",
+    subjectName: "Physics",
+
+    paper: "Physics 1",
+
+    file: "papers/special/isese/form2/2026/series/series1/physics1.pdf",
+
+    markingScheme: ""
 },
 
 
+// ============================================================
+// ISESE - FORM 2 - PRE-NECTA
+// ============================================================
+
+{
+    category: "special",
+    specialExam: "isese",
+
+    form: "form2",
+    year: 2026,
+
+    examType: "pre_necta",
+    examTypeName: "Pre-NECTA",
+
+    series: "",
+
+    seriesName: "",
+
+    title: "ISESE Form 2 - Pre-NECTA - 2026",
+
+    subject: "physics",
+    subjectName: "Physics",
+
+    paper: "Physics 1",
+
+    file: "papers/special/isese/form2/2026/pre_necta/physics1.pdf",
+
+    markingScheme: "papers/special/isese/form2/2026/pre_necta/physics1_ms.pdf"
+},
+
+
+// ============================================================
+// ISESE - FORM 3 - SERIES
+// ============================================================
+
+{
+    category: "special",
+    specialExam: "isese",
+
+    form: "form3",
+    year: 2026,
+
+    examType: "series",
+    examTypeName: "Series",
+
+    series: "series1",
+    seriesName: "Series One",
+
+    title: "ISESE Form 3 - Series One - 2026",
+
+    subject: "physics",
+    subjectName: "Physics",
+
+    paper: "Physics",
+
+    file: "papers/special/isese/form3/2026/series/series1/physics.pdf",
+
+    markingScheme: ""
+},
+
+
+// ============================================================
+// ISESE - FORM 4 - SERIES
+// ============================================================
+
+{
+    category: "special",
+    specialExam: "isese",
+
+    form: "form4",
+    year: 2026,
+
+    examType: "series",
+    examTypeName: "Series",
+
+    series: "series1",
+    seriesName: "Series One",
+
+    title: "ISESE Form 4 - Series One - 2026",
+
+    subject: "physics",
+    subjectName: "Physics",
+
+    paper: "Physics 1",
+
+    file: "papers/special/isese/form4/2026/series/series1/physics1.pdf",
+
+    markingScheme: "papers/special/isese/form4/2026/series/series1/physics1_ms.pdf"
+},
+
+
+// ============================================================
+// ISESE - FORM 4 - PRE-NECTA
+// ============================================================
+
+{
+    category: "special",
+    specialExam: "isese",
+
+    form: "form4",
+    year: 2026,
+
+    examType: "pre_necta",
+    examTypeName: "Pre-NECTA",
+
+    series: "",
+
+    seriesName: "",
+
+    title: "ISESE Form 4 - Pre-NECTA - 2026",
+
+    subject: "physics",
+    subjectName: "Physics",
+
+    paper: "Physics 1",
+
+    file: "papers/special/isese/form4/2026/pre_necta/physics1.pdf",
+
+    markingScheme: "papers/special/isese/form4/2026/pre_necta/physics1_ms.pdf"
+},
+
+
+// ============================================================
+// ISESE - FORM 6 - SERIES
+// ============================================================
+
+{
+    category: "special",
+    specialExam: "isese",
+
+    form: "form6",
+    year: 2026,
+
+    examType: "series",
+    examTypeName: "Series",
+
+    series: "series1",
+    seriesName: "Series One",
+
+    title: "ISESE Form 6 - Series One - 2026",
+
+    subject: "physics",
+    subjectName: "Physics",
+
+    paper: "Physics 1",
+
+    file: "papers/special/isese/form6/2026/series/series1/physics1.pdf",
+
+    markingScheme: "papers/special/isese/form6/2026/series/series1/physics1_ms.pdf"
+},
+
+
+// ============================================================
+// ISESE - FORM 6 - PRE-NECTA
+// ============================================================
+
+{
+    category: "special",
+    specialExam: "isese",
+
+    form: "form6",
+    year: 2026,
+
+    examType: "pre_necta",
+    examTypeName: "Pre-NECTA",
+
+    series: "",
+
+    seriesName: "",
+
+    title: "ISESE Form 6 - Pre-NECTA - 2026",
+
+    subject: "physics",
+
+    subjectName: "Physics",
+
+    paper: "Physics 1",
+
+    file: "papers/special/isese/form6/2026/pre_necta/physics1.pdf",
+
+    markingScheme: "papers/special/isese/form6/2026/pre_necta/physics1_ms.pdf"
+}
 // ============================================================
 // JEPGOS
 // ============================================================
