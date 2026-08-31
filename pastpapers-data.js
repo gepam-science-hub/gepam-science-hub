@@ -354,6 +354,8 @@ const pastPapers = [
     "file":"papers/form1/chemistry/mby_2026.pdf",
     "markingScheme":""
 },
+
+
 // ============================================================
 // FORM 2 - PHYSICS
 // ============================================================
@@ -726,6 +728,8 @@ const pastPapers = [
     "file":"papers/form3/chemistry/mby_2026.pdf",
     "markingScheme":""
 },
+
+
 // ============================================================
 // FORM 4 - PHYSICS
 // ============================================================
@@ -1129,6 +1133,8 @@ const pastPapers = [
     "file":"papers/form5/chemistry/aru_2026.pdf",
     "markingScheme":""
 },
+
+
 // ============================================================
 // FORM 6 - PHYSICS
 // ============================================================
@@ -1360,33 +1366,28 @@ const pastPapers = [
 // ============================================================
 // SPECIAL EXAMINATIONS
 // ============================================================
+//
+// IMPORTANT:
+// HAPA HAKUNA form
+// HAKUNA subject
+// HAKUNA region
+// HAKUNA school
+//
+// Special → Examination → Series → PDF
+// ============================================================
+
 
 // ============================================================
 // ISESE
 // ============================================================
 
-    {
-    "category": "special", 
-    "specialExam": "isese", 
-    "form": "form4",
-    "subject": "physics",   
-    "title": "ISESE - Pre-NECTA One",
-    "type": "pre_necta",   
-    "year": 2026,
-    "file": "papers/special/isese/pre_necta_one.pdf",
-    "markingScheme": ""
-},
-
 {
     "category":"special",
     "specialExam":"isese",
-    "form":"form4",
-    "subject":"physics",
     "title":"ISESE - Series One",
     "type":"series",
     "series":"series1",
     "seriesName":"Series One",
-    "year":2026,
     "file":"papers/special/isese/series_one.pdf",
     "markingScheme":""
 },
@@ -1394,13 +1395,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"isese",
-    "form":"form4",
-    "subject":"physics",
     "title":"ISESE - Series Two",
     "type":"series",
     "series":"series2",
     "seriesName":"Series Two",
-    "year":2026,
     "file":"papers/special/isese/series_two.pdf",
     "markingScheme":""
 },
@@ -1408,13 +1406,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"isese",
-    "form":"form4",
-    "subject":"physics",
     "title":"ISESE - Series Three",
     "type":"series",
     "series":"series3",
     "seriesName":"Series Three",
-    "year":2026,
     "file":"papers/special/isese/series_three.pdf",
     "markingScheme":""
 },
@@ -1422,13 +1417,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"isese",
-    "form":"form4",
-    "subject":"physics",
     "title":"ISESE - Series Four",
     "type":"series",
     "series":"series4",
     "seriesName":"Series Four",
-    "year":2026,
     "file":"papers/special/isese/series_four.pdf",
     "markingScheme":""
 },
@@ -1441,13 +1433,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"jepgos",
-    "form":"form4",
-    "subject":"physics",
     "title":"JEPGOS - Series One",
     "type":"series",
     "series":"series1",
     "seriesName":"Series One",
-    "year":2026,
     "file":"papers/special/jepgos/series_one.pdf",
     "markingScheme":""
 },
@@ -1455,13 +1444,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"jepgos",
-    "form":"form4",
-    "subject":"physics",
     "title":"JEPGOS - Series Two",
     "type":"series",
     "series":"series2",
     "seriesName":"Series Two",
-    "year":2026,
     "file":"papers/special/jepgos/series_two.pdf",
     "markingScheme":""
 },
@@ -1469,13 +1455,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"jepgos",
-    "form":"form4",
-    "subject":"physics",
     "title":"JEPGOS - Series Three",
     "type":"series",
     "series":"series3",
     "seriesName":"Series Three",
-    "year":2026,
     "file":"papers/special/jepgos/series_three.pdf",
     "markingScheme":""
 },
@@ -1483,13 +1466,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"jepgos",
-    "form":"form4",
-    "subject":"physics",
     "title":"JEPGOS - Series Four",
     "type":"series",
     "series":"series4",
     "seriesName":"Series Four",
-    "year":2026,
     "file":"papers/special/jepgos/series_four.pdf",
     "markingScheme":""
 },
@@ -1502,13 +1482,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"tahossa",
-    "form":"form4",
-    "subject":"physics",
     "title":"TAHOSSA - Series One",
     "type":"series",
     "series":"series1",
     "seriesName":"Series One",
-    "year":2026,
     "file":"papers/special/tahossa/series_one.pdf",
     "markingScheme":""
 },
@@ -1516,13 +1493,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"tahossa",
-    "form":"form4",
-    "subject":"physics",
     "title":"TAHOSSA - Series Two",
     "type":"series",
     "series":"series2",
     "seriesName":"Series Two",
-    "year":2026,
     "file":"papers/special/tahossa/series_two.pdf",
     "markingScheme":""
 },
@@ -1530,13 +1504,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"tahossa",
-    "form":"form4",
-    "subject":"physics",
     "title":"TAHOSSA - Series Three",
     "type":"series",
     "series":"series3",
     "seriesName":"Series Three",
-    "year":2026,
     "file":"papers/special/tahossa/series_three.pdf",
     "markingScheme":""
 },
@@ -1544,16 +1515,15 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"tahossa",
-    "form":"form4",
-    "subject":"physics",
     "title":"TAHOSSA - Series Four",
     "type":"series",
     "series":"series4",
     "seriesName":"Series Four",
-    "year":2026,
     "file":"papers/special/tahossa/series_four.pdf",
     "markingScheme":""
 },
+
+
 // ============================================================
 // CSSC
 // ============================================================
@@ -1561,13 +1531,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"cssc",
-    "form":"form4",
-    "subject":"physics",
     "title":"CSSC - Series One",
     "type":"series",
     "series":"series1",
     "seriesName":"Series One",
-    "year":2026,
     "file":"papers/special/cssc/series_one.pdf",
     "markingScheme":""
 },
@@ -1575,13 +1542,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"cssc",
-    "form":"form4",
-    "subject":"physics",
     "title":"CSSC - Series Two",
     "type":"series",
     "series":"series2",
     "seriesName":"Series Two",
-    "year":2026,
     "file":"papers/special/cssc/series_two.pdf",
     "markingScheme":""
 },
@@ -1589,13 +1553,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"cssc",
-    "form":"form4",
-    "subject":"physics",
     "title":"CSSC - Series Three",
     "type":"series",
     "series":"series3",
     "seriesName":"Series Three",
-    "year":2026,
     "file":"papers/special/cssc/series_three.pdf",
     "markingScheme":""
 },
@@ -1603,13 +1564,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"cssc",
-    "form":"form4",
-    "subject":"physics",
     "title":"CSSC - Series Four",
     "type":"series",
     "series":"series4",
     "seriesName":"Series Four",
-    "year":2026,
     "file":"papers/special/cssc/series_four.pdf",
     "markingScheme":""
 },
@@ -1622,13 +1580,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"special_school",
-    "form":"form4",
-    "subject":"physics",
     "title":"Special School - Series One",
     "type":"series",
     "series":"series1",
     "seriesName":"Series One",
-    "year":2026,
     "file":"papers/special/special_school/series_one.pdf",
     "markingScheme":""
 },
@@ -1636,13 +1591,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"special_school",
-    "form":"form4",
-    "subject":"physics",
     "title":"Special School - Series Two",
     "type":"series",
     "series":"series2",
     "seriesName":"Series Two",
-    "year":2026,
     "file":"papers/special/special_school/series_two.pdf",
     "markingScheme":""
 },
@@ -1650,13 +1602,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"special_school",
-    "form":"form4",
-    "subject":"physics",
     "title":"Special School - Series Three",
     "type":"series",
     "series":"series3",
     "seriesName":"Series Three",
-    "year":2026,
     "file":"papers/special/special_school/series_three.pdf",
     "markingScheme":""
 },
@@ -1664,13 +1613,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"special_school",
-    "form":"form4",
-    "subject":"physics",
     "title":"Special School - Series Four",
     "type":"series",
     "series":"series4",
     "seriesName":"Series Four",
-    "year":2026,
     "file":"papers/special/special_school/series_four.pdf",
     "markingScheme":""
 }
