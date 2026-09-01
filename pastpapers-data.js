@@ -9,7 +9,7 @@
 //   Form → Subject → Type → School/Region → Year → Papers
 //
 // SPECIAL EXAMINATIONS
-//   Special Examination → Form → Subject → Year → Pre-NECTA / Series → Papers
+//   Special Examination → Series → PDF
 //
 // PAPER SUPPORT
 //   file           = Examination Paper PDF
@@ -80,61 +80,44 @@ const pastPaperSubjects = [
 ];
 
 
-/* =========================================================
-   SPECIAL EXAMINATIONS
-   GEPAM SCIENCE HUB
-
-   STRUCTURE:
-   SPECIAL EXAMINATION
-       ↓
-   FORM
-       ↓
-   SUBJECT
-       ↓
-   YEAR
-       ↓
-   PRE-NECTA OR SERIES
-       ↓
-   PAPERS
-
-   IMPORTANT:
-   PRE-NECTA ≠ SERIES
-
-   PRE-NECTA:
-       Form → Subject → Year → Pre-NECTA → Papers
-
-   SERIES:
-       Form → Subject → Year → Series → Papers
-========================================================= */
+// ============================================================
+// SPECIAL EXAMINATIONS
+// ============================================================
 
 const specialExaminations = [
 
     {
         id: "isese",
-        name: "ISESE"
+        name: "ISESE",
+        color: "special-blue"
     },
 
     {
         id: "jepgos",
-        name: "JEPGOS"
+        name: "JEPGOS",
+        color: "special-purple"
     },
 
     {
         id: "tahossa",
-        name: "TAHOSSA"
+        name: "TAHOSSA",
+        color: "special-green"
     },
 
     {
         id: "cssc",
-        name: "CSSC"
+        name: "CSSC",
+        color: "special-orange"
     },
 
     {
         id: "special_school",
-        name: "SPECIAL SCHOOL"
+        name: "SPECIAL SCHOOL",
+        color: "special-red"
     }
 
 ];
+
 
 // ============================================================
 // PAST PAPERS
@@ -1379,70 +1362,267 @@ const pastPapers = [
     file: "papers/form6/chemistry/mock/dar_es_salaam/2024/Form_6_Chemistry3B_Mock_2024_Dar_es_salaam_Gepam_hub.pdf",
     "markingScheme":""
 },
-     
+
+// ============================================================
+// SPECIAL EXAMINATIONS
+// ============================================================
+//
+// IMPORTANT:
+// HAPA HAKUNA form
+// HAKUNA subject
+// HAKUNA region
+// HAKUNA school
+//
+// Special → Examination → Series → PDF
+// ============================================================
+
+
+// ============================================================
+// ISESE
+// ============================================================
+
 {
-    title: "Physics 1 (Theory)",
-    category: "special",
-
-    specialExam: "isese",
-
-    form: "form2",
-    subject: "physics",
-    year: 2025,
-
-    specialType: "pre_necta",
-
-    file: "papers/special/isese/form2/physics/2025/pre_necta/physics_1.pdf",
-
-    markingScheme: "papers/special/isese/form2/physics/2025/pre_necta/physics_1_ms.pdf"
-},{
-    title: "Chemistry 1 (Theory)",
-    category: "special",
-
-    specialExam: "isese",
-
-    form: "form2",
-    subject: "chemistry",
-    year: 2025,
-
-    specialType: "pre_necta",
-
-    file: "papers/special/isese/form2/chemistry/2025/pre_necta/chemistry_1.pdf",
-
-    markingScheme: "papers/special/isese/form2/chemistry/2025/pre_necta/chemistry_1_ms.pdf"
-},{
-    title: "Physics 1 (Theory)",
-    category: "special",
-
-    specialExam: "isese",
-
-    form: "form2",
-    subject: "physics",
-    year: 2025,
-
-    specialType: "series",
-    series: "series1",
-
-    file: "papers/special/isese/form2/physics/2025/series1/physics_1.pdf",
-
-    markingScheme: "papers/special/isese/form2/physics/2025/series1/physics_1_ms.pdf"
-},{
-    title: "Physics 1 (Theory)",
-    category: "special",
-
-    specialExam: "isese",
-
-    form: "form2",
-    subject: "physics",
-    year: 2025,
-
-    specialType: "series",
-    series: "series2",
-
-    file: "papers/special/isese/form2/physics/2025/series2/physics_1.pdf",
-
-    markingScheme: "papers/special/isese/form2/physics/2025/series2/physics_1_ms.pdf"
+    "category":"special",
+    "specialExam":"isese",
+    "title":"ISESE - Series One",
+    "type":"series",
+    "series":"series1",
+    "seriesName":"Series One",
+    "file":"papers/special/isese/series_one.pdf",
+    "markingScheme":""
 },
+
+{
+    "category":"special",
+    "specialExam":"isese",
+    "title":"ISESE - Series Two",
+    "type":"series",
+    "series":"series2",
+    "seriesName":"Series Two",
+    "file":"papers/special/isese/series_two.pdf",
+    "markingScheme":""
+},
+
+{
+    "category":"special",
+    "specialExam":"isese",
+    "title":"ISESE - Series Three",
+    "type":"series",
+    "series":"series3",
+    "seriesName":"Series Three",
+    "file":"papers/special/isese/series_three.pdf",
+    "markingScheme":""
+},
+
+{
+    "category":"special",
+    "specialExam":"isese",
+    "title":"ISESE - Series Four",
+    "type":"series",
+    "series":"series4",
+    "seriesName":"Series Four",
+    "file":"papers/special/isese/series_four.pdf",
+    "markingScheme":""
+},
+
+
+// ============================================================
+// JEPGOS
+// ============================================================
+
+{
+    "category":"special",
+    "specialExam":"jepgos",
+    "title":"JEPGOS - Series One",
+    "type":"series",
+    "series":"series1",
+    "seriesName":"Series One",
+    "file":"papers/special/jepgos/series_one.pdf",
+    "markingScheme":""
+},
+
+{
+    "category":"special",
+    "specialExam":"jepgos",
+    "title":"JEPGOS - Series Two",
+    "type":"series",
+    "series":"series2",
+    "seriesName":"Series Two",
+    "file":"papers/special/jepgos/series_two.pdf",
+    "markingScheme":""
+},
+
+{
+    "category":"special",
+    "specialExam":"jepgos",
+    "title":"JEPGOS - Series Three",
+    "type":"series",
+    "series":"series3",
+    "seriesName":"Series Three",
+    "file":"papers/special/jepgos/series_three.pdf",
+    "markingScheme":""
+},
+
+{
+    "category":"special",
+    "specialExam":"jepgos",
+    "title":"JEPGOS - Series Four",
+    "type":"series",
+    "series":"series4",
+    "seriesName":"Series Four",
+    "file":"papers/special/jepgos/series_four.pdf",
+    "markingScheme":""
+},
+
+
+// ============================================================
+// TAHOSSA
+// ============================================================
+
+{
+    "category":"special",
+    "specialExam":"tahossa",
+    "title":"TAHOSSA - Series One",
+    "type":"series",
+    "series":"series1",
+    "seriesName":"Series One",
+    "file":"papers/special/tahossa/series_one.pdf",
+    "markingScheme":""
+},
+
+{
+    "category":"special",
+    "specialExam":"tahossa",
+    "title":"TAHOSSA - Series Two",
+    "type":"series",
+    "series":"series2",
+    "seriesName":"Series Two",
+    "file":"papers/special/tahossa/series_two.pdf",
+    "markingScheme":""
+},
+
+{
+    "category":"special",
+    "specialExam":"tahossa",
+    "title":"TAHOSSA - Series Three",
+    "type":"series",
+    "series":"series3",
+    "seriesName":"Series Three",
+    "file":"papers/special/tahossa/series_three.pdf",
+    "markingScheme":""
+},
+
+{
+    "category":"special",
+    "specialExam":"tahossa",
+    "title":"TAHOSSA - Series Four",
+    "type":"series",
+    "series":"series4",
+    "seriesName":"Series Four",
+    "file":"papers/special/tahossa/series_four.pdf",
+    "markingScheme":""
+},
+
+
+// ============================================================
+// CSSC
+// ============================================================
+
+{
+    "category":"special",
+    "specialExam":"cssc",
+    "title":"CSSC - Series One",
+    "type":"series",
+    "series":"series1",
+    "seriesName":"Series One",
+    "file":"papers/special/cssc/series_one.pdf",
+    "markingScheme":""
+},
+
+{
+    "category":"special",
+    "specialExam":"cssc",
+    "title":"CSSC - Series Two",
+    "type":"series",
+    "series":"series2",
+    "seriesName":"Series Two",
+    "file":"papers/special/cssc/series_two.pdf",
+    "markingScheme":""
+},
+
+{
+    "category":"special",
+    "specialExam":"cssc",
+    "title":"CSSC - Series Three",
+    "type":"series",
+    "series":"series3",
+    "seriesName":"Series Three",
+    "file":"papers/special/cssc/series_three.pdf",
+    "markingScheme":""
+},
+
+{
+    "category":"special",
+    "specialExam":"cssc",
+    "title":"CSSC - Series Four",
+    "type":"series",
+    "series":"series4",
+    "seriesName":"Series Four",
+    "file":"papers/special/cssc/series_four.pdf",
+    "markingScheme":""
+},
+
+
+// ============================================================
+// SPECIAL SCHOOL
+// ============================================================
+
+{
+    "category":"special",
+    "specialExam":"special_school",
+    "title":"Special School - Series One",
+    "type":"series",
+    "series":"series1",
+    "seriesName":"Series One",
+    "file":"papers/special/special_school/series_one.pdf",
+    "markingScheme":""
+},
+
+{
+    "category":"special",
+    "specialExam":"special_school",
+    "title":"Special School - Series Two",
+    "type":"series",
+    "series":"series2",
+    "seriesName":"Series Two",
+    "file":"papers/special/special_school/series_two.pdf",
+    "markingScheme":""
+},
+
+{
+    "category":"special",
+    "specialExam":"special_school",
+    "title":"Special School - Series Three",
+    "type":"series",
+    "series":"series3",
+    "seriesName":"Series Three",
+    "file":"papers/special/special_school/series_three.pdf",
+    "markingScheme":""
+},
+
+{
+    "category":"special",
+    "specialExam":"special_school",
+    "title":"Special School - Series Four",
+    "type":"series",
+    "series":"series4",
+    "seriesName":"Series Four",
+    "file":"papers/special/special_school/series_four.pdf",
+    "markingScheme":""
+}
+
+];
+
 
 // ============================================================
 // MAKE DATABASE AVAILABLE TO pastpapers.html
