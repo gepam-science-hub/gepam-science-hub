@@ -9,7 +9,7 @@
 //   Form → Subject → Type → School/Region → Year → Papers
 //
 // SPECIAL EXAMINATIONS
-//   Special Examination → Series → PDF
+//   Special Examination → Form → Subject → Year → Pre-NECTA / Series → Papers
 //
 // PAPER SUPPORT
 //   file           = Examination Paper PDF
@@ -80,44 +80,61 @@ const pastPaperSubjects = [
 ];
 
 
-// ============================================================
-// SPECIAL EXAMINATIONS
-// ============================================================
+/* =========================================================
+   SPECIAL EXAMINATIONS
+   GEPAM SCIENCE HUB
+
+   STRUCTURE:
+   SPECIAL EXAMINATION
+       ↓
+   FORM
+       ↓
+   SUBJECT
+       ↓
+   YEAR
+       ↓
+   PRE-NECTA OR SERIES
+       ↓
+   PAPERS
+
+   IMPORTANT:
+   PRE-NECTA ≠ SERIES
+
+   PRE-NECTA:
+       Form → Subject → Year → Pre-NECTA → Papers
+
+   SERIES:
+       Form → Subject → Year → Series → Papers
+========================================================= */
 
 const specialExaminations = [
 
     {
         id: "isese",
-        name: "ISESE",
-        color: "special-blue"
+        name: "ISESE"
     },
 
     {
         id: "jepgos",
-        name: "JEPGOS",
-        color: "special-purple"
+        name: "JEPGOS"
     },
 
     {
         id: "tahossa",
-        name: "TAHOSSA",
-        color: "special-green"
+        name: "TAHOSSA"
     },
 
     {
         id: "cssc",
-        name: "CSSC",
-        color: "special-orange"
+        name: "CSSC"
     },
 
     {
         id: "special_school",
-        name: "SPECIAL SCHOOL",
-        color: "special-red"
+        name: "SPECIAL SCHOOL"
     }
 
 ];
-
 
 // ============================================================
 // PAST PAPERS
@@ -1418,6 +1435,69 @@ const specialExaminations = [
     }
 
 ];
+{
+    title: "Physics 1 (Theory)",
+    category: "special",
+
+    specialExam: "isese",
+
+    form: "form2",
+    subject: "physics",
+    year: 2025,
+
+    specialType: "pre_necta",
+
+    file: "papers/special/isese/form2/physics/2025/pre_necta/physics_1.pdf",
+
+    markingScheme: "papers/special/isese/form2/physics/2025/pre_necta/physics_1_ms.pdf"
+},{
+    title: "Chemistry 1 (Theory)",
+    category: "special",
+
+    specialExam: "isese",
+
+    form: "form2",
+    subject: "chemistry",
+    year: 2025,
+
+    specialType: "pre_necta",
+
+    file: "papers/special/isese/form2/chemistry/2025/pre_necta/chemistry_1.pdf",
+
+    markingScheme: "papers/special/isese/form2/chemistry/2025/pre_necta/chemistry_1_ms.pdf"
+},{
+    title: "Physics 1 (Theory)",
+    category: "special",
+
+    specialExam: "isese",
+
+    form: "form2",
+    subject: "physics",
+    year: 2025,
+
+    specialType: "series",
+    series: "series1",
+
+    file: "papers/special/isese/form2/physics/2025/series1/physics_1.pdf",
+
+    markingScheme: "papers/special/isese/form2/physics/2025/series1/physics_1_ms.pdf"
+},{
+    title: "Physics 1 (Theory)",
+    category: "special",
+
+    specialExam: "isese",
+
+    form: "form2",
+    subject: "physics",
+    year: 2025,
+
+    specialType: "series",
+    series: "series2",
+
+    file: "papers/special/isese/form2/physics/2025/series2/physics_1.pdf",
+
+    markingScheme: "papers/special/isese/form2/physics/2025/series2/physics_1_ms.pdf"
+},
 
 // ============================================================
 // MAKE DATABASE AVAILABLE TO pastpapers.html
