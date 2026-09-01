@@ -27,25 +27,46 @@
 
 <style>
 
+/* =========================================================
+   GEPAM SCIENCE HUB
+   PAST PAPERS UI
+========================================================= */
+
 :root {
+
     --primary: #1769aa;
     --primary-dark: #0d47a1;
     --secondary: #00a6a6;
+
     --light-blue: #eef7ff;
+
     --text: #172033;
     --muted: #687386;
+
     --white: #ffffff;
+
     --border: #dce5ee;
+
     --success: #18864b;
     --success-light: #e9f8ef;
+
     --danger: #c62828;
     --danger-light: #ffebee;
+
     --purple: #7b1fa2;
     --purple-light: #f5e9fa;
+
     --orange: #ef6c00;
     --orange-light: #fff3e6;
-    --shadow: 0 8px 25px rgba(23,105,170,.10);
+
+    --shadow:
+        0 8px 25px rgba(23,105,170,.10);
+
 }
+
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
     box-sizing: border-box;
@@ -56,648 +77,1223 @@ html {
 }
 
 body {
+
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(
-        180deg,
-        #f5faff 0%,
-        #ffffff 55%,
-        #f5faff 100%
-    );
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f5faff 0%,
+            #ffffff 55%,
+            #f5faff 100%
+        );
+
     color: var(--text);
+
     overflow-x: hidden;
+
 }
 
+/* =========================================================
+   HEADER
+========================================================= */
+
 .nav-header {
+
     width: 100%;
+
     max-width: 1050px;
+
     margin: 0 auto;
+
     padding: 14px 20px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
+
     background: #ffffff;
-    border-bottom: 1px solid var(--border);
+
+    border-bottom:
+        1px solid var(--border);
+
 }
 
 .logo-area {
+
     display: flex;
+
     align-items: center;
+
     gap: 10px;
+
 }
 
 .logo-area img {
+
     width: 42px;
+
     height: 42px;
+
     object-fit: contain;
+
 }
 
 .logo-text {
+
     display: flex;
+
     flex-direction: column;
+
 }
 
 .logo-title {
+
     font-size: 18px;
+
     font-weight: 800;
+
     color: var(--primary-dark);
+
 }
 
 .logo-subtitle {
+
     font-size: 11px;
+
     color: var(--muted);
+
     margin-top: 2px;
+
 }
 
 .menu-toggle {
+
     width: 45px;
+
     height: 42px;
+
     border: none;
+
     border-radius: 10px;
-    background: linear-gradient(
-        135deg,
-        var(--primary),
-        var(--secondary)
-    );
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
     color: white;
+
     font-size: 24px;
+
     cursor: pointer;
+
 }
+
+/* =========================================================
+   MAIN
+========================================================= */
 
 .main-container {
+
     width: 100%;
+
     max-width: 1050px;
+
     margin: 0 auto;
-    padding: 25px 20px 60px;
+
+    padding:
+        25px 20px 60px;
+
 }
 
+/* =========================================================
+   HERO
+========================================================= */
+
 .page-hero {
-    padding: 32px 25px;
+
+    padding:
+        32px 25px;
+
     border-radius: 20px;
-    background: linear-gradient(
-        135deg,
-        #0d47a1,
-        #1769aa 55%,
-        #00a6a6
-    );
+
+    background:
+        linear-gradient(
+            135deg,
+            #0d47a1,
+            #1769aa 55%,
+            #00a6a6
+        );
+
     color: white;
-    box-shadow: 0 12px 30px rgba(13,71,161,.22);
+
+    box-shadow:
+        0 12px 30px
+        rgba(13,71,161,.22);
+
     margin-bottom: 25px;
+
 }
 
 .hero-icon {
+
     width: 60px;
+
     height: 60px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
-    background: rgba(255,255,255,.15);
+
+    background:
+        rgba(255,255,255,.15);
+
     border-radius: 16px;
+
     font-size: 32px;
+
     margin-bottom: 15px;
+
 }
 
 .page-hero h1 {
+
     margin: 0 0 8px;
+
     font-size: 30px;
+
 }
 
 .page-hero p {
+
     margin: 0;
+
     line-height: 1.7;
+
     color: #e8f4ff;
+
 }
 
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
 .breadcrumb {
+
     display: flex;
+
     align-items: center;
+
     flex-wrap: wrap;
+
     gap: 6px;
-    margin: 10px 0 18px;
+
+    margin:
+        10px 0 18px;
+
     font-size: 14px;
+
 }
 
 .breadcrumb-item {
-    padding: 6px 10px;
+
+    padding:
+        6px 10px;
+
     border-radius: 20px;
+
     background: #e9f3fb;
+
     color: var(--primary-dark);
+
     font-weight: 700;
+
 }
 
 .breadcrumb-separator {
+
     color: #9aa7b5;
+
     font-weight: bold;
+
 }
 
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
 .back-btn {
+
     display: none;
+
     align-items: center;
+
     gap: 8px;
-    padding: 10px 16px;
+
+    padding:
+        10px 16px;
+
     margin-bottom: 20px;
+
     border: none;
+
     border-radius: 9px;
+
     background: #263746;
+
     color: white;
+
     font-weight: 700;
+
     cursor: pointer;
+
 }
 
 .back-btn:hover {
+
     background: #172631;
+
 }
 
+/* =========================================================
+   STEP HEADER
+========================================================= */
+
 .step-header {
-    margin: 10px 0 20px;
+
+    margin:
+        10px 0 20px;
+
 }
 
 .step-number {
+
     display: inline-block;
-    padding: 6px 10px;
+
+    padding:
+        6px 10px;
+
     border-radius: 20px;
+
     background: #dff6f6;
+
     color: #007c7c;
+
     font-size: 12px;
+
     font-weight: 800;
+
     margin-bottom: 8px;
+
 }
 
 .step-header h2 {
-    margin: 0 0 7px;
+
+    margin:
+        0 0 7px;
+
     font-size: 25px;
+
 }
 
 .step-header p {
+
     margin: 0;
+
     color: var(--muted);
+
     line-height: 1.6;
+
 }
 
+/* =========================================================
+   DATABASE STATUS
+========================================================= */
+
 .data-status {
+
     display: none;
+
     margin-bottom: 20px;
-    padding: 14px 16px;
+
+    padding:
+        14px 16px;
+
     border-radius: 10px;
+
     font-size: 14px;
+
     line-height: 1.6;
+
 }
 
 .data-status.error {
+
     display: block;
-    background: var(--danger-light);
-    border: 1px solid #ffcdd2;
-    color: #b71c1c;
+
+    background:
+        var(--danger-light);
+
+    border:
+        1px solid #ffcdd2;
+
+    color:
+        #b71c1c;
+
 }
+
+/* =========================================================
+   GRID
+========================================================= */
 
 .selection-grid {
+
     display: grid;
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(220px, 1fr)
-    );
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(220px, 1fr)
+        );
+
     gap: 18px;
+
 }
 
+/* =========================================================
+   GENERAL CARD
+========================================================= */
+
 .selection-card {
+
     position: relative;
-    background: rgba(255,255,255,.98);
-    border: 1px solid var(--border);
+
+    background:
+        rgba(255,255,255,.98);
+
+    border:
+        1px solid var(--border);
+
     border-radius: 16px;
+
     padding: 22px;
+
     min-height: 180px;
+
     display: flex;
+
     flex-direction: column;
+
     justify-content: space-between;
-    box-shadow: var(--shadow);
+
+    box-shadow:
+        var(--shadow);
+
     overflow: hidden;
+
     transition:
         transform .2s ease,
         box-shadow .2s ease;
+
 }
 
 .selection-card::before {
+
     content: "";
+
     position: absolute;
+
     left: 0;
+
     top: 0;
+
     width: 100%;
+
     height: 5px;
-    background: linear-gradient(
-        90deg,
-        var(--primary),
-        var(--secondary)
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--primary),
+            var(--secondary)
+        );
+
 }
 
 .selection-card:hover {
-    transform: translateY(-4px);
+
+    transform:
+        translateY(-4px);
+
     box-shadow:
         0 14px 30px
         rgba(23,105,170,.15);
+
 }
 
 .selection-card h3 {
-    margin: 0 0 8px;
+
+    margin:
+        0 0 8px;
+
     font-size: 20px;
-    color: #17324d;
+
+    color:
+        #17324d;
+
 }
 
 .selection-card p {
+
     margin: 0;
-    color: var(--muted);
+
+    color:
+        var(--muted);
+
     line-height: 1.55;
+
     font-size: 14px;
+
 }
+
+/* =========================================================
+   CARD ICON
+========================================================= */
 
 .card-icon {
+
     width: 55px;
+
     height: 55px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     border-radius: 15px;
-    background: var(--light-blue);
+
+    background:
+        var(--light-blue);
+
     font-size: 28px;
+
     margin-bottom: 14px;
+
 }
 
+/* =========================================================
+   SUBJECT COLORS
+========================================================= */
+
 .physics-card::before {
-    background: linear-gradient(
-        90deg,
-        #1565c0,
-        #42a5f5
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            #1565c0,
+            #42a5f5
+        );
+
 }
 
 .chemistry-card::before {
-    background: linear-gradient(
-        90deg,
-        #00897b,
-        #26a69a
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            #00897b,
+            #26a69a
+        );
+
 }
 
 .biology-card::before {
-    background: linear-gradient(
-        90deg,
-        #2e7d32,
-        #66bb6a
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            #2e7d32,
+            #66bb6a
+        );
+
 }
 
 .physics-card .card-icon {
-    background: #e6f1ff;
+
+    background:
+        #e6f1ff;
+
 }
 
 .chemistry-card .card-icon {
-    background: #e5f8f5;
+
+    background:
+        #e5f8f5;
+
 }
 
 .biology-card .card-icon {
-    background: #eaf7ea;
+
+    background:
+        #eaf7ea;
+
 }
+
+/* =========================================================
+   FORM CARD
+========================================================= */
 
 .form-card::before {
-    background: linear-gradient(
-        90deg,
-        var(--primary),
-        var(--secondary)
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--primary),
+            var(--secondary)
+        );
+
 }
+
+/* =========================================================
+   TYPE CARD
+========================================================= */
 
 .type-card::before {
-    background: linear-gradient(
-        90deg,
-        #7b1fa2,
-        #ab47bc
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            #7b1fa2,
+            #ab47bc
+        );
+
 }
+
+/* =========================================================
+   REGION CARD
+========================================================= */
 
 .region-card::before {
-    background: linear-gradient(
-        90deg,
-        #00695c,
-        #26a69a
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            #00695c,
+            #26a69a
+        );
+
 }
+
+/* =========================================================
+   SCHOOL CARD
+========================================================= */
 
 .school-card::before {
-    background: linear-gradient(
-        90deg,
-        #ef6c00,
-        #ff9800
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            #ef6c00,
+            #ff9800
+        );
+
 }
+
+/* =========================================================
+   YEAR CARD
+========================================================= */
 
 .year-card::before {
-    background: linear-gradient(
-        90deg,
-        #283593,
-        #5c6bc0
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            #283593,
+            #5c6bc0
+        );
+
 }
+
+/* =========================================================
+   SPECIAL CARD
+========================================================= */
 
 .special-card::before {
-    background: linear-gradient(
-        90deg,
-        #7b1fa2,
-        #00a6a6
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            #7b1fa2,
+            #00a6a6
+        );
+
 }
+
+/* =========================================================
+   SERIES CARD
+========================================================= */
 
 .series-card::before {
-    background: linear-gradient(
-        90deg,
-        #6a1b9a,
-        #ab47bc
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            #6a1b9a,
+            #ab47bc
+        );
+
 }
 
-.pre-necta-card::before {
-    background: linear-gradient(
-        90deg,
-        #1565c0,
-        #00a6a6
-    );
-}
+/* =========================================================
+   LOCATION CARD
+========================================================= */
 
 .location-card::before {
-    background: linear-gradient(
-        90deg,
-        #1565c0,
-        #00a6a6
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            #1565c0,
+            #00a6a6
+        );
+
 }
 
+/* =========================================================
+   OPEN BUTTON
+========================================================= */
+
 .open-btn {
+
     width: 100%;
-    padding: 12px 14px;
+
+    padding:
+        12px 14px;
+
     margin-top: 18px;
+
     border: none;
+
     border-radius: 9px;
-    background: linear-gradient(
-        135deg,
-        var(--primary),
-        var(--secondary)
-    );
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
     color: white;
+
     font-size: 14px;
+
     font-weight: 800;
+
     cursor: pointer;
+
     transition:
         transform .15s ease,
         opacity .15s ease;
+
 }
 
 .open-btn:hover {
-    transform: scale(1.02);
-    opacity: .92;
+
+    transform:
+        scale(1.02);
+
+    opacity:
+        .92;
+
 }
 
+/* =========================================================
+   PAPER CARD
+========================================================= */
+
 .pdf-card {
+
     min-height: 220px;
+
 }
 
 .pdf-card::before {
-    background: linear-gradient(
-        90deg,
-        #b71c1c,
-        #ef5350
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            #b71c1c,
+            #ef5350
+        );
+
 }
 
 .pdf-icon {
-    background: #ffebee;
+
+    background:
+        #ffebee;
+
 }
 
+/* =========================================================
+   PAPER ACTIONS
+========================================================= */
+
 .paper-actions {
+
     display: flex;
+
     flex-direction: column;
+
     gap: 9px;
+
     margin-top: 18px;
+
 }
 
 .paper-action {
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     width: 100%;
+
     min-height: 44px;
-    padding: 11px 14px;
+
+    padding:
+        11px 14px;
+
     border-radius: 9px;
+
     text-decoration: none;
+
     font-size: 13px;
+
     font-weight: 800;
+
     cursor: pointer;
+
     transition:
         transform .15s ease,
         opacity .15s ease;
+
 }
 
 .paper-action:hover {
-    transform: translateY(-1px);
-    opacity: .92;
+
+    transform:
+        translateY(-1px);
+
+    opacity:
+        .92;
+
 }
 
 .download-btn {
-    background: linear-gradient(
-        135deg,
-        #18864b,
-        #28a866
-    );
+
+    background:
+        linear-gradient(
+            135deg,
+            #18864b,
+            #28a866
+        );
+
     color: white;
+
 }
 
 .marking-btn {
-    background: linear-gradient(
-        135deg,
-        #7b1fa2,
-        #ab47bc
-    );
+
+    background:
+        linear-gradient(
+            135deg,
+            #7b1fa2,
+            #ab47bc
+        );
+
     color: white;
+
 }
 
 .preview-btn {
-    background: #edf6ff;
-    color: var(--primary-dark);
-    border: 1px solid #cfe5f7;
+
+    background:
+        #edf6ff;
+
+    color:
+        var(--primary-dark);
+
+    border:
+        1px solid #cfe5f7;
+
 }
 
+/* =========================================================
+   EMPTY CARD
+========================================================= */
+
 .empty-card {
-    grid-column: 1 / -1;
-    padding: 35px 25px;
-    text-align: center;
-    border-radius: 15px;
-    background: #fff8e1;
-    border: 1px solid #ffe082;
+
+    grid-column:
+        1 / -1;
+
+    padding:
+        35px 25px;
+
+    text-align:
+        center;
+
+    border-radius:
+        15px;
+
+    background:
+        #fff8e1;
+
+    border:
+        1px solid #ffe082;
+
 }
 
 .empty-card-icon {
+
     font-size: 40px;
+
     margin-bottom: 10px;
+
 }
 
 .empty-card h3 {
-    margin: 0 0 8px;
-    color: #7a5600;
+
+    margin:
+        0 0 8px;
+
+    color:
+        #7a5600;
+
 }
 
 .empty-card p {
+
     margin: 0;
-    color: #8b6a20;
+
+    color:
+        #8b6a20;
+
 }
+
+/* =========================================================
+   SPECIAL INFO
+========================================================= */
 
 .special-info {
-    margin-bottom: 20px;
-    padding: 15px 16px;
-    border-radius: 12px;
-    background: var(--purple-light);
-    border: 1px solid #e1bee7;
-    color: #6a1b9a;
-    font-size: 14px;
-    line-height: 1.6;
+
+    margin-bottom:
+        20px;
+
+    padding:
+        15px 16px;
+
+    border-radius:
+        12px;
+
+    background:
+        var(--purple-light);
+
+    border:
+        1px solid #e1bee7;
+
+    color:
+        #6a1b9a;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.6;
+
 }
 
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
 .overlay {
+
     display: none;
+
     position: fixed;
+
     inset: 0;
-    background: rgba(0,0,0,.48);
+
+    background:
+        rgba(0,0,0,.48);
+
     z-index: 9998;
+
 }
 
 .sidebar {
+
     position: fixed;
+
     top: 0;
+
     right: -310px;
+
     width: 290px;
+
     height: 100vh;
+
     background: white;
+
     z-index: 9999;
+
     box-shadow:
         -8px 0 25px
         rgba(0,0,0,.18);
+
     padding: 20px;
-    transition: right .3s ease;
+
+    transition:
+        right .3s ease;
+
     overflow-y: auto;
+
 }
 
 .sidebar.active {
+
     right: 0;
+
 }
 
 .close-btn {
+
     float: right;
+
     width: 40px;
+
     height: 40px;
+
     border: none;
+
     border-radius: 9px;
-    background: #edf2f7;
+
+    background:
+        #edf2f7;
+
     font-size: 20px;
+
     cursor: pointer;
+
 }
 
 .sidebar-links {
+
     clear: both;
+
     padding-top: 35px;
+
     display: flex;
+
     flex-direction: column;
+
     gap: 8px;
+
 }
 
 .sidebar-links a,
 .dropdown-btn {
+
     width: 100%;
+
     padding: 13px;
+
     border: none;
+
     border-radius: 9px;
+
     background: white;
+
     text-align: left;
+
     text-decoration: none;
+
     color: #253444;
+
     font-weight: 700;
+
     font-size: 15px;
+
     cursor: pointer;
+
 }
 
 .sidebar-links a:hover,
 .dropdown-btn:hover {
-    background: #edf6ff;
-    color: var(--primary-dark);
+
+    background:
+        #edf6ff;
+
+    color:
+        var(--primary-dark);
+
 }
 
 .dropdown-container {
+
     display: none;
+
     padding-left: 12px;
-    border-left: 3px solid var(--secondary);
+
+    border-left:
+        3px solid var(--secondary);
+
 }
 
 .dropdown-container a {
+
     font-size: 14px;
+
     font-weight: 600;
+
 }
 
+/* =========================================================
+   FOOTER
+========================================================= */
+
 footer {
-    margin-top: 30px;
-    padding: 30px 20px;
-    text-align: center;
-    background: #102a43;
-    color: #dcecff;
+
+    margin-top:
+        30px;
+
+    padding:
+        30px 20px;
+
+    text-align:
+        center;
+
+    background:
+        #102a43;
+
+    color:
+        #dcecff;
+
 }
 
 footer strong {
-    color: white;
+
+    color:
+        white;
+
 }
 
 @keyframes fadeIn {
 
     from {
+
         opacity: 0;
-        transform: translateY(8px);
+
+        transform:
+            translateY(8px);
+
     }
 
     to {
+
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
+
     }
 
 }
 
 #stepContainer {
-    animation: fadeIn .25s ease;
+
+    animation:
+        fadeIn .25s ease;
+
 }
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 600px) {
 
     .main-container {
-        padding: 18px 14px 45px;
+
+        padding:
+            18px 14px 45px;
+
     }
 
     .page-hero {
-        padding: 25px 20px;
-        border-radius: 16px;
+
+        padding:
+            25px 20px;
+
+        border-radius:
+            16px;
+
     }
 
     .page-hero h1 {
-        font-size: 25px;
+
+        font-size:
+            25px;
+
     }
 
     .selection-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            14px;
+
     }
 
     .selection-card {
-        min-height: 175px;
+
+        min-height:
+            175px;
+
     }
 
     .step-header h2 {
-        font-size: 22px;
+
+        font-size:
+            22px;
+
     }
 
     .paper-actions {
-        gap: 8px;
+
+        gap:
+            8px;
+
     }
 
 }
@@ -707,6 +1303,10 @@ footer strong {
 </head>
 
 <body>
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
 <header class="nav-header">
 
@@ -740,6 +1340,10 @@ footer strong {
     </button>
 
 </header>
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
 <main class="main-container">
 
@@ -790,11 +1394,19 @@ footer strong {
 
 </main>
 
+<!-- =========================================================
+     SIDEBAR OVERLAY
+========================================================= -->
+
 <div
     id="menuOverlay"
     class="overlay"
     onclick="toggleMenu()">
 </div>
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
 
 <aside
     id="sidebarMenu"
@@ -867,6 +1479,10 @@ footer strong {
 
 </aside>
 
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
 <footer>
 
     <strong>
@@ -891,23 +1507,7 @@ footer strong {
 /* =========================================================
    GEPAM SCIENCE HUB
    PAST PAPERS ENGINE
-
-   IMPORTANT:
-   NORMAL F1-F6 SYSTEM IS PRESERVED.
-
-   ONLY SPECIAL EXAMINATIONS HAVE BEEN
-   CHANGED TO:
-
-   FORM
-      ↓
-   SUBJECT
-      ↓
-   YEAR
-      ↓
-   PRE-NECTA / SERIES
-      ↓
-   PAPERS
-
+   VERSION: DATABASE-DRIVEN
 ========================================================= */
 
 
@@ -935,9 +1535,7 @@ let currentState = {
 
     specialExam: null,
 
-    series: null,
-
-    specialExamType: null
+    series: null
 
 };
 
@@ -1128,7 +1726,7 @@ const FALLBACK_SPECIAL = [
 
 
 /* =========================================================
-   DATABASE
+   GET DATABASE ARRAYS
 ========================================================= */
 
 function getPapers() {
@@ -1211,6 +1809,10 @@ function getSpecialExaminations() {
 
 }
 
+
+/* =========================================================
+   FORMS
+========================================================= */
 
 const forms = FALLBACK_FORMS;
 
@@ -1316,7 +1918,7 @@ function displayName(value) {
 
 
 /* =========================================================
-   ESCAPE
+   ESCAPE HTML
 ========================================================= */
 
 function escapeHTML(value) {
@@ -1399,14 +2001,92 @@ function checkDataFile() {
 
 
 /* =========================================================
-   BREADCRUMB
+   UPDATE BREADCRUMB
 ========================================================= */
 
 function updateBreadcrumb() {
 
     const items = [
+
         "Past Papers"
+
     ];
+
+    if (
+        currentState.form
+    ) {
+
+        items.push(
+            displayName(
+                currentState.form
+            )
+        );
+
+    }
+
+    if (
+        currentState.subject
+    ) {
+
+        items.push(
+            displayName(
+                currentState.subject
+            )
+        );
+
+    }
+
+    if (
+        currentState.type
+    ) {
+
+        items.push(
+            displayName(
+                currentState.type
+            )
+        );
+
+    }
+
+    if (
+        currentState.locationMode ===
+        "region" &&
+        currentState.region
+    ) {
+
+        items.push(
+            displayName(
+                currentState.region
+            )
+        );
+
+    }
+
+    if (
+        currentState.locationMode ===
+        "school" &&
+        currentState.school
+    ) {
+
+        items.push(
+            displayName(
+                currentState.school
+            )
+        );
+
+    }
+
+    if (
+        currentState.year
+    ) {
+
+        items.push(
+            String(
+                currentState.year
+            )
+        );
+
+    }
 
     if (
         currentState.specialExam
@@ -1418,164 +2098,19 @@ function updateBreadcrumb() {
             )
         );
 
-        if (
-            currentState.form
-        ) {
-
-            items.push(
-                displayName(
-                    currentState.form
-                )
-            );
-
-        }
-
-        if (
-            currentState.subject
-        ) {
-
-            items.push(
-                displayName(
-                    currentState.subject
-                )
-            );
-
-        }
-
-        if (
-            currentState.year
-        ) {
-
-            items.push(
-                String(
-                    currentState.year
-                )
-            );
-
-        }
-
-        if (
-            currentState.specialExamType
-        ) {
-
-            if (
-                currentState.specialExamType ===
-                "pre_necta"
-            ) {
-
-                items.push(
-                    "Pre-NECTA"
-                );
-
-            }
-
-            if (
-                currentState.specialExamType ===
-                "series"
-            ) {
-
-                items.push(
-                    "Series"
-                );
-
-            }
-
-        }
-
-        if (
-            currentState.series
-        ) {
-
-            items.push(
-                displayName(
-                    currentState.series
-                )
-            );
-
-        }
-
     }
 
-    else {
+    if (
+        currentState.series
+    ) {
 
-        if (
-            currentState.form
-        ) {
-
-            items.push(
-                displayName(
-                    currentState.form
-                )
-            );
-
-        }
-
-        if (
-            currentState.subject
-        ) {
-
-            items.push(
-                displayName(
-                    currentState.subject
-                )
-            );
-
-        }
-
-        if (
-            currentState.type
-        ) {
-
-            items.push(
-                displayName(
-                    currentState.type
-                )
-            );
-
-        }
-
-        if (
-            currentState.locationMode ===
-            "region" &&
-            currentState.region
-        ) {
-
-            items.push(
-                displayName(
-                    currentState.region
-                )
-            );
-
-        }
-
-        if (
-            currentState.locationMode ===
-            "school" &&
-            currentState.school
-        ) {
-
-            items.push(
-                displayName(
-                    currentState.school
-                )
-            );
-
-        }
-
-        if (
-            currentState.year
-        ) {
-
-            items.push(
-                String(
-                    currentState.year
-                )
-            );
-
-        }
+        items.push(
+            displayName(
+                currentState.series
+            )
+        );
 
     }
-
 
     breadcrumb.innerHTML =
         items
@@ -1633,7 +2168,6 @@ function updateBreadcrumb() {
 
 /* =========================================================
    HOME
-   NORMAL SYSTEM UNCHANGED
 ========================================================= */
 
 function renderHome() {
@@ -1658,9 +2192,7 @@ function renderHome() {
 
         specialExam: null,
 
-        series: null,
-
-        specialExamType: null
+        series: null
 
     };
 
@@ -1746,7 +2278,6 @@ function renderHome() {
         }
     );
 
-
     const specials =
         getSpecialExaminations();
 
@@ -1772,10 +2303,8 @@ function renderHome() {
                     </h3>
 
                     <p>
-                        Mitihani maalum
-                        kama ISESE, JEPGOS,
-                        TAHOSSA, CSSC na
-                        Special School.
+                        ISESE, JEPGOS, TAHOSSA,
+                        CSSC na Special School.
                     </p>
 
                 </div>
@@ -1807,11 +2336,12 @@ function renderHome() {
 
 
 /* =========================================================
-   NORMAL SYSTEM
-   UNCHANGED
+   OPEN FORM
 ========================================================= */
 
-function openForm(formId) {
+function openForm(
+    formId
+) {
 
     currentState = {
 
@@ -1833,9 +2363,7 @@ function openForm(formId) {
 
         specialExam: null,
 
-        series: null,
-
-        specialExamType: null
+        series: null
 
     };
 
@@ -1845,6 +2373,12 @@ function openForm(formId) {
 
 }
 
+
+/* =========================================================
+   RENDER SUBJECTS
+   NOTE:
+   SUBJECT ICONS REMOVED AS REQUESTED
+========================================================= */
 
 function renderSubjects() {
 
@@ -1959,7 +2493,13 @@ function renderSubjects() {
 }
 
 
-function openSubject(subjectId) {
+/* =========================================================
+   OPEN SUBJECT
+========================================================= */
+
+function openSubject(
+    subjectId
+) {
 
     currentState.subject =
         subjectId;
@@ -1988,6 +2528,10 @@ function openSubject(subjectId) {
 
 }
 
+
+/* =========================================================
+   GET AVAILABLE TYPES
+========================================================= */
 
 function getAvailableTypes() {
 
@@ -2075,6 +2619,10 @@ function getAvailableTypes() {
 
 }
 
+
+/* =========================================================
+   RENDER TYPES
+========================================================= */
 
 function renderTypes() {
 
@@ -2188,7 +2736,15 @@ function renderTypes() {
 }
 
 
-function openType(typeId) {
+/* =========================================================
+   OPEN TYPE
+   UPDATED:
+   SCHOOL + REGION CAN BOTH EXIST
+========================================================= */
+
+function openType(
+    typeId
+) {
 
     currentState.type =
         typeId;
@@ -2205,6 +2761,7 @@ function openType(typeId) {
     const papers =
         getFilteredNormalPapers();
 
+
     const hasSchool =
         papers.some(
             paper =>
@@ -2213,6 +2770,7 @@ function openType(typeId) {
                     paper.school
                 ).trim() !== ""
         );
+
 
     const hasRegion =
         papers.some(
@@ -2225,6 +2783,13 @@ function openType(typeId) {
                     paper.region
                 ) !== "necta"
         );
+
+
+    /*
+       KAMA ZOTE ZIPO:
+       Mteja achague kama anataka
+       School au Regional examination.
+    */
 
     if (
         hasSchool &&
@@ -2245,6 +2810,7 @@ function openType(typeId) {
 
     }
 
+
     if (
         hasSchool
     ) {
@@ -2262,6 +2828,7 @@ function openType(typeId) {
         return;
 
     }
+
 
     if (
         hasRegion
@@ -2281,6 +2848,7 @@ function openType(typeId) {
 
     }
 
+
     currentState.locationMode =
         null;
 
@@ -2294,6 +2862,10 @@ function openType(typeId) {
 }
 
 
+/* =========================================================
+   LOCATION CHOICE
+========================================================= */
+
 function renderLocationChoice() {
 
     updateBreadcrumb();
@@ -2301,7 +2873,7 @@ function renderLocationChoice() {
     backButton.style.display =
         "inline-flex";
 
-    stepContainer.innerHTML = `
+    let html = `
 
         <div class="step-header">
 
@@ -2316,6 +2888,7 @@ function renderLocationChoice() {
             <p>
                 Mitihani hii inapatikana
                 kwa shule na kwa mikoa.
+                Chagua aina unayotaka.
             </p>
 
         </div>
@@ -2358,6 +2931,7 @@ function renderLocationChoice() {
 
             </div>
 
+
             <div class="
                 selection-card
                 region-card
@@ -2398,10 +2972,19 @@ function renderLocationChoice() {
 
     `;
 
+    stepContainer.innerHTML =
+        html;
+
 }
 
 
-function chooseLocationMode(mode) {
+/* =========================================================
+   CHOOSE LOCATION MODE
+========================================================= */
+
+function chooseLocationMode(
+    mode
+) {
 
     currentState.locationMode =
         mode;
@@ -2414,6 +2997,7 @@ function chooseLocationMode(mode) {
 
     currentState.year =
         null;
+
 
     if (
         mode === "school"
@@ -2429,6 +3013,7 @@ function chooseLocationMode(mode) {
         return;
 
     }
+
 
     if (
         mode === "region"
@@ -2447,6 +3032,10 @@ function chooseLocationMode(mode) {
 
 }
 
+
+/* =========================================================
+   GET NORMAL PAPERS
+========================================================= */
 
 function getFilteredNormalPapers() {
 
@@ -2497,6 +3086,10 @@ function getFilteredNormalPapers() {
 
 }
 
+
+/* =========================================================
+   AVAILABLE SCHOOLS
+========================================================= */
 
 function getAvailableSchools() {
 
@@ -2558,6 +3151,10 @@ function getAvailableSchools() {
 
 }
 
+
+/* =========================================================
+   RENDER SCHOOLS
+========================================================= */
 
 function renderSchools() {
 
@@ -2662,7 +3259,13 @@ function renderSchools() {
 }
 
 
-function openSchool(schoolId) {
+/* =========================================================
+   OPEN SCHOOL
+========================================================= */
+
+function openSchool(
+    schoolId
+) {
 
     currentState.school =
         schoolId;
@@ -2679,6 +3282,10 @@ function openSchool(schoolId) {
 
 }
 
+
+/* =========================================================
+   AVAILABLE REGIONS
+========================================================= */
 
 function getAvailableRegions() {
 
@@ -2709,7 +3316,7 @@ function getAvailableRegions() {
 
             if (
                 region ===
-                "necta"
+                    "necta"
             ) {
 
                 return;
@@ -2744,6 +3351,7 @@ function getAvailableRegions() {
                 )
         );
 
+
     ids.forEach(
         id => {
 
@@ -2776,6 +3384,10 @@ function getAvailableRegions() {
 
 }
 
+
+/* =========================================================
+   RENDER REGIONS
+========================================================= */
 
 function renderRegions() {
 
@@ -2883,7 +3495,13 @@ function renderRegions() {
 }
 
 
-function openRegion(regionId) {
+/* =========================================================
+   OPEN REGION
+========================================================= */
+
+function openRegion(
+    regionId
+) {
 
     currentState.region =
         regionId;
@@ -2904,6 +3522,10 @@ function openRegion(regionId) {
 }
 
 
+/* =========================================================
+   GET AVAILABLE YEARS
+========================================================= */
+
 function getAvailableYears() {
 
     const papers =
@@ -2916,7 +3538,7 @@ function getAvailableYears() {
 
             if (
                 currentState.locationMode ===
-                "region"
+                    "region"
             ) {
 
                 if (
@@ -2934,9 +3556,10 @@ function getAvailableYears() {
 
             }
 
+
             if (
                 currentState.locationMode ===
-                "school"
+                    "school"
             ) {
 
                 if (
@@ -2953,6 +3576,7 @@ function getAvailableYears() {
                 }
 
             }
+
 
             const year =
                 String(
@@ -2987,6 +3611,10 @@ function getAvailableYears() {
 
 }
 
+
+/* =========================================================
+   RENDER YEARS
+========================================================= */
 
 function renderYears() {
 
@@ -3094,7 +3722,13 @@ function renderYears() {
 }
 
 
-function openYear(year) {
+/* =========================================================
+   OPEN YEAR
+========================================================= */
+
+function openYear(
+    year
+) {
 
     currentState.year =
         String(year);
@@ -3108,6 +3742,10 @@ function openYear(year) {
 
 }
 
+
+/* =========================================================
+   GET MATCHING PAPERS
+========================================================= */
 
 function getMatchingPapers() {
 
@@ -3134,6 +3772,7 @@ function getMatchingPapers() {
 
                 }
 
+
                 if (
                     normalize(
                         paper.subject
@@ -3146,6 +3785,7 @@ function getMatchingPapers() {
                     return false;
 
                 }
+
 
                 if (
                     normalize(
@@ -3160,6 +3800,7 @@ function getMatchingPapers() {
 
                 }
 
+
                 if (
                     String(
                         paper.year
@@ -3172,6 +3813,7 @@ function getMatchingPapers() {
                     return false;
 
                 }
+
 
                 if (
                     currentState.locationMode ===
@@ -3193,6 +3835,7 @@ function getMatchingPapers() {
 
                 }
 
+
                 if (
                     currentState.locationMode ===
                     "school"
@@ -3213,9 +3856,11 @@ function getMatchingPapers() {
 
                 }
 
+
                 return true;
 
             }
+
 
             return false;
 
@@ -3224,6 +3869,10 @@ function getMatchingPapers() {
 
 }
 
+
+/* =========================================================
+   RENDER PAPERS
+========================================================= */
 
 function renderPapers() {
 
@@ -3294,7 +3943,7 @@ function renderPapers() {
 
 
 /* =========================================================
-   PAPER CARD
+   RENDER PAPER CARD
 ========================================================= */
 
 function renderPaperCard(
@@ -3306,17 +3955,20 @@ function renderPaperCard(
         paper.title ||
         "Past Paper";
 
+
     const description =
         paper.description ||
         buildPaperDescription(
             paper
         );
 
+
     const file =
         String(
             paper.file ||
             ""
         ).trim();
+
 
     const marking =
         String(
@@ -3325,6 +3977,7 @@ function renderPaperCard(
             paper.marking ||
             ""
         ).trim();
+
 
     let html = `
 
@@ -3360,6 +4013,7 @@ function renderPaperCard(
 
     `;
 
+
     if (
         file
     ) {
@@ -3385,6 +4039,7 @@ function renderPaperCard(
         `;
 
     }
+
 
     if (
         marking
@@ -3412,6 +4067,7 @@ function renderPaperCard(
 
     }
 
+
     if (
         file
     ) {
@@ -3437,6 +4093,7 @@ function renderPaperCard(
 
     }
 
+
     if (
         !file &&
         !marking
@@ -3459,6 +4116,7 @@ function renderPaperCard(
 
     }
 
+
     html += `
 
             </div>
@@ -3467,16 +4125,22 @@ function renderPaperCard(
 
     `;
 
+
     return html;
 
 }
 
+
+/* =========================================================
+   BUILD DESCRIPTION
+========================================================= */
 
 function buildPaperDescription(
     paper
 ) {
 
     const parts = [];
+
 
     if (
         paper.form
@@ -3490,6 +4154,7 @@ function buildPaperDescription(
 
     }
 
+
     if (
         paper.subject
     ) {
@@ -3501,6 +4166,7 @@ function buildPaperDescription(
         );
 
     }
+
 
     if (
         paper.type
@@ -3514,6 +4180,7 @@ function buildPaperDescription(
 
     }
 
+
     if (
         paper.school
     ) {
@@ -3526,6 +4193,7 @@ function buildPaperDescription(
         );
 
     }
+
 
     if (
         paper.region &&
@@ -3543,6 +4211,7 @@ function buildPaperDescription(
 
     }
 
+
     if (
         paper.year
     ) {
@@ -3555,12 +4224,17 @@ function buildPaperDescription(
 
     }
 
+
     return parts.join(
         " • "
     );
 
 }
 
+
+/* =========================================================
+   EMPTY CARD
+========================================================= */
 
 function emptyCard(
     title,
@@ -3595,193 +4269,56 @@ function emptyCard(
 
 
 /* =========================================================
-   SPECIAL EXAMINATIONS
-   NEW SYSTEM
+   SPECIAL MENU
 ========================================================= */
-
-
-/*
-    SPECIAL SYSTEM:
-
-    Special Examination
-          ↓
-        FORM
-          ↓
-       SUBJECT
-          ↓
-        YEAR
-          ↓
-    ┌───────────────┐
-    │               │
-    PRE-NECTA     SERIES
-    │               │
-    ↓               ↓
-   PAPERS       SERIES 1
-                SERIES 2
-                SERIES 3
-                SERIES 4
-                    ↓
-                  PAPERS
-*/
-
 
 function openSpecialMenu() {
 
     currentState = {
 
         level:
-            "specialForms",
+            "special",
 
-        form:
-            null,
+        form: null,
 
-        subject:
-            null,
+        subject: null,
 
-        type:
-            null,
+        type: null,
 
-        locationMode:
-            null,
+        locationMode: null,
 
-        region:
-            null,
+        region: null,
 
-        school:
-            null,
+        school: null,
 
-        year:
-            null,
+        year: null,
 
-        specialExam:
-            null,
+        specialExam: null,
 
-        series:
-            null,
-
-        specialExamType:
-            null
+        series: null
 
     };
 
     pushNavigationState();
 
-    renderSpecialForms();
+    renderSpecialMenu();
 
 }
 
 
 /* =========================================================
-   GET SPECIAL PAPERS
+   RENDER SPECIAL MENU
 ========================================================= */
 
-function getAllSpecialPapers() {
-
-    return getPapers().filter(
-        paper =>
-            normalize(
-                paper.category
-            ) ===
-            "special"
-    );
-
-}
-
-
-/* =========================================================
-   GET SPECIAL FORMS
-========================================================= */
-
-function getSpecialForms() {
-
-    const papers =
-        getAllSpecialPapers();
-
-    const forms = [];
-
-    papers.forEach(
-        paper => {
-
-            const id =
-                String(
-                    paper.form ||
-                    ""
-                ).trim();
-
-            if (
-                !id
-            ) {
-
-                return;
-
-            }
-
-            if (
-                !forms.some(
-                    form =>
-                        normalize(
-                            form.id
-                        ) ===
-                        normalize(
-                            id
-                        )
-                )
-            ) {
-
-                forms.push({
-
-                    id: id,
-
-                    name:
-                        paper.formName ||
-                        displayName(
-                            id
-                        )
-
-                });
-
-            }
-
-        }
-    );
-
-    forms.sort(
-        (
-            a,
-            b
-        ) =>
-            Number(
-                a.id.replace(
-                    /\D/g,
-                    ""
-                )
-            ) -
-            Number(
-                b.id.replace(
-                    /\D/g,
-                    ""
-                )
-            )
-    );
-
-    return forms;
-
-}
-
-
-/* =========================================================
-   RENDER SPECIAL FORMS
-========================================================= */
-
-function renderSpecialForms() {
+function renderSpecialMenu() {
 
     updateBreadcrumb();
 
     backButton.style.display =
         "inline-flex";
 
-    const forms =
-        getSpecialForms();
+    const specials =
+        getSpecialExaminations();
 
     let html = `
 
@@ -3792,27 +4329,23 @@ function renderSpecialForms() {
             </span>
 
             <h2>
-                Chagua Form
+                Chagua Special Examination
             </h2>
 
             <p>
-                Chagua kidato cha
-                Special Examination
-                unachotafuta.
+                Chagua examination organisation
+                unayotaka.
             </p>
 
         </div>
 
         <div class="special-info">
 
-            ⭐ Special Examinations
-            zina mfumo wake tofauti na
-            Normal Past Papers.
-
-            <br><br>
-
-            Form → Subject → Year →
-            Pre-NECTA / Series → Papers.
+            ⭐ Special examinations
+            hazilazimishi kuchagua Form,
+            Subject au Region.
+            Mfumo unafuata structure
+            ya database moja kwa moja.
 
         </div>
 
@@ -3820,8 +4353,13 @@ function renderSpecialForms() {
 
     `;
 
-    forms.forEach(
-        form => {
+    specials.forEach(
+        special => {
+
+            const count =
+                getSpecialPapers(
+                    special.id
+                ).length;
 
             html += `
 
@@ -3833,17 +4371,19 @@ function renderSpecialForms() {
                     <div>
 
                         <div class="card-icon">
-                            📘
+                            ⭐
                         </div>
 
                         <h3>
                             ${escapeHTML(
-                                form.name
+                                special.name
                             )}
                         </h3>
 
                         <p>
-                            Special Examinations
+                            ${count}
+                            examination item(s)
+                            available
                         </p>
 
                     </div>
@@ -3851,17 +4391,14 @@ function renderSpecialForms() {
                     <button
                         class="open-btn"
                         onclick="
-                            openSpecialForm(
+                            openSpecial(
                                 '${escapeHTML(
-                                    form.id
+                                    special.id
                                 )}'
                             )
                         ">
 
                         FUNGUA
-                        ${escapeHTML(
-                            form.name
-                        ).toUpperCase()}
 
                     </button>
 
@@ -3871,17 +4408,6 @@ function renderSpecialForms() {
 
         }
     );
-
-    if (
-        forms.length === 0
-    ) {
-
-        html += emptyCard(
-            "Hakuna Special Form",
-            "Hakuna Special Examination yenye form kwenye database."
-        );
-
-    }
 
     html += `
         </div>
@@ -3894,795 +4420,60 @@ function renderSpecialForms() {
 
 
 /* =========================================================
-   OPEN SPECIAL FORM
+   GET SPECIAL PAPERS
 ========================================================= */
 
-function openSpecialForm(
-    formId
+function getSpecialPapers(
+    specialExam
 ) {
 
-    currentState.form =
-        formId;
-
-    currentState.subject =
-        null;
-
-    currentState.year =
-        null;
-
-    currentState.specialExamType =
-        null;
-
-    currentState.series =
-        null;
-
-    currentState.level =
-        "specialSubjects";
-
-    pushNavigationState();
-
-    renderSpecialSubjects();
-
-}
-
-
-/* =========================================================
-   GET SPECIAL SUBJECTS
-========================================================= */
-
-function getSpecialSubjects() {
-
-    const papers =
-        getAllSpecialPapers()
-            .filter(
-                paper =>
-                    normalize(
-                        paper.form
-                    ) ===
-                    normalize(
-                        currentState.form
-                    )
-            );
-
-    const subjects = [];
-
-    papers.forEach(
+    return getPapers().filter(
         paper => {
 
-            const id =
-                String(
-                    paper.subject ||
-                    ""
-                ).trim();
+            return (
 
-            if (
-                !id
-            ) {
+                normalize(
+                    paper.category
+                ) ===
+                "special"
 
-                return;
+                &&
 
-            }
-
-            if (
-                !subjects.some(
-                    subject =>
-                        normalize(
-                            subject.id
-                        ) ===
-                        normalize(
-                            id
-                        )
+                normalize(
+                    paper.specialExam
+                ) ===
+                normalize(
+                    specialExam
                 )
-            ) {
 
-                const configured =
-                    getSubjects().find(
-                        subject =>
-                            normalize(
-                                subject.id
-                            ) ===
-                            normalize(
-                                id
-                            )
-                    );
-
-                subjects.push({
-
-                    id: id,
-
-                    name:
-                        paper.subjectName ||
-                        (
-                            configured
-                                ? configured.name
-                                : displayName(
-                                    id
-                                )
-                        )
-
-                });
-
-            }
+            );
 
         }
     );
-
-    return subjects;
 
 }
 
 
 /* =========================================================
-   RENDER SPECIAL SUBJECTS
+   OPEN SPECIAL
 ========================================================= */
 
-function renderSpecialSubjects() {
-
-    updateBreadcrumb();
-
-    backButton.style.display =
-        "inline-flex";
-
-    const subjects =
-        getSpecialSubjects();
-
-    let html = `
-
-        <div class="step-header">
-
-            <span class="step-number">
-                SPECIAL STEP 2
-            </span>
-
-            <h2>
-                ${escapeHTML(
-                    displayName(
-                        currentState.form
-                    )
-                )}
-            </h2>
-
-            <p>
-                Chagua somo.
-            </p>
-
-        </div>
-
-        <div class="selection-grid">
-
-    `;
-
-    subjects.forEach(
-        subject => {
-
-            let className = "";
-
-            if (
-                normalize(
-                    subject.id
-                ) === "physics"
-            ) {
-
-                className =
-                    "physics-card";
-
-            }
-
-            if (
-                normalize(
-                    subject.id
-                ) === "chemistry"
-            ) {
-
-                className =
-                    "chemistry-card";
-
-            }
-
-            if (
-                normalize(
-                    subject.id
-                ) === "biology"
-            ) {
-
-                className =
-                    "biology-card";
-
-            }
-
-            html += `
-
-                <div class="
-                    selection-card
-                    ${className}
-                ">
-
-                    <div>
-
-                        <h3>
-                            ${escapeHTML(
-                                subject.name
-                            )}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(
-                                displayName(
-                                    currentState.form
-                                )
-                            )}
-                            Special Examination
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="open-btn"
-                        onclick="
-                            openSpecialSubject(
-                                '${escapeHTML(
-                                    subject.id
-                                )}'
-                            )
-                        ">
-
-                        FUNGUA
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-    if (
-        subjects.length === 0
-    ) {
-
-        html += emptyCard(
-            "Hakuna Subject",
-            "Hakuna subject iliyowekwa kwa Special Examination hii."
-        );
-
-    }
-
-    html += `
-        </div>
-    `;
-
-    stepContainer.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   OPEN SPECIAL SUBJECT
-========================================================= */
-
-function openSpecialSubject(
-    subjectId
+function openSpecial(
+    specialExam
 ) {
 
-    currentState.subject =
-        subjectId;
-
-    currentState.year =
-        null;
-
-    currentState.specialExamType =
-        null;
+    currentState.specialExam =
+        specialExam;
 
     currentState.series =
         null;
 
     currentState.level =
-        "specialYears";
+        "series";
 
     pushNavigationState();
 
-    renderSpecialYears();
-
-}
-
-
-/* =========================================================
-   GET SPECIAL YEARS
-========================================================= */
-
-function getSpecialYears() {
-
-    const papers =
-        getAllSpecialPapers()
-            .filter(
-                paper => {
-
-                    return (
-
-                        normalize(
-                            paper.form
-                        ) ===
-                        normalize(
-                            currentState.form
-                        )
-
-                        &&
-
-                        normalize(
-                            paper.subject
-                        ) ===
-                        normalize(
-                            currentState.subject
-                        )
-
-                    );
-
-                }
-            );
-
-    const years = [];
-
-    papers.forEach(
-        paper => {
-
-            const year =
-                String(
-                    paper.year ||
-                    ""
-                ).trim();
-
-            if (
-                year &&
-                !years.includes(
-                    year
-                )
-            ) {
-
-                years.push(
-                    year
-                );
-
-            }
-
-        }
-    );
-
-    return years.sort(
-        (
-            a,
-            b
-        ) =>
-            Number(b) -
-            Number(a)
-    );
-
-}
-
-
-/* =========================================================
-   RENDER SPECIAL YEARS
-========================================================= */
-
-function renderSpecialYears() {
-
-    updateBreadcrumb();
-
-    backButton.style.display =
-        "inline-flex";
-
-    const years =
-        getSpecialYears();
-
-    let html = `
-
-        <div class="step-header">
-
-            <span class="step-number">
-                SPECIAL STEP 3
-            </span>
-
-            <h2>
-                Chagua Mwaka
-            </h2>
-
-            <p>
-                Chagua mwaka wa
-                Special Examination.
-            </p>
-
-        </div>
-
-        <div class="selection-grid">
-
-    `;
-
-    years.forEach(
-        year => {
-
-            html += `
-
-                <div class="
-                    selection-card
-                    year-card
-                ">
-
-                    <div>
-
-                        <div class="card-icon">
-                            📅
-                        </div>
-
-                        <h3>
-                            ${escapeHTML(
-                                year
-                            )}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(
-                                displayName(
-                                    currentState.subject
-                                )
-                            )}
-                            — ${escapeHTML(
-                                year
-                            )}
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="open-btn"
-                        onclick="
-                            openSpecialYear(
-                                '${escapeHTML(
-                                    year
-                                )}'
-                            )
-                        ">
-
-                        FUNGUA
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-    if (
-        years.length === 0
-    ) {
-
-        html += emptyCard(
-            "Hakuna Mwaka",
-            "Hakuna mwaka uliowekwa kwa uchaguzi huu."
-        );
-
-    }
-
-    html += `
-        </div>
-    `;
-
-    stepContainer.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   OPEN SPECIAL YEAR
-========================================================= */
-
-function openSpecialYear(
-    year
-) {
-
-    currentState.year =
-        String(year);
-
-    currentState.specialExamType =
-        null;
-
-    currentState.series =
-        null;
-
-    currentState.level =
-        "specialBranches";
-
-    pushNavigationState();
-
-    renderSpecialBranches();
-
-}
-
-
-/* =========================================================
-   GET SPECIAL BRANCHES
-========================================================= */
-
-function getSpecialBranches() {
-
-    const papers =
-        getAllSpecialPapers()
-            .filter(
-                paper => {
-
-                    return (
-
-                        normalize(
-                            paper.form
-                        ) ===
-                        normalize(
-                            currentState.form
-                        )
-
-                        &&
-
-                        normalize(
-                            paper.subject
-                        ) ===
-                        normalize(
-                            currentState.subject
-                        )
-
-                        &&
-
-                        String(
-                            paper.year
-                        ) ===
-                        String(
-                            currentState.year
-                        )
-
-                    );
-
-                }
-            );
-
-    const branches = [];
-
-    const hasPreNecta =
-        papers.some(
-            paper =>
-                normalize(
-                    paper.examType
-                ) ===
-                "pre_necta"
-                ||
-                normalize(
-                    paper.type
-                ) ===
-                "pre_necta"
-        );
-
-    const hasSeries =
-        papers.some(
-            paper =>
-                normalize(
-                    paper.examType
-                ) ===
-                "series"
-                ||
-                normalize(
-                    paper.type
-                ) ===
-                "series"
-        );
-
-
-    if (
-        hasPreNecta
-    ) {
-
-        branches.push({
-            id: "pre_necta",
-            name: "Pre-NECTA",
-            icon: "📘",
-            className: "pre-necta-card",
-            description:
-                "Pre-NECTA papers. Branch hii inajitegemea na haina Series."
-        });
-
-    }
-
-
-    if (
-        hasSeries
-    ) {
-
-        branches.push({
-            id: "series",
-            name: "Series",
-            icon: "📚",
-            className: "series-card",
-            description:
-                "Series za Special Examination. Branch hii inajitegemea na Pre-NECTA."
-        });
-
-    }
-
-    return branches;
-
-}
-
-
-/* =========================================================
-   RENDER SPECIAL BRANCHES
-========================================================= */
-
-function renderSpecialBranches() {
-
-    updateBreadcrumb();
-
-    backButton.style.display =
-        "inline-flex";
-
-    const branches =
-        getSpecialBranches();
-
-    let html = `
-
-        <div class="step-header">
-
-            <span class="step-number">
-                SPECIAL STEP 4
-            </span>
-
-            <h2>
-                Chagua Aina
-            </h2>
-
-            <p>
-                Chagua Pre-NECTA au Series.
-                Hizi ni branches mbili
-                zinazojitegemea.
-            </p>
-
-        </div>
-
-        <div class="special-info">
-
-            <strong>
-                Muhimu:
-            </strong>
-
-            Pre-NECTA haina Series ndani yake,
-            na Series haina Pre-NECTA ndani yake.
-
-        </div>
-
-        <div class="selection-grid">
-
-    `;
-
-    branches.forEach(
-        branch => {
-
-            html += `
-
-                <div class="
-                    selection-card
-                    ${escapeHTML(
-                        branch.className
-                    )}
-                ">
-
-                    <div>
-
-                        <div class="card-icon">
-                            ${branch.icon}
-                        </div>
-
-                        <h3>
-                            ${escapeHTML(
-                                branch.name
-                            )}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(
-                                branch.description
-                            )}
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="open-btn"
-                        onclick="
-                            openSpecialBranch(
-                                '${escapeHTML(
-                                    branch.id
-                                )}'
-                            )
-                        ">
-
-                        FUNGUA
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-    if (
-        branches.length === 0
-    ) {
-
-        html += emptyCard(
-            "Hakuna Special Type",
-            "Hakuna Pre-NECTA au Series iliyowekwa kwa uchaguzi huu."
-        );
-
-    }
-
-    html += `
-        </div>
-    `;
-
-    stepContainer.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   OPEN SPECIAL BRANCH
-========================================================= */
-
-function openSpecialBranch(
-    branch
-) {
-
-    currentState.specialExamType =
-        normalize(
-            branch
-        );
-
-    currentState.series =
-        null;
-
-    if (
-        currentState.specialExamType ===
-        "pre_necta"
-    ) {
-
-        currentState.level =
-            "specialPapers";
-
-        pushNavigationState();
-
-        renderSpecialPapers();
-
-        return;
-
-    }
-
-
-    if (
-        currentState.specialExamType ===
-        "series"
-    ) {
-
-        currentState.level =
-            "specialSeries";
-
-        pushNavigationState();
-
-        renderSpecialSeries();
-
-        return;
-
-    }
+    renderSeries();
 
 }
 
@@ -4694,56 +4485,9 @@ function openSpecialBranch(
 function getSpecialSeries() {
 
     const papers =
-        getAllSpecialPapers()
-            .filter(
-                paper => {
-
-                    const isSeries =
-                        normalize(
-                            paper.examType
-                        ) ===
-                        "series"
-                        ||
-                        normalize(
-                            paper.type
-                        ) ===
-                        "series";
-
-                    return (
-
-                        isSeries
-
-                        &&
-
-                        normalize(
-                            paper.form
-                        ) ===
-                        normalize(
-                            currentState.form
-                        )
-
-                        &&
-
-                        normalize(
-                            paper.subject
-                        ) ===
-                        normalize(
-                            currentState.subject
-                        )
-
-                        &&
-
-                        String(
-                            paper.year
-                        ) ===
-                        String(
-                            currentState.year
-                        )
-
-                    );
-
-                }
-            );
+        getSpecialPapers(
+            currentState.specialExam
+        );
 
     const series = [];
 
@@ -4793,25 +4537,6 @@ function getSpecialSeries() {
         }
     );
 
-    series.sort(
-        (
-            a,
-            b
-        ) =>
-            Number(
-                a.id.replace(
-                    /\D/g,
-                    ""
-                )
-            ) -
-            Number(
-                b.id.replace(
-                    /\D/g,
-                    ""
-                )
-            )
-    );
-
     return series;
 
 }
@@ -4821,7 +4546,7 @@ function getSpecialSeries() {
    RENDER SERIES
 ========================================================= */
 
-function renderSpecialSeries() {
+function renderSeries() {
 
     updateBreadcrumb();
 
@@ -4836,25 +4561,20 @@ function renderSpecialSeries() {
         <div class="step-header">
 
             <span class="step-number">
-                SPECIAL STEP 5
+                SPECIAL STEP 2
             </span>
 
             <h2>
-                Chagua Series
+                ${escapeHTML(
+                    displayName(
+                        currentState.specialExam
+                    )
+                )}
             </h2>
 
             <p>
-                Chagua Series ya
-                Special Examination.
+                Chagua series ya examination.
             </p>
-
-        </div>
-
-        <div class="special-info">
-
-            📚 Series ni branch yake
-            yenyewe. Pre-NECTA haipo
-            ndani ya Series.
 
         </div>
 
@@ -4887,18 +4607,8 @@ function renderSpecialSeries() {
                         <p>
                             ${escapeHTML(
                                 displayName(
-                                    currentState.form
+                                    currentState.specialExam
                                 )
-                            )}
-                            •
-                            ${escapeHTML(
-                                displayName(
-                                    currentState.subject
-                                )
-                            )}
-                            •
-                            ${escapeHTML(
-                                currentState.year
                             )}
                         </p>
 
@@ -4907,7 +4617,7 @@ function renderSpecialSeries() {
                     <button
                         class="open-btn"
                         onclick="
-                            openSpecialSeries(
+                            openSeries(
                                 '${escapeHTML(
                                     item.id
                                 )}'
@@ -4930,8 +4640,8 @@ function renderSpecialSeries() {
     ) {
 
         html += emptyCard(
-            "Hakuna Series",
-            "Hakuna Series iliyowekwa kwa uchaguzi huu."
+            "Hakuna series",
+            "Hakuna series iliyowekwa kwenye database."
         );
 
     }
@@ -4950,7 +4660,7 @@ function renderSpecialSeries() {
    OPEN SERIES
 ========================================================= */
 
-function openSpecialSeries(
+function openSeries(
     seriesId
 ) {
 
@@ -4968,146 +4678,43 @@ function openSpecialSeries(
 
 
 /* =========================================================
-   GET SPECIAL PAPERS
+   GET SPECIAL MATCHING PAPERS
 ========================================================= */
 
 function getMatchingSpecialPapers() {
 
-    return getAllSpecialPapers()
-        .filter(
-            paper => {
+    return getPapers().filter(
+        paper => {
 
-                if (
-                    normalize(
-                        paper.form
-                    ) !==
-                    normalize(
-                        currentState.form
-                    )
-                ) {
+            return (
 
-                    return false;
+                normalize(
+                    paper.category
+                ) ===
+                "special"
 
-                }
+                &&
 
-                if (
-                    normalize(
-                        paper.subject
-                    ) !==
-                    normalize(
-                        currentState.subject
-                    )
-                ) {
+                normalize(
+                    paper.specialExam
+                ) ===
+                normalize(
+                    currentState.specialExam
+                )
 
-                    return false;
+                &&
 
-                }
+                normalize(
+                    paper.series
+                ) ===
+                normalize(
+                    currentState.series
+                )
 
-                if (
-                    String(
-                        paper.year
-                    ) !==
-                    String(
-                        currentState.year
-                    )
-                ) {
+            );
 
-                    return false;
-
-                }
-
-
-                /*
-                    PRE-NECTA BRANCH
-                    ONLY PRE-NECTA RECORDS
-                */
-
-                if (
-                    currentState.specialExamType ===
-                    "pre_necta"
-                ) {
-
-                    const examType =
-                        normalize(
-                            paper.examType ||
-                            paper.type
-                        );
-
-                    if (
-                        examType !==
-                        "pre_necta"
-                    ) {
-
-                        return false;
-
-                    }
-
-                    /*
-                       IMPORTANT:
-                       Series records cannot enter
-                       Pre-NECTA branch.
-                    */
-
-                    if (
-                        paper.series
-                    ) {
-
-                        return false;
-
-                    }
-
-                    return true;
-
-                }
-
-
-                /*
-                    SERIES BRANCH
-                    ONLY SERIES RECORDS
-                */
-
-                if (
-                    currentState.specialExamType ===
-                    "series"
-                ) {
-
-                    const examType =
-                        normalize(
-                            paper.examType ||
-                            paper.type
-                        );
-
-                    if (
-                        examType !==
-                        "series"
-                    ) {
-
-                        return false;
-
-                    }
-
-                    if (
-                        normalize(
-                            paper.series
-                        ) !==
-                        normalize(
-                            currentState.series
-                        )
-                    ) {
-
-                        return false;
-
-                    }
-
-                    return true;
-
-                }
-
-
-                return false;
-
-            }
-        );
+        }
+    );
 
 }
 
@@ -5126,59 +4733,21 @@ function renderSpecialPapers() {
     const papers =
         getMatchingSpecialPapers();
 
-    let title =
-        "Available Papers";
-
-    let description =
-        "Download examination PDF.";
-
-    if (
-        currentState.specialExamType ===
-        "pre_necta"
-    ) {
-
-        title =
-            "Pre-NECTA Papers";
-
-        description =
-            "Pre-NECTA papers za uchaguzi wako.";
-
-    }
-
-    if (
-        currentState.specialExamType ===
-        "series"
-    ) {
-
-        title =
-            displayName(
-                currentState.series
-            ) +
-            " Papers";
-
-        description =
-            "Series papers za uchaguzi wako.";
-
-    }
-
     let html = `
 
         <div class="step-header">
 
             <span class="step-number">
-                SPECIAL PAPERS
+                SPECIAL STEP 3
             </span>
 
             <h2>
-                ${escapeHTML(
-                    title
-                )}
+                Available Papers
             </h2>
 
             <p>
-                ${escapeHTML(
-                    description
-                )}
+                Download examination PDF
+                na Marking Guide kama ipo.
             </p>
 
         </div>
@@ -5193,7 +4762,7 @@ function renderSpecialPapers() {
 
         html += emptyCard(
             "Hakuna paper",
-            "Hakuna PDF iliyowekwa kwa uchaguzi huu bado."
+            "Hakuna paper iliyowekwa kwa series hii."
         );
 
     }
@@ -5243,6 +4812,10 @@ function pushNavigationState() {
 }
 
 
+/* =========================================================
+   POPSTATE
+========================================================= */
+
 window.addEventListener(
     "popstate",
     function(event) {
@@ -5259,9 +4832,7 @@ window.addEventListener(
 
             renderCurrentLevel();
 
-        }
-
-        else {
+        } else {
 
             renderHome();
 
@@ -5287,7 +4858,6 @@ function renderCurrentLevel() {
 
             break;
 
-        /* NORMAL */
 
         case "subjects":
 
@@ -5295,11 +4865,13 @@ function renderCurrentLevel() {
 
             break;
 
+
         case "types":
 
             renderTypes();
 
             break;
+
 
         case "location":
 
@@ -5307,11 +4879,13 @@ function renderCurrentLevel() {
 
             break;
 
+
         case "schools":
 
             renderSchools();
 
             break;
+
 
         case "regions":
 
@@ -5319,11 +4893,13 @@ function renderCurrentLevel() {
 
             break;
 
+
         case "years":
 
             renderYears();
 
             break;
+
 
         case "papers":
 
@@ -5332,43 +4908,26 @@ function renderCurrentLevel() {
             break;
 
 
-        /* SPECIAL */
+        case "special":
 
-        case "specialForms":
-
-            renderSpecialForms();
+            renderSpecialMenu();
 
             break;
 
-        case "specialSubjects":
 
-            renderSpecialSubjects();
+        case "series":
 
-            break;
-
-        case "specialYears":
-
-            renderSpecialYears();
+            renderSeries();
 
             break;
 
-        case "specialBranches":
-
-            renderSpecialBranches();
-
-            break;
-
-        case "specialSeries":
-
-            renderSpecialSeries();
-
-            break;
 
         case "specialPapers":
 
             renderSpecialPapers();
 
             break;
+
 
         default:
 
@@ -5431,6 +4990,10 @@ function toggleMenu() {
 
 }
 
+
+/* =========================================================
+   SIDEBAR DROPDOWN
+========================================================= */
 
 function toggleDropdown(
     button
@@ -5505,9 +5068,6 @@ function initialize() {
                 null,
 
             series:
-                null,
-
-            specialExamType:
                 null
 
         },
@@ -5533,4 +5093,4 @@ initialize();
 
 </body>
 
-      </html>
+              </html>
