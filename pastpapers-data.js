@@ -1379,62 +1379,7 @@ const pastPapers = [
     file: "papers/form6/chemistry/mock/dar_es_salaam/2024/Form_6_Chemistry3B_Mock_2024_Dar_es_salaam_Gepam_hub.pdf",
     "markingScheme":""
 },
-
-/* =========================================================
-   SPECIAL EXAMINATIONS
-   GEPAM SCIENCE HUB
-
-   STRUCTURE:
-   SPECIAL EXAMINATION
-       ↓
-   FORM
-       ↓
-   SUBJECT
-       ↓
-   YEAR
-       ↓
-   PRE-NECTA OR SERIES
-       ↓
-   PAPERS
-
-   IMPORTANT:
-   PRE-NECTA ≠ SERIES
-
-   PRE-NECTA:
-       Form → Subject → Year → Pre-NECTA → Papers
-
-   SERIES:
-       Form → Subject → Year → Series → Papers
-========================================================= */
-
-const specialExaminations = [
-
-    {
-        id: "isese",
-        name: "ISESE"
-    },
-
-    {
-        id: "jepgos",
-        name: "JEPGOS"
-    },
-
-    {
-        id: "tahossa",
-        name: "TAHOSSA"
-    },
-
-    {
-        id: "cssc",
-        name: "CSSC"
-    },
-
-    {
-        id: "special_school",
-        name: "SPECIAL SCHOOL"
-    }
-
-];
+     
 {
     title: "Physics 1 (Theory)",
     category: "special",
