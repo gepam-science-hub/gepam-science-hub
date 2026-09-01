@@ -1384,10 +1384,10 @@ const pastPapers = [
 {
     "category":"special",
     "specialExam":"isese",
-    "title":"ISESE - Series One",
-    "type":"series",
-    "series":"series1",
-    "seriesName":"Series One",
+    "title":"Pre NECTA",
+    "type":"physics",
+    "series":"2026",
+    "seriesName":"pre_necta",
     "file":"papers/special/isese/series_one.pdf",
     "markingScheme":""
 },
