@@ -589,37 +589,14 @@ const pastPapers = [
     "file":"papers/form3/physics/dsm_2025.pdf",
     "markingScheme":""
 },
-
-{
-    "form":"form3",
-    "subject":"physics",
-    "title":"Physics Annual Exam",
-    "type":"annual",
-    "region":"dar_es_salaam",
-    "year":2024,
-    "file":"papers/form3/physics/dsm_2024.pdf",
-    "markingScheme":""
-},
-
-{
-    "form":"form3",
-    "subject":"physics",
-    "title":"Physics Annual Exam",
-    "type":"annual",
-    "region":"dar_es_salaam",
-    "year":2023,
-    "file":"papers/form3/physics/dsm_2023.pdf",
-    "markingScheme":""
-},
-
 {
     "form":"form3",
     "subject":"physics",
     "title":"Physics Midterm Exam",
     "type":"midterm",
-    "region":"dodoma",
+    "region":"bumbuli dc",
     "year":2026,
-    "file":"papers/form3/physics/dom_2026.pdf",
+    "file":"papers/form3/physics/midterm/2026/F3_PHYSICS_-_Exam_n_Answers_-_GEPAM_HUB.pdf",
     "markingScheme":""
 },
 
@@ -628,9 +605,9 @@ const pastPapers = [
     "subject":"physics",
     "title":"Physics Terminal Exam",
     "type":"terminal",
-    "region":"arusha",
-    "year":2025,
-    "file":"papers/form3/physics/aru_2025.pdf",
+    "region":"kilwa dc",
+    "year":2026,
+    "file":"papers/form3/physics/terminal/2026/F3_PHYSICS_Kilwa_DC_Exam_n_Answers_-_GEPAM_HUB.pdf",
     "markingScheme":""
 },
 
@@ -641,10 +618,9 @@ const pastPapers = [
     "type":"joint",
     "region":"mbeya",
     "year":2026,
-    "file":"papers/form3/physics/mby_2026.pdf",
+    "file":"papers/form3/physics/joint/2026/F3_PHYSICS1_-_Exam_n_Answers_-_GEPAM_HUB.pdf",
     "markingScheme":""
 },
-
 
 // ============================================================
 // FORM 3 - CHEMISTRY
@@ -671,37 +647,14 @@ const pastPapers = [
     "file":"papers/form3/chemistry/dsm_2025.pdf",
     "markingScheme":""
 },
-
-{
-    "form":"form3",
-    "subject":"chemistry",
-    "title":"Chemistry Annual Exam",
-    "type":"annual",
-    "region":"dar_es_salaam",
-    "year":2024,
-    "file":"papers/form3/chemistry/dsm_2024.pdf",
-    "markingScheme":""
-},
-
-{
-    "form":"form3",
-    "subject":"chemistry",
-    "title":"Chemistry Annual Exam",
-    "type":"annual",
-    "region":"dar_es_salaam",
-    "year":2023,
-    "file":"papers/form3/chemistry/dsm_2023.pdf",
-    "markingScheme":""
-},
-
 {
     "form":"form3",
     "subject":"chemistry",
     "title":"Chemistry Midterm Exam",
     "type":"midterm",
-    "region":"dodoma",
+    "region":"bumbuli dc",
     "year":2026,
-    "file":"papers/form3/chemistry/dom_2026.pdf",
+    "file":"papers/form3/chemistry/midterm/2026/F3_CHEMISTRY_-_Exam_n_Answers_-_GEPAM_HUB.pdf",
     "markingScheme":""
 },
 
@@ -710,9 +663,9 @@ const pastPapers = [
     "subject":"chemistry",
     "title":"Chemistry Terminal Exam",
     "type":"terminal",
-    "region":"arusha",
-    "year":2025,
-    "file":"papers/form3/chemistry/aru_2025.pdf",
+    "region":"kilwa dc",
+    "year":2026,
+    "file":"papers/form3/chemistry/terminal/2026/F3_CHEMISTRY_Kilwa_DC_Exam_n_Answers_-_GEPAM_HUB.pdf",
     "markingScheme":""
 },
 
@@ -723,7 +676,7 @@ const pastPapers = [
     "type":"joint",
     "region":"mbeya",
     "year":2026,
-    "file":"papers/form3/chemistry/mby_2026.pdf",
+    "file":"papers/form3/chemistry/joint/2026/F3_CHEMISTRY1_-_Exam_n_Answers_-_GEPAM_HUB.pdf",
     "markingScheme":""
 },
 
