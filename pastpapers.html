@@ -23,7 +23,7 @@
 <link rel="stylesheet"
       href="style.css">
 
-<script src="pastpapers-data.js"></script>
+<script src="pastpapers-data.js?v=20260902"></script>
 
 <style>
 
@@ -1501,8 +1501,6 @@ footer strong {
     </p>
 
 </footer>
-      
-<script src="pastpapers-data.js"></script>
 
 <script>
 
@@ -1959,9 +1957,8 @@ function escapeHTML(value) {
 function checkDataFile() {
 
     if (
-        !Array.isArray(
-            window.pastPapers
-        )
+        !Array.isArray(window.pastPapers) &&
+        !Array.isArray(window.specialPaperRecords)
     ) {
 
         dataStatus.className =
@@ -2009,164 +2006,58 @@ function checkDataFile() {
 function updateBreadcrumb() {
 
     const items = [
-
         "Past Papers"
-
     ];
 
-    if (
-        currentState.form
-    ) {
-
-        items.push(
-            displayName(
-                currentState.form
-            )
-        );
-
+    if (currentState.specialExam) {
+        items.push(displayName(currentState.specialExam));
     }
 
-    if (
-        currentState.subject
-    ) {
-
-        items.push(
-            displayName(
-                currentState.subject
-            )
-        );
-
+    if (currentState.form) {
+        items.push(displayName(currentState.form));
     }
 
-    if (
-        currentState.type
-    ) {
-
-        items.push(
-            displayName(
-                currentState.type
-            )
-        );
-
+    if (currentState.subject) {
+        items.push(displayName(currentState.subject));
     }
 
-    if (
-        currentState.locationMode ===
-        "region" &&
-        currentState.region
-    ) {
-
-        items.push(
-            displayName(
-                currentState.region
-            )
-        );
-
+    if (currentState.year) {
+        items.push(String(currentState.year));
     }
 
-    if (
-        currentState.locationMode ===
-        "school" &&
-        currentState.school
-    ) {
+    if (currentState.type) {
+        items.push(displayName(currentState.type));
+    } else if (!currentState.specialExam) {
+        if (currentState.locationMode === "region" && currentState.region) {
+            items.push(displayName(currentState.region));
+        }
 
-        items.push(
-            displayName(
-                currentState.school
-            )
-        );
-
+        if (currentState.locationMode === "school" && currentState.school) {
+            items.push(displayName(currentState.school));
+        }
     }
 
-    if (
-        currentState.year
-    ) {
-
-        items.push(
-            String(
-                currentState.year
-            )
-        );
-
+    if (currentState.series) {
+        items.push(displayName(currentState.series));
     }
 
-    if (
-        currentState.specialExam
-    ) {
+    breadcrumb.innerHTML = items.map((item, index) => {
+        if (index === 0) {
+            return `
+                <span class="breadcrumb-item">
+                    ${escapeHTML(item)}
+                </span>
+            `;
+        }
 
-        items.push(
-            displayName(
-                currentState.specialExam
-            )
-        );
-
-    }
-
-    if (
-        currentState.series
-    ) {
-
-        items.push(
-            displayName(
-                currentState.series
-            )
-        );
-
-    }
-
-    breadcrumb.innerHTML =
-        items
-            .map(
-                (
-                    item,
-                    index
-                ) => {
-
-                    if (
-                        index === 0
-                    ) {
-
-                        return `
-
-                            <span
-                                class="breadcrumb-item">
-
-                                ${escapeHTML(
-                                    item
-                                )}
-
-                            </span>
-
-                        `;
-
-                    }
-
-                    return `
-
-                        <span
-                            class="breadcrumb-separator">
-
-                            ›
-
-                        </span>
-
-                        <span
-                            class="breadcrumb-item">
-
-                            ${escapeHTML(
-                                item
-                            )}
-
-                        </span>
-
-                    `;
-
-                }
-            )
-            .join("");
-
+        return `
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item">
+                ${escapeHTML(item)}
+            </span>
+        `;
+    }).join("");
 }
-
 
 /* =========================================================
    HOME
@@ -4278,9 +4169,17 @@ function emptyCard(
 
 function getSpecialRecords() {
 
-    return Array.isArray(window.specialPaperRecords)
-        ? window.specialPaperRecords
-        : [];
+    if (Array.isArray(window.specialPaperRecords)) {
+        return window.specialPaperRecords;
+    }
+
+    if (Array.isArray(window.pastPapers)) {
+        return window.pastPapers.filter(paper =>
+            normalize(paper.category) === "special"
+        );
+    }
+
+    return [];
 
 }
 
@@ -4714,42 +4613,20 @@ function renderSpecialTypes() {
         <div class="selection-grid">
     `;
 
-    /*
-     * PRE-NECTA BRANCH
-     *
-     * Branch hii inaonyeshwa hata kama bado haina papers.
-     * Hii inatuandalia mfumo wa kuingiza Pre-NECTA papers
-     * baadaye bila kubadilisha navigation structure.
-     */
     html += `
-        <div class="selection-card">
+        <div class="selection-card type-card">
             <div>
                 <div class="card-icon">📝</div>
                 <h3>Pre-NECTA</h3>
-                <p>
-                    ${preNecta.length
-                        ? `${preNecta.length} paper(s) available`
-                        : "Papers zitaongezwa hivi karibuni"}
-                </p>
+                <p>${preNecta.length ? `${preNecta.length} paper(s) available` : "Papers zitaongezwa hivi karibuni"}</p>
             </div>
-
-            <button
-                class="open-btn"
-                onclick="openSpecialBranch('pre_necta')">
+            <button class="open-btn" onclick="openSpecialBranch('pre_necta')">
                 FUNGUA PRE-NECTA
             </button>
         </div>
     `;
 
-
-    /*
-     * SERIES BRANCH
-     *
-     * Series inaendelea kuonekana kulingana na
-     * Series records zilizopo.
-     */
     if (series.length) {
-
         html += `
             <div class="selection-card series-card">
                 <div>
@@ -4757,24 +4634,31 @@ function renderSpecialTypes() {
                     <h3>Series</h3>
                     <p>${series.length} paper(s) available</p>
                 </div>
-
-                <button
-                    class="open-btn"
-                    onclick="openSpecialBranch('series')">
+                <button class="open-btn" onclick="openSpecialBranch('series')">
                     FUNGUA SERIES
                 </button>
             </div>
         `;
-
+    } else {
+        html += `
+            <div class="selection-card series-card">
+                <div>
+                    <div class="card-icon">📚</div>
+                    <h3>Series</h3>
+                    <p>Hakuna Series iliyowekwa kwa uchaguzi huu.</p>
+                </div>
+                <button class="open-btn" onclick="openSpecialBranch('series')">
+                    FUNGUA SERIES
+                </button>
+            </div>
+        `;
     }
 
-
     html += `</div>`;
-
     stepContainer.innerHTML = html;
 
 }
-      
+
 function openSpecialBranch(branch) {
 
     currentState.type = branch;
@@ -5294,4 +5178,4 @@ initialize();
 
 </body>
 
-              </html>
+      </html>
