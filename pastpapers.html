@@ -4700,51 +4700,55 @@ function renderSpecialTypes() {
     backButton.style.display = "inline-flex";
 
     const preNecta = getSpecialBranchRecords("pre_necta");
-    const series = getSpecialBranchRecords("series");
+const series = getSpecialBranchRecords("series");
 
-    let html = `
-        <div class="step-header">
-            <span class="step-number">SPECIAL STEP 5</span>
-            <h2>${escapeHTML(String(currentState.year))}</h2>
-            <p>Chagua Pre-NECTA au Series.</p>
+let html = `
+    <div class="step-header">
+        <span class="step-number">SPECIAL STEP 5</span>
+        <h2>${escapeHTML(String(currentState.year))}</h2>
+        <p>Chagua Pre-NECTA au Series.</p>
+    </div>
+
+    <div class="selection-grid">
+`;
+
+html += `
+    <div class="selection-card">
+        <div>
+            <div class="card-icon">📝</div>
+            <h3>Pre-NECTA</h3>
+            <p>${preNecta.length ? `${preNecta.length} paper(s) available` : "Papers zitaongezwa hivi karibuni"}</p>
         </div>
+        <button class="open-btn" onclick="openSpecialBranch('pre_necta')">
+            FUNGUA PRE-NECTA
+        </button>
+    </div>
+`;
 
-        <div class="selection-grid">
+if (series.length) {
+    html += `
+        <div class="selection-card series-card">
+            <div>
+                <div class="card-icon">📚</div>
+                <h3>Series</h3>
+                <p>${series.length} paper(s) available</p>
+            </div>
+            <button class="open-btn" onclick="openSpecialBranch('series')">
+                FUNGUA SERIES
+            </button>
+        </div>
     `;
+}
 
-    if (preNecta.length) {
-        html += `
-            <div class="selection-card">
-                <div>
-                    <div class="card-icon">📝</div>
-                    <h3>Pre-NECTA</h3>
-                    <p>${preNecta.length} paper(s) available</p>
-                </div>
-                <button class="open-btn" onclick="openSpecialBranch('pre_necta')">FUNGUA PRE-NECTA</button>
-            </div>
-        `;
-    }
+if (!preNecta.length && !series.length) {
+    html += emptyCard(
+        "Hakuna branch",
+        "Hakuna Pre-NECTA au Series iliyowekwa kwa uchaguzi huu."
+    );
+}
 
-    if (series.length) {
-        html += `
-            <div class="selection-card series-card">
-                <div>
-                    <div class="card-icon">📚</div>
-                    <h3>Series</h3>
-                    <p>${series.length} paper(s) available</p>
-                </div>
-                <button class="open-btn" onclick="openSpecialBranch('series')">FUNGUA SERIES</button>
-            </div>
-        `;
-    }
-
-    if (!preNecta.length && !series.length) {
-        html += emptyCard("Hakuna branch", "Hakuna Pre-NECTA au Series iliyowekwa kwa uchaguzi huu.");
-    }
-
-    html += `</div>`;
-    stepContainer.innerHTML = html;
-
+html += `</div>`;
+stepContainer.innerHTML = html;
 }
 
 
