@@ -4712,20 +4712,42 @@ function renderSpecialTypes() {
         <div class="selection-grid">
     `;
 
-    if (preNecta.length) {
-        html += `
-            <div class="selection-card">
-                <div>
-                    <div class="card-icon">📝</div>
-                    <h3>Pre-NECTA</h3>
-                    <p>${preNecta.length} paper(s) available</p>
-                </div>
-                <button class="open-btn" onclick="openSpecialBranch('pre_necta')">FUNGUA PRE-NECTA</button>
+    /*
+     * PRE-NECTA BRANCH
+     *
+     * Branch hii inaonyeshwa hata kama bado haina papers.
+     * Hii inatuandalia mfumo wa kuingiza Pre-NECTA papers
+     * baadaye bila kubadilisha navigation structure.
+     */
+    html += `
+        <div class="selection-card">
+            <div>
+                <div class="card-icon">📝</div>
+                <h3>Pre-NECTA</h3>
+                <p>
+                    ${preNecta.length
+                        ? `${preNecta.length} paper(s) available`
+                        : "Papers zitaongezwa hivi karibuni"}
+                </p>
             </div>
-        `;
-    }
 
+            <button
+                class="open-btn"
+                onclick="openSpecialBranch('pre_necta')">
+                FUNGUA PRE-NECTA
+            </button>
+        </div>
+    `;
+
+
+    /*
+     * SERIES BRANCH
+     *
+     * Series inaendelea kuonekana kulingana na
+     * Series records zilizopo.
+     */
     if (series.length) {
+
         html += `
             <div class="selection-card series-card">
                 <div>
@@ -4733,21 +4755,24 @@ function renderSpecialTypes() {
                     <h3>Series</h3>
                     <p>${series.length} paper(s) available</p>
                 </div>
-                <button class="open-btn" onclick="openSpecialBranch('series')">FUNGUA SERIES</button>
+
+                <button
+                    class="open-btn"
+                    onclick="openSpecialBranch('series')">
+                    FUNGUA SERIES
+                </button>
             </div>
         `;
+
     }
 
-    if (!preNecta.length && !series.length) {
-        html += emptyCard("Hakuna branch", "Hakuna Pre-NECTA au Series iliyowekwa kwa uchaguzi huu.");
-    }
 
     html += `</div>`;
+
     stepContainer.innerHTML = html;
 
 }
-
-
+      
 function openSpecialBranch(branch) {
 
     currentState.type = branch;
