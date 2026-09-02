@@ -207,7 +207,7 @@ const pastPapers = [
     "markingScheme":"F1_Physics_MS_2026_Busega_DS.pdf"
 },
 
-    {
+{
     "form":"form1",
     "subject":"physics",
     "title":"Physics Terminal Exam",
@@ -321,7 +321,7 @@ const pastPapers = [
     "file":"papers/form1/chemistry/terminal/arusha/2026/FI_CHEMISTRY_TERMINAL_EXAM_2026_ARUSHA.pdf",
     "markingScheme":""
 },
-    
+
 {
     "form":"form1",
     "subject":"chemistry",
@@ -333,7 +333,7 @@ const pastPapers = [
     "markingScheme":"F1_Chemistry_2026_MS_Busega_DC.pdf"
 },
 
-   {
+{
     "form":"form1",
     "subject":"chemistry",
     "title":"Chemistry Terminal Exam",
@@ -342,7 +342,7 @@ const pastPapers = [
     "year":2026,
     "file":"papers/form1/chemistry/terminal/moshi dc/2026/Moshi_DC_FI_terminal_2026_Chemistry.pdf",
     "markingScheme":""
-}, 
+},
 
 {
     "form":"form1",
@@ -415,16 +415,14 @@ const pastPapers = [
     "markingScheme":""
 },
 
-    {
+{
     form: "form2",
     subject: "physics",
     title: "Physics Terminal Exam",
     type: "terminal",
     region: "morogoro",
     year: 2026,
-
     file: "papers/form2/physics/terminal/morogoro/2026/F2_Physics_Terminal_Exam_2026_Morogoro_Gepam_hub.pdf",
-
     markingScheme: "papers/form2/physics/terminal/morogoro/2026/Physics_Marking_scheme.pdf"
 },
 
@@ -542,7 +540,7 @@ const pastPapers = [
     file: "papers/form2/chemistry/terminal/morogoro/2026/F2_Chemistry_Terminal_Exam_2026_Morogoro_Gepam_hub.pdf",
     markingScheme: "papers/form2/chemistry/terminal/morogoro/2026/Chemistry_Marking_scheme.pdf"
 },
-    
+
 {
     "form":"form2",
     "subject":"chemistry",
@@ -619,9 +617,9 @@ const pastPapers = [
     "subject":"physics",
     "title":"Physics Midterm Exam",
     "type":"midterm",
-    "region":"bumbuli dc",
+    "region":"dodoma",
     "year":2026,
-    "file":"papers/form3/physics/midterm/2026/F3_PHYSICS_-_Exam_n_Answers_-_GEPAM_HUB.pdf",
+    "file":"papers/form3/physics/dom_2026.pdf",
     "markingScheme":""
 },
 
@@ -630,9 +628,9 @@ const pastPapers = [
     "subject":"physics",
     "title":"Physics Terminal Exam",
     "type":"terminal",
-    "region":"kilwa dc",
-    "year":2026,
-    "file":"papers/form3/physics/terminal/2026/F3_PHYSICS_Kilwa_DC_Exam_n_Answers_-_GEPAM_HUB.pdf",
+    "region":"arusha",
+    "year":2025,
+    "file":"papers/form3/physics/aru_2025.pdf",
     "markingScheme":""
 },
 
@@ -643,7 +641,7 @@ const pastPapers = [
     "type":"joint",
     "region":"mbeya",
     "year":2026,
-    "file":"papers/form3/physics/joint/2026/F3_PHYSICS1_-_Exam_n_Answers_-_GEPAM_HUB.pdf",
+    "file":"papers/form3/physics/mby_2026.pdf",
     "markingScheme":""
 },
 
@@ -701,9 +699,9 @@ const pastPapers = [
     "subject":"chemistry",
     "title":"Chemistry Midterm Exam",
     "type":"midterm",
-    "region":"bumbuli dc",
+    "region":"dodoma",
     "year":2026,
-    "file":"papers/form3/chemistry/midterm/2026/F3_CHEMISTRY_-_Exam_n_Answers_-_GEPAM_HUB.pdf",
+    "file":"papers/form3/chemistry/dom_2026.pdf",
     "markingScheme":""
 },
 
@@ -712,9 +710,9 @@ const pastPapers = [
     "subject":"chemistry",
     "title":"Chemistry Terminal Exam",
     "type":"terminal",
-    "region":"kilwa dc",
-    "year":2026,
-    "file":"papers/form3/chemistry/terminal/2026/F3_CHEMISTRY_Kilwa_DC_Exam_n_Answers_-_GEPAM_HUB.pdf",
+    "region":"arusha",
+    "year":2025,
+    "file":"papers/form3/chemistry/aru_2025.pdf",
     "markingScheme":""
 },
 
@@ -725,7 +723,7 @@ const pastPapers = [
     "type":"joint",
     "region":"mbeya",
     "year":2026,
-    "file":"papers/form3/chemistry/joint/2026/F3_CHEMISTRY1_-_Exam_n_Answers_-_GEPAM_HUB.pdf",
+    "file":"papers/form3/chemistry/mby_2026.pdf",
     "markingScheme":""
 },
 
@@ -777,7 +775,7 @@ const pastPapers = [
     "file":"papers/form4/physics/mock/dar_es_salaam/2026/F4_Physics1_Mock_2026_Dsm_Gepam_hub.pdf",
     "markingScheme":""
 },
-    
+
 {
     "form":"form4",
     "subject":"physics",
@@ -788,7 +786,7 @@ const pastPapers = [
     "file":"papers/form4/physics/mock/dar_es_salaam/2026/F4_Phys2A_Mock_2026_Dsm.pdf",
     "markingScheme":""
 },
-    
+
 {
     "form":"form4",
     "subject":"physics",
@@ -799,7 +797,7 @@ const pastPapers = [
     "file":"papers/form4/physics/mock/zonal_mock/2026/F4_physics1_zonal_mock_2026_Gepam_hub.pdf",
     "markingScheme":""
 },
-    
+
 {
     "form":"form4",
     "subject":"physics",
@@ -887,7 +885,6 @@ const pastPapers = [
     "file":"papers/form4/physics/necta/2023/physics_2023.pdf",
     "markingScheme":""
 },
-
 
 // ============================================================
 // FORM 4 - CHEMISTRY
@@ -1248,8 +1245,7 @@ const pastPapers = [
     file: "papers/form6/physics/mock/dodoma/2023/F6_Physics1_Mock_2023_Dodoma_Gepam_hub.pdf",
     "markingScheme":""
 },
-    
-// ============================================================
+    // ============================================================
 // FORM 6 - CHEMISTRY
 // ============================================================
 
@@ -1363,23 +1359,37 @@ const pastPapers = [
     "markingScheme":""
 },
 
+];
+
+
 // ============================================================
 // SPECIAL EXAMINATIONS
 // ============================================================
 //
-// IMPORTANT:
-// HAPA HAKUNA form
-// HAKUNA subject
-// HAKUNA region
-// HAKUNA school
+// NAVIGATION STRUCTURE:
 //
-// Special → Examination → Series → PDF
+// Special Examination
+//       ↓
+// ISESE / TAHOSSA / JEPGOS / CSSC / SPECIAL SCHOOL
+//       ↓
+// Form 1 / Form 2 / Form 3 / Form 4 / Form 5 / Form 6
+//       ↓
+// Physics / Chemistry
+//       ↓
+// Year
+//       ↓
+// PRE-NECTA → Papers
+//
+// OR
+//
+// Year
+//       ↓
+// SERIES → Papers
+//
+// Pre-NECTA and Series are separate branches.
 // ============================================================
 
-
-// ============================================================
-// ISESE
-// ============================================================
+const specialPaperRecords = [
 
 {
     "category":"special",
@@ -1625,6 +1635,31 @@ const pastPapers = [
 
 
 // ============================================================
+// SPECIAL NAVIGATION METADATA
+// ============================================================
+
+const specialNavigation = {
+
+    forms: [
+        { id: "form1", name: "Form 1" },
+        { id: "form2", name: "Form 2" },
+        { id: "form3", name: "Form 3" },
+        { id: "form4", name: "Form 4" },
+        { id: "form5", name: "Form 5" },
+        { id: "form6", name: "Form 6" }
+    ],
+
+    subjects: [
+        { id: "physics", name: "Physics" },
+        { id: "chemistry", name: "Chemistry" }
+    ],
+
+    years: [2026]
+
+};
+
+
+// ============================================================
 // MAKE DATABASE AVAILABLE TO pastpapers.html
 // ============================================================
 
@@ -1637,3 +1672,7 @@ window.pastPaperYears = pastPaperYears;
 window.pastPaperSubjects = pastPaperSubjects;
 
 window.specialExaminations = specialExaminations;
+
+window.specialPaperRecords = specialPaperRecords;
+
+window.specialNavigation = specialNavigation;
