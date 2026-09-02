@@ -1465,7 +1465,7 @@ const specialPaperRecords = [
     "form": "form4",
     "subject": "physics",
     "year": 2026,
-    "title": "ISESE Form 4 Physics Pre-NECTA Examination",
+    "title": "JEPGOS Form 4 Physics Pre-NECTA Examination",
     "type": "pre_necta",
     "file": "papers/special/jepgos/form4/physics/2026/pre_necta/physics_pre_necta_2026.pdf",
     "markingScheme": ""
@@ -1477,7 +1477,7 @@ const specialPaperRecords = [
     "form": "form4",
     "subject": "chemistry",
     "year": 2026,
-    "title": "ISESE Form 4 Chemistry Pre-NECTA Examination",
+    "title": "JEPGOS Form 4 Chemistry Pre-NECTA Examination",
     "type": "pre_necta",
     "file": "papers/special/jepgos/form4/chemistry/2026/pre_necta/chemistry_pre_necta_2026.pdf",
     "markingScheme": ""
@@ -1669,7 +1669,6 @@ const specialNavigation = {
     ]
 
 };
-
 
 // ============================================================
 // MAKE DATABASE AVAILABLE TO pastpapers.html
