@@ -4269,524 +4269,663 @@ function emptyCard(
 
 
 /* =========================================================
+   SPECIAL EXAMINATION
+   SPECIAL → ORGANISATION → FORM → SUBJECT → YEAR
+   → PRE-NECTA OR SERIES → PAPERS
+========================================================= */
+
+function getSpecialRecords() {
+
+    return Array.isArray(window.specialPaperRecords)
+        ? window.specialPaperRecords
+        : [];
+
+}
+
+function getSpecialNavigation() {
+
+    return window.specialNavigation || {
+        forms: FALLBACK_FORMS,
+        subjects: FALLBACK_SUBJECTS,
+        years: [2026]
+    };
+
+}
+
+
+/* =========================================================
    SPECIAL MENU
 ========================================================= */
 
 function openSpecialMenu() {
 
     currentState = {
-
-        level:
-            "special",
-
+        level: "special",
         form: null,
-
         subject: null,
-
         type: null,
-
         locationMode: null,
-
         region: null,
-
         school: null,
-
         year: null,
-
         specialExam: null,
-
         series: null
-
     };
 
     pushNavigationState();
-
     renderSpecialMenu();
 
 }
 
 
-/* =========================================================
-   RENDER SPECIAL MENU
-========================================================= */
-
 function renderSpecialMenu() {
 
     updateBreadcrumb();
+    backButton.style.display = "inline-flex";
 
-    backButton.style.display =
-        "inline-flex";
-
-    const specials =
-        getSpecialExaminations();
+    const specials = getSpecialExaminations();
 
     let html = `
-
         <div class="step-header">
-
-            <span class="step-number">
-                SPECIAL EXAMINATIONS
-            </span>
-
-            <h2>
-                Chagua Special Examination
-            </h2>
-
-            <p>
-                Chagua examination organisation
-                unayotaka.
-            </p>
-
-        </div>
-
-        <div class="special-info">
-
-            ⭐ Special examinations
-            hazilazimishi kuchagua Form,
-            Subject au Region.
-            Mfumo unafuata structure
-            ya database moja kwa moja.
-
+            <span class="step-number">SPECIAL EXAMINATIONS</span>
+            <h2>Chagua Special Examination</h2>
+            <p>Chagua organisation ya examination unayotaka.</p>
         </div>
 
         <div class="selection-grid">
-
     `;
 
-    specials.forEach(
-        special => {
+    specials.forEach(special => {
 
-            const count =
-                getSpecialPapers(
-                    special.id
-                ).length;
+        const count = getSpecialRecords().filter(paper =>
+            normalize(paper.specialExam) === normalize(special.id)
+        ).length;
 
-            html += `
-
-                <div class="
-                    selection-card
-                    special-card
-                ">
-
-                    <div>
-
-                        <div class="card-icon">
-                            ⭐
-                        </div>
-
-                        <h3>
-                            ${escapeHTML(
-                                special.name
-                            )}
-                        </h3>
-
-                        <p>
-                            ${count}
-                            examination item(s)
-                            available
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="open-btn"
-                        onclick="
-                            openSpecial(
-                                '${escapeHTML(
-                                    special.id
-                                )}'
-                            )
-                        ">
-
-                        FUNGUA
-
-                    </button>
-
+        html += `
+            <div class="selection-card special-card">
+                <div>
+                    <div class="card-icon">⭐</div>
+                    <h3>${escapeHTML(special.name)}</h3>
+                    <p>${count} examination item(s) available</p>
                 </div>
 
-            `;
+                <button
+                    class="open-btn"
+                    onclick="openSpecial('${escapeHTML(special.id)}')">
+                    FUNGUA
+                </button>
+            </div>
+        `;
 
-        }
-    );
+    });
 
-    html += `
-        </div>
-    `;
-
-    stepContainer.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   GET SPECIAL PAPERS
-========================================================= */
-
-function getSpecialPapers(
-    specialExam
-) {
-
-    return getPapers().filter(
-        paper => {
-
-            return (
-
-                normalize(
-                    paper.category
-                ) ===
-                "special"
-
-                &&
-
-                normalize(
-                    paper.specialExam
-                ) ===
-                normalize(
-                    specialExam
-                )
-
-            );
-
-        }
-    );
+    html += `</div>`;
+    stepContainer.innerHTML = html;
 
 }
 
 
 /* =========================================================
-   OPEN SPECIAL
+   OPEN SPECIAL ORGANISATION
 ========================================================= */
 
-function openSpecial(
-    specialExam
-) {
+function openSpecial(specialExam) {
 
-    currentState.specialExam =
-        specialExam;
-
-    currentState.series =
-        null;
-
-    currentState.level =
-        "series";
+    currentState.specialExam = specialExam;
+    currentState.form = null;
+    currentState.subject = null;
+    currentState.year = null;
+    currentState.type = null;
+    currentState.series = null;
+    currentState.level = "specialForms";
 
     pushNavigationState();
-
-    renderSeries();
+    renderSpecialForms();
 
 }
 
 
 /* =========================================================
-   GET SPECIAL SERIES
+   SPECIAL FORMS
+========================================================= */
+
+function getSpecialForms() {
+
+    const nav = getSpecialNavigation();
+    const records = getSpecialRecords().filter(paper =>
+        normalize(paper.specialExam) === normalize(currentState.specialExam)
+    );
+
+    return nav.forms.filter(form => {
+
+        // A form is available when it is represented by explicit
+        // metadata OR when this is a legacy Special record without
+        // form metadata. Legacy records are exposed through the
+        // compatibility navigation layer.
+        return records.some(paper =>
+            !paper.form || normalize(paper.form) === normalize(form.id)
+        );
+
+    });
+
+}
+
+
+function renderSpecialForms() {
+
+    updateBreadcrumb();
+    backButton.style.display = "inline-flex";
+
+    const forms = getSpecialForms();
+
+    let html = `
+        <div class="step-header">
+            <span class="step-number">SPECIAL STEP 2</span>
+            <h2>${escapeHTML(displayName(currentState.specialExam))}</h2>
+            <p>Chagua Form.</p>
+        </div>
+
+        <div class="selection-grid">
+    `;
+
+    forms.forEach(form => {
+
+        html += `
+            <div class="selection-card form-card">
+                <div>
+                    <div class="card-icon">📘</div>
+                    <h3>${escapeHTML(form.name)}</h3>
+                    <p>Special Examination</p>
+                </div>
+
+                <button
+                    class="open-btn"
+                    onclick="openSpecialForm('${escapeHTML(form.id)}')">
+                    FUNGUA ${escapeHTML(form.name).toUpperCase()}
+                </button>
+            </div>
+        `;
+
+    });
+
+    if (!forms.length) {
+        html += emptyCard("Hakuna Form", "Hakuna Form iliyowekwa kwa Special Examination hii.");
+    }
+
+    html += `</div>`;
+    stepContainer.innerHTML = html;
+
+}
+
+
+function openSpecialForm(formId) {
+
+    currentState.form = formId;
+    currentState.subject = null;
+    currentState.year = null;
+    currentState.type = null;
+    currentState.series = null;
+    currentState.level = "specialSubjects";
+
+    pushNavigationState();
+    renderSpecialSubjects();
+
+}
+
+
+/* =========================================================
+   SPECIAL SUBJECTS
+========================================================= */
+
+function getSpecialSubjects() {
+
+    const nav = getSpecialNavigation();
+    const records = getSpecialRecords().filter(paper =>
+        normalize(paper.specialExam) === normalize(currentState.specialExam)
+    );
+
+    return nav.subjects.filter(subject => {
+
+        return records.some(paper =>
+            !paper.subject || normalize(paper.subject) === normalize(subject.id)
+        );
+
+    });
+
+}
+
+
+function renderSpecialSubjects() {
+
+    updateBreadcrumb();
+    backButton.style.display = "inline-flex";
+
+    const subjects = getSpecialSubjects();
+
+    let html = `
+        <div class="step-header">
+            <span class="step-number">SPECIAL STEP 3</span>
+            <h2>${escapeHTML(displayName(currentState.form))}</h2>
+            <p>Chagua Subject.</p>
+        </div>
+
+        <div class="selection-grid">
+    `;
+
+    subjects.forEach(subject => {
+
+        html += `
+            <div class="selection-card">
+                <div>
+                    <div class="card-icon">📚</div>
+                    <h3>${escapeHTML(subject.name)}</h3>
+                    <p>${escapeHTML(displayName(currentState.form))} ${escapeHTML(subject.name)}</p>
+                </div>
+
+                <button
+                    class="open-btn"
+                    onclick="openSpecialSubject('${escapeHTML(subject.id)}')">
+                    FUNGUA
+                </button>
+            </div>
+        `;
+
+    });
+
+    if (!subjects.length) {
+        html += emptyCard("Hakuna Subject", "Hakuna Subject iliyowekwa kwa Special Examination hii.");
+    }
+
+    html += `</div>`;
+    stepContainer.innerHTML = html;
+
+}
+
+
+function openSpecialSubject(subjectId) {
+
+    currentState.subject = subjectId;
+    currentState.year = null;
+    currentState.type = null;
+    currentState.series = null;
+    currentState.level = "specialYears";
+
+    pushNavigationState();
+    renderSpecialYears();
+
+}
+
+
+/* =========================================================
+   SPECIAL YEARS
+========================================================= */
+
+function getSpecialYears() {
+
+    const nav = getSpecialNavigation();
+    const records = getSpecialRecords().filter(paper =>
+        normalize(paper.specialExam) === normalize(currentState.specialExam)
+    );
+
+    const explicitYears = [...new Set(
+        records
+            .map(paper => Number(paper.year))
+            .filter(year => Number.isFinite(year))
+    )];
+
+    const years = explicitYears.length
+        ? explicitYears
+        : nav.years;
+
+    return years
+        .map(year => Number(year))
+        .filter(year => Number.isFinite(year))
+        .sort((a, b) => b - a);
+
+}
+
+
+function renderSpecialYears() {
+
+    updateBreadcrumb();
+    backButton.style.display = "inline-flex";
+
+    const years = getSpecialYears();
+
+    let html = `
+        <div class="step-header">
+            <span class="step-number">SPECIAL STEP 4</span>
+            <h2>${escapeHTML(displayName(currentState.subject))}</h2>
+            <p>Chagua Year.</p>
+        </div>
+
+        <div class="selection-grid">
+    `;
+
+    years.forEach(year => {
+
+        html += `
+            <div class="selection-card">
+                <div>
+                    <div class="card-icon">📅</div>
+                    <h3>${escapeHTML(String(year))}</h3>
+                    <p>Special Examination</p>
+                </div>
+
+                <button
+                    class="open-btn"
+                    onclick="openSpecialYear(${year})">
+                    FUNGUA ${year}
+                </button>
+            </div>
+        `;
+
+    });
+
+    if (!years.length) {
+        html += emptyCard("Hakuna Year", "Hakuna mwaka uliowekwa kwa Special Examination hii.");
+    }
+
+    html += `</div>`;
+    stepContainer.innerHTML = html;
+
+}
+
+
+function openSpecialYear(year) {
+
+    currentState.year = Number(year);
+    currentState.type = null;
+    currentState.series = null;
+    currentState.level = "specialTypes";
+
+    pushNavigationState();
+    renderSpecialTypes();
+
+}
+
+
+/* =========================================================
+   SPECIAL BRANCHES
+   PRE-NECTA AND SERIES ARE MUTUALLY EXCLUSIVE
+========================================================= */
+
+function getSpecialScopedRecords() {
+
+    return getSpecialRecords().filter(paper => {
+
+        const specialMatch =
+            normalize(paper.specialExam) === normalize(currentState.specialExam);
+
+        const formMatch =
+            !paper.form || normalize(paper.form) === normalize(currentState.form);
+
+        const subjectMatch =
+            !paper.subject || normalize(paper.subject) === normalize(currentState.subject);
+
+        const yearMatch =
+            !paper.year || Number(paper.year) === Number(currentState.year);
+
+        return specialMatch && formMatch && subjectMatch && yearMatch;
+
+    });
+
+}
+
+
+function getSpecialBranchRecords(branch) {
+
+    return getSpecialScopedRecords().filter(paper => {
+
+        const type = normalize(paper.type);
+
+        if (branch === "pre_necta") {
+            return type === "pre_necta" || type === "prenecta" || type === "pre-necta";
+        }
+
+        if (branch === "series") {
+            return type === "series";
+        }
+
+        return false;
+
+    });
+
+}
+
+
+function renderSpecialTypes() {
+
+    updateBreadcrumb();
+    backButton.style.display = "inline-flex";
+
+    const preNecta = getSpecialBranchRecords("pre_necta");
+    const series = getSpecialBranchRecords("series");
+
+    let html = `
+        <div class="step-header">
+            <span class="step-number">SPECIAL STEP 5</span>
+            <h2>${escapeHTML(String(currentState.year))}</h2>
+            <p>Chagua Pre-NECTA au Series.</p>
+        </div>
+
+        <div class="selection-grid">
+    `;
+
+    if (preNecta.length) {
+        html += `
+            <div class="selection-card">
+                <div>
+                    <div class="card-icon">📝</div>
+                    <h3>Pre-NECTA</h3>
+                    <p>${preNecta.length} paper(s) available</p>
+                </div>
+                <button class="open-btn" onclick="openSpecialBranch('pre_necta')">FUNGUA PRE-NECTA</button>
+            </div>
+        `;
+    }
+
+    if (series.length) {
+        html += `
+            <div class="selection-card series-card">
+                <div>
+                    <div class="card-icon">📚</div>
+                    <h3>Series</h3>
+                    <p>${series.length} paper(s) available</p>
+                </div>
+                <button class="open-btn" onclick="openSpecialBranch('series')">FUNGUA SERIES</button>
+            </div>
+        `;
+    }
+
+    if (!preNecta.length && !series.length) {
+        html += emptyCard("Hakuna branch", "Hakuna Pre-NECTA au Series iliyowekwa kwa uchaguzi huu.");
+    }
+
+    html += `</div>`;
+    stepContainer.innerHTML = html;
+
+}
+
+
+function openSpecialBranch(branch) {
+
+    currentState.type = branch;
+    currentState.series = null;
+
+    if (branch === "pre_necta") {
+        currentState.level = "specialPreNectaPapers";
+        pushNavigationState();
+        renderSpecialPreNectaPapers();
+        return;
+    }
+
+    currentState.level = "specialSeries";
+    pushNavigationState();
+    renderSpecialSeries();
+
+}
+
+
+/* =========================================================
+   PRE-NECTA PAPERS
+========================================================= */
+
+function renderSpecialPreNectaPapers() {
+
+    updateBreadcrumb();
+    backButton.style.display = "inline-flex";
+
+    const papers = getSpecialBranchRecords("pre_necta");
+
+    let html = `
+        <div class="step-header">
+            <span class="step-number">SPECIAL STEP 6</span>
+            <h2>Pre-NECTA</h2>
+            <p>Pre-NECTA papers only. Series haijaingizwa kwenye branch hii.</p>
+        </div>
+
+        <div class="selection-grid">
+    `;
+
+    if (!papers.length) {
+        html += emptyCard("Hakuna Pre-NECTA", "Hakuna paper ya Pre-NECTA iliyowekwa kwa uchaguzi huu.");
+    }
+
+    papers.forEach((paper, index) => {
+        html += renderPaperCard(paper, index);
+    });
+
+    html += `</div>`;
+    stepContainer.innerHTML = html;
+
+}
+
+
+/* =========================================================
+   SERIES LIST
 ========================================================= */
 
 function getSpecialSeries() {
 
-    const papers =
-        getSpecialPapers(
-            currentState.specialExam
-        );
-
+    const papers = getSpecialBranchRecords("series");
     const series = [];
 
-    papers.forEach(
-        paper => {
+    papers.forEach(paper => {
 
-            const id =
-                String(
-                    paper.series ||
-                    ""
-                ).trim();
+        const id = String(paper.series || "").trim();
+        if (!id) return;
 
-            if (
-                !id
-            ) {
-
-                return;
-
-            }
-
-            if (
-                !series.some(
-                    item =>
-                        normalize(
-                            item.id
-                        ) ===
-                        normalize(
-                            id
-                        )
-                )
-            ) {
-
-                series.push({
-
-                    id: id,
-
-                    name:
-                        paper.seriesName ||
-                        displayName(
-                            id
-                        )
-
-                });
-
-            }
-
+        if (!series.some(item => normalize(item.id) === normalize(id))) {
+            series.push({
+                id,
+                name: paper.seriesName || displayName(id)
+            });
         }
-    );
+
+    });
 
     return series;
 
 }
 
 
-/* =========================================================
-   RENDER SERIES
-========================================================= */
-
-function renderSeries() {
+function renderSpecialSeries() {
 
     updateBreadcrumb();
+    backButton.style.display = "inline-flex";
 
-    backButton.style.display =
-        "inline-flex";
-
-    const series =
-        getSpecialSeries();
+    const series = getSpecialSeries();
 
     let html = `
-
         <div class="step-header">
-
-            <span class="step-number">
-                SPECIAL STEP 2
-            </span>
-
-            <h2>
-                ${escapeHTML(
-                    displayName(
-                        currentState.specialExam
-                    )
-                )}
-            </h2>
-
-            <p>
-                Chagua series ya examination.
-            </p>
-
+            <span class="step-number">SPECIAL STEP 6</span>
+            <h2>Series</h2>
+            <p>Chagua Series. Pre-NECTA haipo ndani ya branch hii.</p>
         </div>
 
         <div class="selection-grid">
-
     `;
 
-    series.forEach(
-        item => {
+    series.forEach(item => {
 
-            html += `
-
-                <div class="
-                    selection-card
-                    series-card
-                ">
-
-                    <div>
-
-                        <div class="card-icon">
-                            📚
-                        </div>
-
-                        <h3>
-                            ${escapeHTML(
-                                item.name
-                            )}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(
-                                displayName(
-                                    currentState.specialExam
-                                )
-                            )}
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="open-btn"
-                        onclick="
-                            openSeries(
-                                '${escapeHTML(
-                                    item.id
-                                )}'
-                            )
-                        ">
-
-                        FUNGUA
-
-                    </button>
-
+        html += `
+            <div class="selection-card series-card">
+                <div>
+                    <div class="card-icon">📚</div>
+                    <h3>${escapeHTML(item.name)}</h3>
+                    <p>${escapeHTML(displayName(currentState.specialExam))}</p>
                 </div>
 
-            `;
+                <button class="open-btn" onclick="openSpecialSeries('${escapeHTML(item.id)}')">
+                    FUNGUA
+                </button>
+            </div>
+        `;
 
-        }
-    );
+    });
 
-    if (
-        series.length === 0
-    ) {
-
-        html += emptyCard(
-            "Hakuna series",
-            "Hakuna series iliyowekwa kwenye database."
-        );
-
+    if (!series.length) {
+        html += emptyCard("Hakuna Series", "Hakuna Series iliyowekwa kwa uchaguzi huu.");
     }
 
-    html += `
-        </div>
-    `;
-
-    stepContainer.innerHTML =
-        html;
+    html += `</div>`;
+    stepContainer.innerHTML = html;
 
 }
 
 
-/* =========================================================
-   OPEN SERIES
-========================================================= */
+function openSpecialSeries(seriesId) {
 
-function openSeries(
-    seriesId
-) {
-
-    currentState.series =
-        seriesId;
-
-    currentState.level =
-        "specialPapers";
+    currentState.series = seriesId;
+    currentState.level = "specialSeriesPapers";
 
     pushNavigationState();
-
-    renderSpecialPapers();
+    renderSpecialSeriesPapers();
 
 }
 
 
 /* =========================================================
-   GET SPECIAL MATCHING PAPERS
+   SERIES PAPERS
 ========================================================= */
 
 function getMatchingSpecialPapers() {
 
-    return getPapers().filter(
-        paper => {
-
-            return (
-
-                normalize(
-                    paper.category
-                ) ===
-                "special"
-
-                &&
-
-                normalize(
-                    paper.specialExam
-                ) ===
-                normalize(
-                    currentState.specialExam
-                )
-
-                &&
-
-                normalize(
-                    paper.series
-                ) ===
-                normalize(
-                    currentState.series
-                )
-
-            );
-
-        }
+    return getSpecialBranchRecords("series").filter(paper =>
+        normalize(paper.series) === normalize(currentState.series)
     );
 
 }
 
 
-/* =========================================================
-   RENDER SPECIAL PAPERS
-========================================================= */
-
-function renderSpecialPapers() {
+function renderSpecialSeriesPapers() {
 
     updateBreadcrumb();
+    backButton.style.display = "inline-flex";
 
-    backButton.style.display =
-        "inline-flex";
-
-    const papers =
-        getMatchingSpecialPapers();
+    const papers = getMatchingSpecialPapers();
 
     let html = `
-
         <div class="step-header">
-
-            <span class="step-number">
-                SPECIAL STEP 3
-            </span>
-
-            <h2>
-                Available Papers
-            </h2>
-
-            <p>
-                Download examination PDF
-                na Marking Guide kama ipo.
-            </p>
-
+            <span class="step-number">SPECIAL STEP 7</span>
+            <h2>${escapeHTML(displayName(currentState.series))}</h2>
+            <p>Series papers only. Pre-NECTA haijaingizwa hapa.</p>
         </div>
 
         <div class="selection-grid">
-
     `;
 
-    if (
-        papers.length === 0
-    ) {
-
-        html += emptyCard(
-            "Hakuna paper",
-            "Hakuna paper iliyowekwa kwa series hii."
-        );
-
+    if (!papers.length) {
+        html += emptyCard("Hakuna paper", "Hakuna paper iliyowekwa kwa Series hii.");
     }
 
-    papers.forEach(
-        (
-            paper,
-            index
-        ) => {
+    papers.forEach((paper, index) => {
+        html += renderPaperCard(paper, index);
+    });
 
-            html += renderPaperCard(
-                paper,
-                index
-            );
-
-        }
-    );
-
-    html += `
-        </div>
-    `;
-
-    stepContainer.innerHTML =
-        html;
+    html += `</div>`;
+    stepContainer.innerHTML = html;
 
 }
 
@@ -4915,16 +5054,51 @@ function renderCurrentLevel() {
             break;
 
 
-        case "series":
+        case "specialForms":
 
-            renderSeries();
+            renderSpecialForms();
 
             break;
 
 
-        case "specialPapers":
+        case "specialSubjects":
 
-            renderSpecialPapers();
+            renderSpecialSubjects();
+
+            break;
+
+
+        case "specialYears":
+
+            renderSpecialYears();
+
+            break;
+
+
+        case "specialTypes":
+
+            renderSpecialTypes();
+
+            break;
+
+
+        case "specialPreNectaPapers":
+
+            renderSpecialPreNectaPapers();
+
+            break;
+
+
+        case "specialSeries":
+
+            renderSpecialSeries();
+
+            break;
+
+
+        case "specialSeriesPapers":
+
+            renderSpecialSeriesPapers();
 
             break;
 
