@@ -1607,7 +1607,18 @@ const specialNavigation = {
         { id: "chemistry", name: "Chemistry" }
     ],
 
-    years: [2026]
+    years: [2026],
+
+    branches: [
+        {
+            id: "pre_necta",
+            name: "Pre-NECTA"
+        },
+        {
+            id: "series",
+            name: "Series"
+        }
+    ]
 
 };
 
