@@ -1592,7 +1592,6 @@ const specialPaperRecords = [
 // ============================================================
 
 const specialNavigation = {
-const specialNavigation = {
 
     forms: [
         { id: "form1", name: "Form 1" },
@@ -1608,20 +1607,7 @@ const specialNavigation = {
         { id: "chemistry", name: "Chemistry" }
     ],
 
-    years: [2026],
-
-    branches: [
-        {
-            id: "pre_necta",
-            name: "Pre-NECTA",
-            type: "pre_necta"
-        },
-        {
-            id: "series",
-            name: "Series",
-            type: "series"
-        }
-    ]
+    years: [2026]
 
 };
 
