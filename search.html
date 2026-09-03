@@ -369,6 +369,73 @@
             }
         }
 
+        /* Sehemu ya vichwa vya habari vya makundi */
+.search-section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #003366;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+/* Priority inakuja kama list pana inayovutia macho */
+.priority-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+/* Relevant inakuja chini kama Grid ya mabox (boxes) */
+.relevant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Kadi ya kipaumbele inapata mstari mnene wa pembeni */
+.priority-card {
+    border-left: 5px solid #003366 !important;
+    background: #f8fafc;
+}
+/* Rangi ya Physics (Bluu ya Elimu) */
+.result-card.card-physics {
+    border-top: 4px solid #005b96;
+}
+.result-card.card-physics .result-type {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+.result-card.card-physics .result-action {
+    background: #005b96;
+}
+
+/* Rangi ya Chemistry (Kijani ya Maabara) */
+.result-card.card-chemistry {
+    border-top: 4px solid #00a86b;
+}
+.result-card.card-chemistry .result-type {
+    background: #dcfce7;
+    color: #15803d;
+}
+.result-card.card-chemistry .result-action {
+    background: #00a86b;
+}
+
+/* Rangi ya Practical Notes (Urujuani/Purple) */
+.result-card.card-practical {
+    border-top: 4px solid #7c3aed;
+}
+.result-card.card-practical .result-type {
+    background: #f3e8ff;
+    color: #6d28d9;
+}
+.result-card.card-practical .result-action {
+    background: #7c3aed;
+}
+
     </style>
 </head>
 
