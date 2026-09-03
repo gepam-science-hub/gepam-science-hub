@@ -2,40 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Search Physics and Chemistry notes, topics and past papers on GEPAM Science Hub."
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Search Physics and Chemistry notes, topics and past papers on GEPAM Science Hub.">
     <title>Search | GEPAM Science Hub</title>
-
     <style>
-
         * {
             box-sizing: border-box;
         }
-
         html {
             scroll-behavior: smooth;
         }
-
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
             background: #f4f8fb;
             color: #1f2937;
         }
-
-        /* =========================
-           HEADER
-        ========================= */
-
         .topbar {
             background: #003366;
             color: white;
@@ -48,60 +30,42 @@
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.12);
         }
-
         .brand {
             color: white;
             text-decoration: none;
             font-size: 21px;
             font-weight: 700;
         }
-
         .nav {
             margin-left: auto;
             display: flex;
             gap: 22px;
         }
-
         .nav a {
             color: white;
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
         }
-
         .nav a:hover {
             opacity: 0.8;
         }
-
-        /* =========================
-           HERO
-        ========================= */
-
         .search-hero {
-            background:
-                linear-gradient(
-                    135deg,
-                    #003366,
-                    #005b96
-                );
-
+            background: linear-gradient(135deg, #003366, #005b96);
             color: white;
             padding: 55px 20px 60px;
             text-align: center;
         }
-
         .search-hero h1 {
             margin: 0 0 10px;
             font-size: 36px;
         }
-
         .search-hero p {
             margin: 0 auto 28px;
             max-width: 650px;
             line-height: 1.6;
             opacity: 0.92;
         }
-
         .search-form {
             max-width: 720px;
             margin: auto;
@@ -111,7 +75,6 @@
             overflow: hidden;
             box-shadow: 0 8px 25px rgba(0,0,0,0.18);
         }
-
         .search-form input {
             flex: 1;
             border: none;
@@ -120,7 +83,6 @@
             font-size: 16px;
             min-width: 0;
         }
-
         .search-form button {
             border: none;
             background: #00a86b;
@@ -130,46 +92,31 @@
             font-weight: 700;
             cursor: pointer;
         }
-
         .search-form button:hover {
             background: #008f5a;
         }
-
-        /* =========================
-           MAIN
-        ========================= */
-
         .container {
             width: min(1100px, 92%);
             margin: 40px auto 70px;
         }
-
         .search-info {
             margin-bottom: 25px;
         }
-
         .search-info h2 {
             margin: 0 0 8px;
             color: #003366;
             font-size: 25px;
         }
-
         .search-info p {
             margin: 0;
             color: #64748b;
         }
-
-        /* =========================
-           FILTERS
-        ========================= */
-
         .filters {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 30px;
         }
-
         .filter-btn {
             border: 1px solid #d5dde5;
             background: white;
@@ -180,44 +127,29 @@
             font-size: 14px;
             font-weight: 600;
         }
-
         .filter-btn:hover {
             border-color: #003366;
         }
-
         .filter-btn.active {
             background: #003366;
             color: white;
             border-color: #003366;
         }
-
-        /* =========================
-           RESULTS
-        ========================= */
-
         .results {
-            display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            display: block;
+            width: 100%;
         }
-
         .result-card {
             background: white;
             border: 1px solid #e2e8f0;
             border-radius: 10px;
             padding: 22px;
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-
         .result-card:hover {
             transform: translateY(-3px);
-            box-shadow:
-                0 8px 25px rgba(15, 23, 42, 0.08);
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
         }
-
         .result-type {
             display: inline-block;
             font-size: 11px;
@@ -230,28 +162,24 @@
             color: #003366;
             margin-bottom: 12px;
         }
-
         .result-card h3 {
             margin: 0 0 10px;
             color: #003366;
             font-size: 19px;
             line-height: 1.35;
         }
-
         .result-description {
             color: #64748b;
             font-size: 14px;
             line-height: 1.6;
             margin-bottom: 15px;
         }
-
         .result-meta {
             display: flex;
             flex-wrap: wrap;
             gap: 7px;
             margin-bottom: 18px;
         }
-
         .meta-item {
             background: #f1f5f9;
             color: #475569;
@@ -259,7 +187,6 @@
             border-radius: 5px;
             font-size: 12px;
         }
-
         .result-action {
             display: inline-block;
             text-decoration: none;
@@ -270,43 +197,98 @@
             font-size: 13px;
             font-weight: 700;
         }
-
         .result-action:hover {
             background: #00508f;
         }
-
         .price {
             color: #008f5a;
             font-weight: 700;
             margin-bottom: 12px;
         }
-
-        /* =========================
-           EMPTY STATE
-        ========================= */
-
         .empty-state {
             background: white;
             border: 1px solid #e2e8f0;
             border-radius: 10px;
             padding: 45px 25px;
             text-align: center;
+            width: 100%;
         }
-
         .empty-state h3 {
             color: #003366;
             margin-top: 0;
         }
-
         .empty-state p {
             color: #64748b;
             line-height: 1.6;
         }
-
-        /* =========================
-           FOOTER
-        ========================= */
-
+        .search-section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #003366;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 5px;
+            width: 100%;
+        }
+        .priority-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        .relevant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+        .priority-card {
+            border-left: 5px solid #003366 !important;
+            background: #f8fafc;
+        }
+        .result-card.card-physics {
+            border-top: 4px solid #005b96;
+        }
+        .result-card.card-physics .result-type {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+        .result-card.card-physics .result-action {
+            background: #005b96;
+        }
+        .result-card.card-physics .result-action:hover {
+            background: #003366;
+        }
+        .result-card.card-chemistry {
+            border-top: 4px solid #00a86b;
+        }
+        .result-card.card-chemistry .result-type {
+            background: #dcfce7;
+            color: #15803d;
+        }
+        .result-card.card-chemistry .result-action {
+            background: #00a86b;
+        }
+        .result-card.card-chemistry .result-action:hover {
+            background: #008f5a;
+        }
+        .result-card.card-practical {
+            border-top: 4px solid #7c3aed;
+        }
+        .result-card.card-practical .result-type {
+            background: #f3e8ff;
+            color: #6d28d9;
+        }
+        .result-card.card-practical .result-action {
+            background: #7c3aed;
+        }
+        .result-card.card-practical .result-action:hover {
+            background: #5b21b6;
+        }
+        .result-card.card-default {
+            border-top: 4px solid #64748b;
+        }
         footer {
             background: #003366;
             color: white;
@@ -314,276 +296,87 @@
             padding: 28px 20px;
             font-size: 13px;
         }
-
         footer p {
             margin: 5px 0;
         }
-
-        /* =========================
-           MOBILE
-        ========================= */
-
         @media (max-width: 700px) {
-
-            .topbar {
-                padding: 0 20px;
-            }
-
-            .nav {
-                gap: 12px;
-            }
-
-            .nav a {
-                font-size: 12px;
-            }
-
-            .search-hero {
-                padding: 42px 18px 45px;
-            }
-
-            .search-hero h1 {
-                font-size: 29px;
-            }
-
-            .search-form {
-                flex-direction: column;
-                border-radius: 9px;
-            }
-
-            .search-form input {
-                width: 100%;
-                padding: 15px;
-            }
-
-            .search-form button {
-                min-height: 48px;
-            }
-
-            .container {
-                width: 92%;
-                margin-top: 30px;
-            }
-
-            .results {
-                grid-template-columns: 1fr;
-            }
+            .topbar { padding: 0 20px; }
+            .nav { gap: 12px; }
+            .nav a { font-size: 12px; }
+            .search-hero { padding: 42px 18px 45px; }
+            .search-hero h1 { font-size: 29px; }
+            .search-form { flex-direction: column; border-radius: 9px; }
+            .search-form input { width: 100%; padding: 15px; }
+            .search-form button { min-height: 48px; }
+            .container { width: 92%; margin-top: 30px; }
+            .relevant-grid { grid-template-columns: 1fr; }
         }
-
-        /* Sehemu ya vichwa vya habari vya makundi */
-.search-section-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #003366;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 5px;
-    width: 100%;
-}
-
-/* Priority inakuja kama list pana inayovutia macho */
-.priority-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-/* Relevant inakuja chini kama Grid ya mabox (boxes) */
-.relevant-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-}
-
-/* Kadi ya kipaumbele inapata mstari mnene wa pembeni */
-.priority-card {
-    border-left: 5px solid #003366 !important;
-    background: #f8fafc;
-}
-/* Rangi ya Physics (Bluu ya Elimu) */
-.result-card.card-physics {
-    border-top: 4px solid #005b96;
-}
-.result-card.card-physics .result-type {
-    background: #e0f2fe;
-    color: #0369a1;
-}
-.result-card.card-physics .result-action {
-    background: #005b96;
-}
-
-/* Rangi ya Chemistry (Kijani ya Maabara) */
-.result-card.card-chemistry {
-    border-top: 4px solid #00a86b;
-}
-.result-card.card-chemistry .result-type {
-    background: #dcfce7;
-    color: #15803d;
-}
-.result-card.card-chemistry .result-action {
-    background: #00a86b;
-}
-
-/* Rangi ya Practical Notes (Urujuani/Purple) */
-.result-card.card-practical {
-    border-top: 4px solid #7c3aed;
-}
-.result-card.card-practical .result-type {
-    background: #f3e8ff;
-    color: #6d28d9;
-}
-.result-card.card-practical .result-action {
-    background: #7c3aed;
-}
-
     </style>
 </head>
-
 <body>
-
-    <!-- HEADER -->
-
     <header class="topbar">
-
         <a href="index.html" class="brand">
             GEPAM Science Hub
         </a>
-
         <nav class="nav">
             <a href="index.html">Home</a>
             <a href="notes.html">Notes</a>
             <a href="pastpapers.html">Past Papers</a>
         </nav>
-
     </header>
-
-
-    <!-- SEARCH HERO -->
-
     <section class="search-hero">
-
         <h1>Search GEPAM</h1>
-
         <p>
             Find Physics and Chemistry notes, topics,
             practical notes and past papers.
         </p>
-
-        <form
-            class="search-form"
-            id="searchForm"
-        >
-
+        <form class="search-form" id="searchForm">
             <input
                 type="search"
                 id="searchInput"
                 placeholder="Search Physics, Chemistry, Waves, 2026 Mock..."
                 autocomplete="off"
             >
-
             <button type="submit">
                 Search
             </button>
-
         </form>
-
     </section>
-
-
-    <!-- MAIN -->
-
     <main class="container">
-
         <div class="search-info">
-
             <h2 id="searchTitle">
-                Search results
+                Search GEPAM resources
             </h2>
-
             <p id="searchCount">
-                Search across GEPAM resources.
+                Search Notes, Topics, Practical Notes and Past Papers.
             </p>
-
         </div>
-
-
-        <!-- FILTERS -->
-
         <div class="filters">
-
-            <button
-                class="filter-btn active"
-                data-filter="all"
-            >
-                All
-            </button>
-
-            <button
-                class="filter-btn"
-                data-filter="notes"
-            >
-                Notes
-            </button>
-
-            <button
-                class="filter-btn"
-                data-filter="topics"
-            >
-                Topics
-            </button>
-
-            <button
-                class="filter-btn"
-                data-filter="practical"
-            >
-                Practical Notes
-            </button>
-
-            <button
-                class="filter-btn"
-                data-filter="papers"
-            >
-                Past Papers
-            </button>
-
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="notes">Notes</button>
+            <button class="filter-btn" data-filter="topics">Topics</button>
+            <button class="filter-btn" data-filter="practical">Practical Notes</button>
+            <button class="filter-btn" data-filter="papers">Past Papers</button>
         </div>
-
-
-        <!-- RESULTS -->
-
-        <div
-            class="results"
-            id="results"
-        ></div>
-
+        <div class="results" id="results">
+            <div class="empty-state">
+                <h3>
+                    What are you looking for?
+                </h3>
+                <p>
+                    Search for a subject, topic, form,
+                    year, exam type or keyword.
+                </p>
+            </div>
+        </div>
     </main>
-
-
-    <!-- FOOTER -->
-
     <footer>
-
-        <p>
-            <strong>GEPAM Science Hub</strong>
-        </p>
-
-        <p>
-            Making Science Easy.
-        </p>
-
-        <p>
-            © 2026 GEPAM Science Hub
-        </p>
-
+        <p><strong>GEPAM Science Hub</strong></p>
+        <p>Making Science Easy.</p>
+        <p>© 2026 GEPAM Science Hub</p>
     </footer>
-
-
-    <!-- IMPORTANT:
-         Data files must load BEFORE search.js -->
-
     <script src="pastpapers-data.js"></script>
-
     <script src="search-data.js"></script>
-<script src="search.js"></script>
+    <script src="search.js"></script>
 </body>
 </html>
