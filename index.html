@@ -3,129 +3,1416 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="z3P-P6927NtjQmQF1KrZJbPR0D9Gjn2ZuowRrj7gJvk" />
-    <title>GEPAM Science Hub | Making Science Easy</title>
-    <link rel="icon" type="image/png" href="file_00000000f17471f4b8f76a744122207a.png">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Hamburger Menu Styling */
-        .nav-header { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 10px 20px; background: #fff; border-bottom: 1px solid #eee; position: relative; }
-        .menu-toggle { font-size: 28px; background: none; border: none; cursor: pointer; color: #333; display: block; }
-        .sidebar { position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: 0.3s ease; z-index: 10000; padding: 20px; box-sizing: border-box; overflow-y: auto; text-align: left; }
-        .sidebar.active { right: 0; }
-        .close-btn { font-size: 24px; background: none; border: none; cursor: pointer; color: #999; float: right; margin-bottom: 20px; }
-        .sidebar-links { margin-top: 50px; display: flex; flex-direction: column; gap: 15px; }
-        .sidebar-links a { text-decoration: none; color: #333; font-weight: bold; font-size: 16px; padding: 10px; border-radius: 4px; transition: 0.2s; display: block; }
-        .sidebar-links a:hover { background: #f4f4f4; color: #00c300; }
-        
-        /* Dropdown Ndani ya Sidebar (Accordion) */
-        .dropdown-btn { background: none; border: none; width: 100%; text-align: left; font-weight: bold; font-size: 16px; padding: 10px; cursor: pointer; color: #333; display: flex; justify-content: space-between; align-items: center; }
-        .dropdown-container { display: none; background: #f9f9f9; padding-left: 15px; border-left: 3px solid #00c300; margin-top: 5px; }
-        .dropdown-container a { font-size: 14px; font-weight: normal; padding: 6px 10px; }
 
-        /* Homepage Cards (Kama za Notes) */
-        .home-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; max-width: 1000px; margin: 40px auto; padding: 0 20px; }
-        .home-card { background: #fff; border: 1px solid #eee; border-top: 5px solid #00c300; border-radius: 8px; padding: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: left; transition: 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
-        .home-card:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.08); }
-        .action-btn { width: 100%; padding: 12px; background: #00c300; color: white; border: none; font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 20px; font-size: 15px; transition: 0.2s; text-align: center; display: inline-block; text-decoration: none; box-sizing: border-box; }
-        .action-btn:hover { background: #00a500; }
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 9999; }
+    <meta name="google-site-verification"
+          content="z3P-P6927NtjQmQmQmQmQmQmQmQmQmQmQmQmQ" />
+
+    <meta name="description"
+          content="GEPAM Science Hub - Physics and Chemistry learning resources, notes and examination papers for Tanzanian students.">
+
+    <meta name="keywords"
+          content="GEPAM Science Hub, Physics Notes Tanzania, Chemistry Notes Tanzania, Past Papers Tanzania, NECTA, Pre-NECTA">
+
+    <meta name="author" content="GEPAM Science Hub">
+
+    <title>GEPAM Science Hub | Making Science Easy</title>
+
+    <link rel="icon"
+          type="image/png"
+          href="file_00000000f17471f4b8f76a744122207a.png">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =====================================================
+           GEPAM SCIENCE HUB — HOME PAGE
+           Modern, Clean & Mobile First
+        ===================================================== */
+
+        :root {
+            --gepam-blue: #003366;
+            --gepam-blue-light: #0b5aa6;
+            --gepam-green: #00a86b;
+            --dark: #172033;
+            --text: #4b5563;
+            --light: #f6f8fb;
+            --white: #ffffff;
+            --border: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =====================================================
+           TOP NAVIGATION
+        ===================================================== */
+
+        .nav-header {
+            width: 100%;
+            background: #ffffff;
+            border-bottom: 1px solid #eeeeee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-inner {
+            max-width: 1150px;
+            margin: auto;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gepam-blue);
+        }
+
+        .menu-toggle {
+            border: none;
+            background: transparent;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--dark);
+            padding: 4px 8px;
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 1999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -310px;
+            width: 300px;
+            max-width: 88%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 2000;
+            transition: right 0.3s ease;
+            box-shadow: -8px 0 25px rgba(0,0,0,0.12);
+            padding: 22px;
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-title {
+            font-weight: 700;
+            color: var(--gepam-blue);
+            font-size: 18px;
+        }
+
+        .close-btn {
+            border: none;
+            background: transparent;
+            font-size: 24px;
+            color: #777;
+            cursor: pointer;
+        }
+
+        .sidebar-links {
+            margin-top: 20px;
+        }
+
+        .sidebar-links > a,
+        .dropdown-btn {
+            width: 100%;
+            display: block;
+            padding: 13px 5px;
+            margin-bottom: 5px;
+            color: var(--dark);
+            font-size: 16px;
+            font-weight: 600;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .sidebar-links > a:hover,
+        .dropdown-btn:hover {
+            color: var(--gepam-blue-light);
+        }
+
+        .dropdown-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dropdown-container {
+            display: none;
+            padding-left: 15px;
+            margin-bottom: 8px;
+            border-left: 2px solid var(--gepam-blue);
+        }
+
+        .dropdown-container a {
+            display: block;
+            color: #555;
+            padding: 7px 0;
+            font-size: 14px;
+        }
+
+        .dropdown-container a:hover {
+            color: var(--gepam-blue-light);
+        }
+
+        /* =====================================================
+           HERO SECTION
+        ===================================================== */
+
+        .hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    #003366 0%,
+                    #064d83 55%,
+                    #087f68 100%
+                );
+
+            color: #ffffff;
+            padding: 75px 20px 85px;
+        }
+
+        .hero-inner {
+            max-width: 1100px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .hero-kicker {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            opacity: 0.9;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: clamp(36px, 7vw, 64px);
+            line-height: 1.08;
+            letter-spacing: -1.5px;
+        }
+
+        .hero h1 span {
+            display: block;
+            color: #b9f5dd;
+        }
+
+        .hero-text {
+            max-width: 680px;
+            margin: 22px auto 0;
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .hero-buttons {
+            margin-top: 32px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 13px 22px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 700;
+            transition: 0.2s ease;
+        }
+
+        .hero-btn.primary {
+            background: #ffffff;
+            color: var(--gepam-blue);
+        }
+
+        .hero-btn.secondary {
+            border: 1px solid rgba(255,255,255,0.55);
+            color: #ffffff;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* =====================================================
+           SEARCH
+        ===================================================== */
+
+        .search-section {
+            max-width: 900px;
+            margin: -32px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .search-box {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 9px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+            display: flex;
+            align-items: center;
+        }
+
+        .search-icon {
+            padding: 0 12px;
+            font-size: 20px;
+            color: #777;
+        }
+
+        .search-box input {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            padding: 14px 8px;
+            color: var(--dark);
+        }
+
+        .search-box button {
+            border: none;
+            background: var(--gepam-blue);
+            color: #ffffff;
+            padding: 13px 20px;
+            border-radius: 7px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           GENERAL SECTION
+        ===================================================== */
+
+        .section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 70px 20px;
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gepam-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            margin: 5px 0 8px;
+            font-size: 30px;
+            line-height: 1.2;
+            color: var(--dark);
+        }
+
+        .section-description {
+            max-width: 650px;
+            margin: 0;
+            color: var(--text);
+        }
+
+        /* =====================================================
+           RESOURCE CARDS
+        ===================================================== */
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .resource-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            background: #ffffff;
+            transition: 0.2s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+            border-color: #d4dce6;
+        }
+
+        .resource-card h3 {
+            margin: 0 0 8px;
+            font-size: 22px;
+            color: var(--gepam-blue);
+        }
+
+        .resource-card p {
+            color: var(--text);
+            margin: 0 0 20px;
+        }
+
+        .resource-link {
+            color: var(--gepam-blue-light);
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           QUICK ACCESS
+        ===================================================== */
+
+        .quick-section {
+            background: var(--light);
+        }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .quick-item {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            padding: 22px;
+            border-radius: 10px;
+        }
+
+        .quick-item h3 {
+            margin: 0 0 5px;
+            font-size: 18px;
+        }
+
+        .quick-item p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        /* =====================================================
+           FEATURED
+        ===================================================== */
+
+        .featured {
+            background: #f8fafc;
+        }
+
+        .featured-box {
+            border-radius: 14px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            padding: 35px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .featured-box h2 {
+            margin: 0 0 10px;
+            color: var(--gepam-blue);
+            font-size: 27px;
+        }
+
+        .featured-box p {
+            color: var(--text);
+            margin: 0;
+            max-width: 700px;
+        }
+
+        .featured-btn {
+            display: inline-block;
+            background: var(--gepam-blue);
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 7px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* =====================================================
+           WHY GEPAM
+        ===================================================== */
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .why-card {
+            padding: 10px 5px;
+        }
+
+        .why-number {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gepam-green);
+            margin-bottom: 7px;
+        }
+
+        .why-card h3 {
+            margin: 0 0 7px;
+            font-size: 19px;
+        }
+
+        .why-card p {
+            margin: 0;
+            color: var(--text);
+            font-size: 15px;
+        }
+
+        /* =====================================================
+           ABOUT PREVIEW
+        ===================================================== */
+
+        .about-preview {
+            background: var(--gepam-blue);
+            color: #ffffff;
+        }
+
+        .about-inner {
+            max-width: 850px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .about-inner .section-label {
+            color: #9ce7ca;
+        }
+
+        .about-inner h2 {
+            font-size: 32px;
+            margin: 7px 0 15px;
+        }
+
+        .about-inner p {
+            color: rgba(255,255,255,0.86);
+            margin: 0 auto;
+            max-width: 720px;
+        }
+
+        .about-link {
+            display: inline-block;
+            margin-top: 25px;
+            color: #ffffff;
+            border: 1px solid rgba(255,255,255,0.5);
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            background: #111827;
+            color: #ffffff;
+            padding: 45px 20px 25px;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 35px;
+        }
+
+        .footer-brand {
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .footer-text {
+            color: #b8c0cc;
+            max-width: 400px;
+            margin-top: 8px;
+        }
+
+        .footer-column h4 {
+            margin: 0 0 12px;
+            font-size: 15px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #b8c0cc;
+            font-size: 14px;
+            margin: 7px 0;
+        }
+
+        .footer-column a:hover {
+            color: #ffffff;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #293241;
+            padding-top: 20px;
+            color: #9ca3af;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 800px) {
+
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-grid,
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-box {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .hero {
+                padding: 60px 20px 75px;
+            }
+
+            .hero-text {
+                font-size: 16px;
+            }
+
+            .section {
+                padding: 55px 20px;
+            }
+
+            .section-title {
+                font-size: 27px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .brand-name {
+                font-size: 16px;
+            }
+
+            .hero h1 {
+                font-size: 39px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .search-box {
+                padding: 6px;
+            }
+
+            .search-box button {
+                padding: 11px 14px;
+            }
+
+            .search-icon {
+                display: none;
+            }
+
+            .featured-box {
+                padding: 25px;
+            }
+        }
+
     </style>
 </head>
+
 <body>
-  
-<!-- Sehemu ya Juu yenye Logo na Mistari Mitatu -->
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
 <div class="nav-header">
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <img src="file_00000000f17471f4b8f76a744122207a.png" style="height: 40px;" alt="Logo">
-        <span style="font-weight: bold; font-size: 18px; color: #222;">GEPAM Hub</span>
+    <div class="nav-inner">
+
+        <a href="index.html" class="brand">
+            <img
+                src="file_00000000f17471f4b8f76a744122207a.png"
+                alt="GEPAM Science Hub Logo">
+
+            <span class="brand-name">
+                GEPAM Science Hub
+            </span>
+        </a>
+
+        <button
+            class="menu-toggle"
+            onclick="toggleMenu()"
+            aria-label="Open menu">
+            ☰
+        </button>
+
     </div>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 </div>
 
-<header style="text-align: center; padding: 40px 20px; background: #f8f9fa;">
-    <h1>GEPAM Science Hub</h1>
-    <p style="font-size: 18px; color: #666;">Making Physics and Chemistry Easy for Tanzanian Students.</p>
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<header class="hero">
+
+    <div class="hero-inner">
+
+        <div class="hero-kicker">
+            Tanzania's Science Learning Hub
+        </div>
+
+        <h1>
+            Making Science
+            <span>Easy.</span>
+        </h1>
+
+        <p class="hero-text">
+            Learn Physics and Chemistry through well-organized
+            notes, examination papers and revision resources
+            designed for Tanzanian students.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="notes.html"
+               class="hero-btn primary">
+                EXPLORE NOTES
+            </a>
+
+            <a href="pastpapers.html"
+               class="hero-btn secondary">
+                BROWSE PAST PAPERS
+            </a>
+
+        </div>
+
+    </div>
+
 </header>
 
-<!-- Soko Kuu la Homepage (Grid ya Kadi za Kisasa) -->
-<main class="home-grid">
-    <div class="home-card">
+
+<!-- =====================================================
+     SEARCH
+===================================================== -->
+
+<section class="search-section">
+
+    <form
+        class="search-box"
+        onsubmit="performSearch(event)">
+
+        <span class="search-icon">⌕</span>
+
+        <input
+            id="siteSearch"
+            type="search"
+            placeholder="Search notes, past papers or topics..."
+            autocomplete="off">
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- =====================================================
+     MAIN RESOURCES
+===================================================== -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <div class="section-label">
+            Explore GEPAM
+        </div>
+
+        <h2 class="section-title">
+            Learning Resources
+        </h2>
+
+        <p class="section-description">
+            Find the resources you need for learning,
+            revision and examination preparation.
+        </p>
+
+    </div>
+
+
+    <div class="resource-grid">
+
+        <article class="resource-card">
+
+            <h3>
+                Notes
+            </h3>
+
+            <p>
+                Study Physics and Chemistry topics with
+                simplified explanations organized according
+                to form and topic.
+            </p>
+
+            <a href="notes.html"
+               class="resource-link">
+                Explore Notes →
+            </a>
+
+        </article>
+
+
+        <article class="resource-card">
+
+            <h3>
+                Past Papers
+            </h3>
+
+            <p>
+                Access examination papers and marking schemes
+                from Form 1 to Form 6, including NECTA,
+                Mock, Joint, Regional and Special examinations.
+            </p>
+
+            <a href="pastpapers.html"
+               class="resource-link">
+                Browse Past Papers →
+            </a>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     QUICK ACCESS
+===================================================== -->
+
+<section class="section quick-section">
+
+    <div class="section-header">
+
+        <div class="section-label">
+            Quick Access
+        </div>
+
+        <h2 class="section-title">
+            Choose Your Level
+        </h2>
+
+        <p class="section-description">
+            Start from your current level and find
+            the materials you need.
+        </p>
+
+    </div>
+
+
+    <div class="quick-grid">
+
+        <a href="notes.html" class="quick-item">
+
+            <h3>
+                Form 1 – Form 2
+            </h3>
+
+            <p>
+                Foundation-level Physics and Chemistry resources.
+            </p>
+
+        </a>
+
+
+        <a href="notes.html" class="quick-item">
+
+            <h3>
+                Form 3 – Form 4
+            </h3>
+
+            <p>
+                O-Level learning and examination preparation.
+            </p>
+
+        </a>
+
+
+        <a href="notes.html" class="quick-item">
+
+            <h3>
+                Form 5 – Form 6
+            </h3>
+
+            <p>
+                Advanced Physics and Chemistry resources.
+            </p>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FEATURED RESOURCE
+===================================================== -->
+
+<section class="section featured">
+
+    <div class="featured-box">
+
         <div>
-            <h3 style="font-size: 20px; margin-top: 0;">📚 Past Papers with Marking Schemes</h3>
-            <p style="color: #666; line-height: 1.6;">Browse and download free Physics and Chemistry examination Papers with Marking Schemes hierarchically. Access NECTA, Regional Mocks, and Joint exams from Form 1 to Form 6.</p>
+
+            <div class="section-label">
+                Featured
+            </div>
+
+            <h2>
+                Prepare. Practice. Improve.
+            </h2>
+
+            <p>
+                Regular practice with examination papers,
+                together with clear notes, can help you
+                understand concepts and prepare more
+                confidently for examinations.
+            </p>
+
         </div>
-        <a href="pastpapers.html" class="action-btn">FUNGUA MITIHANI</a>
+
+        <a href="pastpapers.html"
+           class="featured-btn">
+            START PRACTISING
+        </a>
+
     </div>
 
-    <div class="home-card">
-        <div>
-            <h3 style="font-size: 20px; margin-top: 0;">📘 Premium Notes Store</h3>
-            <p style="color: #666; line-height: 1.6;">Get high-quality, topic-by-topic Physics and Chemistry notes. Simplified explanations designed to help you score an A in your terminal and national exams.</p>
+</section>
+
+
+<!-- =====================================================
+     WHY GEPAM
+===================================================== -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <div class="section-label">
+            Why GEPAM
         </div>
-        <a href="notes.html" class="action-btn">NUNUA NOTES</a>
+
+        <h2 class="section-title">
+            Built for Better Learning
+        </h2>
+
     </div>
-</main>
 
-<!-- SIRI YA MSOMI BORA: Sidebar Menu yenye Maelekezo ya Ndani -->
-<div class="overlay" id="menuOverlay" onclick="toggleMenu()"></div>
-<div class="sidebar" id="sidebarMenu">
-    <button class="close-btn" onclick="toggleMenu()">✕</button>
-    <div class="sidebar-links">
-        <a href="index.html">🏠 Home</a>
-        <a href="about.html">ℹ️ About Us</a>
-        
-        <!-- Dropdown ya Notes -->
-        <button class="dropdown-btn" onclick="toggleDropdown(this)">📝 Notes Store <span>▼</span></button>
-        <div class="dropdown-container">
-            <a href="notes.html">Form 1 Topics</a>
-            <a href="notes.html">Form 2 Topics</a>
-            <a href="notes.html">Form 3 Topics</a>
-            <a href="notes.html">Form 4 Topics</a>
-            <a href="notes.html">Form 5 Topics</a>
-            <a href="notes.html">Form 6 Topics</a>
+
+    <div class="why-grid">
+
+        <div class="why-card">
+
+            <div class="why-number">
+                01
+            </div>
+
+            <h3>
+                Organized Resources
+            </h3>
+
+            <p>
+                Materials are arranged by level,
+                subject, examination type and other
+                useful categories.
+            </p>
+
         </div>
 
-        <!-- Dropdown ya Past Papers -->
-        <button class="dropdown-btn" onclick="toggleDropdown(this)">📚 Past Papers <span>▼</span></button>
-        <div class="dropdown-container">
-            <a href="pastpapers.html">Form 1 Exams</a>
-            <a href="pastpapers.html">Form 2 Exams</a>
-            <a href="pastpapers.html">Form 3 Exams</a>
-            <a href="pastpapers.html">Form 4 (NECTA/Mock)</a>
-            <a href="pastpapers.html">Form 5 Exams</a>
-            <a href="pastpapers.html">Form 6 (ACSEE/Mock)</a>
+
+        <div class="why-card">
+
+            <div class="why-number">
+                02
+            </div>
+
+            <h3>
+                Simple Learning
+            </h3>
+
+            <p>
+                Our goal is to make difficult scientific
+                concepts easier to understand.
+            </p>
+
         </div>
 
-        <a href="contact.html">📞 Contact Us</a>
+
+        <div class="why-card">
+
+            <div class="why-number">
+                03
+            </div>
+
+            <h3>
+                Exam Preparation
+            </h3>
+
+            <p>
+                Use notes and examination papers to
+                strengthen your preparation.
+            </p>
+
+        </div>
+
     </div>
+
+</section>
+
+
+<!-- =====================================================
+     ABOUT PREVIEW
+===================================================== -->
+
+<section class="section about-preview">
+
+    <div class="about-inner">
+
+        <div class="section-label">
+            About GEPAM
+        </div>
+
+        <h2>
+            Science Made Simpler
+        </h2>
+
+        <p>
+            GEPAM Science Hub is an educational platform
+            focused on helping Tanzanian students access
+            useful Physics and Chemistry learning resources
+            in a simple and organized way.
+        </p>
+
+        <a href="about.html"
+           class="about-link">
+            Learn More About GEPAM
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<div
+    class="overlay"
+    id="menuOverlay"
+    onclick="toggleMenu()">
 </div>
 
-<footer style="text-align: center; padding: 30px; background: #222; color: #fff; margin-top: 50px;">
-    <h3>GEPAM Science Hub</h3>
-    <p>© 2026 GEPAM Science Hub. All Rights Reserved.</p>
+
+<aside
+    class="sidebar"
+    id="sidebarMenu">
+
+    <div class="sidebar-top">
+
+        <div class="sidebar-title">
+            GEPAM Science Hub
+        </div>
+
+        <button
+            class="close-btn"
+            onclick="toggleMenu()"
+            aria-label="Close menu">
+            ✕
+        </button>
+
+    </div>
+
+
+    <nav class="sidebar-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+
+        <a href="about.html">
+            About Us
+        </a>
+
+
+        <!-- NOTES -->
+
+        <button
+            class="dropdown-btn"
+            onclick="toggleDropdown(this)">
+
+            <span>Notes Store</span>
+            <span>+</span>
+
+        </button>
+
+        <div class="dropdown-container">
+
+            <a href="notes.html">
+                Form 1 Topics
+            </a>
+
+            <a href="notes.html">
+                Form 2 Topics
+            </a>
+
+            <a href="notes.html">
+                Form 3 Topics
+            </a>
+
+            <a href="notes.html">
+                Form 4 Topics
+            </a>
+
+            <a href="notes.html">
+                Form 5 Topics
+            </a>
+
+            <a href="notes.html">
+                Form 6 Topics
+            </a>
+
+        </div>
+
+
+        <!-- PAST PAPERS -->
+
+        <button
+            class="dropdown-btn"
+            onclick="toggleDropdown(this)">
+
+            <span>Past Papers</span>
+            <span>+</span>
+
+        </button>
+
+        <div class="dropdown-container">
+
+            <a href="pastpapers.html">
+                Form 1 Exams
+            </a>
+
+            <a href="pastpapers.html">
+                Form 2 Exams
+            </a>
+
+            <a href="pastpapers.html">
+                Form 3 Exams
+            </a>
+
+            <a href="pastpapers.html">
+                Form 4 Exams
+            </a>
+
+            <a href="pastpapers.html">
+                Form 5 Exams
+            </a>
+
+            <a href="pastpapers.html">
+                Form 6 Exams
+            </a>
+
+        </div>
+
+
+        <a href="contact.html">
+            Contact Us
+        </a>
+
+    </nav>
+
+</aside>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div class="footer-grid">
+
+            <div>
+
+                <div class="footer-brand">
+                    GEPAM Science Hub
+                </div>
+
+                <p class="footer-text">
+                    Making Physics and Chemistry easier
+                    for Tanzanian students through organized
+                    learning resources.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Resources
+                </h4>
+
+                <a href="notes.html">
+                    Notes
+                </a>
+
+                <a href="pastpapers.html">
+                    Past Papers
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    GEPAM
+                </h4>
+
+                <a href="about.html">
+                    About Us
+                </a>
+
+                <a href="contact.html">
+                    Contact Us
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 GEPAM Science Hub.
+            All Rights Reserved.
+
+        </div>
+
+    </div>
+
 </footer>
 
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
 <script>
+
+    /* ==============================
+       SIDEBAR
+    ============================== */
+
     function toggleMenu() {
-        const sidebar = document.getElementById("sidebarMenu");
-        const overlay = document.getElementById("menuOverlay");
+
+        const sidebar =
+            document.getElementById("sidebarMenu");
+
+        const overlay =
+            document.getElementById("menuOverlay");
+
         sidebar.classList.toggle("active");
-        overlay.style.display = sidebar.classList.contains("active") ? "block" : "none";
+        overlay.classList.toggle("active");
+
     }
 
-    function toggleDropdown(btn) {
-        btn.classList.toggle("active");
-        const container = btn.nextElementSibling;
-        const arrow = btn.querySelector("span");
+
+    /* ==============================
+       DROPDOWN
+    ============================== */
+
+    function toggleDropdown(button) {
+
+        const container =
+            button.nextElementSibling;
+
+        const arrow =
+            button.querySelector("span:last-child");
+
         if (container.style.display === "block") {
+
             container.style.display = "none";
-            arrow.textContent = "▼";
+
+            if (arrow) {
+                arrow.textContent = "+";
+            }
+
         } else {
+
             container.style.display = "block";
-            arrow.textContent = "▲";
+
+            if (arrow) {
+                arrow.textContent = "−";
+            }
+
         }
+
     }
+
+
+    /* ==============================
+       SEARCH
+    ============================== */
+
+    function performSearch(event) {
+
+        event.preventDefault();
+
+        const input =
+            document.getElementById("siteSearch");
+
+        const query =
+            input.value.trim().toLowerCase();
+
+        if (!query) {
+            input.focus();
+            return;
+        }
+
+        /*
+         * Kwa sasa search inampeleka user
+         * kwenye Past Papers page.
+         *
+         * Search engine kamili ya:
+         * Notes + Past Papers + Topics
+         * tutaijenga baadaye bila kuvuruga
+         * mfumo uliopo.
+         */
+
+        window.location.href =
+            "pastpapers.html";
+
+    }
+
+
+    /* ==============================
+       CLOSE MENU WITH ESCAPE
+    ============================== */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Escape") {
+
+                const sidebar =
+                    document.getElementById("sidebarMenu");
+
+                const overlay =
+                    document.getElementById("menuOverlay");
+
+                sidebar.classList.remove("active");
+                overlay.classList.remove("active");
+
+            }
+
+        }
+    );
+
 </script>
+
 </body>
 </html>
