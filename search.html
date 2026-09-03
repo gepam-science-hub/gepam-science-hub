@@ -144,6 +144,7 @@
             border: 1px solid #e2e8f0;
             border-radius: 10px;
             padding: 22px;
+            margin-bottom: 15px;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .result-card:hover {
@@ -225,8 +226,8 @@
             font-size: 20px;
             font-weight: 700;
             color: #003366;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #e2e8f0;
+            margin: 25px 0 15px 0;
+            border-bottom: 2px solid #d5dde5;
             padding-bottom: 5px;
             width: 100%;
         }
@@ -244,8 +245,9 @@
             width: 100%;
         }
         .priority-card {
-            border-left: 5px solid #003366 !important;
+            border-left: 6px solid #003366 !important;
             background: #f8fafc;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
         .result-card.card-physics {
             border-top: 4px solid #005b96;
@@ -257,9 +259,6 @@
         .result-card.card-physics .result-action {
             background: #005b96;
         }
-        .result-card.card-physics .result-action:hover {
-            background: #003366;
-        }
         .result-card.card-chemistry {
             border-top: 4px solid #00a86b;
         }
@@ -270,9 +269,6 @@
         .result-card.card-chemistry .result-action {
             background: #00a86b;
         }
-        .result-card.card-chemistry .result-action:hover {
-            background: #008f5a;
-        }
         .result-card.card-practical {
             border-top: 4px solid #7c3aed;
         }
@@ -282,9 +278,6 @@
         }
         .result-card.card-practical .result-action {
             background: #7c3aed;
-        }
-        .result-card.card-practical .result-action:hover {
-            background: #5b21b6;
         }
         .result-card.card-default {
             border-top: 4px solid #64748b;
@@ -358,17 +351,7 @@
             <button class="filter-btn" data-filter="practical">Practical Notes</button>
             <button class="filter-btn" data-filter="papers">Past Papers</button>
         </div>
-        <div class="results" id="results">
-            <div class="empty-state">
-                <h3>
-                    What are you looking for?
-                </h3>
-                <p>
-                    Search for a subject, topic, form,
-                    year, exam type or keyword.
-                </p>
-            </div>
-        </div>
+        <div class="results" id="results"></div>
     </main>
     <footer>
         <p><strong>GEPAM Science Hub</strong></p>
