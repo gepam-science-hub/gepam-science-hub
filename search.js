@@ -77,7 +77,7 @@ function performSearch(query) {
     const index = buildSearchIndex();
 
     const wantsNotes = cleanQuery.includes("note") || cleanQuery.includes("topic") || cleanQuery.includes("practical");
-    const wantsPapers = cleanQuery.includes("paper") || cleanQuery.includes("past") || cleanQuery.includes("exam") || cleanQuery.includes("mock") || cleanQuery.includes("necta");
+    const wantsPapers = cleanQuery.includes("paper") || cleanQuery.includes("past") || cleanQuery.includes("exam") || cleanQuery.includes("mock");
 
     allSearchResults = index
         .map(
@@ -88,11 +88,10 @@ function performSearch(query) {
                 let isPriority = false;
 
                 if (titleClean.includes(cleanQuery)) {
-                    score += 60;
+                    score += 50;
                     isPriority = true;
                 } else if (searchable.includes(cleanQuery)) {
-                    score += 30;
-                    isPriority = true;
+                    score += 20;
                 }
 
                 let matchedTokens = 0;
@@ -103,14 +102,14 @@ function performSearch(query) {
                             matchedTokens++;
                         }
                         if (titleClean.includes(token)) {
-                            score += 15;
+                            score += 10;
                         }
                     }
                 );
 
                 if (matchedTokens === tokens.length && tokens.length > 1) {
                     isPriority = true;
-                    score += 25;
+                    score += 15;
                 }
 
                 if (wantsNotes && item.type === "papers") {
@@ -182,7 +181,7 @@ function buildSearchIndex() {
                                 syllabus: extractSyllabusFromKey(key),
                                 actionUrl: buildNotesUrl(key),
                                 searchText: [topic.title, topic.description, key, extractFormFromKey(key), extractSubjectFromKey(key), extractSyllabusFromKey(key), "topic", "topics", "notes"].join(" ")
-                            });
+                    });
                         }
                     );
                 }
@@ -270,7 +269,8 @@ function deduplicateResults(items) {
 
 function extractFormFromKey(key) {
     const match = String(key || "").match(/form([1-6])/i);
-    return match ? `Form ${match[1]}` : "";
+    if (!match) return "";
+    return "Form " + match[1];
 }
 
 function extractSubjectFromKey(key) {
@@ -288,8 +288,9 @@ function extractSyllabusFromKey(key) {
 }
 
 function buildNotesUrl(key) {
-    const form = String(key || "").match(/form([1-6])/i);
-    return form ? "notes.html?form=" + encodeURIComponent(`form${form[1]}`) : "notes.html";
+    const match = String(key || "").match(/form([1-6])/i);
+    if (!match) return "notes.html";
+    return "notes.html?form=" + encodeURIComponent("form" + match[1]);
 }
 
 function buildPaperUrl(paper) {
@@ -306,10 +307,10 @@ function renderResults() {
     }
 
     const count = filtered.length;
-    document.getElementById("searchCount").textContent = `${count} result${count === 1 ? "" : "s"} found.`;
+    document.getElementById("searchCount").textContent = count + " result" + (count === 1 ? "" : "s") + " found.";
 
     if (!count) {
-        container.innerHTML = `<div class="empty-state"><h3>No results found</h3></div>`;
+        container.innerHTML = '<div class="empty-state"><h3>No results found</h3><p>Try another keyword such as <strong>Physics</strong>, <strong>Chemistry</strong>, <strong>Waves</strong>, or <strong>Mock</strong>.</p></div>';
         return;
     }
 
@@ -318,13 +319,13 @@ function renderResults() {
     let htmlOutput = "";
 
     if (priorityItems.length > 0) {
-        htmlOutput += `<div class="search-section-title">Best Matches (Priority)</div>`;
-        htmlOutput += `<div class="priority-list">` + priorityItems.map(item => createResultCard(item, true)).join("") + `</div>`;
+        htmlOutput += '<div class="search-section-title">Best Matches (Priority)</div>';
+        htmlOutput += '<div class="priority-list">' + priorityItems.map(item => createResultCard(item, true)).join("") + '</div>';
     }
 
     if (relevantItems.length > 0) {
-        htmlOutput += `<div class="search-section-title" style="margin-top: 35px;">Other Relevant Resources</div>`;
-        htmlOutput += `<div class="relevant-grid">` + relevantItems.map(item => createResultCard(item, false)).join("") + `</div>`;
+        htmlOutput += '<div class="search-section-title">Other Relevant Resources</div>';
+        htmlOutput += '<div class="relevant-grid">' + relevantItems.map(item => createResultCard(item, false)).join("") + '</div>';
     }
 
     container.innerHTML = htmlOutput;
@@ -342,29 +343,29 @@ function createResultCard(item, isPriority) {
     else if (item.type === "practical") colorClass = "card-practical";
 
     let meta = "";
-    if (item.form) meta += `<span class="meta-item">${escapeHtml(item.form)}</span>`;
-    if (item.subject) meta += `<span class="meta-item">${escapeHtml(item.subject)}</span>`;
-    if (item.year) meta += `<span class="meta-item">${escapeHtml(item.year)}</span>`;
+    if (item.form) meta += '<span class="meta-item">' + escapeHtml(item.form) + '</span>';
+    if (item.subject) meta += '<span class="meta-item">' + escapeHtml(item.subject) + '</span>';
+    if (item.syllabus) meta += '<span class="meta-item">' + escapeHtml(item.syllabus) + '</span>';
+    if (item.year) meta += '<span class="meta-item">' + escapeHtml(item.year) + '</span>';
+    if (item.paperType) meta += '<span class="meta-item">' + escapeHtml(item.paperType) + '</span>';
 
-    let priceHTML = item.price ? `<div class="price">TZS ${Number(item.price).toLocaleString()}</div>` : "";
+    let priceHTML = (item.price !== null && item.price !== undefined && item.price !== "") ? '<div class="price">TZS ' + Number(item.price).toLocaleString() + '</div>' : "";
     let actionText = item.type === "papers" ? "Open Paper" : "View Notes";
 
-    return `
-        <article class="result-card ${colorClass} ${isPriority ? 'priority-card' : ''}">
-            <span class="result-type">${typeLabel}</span>
-            <h3>${title}</h3>
-            ${description ? `<div class="result-description">${description}</div>` : ""}
-            ${meta ? `<div class="result-meta">${meta}</div>` : ""}
-            ${priceHTML}
-            <a class="result-action" href="${escapeAttribute(item.actionUrl)}">${actionText}</a>
-        </article>
-    `;
+    return '<article class="result-card ' + colorClass + (isPriority ? ' priority-card' : '') + '">' +
+        '<span class="result-type">' + typeLabel + '</span>' +
+        '<h3>' + title + '</h3>' +
+        (description ? '<div class="result-description">' + description + '</div>' : '') +
+        (meta ? '<div class="result-meta">' + meta + '</div>' : '') +
+        priceHTML +
+        '<a class="result-action" href="' + escapeAttribute(item.actionUrl) + '">' + actionText + '</a>' +
+    '</article>';
 }
 
 function showInitialState() {
     document.getElementById("searchTitle").textContent = "Search GEPAM resources";
     document.getElementById("searchCount").textContent = "Search Notes, Topics, Practical Notes and Past Papers.";
-    document.getElementById("results").innerHTML = `<div class="empty-state"><h3>What are you looking for?</h3></div>`;
+    document.getElementById("results").innerHTML = '<div class="empty-state"><h3>What are you looking for?</h3><p>Search for a subject, topic, form, year, exam type or keyword.</p></div>';
 }
 
 function escapeHtml(value) {
