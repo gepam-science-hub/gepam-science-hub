@@ -1359,34 +1359,39 @@
 
     function performSearch(event) {
 
-        event.preventDefault();
+    event.preventDefault();
 
-        const input =
-            document.getElementById("siteSearch");
+    const input =
+        document.getElementById("siteSearch");
 
-        const query =
-            input.value.trim().toLowerCase();
-
-        if (!query) {
-            input.focus();
-            return;
-        }
-
-        /*
-         * Kwa sasa search inampeleka user
-         * kwenye Past Papers page.
-         *
-         * Search engine kamili ya:
-         * Notes + Past Papers + Topics
-         * tutaijenga baadaye bila kuvuruga
-         * mfumo uliopo.
-         */
-
-        window.location.href =
-            "pastpapers.html";
-
+    if (!input) {
+        return;
     }
 
+    const query =
+        input.value.trim();
+
+    if (!query) {
+
+        input.focus();
+
+        return;
+    }
+
+    const url =
+        new URL(
+            "search.html",
+            window.location.href
+        );
+
+    url.searchParams.set(
+        "q",
+        query
+    );
+
+    window.location.href =
+        url.href;
+}
 
     /* ==============================
        CLOSE MENU WITH ESCAPE
