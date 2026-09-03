@@ -294,6 +294,100 @@ function getPracticalDatabase() {
 
 function getPastPapersDatabase() {
 
+    // ------------------------------------------------------
+    // First: try direct global variables.
+    // This is important because the existing
+    // pastpapers-data.js may use "const" or "let".
+    // ------------------------------------------------------
+
+    try {
+
+        if (
+            typeof pastPaperRecords !== "undefined" &&
+            Array.isArray(pastPaperRecords)
+        ) {
+            return pastPaperRecords;
+        }
+
+    } catch (error) {
+        // Continue.
+    }
+
+
+    try {
+
+        if (
+            typeof pastPapers !== "undefined" &&
+            Array.isArray(pastPapers)
+        ) {
+            return pastPapers;
+        }
+
+    } catch (error) {
+        // Continue.
+    }
+
+
+    try {
+
+        if (
+            typeof pastPaperData !== "undefined" &&
+            Array.isArray(pastPaperData)
+        ) {
+            return pastPaperData;
+        }
+
+    } catch (error) {
+        // Continue.
+    }
+
+
+    try {
+
+        if (
+            typeof pastpapers !== "undefined" &&
+            Array.isArray(pastpapers)
+        ) {
+            return pastpapers;
+        }
+
+    } catch (error) {
+        // Continue.
+    }
+
+
+    try {
+
+        if (
+            typeof pastpapersData !== "undefined" &&
+            Array.isArray(pastpapersData)
+        ) {
+            return pastpapersData;
+        }
+
+    } catch (error) {
+        // Continue.
+    }
+
+
+    try {
+
+        if (
+            typeof pastPapersData !== "undefined" &&
+            Array.isArray(pastPapersData)
+        ) {
+            return pastPapersData;
+        }
+
+    } catch (error) {
+        // Continue.
+    }
+
+
+    // ------------------------------------------------------
+    // Second: try window properties.
+    // ------------------------------------------------------
+
     const possibleNames = [
 
         "pastPaperRecords",
@@ -313,8 +407,9 @@ function getPastPapersDatabase() {
         try {
 
             if (
-                typeof window[name] !==
-                "undefined"
+                Array.isArray(
+                    window[name]
+                )
             ) {
 
                 return window[name];
