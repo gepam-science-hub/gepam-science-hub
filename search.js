@@ -1,9 +1,9 @@
-// ======================================================
-// GEPAM SCIENCE HUB - JAVASCRIPT SEARCH ENGINE
-// ======================================================
-document.addEventListener("DOMContentLoaded", function () {
-    initializeSearch();
-});
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+        initializeSearch();
+    }
+);
 
 let allSearchResults = [];
 let currentFilter = "all";
@@ -11,7 +11,9 @@ let currentFilter = "all";
 function initializeSearch() {
     const searchForm = document.getElementById("searchForm");
     const searchInput = document.getElementById("searchInput");
-    if (!searchForm || !searchInput) return;
+    if (!searchForm || !searchInput) {
+        return;
+    }
 
     const params = new URLSearchParams(window.location.search);
     const query = (params.get("q") || "").trim();
@@ -22,32 +24,47 @@ function initializeSearch() {
         showInitialState();
     }
 
-    searchForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const newQuery = searchInput.value.trim();
-        const url = new URL(window.location.href);
-        if (newQuery) {
-            url.searchParams.set("q", newQuery);
-        } else {
-            url.searchParams.delete("q");
+    searchForm.addEventListener(
+        "submit",
+        function (event) {
+            event.preventDefault();
+            const newQuery = searchInput.value.trim();
+            const url = new URL(window.location.href);
+            if (newQuery) {
+                url.searchParams.set("q", newQuery);
+            } else {
+                url.searchParams.delete("q");
+            }
+            window.history.pushState({}, "", url);
+            performSearch(newQuery);
         }
-        window.history.pushState({}, "", url);
-        performSearch(newQuery);
-    });
+    );
 
     const filterButtons = document.querySelectorAll(".filter-btn");
-    filterButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            filterButtons.forEach(btn => btn.classList.remove("active"));
-            button.classList.add("active");
-            currentFilter = button.dataset.filter;
-            renderResults();
-        });
-    });
+    filterButtons.forEach(
+        function (button) {
+            button.addEventListener(
+                "click",
+                function () {
+                    filterButtons.forEach(
+                        function (btn) {
+                            btn.classList.remove("active");
+                        }
+                    );
+                    button.classList.add("active");
+                    currentFilter = button.dataset.filter;
+                    renderResults();
+                }
+            );
+        }
+    );
 }
 
 function normalizeText(value) {
-    return String(value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return String(value || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
 }
 function performSearch(query) {
     const cleanQuery = normalizeText(query);
@@ -59,41 +76,226 @@ function performSearch(query) {
     const tokens = cleanQuery.split(/\s+/).filter(Boolean);
     const index = buildSearchIndex();
 
-    // Utambuzi wa kiotomatiki wa nia ya mtafutaji
     const wantsNotes = cleanQuery.includes("note") || cleanQuery.includes("topic") || cleanQuery.includes("practical");
-    const wantsPapers = cleanQuery.includes("paper") || cleanQuery.includes("past") || cleanQuery.includes("exam") || cleanQuery.includes("mock");
+    const wantsPapers = cleanQuery.includes("paper") || cleanQuery.includes("past") || cleanQuery.includes("exam") || cleanQuery.includes("mock") || cleanQuery.includes("necta");
 
-    allSearchResults = index.map(function (item) {
-        const searchable = normalizeText(item.searchText);
-        const titleClean = normalizeText(item.title);
-        let score = 0;
-        let isPriority = false;
+    allSearchResults = index
+        .map(
+            function (item) {
+                const searchable = normalizeText(item.searchText);
+                const titleClean = normalizeText(item.title);
+                let score = 0;
+                let isPriority = false;
 
-        // 1. EXACT MATCH (Kipaumbele kikubwa zaidi)
-        if (titleClean.includes(cleanQuery) || searchable.includes(cleanQuery)) {
-            score += 50;
-            isPriority = true;
-        }
+                if (titleClean.includes(cleanQuery)) {
+                    score += 60;
+                    isPriority = true;
+                } else if (searchable.includes(cleanQuery)) {
+                    score += 30;
+                    isPriority = true;
+                }
 
-        // 2. TOKEN MATCH (Uzito kwa maneno yote mawili yakipatikana mfano "physics f2")
-        let matchedTokens = 0;
-        tokens.forEach(function (token) {
-            if (searchable.includes(token)) score += 5;
-            if (titleClean.includes(token)) score += 15;
-        });
+                let matchedTokens = 0;
+                tokens.forEach(
+                    function (token) {
+                        if (searchable.includes(token)) {
+                            score += 5;
+                            matchedTokens++;
+                        }
+                        if (titleClean.includes(token)) {
+                            score += 15;
+                        }
+                    }
+                );
 
-        // 3. AUTO-FILTER (Hakuna past papers wakati umesearch notes)
-        if (wantsNotes && item.type === "papers") score = 0;
-        if (wantsPapers && (item.type === "notes" || item.type === "topics")) score = 0;
+                if (matchedTokens === tokens.length && tokens.length > 1) {
+                    isPriority = true;
+                    score += 25;
+                }
 
-        return { ...item, score: score, isPriority: isPriority };
-    })
-    .filter(item => item.score > 0)
-    .sort((a, b) => b.score - a.score);
+                if (wantsNotes && item.type === "papers") {
+                    score = 0;
+                }
+                if (wantsPapers && (item.type === "notes" || item.type === "topics")) {
+                    score = 0;
+                }
+
+                return {
+                    ...item,
+                    score: score,
+                    isPriority: isPriority
+                };
+            }
+        )
+        .filter(
+            function (item) {
+                return item.score > 0;
+            }
+        )
+        .sort(
+            function (a, b) {
+                return b.score - a.score;
+            }
+        );
 
     document.getElementById("searchTitle").textContent = `Search results for "${query}"`;
     renderResults();
 }
+
+function buildSearchIndex() {
+    const index = [];
+
+    if (typeof notesData !== "undefined" && notesData && typeof notesData === "object") {
+        Object.keys(notesData).forEach(
+            function (key) {
+                const group = notesData[key];
+                if (!group) return;
+                if (group.full) {
+                    const full = group.full;
+                    index.push({
+                        uniqueKey: `full-${full.id}`,
+                        type: "notes",
+                        typeLabel: "Notes",
+                        title: full.title || "Full Notes",
+                        description: full.description || "",
+                        price: full.price,
+                        form: extractFormFromKey(key),
+                        subject: extractSubjectFromKey(key),
+                        syllabus: extractSyllabusFromKey(key),
+                        actionUrl: buildNotesUrl(key),
+                        searchText: [full.title, full.description, key, extractFormFromKey(key), extractSubjectFromKey(key), extractSyllabusFromKey(key), "notes", "full notes", "physics", "chemistry"].join(" ")
+                    });
+                }
+                if (Array.isArray(group.topics)) {
+                    group.topics.forEach(
+                        function (topic) {
+                            if (!topic) return;
+                            index.push({
+                                uniqueKey: `topic-${topic.id}`,
+                                type: "topics",
+                                typeLabel: "Topic",
+                                title: topic.title || "Topic",
+                                description: topic.description || "",
+                                price: topic.price,
+                                form: extractFormFromKey(key),
+                                subject: extractSubjectFromKey(key),
+                                syllabus: extractSyllabusFromKey(key),
+                                actionUrl: buildNotesUrl(key),
+                                searchText: [topic.title, topic.description, key, extractFormFromKey(key), extractSubjectFromKey(key), extractSyllabusFromKey(key), "topic", "topics", "notes"].join(" ")
+                            });
+                        }
+                    );
+                }
+            }
+        );
+    }
+
+    if (typeof practicalNotes !== "undefined" && practicalNotes && typeof practicalNotes === "object") {
+        Object.keys(practicalNotes).forEach(
+            function (level) {
+                const list = practicalNotes[level];
+                if (!Array.isArray(list)) return;
+                list.forEach(
+                    function (item) {
+                        if (!item) return;
+                        const subject = extractSubjectFromKey(item.id || "");
+                        index.push({
+                            uniqueKey: `practical-${item.id}`,
+                            type: "practical",
+                            typeLabel: "Practical Notes",
+                            title: item.title || "Practical Notes",
+                            description: item.description || "",
+                            price: item.price,
+                            form: level === "olevel" ? "O-Level" : "A-Level",
+                            subject: subject,
+                            syllabus: "",
+                            actionUrl: "notes.html",
+                            searchText: [item.title, item.description, item.id, level, subject, "practical", "practical notes", "physics", "chemistry"].join(" ")
+                        });
+                    }
+                );
+            }
+        );
+    }
+
+    const paperSource = getPastPaperSource();
+    if (Array.isArray(paperSource)) {
+        paperSource.forEach(
+            function (paper, indexNumber) {
+                if (!paper) return;
+                index.push({
+                    uniqueKey: `paper-${paper.id || indexNumber}`,
+                    type: "papers",
+                    typeLabel: "Past Paper",
+                    title: paper.title || paper.name || "Past Paper",
+                    description: paper.description || "",
+                    price: null,
+                    form: paper.form || "",
+                    subject: paper.subject || "",
+                    syllabus: "",
+                    year: paper.year || "",
+                    paperType: paper.type || "",
+                    category: paper.category || "",
+                    region: paper.region || "",
+                    specialExam: paper.specialExam || "",
+                    actionUrl: buildPaperUrl(paper),
+                    searchText: [paper.title, paper.name, paper.description, paper.year, paper.form, paper.subject, paper.type, paper.category, paper.region, "past papers", "papers"].join(" ")
+                });
+            }
+        );
+    }
+    return deduplicateResults(index);
+}
+function getPastPaperSource() {
+    const possibleNames = ["pastPaperRecords", "pastPapers", "pastpapers", "pastPaperData"];
+    for (let i = 0; i < possibleNames.length; i++) {
+        if (typeof window[possibleNames[i]] !== "undefined" && Array.isArray(window[possibleNames[i]])) {
+            return window[possibleNames[i]];
+        }
+    }
+    return [];
+}
+
+function deduplicateResults(items) {
+    const seen = new Set();
+    const output = [];
+    items.forEach(function (item) {
+        const key = item.uniqueKey || `${item.type}-${item.title}`;
+        if (seen.has(key)) return;
+        seen.add(key);
+        output.push(item);
+    });
+    return output;
+}
+
+function extractFormFromKey(key) {
+    const match = String(key || "").match(/form([1-6])/i);
+    return match ? `Form ${match[1]}` : "";
+}
+
+function extractSubjectFromKey(key) {
+    const value = normalizeText(key);
+    if (value.includes("physics")) return "Physics";
+    if (value.includes("chemistry")) return "Chemistry";
+    return "";
+}
+
+function extractSyllabusFromKey(key) {
+    const value = normalizeText(key);
+    if (value.includes("old")) return "Old Syllabus";
+    if (value.includes("new")) return "New Syllabus";
+    return "";
+}
+
+function buildNotesUrl(key) {
+    const form = String(key || "").match(/form([1-6])/i);
+    return form ? "notes.html?form=" + encodeURIComponent(`form${form[1]}`) : "notes.html";
+}
+
+function buildPaperUrl(paper) {
+    return paper && paper.file ? paper.file : "pastpapers.html";
+}
+
 function renderResults() {
     const container = document.getElementById("results");
     if (!container) return;
@@ -111,38 +313,29 @@ function renderResults() {
         return;
     }
 
-    // Tofautisha Kati ya Priority na Relevant
-    const topScore = filtered[0].score;
-    const priorityItems = filtered.filter(item => item.score === topScore || item.isPriority);
-    const relevantItems = filtered.filter(item => !priorityItems.includes(item));
-
+    const priorityItems = filtered.filter(item => item.isPriority);
+    const relevantItems = filtered.filter(item => !item.isPriority);
     let htmlOutput = "";
 
-    // 1. Weka kwanza Priority List juu
     if (priorityItems.length > 0) {
         htmlOutput += `<div class="search-section-title">Best Matches (Priority)</div>`;
-        htmlOutput += `<div class="priority-list">`;
-        htmlOutput += priorityItems.map(item => createResultCard(item, true)).join("");
-        htmlOutput += `</div>`;
+        htmlOutput += `<div class="priority-list">` + priorityItems.map(item => createResultCard(item, true)).join("") + `</div>`;
     }
 
-    // 2. Weka rasilimali nyingine zinazohusiana chini yake kama Grid
     if (relevantItems.length > 0) {
-        htmlOutput += `<div class="search-section-title" style="margin-top: 40px;">Other Relevant Resources</div>`;
-        htmlOutput += `<div class="relevant-grid">`;
-        htmlOutput += relevantItems.map(item => createResultCard(item, false)).join("");
-        htmlOutput += `</div>`;
+        htmlOutput += `<div class="search-section-title" style="margin-top: 35px;">Other Relevant Resources</div>`;
+        htmlOutput += `<div class="relevant-grid">` + relevantItems.map(item => createResultCard(item, false)).join("") + `</div>`;
     }
 
     container.innerHTML = htmlOutput;
 }
+
 function createResultCard(item, isPriority) {
     const title = escapeHtml(item.title);
     const description = escapeHtml(item.description);
     const typeLabel = escapeHtml(item.typeLabel);
-    
-    // Kuchagua class ya CSS kulingana na somo
     const subject = item.subject ? item.subject.toLowerCase() : "";
+    
     let colorClass = "card-default";
     if (subject === "physics") colorClass = "card-physics";
     else if (subject === "chemistry") colorClass = "card-chemistry";
@@ -154,7 +347,7 @@ function createResultCard(item, isPriority) {
     if (item.year) meta += `<span class="meta-item">${escapeHtml(item.year)}</span>`;
 
     let priceHTML = item.price ? `<div class="price">TZS ${Number(item.price).toLocaleString()}</div>` : "";
-    const actionText = item.type === "papers" ? "Open Paper" : "View Notes";
+    let actionText = item.type === "papers" ? "Open Paper" : "View Notes";
 
     return `
         <article class="result-card ${colorClass} ${isPriority ? 'priority-card' : ''}">
@@ -168,4 +361,16 @@ function createResultCard(item, isPriority) {
     `;
 }
 
-// (Weka hapa chini kazi zako zote zilizobaki za buildSearchIndex, extractForm, nk. zilizokuwepo mwanzo)
+function showInitialState() {
+    document.getElementById("searchTitle").textContent = "Search GEPAM resources";
+    document.getElementById("searchCount").textContent = "Search Notes, Topics, Practical Notes and Past Papers.";
+    document.getElementById("results").innerHTML = `<div class="empty-state"><h3>What are you looking for?</h3></div>`;
+}
+
+function escapeHtml(value) {
+    return String(value || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+}
+
+function escapeAttribute(value) {
+    return escapeHtml(value);
+}
