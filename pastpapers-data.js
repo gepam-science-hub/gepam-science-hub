@@ -1096,8 +1096,8 @@ const pastPapers = [
     "type":"necta",
     "region":"necta",
     "year":2025,
-    "file":"papers/form6/physics/necta/2025/F6_necta_2025_phy1.pdf",
-    "markingScheme":""
+    "file":"papers/form6/physics/necta/2025/Physics1_F6_2025.pdf",
+    "markingScheme":"Physics1_F6_2025_Solutions.pdf"
 },
 
 {
@@ -1118,8 +1118,8 @@ const pastPapers = [
     "type":"necta",
     "region":"necta",
     "year":2025,
-    "file":"papers/form6/physics/necta/2025/F6_necta_2025_phy3a.pdf",
-    "markingScheme":""
+    "file":"papers/form6/physics/necta/2025/Physics3A_F6_2025.pdf",
+    "markingScheme":"Physics3A_F6_2025_Solutions"
 },
 
 {
