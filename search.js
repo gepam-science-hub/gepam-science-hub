@@ -61,10 +61,18 @@ function initializeSearch() {
 }
 
 function normalizeText(value) {
-    return String(value || "")
+    let text = String(value || "")
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
+    
+    text = text.replace(/\bf1\b/g, "form1")
+               .replace(/\bf2\b/g, "form2")
+               .replace(/\bf3\b/g, "form3")
+               .replace(/\bf4\b/g, "form4")
+               .replace(/\bf5\b/g, "form5")
+               .replace(/\bf6\b/g, "form6");
+    return text;
 }
 function performSearch(query) {
     const cleanQuery = normalizeText(query);
@@ -137,7 +145,7 @@ function performSearch(query) {
             }
         );
 
-    document.getElementById("searchTitle").textContent = `Search results for "${query}"`;
+    document.getElementById("searchTitle").textContent = "Search results for \"" + query + "\"";
     renderResults();
 }
 
@@ -152,7 +160,7 @@ function buildSearchIndex() {
                 if (group.full) {
                     const full = group.full;
                     index.push({
-                        uniqueKey: `full-${full.id}`,
+                        uniqueKey: "full-" + full.id,
                         type: "notes",
                         typeLabel: "Notes",
                         title: full.title || "Full Notes",
@@ -170,7 +178,7 @@ function buildSearchIndex() {
                         function (topic) {
                             if (!topic) return;
                             index.push({
-                                uniqueKey: `topic-${topic.id}`,
+                                uniqueKey: "topic-" + topic.id,
                                 type: "topics",
                                 typeLabel: "Topic",
                                 title: topic.title || "Topic",
@@ -181,7 +189,7 @@ function buildSearchIndex() {
                                 syllabus: extractSyllabusFromKey(key),
                                 actionUrl: buildNotesUrl(key),
                                 searchText: [topic.title, topic.description, key, extractFormFromKey(key), extractSubjectFromKey(key), extractSyllabusFromKey(key), "topic", "topics", "notes"].join(" ")
-                    });
+                            });
                         }
                     );
                 }
@@ -199,7 +207,7 @@ function buildSearchIndex() {
                         if (!item) return;
                         const subject = extractSubjectFromKey(item.id || "");
                         index.push({
-                            uniqueKey: `practical-${item.id}`,
+                            uniqueKey: "practical-" + item.id,
                             type: "practical",
                             typeLabel: "Practical Notes",
                             title: item.title || "Practical Notes",
@@ -223,7 +231,7 @@ function buildSearchIndex() {
             function (paper, indexNumber) {
                 if (!paper) return;
                 index.push({
-                    uniqueKey: `paper-${paper.id || indexNumber}`,
+                    uniqueKey: "paper-" + (paper.id || indexNumber),
                     type: "papers",
                     typeLabel: "Past Paper",
                     title: paper.title || paper.name || "Past Paper",
@@ -259,7 +267,7 @@ function deduplicateResults(items) {
     const seen = new Set();
     const output = [];
     items.forEach(function (item) {
-        const key = item.uniqueKey || `${item.type}-${item.title}`;
+        const key = item.uniqueKey || (item.type + "-" + item.title);
         if (seen.has(key)) return;
         seen.add(key);
         output.push(item);
@@ -269,7 +277,7 @@ function deduplicateResults(items) {
 
 function extractFormFromKey(key) {
     const match = String(key || "").match(/form([1-6])/i);
-    if (!match) return "";
+    if (!match || !match[1]) return "";
     return "Form " + match[1];
 }
 
@@ -289,7 +297,7 @@ function extractSyllabusFromKey(key) {
 
 function buildNotesUrl(key) {
     const match = String(key || "").match(/form([1-6])/i);
-    if (!match) return "notes.html";
+    if (!match || !match[1]) return "notes.html";
     return "notes.html?form=" + encodeURIComponent("form" + match[1]);
 }
 
