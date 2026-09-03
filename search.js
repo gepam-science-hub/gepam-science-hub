@@ -1,320 +1,789 @@
-// ==========================================================
+// ======================================================
 // GEPAM SCIENCE HUB
-// SMART SITE SEARCH
-// ==========================================================
+// UNIFIED SEARCH ENGINE
+// ======================================================
+//
 // Searches:
-//   - Premium Notes
-//   - Topics
-//   - Practical Notes
-//   - Past Papers
+// 1. Premium Notes
+// 2. Topics
+// 3. Practical Notes
+// 4. Past Papers
 //
 // IMPORTANT:
-// - Does NOT modify notesData
-// - Does NOT modify practicalNotes
-// - Does NOT modify pastPaperRecords
-// - Does NOT touch the payment engine
-// ==========================================================
+// - Does NOT modify payment system.
+// - Does NOT modify pastpapers-data.js.
+// - Uses existing data where available.
+// ======================================================
 
 
-// ==========================================================
-// BASIC HELPERS
-// ==========================================================
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        initializeSearch();
+
+    }
+);
+
+
+// ======================================================
+// GLOBAL STATE
+// ======================================================
+
+let allSearchResults = [];
+
+let currentFilter = "all";
+
+
+// ======================================================
+// INITIALIZE
+// ======================================================
+
+function initializeSearch() {
+
+    const searchForm =
+        document.getElementById("searchForm");
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    if (!searchForm || !searchInput) {
+        return;
+    }
+
+
+    // ------------------------------------------
+    // GET QUERY FROM URL
+    // ------------------------------------------
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const query =
+        (params.get("q") || "").trim();
+
+
+    if (query) {
+
+        searchInput.value = query;
+
+        performSearch(query);
+
+    } else {
+
+        showInitialState();
+
+    }
+
+
+    // ------------------------------------------
+    // SEARCH FORM
+    // ------------------------------------------
+
+    searchForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+            const newQuery =
+                searchInput.value.trim();
+
+            const url =
+                new URL(
+                    window.location.href
+                );
+
+            if (newQuery) {
+
+                url.searchParams.set(
+                    "q",
+                    newQuery
+                );
+
+            } else {
+
+                url.searchParams.delete("q");
+
+            }
+
+
+            window.history.pushState(
+                {},
+                "",
+                url
+            );
+
+
+            performSearch(newQuery);
+
+        }
+    );
+
+
+    // ------------------------------------------
+    // FILTER BUTTONS
+    // ------------------------------------------
+
+    const filterButtons =
+        document.querySelectorAll(
+            ".filter-btn"
+        );
+
+
+    filterButtons.forEach(
+        function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    filterButtons.forEach(
+                        function (btn) {
+
+                            btn.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+                    currentFilter =
+                        button.dataset.filter;
+
+
+                    renderResults();
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+// ======================================================
+// NORMALIZE TEXT
+// ======================================================
 
 function normalizeText(value) {
 
-    return String(value ?? "")
+    return String(value || "")
         .toLowerCase()
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[-_/]+/g, " ")
-        .replace(/\s+/g, " ")
-        .trim();
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        );
 
 }
 
 
-function escapeHTML(value) {
+// ======================================================
+// SEARCH
+// ======================================================
 
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+function performSearch(query) {
 
-}
+    const cleanQuery =
+        normalizeText(query);
 
 
-// ==========================================================
-// FORM DETECTION
-// ==========================================================
+    if (!cleanQuery) {
 
-function detectForm(query) {
+        showInitialState();
 
-    const q = normalizeText(query);
+        return;
 
-    const match = q.match(
-        /\b(?:form|f)\s*([1-6])\b/
-    );
-
-    if (match) {
-        return `form${match[1]}`;
     }
 
-    const words = q.split(" ");
 
-    for (let i = 1; i <= 6; i++) {
+    const tokens =
+        cleanQuery
+            .split(/\s+/)
+            .filter(Boolean);
 
-        if (
-            words.includes(
-                `form${i}`
+
+    const index =
+        buildSearchIndex();
+
+
+    allSearchResults =
+        index
+            .map(
+                function (item) {
+
+                    const searchable =
+                        normalizeText(
+                            item.searchText
+                        );
+
+
+                    let score = 0;
+
+
+                    // --------------------------------
+                    // EXACT FULL QUERY
+                    // --------------------------------
+
+                    if (
+                        searchable.includes(
+                            cleanQuery
+                        )
+                    ) {
+
+                        score += 20;
+
+                    }
+
+
+                    // --------------------------------
+                    // EACH WORD
+                    // --------------------------------
+
+                    tokens.forEach(
+                        function (token) {
+
+                            if (
+                                searchable.includes(
+                                    token
+                                )
+                            ) {
+
+                                score += 5;
+
+                            }
+
+
+                            // Title gets extra weight
+
+                            if (
+                                normalizeText(
+                                    item.title
+                                ).includes(token)
+                            ) {
+
+                                score += 10;
+
+                            }
+
+                        }
+                    );
+
+
+                    return {
+                        ...item,
+                        score: score
+                    };
+
+                }
             )
-        ) {
-            return `form${i}`;
-        }
+            .filter(
+                function (item) {
 
-    }
+                    return item.score > 0;
 
-    return null;
-
-}
-
-
-// ==========================================================
-// SUBJECT DETECTION
-// ==========================================================
-
-function detectSubject(query) {
-
-    const q = normalizeText(query);
-
-    if (
-        /\bphysics\b/.test(q)
-    ) {
-        return "physics";
-    }
-
-    if (
-        /\bchemistry\b/.test(q)
-    ) {
-        return "chemistry";
-    }
-
-    return null;
-
-}
-
-
-// ==========================================================
-// YEAR DETECTION
-// ==========================================================
-
-function detectYear(query) {
-
-    const q = normalizeText(query);
-
-    const match = q.match(
-        /\b(20\d{2})\b/
-    );
-
-    return match
-        ? Number(match[1])
-        : null;
-
-}
-
-
-// ==========================================================
-// PAPER TYPE DETECTION
-// ==========================================================
-
-function detectPaperType(query) {
-
-    const q = normalizeText(query);
-
-    if (
-        /\bpre\s*necta\b/.test(q) ||
-        /\bprenecta\b/.test(q)
-    ) {
-        return "pre_necta";
-    }
-
-    if (
-        /\bnecta\b/.test(q)
-    ) {
-        return "necta";
-    }
-
-    if (
-        /\bmock\b/.test(q)
-    ) {
-        return "mock";
-    }
-
-    if (
-        /\bannual\b/.test(q)
-    ) {
-        return "annual";
-    }
-
-    if (
-        /\bjoint\b/.test(q)
-    ) {
-        return "joint";
-    }
-
-    if (
-        /\bspecial\b/.test(q) ||
-        /\bisese\b/.test(q) ||
-        /\btahossa\b/.test(q) ||
-        /\bjepgos\b/.test(q) ||
-        /\bcssc\b/.test(q)
-    ) {
-        return "special";
-    }
-
-    return null;
-
-}
-
-
-// ==========================================================
-// SYLLABUS DETECTION
-// ==========================================================
-
-function detectSyllabus(query) {
-
-    const q = normalizeText(query);
-
-    if (
-        /\bold\s+syllabus\b/.test(q) ||
-        /\bold\b/.test(q)
-    ) {
-        return "old";
-    }
-
-    if (
-        /\bnew\s+syllabus\b/.test(q) ||
-        /\bnew\b/.test(q)
-    ) {
-        return "new";
-    }
-
-    return null;
-
-}
-
-
-// ==========================================================
-// SPECIAL EXAM DETECTION
-// ==========================================================
-
-function detectSpecialExam(query) {
-
-    const q = normalizeText(query);
-
-    const names = [
-        "isese",
-        "tahossa",
-        "jepgos",
-        "cssc",
-        "special school"
-    ];
-
-    for (const name of names) {
-
-        if (
-            q.includes(
-                normalizeText(name)
+                }
             )
-        ) {
-            return name;
-        }
+            .sort(
+                function (a, b) {
 
-    }
+                    return b.score - a.score;
 
-    return null;
-
-}
+                }
+            );
 
 
-// ==========================================================
-// NOTES DATA SOURCE
-// ==========================================================
+    document.getElementById(
+        "searchTitle"
+    ).textContent =
+        `Search results for "${query}"`;
 
-function getNotesDatabase() {
 
-    if (
-        typeof notesData !== "undefined"
-    ) {
-        return notesData;
-    }
-
-    if (
-        window.gepamNotesData
-    ) {
-        return window.gepamNotesData;
-    }
-
-    return {};
+    renderResults();
 
 }
 
 
-// ==========================================================
-// PRACTICAL NOTES SOURCE
-// ==========================================================
+// ======================================================
+// BUILD SEARCH INDEX
+// ======================================================
 
-function getPracticalDatabase() {
+function buildSearchIndex() {
+
+    const index = [];
+
+
+    // ==================================================
+    // NOTES DATA
+    // ==================================================
 
     if (
-        typeof practicalNotes !== "undefined"
+        typeof notesData !== "undefined" &&
+        notesData &&
+        typeof notesData === "object"
     ) {
-        return practicalNotes;
+
+        Object.keys(notesData).forEach(
+            function (key) {
+
+                const group =
+                    notesData[key];
+
+
+                if (!group) {
+                    return;
+                }
+
+
+                // --------------------------------------
+                // FULL NOTES
+                // --------------------------------------
+
+                if (group.full) {
+
+                    const full =
+                        group.full;
+
+
+                    index.push({
+
+                        uniqueKey:
+                            `full-${full.id}`,
+
+                        type:
+                            "notes",
+
+                        typeLabel:
+                            "Notes",
+
+                        title:
+                            full.title ||
+                            "Full Notes",
+
+                        description:
+                            full.description ||
+                            "",
+
+                        price:
+                            full.price,
+
+                        form:
+                            extractFormFromKey(key),
+
+                        subject:
+                            extractSubjectFromKey(key),
+
+                        syllabus:
+                            extractSyllabusFromKey(key),
+
+                        actionUrl:
+                            buildNotesUrl(
+                                key
+                            ),
+
+                        searchText:
+                            [
+                                full.title,
+                                full.description,
+                                key,
+                                extractFormFromKey(key),
+                                extractSubjectFromKey(key),
+                                extractSyllabusFromKey(key),
+                                "notes",
+                                "full notes",
+                                "physics",
+                                "chemistry"
+                            ].join(" ")
+
+                    });
+
+                }
+
+
+                // --------------------------------------
+                // TOPICS
+                // --------------------------------------
+
+                if (
+                    Array.isArray(
+                        group.topics
+                    )
+                ) {
+
+                    group.topics.forEach(
+                        function (topic) {
+
+                            if (!topic) {
+                                return;
+                            }
+
+
+                            index.push({
+
+                                uniqueKey:
+                                    `topic-${topic.id}`,
+
+                                type:
+                                    "topics",
+
+                                typeLabel:
+                                    "Topic",
+
+                                title:
+                                    topic.title ||
+                                    "Topic",
+
+                                description:
+                                    topic.description ||
+                                    "",
+
+                                price:
+                                    topic.price,
+
+                                form:
+                                    extractFormFromKey(key),
+
+                                subject:
+                                    extractSubjectFromKey(key),
+
+                                syllabus:
+                                    extractSyllabusFromKey(key),
+
+                                actionUrl:
+                                    buildNotesUrl(
+                                        key
+                                    ),
+
+                                searchText:
+                                    [
+                                        topic.title,
+                                        topic.description,
+                                        key,
+                                        extractFormFromKey(key),
+                                        extractSubjectFromKey(key),
+                                        extractSyllabusFromKey(key),
+                                        "topic",
+                                        "topics",
+                                        "notes"
+                                    ].join(" ")
+
+                            });
+
+                        }
+                    );
+
+                }
+
+            }
+        );
+
     }
+
+
+    // ==================================================
+    // PRACTICAL NOTES
+    // ==================================================
 
     if (
-        window.gepamPracticalNotes
+        typeof practicalNotes !== "undefined" &&
+        practicalNotes &&
+        typeof practicalNotes === "object"
     ) {
-        return window.gepamPracticalNotes;
+
+        Object.keys(practicalNotes)
+            .forEach(
+                function (level) {
+
+                    const list =
+                        practicalNotes[level];
+
+
+                    if (
+                        !Array.isArray(list)
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    list.forEach(
+                        function (item) {
+
+                            if (!item) {
+                                return;
+                            }
+
+
+                            const subject =
+                                extractSubjectFromKey(
+                                    item.id || ""
+                                );
+
+
+                            index.push({
+
+                                uniqueKey:
+                                    `practical-${item.id}`,
+
+                                type:
+                                    "practical",
+
+                                typeLabel:
+                                    "Practical Notes",
+
+                                title:
+                                    item.title ||
+                                    "Practical Notes",
+
+                                description:
+                                    item.description ||
+                                    "",
+
+                                price:
+                                    item.price,
+
+                                form:
+                                    level === "olevel"
+                                        ? "O-Level"
+                                        : "A-Level",
+
+                                subject:
+                                    subject,
+
+                                syllabus:
+                                    "",
+
+                                actionUrl:
+                                    "notes.html",
+
+                                searchText:
+                                    [
+                                        item.title,
+                                        item.description,
+                                        item.id,
+                                        level,
+                                        subject,
+                                        "practical",
+                                        "practical notes",
+                                        "physics",
+                                        "chemistry"
+                                    ].join(" ")
+
+                            });
+
+                        }
+                    );
+
+                }
+            );
+
     }
 
-    return {};
+
+    // ==================================================
+    // PAST PAPERS
+    // ==================================================
+
+    const paperSource =
+        getPastPaperSource();
+
+
+    if (
+        Array.isArray(
+            paperSource
+        )
+    ) {
+
+        paperSource.forEach(
+            function (paper, indexNumber) {
+
+                if (!paper) {
+                    return;
+                }
+
+
+                const title =
+                    paper.title ||
+                    paper.name ||
+                    "Past Paper";
+
+
+                const description =
+                    paper.description ||
+                    "";
+
+
+                const year =
+                    paper.year ||
+                    "";
+
+
+                const form =
+                    paper.form ||
+                    "";
+
+
+                const subject =
+                    paper.subject ||
+                    "";
+
+
+                const type =
+                    paper.type ||
+                    "";
+
+
+                const category =
+                    paper.category ||
+                    "";
+
+
+                const region =
+                    paper.region ||
+                    "";
+
+
+                const specialExam =
+                    paper.specialExam ||
+                    "";
+
+
+                const file =
+                    paper.file ||
+                    "";
+
+
+                index.push({
+
+                    uniqueKey:
+                        `paper-${paper.id || indexNumber}`,
+
+                    type:
+                        "papers",
+
+                    typeLabel:
+                        "Past Paper",
+
+                    title:
+                        title,
+
+                    description:
+                        description,
+
+                    price:
+                        null,
+
+                    form:
+                        form,
+
+                    subject:
+                        subject,
+
+                    syllabus:
+                        "",
+
+                    year:
+                        year,
+
+                    paperType:
+                        type,
+
+                    category:
+                        category,
+
+                    region:
+                        region,
+
+                    specialExam:
+                        specialExam,
+
+                    file:
+                        file,
+
+                    actionUrl:
+                        buildPaperUrl(
+                            paper
+                        ),
+
+                    searchText:
+                        [
+                            title,
+                            description,
+                            year,
+                            form,
+                            subject,
+                            type,
+                            category,
+                            region,
+                            specialExam,
+                            file,
+                            "past papers",
+                            "papers"
+                        ].join(" ")
+
+                });
+
+            }
+        );
+
+    }
+
+
+    return deduplicateResults(index);
 
 }
 
 
-// ==========================================================
-// PAST PAPERS DATA SOURCE
-// ==========================================================
-// We deliberately support several common variable names so
-// the search does not break if the existing Past Papers file
-// uses one of these names.
-// ==========================================================
+// ======================================================
+// GET PAST PAPER DATA
+// ======================================================
 
-function getPastPapersDatabase() {
+function getPastPaperSource() {
+
+    // --------------------------------------------------
+    // Try common variable names without modifying
+    // the existing pastpapers-data.js.
+    // --------------------------------------------------
 
     const possibleNames = [
 
         "pastPaperRecords",
+
         "pastPapers",
-        "pastPaperData",
+
         "pastpapers",
-        "pastpapersData",
-        "pastPapersData"
+
+        "pastPaperData"
 
     ];
 
 
     for (
-        const name of possibleNames
+        let i = 0;
+        i < possibleNames.length;
+        i++
     ) {
+
+        const name =
+            possibleNames[i];
+
 
         try {
 
             if (
-                typeof window[name] !==
-                "undefined"
+                typeof window[name] !== "undefined" &&
+                Array.isArray(window[name])
             ) {
 
                 return window[name];
@@ -335,1591 +804,97 @@ function getPastPapersDatabase() {
 }
 
 
-// ==========================================================
-// BUILD NOTES RESULTS
-// ==========================================================
+// ======================================================
+// DEDUPLICATE
+// ======================================================
 
-function buildNotesResults(
-    query,
-    filters
-) {
+function deduplicateResults(items) {
 
-    const database =
-        getNotesDatabase();
+    const seen =
+        new Set();
 
-    const results = [];
-
-    const q =
-        normalizeText(query);
+    const output = [];
 
 
-    Object.entries(
-        database
-    ).forEach(
-        ([key, data]) => {
+    items.forEach(
+        function (item) {
+
+            const key =
+                item.uniqueKey ||
+                `${item.type}-${item.title}`;
+
 
             if (
-                !data
+                seen.has(key)
             ) {
+
                 return;
-            }
-
-
-            const keyNormalized =
-                normalizeText(key);
-
-
-            // ----------------------------------------------
-            // Detect form / subject / syllabus from key
-            // ----------------------------------------------
-
-            const formMatch =
-                keyNormalized.match(
-                    /\bform\s*([1-6])\b/
-                );
-
-            const form =
-                formMatch
-                    ? `form${formMatch[1]}`
-                    : null;
-
-
-            let subject = null;
-
-            if (
-                keyNormalized.includes(
-                    "physics"
-                )
-            ) {
-                subject = "physics";
-            }
-
-            if (
-                keyNormalized.includes(
-                    "chemistry"
-                )
-            ) {
-                subject = "chemistry";
-            }
-
-
-            let syllabus = null;
-
-            if (
-                keyNormalized.includes(
-                    "old"
-                )
-            ) {
-                syllabus = "old";
-            }
-
-            if (
-                keyNormalized.includes(
-                    "new"
-                )
-            ) {
-                syllabus = "new";
-            }
-
-
-            // ----------------------------------------------
-            // Strong filtering
-            // ----------------------------------------------
-
-            if (
-                filters.form &&
-                form !== filters.form
-            ) {
-                return;
-            }
-
-
-            if (
-                filters.subject &&
-                subject !== filters.subject
-            ) {
-                return;
-            }
-
-
-            if (
-                filters.syllabus &&
-                syllabus !== filters.syllabus
-            ) {
-                return;
-            }
-
-
-            // ----------------------------------------------
-            // FULL NOTES
-            // ----------------------------------------------
-
-            if (
-                data.full
-            ) {
-
-                const full =
-                    data.full;
-
-
-                const searchable =
-                    normalizeText(
-                        [
-                            key,
-                            full.id,
-                            full.title,
-                            full.description,
-                            form,
-                            subject,
-                            syllabus,
-                            "full notes",
-                            "premium notes"
-                        ].join(" ")
-                    );
-
-
-                const score =
-                    calculateScore(
-                        q,
-                        searchable,
-                        {
-                            form,
-                            subject,
-                            syllabus,
-                            title:
-                                full.title
-                        }
-                    );
-
-
-                if (
-                    score > 0
-                ) {
-
-                    results.push({
-
-                        category: "notes",
-
-                        subtype: "full",
-
-                        title:
-                            full.title,
-
-                        description:
-                            full.description,
-
-                        price:
-                            full.price,
-
-                        id:
-                            full.id,
-
-                        form,
-
-                        subject,
-
-                        syllabus,
-
-                        score
-
-                    });
-
-                }
 
             }
 
 
-            // ----------------------------------------------
-            // TOPICS
-            // ----------------------------------------------
+            seen.add(key);
 
-            if (
-                Array.isArray(
-                    data.topics
-                )
-            ) {
-
-                data.topics.forEach(
-                    topic => {
-
-                        if (
-                            !topic
-                        ) {
-                            return;
-                        }
-
-
-                        const searchable =
-                            normalizeText(
-                                [
-                                    key,
-                                    topic.id,
-                                    topic.title,
-                                    topic.description,
-                                    form,
-                                    subject,
-                                    syllabus,
-                                    "topic"
-                                ].join(" ")
-                            );
-
-
-                        const score =
-                            calculateScore(
-                                q,
-                                searchable,
-                                {
-                                    form,
-                                    subject,
-                                    syllabus,
-                                    title:
-                                        topic.title
-                                }
-                            );
-
-
-                        if (
-                            score > 0
-                        ) {
-
-                            results.push({
-
-                                category: "topics",
-
-                                subtype: "topic",
-
-                                title:
-                                    topic.title,
-
-                                description:
-                                    topic.description,
-
-                                price:
-                                    topic.price,
-
-                                id:
-                                    topic.id,
-
-                                form,
-
-                                subject,
-
-                                syllabus,
-
-                                score
-
-                            });
-
-                        }
-
-                    }
-                );
-
-            }
+            output.push(item);
 
         }
     );
 
 
-    return results;
+    return output;
 
 }
 
 
-// ==========================================================
-// BUILD PRACTICAL NOTES RESULTS
-// ==========================================================
-
-function buildPracticalResults(
-    query,
-    filters
-) {
-
-    const database =
-        getPracticalDatabase();
-
-    const results = [];
-
-    const q =
-        normalizeText(query);
-
-
-    Object.entries(
-        database
-    ).forEach(
-        ([level, items]) => {
-
-            if (
-                !Array.isArray(items)
-            ) {
-                return;
-            }
-
-
-            items.forEach(
-                item => {
-
-                    if (
-                        !item
-                    ) {
-                        return;
-                    }
-
-
-                    const titleNormalized =
-                        normalizeText(
-                            item.title
-                        );
-
-
-                    let subject = null;
-
-                    if (
-                        titleNormalized.includes(
-                            "physics"
-                        )
-                    ) {
-                        subject =
-                            "physics";
-                    }
-
-
-                    if (
-                        titleNormalized.includes(
-                            "chemistry"
-                        )
-                    ) {
-                        subject =
-                            "chemistry";
-                    }
-
-
-                    if (
-                        filters.subject &&
-                        subject !==
-                            filters.subject
-                    ) {
-                        return;
-                    }
-
-
-                    const searchable =
-                        normalizeText(
-                            [
-                                level,
-                                item.id,
-                                item.title,
-                                item.description,
-                                subject,
-                                "practical",
-                                "practical notes"
-                            ].join(" ")
-                        );
-
-
-                    const score =
-                        calculateScore(
-                            q,
-                            searchable,
-                            {
-                                subject,
-                                title:
-                                    item.title
-                            }
-                        );
-
-
-                    if (
-                        score > 0
-                    ) {
-
-                        results.push({
-
-                            category:
-                                "practical",
-
-                            subtype:
-                                "practical",
-
-                            title:
-                                item.title,
-
-                            description:
-                                item.description,
-
-                            price:
-                                item.price,
-
-                            id:
-                                item.id,
-
-                            level,
-
-                            subject,
-
-                            score
-
-                        });
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-    return results;
-
-}
-
-
-// ==========================================================
-// BUILD PAST PAPER RESULTS
-// ==========================================================
-
-function buildPastPaperResults(
-    query,
-    filters
-) {
-
-    const database =
-        getPastPapersDatabase();
-
-    const results = [];
-
-    const q =
-        normalizeText(query);
-
-
-    if (
-        !Array.isArray(database)
-    ) {
-        return results;
-    }
-
-
-    database.forEach(
-        paper => {
-
-            if (
-                !paper
-            ) {
-                return;
-            }
-
-
-            const form =
-                normalizeText(
-                    paper.form
-                );
-
-
-            const subject =
-                normalizeText(
-                    paper.subject
-                );
-
-
-            const year =
-                Number(
-                    paper.year
-                ) || null;
-
-
-            const type =
-                normalizeText(
-                    paper.type
-                );
-
-
-            const specialExam =
-                normalizeText(
-                    paper.specialExam
-                );
-
-
-            // ----------------------------------------------
-            // FORM FILTER
-            // ----------------------------------------------
-
-            if (
-                filters.form &&
-                form !== filters.form
-            ) {
-                return;
-            }
-
-
-            // ----------------------------------------------
-            // SUBJECT FILTER
-            // ----------------------------------------------
-
-            if (
-                filters.subject &&
-                subject !==
-                    filters.subject
-            ) {
-                return;
-            }
-
-
-            // ----------------------------------------------
-            // YEAR FILTER
-            // ----------------------------------------------
-
-            if (
-                filters.year &&
-                year !== filters.year
-            ) {
-                return;
-            }
-
-
-            // ----------------------------------------------
-            // TYPE FILTER
-            // ----------------------------------------------
-
-            if (
-                filters.paperType &&
-                filters.paperType !==
-                    "special" &&
-                type !==
-                    filters.paperType
-            ) {
-                return;
-            }
-
-
-            // ----------------------------------------------
-            // SPECIAL EXAM FILTER
-            // ----------------------------------------------
-
-            if (
-                filters.specialExam
-            ) {
-
-                if (
-                    specialExam !==
-                    normalizeText(
-                        filters.specialExam
-                    )
-                ) {
-                    return;
-                }
-
-            }
-
-
-            // ----------------------------------------------
-            // SEARCHABLE TEXT
-            // ----------------------------------------------
-
-            const searchable =
-                normalizeText(
-                    [
-                        paper.title,
-                        paper.form,
-                        paper.subject,
-                        paper.year,
-                        paper.type,
-                        paper.region,
-                        paper.category,
-                        paper.specialExam,
-                        paper.series,
-                        paper.branch,
-                        paper.file,
-                        paper.id
-                    ].join(" ")
-                );
-
-
-            const score =
-                calculateScore(
-                    q,
-                    searchable,
-                    {
-                        form:
-                            form ||
-                            null,
-
-                        subject:
-                            subject ||
-                            null,
-
-                        year,
-
-                        type,
-
-                        title:
-                            paper.title
-                    }
-                );
-
-
-            if (
-                score > 0
-            ) {
-
-                results.push({
-
-                    category:
-                        "pastpapers",
-
-                    subtype:
-                        "pastpaper",
-
-                    title:
-                        paper.title ||
-                        "Past Paper",
-
-                    description:
-                        buildPaperDescription(
-                            paper
-                        ),
-
-                    form:
-                        paper.form,
-
-                    subject:
-                        paper.subject,
-
-                    year,
-
-                    type:
-                        paper.type,
-
-                    region:
-                        paper.region,
-
-                    specialExam:
-                        paper.specialExam,
-
-                    file:
-                        paper.file,
-
-                    markingScheme:
-                        paper.markingScheme,
-
-                    score
-
-                });
-
-            }
-
-        }
-    );
-
-
-    return results;
-
-}
-
-
-// ==========================================================
-// PAPER DESCRIPTION
-// ==========================================================
-
-function buildPaperDescription(
-    paper
-) {
-
-    const parts = [];
-
-
-    if (
-        paper.form
-    ) {
-        parts.push(
-            formatForm(
-                paper.form
-            )
-        );
-    }
-
-
-    if (
-        paper.subject
-    ) {
-        parts.push(
-            formatSubject(
-                paper.subject
-            )
-        );
-    }
-
-
-    if (
-        paper.year
-    ) {
-        parts.push(
-            String(
-                paper.year
-            )
-        );
-    }
-
-
-    if (
-        paper.type
-    ) {
-        parts.push(
-            formatPaperType(
-                paper.type
-            )
-        );
-    }
-
-
-    if (
-        paper.region
-    ) {
-
-        parts.push(
-            formatRegion(
-                paper.region
-            )
-        );
-
-    }
-
-
-    if (
-        paper.specialExam
-    ) {
-
-        parts.push(
-            String(
-                paper.specialExam
-            )
-        );
-
-    }
-
-
-    return parts.join(" • ");
-
-}
-
-
-// ==========================================================
-// SMART SCORE
-// ==========================================================
-
-function calculateScore(
-    query,
-    searchable,
-    context = {}
-) {
-
-    const q =
-        normalizeText(query);
-
-    const text =
-        normalizeText(searchable);
-
-
-    if (
-        !q
-    ) {
-        return 0;
-    }
-
-
-    const queryWords =
-        q
-            .split(" ")
-            .filter(Boolean);
-
-
-    let score = 0;
-
-
-    // ------------------------------------------------------
-    // Exact complete phrase
-    // ------------------------------------------------------
-
-    if (
-        text.includes(q)
-    ) {
-
-        score += 30;
-
-    }
-
-
-    // ------------------------------------------------------
-    // Individual query words
-    // ------------------------------------------------------
-
-    queryWords.forEach(
-        word => {
-
-            if (
-                text.includes(word)
-            ) {
-
-                score += 8;
-
-            }
-
-        }
-    );
-
-
-    // ------------------------------------------------------
-    // FORM BOOST
-    // ------------------------------------------------------
-
-    const requestedForm =
-        detectForm(q);
-
-
-    if (
-        requestedForm
-    ) {
-
-        if (
-            context.form ===
-            requestedForm
-        ) {
-
-            score += 35;
-
-        } else if (
-            text.includes(
-                requestedForm
-            )
-        ) {
-
-            score += 15;
-
-        }
-
-    }
-
-
-    // ------------------------------------------------------
-    // SUBJECT BOOST
-    // ------------------------------------------------------
-
-    const requestedSubject =
-        detectSubject(q);
-
-
-    if (
-        requestedSubject
-    ) {
-
-        if (
-            context.subject ===
-            requestedSubject
-        ) {
-
-            score += 35;
-
-        } else if (
-            text.includes(
-                requestedSubject
-            )
-        ) {
-
-            score += 15;
-
-        }
-
-    }
-
-
-    // ------------------------------------------------------
-    // YEAR BOOST
-    // ------------------------------------------------------
-
-    const requestedYear =
-        detectYear(q);
-
-
-    if (
-        requestedYear
-    ) {
-
-        if (
-            Number(
-                context.year
-            ) === requestedYear
-        ) {
-
-            score += 40;
-
-        } else if (
-            text.includes(
-                String(
-                    requestedYear
-                )
-            )
-        ) {
-
-            score += 15;
-
-        }
-
-    }
-
-
-    // ------------------------------------------------------
-    // TITLE BOOST
-    // ------------------------------------------------------
-
-    if (
-        context.title
-    ) {
-
-        const title =
-            normalizeText(
-                context.title
-            );
-
-
-        if (
-            title === q
-        ) {
-
-            score += 100;
-
-        }
-
-
-        queryWords.forEach(
-            word => {
-
-                if (
-                    title.includes(
-                        word
-                    )
-                ) {
-
-                    score += 12;
-
-                }
-
-            }
-        );
-
-    }
-
-
-    // ------------------------------------------------------
-    // IMPORTANT: prevent unrelated subject pollution
-    // ------------------------------------------------------
-
-    if (
-        requestedSubject &&
-        context.subject &&
-        context.subject !==
-            requestedSubject
-    ) {
-
-        score -= 35;
-
-    }
-
-
-    // ------------------------------------------------------
-    // IMPORTANT: prevent unrelated form pollution
-    // ------------------------------------------------------
-
-    if (
-        requestedForm &&
-        context.form &&
-        context.form !==
-            requestedForm
-    ) {
-
-        score -= 35;
-
-    }
-
-
-    // ------------------------------------------------------
-    // Avoid weak accidental matches
-    // ------------------------------------------------------
-
-    return Math.max(
-        score,
-        0
-    );
-
-}
-
-
-// ==========================================================
-// FORMATTING
-// ==========================================================
-
-function formatForm(
-    form
-) {
-
-    const value =
-        normalizeText(
-            form
-        );
-
+// ======================================================
+// FORM EXTRACTION
+// ======================================================
+
+function extractFormFromKey(key) {
 
     const match =
-        value.match(
-            /form\s*([1-6])/
-        );
-
-
-    if (
-        match
-    ) {
-
-        return `Form ${match[1]}`;
-
-    }
-
-
-    return form || "";
-
-}
-
-
-function formatSubject(
-    subject
-) {
-
-    if (
-        !subject
-    ) {
-        return "";
-    }
-
-
-    const value =
-        normalizeText(
-            subject
-        );
-
-
-    if (
-        value === "physics"
-    ) {
-        return "Physics";
-    }
-
-
-    if (
-        value === "chemistry"
-    ) {
-        return "Chemistry";
-    }
-
-
-    return subject;
-
-}
-
-
-function formatPaperType(
-    type
-) {
-
-    const value =
-        normalizeText(
-            type
-        );
-
-
-    const names = {
-
-        "pre necta":
-            "Pre-NECTA",
-
-        "pre_necta":
-            "Pre-NECTA",
-
-        "necta":
-            "NECTA",
-
-        "mock":
-            "Mock",
-
-        "annual":
-            "Annual",
-
-        "joint":
-            "Joint",
-
-        "series":
-            "Series"
-
-    };
-
-
-    return (
-        names[value] ||
-        type ||
-        ""
-    );
-
-}
-
-
-function formatRegion(
-    region
-) {
-
-    if (
-        !region
-    ) {
-        return "";
-    }
-
-
-    return String(
-        region
-    )
-        .replace(/_/g, " ")
-        .replace(/\b\w/g, char =>
-            char.toUpperCase()
-        );
-
-}
-
-
-// ==========================================================
-// RESULT SORTING
-// ==========================================================
-
-function sortResults(
-    results
-) {
-
-    return results.sort(
-        (a, b) => {
-
-            // Highest relevance first
-            if (
-                b.score !==
-                a.score
-            ) {
-
-                return (
-                    b.score -
-                    a.score
-                );
-
-            }
-
-
-            // Topics before full notes
-            if (
-                a.category ===
-                    "topics" &&
-                b.category !==
-                    "topics"
-            ) {
-
-                return -1;
-
-            }
-
-
-            if (
-                b.category ===
-                    "topics" &&
-                a.category !==
-                    "topics"
-            ) {
-
-                return 1;
-
-            }
-
-
-            // Newer papers first
-            if (
-                a.year &&
-                b.year &&
-                a.year !==
-                    b.year
-            ) {
-
-                return (
-                    b.year -
-                    a.year
-                );
-
-            }
-
-
-            return String(
-                a.title || ""
-            ).localeCompare(
-                String(
-                    b.title || ""
-                )
+        String(key || "")
+            .match(
+                /form([1-6])/i
             );
 
-        }
-    );
+
+    if (!match) {
+        return "";
+    }
+
+
+    return `Form ${match[1]}`;
 
 }
 
 
-// ==========================================================
-// RESULT RENDERING
-// ==========================================================
+// ======================================================
+// SUBJECT EXTRACTION
+// ======================================================
 
-function renderResultCard(
-    result
-) {
+function extractSubjectFromKey(key) {
+
+    const value =
+        normalizeText(
+            key
+        );
+
 
     if (
-        result.category ===
-        "notes"
+        value.includes("physics")
     ) {
 
-        return `
-            <article class="search-result-card notes-result">
-
-                <div class="search-result-type">
-                    Notes
-                </div>
-
-                <h3>
-                    ${escapeHTML(
-                        result.title
-                    )}
-                </h3>
-
-                <p>
-                    ${escapeHTML(
-                        result.description
-                    )}
-                </p>
-
-                <div class="search-meta">
-
-                    ${
-                        result.form
-                            ? `<span>${escapeHTML(
-                                formatForm(
-                                    result.form
-                            )
-                            )}</span>`
-                            : ""
-                    }
-
-                    ${
-                        result.subject
-                            ? `<span>${escapeHTML(
-                                formatSubject(
-                                    result.subject
-                            )
-                            )}</span>`
-                            : ""
-                    }
-
-                    ${
-                        result.syllabus
-                            ? `<span>${escapeHTML(
-                                result.syllabus === "old"
-                                    ? "Old Syllabus"
-                                    : "New Syllabus"
-                            )}</span>`
-                            : ""
-                    }
-
-                </div>
-
-                <div class="search-result-bottom">
-
-                    <strong>
-                        TZS ${Number(
-                            result.price || 0
-                        ).toLocaleString()}
-                    </strong>
-
-                    <a
-                        href="notes.html?form=${encodeURIComponent(
-                            result.form || ""
-                        )}"
-                        class="search-action"
-                    >
-                        View Notes
-                    </a>
-
-                </div>
-
-            </article>
-        `;
+        return "Physics";
 
     }
 
 
     if (
-        result.category ===
-        "topics"
+        value.includes("chemistry")
     ) {
 
-        return `
-            <article class="search-result-card topic-result">
-
-                <div class="search-result-type">
-                    Topic
-                </div>
-
-                <h3>
-                    ${escapeHTML(
-                        result.title
-                    )}
-                </h3>
-
-                <p>
-                    ${escapeHTML(
-                        result.description
-                    )}
-                </p>
-
-                <div class="search-meta">
-
-                    ${
-                        result.form
-                            ? `<span>${escapeHTML(
-                                formatForm(
-                                    result.form
-                            )
-                            )}</span>`
-                            : ""
-                    }
-
-                    ${
-                        result.subject
-                            ? `<span>${escapeHTML(
-                                formatSubject(
-                                    result.subject
-                            )
-                            )}</span>`
-                            : ""
-                    }
-
-                    ${
-                        result.syllabus
-                            ? `<span>${escapeHTML(
-                                result.syllabus === "old"
-                                    ? "Old Syllabus"
-                                    : "New Syllabus"
-                            )}</span>`
-                            : ""
-                    }
-
-                </div>
-
-                <div class="search-result-bottom">
-
-                    <strong>
-                        TZS ${Number(
-                            result.price || 0
-                        ).toLocaleString()}
-                    </strong>
-
-                    <a
-                        href="notes.html?form=${encodeURIComponent(
-                            result.form || ""
-                        )}"
-                        class="search-action"
-                    >
-                        View Notes
-                    </a>
-
-                </div>
-
-            </article>
-        `;
-
-    }
-
-
-    if (
-        result.category ===
-        "practical"
-    ) {
-
-        return `
-            <article class="search-result-card practical-result">
-
-                <div class="search-result-type">
-                    Practical Notes
-                </div>
-
-                <h3>
-                    ${escapeHTML(
-                        result.title
-                    )}
-                </h3>
-
-                <p>
-                    ${escapeHTML(
-                        result.description
-                    )}
-                </p>
-
-                <div class="search-meta">
-
-                    ${
-                        result.level
-                            ? `<span>${escapeHTML(
-                                result.level === "olevel"
-                                    ? "O-Level"
-                                    : "A-Level"
-                            )}</span>`
-                            : ""
-                    }
-
-                    ${
-                        result.subject
-                            ? `<span>${escapeHTML(
-                                formatSubject(
-                                    result.subject
-                            )
-                            )}</span>`
-                            : ""
-                    }
-
-                </div>
-
-                <div class="search-result-bottom">
-
-                    <strong>
-                        TZS ${Number(
-                            result.price || 0
-                        ).toLocaleString()}
-                    </strong>
-
-                    <a
-                        href="notes.html"
-                        class="search-action"
-                    >
-                        View Notes
-                    </a>
-
-                </div>
-
-            </article>
-        `;
-
-    }
-
-
-    if (
-        result.category ===
-        "pastpapers"
-    ) {
-
-        return `
-            <article class="search-result-card paper-result">
-
-                <div class="search-result-type">
-                    Past Paper
-                </div>
-
-                <h3>
-                    ${escapeHTML(
-                        result.title
-                    )}
-                </h3>
-
-                <div class="search-meta">
-
-                    ${
-                        result.form
-                            ? `<span>${escapeHTML(
-                                formatForm(
-                                    result.form
-                            )
-                            )}</span>`
-                            : ""
-                    }
-
-                    ${
-                        result.subject
-                            ? `<span>${escapeHTML(
-                                formatSubject(
-                                    result.subject
-                            )
-                            )}</span>`
-                            : ""
-                    }
-
-                    ${
-                        result.year
-                            ? `<span>${escapeHTML(
-                                result.year
-                            )}</span>`
-                            : ""
-                    }
-
-                    ${
-                        result.type
-                            ? `<span>${escapeHTML(
-                                formatPaperType(
-                                    result.type
-                            )
-                            )}</span>`
-                            : ""
-                    }
-
-                    ${
-                        result.region
-                            ? `<span>${escapeHTML(
-                                formatRegion(
-                                    result.region
-                            )
-                            )}</span>`
-                            : ""
-                    }
-
-                    ${
-                        result.specialExam
-                            ? `<span>${escapeHTML(
-                                result.specialExam
-                            )}</span>`
-                            : ""
-                    }
-
-                </div>
-
-                <div class="search-result-bottom">
-
-                    ${
-                        result.file
-                            ? `
-                                <a
-                                    href="${escapeHTML(
-                                        result.file
-                                    )}"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="search-action"
-                                >
-                                    Open Paper
-                                </a>
-                            `
-                            : `
-                                <span class="search-unavailable">
-                                    Paper unavailable
-                                </span>
-                            `
-                    }
-
-                </div>
-
-            </article>
-        `;
+        return "Chemistry";
 
     }
 
@@ -1929,198 +904,168 @@ function renderResultCard(
 }
 
 
-// ==========================================================
-// CATEGORY COUNTS
-// ==========================================================
+// ======================================================
+// SYLLABUS EXTRACTION
+// ======================================================
 
-function updateCategoryCounts(
-    results
-) {
+function extractSyllabusFromKey(key) {
 
-    const all =
-        document.querySelector(
-            '[data-filter="all"]'
-        );
-
-    const notes =
-        document.querySelector(
-            '[data-filter="notes"]'
-        );
-
-    const topics =
-        document.querySelector(
-            '[data-filter="topics"]'
-        );
-
-    const practical =
-        document.querySelector(
-            '[data-filter="practical"]'
-        );
-
-    const papers =
-        document.querySelector(
-            '[data-filter="pastpapers"]'
+    const value =
+        normalizeText(
+            key
         );
 
 
     if (
-        all
-    ) {
-        all.textContent =
-            `All (${results.length})`;
-    }
-
-
-    if (
-        notes
+        value.includes("old")
     ) {
 
-        notes.textContent =
-            `Notes (${
-                results.filter(
-                    r =>
-                        r.category ===
-                        "notes"
-                ).length
-            })`;
+        return "Old Syllabus";
 
     }
 
 
     if (
-        topics
+        value.includes("new")
     ) {
 
-        topics.textContent =
-            `Topics (${
-                results.filter(
-                    r =>
-                        r.category ===
-                        "topics"
-                ).length
-            })`;
+        return "New Syllabus";
 
     }
 
 
-    if (
-        practical
-    ) {
-
-        practical.textContent =
-            `Practical Notes (${
-                results.filter(
-                    r =>
-                        r.category ===
-                        "practical"
-                ).length
-            })`;
-
-    }
-
-
-    if (
-        papers
-    ) {
-
-        papers.textContent =
-            `Past Papers (${
-                results.filter(
-                    r =>
-                        r.category ===
-                        "pastpapers"
-                ).length
-            })`;
-
-    }
+    return "";
 
 }
 
 
-// ==========================================================
-// DISPLAY RESULTS
-// ==========================================================
+// ======================================================
+// NOTES URL
+// ======================================================
 
-function displayResults(
-    results,
-    query
-) {
+function buildNotesUrl(key) {
+
+    const form =
+        String(key || "")
+            .match(
+                /form([1-6])/i
+            );
+
+
+    if (!form) {
+
+        return "notes.html";
+
+    }
+
+
+    return (
+        "notes.html?form=" +
+        encodeURIComponent(
+            `form${form[1]}`
+        )
+    );
+
+}
+
+
+// ======================================================
+// PAST PAPER URL
+// ======================================================
+
+function buildPaperUrl(paper) {
+
+    // --------------------------------------------------
+    // IMPORTANT:
+    // We do NOT guess internal Past Papers routes.
+    //
+    // The file itself is preserved and we use the
+    // existing paper file when available.
+    // --------------------------------------------------
+
+    if (
+        paper &&
+        paper.file
+    ) {
+
+        return paper.file;
+
+    }
+
+
+    return "pastpapers.html";
+
+}
+
+
+// ======================================================
+// RENDER RESULTS
+// ======================================================
+
+function renderResults() {
 
     const container =
         document.getElementById(
-            "searchResults"
+            "results"
         );
 
 
-    const count =
-        document.getElementById(
-            "resultsCount"
-        );
-
-
-    const heading =
-        document.getElementById(
-            "searchHeading"
-        );
-
-
-    if (
-        heading
-    ) {
-
-        heading.textContent =
-            query
-                ? `Search results for "${query}"`
-                : "Search GEPAM";
-
-    }
-
-
-    if (
-        count
-    ) {
-
-        count.textContent =
-            `${results.length} result${
-                results.length === 1
-                    ? ""
-                    : "s"
-            } found.`;
-
-    }
-
-
-    updateCategoryCounts(
-        results
-    );
-
-
-    if (
-        !container
-    ) {
+    if (!container) {
         return;
     }
 
 
+    let filtered =
+        allSearchResults;
+
+
     if (
-        !results.length
+        currentFilter !== "all"
     ) {
+
+        filtered =
+            allSearchResults.filter(
+                function (item) {
+
+                    return (
+                        item.type ===
+                        currentFilter
+                    );
+
+                }
+            );
+
+    }
+
+
+    const count =
+        filtered.length;
+
+
+    document.getElementById(
+        "searchCount"
+    ).textContent =
+        `${count} result${count === 1 ? "" : "s"} found.`;
+
+
+    if (!count) {
 
         container.innerHTML = `
 
-            <div class="no-search-results">
+            <div class="empty-state">
 
                 <h3>
                     No results found
                 </h3>
 
                 <p>
-                    Try another search such as
-                    <strong>Form 4 Physics</strong>,
+                    Try another keyword such as
+                    <strong>Physics</strong>,
+                    <strong>Chemistry</strong>,
                     <strong>Waves</strong>,
-                    <strong>2026 Mock</strong>
-                    or
-                    <strong>Chemistry Practical</strong>.
+                    <strong>Form 4</strong>,
+                    <strong>2026</strong>,
+                    or <strong>Mock</strong>.
                 </p>
 
             </div>
@@ -2133,343 +1078,300 @@ function displayResults(
 
 
     container.innerHTML =
-        results
+        filtered
             .map(
-                renderResultCard
+                function (item) {
+
+                    return createResultCard(
+                        item
+                    );
+
+                }
             )
             .join("");
 
 }
 
 
-// ==========================================================
-// CATEGORY FILTER
-// ==========================================================
+// ======================================================
+// RESULT CARD
+// ======================================================
 
-function filterDisplayedResults(
-    results,
-    category
-) {
+function createResultCard(item) {
 
-    if (
-        category ===
-        "all"
-    ) {
+    const title =
+        escapeHtml(
+            item.title
+        );
 
-        return results;
+
+    const description =
+        escapeHtml(
+            item.description
+        );
+
+
+    const typeLabel =
+        escapeHtml(
+            item.typeLabel
+        );
+
+
+    let meta = "";
+
+
+    if (item.form) {
+
+        meta += `
+            <span class="meta-item">
+                ${escapeHtml(item.form)}
+            </span>
+        `;
 
     }
 
 
-    return results.filter(
-        result =>
-            result.category ===
-            category
-    );
+    if (item.subject) {
 
-}
-
-
-// ==========================================================
-// RUN SEARCH
-// ==========================================================
-
-let currentSearchResults = [];
-
-let currentSearchQuery = "";
-
-let currentSearchCategory =
-    "all";
-
-
-function runSearch(
-    query
-) {
-
-    const cleanQuery =
-        String(
-            query ?? ""
-        ).trim();
-
-
-    currentSearchQuery =
-        cleanQuery;
-
-
-    if (
-        !cleanQuery
-    ) {
-
-        currentSearchResults = [];
-
-        displayResults(
-            [],
-            ""
-        );
-
-        return;
+        meta += `
+            <span class="meta-item">
+                ${escapeHtml(item.subject)}
+            </span>
+        `;
 
     }
 
 
-    const filters = {
+    if (item.syllabus) {
 
-        form:
-            detectForm(
-                cleanQuery
-            ),
+        meta += `
+            <span class="meta-item">
+                ${escapeHtml(item.syllabus)}
+            </span>
+        `;
 
-        subject:
-            detectSubject(
-                cleanQuery
-            ),
-
-        year:
-            detectYear(
-                cleanQuery
-            ),
-
-        paperType:
-            detectPaperType(
-                cleanQuery
-            ),
-
-        syllabus:
-            detectSyllabus(
-                cleanQuery
-            ),
-
-        specialExam:
-            detectSpecialExam(
-                cleanQuery
-            )
-
-    };
+    }
 
 
-    const notesResults =
-        buildNotesResults(
-            cleanQuery,
-            filters
-        );
+    if (item.year) {
+
+        meta += `
+            <span class="meta-item">
+                ${escapeHtml(item.year)}
+            </span>
+        `;
+
+    }
 
 
-    const practicalResults =
-        buildPracticalResults(
-            cleanQuery,
-            filters
-        );
+    if (item.paperType) {
+
+        meta += `
+            <span class="meta-item">
+                ${escapeHtml(item.paperType)}
+            </span>
+        `;
+
+    }
 
 
-    const paperResults =
-        buildPastPaperResults(
-            cleanQuery,
-            filters
-        );
+    if (item.region) {
+
+        meta += `
+            <span class="meta-item">
+                ${escapeHtml(item.region)}
+            </span>
+        `;
+
+    }
 
 
-    currentSearchResults =
-        sortResults(
-            [
-                ...notesResults,
-                ...practicalResults,
-                ...paperResults
-            ]
-        );
+    if (item.specialExam) {
+
+        meta += `
+            <span class="meta-item">
+                ${escapeHtml(item.specialExam)}
+            </span>
+        `;
+
+    }
 
 
-    currentSearchCategory =
-        "all";
-
-
-    displayResults(
-        currentSearchResults,
-        cleanQuery
-    );
-
-}
-
-
-// ==========================================================
-// SEARCH FORM
-// ==========================================================
-
-function setupSearchForm() {
-
-    const form =
-        document.getElementById(
-            "searchForm"
-        );
-
-
-    const input =
-        document.getElementById(
-            "searchInput"
-        );
+    let priceHTML = "";
 
 
     if (
-        !form ||
-        !input
+        item.price !== null &&
+        item.price !== undefined &&
+        item.price !== ""
     ) {
-        return;
+
+        priceHTML = `
+            <div class="price">
+                TZS ${Number(
+                    item.price
+                ).toLocaleString()}
+            </div>
+        `;
+
     }
 
 
-    form.addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
-
-            runSearch(
-                input.value
-            );
-
-
-            const params =
-                new URLSearchParams(
-                    window.location.search
-                );
-
-
-            params.set(
-                "q",
-                input.value.trim()
-            );
-
-
-            const newUrl =
-                `${window.location.pathname}?${params.toString()}`;
-
-
-            window.history.replaceState(
-                {},
-                "",
-                newUrl
-            );
-
-        }
-    );
-
-}
-
-
-// ==========================================================
-// CATEGORY BUTTONS
-// ==========================================================
-
-function setupCategoryFilters() {
-
-    const buttons =
-        document.querySelectorAll(
-            "[data-filter]"
-        );
-
-
-    buttons.forEach(
-        button => {
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    currentSearchCategory =
-                        button.dataset.filter ||
-                        "all";
-
-
-                    const filtered =
-                        filterDisplayedResults(
-                            currentSearchResults,
-                            currentSearchCategory
-                        );
-
-
-                    displayResults(
-                        filtered,
-                        currentSearchQuery
-                    );
-
-
-                    buttons.forEach(
-                        item => {
-
-                            item.classList.remove(
-                                "active"
-                            );
-
-                        }
-                    );
-
-
-                    button.classList.add(
-                        "active"
-                    );
-
-                }
-            );
-
-        }
-    );
-
-}
-
-
-// ==========================================================
-// LOAD QUERY FROM URL
-// ==========================================================
-
-function loadSearchFromURL() {
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-
-    const query =
-        params.get(
-            "q"
-        );
-
-
-    const input =
-        document.getElementById(
-            "searchInput"
-        );
+    let actionText =
+        "Open";
 
 
     if (
-        query &&
-        input
+        item.type === "notes" ||
+        item.type === "topics" ||
+        item.type === "practical"
     ) {
 
-        input.value =
-            query;
-
-        runSearch(
-            query
-        );
+        actionText =
+            "View Notes";
 
     }
+
+
+    if (
+        item.type === "papers"
+    ) {
+
+        actionText =
+            "Open Paper";
+
+    }
+
+
+    return `
+
+        <article class="result-card">
+
+            <span class="result-type">
+                ${typeLabel}
+            </span>
+
+            <h3>
+                ${title}
+            </h3>
+
+            ${
+                description
+                    ? `
+                        <div class="result-description">
+                            ${description}
+                        </div>
+                    `
+                    : ""
+            }
+
+            ${
+                meta
+                    ? `
+                        <div class="result-meta">
+                            ${meta}
+                        </div>
+                    `
+                    : ""
+            }
+
+            ${priceHTML}
+
+            <a
+                class="result-action"
+                href="${escapeAttribute(
+                    item.actionUrl
+                )}"
+            >
+                ${actionText}
+            </a>
+
+        </article>
+
+    `;
 
 }
 
 
-// ==========================================================
-// INITIALIZE
-// ==========================================================
+// ======================================================
+// INITIAL STATE
+// ======================================================
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+function showInitialState() {
 
-        setupSearchForm();
+    document.getElementById(
+        "searchTitle"
+    ).textContent =
+        "Search GEPAM resources";
 
-        setupCategoryFilters();
 
-        loadSearchFromURL();
+    document.getElementById(
+        "searchCount"
+    ).textContent =
+        "Search Notes, Topics, Practical Notes and Past Papers.";
 
-    }
-);
+
+    document.getElementById(
+        "results"
+    ).innerHTML = `
+
+        <div class="empty-state">
+
+            <h3>
+                What are you looking for?
+            </h3>
+
+            <p>
+                Search for a subject, topic, form,
+                year, exam type or keyword.
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+// ======================================================
+// ESCAPE HTML
+// ======================================================
+
+function escapeHtml(value) {
+
+    return String(value || "")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+// ======================================================
+// ESCAPE ATTRIBUTE
+// ======================================================
+
+function escapeAttribute(value) {
+
+    return escapeHtml(
+        value
+    );
+
+}
