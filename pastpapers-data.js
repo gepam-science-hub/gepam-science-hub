@@ -1107,8 +1107,8 @@ const pastPapers = [
     "type":"necta",
     "region":"necta",
     "year":2025,
-    "file":"papers/form6/physics/necta/2025/F6_necta_2025_phy2.pdf",
-    "markingScheme":""
+    "file":"papers/form6/physics/necta/2025/Physics2_F6_2025.pdf",
+    "markingScheme":"Physics2_F6_2025-Solutions.pdf"
 },
 
 {
