@@ -1,137 +1,813 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GEPAM Science Hub | Contact Us</title>
-    <link rel="icon" type="image/png" href="file_00000000f17471f4b8f76a744122207a.png">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fafafa; text-align: center; overflow-x: hidden; }
-        .nav-header { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 15px 20px; background: #fff; border-bottom: 1px solid #eee; box-sizing: border-box; }
-        .menu-toggle { font-size: 28px; background: none; border: none; cursor: pointer; color: #333; }
-        
-        /* === SIDEBAR LOCK (Inazuia menyu isijifungue yenyewe) === */
-        .sidebar { position: fixed; top: 0; right: -280px !important; width: 280px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: 0.3s ease; z-index: 10000; padding: 20px; box-sizing: border-box; overflow-y: auto; text-align: left; }
-        .sidebar.active { right: 0 !important; }
-        
-        .close-btn { font-size: 24px; background: none; border: none; cursor: pointer; color: #999; float: right; }
-        .sidebar-links { margin-top: 50px; display: flex; flex-direction: column; gap: 15px; }
-        .sidebar-links a, .dropdown-btn { text-decoration: none; color: #333; font-weight: bold; font-size: 16px; padding: 12px; border-radius: 4px; display: block; text-align: left; width: 100%; box-sizing: border-box; border: none; background: none; cursor: pointer; }
-        .sidebar-links a:hover, .dropdown-btn:hover { background: #f4f4f4; color: #00c300; }
-        
-        /* === MTINDO WA KADI ZA CONTACT === */
-        .contact-section { max-width: 900px; margin: 40px auto; padding: 0 20px; box-sizing: border-box; }
-        .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .contact-card { background: #fff; border: 1px solid #eee; border-top: 5px solid #00c300; border-radius: 8px; padding: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: left; display: flex; flex-direction: column; justify-content: space-between; }
-        .contact-card h3 { margin-top: 0; color: #222; font-size: 18px; display: flex; align-items: center; gap: 8px; }
-        .contact-btn { width: 100%; padding: 10px; background: #00c300; color: white; border: none; font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 15px; font-size: 14px; text-align: center; display: inline-block; text-decoration: none; box-sizing: border-box; }
-        .contact-btn:hover { background: #00a500; }
-        .social-links a { display: inline-block; background: #f4f4f4; color: #333; padding: 8px 12px; border-radius: 4px; text-decoration: none; font-weight: bold; margin: 5px 5px 5px 0; font-size: 13px; transition: 0.2s; }
-        .social-links a:hover { background: #00c300; color: white; }
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; }
-    </style>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>GEPAM Science Hub | Contact Us</title>
 
-<div class="nav-header">
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <img src="file_00000000f17471f4b8f76a744122207a.png" style="height: 40px;" alt="Logo">
-        <span style="font-weight: bold; font-size: 18px; color: #222;">GEPAM Hub</span>
-    </div>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-</div>
+<link rel="icon" type="image/png" href="file_00000000f17471f4b8f76a744122207a.png">
+<link rel="stylesheet" href="style.css">
 
-<header style="text-align: center; padding: 40px 20px; background: #f8f9fa;">
-    <h2>📞 Contact Us</h2>
-    <p style="color: #666; margin: 5px 0 0 0;">Have questions about notes, past papers or science learning resources? We are ready to help you.</p>
-</header>
+<style>
+    * {
+        box-sizing: border-box;
+    }
 
-<main class="contact-section">
-    <div class="contact-grid">
-        
-        <!-- CARD 1: WHATSAPP -->
-<div class="contact-card">
-    <div>
-        <h3>💬 WhatsApp</h3>
-        <p style="color: #666; font-size: 14px; margin: 5px 0;">
-            Chat with us instantly for customer support and link generation.
-        </p>
-        <strong style="color: #333; font-size: 15px;">+255 748 978 398</strong>
-    </div>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f5f8fb;
+        color: #1f2937;
+        overflow-x: hidden;
+    }
 
-    <a href="https://wa.me/255748978398?text=Habari%20GEPAM%20Science%20Hub.%20Naomba%20msaada%20kuhusu%20Notes%20na%20Past%20Papers."
-       target="_blank"
-       class="contact-btn">
-         CHAT ON WHATSAPP
-    </a>
-</div>
-        
-        <!-- CARD 2: EMAIL -->
-        <div class="contact-card">
-            <div>
-                <h3>📧 Email Address</h3>
-                <p style="color: #666; font-size: 14px; margin: 5px 0;">Send us your academic inquiries, partnerships, or suggestions.</p>
-                <strong style="color: #333; font-size: 14px;">gepamsciencehub@gmail.com</strong>
-            </div>
-            <a href="mailto:gepamsciencehub@gmail.com" class="contact-btn">SEND EMAIL</a>
-        </div>
+    /* =========================
+       HEADER
+    ========================= */
 
-        <!-- CARD 3: SOCIAL MEDIA -->
-<div class="contact-card">
-<div>
-<h3>🌐 Follow Our Community</h3>
-<p style="color: #666; font-size: 14px; margin: 5px 0;">Join our active social media networks for daily science tutorials.</p>
-<div class="social-links">
-                    <a href="https://youtube.com" target="_blank">YouTube</a>
-                    <a href="https://tiktok.com" target="_blank">TikTok</a>
-                    <a href="https://facebook.com" target="_blank">Facebook</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    .nav-header {
+        width: 100%;
+        background: #ffffff;
+        border-bottom: 1px solid #e5e7eb;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 13px 22px;
+        position: relative;
+        z-index: 1000;
+    }
 
-    <!-- KADI YA CHINI YA BONUS YA SEO -->
-<div class="contact-card" style="border-top: 5px solid #222;">
-    <h3>📚 Need Learning Materials?</h3>
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+    }
 
-    <p style="color: #666; margin: 0; line-height: 1.6;">
-        Contact GEPAM Science Hub today to access your highly simplified Physics and Chemistry notes, detailed past papers, and national examination revision resources. We make science easy for every Tanzanian student!
-    </p>
+    .brand img {
+        height: 42px;
+        width: auto;
+        display: block;
+    }
 
-    <a href="https://wa.me/255748978398?text=Habari%20GEPAM%20Science%20Hub.%20Naomba%20kupata%20Notes%20na%20Past%20Papers."
-       target="_blank"
-       class="contact-btn">
-         CONTACT US ON WHATSAPP
-    </a>
-</div>
-    
-    </main>
-<div class="overlay" id="menuOverlay" onclick="toggleMenu()"></div>
-    <div class="sidebar" id="sidebarMenu">
-<button class="close-btn" onclick="toggleMenu()">✕</button>
-<div class="sidebar-links">
-<a href="index.html">🏠 Home</a>
-<a href="about.html">ℹ️ About Us</a>
-<a href="notes.html">📝 Notes Store</a>
-<a href="pastpapers.html">📚 Past Papers</a>
-<a href="contact.html" style="color: #00c300;">📞 Contact</a>
-</div>
-</div>
+    .brand-name {
+        font-size: 18px;
+        font-weight: 700;
+        color: #003366;
+        letter-spacing: 0.2px;
+    }
 
-<footer style="text-align: center; padding: 30px; background: #222; color: #fff; margin-top: 50px;">
-    <p>© 2026 GEPAM Science Hub. All Rights Reserved.</p>
-</footer>
+    .menu-toggle {
+        min-width: 82px;
+        height: 42px;
+        padding: 0 15px;
+        border: 1px solid #d7dee7;
+        border-radius: 8px;
+        background: #ffffff;
+        color: #003366;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.7px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
 
-<script>
-    function toggleMenu() {
-        const sidebar = document.getElementById("sidebarMenu");
-        const overlay = document.getElementById("menuOverlay");
-        if (sidebar && overlay) {
-            sidebar.classList.toggle("active");
-            overlay.style.display = sidebar.classList.contains("active") ? "block" : "none";
+    .menu-toggle:hover {
+        background: #003366;
+        color: #ffffff;
+        border-color: #003366;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .contact-hero {
+        background:
+            linear-gradient(
+                135deg,
+                #003366 0%,
+                #064b82 55%,
+                #0a5f91 100%
+            );
+        color: #ffffff;
+        padding: 72px 20px 76px;
+        text-align: center;
+    }
+
+    .hero-inner {
+        max-width: 850px;
+        margin: 0 auto;
+    }
+
+    .hero-label {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        opacity: 0.85;
+        margin-bottom: 14px;
+    }
+
+    .contact-hero h1 {
+        margin: 0;
+        font-size: clamp(30px, 5vw, 46px);
+        line-height: 1.15;
+        font-weight: 700;
+    }
+
+    .contact-hero p {
+        max-width: 680px;
+        margin: 18px auto 0;
+        font-size: 16px;
+        line-height: 1.7;
+        color: rgba(255,255,255,0.88);
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .contact-section {
+        width: min(1050px, calc(100% - 32px));
+        margin: -34px auto 70px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .contact-card {
+        background: #ffffff;
+        border: 1px solid #e4e9ef;
+        border-radius: 12px;
+        padding: 28px 24px;
+        box-shadow: 0 8px 25px rgba(0, 45, 80, 0.07);
+        text-align: left;
+        min-height: 235px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .contact-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(0, 45, 80, 0.11);
+    }
+
+    .contact-card h2 {
+        margin: 0 0 11px;
+        color: #003366;
+        font-size: 19px;
+        font-weight: 700;
+    }
+
+    .contact-card p {
+        margin: 0;
+        color: #667085;
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .contact-detail {
+        margin-top: 14px;
+        color: #1f2937;
+        font-size: 14px;
+        font-weight: 700;
+        word-break: break-word;
+    }
+
+    .contact-btn {
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 43px;
+        padding: 10px 14px;
+        margin-top: 22px;
+        border-radius: 7px;
+        background: #003366;
+        color: #ffffff;
+        text-decoration: none;
+        border: 1px solid #003366;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        transition: all 0.2s ease;
+    }
+
+    .contact-btn:hover {
+        background: #064b82;
+        border-color: #064b82;
+    }
+
+    .social-links {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 9px;
+        margin-top: 18px;
+    }
+
+    .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        padding: 8px 10px;
+        border: 1px solid #dfe5ec;
+        border-radius: 6px;
+        background: #f8fafc;
+        color: #334155;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 700;
+        transition: all 0.2s ease;
+    }
+
+    .social-links a:hover {
+        background: #003366;
+        border-color: #003366;
+        color: #ffffff;
+    }
+
+    /* =========================
+       SUPPORT SECTION
+    ========================= */
+
+    .support-card {
+        margin-top: 22px;
+        background: #ffffff;
+        border: 1px solid #e0e7ef;
+        border-radius: 12px;
+        padding: 38px 35px;
+        box-shadow: 0 8px 25px rgba(0, 45, 80, 0.06);
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 35px;
+        align-items: center;
+    }
+
+    .support-card h2 {
+        margin: 0 0 12px;
+        color: #003366;
+        font-size: 25px;
+    }
+
+    .support-card p {
+        margin: 0;
+        color: #667085;
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .support-action {
+        text-align: right;
+    }
+
+    .support-action .contact-btn {
+        width: auto;
+        min-width: 210px;
+    }
+
+    /* =========================
+       QUICK LINKS
+    ========================= */
+
+    .quick-links {
+        margin-top: 22px;
+        background: #003366;
+        border-radius: 12px;
+        padding: 30px 25px;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .quick-links h2 {
+        margin: 0 0 8px;
+        font-size: 21px;
+    }
+
+    .quick-links p {
+        margin: 0 0 22px;
+        color: rgba(255,255,255,0.78);
+        font-size: 14px;
+    }
+
+    .quick-link-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .quick-link-buttons a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        padding: 9px 18px;
+        border: 1px solid rgba(255,255,255,0.35);
+        border-radius: 6px;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 700;
+        transition: all 0.2s ease;
+    }
+
+    .quick-link-buttons a:hover {
+        background: #ffffff;
+        color: #003366;
+    }
+
+    /* =========================
+       SIDEBAR
+    ========================= */
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        right: -300px !important;
+        width: 290px;
+        height: 100%;
+        background: #ffffff;
+        box-shadow: -8px 0 28px rgba(0,0,0,0.14);
+        transition: right 0.3s ease;
+        z-index: 10000;
+        padding: 22px;
+        overflow-y: auto;
+        text-align: left;
+    }
+
+    .sidebar.active {
+        right: 0 !important;
+    }
+
+    .sidebar-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 18px;
+        border-bottom: 1px solid #edf0f4;
+    }
+
+    .sidebar-title {
+        color: #003366;
+        font-size: 17px;
+        font-weight: 700;
+    }
+
+    .close-btn {
+        width: 38px;
+        height: 38px;
+        border: 1px solid #dfe5ec;
+        border-radius: 7px;
+        background: #ffffff;
+        color: #52606d;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .close-btn:hover {
+        background: #003366;
+        border-color: #003366;
+        color: #ffffff;
+    }
+
+    .sidebar-links {
+        margin-top: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .sidebar-links a {
+        text-decoration: none;
+        color: #344054;
+        font-weight: 600;
+        font-size: 15px;
+        padding: 13px 14px;
+        border-radius: 7px;
+        display: block;
+        transition: all 0.2s ease;
+    }
+
+    .sidebar-links a:hover {
+        background: #f1f6fa;
+        color: #003366;
+    }
+
+    .sidebar-links a.active-link {
+        background: #eaf2f8;
+        color: #003366;
+    }
+
+    .overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.48);
+        z-index: 9999;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+        background: #17202b;
+        color: #ffffff;
+        text-align: center;
+        padding: 32px 20px;
+    }
+
+    footer p {
+        margin: 0;
+        color: rgba(255,255,255,0.72);
+        font-size: 13px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 800px) {
+
+        .contact-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .contact-section {
+            margin-top: -25px;
+        }
+
+        .support-card {
+            grid-template-columns: 1fr;
+            padding: 30px 24px;
+        }
+
+        .support-action {
+            text-align: left;
+        }
+
+        .support-action .contact-btn {
+            width: 100%;
         }
     }
+
+    @media (max-width: 500px) {
+
+        .nav-header {
+            padding: 12px 15px;
+        }
+
+        .brand-name {
+            font-size: 16px;
+        }
+
+        .brand img {
+            height: 38px;
+        }
+
+        .menu-toggle {
+            min-width: 76px;
+            height: 40px;
+        }
+
+        .contact-hero {
+            padding: 55px 18px 62px;
+        }
+
+        .contact-hero p {
+            font-size: 14px;
+        }
+
+        .contact-section {
+            width: calc(100% - 24px);
+        }
+
+        .contact-card {
+            padding: 24px 20px;
+        }
+
+        .support-card {
+            padding: 27px 20px;
+        }
+
+        .quick-links {
+            padding: 27px 18px;
+        }
+
+        .quick-link-buttons {
+            flex-direction: column;
+        }
+
+        .quick-link-buttons a {
+            width: 100%;
+        }
+
+        .sidebar {
+            width: 285px;
+        }
+    }
+</style>
+
+</head><body><!-- HEADER -->
+<div class="nav-header">
+
+    <div class="brand">
+        <img src="file_00000000f17471f4b8f76a744122207a.png" alt="GEPAM Science Hub Logo">
+        <span class="brand-name">GEPAM Science Hub</span>
+    </div>
+
+    <button
+        class="menu-toggle"
+        id="menuToggle"
+        onclick="toggleMenu()"
+        aria-label="Open navigation menu"
+        aria-expanded="false">
+        MENU
+    </button>
+
+</div>
+
+
+<!-- HERO -->
+<header class="contact-hero">
+
+    <div class="hero-inner">
+
+        <div class="hero-label">GEPAM Science Hub</div>
+
+        <h1>Contact Us</h1>
+
+        <p>
+            Have a question, need assistance with our learning resources,
+            or want to get in touch with GEPAM Science Hub?
+            We are here to help.
+        </p>
+
+    </div>
+
+</header>
+
+
+<!-- MAIN -->
+<main class="contact-section">
+
+    <!-- CONTACT CARDS -->
+    <div class="contact-grid">
+
+        <!-- WHATSAPP -->
+        <div class="contact-card">
+
+            <div>
+                <h2>WhatsApp Support</h2>
+
+                <p>
+                    Contact us directly for assistance with Notes,
+                    Past Papers, purchases, payments, or accessing
+                    learning materials.
+                </p>
+
+                <div class="contact-detail">
+                    +255 748 978 398
+                </div>
+            </div>
+
+            <a
+                href="https://wa.me/255748978398?text=Habari%20GEPAM%20Science%20Hub.%20Naomba%20msaada%20kuhusu%20Notes%20na%20Past%20Papers."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-btn">
+                CHAT ON WHATSAPP
+            </a>
+
+        </div>
+
+
+        <!-- EMAIL -->
+        <div class="contact-card">
+
+            <div>
+                <h2>Email Support</h2>
+
+                <p>
+                    Send us your questions, suggestions, academic
+                    inquiries, partnership ideas, or other messages.
+                </p>
+
+                <div class="contact-detail">
+                    gepamsciencehub@gmail.com
+                </div>
+            </div>
+
+            <a
+                href="mailto:gepamsciencehub@gmail.com"
+                class="contact-btn">
+                SEND EMAIL
+            </a>
+
+        </div>
+
+
+        <!-- SOCIAL MEDIA -->
+        <div class="contact-card">
+
+            <div>
+                <h2>Stay Connected</h2>
+
+                <p>
+                    Follow GEPAM Science Hub online for science
+                    learning content, updates, tutorials, and new
+                    educational resources.
+                </p>
+
+                <div class="social-links">
+
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+                        YouTube
+                    </a>
+
+                    <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
+                        TikTok
+                    </a>
+
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                        Facebook
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUPPORT -->
+    <section class="support-card">
+
+        <div>
+            <h2>Need Help With Learning Materials?</h2>
+
+            <p>
+                Whether you are looking for Physics or Chemistry Notes,
+                Past Papers, revision resources, or help with a purchase,
+                our support team is ready to assist you.
+            </p>
+        </div>
+
+        <div class="support-action">
+
+            <a
+                href="https://wa.me/255748978398?text=Habari%20GEPAM%20Science%20Hub.%20Naomba%20msaada%20kuhusu%20learning%20materials."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-btn">
+                CONTACT SUPPORT
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUICK LINKS -->
+    <section class="quick-links">
+
+        <h2>Explore GEPAM Science Hub</h2>
+
+        <p>
+            Continue learning or explore our available resources.
+        </p>
+
+        <div class="quick-link-buttons">
+
+            <a href="index.html">HOME</a>
+
+            <a href="notes.html">NOTES</a>
+
+            <a href="pastpapers.html">PAST PAPERS</a>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- OVERLAY -->
+<div
+    class="overlay"
+    id="menuOverlay"
+    onclick="toggleMenu()">
+</div>
+
+
+<!-- SIDEBAR -->
+<aside
+    class="sidebar"
+    id="sidebarMenu"
+    aria-label="Main navigation">
+
+    <div class="sidebar-top">
+
+        <div class="sidebar-title">
+            GEPAM Science Hub
+        </div>
+
+        <button
+            class="close-btn"
+            onclick="toggleMenu()"
+            aria-label="Close navigation menu">
+            CLOSE
+        </button>
+
+    </div>
+
+
+    <nav class="sidebar-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="about.html">
+            About Us
+        </a>
+
+        <a href="notes.html">
+            Notes Store
+        </a>
+
+        <a href="pastpapers.html">
+            Past Papers
+        </a>
+
+        <a href="contact.html" class="active-link">
+            Contact
+        </a>
+
+    </nav>
+
+</aside>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        © 2026 GEPAM Science Hub. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<!-- SCRIPT -->
+<script>
+
+    function toggleMenu() {
+
+        const sidebar = document.getElementById("sidebarMenu");
+        const overlay = document.getElementById("menuOverlay");
+        const menuToggle = document.getElementById("menuToggle");
+
+        if (!sidebar || !overlay) return;
+
+        const isOpen = sidebar.classList.toggle("active");
+
+        overlay.style.display = isOpen ? "block" : "none";
+
+        if (menuToggle) {
+            menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        }
+
+        document.body.style.overflow = isOpen ? "hidden" : "";
+    }
+
+
+    document.addEventListener("keydown", function(event) {
+
+        if (event.key === "Escape") {
+
+            const sidebar = document.getElementById("sidebarMenu");
+
+            if (sidebar && sidebar.classList.contains("active")) {
+                toggleMenu();
+            }
+
+        }
+
+    });
+
 </script>
+
 </body>
 </html>
