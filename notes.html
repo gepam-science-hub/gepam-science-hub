@@ -18,615 +18,34 @@
       href="style.css">
 
 <style>
-
-/* =========================================================
-   BASIC
-========================================================= */
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: #fafafa;
-    color: #222;
-    overflow-x: hidden;
-}
-
-
-/* =========================================================
-   TOP NAVIGATION
-========================================================= */
-
-.nav-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    max-width: 1000px;
-    margin: 0 auto;
-
-    padding: 15px 20px;
-
-    background: #fff;
-    border-bottom: 1px solid #eee;
-}
-
-.logo-area {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.logo-area img {
-    height: 40px;
-    width: auto;
-}
-
-.logo-title {
-    font-weight: bold;
-    font-size: 18px;
-    color: #222;
-}
-
-.menu-toggle {
-    font-size: 28px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #333;
-}
-
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
-
-.sidebar {
-    position: fixed;
-
-    top: 0;
-    right: -290px;
-
-    width: 280px;
-    height: 100%;
-
-    background: #fff;
-
-    box-shadow: -5px 0 15px rgba(0,0,0,0.12);
-
-    transition: right 0.3s ease;
-
-    z-index: 10000;
-
-    padding: 20px;
-
-    overflow-y: auto;
-}
-
-.sidebar.active {
-    right: 0;
-}
-
-.close-btn {
-    font-size: 24px;
-
-    background: none;
-    border: none;
-
-    cursor: pointer;
-
-    color: #333;
-
-    float: right;
-
-    padding: 5px 10px;
-}
-
-.sidebar-links {
-    margin-top: 55px;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 10px;
-}
-
-.sidebar-links a,
-.dropdown-btn {
-    display: block;
-
-    width: 100%;
-
-    padding: 12px;
-
-    text-decoration: none;
-
-    color: #333;
-
-    font-weight: bold;
-
-    font-size: 16px;
-
-    text-align: left;
-
-    border: none;
-
-    background: none;
-
-    cursor: pointer;
-
-    border-radius: 5px;
-}
-
-.sidebar-links a:hover,
-.dropdown-btn:hover {
-    background: #f4f4f4;
-    color: #00a500;
-}
-
-.dropdown-container {
-    display: none;
-
-    background: #f8f8f8;
-
-    border-left: 3px solid #00c300;
-
-    padding-left: 10px;
-}
-
-.dropdown-container a {
-    font-size: 14px;
-    font-weight: normal;
-}
-
-
-/* =========================================================
-   OVERLAY
-========================================================= */
-
-.overlay {
-    display: none;
-
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background: rgba(0,0,0,0.45);
-
-    z-index: 9999;
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-.main-container {
-    max-width: 1000px;
-
-    margin: 0 auto;
-
-    padding: 25px 20px 60px;
-}
-
-
-/* =========================================================
-   PAGE TITLE
-========================================================= */
-
-.page-header {
-    text-align: center;
-
-    margin-bottom: 25px;
-}
-
-.page-header h1 {
-    margin-bottom: 8px;
-
-    font-size: 28px;
-}
-
-.page-header p {
-    color: #666;
-
-    line-height: 1.6;
-}
-
-
-/* =========================================================
-   BREADCRUMB
-========================================================= */
-
-.breadcrumb {
-    display: flex;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: 6px;
-
-    margin-bottom: 20px;
-
-    font-size: 14px;
-
-    color: #666;
-}
-
-.breadcrumb span {
-    font-weight: bold;
-    color: #333;
-}
-
-.breadcrumb .separator {
-    color: #aaa;
-}
-
-
-/* =========================================================
-   BACK BUTTON
-========================================================= */
-
-.back-btn {
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 8px;
-
-    padding: 11px 18px;
-
-    background: #333;
-
-    color: #fff;
-
-    border: none;
-
-    border-radius: 6px;
-
-    cursor: pointer;
-
-    font-size: 15px;
-
-    font-weight: bold;
-
-    margin-bottom: 20px;
-
-    text-decoration: none;
-}
-
-.back-btn:hover {
-    background: #222;
-}
-
-
-/* =========================================================
-   STEP TITLE
-========================================================= */
-
-.step-title {
-    text-align: center;
-
-    margin: 20px 0;
-}
-
-.step-title h2 {
-    margin-bottom: 8px;
-
-    font-size: 24px;
-}
-
-.step-title p {
-    color: #666;
-}
-
-
-/* =========================================================
-   SELECTION GRID
-========================================================= */
-
-.selection-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(220px, 1fr));
-
-    gap: 18px;
-
-    margin-top: 20px;
-}
-
-
-/* =========================================================
-   SELECTION CARD
-========================================================= */
-
-.selection-card {
-    background: #fff;
-
-    border: 1px solid #e5e5e5;
-
-    border-top: 5px solid #00c300;
-
-    border-radius: 9px;
-
-    padding: 22px;
-
-    min-height: 150px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: space-between;
-
-    box-shadow:
-        0 4px 10px rgba(0,0,0,0.05);
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.selection-card:hover {
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 7px 15px rgba(0,0,0,0.08);
-}
-
-.selection-card h3 {
-    margin-top: 0;
-
-    font-size: 19px;
-}
-
-.selection-card p {
-    color: #666;
-
-    line-height: 1.5;
-
-    font-size: 14px;
-}
-
-
-/* =========================================================
-   OPEN BUTTON
-========================================================= */
-
-.open-btn {
-    width: 100%;
-
-    padding: 12px;
-
-    background: #00c300;
-
-    color: #fff;
-
-    border: none;
-
-    border-radius: 5px;
-
-    font-weight: bold;
-
-    font-size: 14px;
-
-    cursor: pointer;
-
-    margin-top: 15px;
-}
-
-.open-btn:hover {
-    background: #00a500;
-}
-
-
-/* =========================================================
-   SYLLABUS
-========================================================= */
-
-.syllabus-old {
-    border-top-color: #555;
-}
-
-.syllabus-new {
-    border-top-color: #00c300;
-}
-
-
-/* =========================================================
-   SUBJECT
-========================================================= */
-
-.subject-card {
-    min-height: 170px;
-}
-
-.subject-icon {
-    font-size: 34px;
-
-    margin-bottom: 8px;
-}
-
-
-/* =========================================================
-   FULL NOTES
-========================================================= */
-
-.full-notes-card {
-    border-top-color: #0066cc;
-
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff,
-            #f8fbff
-        );
-}
-
-.full-notes-label {
-    display: inline-block;
-
-    padding: 5px 9px;
-
-    border-radius: 4px;
-
-    background: #e8f2ff;
-
-    color: #0066cc;
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-    margin-bottom: 8px;
-}
-
-
-/* =========================================================
-   TOPICS
-========================================================= */
-
-.topic-card {
-    min-height: 190px;
-}
-
-.topic-price {
-    font-size: 19px;
-
-    font-weight: bold;
-
-    color: #00a500;
-
-    margin: 12px 0;
-}
-
-.buy-btn {
-    width: 100%;
-
-    padding: 12px;
-
-    background: #00c300;
-
-    color: white;
-
-    border: none;
-
-    border-radius: 5px;
-
-    font-size: 14px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-.buy-btn:hover {
-    background: #00a500;
-}
-
-
-/* =========================================================
-   PRACTICAL
-========================================================= */
-
-.practical-section {
-    margin-top: 30px;
-}
-
-.practical-card {
-    border-top-color: #8a2be2;
-
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff,
-            #faf7ff
-        );
-}
-
-.practical-label {
-    display: inline-block;
-
-    padding: 5px 9px;
-
-    border-radius: 4px;
-
-    background: #f0e7ff;
-
-    color: #7020b5;
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-    margin-bottom: 8px;
-}
-
-
-/* =========================================================
-   EMPTY / FUTURE TOPICS
-========================================================= */
-
-.topic-card.future {
-    border-top-color: #777;
-}
-
-.future-label {
-    display: inline-block;
-
-    padding: 5px 8px;
-
-    border-radius: 4px;
-
-    background: #eee;
-
-    color: #555;
-
-    font-size: 12px;
-
-    font-weight: bold;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 600px) {
-
-    .main-container {
-        padding: 20px 15px 50px;
-    }
-
-    .page-header h1 {
-        font-size: 24px;
-    }
-
-    .step-title h2 {
-        font-size: 21px;
-    }
-
-    .selection-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .selection-card {
-        min-height: 145px;
-    }
-
-}
-
+*{box-sizing:border-box}
+:root{--primary:#5b3cc4;--primary-dark:#43289b;--primary-soft:#f3efff;--ink:#1f2430;--muted:#667085;--line:#e7e3f2;--surface:#fff;--bg:#f8f7fc}
+html{scroll-behavior:smooth}
+body{margin:0;padding:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+.nav-header{position:sticky;top:0;z-index:9000;display:flex;justify-content:space-between;align-items:center;width:100%;padding:14px max(20px,calc((100% - 1120px)/2));background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);box-shadow:0 2px 14px rgba(48,35,90,.05)}
+.logo-area{display:flex;align-items:center;gap:11px}.logo-area img{height:42px;width:auto}.logo-title{font-weight:800;font-size:18px;color:#25213a;letter-spacing:.1px}
+.menu-toggle{font-size:13px;font-weight:800;letter-spacing:.4px;background:var(--primary);border:0;border-radius:8px;color:#fff;cursor:pointer;padding:10px 14px}.menu-toggle:hover{background:var(--primary-dark)}
+.sidebar{position:fixed;top:0;right:-310px;width:290px;height:100%;background:#fff;box-shadow:-8px 0 28px rgba(31,24,61,.16);transition:right .28s ease;z-index:10000;padding:20px;overflow-y:auto}.sidebar.active{right:0}
+.close-btn{font-size:13px;font-weight:800;letter-spacing:.4px;background:#f2effa;border:0;border-radius:8px;cursor:pointer;color:var(--ink);float:right;padding:9px 12px}.close-btn:hover{background:#e9e4f7}
+.sidebar-links{margin-top:62px;display:flex;flex-direction:column;gap:7px}.sidebar-links a,.dropdown-btn{display:block;width:100%;padding:12px 13px;text-decoration:none;color:#333;font-weight:700;font-size:15px;text-align:left;border:0;background:none;cursor:pointer;border-radius:8px}.sidebar-links a:hover,.dropdown-btn:hover{background:var(--primary-soft);color:var(--primary)}
+.dropdown-container{display:none;background:#faf9fe;border-left:3px solid var(--primary);padding:6px 0 6px 9px;border-radius:0 8px 8px 0}.dropdown-container a{font-size:14px;font-weight:600}
+.overlay{display:none;position:fixed;inset:0;background:rgba(18,14,31,.48);z-index:9999}
+.main-container{max-width:1120px;margin:0 auto;padding:34px 20px 64px}
+.page-header{position:relative;text-align:center;margin:0 auto 30px;padding:38px 24px 34px;background:linear-gradient(135deg,#5b3cc4,#7657d8);border-radius:18px;color:#fff;overflow:hidden;box-shadow:0 14px 35px rgba(91,60,196,.16)}
+.page-header:after{content:"";position:absolute;width:220px;height:220px;border:1px solid rgba(255,255,255,.15);border-radius:50%;right:-90px;top:-120px}.page-header h1{position:relative;z-index:1;margin:0 0 10px;font-size:31px;line-height:1.2}.page-header p{position:relative;z-index:1;margin:0 auto;max-width:700px;color:rgba(255,255,255,.9);line-height:1.65;font-size:15px}
+.breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:0 0 18px;padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:9px;font-size:13px;color:var(--muted)}.breadcrumb span{font-weight:700;color:#333}.breadcrumb .separator{color:#aaa;font-weight:400}
+.back-btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 15px;background:#29263a;color:#fff;border:0;border-radius:8px;cursor:pointer;font-size:14px;font-weight:800;margin-bottom:14px;text-decoration:none}.back-btn:hover{background:#181622}
+.step-title{text-align:center;margin:28px 0 20px}.step-title h2{margin:0 0 7px;font-size:25px;color:#29243d}.step-title p{margin:0;color:var(--muted);line-height:1.55;font-size:14px}
+.selection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:18px;margin-top:18px}
+.selection-card{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--primary);border-radius:12px;padding:22px;min-height:158px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 5px 18px rgba(41,31,75,.06);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.selection-card:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(41,31,75,.10);border-color:#d9d1ef}.selection-card h3{margin:0 0 9px;font-size:19px;color:#29243d}.selection-card p{margin:0;color:var(--muted);line-height:1.55;font-size:14px}
+.open-btn,.buy-btn{width:100%;padding:12px 14px;border:0;border-radius:8px;font-weight:800;font-size:14px;cursor:pointer;margin-top:17px}.open-btn{background:var(--primary);color:#fff}.open-btn:hover{background:var(--primary-dark)}
+.syllabus-old{border-top-color:#626878}.syllabus-new{border-top-color:var(--primary)}
+.subject-card{min-height:180px}.subject-card:before{content:"SUBJECT";display:inline-block;width:max-content;padding:5px 8px;margin-bottom:12px;border-radius:5px;background:var(--primary-soft);color:var(--primary);font-size:11px;font-weight:800;letter-spacing:.5px}
+.full-notes-card{border-top-color:#3158b8;background:linear-gradient(180deg,#fff,#f8faff)}.full-notes-label,.practical-label,.future-label{display:inline-block;padding:5px 9px;border-radius:5px;font-size:11px;font-weight:800;letter-spacing:.4px}.full-notes-label{background:#eaf0ff;color:#3158b8}.topic-card{min-height:190px}.topic-price{font-size:20px;font-weight:800;color:#178548;margin:13px 0 0}.buy-btn{background:#168a4a;color:#fff}.buy-btn:hover{background:#106d3a}
+.practical-section{margin-top:32px}.practical-card{border-top-color:#7b4bc4;background:linear-gradient(180deg,#fff,#fbf8ff)}.practical-label{background:#f1eaff;color:#6e3aae}.future-label{background:#eeeef2;color:#5d6070}
+footer{text-align:center;padding:28px 20px;background:#201d2c;color:#fff;margin-top:42px}footer p{margin:0;color:#d9d6e1;font-size:13px}
+@media(max-width:700px){.nav-header{padding:12px 15px}.logo-area img{height:38px}.logo-title{font-size:16px}.main-container{padding:22px 14px 50px}.page-header{padding:30px 18px 28px;border-radius:14px}.page-header h1{font-size:25px}.selection-grid{grid-template-columns:1fr;gap:14px}.selection-card{padding:19px;min-height:145px}.step-title{margin:23px 0 17px}.step-title h2{font-size:21px}.breadcrumb{font-size:12px}.sidebar{width:280px}}
+@media(min-width:701px){.selection-grid .selection-card:only-child{max-width:620px;margin-left:auto;margin-right:auto}}
 </style>
 
 </head>
@@ -648,7 +67,7 @@ body {
             alt="GEPAM Logo">
 
         <span class="logo-title">
-            GEPAM Store
+            GEPAM Science Hub
         </span>
 
     </div>
@@ -675,7 +94,7 @@ body {
     <div class="page-header">
 
         <h1>
-            📘 GEPAM Premium Notes
+             GEPAM Premium Notes
         </h1>
 
         <p>
@@ -711,7 +130,7 @@ body {
         id="backButton"
         onclick="goBack()">
 
-        ← RUDI NYUMA
+        RUDI NYUMA
 
     </button>
 
@@ -745,7 +164,7 @@ body {
         class="close-btn"
         onclick="toggleMenu()">
 
-        ✕
+        CLOSE
 
     </button>
 
@@ -753,7 +172,7 @@ body {
     <div class="sidebar-links">
 
         <a href="index.html">
-            🏠 Home
+             Home
         </a>
 
         <a href="about.html">
@@ -765,7 +184,7 @@ body {
             class="dropdown-btn"
             onclick="toggleDropdown(this)">
 
-            📝 Notes Store
+             Notes Store
             <span>▼</span>
 
         </button>
@@ -801,12 +220,12 @@ body {
 
 
         <a href="pastpapers.html">
-            📚 Past Papers
+             Past Papers
         </a>
 
 
         <a href="contact.html">
-            📞 Contact
+             Contact
         </a>
 
     </div>
@@ -2007,7 +1426,7 @@ function renderHome() {
                 <div>
 
                     <h3>
-                        📚 O-Level & A-Level Notes
+                        O-Level & A-Level Notes
                     </h3>
 
                     <p>
@@ -2037,7 +1456,7 @@ function renderHome() {
                     </span>
 
                     <h3>
-                        🧪 Practical Notes
+                        Practical Notes
                     </h3>
 
                     <p>
@@ -2164,7 +1583,7 @@ function renderForms() {
                 <div>
 
                     <h3>
-                        📚 Form ${i}
+                        Form ${i}
                     </h3>
 
                     <p>
@@ -2300,7 +1719,7 @@ function renderSyllabus() {
                 <div>
 
                     <h3>
-                        📕 Old Syllabus
+                        Old Syllabus
                     </h3>
 
                     <p>
@@ -2327,7 +1746,7 @@ function renderSyllabus() {
                 <div>
 
                     <h3>
-                        📗 New Syllabus
+                        New Syllabus
                     </h3>
 
                     <p>
@@ -2456,21 +1875,11 @@ function renderSubjects() {
     syllabus.subjects.forEach(
         subject => {
 
-            const icon =
-                subject === "Physics"
-                ? "⚛️"
-                : "🧪";
-
-
             html += `
 
                 <div class="selection-card subject-card">
 
                     <div>
-
-                        <div class="subject-icon">
-                            ${icon}
-                        </div>
 
                         <h3>
                             ${subject}
@@ -2629,7 +2038,7 @@ function renderTopics() {
                     <div>
 
                         <span class="full-notes-label">
-                            📘 FULL NOTES
+                            FULL NOTES
                         </span>
 
                         <h3>
@@ -2682,7 +2091,7 @@ function renderTopics() {
             <div class="step-title">
 
                 <h2>
-                    📚 Topics
+                     Topics
                 </h2>
 
                 <p>
@@ -2782,7 +2191,7 @@ function renderTopics() {
                 <div>
 
                     <h3>
-                        📚 Topic-by-topic Notes
+                         Topic-by-topic Notes
                     </h3>
 
                     <p>
@@ -2816,7 +2225,7 @@ function renderTopics() {
                 <div>
 
                     <h3>
-                        📚 Premium ${currentState.subject}
+                        Premium ${currentState.subject}
                         Notes
                     </h3>
 
@@ -2907,7 +2316,7 @@ function renderPracticalLevels() {
         <div class="step-title">
 
             <h2>
-                🧪 Practical Notes
+                Practical Notes
             </h2>
 
             <p>
@@ -2928,7 +2337,7 @@ function renderPracticalLevels() {
                     </span>
 
                     <h3>
-                        🧪 O-Level Practical Notes
+                         O-Level Practical Notes
                     </h3>
 
                     <p>
@@ -2959,7 +2368,7 @@ function renderPracticalLevels() {
                     </span>
 
                     <h3>
-                        🔬 A-Level Practical Notes
+                        A-Level Practical Notes
                     </h3>
 
                     <p>
@@ -3051,7 +2460,7 @@ function renderPractical() {
         <div class="step-title">
 
             <h2>
-                🧪 ${levelName} Practical Notes
+                 ${levelName} Practical Notes
             </h2>
 
             <p>
