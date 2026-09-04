@@ -245,29 +245,6 @@ body {
 
 }
 
-.hero-icon {
-
-    width: 60px;
-
-    height: 60px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background:
-        rgba(255,255,255,.15);
-
-    border-radius: 16px;
-
-    font-size: 32px;
-
-    margin-bottom: 15px;
-
-}
-
 .page-hero h1 {
 
     margin: 0 0 8px;
@@ -569,33 +546,6 @@ body {
 }
 
 /* =========================================================
-   CARD ICON
-========================================================= */
-
-.card-icon {
-
-    width: 55px;
-
-    height: 55px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 15px;
-
-    background:
-        var(--light-blue);
-
-    font-size: 28px;
-
-    margin-bottom: 14px;
-
-}
-
-/* =========================================================
    SUBJECT COLORS
 ========================================================= */
 
@@ -629,27 +579,6 @@ body {
             #2e7d32,
             #66bb6a
         );
-
-}
-
-.physics-card .card-icon {
-
-    background:
-        #e6f1ff;
-
-}
-
-.chemistry-card .card-icon {
-
-    background:
-        #e5f8f5;
-
-}
-
-.biology-card .card-icon {
-
-    background:
-        #eaf7ea;
 
 }
 
@@ -842,13 +771,6 @@ body {
 
 }
 
-.pdf-icon {
-
-    background:
-        #ffebee;
-
-}
-
 /* =========================================================
    PAPER ACTIONS
 ========================================================= */
@@ -968,14 +890,6 @@ body {
 
     border:
         1px solid #ffe082;
-
-}
-
-.empty-card-icon {
-
-    font-size: 40px;
-
-    margin-bottom: 10px;
 
 }
 
@@ -1334,9 +1248,7 @@ footer strong {
         class="menu-toggle"
         onclick="toggleMenu()"
         aria-label="Open menu">
-
-        ☰
-
+        MENU
     </button>
 
 </header>
@@ -1348,10 +1260,6 @@ footer strong {
 <main class="main-container">
 
     <section class="page-hero">
-
-        <div class="hero-icon">
-            📚
-        </div>
 
         <h1>
             Past Papers
@@ -1381,7 +1289,7 @@ footer strong {
         class="back-btn"
         onclick="goBack()">
 
-        ← RUDI NYUMA
+        RUDI NYUMA
 
     </button>
 
@@ -1415,26 +1323,24 @@ footer strong {
     <button
         class="close-btn"
         onclick="toggleMenu()">
-
-        ✕
-
+        CLOSE
     </button>
 
     <nav class="sidebar-links">
 
         <a href="index.html">
-            🏠 Home
+             Home
         </a>
 
         <a href="about.html">
-            ℹ️ About Us
+             About Us
         </a>
 
         <button
             class="dropdown-btn"
             onclick="toggleDropdown(this)">
 
-            📝 Notes
+             Notes
             <span>▼</span>
 
         </button>
@@ -1468,11 +1374,11 @@ footer strong {
         </div>
 
         <a href="pastpapers.html">
-            📚 Past Papers
+             Past Papers
         </a>
 
         <a href="contact.html">
-            📞 Contact
+             Contact
         </a>
 
     </nav>
@@ -1609,21 +1515,18 @@ const FALLBACK_SUBJECTS = [
     {
         id: "physics",
         name: "Physics",
-        icon: "⚡",
         className: "physics-card"
     },
 
     {
         id: "chemistry",
         name: "Chemistry",
-        icon: "🧪",
         className: "chemistry-card"
     },
 
     {
         id: "biology",
         name: "Biology",
-        icon: "🧬",
         className: "biology-card"
     }
 
@@ -1765,11 +1668,6 @@ function getSubjects() {
                 return {
 
                     ...subject,
-
-                    icon:
-                        found
-                            ? found.icon
-                            : "📚",
 
                     className:
                         found
@@ -1967,7 +1865,7 @@ function checkDataFile() {
 
         dataStatus.innerHTML = `
 
-            ⚠️ <strong>
+             <strong>
                 Past Papers database
                 haijapakiwa.
             </strong>
@@ -2237,10 +2135,6 @@ function renderHome() {
 
                     <div>
 
-                        <div class="card-icon">
-                            📘
-                        </div>
-
                         <h3>
                             ${escapeHTML(
                                 form.name
@@ -2293,10 +2187,6 @@ function renderHome() {
             ">
 
                 <div>
-
-                    <div class="card-icon">
-                        ⭐
-                    </div>
 
                     <h3>
                         Special Examinations
@@ -2669,10 +2559,6 @@ function renderTypes() {
 
                     <div>
 
-                        <div class="card-icon">
-                            📝
-                        </div>
-
                         <h3>
                             ${escapeHTML(
                                 type.name
@@ -2902,10 +2788,6 @@ function renderLocationChoice() {
 
                 <div>
 
-                    <div class="card-icon">
-                        🏫
-                    </div>
-
                     <h3>
                         School Examinations
                     </h3>
@@ -2938,10 +2820,6 @@ function renderLocationChoice() {
             ">
 
                 <div>
-
-                    <div class="card-icon">
-                        📍
-                    </div>
 
                     <h3>
                         Regional Examinations
@@ -3201,10 +3079,6 @@ function renderSchools() {
 
                     <div>
 
-                        <div class="card-icon">
-                            🏫
-                        </div>
-
                         <h3>
                             ${escapeHTML(
                                 school.name
@@ -3434,10 +3308,6 @@ function renderRegions() {
 
                     <div>
 
-                        <div class="card-icon">
-                            📍
-                        </div>
-
                         <h3>
                             ${escapeHTML(
                                 region.name
@@ -3660,10 +3530,6 @@ function renderYears() {
                 ">
 
                     <div>
-
-                        <div class="card-icon">
-                            📅
-                        </div>
 
                         <h3>
                             ${escapeHTML(
@@ -3988,13 +3854,6 @@ function renderPaperCard(
 
             <div>
 
-                <div class="
-                    card-icon
-                    pdf-icon
-                ">
-                    📄
-                </div>
-
                 <h3>
                     ${escapeHTML(
                         title
@@ -4032,7 +3891,7 @@ function renderPaperCard(
                 target="_blank"
                 rel="noopener">
 
-                ⬇️ DOWNLOAD PDF
+                 DOWNLOAD PDF
 
             </a>
 
@@ -4059,7 +3918,7 @@ function renderPaperCard(
                 target="_blank"
                 rel="noopener">
 
-                📝 MARKING GUIDE
+                 MARKING GUIDE
 
             </a>
 
@@ -4085,7 +3944,7 @@ function renderPaperCard(
                 target="_blank"
                 rel="noopener">
 
-                👁️ OPEN / VIEW PDF
+                 OPEN / VIEW PDF
 
             </a>
 
@@ -4245,10 +4104,6 @@ function emptyCard(
 
         <div class="empty-card">
 
-            <div class="empty-card-icon">
-                📭
-            </div>
-
             <h3>
                 ${escapeHTML(
                     title
@@ -4344,7 +4199,6 @@ function renderSpecialMenu() {
         html += `
             <div class="selection-card special-card">
                 <div>
-                    <div class="card-icon">⭐</div>
                     <h3>${escapeHTML(special.name)}</h3>
                     <p>${count} examination item(s) available</p>
                 </div>
@@ -4433,7 +4287,6 @@ function renderSpecialForms() {
         html += `
             <div class="selection-card form-card">
                 <div>
-                    <div class="card-icon">📘</div>
                     <h3>${escapeHTML(form.name)}</h3>
                     <p>Special Examination</p>
                 </div>
@@ -4517,7 +4370,6 @@ function renderSpecialSubjects() {
         html += `
             <div class="selection-card">
                 <div>
-                    <div class="card-icon">📚</div>
                     <h3>${escapeHTML(subject.name)}</h3>
                     <p>${escapeHTML(displayName(currentState.form))} ${escapeHTML(subject.name)}</p>
                 </div>
@@ -4607,7 +4459,6 @@ function renderSpecialYears() {
         html += `
             <div class="selection-card">
                 <div>
-                    <div class="card-icon">📅</div>
                     <h3>${escapeHTML(String(year))}</h3>
                     <p>Special Examination</p>
                 </div>
@@ -4715,7 +4566,6 @@ let html = `
 html += `
     <div class="selection-card">
         <div>
-            <div class="card-icon">📝</div>
             <h3>Pre-NECTA</h3>
             <p>${preNecta.length ? `${preNecta.length} paper(s) available` : "Papers zitaongezwa hivi karibuni"}</p>
         </div>
@@ -4729,7 +4579,6 @@ if (series.length) {
     html += `
         <div class="selection-card series-card">
             <div>
-                <div class="card-icon">📚</div>
                 <h3>Series</h3>
                 <p>${series.length} paper(s) available</p>
             </div>
@@ -4856,7 +4705,6 @@ function renderSpecialSeries() {
         html += `
             <div class="selection-card series-card">
                 <div>
-                    <div class="card-icon">📚</div>
                     <h3>${escapeHTML(item.name)}</h3>
                     <p>${escapeHTML(displayName(currentState.specialExam))}</p>
                 </div>
