@@ -374,7 +374,7 @@ const pastPapers = [
 {
     "form":"form2",
     "subject":"physics",
-    "title":"WANGING'OMBE DC Pre NECTA Exam",
+    "title":"WANGING'OMBE DC",
     "type":"Pre NECTA",
     "region":"Pre NECTA",
     "year":2026,
@@ -490,7 +490,7 @@ const pastPapers = [
 {
     "form":"form2",
     "subject":"chemistry",
-    "title":"MILITARY SCHOOLS ASSOCIATION Pre NECTA Exam",
+    "title":"MILITARY SCHOOLS ASSOCIATION",
     "type":"Pre NECTA",
     "region":"Pre NECTA",
     "year":2026,
