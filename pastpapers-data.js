@@ -1406,6 +1406,7 @@ const specialPaperRecords = [
 
 // FORM 2 PHYSICS
 {
+    "category": "special_examinations",
     "title": "Physics",
     "type": "pre_necta",
     "region": "isese",
@@ -1416,6 +1417,7 @@ const specialPaperRecords = [
 
 // FORM 2 CHEMISTRY
 {
+    "category": "special_examinations",
     "title": "Chemistry",
     "type": "pre_necta",
     "region": "isese",
