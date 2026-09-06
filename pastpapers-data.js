@@ -363,11 +363,22 @@ const pastPapers = [
 {
     "form":"form2",
     "subject":"physics",
-    "title":"Physics FTNA Exam",
-    "type":"ftna",
-    "region":"necta",
+    "title":"MILITARY SCHOOLS ASSOCIATION Pre NECTA Exam",
+    "type":"Pre NECTA",
+    "region":"Pre NECTA",
     "year":2026,
-    "file":"papers/form2/physics/necta_2026.pdf",
+    "file":"papers/form2/physics/pre_necta/military schools/2026/F2_PHYSICS__PRE-NECTA__2026_GEPAM_HUB.pdf",
+    "markingScheme":"F2_PHYSICS_MS.pdf"
+},
+    
+{
+    "form":"form2",
+    "subject":"physics",
+    "title":"WANGING'OMBE DC Pre NECTA Exam",
+    "type":"Pre NECTA",
+    "region":"Pre NECTA",
+    "year":2026,
+    "file":"papers/form2/physics/pre_necta/wanging'ombe dc/2026/F2_PHYSICS__PRE-NECTA_+_MS.pdf",
     "markingScheme":""
 },
 
@@ -475,15 +486,16 @@ const pastPapers = [
 // FORM 2 - CHEMISTRY
 // ============================================================
 
+
 {
     "form":"form2",
     "subject":"chemistry",
-    "title":"Chemistry FTNA Exam",
-    "type":"ftna",
-    "region":"necta",
+    "title":"MILITARY SCHOOLS ASSOCIATION Pre NECTA Exam",
+    "type":"Pre NECTA",
+    "region":"Pre NECTA",
     "year":2026,
-    "file":"papers/form2/chemistry/necta_2026.pdf",
-    "markingScheme":""
+    "file":"papers/form2/chemistry/pre_necta/military schools/2026/F2_CHEMISTRY_PRE-NECTA_2026_GEPAM_HUB.pdf",
+    "markingScheme":"F2_CHEMISTRY_MS__GEPAM_HUB.pdf"
 },
 
 {
