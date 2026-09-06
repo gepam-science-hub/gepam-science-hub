@@ -204,7 +204,7 @@ const pastPapers = [
     "region":"busega dc",
     "year":2026,
     "file":"papers/form1/physics/terminal/busega_dc/2026/F1_Physics_Terminal_Exam_2026_Busega_DC.pdf",
-    "markingScheme":"F1_Physics_MS_2026_Busega_DS.pdf"
+    "markingScheme":"papers/form1/physics/terminal/busega_dc/2026/F1_Physics_MS_2026_Busega_DS.pdf"
 },
 
 {
@@ -330,7 +330,7 @@ const pastPapers = [
     "region":"busega dc",
     "year":2026,
     "file":"papers/form1/chemistry/terminal/busega_dc/2026/F1_Chemistry_Terminal_Exam_2026_Busega_DC.pdf",
-    "markingScheme":"F1_Chemistry_2026_MS_Busega_DC.pdf"
+    "markingScheme":"papers/form1/chemistry/terminal/busega_dc/2026/F1_Chemistry_2026_MS_Busega_DC.pdf"
 },
 
 {
@@ -368,7 +368,7 @@ const pastPapers = [
     "region":"Pre NECTA",
     "year":2026,
     "file":"papers/form2/physics/pre_necta/military schools/2026/F2_PHYSICS__PRE-NECTA__2026_GEPAM_HUB.pdf",
-    "markingScheme":"F2_PHYSICS_MS.pdf"
+    "markingScheme":"papers/form2/physics/pre_necta/military schools/2026/F2_PHYSICS_MS.pdf"
 },
     
 {
@@ -495,7 +495,7 @@ const pastPapers = [
     "region":"Pre NECTA",
     "year":2026,
     "file":"papers/form2/chemistry/pre_necta/military schools/2026/F2_CHEMISTRY_PRE-NECTA_2026_GEPAM_HUB.pdf",
-    "markingScheme":"F2_CHEMISTRY_MS__GEPAM_HUB.pdf"
+    "markingScheme":"papers/form2/chemistry/pre_necta/military schools/2026/F2_CHEMISTRY_MS__GEPAM_HUB.pdf"
 },
 
 {
@@ -1109,7 +1109,7 @@ const pastPapers = [
     "region":"necta",
     "year":2025,
     "file":"papers/form6/physics/necta/2025/Physics1_F6_2025.pdf",
-    "markingScheme":"Physics1_F6_2025_Solutions.pdf"
+    "markingScheme":"papers/form6/physics/necta/2025/Physics1_F6_2025_Solutions.pdf"
 },
 
 {
@@ -1120,7 +1120,7 @@ const pastPapers = [
     "region":"necta",
     "year":2025,
     "file":"papers/form6/physics/necta/2025/Physics2_F6_2025.pdf",
-    "markingScheme":"Physics2_F6_2025-Solutions.pdf"
+    "markingScheme":"papers/form6/physics/necta/2025/Physics2_F6_2025-Solutions.pdf"
 },
 
 {
@@ -1131,7 +1131,7 @@ const pastPapers = [
     "region":"necta",
     "year":2025,
     "file":"papers/form6/physics/necta/2025/Physics3A_F6_2025.pdf",
-    "markingScheme":"Physics3A_F6_2025_Solutions"
+    "markingScheme":"papers/form6/physics/necta/2025/Physics3A_F6_2025_Solutions"
 },
 
 {
@@ -1142,7 +1142,7 @@ const pastPapers = [
     "region":"necta",
     "year":2025,
     "file":"papers/form6/physics/necta/2025/Physics3B-F6-2025.pdf",
-    "markingScheme":"Physics3B-F6-2025-Solutions.pdf"
+    "markingScheme":"papers/form6/physics/necta/2025/Physics3B-F6-2025-Solutions.pdf"
 },
 
 {
