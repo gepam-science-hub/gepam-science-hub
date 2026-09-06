@@ -363,7 +363,7 @@ const pastPapers = [
 {
     "form":"form2",
     "subject":"physics",
-    "title":"MILITARY SCHOOLS ASSOCIATION Pre NECTA Exam",
+    "title":"MILITARY SCHOOLS ASSOCIATION",
     "type":"Pre NECTA",
     "region":"Pre NECTA",
     "year":2026,
