@@ -1400,6 +1400,181 @@ const specialPaperRecords = [
     "markingScheme":""
 },
 
+    // ============================================================
+// ISESE — PRE-NECTA / SPECIAL EXAMINATIONS
+// FORM 1–6 | PHYSICS & CHEMISTRY | 2026
+// ============================================================
+
+
+// =========================
+// FORM 1
+// =========================
+
+// FORM 1 PHYSICS
+{
+    "title": "Physics",
+    "type": "pre_necta",
+    "region": "isese",
+    "year": 2026,
+    "file": "papers/form1/physics/pre_necta/special_examinations/isese/2026/F1_Physics_ISESE_Pre_NECTA_2026.pdf",
+    "markingScheme": "papers/form1/physics/pre_necta/special_examinations/isese/2026/F1_Physics_ISESE_Pre_NECTA_2026_MS.pdf"
+},
+
+// FORM 1 CHEMISTRY
+{
+    "title": "Chemistry",
+    "type": "pre_necta",
+    "region": "isese",
+    "year": 2026,
+    "file": "papers/form1/chemistry/pre_necta/special_examinations/isese/2026/F1_Chemistry_ISESE_Pre_NECTA_2026.pdf",
+    "markingScheme": "papers/form1/chemistry/pre_necta/special_examinations/isese/2026/F1_Chemistry_ISESE_Pre_NECTA_2026_MS.pdf"
+},
+
+
+// =========================
+// FORM 2
+// =========================
+
+// FORM 2 PHYSICS
+{
+    "title": "Physics",
+    "type": "pre_necta",
+    "region": "isese",
+    "year": 2026,
+    "file": "papers/form2/physics/pre_necta/special_examinations/isese/2026/F2_PHYSICS_ISESE_PRE-NECTA_S01_2026.pdf",
+    "markingScheme": "papers/form2/physics/pre_necta/special_examinations/isese/2026/F2_PHYSICS_MS_ISESE_PRE-NECTA_S01_2026.pdf"
+},
+
+// FORM 2 CHEMISTRY
+{
+    "title": "Chemistry",
+    "type": "pre_necta",
+    "region": "isese",
+    "year": 2026,
+    "file": "papers/form2/chemistry/pre_necta/special_examinations/isese/2026/F2_CHEMISTRY_ISESE_PRE-NECTA_S01_2026.pdf",
+    "markingScheme": "papers/form2/chemistry/pre_necta/special_examinations/isese/2026/F2_CHEMISTRY_MS_ISESE_PRE-NECTA_S01_2026.pdf"
+},
+
+
+// =========================
+// FORM 3
+// =========================
+
+// FORM 3 PHYSICS
+{
+    "title": "Physics",
+    "type": "pre_necta",
+    "region": "isese",
+    "year": 2026,
+    "file": "papers/form3/physics/pre_necta/special_examinations/isese/2026/F3_Physics_ISESE_Pre_NECTA_2026.pdf",
+    "markingScheme": "papers/form3/physics/pre_necta/special_examinations/isese/2026/F3_Physics_ISESE_Pre_NECTA_2026_MS.pdf"
+},
+
+// FORM 3 CHEMISTRY
+{
+    "title": "Chemistry",
+    "type": "pre_necta",
+    "region": "isese",
+    "year": 2026,
+    "file": "papers/form3/chemistry/pre_necta/special_examinations/isese/2026/F3_Chemistry_ISESE_Pre_NECTA_2026.pdf",
+    "markingScheme": "papers/form3/chemistry/pre_necta/special_examinations/isese/2026/F3_Chemistry_ISESE_Pre_NECTA_2026_MS.pdf"
+},
+
+
+// =========================
+// FORM 4
+// =========================
+
+// FORM 4 PHYSICS 1
+{
+    "title": "Physics 1",
+    "type": "pre_necta",
+    "region": "isese",
+    "year": 2026,
+    "file": "papers/form4/physics/pre_necta/special_examinations/isese/2026/F4_Physics_1_ISESE_Pre_NECTA_2026.pdf",
+    "markingScheme": "papers/form4/physics/pre_necta/special_examinations/isese/2026/F4_Physics_1_ISESE_Pre_NECTA_2026_MS.pdf"
+},
+
+// FORM 4 CHEMISTRY 1
+{
+    "title": "Chemistry 1",
+    "type": "pre_necta",
+    "region": "isese",
+    "year": 2026,
+    "file": "papers/form4/chemistry/pre_necta/special_examinations/isese/2026/F4_Chemistry_1_ISESE_Pre_NECTA_2026.pdf",
+    "markingScheme": "papers/form4/chemistry/pre_necta/special_examinations/isese/2026/F4_Chemistry_1_ISESE_Pre_NECTA_2026_MS.pdf"
+},
+
+
+// =========================
+// FORM 5
+// =========================
+
+// FORM 5 PHYSICS
+{
+    "title": "Physics",
+    "type": "pre_necta",
+    "region": "isese",
+    "year": 2026,
+    "file": "papers/form5/physics/pre_necta/special_examinations/isese/2026/F5_Physics_ISESE_Pre_NECTA_2026.pdf",
+    "markingScheme": "papers/form5/physics/pre_necta/special_examinations/isese/2026/F5_Physics_ISESE_Pre_NECTA_2026_MS.pdf"
+},
+
+// FORM 5 CHEMISTRY
+{
+    "title": "Chemistry",
+    "type": "pre_necta",
+    "region": "isese",
+    "year": 2026,
+    "file": "papers/form5/chemistry/pre_necta/special_examinations/isese/2026/F5_Chemistry_ISESE_Pre_NECTA_2026.pdf",
+    "markingScheme": "papers/form5/chemistry/pre_necta/special_examinations/isese/2026/F5_Chemistry_ISESE_Pre_NECTA_2026_MS.pdf"
+},
+
+
+// =========================
+// FORM 6
+// =========================
+
+// FORM 6 PHYSICS 1
+{
+    "title": "Physics 1",
+    "type": "pre_necta",
+    "region": "isese",
+    "year": 2026,
+    "file": "papers/form6/physics/pre_necta/special_examinations/isese/2026/F6_Physics_1_ISESE_Pre_NECTA_2026.pdf",
+    "markingScheme": "papers/form6/physics/pre_necta/special_examinations/isese/2026/F6_Physics_1_ISESE_Pre_NECTA_2026_MS.pdf"
+},
+
+// FORM 6 PHYSICS 2
+{
+    "title": "Physics 2",
+    "type": "pre_necta",
+    "region": "isese",
+    "year": 2026,
+    "file": "papers/form6/physics/pre_necta/special_examinations/isese/2026/F6_Physics_2_ISESE_Pre_NECTA_2026.pdf",
+    "markingScheme": "papers/form6/physics/pre_necta/special_examinations/isese/2026/F6_Physics_2_ISESE_Pre_NECTA_2026_MS.pdf"
+},
+
+// FORM 6 CHEMISTRY 1
+{
+    "title": "Chemistry 1",
+    "type": "pre_necta",
+    "region": "isese",
+    "year": 2026,
+    "file": "papers/form6/chemistry/pre_necta/special_examinations/isese/2026/F6_Chemistry_1_ISESE_Pre_NECTA_2026.pdf",
+    "markingScheme": "papers/form6/chemistry/pre_necta/special_examinations/isese/2026/F6_Chemistry_1_ISESE_Pre_NECTA_2026_MS.pdf"
+},
+
+// FORM 6 CHEMISTRY 2
+{
+    "title": "Chemistry 2",
+    "type": "pre_necta",
+    "region": "isese",
+    "year": 2026,
+    "file": "papers/form6/chemistry/pre_necta/special_examinations/isese/2026/F6_Chemistry_2_ISESE_Pre_NECTA_2026.pdf",
+    "markingScheme": "papers/form6/chemistry/pre_necta/special_examinations/isese/2026/F6_Chemistry_2_ISESE_Pre_NECTA_2026_MS.pdf"
+},
+
 
 // ============================================================
 // JEPGOS
