@@ -8,16 +8,29 @@ document.addEventListener(
 let allSearchResults = [];
 let currentFilter = "all";
 
+
+/* =========================================================
+   INITIALIZE SEARCH
+========================================================= */
+
 function initializeSearch() {
-    const searchForm = document.getElementById("searchForm");
-    const searchInput = document.getElementById("searchInput");
+    const searchForm =
+        document.getElementById("searchForm");
+
+    const searchInput =
+        document.getElementById("searchInput");
 
     if (!searchForm || !searchInput) {
         return;
     }
 
-    const params = new URLSearchParams(window.location.search);
-    const query = (params.get("q") || "").trim();
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const query =
+        (params.get("q") || "").trim();
 
     if (query) {
         searchInput.value = query;
@@ -26,40 +39,71 @@ function initializeSearch() {
         showInitialState();
     }
 
+
+    /* -------------------------------------------------------
+       SEARCH SUBMIT
+    ------------------------------------------------------- */
+
     searchForm.addEventListener(
         "submit",
         function (event) {
             event.preventDefault();
 
-            const newQuery = searchInput.value.trim();
-            const url = new URL(window.location.href);
+            const newQuery =
+                searchInput.value.trim();
+
+            const url =
+                new URL(window.location.href);
 
             if (newQuery) {
-                url.searchParams.set("q", newQuery);
+                url.searchParams.set(
+                    "q",
+                    newQuery
+                );
             } else {
                 url.searchParams.delete("q");
             }
 
-            window.history.pushState({}, "", url);
+            window.history.pushState(
+                {},
+                "",
+                url
+            );
+
             performSearch(newQuery);
         }
     );
 
-    const filterButtons = document.querySelectorAll(".filter-btn");
+
+    /* -------------------------------------------------------
+       FILTER BUTTONS
+    ------------------------------------------------------- */
+
+    const filterButtons =
+        document.querySelectorAll(
+            ".filter-btn"
+        );
 
     filterButtons.forEach(
         function (button) {
             button.addEventListener(
                 "click",
                 function () {
+
                     filterButtons.forEach(
                         function (btn) {
-                            btn.classList.remove("active");
+                            btn.classList.remove(
+                                "active"
+                            );
                         }
                     );
 
-                    button.classList.add("active");
-                    currentFilter = button.dataset.filter;
+                    button.classList.add(
+                        "active"
+                    );
+
+                    currentFilter =
+                        button.dataset.filter;
 
                     renderResults();
                 }
@@ -67,18 +111,13 @@ function initializeSearch() {
         }
     );
 
+
     /*
      * =========================================================
      * SEARCH NOTES PURCHASE
      * =========================================================
      *
-     * Hii ndiyo shortcut ya Search → Buy.
-     *
-     * Haitumii:
-     * notes.html?form=form3
-     *
-     * Badala yake:
-     * Search → NUNUA → Email → PesaPal
+     * Search → Nunua → Email → PesaPal
      *
      * Past Papers haziguswi.
      * =========================================================
@@ -87,6 +126,7 @@ function initializeSearch() {
     document.addEventListener(
         "click",
         function (event) {
+
             const button =
                 event.target.closest(
                     ".search-buy-note"
@@ -106,7 +146,9 @@ function initializeSearch() {
                 button.dataset.title || "";
 
             const price =
-                Number(button.dataset.price || 0);
+                Number(
+                    button.dataset.price || 0
+                );
 
             if (
                 !notesId ||
@@ -135,20 +177,281 @@ function initializeSearch() {
 ========================================================= */
 
 function normalizeText(value) {
-    let text = String(value || "")
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
+
+    let text =
+        String(value || "")
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(
+                /[\u0300-\u036f]/g,
+                ""
+            );
+
+    /*
+     * ---------------------------------------------------------
+     * FORM NORMALIZATION
+     * ---------------------------------------------------------
+     */
 
     text = text
-        .replace(/\bf1\b/g, "form1")
-        .replace(/\bf2\b/g, "form2")
-        .replace(/\bf3\b/g, "form3")
-        .replace(/\bf4\b/g, "form4")
-        .replace(/\bf5\b/g, "form5")
-        .replace(/\bf6\b/g, "form6");
+        .replace(
+            /\bf\s*1\b/g,
+            "form1"
+        )
+        .replace(
+            /\bf\s*2\b/g,
+            "form2"
+        )
+        .replace(
+            /\bf\s*3\b/g,
+            "form3"
+        )
+        .replace(
+            /\bf\s*4\b/g,
+            "form4"
+        )
+        .replace(
+            /\bf\s*5\b/g,
+            "form5"
+        )
+        .replace(
+            /\bf\s*6\b/g,
+            "form6"
+        );
 
-    return text;
+
+    /*
+     * ---------------------------------------------------------
+     * EXAM TYPE NORMALIZATION
+     * ---------------------------------------------------------
+     *
+     * Hapa tunaruhusu:
+     *
+     * Midterm
+     * Mid Term
+     * Mid-Term
+     * Mid_Term
+     *
+     * Terminal
+     *
+     * Pre-NECTA
+     * Pre NECTA
+     * Pre_NECTA
+     * PreNecta
+     *
+     * Special Exam
+     * Special Examination
+     * Special_Exam
+     * ---------------------------------------------------------
+     */
+
+    text = text
+
+        /* MIDTERM */
+        .replace(
+            /\bmid[\s_-]*term\b/g,
+            "midterm"
+        )
+
+        /* PRE NECTA */
+        .replace(
+            /\bpre[\s_-]*necta\b/g,
+            "prenecta"
+        )
+
+        .replace(
+            /\bprenecta\b/g,
+            "prenecta"
+        )
+
+        /* SPECIAL EXAMINATION */
+        .replace(
+            /\bspecial[\s_-]*(exam|examination)\b/g,
+            "specialexamination"
+        )
+
+        /* SPECIAL EXAM */
+        .replace(
+            /\bspecialexam\b/g,
+            "specialexamination"
+        );
+
+    return text.trim();
+}
+
+
+/* =========================================================
+   CANONICAL SEARCH TYPE
+========================================================= */
+
+function getCanonicalPaperType(value) {
+
+    const text =
+        normalizeText(value);
+
+    if (
+        text.includes("midterm")
+    ) {
+        return "midterm";
+    }
+
+    if (
+        text.includes("terminal")
+    ) {
+        return "terminal";
+    }
+
+    if (
+        text.includes("annual")
+    ) {
+        return "annual";
+    }
+
+    if (
+        text.includes("mock")
+    ) {
+        return "mock";
+    }
+
+    if (
+        text.includes("joint")
+    ) {
+        return "joint";
+    }
+
+    if (
+        text.includes("prenecta")
+    ) {
+        return "prenecta";
+    }
+
+    if (
+        text.includes("specialexamination") ||
+        text.includes("specialexam")
+    ) {
+        return "specialexamination";
+    }
+
+    if (
+        text.includes("necta")
+    ) {
+        return "necta";
+    }
+
+    return "";
+}
+
+
+/* =========================================================
+   SEARCH TYPE ALIASES
+========================================================= */
+
+function getPaperTypeAliases(value) {
+
+    const canonical =
+        getCanonicalPaperType(value);
+
+    switch (canonical) {
+
+        case "midterm":
+            return [
+                "midterm",
+                "mid term",
+                "mid-term",
+                "mid_term",
+                "mid examination",
+                "mid exam"
+            ];
+
+        case "terminal":
+            return [
+                "terminal",
+                "terminal exam",
+                "terminal examination",
+                "terminal exams"
+            ];
+
+        case "annual":
+            return [
+                "annual",
+                "annual exam",
+                "annual examination",
+                "annual exams"
+            ];
+
+        case "mock":
+            return [
+                "mock",
+                "mock exam",
+                "mock examination",
+                "mock exams"
+            ];
+
+        case "joint":
+            return [
+                "joint",
+                "joint exam",
+                "joint examination",
+                "joint exams"
+            ];
+
+        case "prenecta":
+            return [
+                "prenecta",
+                "pre necta",
+                "pre-necta",
+                "pre_necta",
+                "pre necta examination",
+                "pre-necta examination",
+                "pre necta exam",
+                "pre-necta exam"
+            ];
+
+        case "specialexamination":
+            return [
+                "specialexamination",
+                "special examination",
+                "special-examination",
+                "special_examination",
+                "special exam",
+                "special-exam",
+                "special_exam",
+                "special exams"
+            ];
+
+        case "necta":
+            return [
+                "necta",
+                "necta exam",
+                "necta examination"
+            ];
+
+        default:
+            return [];
+    }
+}
+
+
+/* =========================================================
+   BUILD CANONICAL SEARCH TEXT
+========================================================= */
+
+function buildCanonicalSearchText(value) {
+
+    const original =
+        normalizeText(value);
+
+    const canonical =
+        getCanonicalPaperType(value);
+
+    const aliases =
+        getPaperTypeAliases(value);
+
+    return [
+        original,
+        canonical,
+        aliases.join(" ")
+    ].join(" ");
 }
 
 
@@ -157,25 +460,61 @@ function normalizeText(value) {
 ========================================================= */
 
 function performSearch(query) {
-    const cleanQuery = normalizeText(query);
+
+    const cleanQuery =
+        normalizeText(query);
 
     if (!cleanQuery) {
         showInitialState();
         return;
     }
 
+
+    /*
+     * ---------------------------------------------------------
+     * TOKENS
+     * ---------------------------------------------------------
+     */
+
     const tokens =
         cleanQuery
             .split(/\s+/)
             .filter(Boolean);
 
+
+    /*
+     * ---------------------------------------------------------
+     * SEARCH INDEX
+     * ---------------------------------------------------------
+     */
+
     const index =
         buildSearchIndex();
+
+
+    /*
+     * ---------------------------------------------------------
+     * DETECT REQUESTED PAPER TYPE
+     * ---------------------------------------------------------
+     */
+
+    const requestedPaperType =
+        getCanonicalPaperType(
+            cleanQuery
+        );
+
+
+    /*
+     * ---------------------------------------------------------
+     * RESULTS
+     * ---------------------------------------------------------
+     */
 
     allSearchResults =
         index
             .map(
                 function (item) {
+
                     const searchable =
                         normalizeText(
                             item.searchText
@@ -186,8 +525,27 @@ function performSearch(query) {
                             item.title
                         );
 
+                    const itemPaperType =
+                        getCanonicalPaperType(
+                            [
+                                item.paperType,
+                                item.category,
+                                item.specialExam,
+                                item.searchText
+                            ].join(" ")
+                        );
+
                     let score = 0;
-                    let isPriority = false;
+
+                    let isPriority =
+                        false;
+
+
+                    /*
+                     * -------------------------------------------------
+                     * EXACT FULL QUERY
+                     * -------------------------------------------------
+                     */
 
                     if (
                         titleClean.includes(
@@ -196,6 +554,7 @@ function performSearch(query) {
                     ) {
                         score += 50;
                         isPriority = true;
+
                     } else if (
                         searchable.includes(
                             cleanQuery
@@ -204,10 +563,18 @@ function performSearch(query) {
                         score += 20;
                     }
 
+
+                    /*
+                     * -------------------------------------------------
+                     * TOKEN MATCHING
+                     * -------------------------------------------------
+                     */
+
                     let matchedTokens = 0;
 
                     tokens.forEach(
                         function (token) {
+
                             if (
                                 searchable.includes(
                                     token
@@ -227,6 +594,13 @@ function performSearch(query) {
                         }
                     );
 
+
+                    /*
+                     * -------------------------------------------------
+                     * ALL TOKENS MATCH
+                     * -------------------------------------------------
+                     */
+
                     if (
                         matchedTokens ===
                             tokens.length &&
@@ -236,21 +610,76 @@ function performSearch(query) {
                         score += 15;
                     }
 
+
                     /*
-                     * Notes query should not show Past Papers.
+                     * -------------------------------------------------
+                     * PAPER TYPE EXACT MATCH
+                     * -------------------------------------------------
+                     *
+                     * Mfano:
+                     *
+                     * pre necta
+                     * special examination
+                     * mid term
+                     * terminal
+                     * annual
+                     * mock
+                     * joint
+                     * -------------------------------------------------
                      */
+
                     if (
-                        wantsNotesQuery(cleanQuery) &&
+                        requestedPaperType &&
+                        item.type === "papers"
+                    ) {
+
+                        if (
+                            itemPaperType ===
+                            requestedPaperType
+                        ) {
+                            score += 80;
+                            isPriority = true;
+
+                        } else {
+
+                            /*
+                             * User ameomba aina maalum
+                             * ya paper, hivyo hatutaki
+                             * aina nyingine ichanganyike
+                             * kwenye priority/relevant.
+                             */
+
+                            score = 0;
+                        }
+                    }
+
+
+                    /*
+                     * -------------------------------------------------
+                     * NOTES QUERY
+                     * -------------------------------------------------
+                     */
+
+                    if (
+                        wantsNotesQuery(
+                            cleanQuery
+                        ) &&
                         item.type === "papers"
                     ) {
                         score = 0;
                     }
 
+
                     /*
-                     * Past Paper query should not show Notes.
+                     * -------------------------------------------------
+                     * PAST PAPER QUERY
+                     * -------------------------------------------------
                      */
+
                     if (
-                        wantsPapersQuery(cleanQuery) &&
+                        wantsPapersQuery(
+                            cleanQuery
+                        ) &&
                         (
                             item.type === "notes" ||
                             item.type === "topics" ||
@@ -260,10 +689,29 @@ function performSearch(query) {
                         score = 0;
                     }
 
+
+                    /*
+                     * -------------------------------------------------
+                     * PAPER TYPE REQUEST
+                     * -------------------------------------------------
+                     */
+
+                    if (
+                        requestedPaperType &&
+                        item.type === "papers" &&
+                        itemPaperType !==
+                            requestedPaperType
+                    ) {
+                        score = 0;
+                    }
+
+
                     return {
                         ...item,
-                        score: score,
-                        isPriority: isPriority
+                        score:
+                            score,
+                        isPriority:
+                            isPriority
                     };
                 }
             )
@@ -274,9 +722,19 @@ function performSearch(query) {
             )
             .sort(
                 function (a, b) {
-                    return b.score - a.score;
+                    return (
+                        b.score -
+                        a.score
+                    );
                 }
             );
+
+
+    /*
+     * ---------------------------------------------------------
+     * SEARCH TITLE
+     * ---------------------------------------------------------
+     */
 
     const searchTitle =
         document.getElementById(
@@ -290,6 +748,7 @@ function performSearch(query) {
             '"';
     }
 
+
     renderResults();
 }
 
@@ -299,19 +758,39 @@ function performSearch(query) {
 ========================================================= */
 
 function wantsNotesQuery(query) {
+
+    const text =
+        normalizeText(query);
+
     return (
-        query.includes("note") ||
-        query.includes("topic") ||
-        query.includes("practical")
+        text.includes("note") ||
+        text.includes("notes") ||
+        text.includes("topic") ||
+        text.includes("topics") ||
+        text.includes("practical")
     );
 }
 
+
 function wantsPapersQuery(query) {
+
+    const text =
+        normalizeText(query);
+
     return (
-        query.includes("paper") ||
-        query.includes("past") ||
-        query.includes("exam") ||
-        query.includes("mock")
+        text.includes("paper") ||
+        text.includes("papers") ||
+        text.includes("past") ||
+        text.includes("exam") ||
+        text.includes("examination") ||
+        text.includes("mock") ||
+        text.includes("midterm") ||
+        text.includes("terminal") ||
+        text.includes("annual") ||
+        text.includes("joint") ||
+        text.includes("prenecta") ||
+        text.includes("specialexamination") ||
+        text.includes("special")
     );
 }
 
@@ -321,7 +800,9 @@ function wantsPapersQuery(query) {
 ========================================================= */
 
 function buildSearchIndex() {
+
     const index = [];
+
 
     /*
      * =========================================================
@@ -334,14 +815,17 @@ function buildSearchIndex() {
         notesData &&
         typeof notesData === "object"
     ) {
+
         Object.keys(notesData).forEach(
             function (key) {
+
                 const group =
                     notesData[key];
 
                 if (!group) {
                     return;
                 }
+
 
                 /*
                  * -------------------------------------------------
@@ -350,10 +834,27 @@ function buildSearchIndex() {
                  */
 
                 if (group.full) {
+
                     const full =
                         group.full;
 
+                    const form =
+                        extractFormFromKey(
+                            key
+                        );
+
+                    const subject =
+                        extractSubjectFromKey(
+                            key
+                        );
+
+                    const syllabus =
+                        extractSyllabusFromKey(
+                            key
+                        );
+
                     index.push({
+
                         uniqueKey:
                             "full-" +
                             full.id,
@@ -375,33 +876,18 @@ function buildSearchIndex() {
                         price:
                             full.price,
 
-                        /*
-                         * MUHIMU:
-                         * Hii ndiyo ID itakayotumwa
-                         * moja kwa moja kwenye payment engine.
-                         */
                         notesId:
                             full.id,
 
                         form:
-                            extractFormFromKey(
-                                key
-                            ),
+                            form,
 
                         subject:
-                            extractSubjectFromKey(
-                                key
-                            ),
+                            subject,
 
                         syllabus:
-                            extractSyllabusFromKey(
-                                key
-                            ),
+                            syllabus,
 
-                        /*
-                         * Hakuna normal navigation
-                         * kwa Search purchase.
-                         */
                         actionUrl:
                             "",
 
@@ -410,15 +896,9 @@ function buildSearchIndex() {
                                 full.title,
                                 full.description,
                                 key,
-                                extractFormFromKey(
-                                    key
-                                ),
-                                extractSubjectFromKey(
-                                    key
-                                ),
-                                extractSyllabusFromKey(
-                                    key
-                                ),
+                                form,
+                                subject,
+                                syllabus,
                                 "notes",
                                 "full notes",
                                 "physics",
@@ -439,13 +919,31 @@ function buildSearchIndex() {
                         group.topics
                     )
                 ) {
+
                     group.topics.forEach(
                         function (topic) {
+
                             if (!topic) {
                                 return;
                             }
 
+                            const form =
+                                extractFormFromKey(
+                                    key
+                                );
+
+                            const subject =
+                                extractSubjectFromKey(
+                                    key
+                                );
+
+                            const syllabus =
+                                extractSyllabusFromKey(
+                                    key
+                                );
+
                             index.push({
+
                                 uniqueKey:
                                     "topic-" +
                                     topic.id,
@@ -467,32 +965,18 @@ function buildSearchIndex() {
                                 price:
                                     topic.price,
 
-                                /*
-                                 * MUHIMU:
-                                 * Topic ID halisi.
-                                 */
                                 notesId:
                                     topic.id,
 
                                 form:
-                                    extractFormFromKey(
-                                        key
-                                    ),
+                                    form,
 
                                 subject:
-                                    extractSubjectFromKey(
-                                        key
-                                    ),
+                                    subject,
 
                                 syllabus:
-                                    extractSyllabusFromKey(
-                                        key
-                                    ),
+                                    syllabus,
 
-                                /*
-                                 * Hakuna redirect
-                                 * ya notes.html?form=...
-                                 */
                                 actionUrl:
                                     "",
 
@@ -501,15 +985,9 @@ function buildSearchIndex() {
                                         topic.title,
                                         topic.description,
                                         key,
-                                        extractFormFromKey(
-                                            key
-                                        ),
-                                        extractSubjectFromKey(
-                                            key
-                                        ),
-                                        extractSyllabusFromKey(
-                                            key
-                                        ),
+                                        form,
+                                        subject,
+                                        syllabus,
                                         "topic",
                                         "topics",
                                         "notes"
@@ -534,8 +1012,10 @@ function buildSearchIndex() {
         practicalNotes &&
         typeof practicalNotes === "object"
     ) {
+
         Object.keys(practicalNotes).forEach(
             function (level) {
+
                 const list =
                     practicalNotes[level];
 
@@ -545,6 +1025,7 @@ function buildSearchIndex() {
 
                 list.forEach(
                     function (item) {
+
                         if (!item) {
                             return;
                         }
@@ -555,6 +1036,7 @@ function buildSearchIndex() {
                             );
 
                         index.push({
+
                             uniqueKey:
                                 "practical-" +
                                 item.id,
@@ -576,11 +1058,6 @@ function buildSearchIndex() {
                             price:
                                 item.price,
 
-                            /*
-                             * Practical Notes pia
-                             * zitatumia payment engine
-                             * moja kwa moja.
-                             */
                             notesId:
                                 item.id,
 
@@ -623,7 +1100,8 @@ function buildSearchIndex() {
      * PAST PAPERS
      * =========================================================
      *
-     * HII SEHEMU HAIBADILISHWI KIMANTIKI.
+     * Logic imeboreshwa hapa bila kubadilisha
+     * structure ya data yako.
      * =========================================================
      */
 
@@ -631,16 +1109,105 @@ function buildSearchIndex() {
         getPastPaperSource();
 
     if (Array.isArray(paperSource)) {
+
         paperSource.forEach(
             function (
                 paper,
                 indexNumber
             ) {
+
                 if (!paper) {
                     return;
                 }
 
+
+                const paperType =
+                    paper.type ||
+                    "";
+
+                const category =
+                    paper.category ||
+                    "";
+
+                const specialExam =
+                    paper.specialExam ||
+                    "";
+
+
+                /*
+                 * -------------------------------------------------
+                 * CANONICAL TYPE
+                 * -------------------------------------------------
+                 */
+
+                const canonicalType =
+                    getCanonicalPaperType(
+                        [
+                            paperType,
+                            category,
+                            specialExam,
+                            paper.title,
+                            paper.name
+                        ].join(" ")
+                    );
+
+
+                /*
+                 * -------------------------------------------------
+                 * TYPE ALIASES
+                 * -------------------------------------------------
+                 */
+
+                const typeAliases =
+                    getPaperTypeAliases(
+                        [
+                            paperType,
+                            category,
+                            specialExam
+                        ].join(" ")
+                    );
+
+
+                /*
+                 * -------------------------------------------------
+                 * SEARCH TEXT
+                 * -------------------------------------------------
+                 *
+                 * specialExam sasa imejumuishwa.
+                 *
+                 * Hii ndiyo ilikuwa sehemu muhimu
+                 * iliyokuwa missing kwenye version ya zamani.
+                 * -------------------------------------------------
+                 */
+
+                const paperSearchText =
+                    [
+                        paper.title,
+                        paper.name,
+                        paper.description,
+                        paper.year,
+                        paper.form,
+                        paper.subject,
+
+                        paperType,
+                        category,
+                        paper.region,
+                        specialExam,
+
+                        canonicalType,
+
+                        typeAliases.join(" "),
+
+                        "past papers",
+                        "past paper",
+                        "papers",
+                        "examination",
+                        "exam"
+                    ].join(" ");
+
+
                 index.push({
+
                     uniqueKey:
                         "paper-" +
                         (
@@ -682,20 +1249,20 @@ function buildSearchIndex() {
                         "",
 
                     paperType:
-                        paper.type ||
-                        "",
+                        paperType,
 
                     category:
-                        paper.category ||
-                        "",
+                        category,
 
                     region:
                         paper.region ||
                         "",
 
                     specialExam:
-                        paper.specialExam ||
-                        "",
+                        specialExam,
+
+                    canonicalPaperType:
+                        canonicalType,
 
                     actionUrl:
                         buildPaperUrl(
@@ -703,23 +1270,12 @@ function buildSearchIndex() {
                         ),
 
                     searchText:
-                        [
-                            paper.title,
-                            paper.name,
-                            paper.description,
-                            paper.year,
-                            paper.form,
-                            paper.subject,
-                            paper.type,
-                            paper.category,
-                            paper.region,
-                            "past papers",
-                            "papers"
-                        ].join(" ")
+                        paperSearchText
                 });
             }
         );
     }
+
 
     return deduplicateResults(
         index
@@ -732,18 +1288,26 @@ function buildSearchIndex() {
 ========================================================= */
 
 function getPastPaperSource() {
+
     const possibleNames = [
+
         "pastPaperRecords",
+
         "pastPapers",
+
         "pastpapers",
+
         "pastPaperData"
+
     ];
+
 
     for (
         let i = 0;
         i < possibleNames.length;
         i++
     ) {
+
         if (
             typeof window[
                 possibleNames[i]
@@ -754,11 +1318,13 @@ function getPastPaperSource() {
                 ]
             )
         ) {
+
             return window[
                 possibleNames[i]
             ];
         }
     }
+
 
     return [];
 }
@@ -769,11 +1335,16 @@ function getPastPaperSource() {
 ========================================================= */
 
 function deduplicateResults(items) {
-    const seen = new Set();
-    const output = [];
+
+    const seen =
+        new Set();
+
+    const output =
+        [];
 
     items.forEach(
         function (item) {
+
             const key =
                 item.uniqueKey ||
                 (
@@ -782,12 +1353,17 @@ function deduplicateResults(items) {
                     item.title
                 );
 
-            if (seen.has(key)) {
+            if (
+                seen.has(key)
+            ) {
                 return;
             }
 
             seen.add(key);
-            output.push(item);
+
+            output.push(
+                item
+            );
         }
     );
 
@@ -800,9 +1376,12 @@ function deduplicateResults(items) {
 ========================================================= */
 
 function extractFormFromKey(key) {
+
     const match =
         String(key || "")
-            .match(/form([1-6])/i);
+            .match(
+                /form\s*([1-6])/i
+            );
 
     if (
         !match ||
@@ -811,7 +1390,10 @@ function extractFormFromKey(key) {
         return "";
     }
 
-    return "Form " + match[1];
+    return (
+        "Form " +
+        match[1]
+    );
 }
 
 
@@ -820,17 +1402,22 @@ function extractFormFromKey(key) {
 ========================================================= */
 
 function extractSubjectFromKey(key) {
+
     const value =
         normalizeText(key);
 
     if (
-        value.includes("physics")
+        value.includes(
+            "physics"
+        )
     ) {
         return "Physics";
     }
 
     if (
-        value.includes("chemistry")
+        value.includes(
+            "chemistry"
+        )
     ) {
         return "Chemistry";
     }
@@ -844,17 +1431,22 @@ function extractSubjectFromKey(key) {
 ========================================================= */
 
 function extractSyllabusFromKey(key) {
+
     const value =
         normalizeText(key);
 
     if (
-        value.includes("old")
+        value.includes(
+            "old"
+        )
     ) {
         return "Old Syllabus";
     }
 
     if (
-        value.includes("new")
+        value.includes(
+            "new"
+        )
     ) {
         return "New Syllabus";
     }
@@ -865,16 +1457,15 @@ function extractSyllabusFromKey(key) {
 
 /* =========================================================
    NORMAL NOTES URL
-   =========================================================
-   
-   Hii function bado ipo kwa compatibility,
-   lakini Search Notes purchase haitumii tena.
 ========================================================= */
 
 function buildNotesUrl(key) {
+
     const match =
         String(key || "")
-            .match(/form([1-6])/i);
+            .match(
+                /form\s*([1-6])/i
+            );
 
     if (
         !match ||
@@ -886,7 +1477,8 @@ function buildNotesUrl(key) {
     return (
         "notes.html?form=" +
         encodeURIComponent(
-            "form" + match[1]
+            "form" +
+            match[1]
         )
     );
 }
@@ -894,9 +1486,10 @@ function buildNotesUrl(key) {
 
 /* =========================================================
    BUILD PAPER URL
-   ========================================================= */
+========================================================= */
 
 function buildPaperUrl(paper) {
+
     return (
         paper &&
         paper.file
@@ -911,6 +1504,7 @@ function buildPaperUrl(paper) {
 ========================================================= */
 
 function renderResults() {
+
     const container =
         document.getElementById(
             "results"
@@ -920,15 +1514,25 @@ function renderResults() {
         return;
     }
 
+
     let filtered =
         allSearchResults;
+
+
+    /*
+     * ---------------------------------------------------------
+     * CURRENT FILTER
+     * ---------------------------------------------------------
+     */
 
     if (
         currentFilter !== "all"
     ) {
+
         filtered =
             allSearchResults.filter(
                 function (item) {
+
                     return (
                         item.type ===
                         currentFilter
@@ -937,15 +1541,19 @@ function renderResults() {
             );
     }
 
+
     const count =
         filtered.length;
+
 
     const searchCount =
         document.getElementById(
             "searchCount"
         );
 
+
     if (searchCount) {
+
         searchCount.textContent =
             count +
             " result" +
@@ -957,15 +1565,44 @@ function renderResults() {
             " found.";
     }
 
+
+    /*
+     * ---------------------------------------------------------
+     * NO RESULTS
+     * ---------------------------------------------------------
+     */
+
     if (!count) {
+
         container.innerHTML =
             '<div class="empty-state">' +
+
             '<h3>No results found</h3>' +
-            '<p>Try another keyword such as <strong>Physics</strong>, <strong>Chemistry</strong>, <strong>Waves</strong>, or <strong>Mock</strong>.</p>' +
+
+            '<p>' +
+            'Try another keyword such as ' +
+            '<strong>Physics</strong>, ' +
+            '<strong>Chemistry</strong>, ' +
+            '<strong>Waves</strong>, ' +
+            '<strong>Midterm</strong>, ' +
+            '<strong>Terminal</strong>, ' +
+            '<strong>Mock</strong>, ' +
+            '<strong>Pre-NECTA</strong> ' +
+            'or ' +
+            '<strong>Special Examination</strong>.' +
+            '</p>' +
+
             '</div>';
 
         return;
     }
+
+
+    /*
+     * ---------------------------------------------------------
+     * PRIORITY RESULTS
+     * ---------------------------------------------------------
+     */
 
     const priorityItems =
         filtered.filter(
@@ -974,6 +1611,7 @@ function renderResults() {
             }
         );
 
+
     const relevantItems =
         filtered.filter(
             function (item) {
@@ -981,19 +1619,33 @@ function renderResults() {
             }
         );
 
+
     let htmlOutput = "";
+
+
+    /*
+     * ---------------------------------------------------------
+     * BEST MATCHES
+     * ---------------------------------------------------------
+     */
 
     if (
         priorityItems.length > 0
     ) {
+
         htmlOutput +=
-            '<div class="search-section-title">Best Matches (Priority)</div>';
+            '<div class="search-section-title">' +
+            'Best Matches (Priority)' +
+            '</div>';
+
 
         htmlOutput +=
             '<div class="priority-list">' +
+
             priorityItems
                 .map(
                     function (item) {
+
                         return createResultCard(
                             item,
                             true
@@ -1001,20 +1653,34 @@ function renderResults() {
                     }
                 )
                 .join("") +
+
             '</div>';
     }
+
+
+    /*
+     * ---------------------------------------------------------
+     * OTHER RELEVANT
+     * ---------------------------------------------------------
+     */
 
     if (
         relevantItems.length > 0
     ) {
+
         htmlOutput +=
-            '<div class="search-section-title">Other Relevant Resources</div>';
+            '<div class="search-section-title">' +
+            'Other Relevant Resources' +
+            '</div>';
+
 
         htmlOutput +=
             '<div class="relevant-grid">' +
+
             relevantItems
                 .map(
                     function (item) {
+
                         return createResultCard(
                             item,
                             false
@@ -1022,8 +1688,10 @@ function renderResults() {
                     }
                 )
                 .join("") +
+
             '</div>';
     }
+
 
     container.innerHTML =
         htmlOutput;
@@ -1038,42 +1706,53 @@ function createResultCard(
     item,
     isPriority
 ) {
+
     const title =
         escapeHtml(
             item.title
         );
+
 
     const description =
         escapeHtml(
             item.description
         );
 
+
     const typeLabel =
         escapeHtml(
             item.typeLabel
         );
+
 
     const subject =
         item.subject
             ? item.subject.toLowerCase()
             : "";
 
+
     let colorClass =
         "card-default";
+
 
     if (
         subject === "physics"
     ) {
+
         colorClass =
             "card-physics";
+
     } else if (
         subject === "chemistry"
     ) {
+
         colorClass =
             "card-chemistry";
+
     } else if (
         item.type === "practical"
     ) {
+
         colorClass =
             "card-practical";
     }
@@ -1087,48 +1766,89 @@ function createResultCard(
 
     let meta = "";
 
+
     if (item.form) {
+
         meta +=
             '<span class="meta-item">' +
+
             escapeHtml(
                 item.form
             ) +
+
             '</span>';
     }
 
+
     if (item.subject) {
+
         meta +=
             '<span class="meta-item">' +
+
             escapeHtml(
                 item.subject
             ) +
+
             '</span>';
     }
 
+
     if (item.syllabus) {
+
         meta +=
             '<span class="meta-item">' +
+
             escapeHtml(
                 item.syllabus
             ) +
+
             '</span>';
     }
 
+
     if (item.year) {
+
         meta +=
             '<span class="meta-item">' +
+
             escapeHtml(
                 item.year
             ) +
+
             '</span>';
     }
 
+
     if (item.paperType) {
+
         meta +=
             '<span class="meta-item">' +
+
             escapeHtml(
                 item.paperType
             ) +
+
+            '</span>';
+    }
+
+
+    /*
+     * ---------------------------------------------------------
+     * SPECIAL EXAM DISPLAY
+     * ---------------------------------------------------------
+     */
+
+    if (
+        item.specialExam
+    ) {
+
+        meta +=
+            '<span class="meta-item">' +
+
+            escapeHtml(
+                item.specialExam
+            ) +
+
             '</span>';
     }
 
@@ -1141,16 +1861,22 @@ function createResultCard(
 
     let priceHTML = "";
 
+
     if (
         item.price !== null &&
         item.price !== undefined &&
         item.price !== ""
     ) {
+
         priceHTML =
-            '<div class="price">TZS ' +
+            '<div class="price">' +
+
+            'TZS ' +
+
             Number(
                 item.price
             ).toLocaleString() +
+
             '</div>';
     }
 
@@ -1161,55 +1887,74 @@ function createResultCard(
      * ---------------------------------------------------------
      *
      * NOTES:
-     *     NUNUA
-     *     → Email
-     *     → PesaPal
+     * Nunua → Email → PesaPal
      *
      * PAPERS:
-     *     Open Paper
-     *     → PDF
-     *
+     * Open Paper → PDF
      * ---------------------------------------------------------
      */
 
     let actionHTML = "";
+
 
     if (
         item.type === "notes" ||
         item.type === "topics" ||
         item.type === "practical"
     ) {
+
         actionHTML =
             '<button ' +
+
             'class="result-action search-buy-note" ' +
+
             'type="button" ' +
+
             'data-notes-id="' +
+
             escapeAttribute(
                 item.notesId
             ) +
+
             '" ' +
+
             'data-title="' +
+
             escapeAttribute(
                 item.title
             ) +
+
             '" ' +
+
             'data-price="' +
+
             escapeAttribute(
                 item.price
             ) +
+
             '">' +
+
             'Nunua' +
+
             '</button>';
+
     } else {
+
         actionHTML =
             '<a ' +
+
             'class="result-action" ' +
+
             'href="' +
+
             escapeAttribute(
                 item.actionUrl
             ) +
+
             '">' +
+
             'Open Paper' +
+
             '</a>';
     }
 
@@ -1221,46 +1966,69 @@ function createResultCard(
      */
 
     return (
+
         '<article class="result-card ' +
+
         colorClass +
+
         (
             isPriority
                 ? " priority-card"
                 : ""
         ) +
+
         '">' +
 
+
         '<span class="result-type">' +
+
         typeLabel +
+
         '</span>' +
 
+
         '<h3>' +
+
         title +
+
         '</h3>' +
+
 
         (
             description
                 ? (
+
                     '<div class="result-description">' +
+
                     description +
+
                     '</div>'
+
                 )
                 : ""
         ) +
+
 
         (
             meta
                 ? (
+
                     '<div class="result-meta">' +
+
                     meta +
+
                     '</div>'
+
                 )
                 : ""
         ) +
 
+
         priceHTML +
 
+
         actionHTML +
+
 
         '</article>'
     );
@@ -1276,14 +2044,17 @@ async function purchaseNoteFromSearch(
     title,
     price
 ) {
+
     /*
      * Kama notes.js tayari ipo,
      * tumia function iliyopo.
      */
+
     if (
         typeof window.anzishaUnunuziWaNotes ===
         "function"
     ) {
+
         window.anzishaUnunuziWaNotes(
             notesId,
             title,
@@ -1295,26 +2066,27 @@ async function purchaseNoteFromSearch(
 
 
     /*
-     * Kama notes.js haijapakiwa kwenye
-     * search.html, i-load hapa.
-     *
-     * Hii inamaanisha search.html
-     * haihitaji kubadilishwa.
+     * Kama notes.js haijapakiwa,
+     * i-load hapa.
      */
 
     try {
+
         await loadNotesPaymentEngine();
+
 
         if (
             typeof window.anzishaUnunuziWaNotes !==
             "function"
         ) {
+
             alert(
                 "Payment system haijapakia vizuri. Tafadhali refresh page kisha ujaribu tena."
             );
 
             return;
         }
+
 
         window.anzishaUnunuziWaNotes(
             notesId,
@@ -1323,10 +2095,12 @@ async function purchaseNoteFromSearch(
         );
 
     } catch (error) {
+
         console.error(
             "Failed to load notes.js:",
             error
         );
+
 
         alert(
             "Payment system haijapatikana kwa sasa. Tafadhali jaribu tena."
@@ -1340,17 +2114,25 @@ async function purchaseNoteFromSearch(
 ========================================================= */
 
 function loadNotesPaymentEngine() {
+
     return new Promise(
-        function (resolve, reject) {
+        function (
+            resolve,
+            reject
+        ) {
+
 
             /*
              * Angalia kama tayari ime-load.
              */
+
             if (
                 typeof window.anzishaUnunuziWaNotes ===
                 "function"
             ) {
+
                 resolve();
+
                 return;
             }
 
@@ -1358,12 +2140,15 @@ function loadNotesPaymentEngine() {
             /*
              * Usipakie script mara mbili.
              */
+
             const existingScript =
                 document.querySelector(
                     'script[data-gepam-notes-payment="true"]'
                 );
 
+
             if (existingScript) {
+
                 existingScript.addEventListener(
                     "load",
                     function () {
@@ -1374,19 +2159,23 @@ function loadNotesPaymentEngine() {
                     }
                 );
 
+
                 existingScript.addEventListener(
                     "error",
                     function () {
+
                         reject(
                             new Error(
                                 "notes.js failed to load."
                             )
                         );
+
                     },
                     {
                         once: true
                     }
                 );
+
 
                 return;
             }
@@ -1395,30 +2184,37 @@ function loadNotesPaymentEngine() {
             /*
              * Create script dynamically.
              */
+
             const script =
                 document.createElement(
                     "script"
                 );
 
+
             script.src =
                 "notes.js";
 
+
             script.dataset.gepamNotesPayment =
                 "true";
+
 
             script.onload =
                 function () {
                     resolve();
                 };
 
+
             script.onerror =
                 function () {
+
                     reject(
                         new Error(
                             "Unable to load notes.js"
                         )
                     );
                 };
+
 
             document.head.appendChild(
                 script
@@ -1433,36 +2229,50 @@ function loadNotesPaymentEngine() {
 ========================================================= */
 
 function showInitialState() {
+
     const searchTitle =
         document.getElementById(
             "searchTitle"
         );
+
 
     const searchCount =
         document.getElementById(
             "searchCount"
         );
 
+
     const results =
         document.getElementById(
             "results"
         );
 
+
     if (searchTitle) {
+
         searchTitle.textContent =
             "Search GEPAM resources";
     }
 
+
     if (searchCount) {
+
         searchCount.textContent =
             "Search Notes, Topics, Practical Notes and Past Papers.";
     }
 
+
     if (results) {
+
         results.innerHTML =
             '<div class="empty-state">' +
+
             '<h3>What are you looking for?</h3>' +
-            '<p>Search for a subject, topic, form, year, exam type or keyword.</p>' +
+
+            '<p>' +
+            'Search for a subject, topic, form, year, exam type or keyword.' +
+            '</p>' +
+
             '</div>';
     }
 }
@@ -1473,6 +2283,7 @@ function showInitialState() {
 ========================================================= */
 
 function escapeHtml(value) {
+
     return String(
         value || ""
     )
@@ -1504,5 +2315,8 @@ function escapeHtml(value) {
 ========================================================= */
 
 function escapeAttribute(value) {
-    return escapeHtml(value);
+
+    return escapeHtml(
+        value
+    );
 }
