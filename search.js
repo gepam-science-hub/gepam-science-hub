@@ -8,27 +8,16 @@ document.addEventListener(
 let allSearchResults = [];
 let currentFilter = "all";
 
-
-/* =========================================================
-   INITIALIZE SEARCH
-========================================================= */
-
 function initializeSearch() {
-    const searchForm =
-        document.getElementById("searchForm");
-
-    const searchInput =
-        document.getElementById("searchInput");
+    const searchForm = document.getElementById("searchForm");
+    const searchInput = document.getElementById("searchInput");
 
     if (!searchForm || !searchInput) {
         return;
     }
 
-    const params =
-        new URLSearchParams(window.location.search);
-
-    const query =
-        (params.get("q") || "").trim();
+    const params = new URLSearchParams(window.location.search);
+    const query = (params.get("q") || "").trim();
 
     if (query) {
         searchInput.value = query;
@@ -37,72 +26,40 @@ function initializeSearch() {
         showInitialState();
     }
 
-
-    /* -------------------------------------------------------
-       SEARCH SUBMIT
-    ------------------------------------------------------- */
-
     searchForm.addEventListener(
         "submit",
         function (event) {
             event.preventDefault();
 
-            const newQuery =
-                searchInput.value.trim();
-
-            const url =
-                new URL(window.location.href);
+            const newQuery = searchInput.value.trim();
+            const url = new URL(window.location.href);
 
             if (newQuery) {
-                url.searchParams.set(
-                    "q",
-                    newQuery
-                );
+                url.searchParams.set("q", newQuery);
             } else {
                 url.searchParams.delete("q");
             }
 
-            window.history.pushState(
-                {},
-                "",
-                url
-            );
-
+            window.history.pushState({}, "", url);
             performSearch(newQuery);
         }
     );
 
-
-    /* -------------------------------------------------------
-       FILTER BUTTONS
-    ------------------------------------------------------- */
-
-    const filterButtons =
-        document.querySelectorAll(
-            ".filter-btn"
-        );
+    const filterButtons = document.querySelectorAll(".filter-btn");
 
     filterButtons.forEach(
         function (button) {
-
             button.addEventListener(
                 "click",
                 function () {
-
                     filterButtons.forEach(
                         function (btn) {
-                            btn.classList.remove(
-                                "active"
-                            );
+                            btn.classList.remove("active");
                         }
                     );
 
-                    button.classList.add(
-                        "active"
-                    );
-
-                    currentFilter =
-                        button.dataset.filter;
+                    button.classList.add("active");
+                    currentFilter = button.dataset.filter;
 
                     renderResults();
                 }
@@ -110,13 +67,12 @@ function initializeSearch() {
         }
     );
 
-
     /*
      * =========================================================
      * SEARCH NOTES PURCHASE
      * =========================================================
      *
-     * Search → Nunua → Email → PesaPal
+     * Search → NUNUA → Email → PesaPal
      *
      * Past Papers haziguswi.
      * =========================================================
@@ -125,7 +81,6 @@ function initializeSearch() {
     document.addEventListener(
         "click",
         function (event) {
-
             const button =
                 event.target.closest(
                     ".search-buy-note"
@@ -145,9 +100,7 @@ function initializeSearch() {
                 button.dataset.title || "";
 
             const price =
-                Number(
-                    button.dataset.price || 0
-                );
+                Number(button.dataset.price || 0);
 
             if (
                 !notesId ||
@@ -176,466 +129,20 @@ function initializeSearch() {
 ========================================================= */
 
 function normalizeText(value) {
-
-    return String(value || "")
+    let text = String(value || "")
         .toLowerCase()
         .normalize("NFD")
-        .replace(
-            /[\u0300-\u036f]/g,
-            ""
-        )
-        .replace(
-            /[\u2010-\u2015\u2212]/g,
-            "-"
-        )
-        .replace(
-            /[_-]+/g,
-            " "
-        )
-        .replace(
-            /\s+/g,
-            " "
-        )
-        .trim();
-}
-
-
-/* =========================================================
-   NORMALIZE SEARCH VALUE
-========================================================= */
-
-function normalizeSearchValue(value) {
-
-    return normalizeText(value)
-        .replace(
-            /\bpre\s+necta\b/g,
-            "prenecta"
-        )
-        .replace(
-            /\bpre\s+necta\b/g,
-            "prenecta"
-        )
-        .replace(
-            /\bmid\s+term\b/g,
-            "midterm"
-        )
-        .replace(
-            /\bspecial\s+examinations?\b/g,
-            "specialexaminations"
-        )
-        .replace(
-            /\bspecial\s+exams?\b/g,
-            "specialexaminations"
-        )
-        .replace(
-            /\bspecial\s+school\b/g,
-            "specialschool"
-        )
-        .trim();
-}
-
-
-/* =========================================================
-   PAPER TYPE / SOURCE NORMALIZATION
-========================================================= */
-
-function normalizePaperType(value) {
-
-    const text =
-        normalizeSearchValue(value);
-
-    if (!text) {
-        return "";
-    }
-
-
-    /* -------------------------------------------------------
-       PRE-NECTA
-    ------------------------------------------------------- */
-
-    if (
-        text.includes("prenecta") ||
-        text.includes("pre necta")
-    ) {
-        return "prenecta";
-    }
-
-
-    /* -------------------------------------------------------
-       SPECIAL EXAMINATIONS
-    ------------------------------------------------------- */
-
-    if (
-        text.includes("specialexaminations") ||
-        text.includes("special examination") ||
-        text.includes("specialexams") ||
-        text.includes("special exam")
-    ) {
-        return "specialexaminations";
-    }
-
-
-    /* -------------------------------------------------------
-       MIDTERM
-    ------------------------------------------------------- */
-
-    if (
-        text.includes("midterm") ||
-        text.includes("mid term")
-    ) {
-        return "midterm";
-    }
-
-
-    /* -------------------------------------------------------
-       TERMINAL
-    ------------------------------------------------------- */
-
-    if (
-        text.includes("terminal")
-    ) {
-        return "terminal";
-    }
-
-
-    /* -------------------------------------------------------
-       ANNUAL
-    ------------------------------------------------------- */
-
-    if (
-        text.includes("annual")
-    ) {
-        return "annual";
-    }
-
-
-    /* -------------------------------------------------------
-       JOINT
-    ------------------------------------------------------- */
-
-    if (
-        text.includes("joint")
-    ) {
-        return "joint";
-    }
-
-
-    /* -------------------------------------------------------
-       MOCK
-    ------------------------------------------------------- */
-
-    if (
-        text.includes("mock")
-    ) {
-        return "mock";
-    }
-
-
-    /* -------------------------------------------------------
-       NECTA
-    ------------------------------------------------------- */
-
-    if (
-        text === "necta" ||
-        text.includes("necta examination") ||
-        text.includes("necta exam")
-    ) {
-        return "necta";
-    }
-
-
-    return "";
-}
-
-
-/* =========================================================
-   SPECIAL EXAMINATION SOURCE NORMALIZATION
-========================================================= */
-
-function normalizeSpecialExamSource(value) {
-
-    const text =
-        normalizeText(value);
-
-    if (!text) {
-        return "";
-    }
-
-
-    /* ISESE */
-
-    if (
-        text.includes("isese")
-    ) {
-        return "isese";
-    }
-
-
-    /* JEPGOS */
-
-    if (
-        text.includes("jepgos")
-    ) {
-        return "jepgos";
-    }
-
-
-    /* TAHOSSA */
-
-    if (
-        text.includes("tahossa")
-    ) {
-        return "tahossa";
-    }
-
-
-    /* CSSC */
-
-    if (
-        text.includes("cssc")
-    ) {
-        return "cssc";
-    }
-
-
-    /* SPECIAL SCHOOL */
-
-    if (
-        text.includes("special school") ||
-        text.includes("specialschool")
-    ) {
-        return "specialschool";
-    }
-
-
-    return "";
-}
-
-
-/* =========================================================
-   PAPER SEARCH TEXT
-========================================================= */
-
-function buildPaperSearchText(paper) {
-
-    const values = [];
-
-
-    /*
-     * Collect ordinary values.
-     */
-
-    function collect(value) {
-
-        if (
-            value === null ||
-            value === undefined
-        ) {
-            return;
-        }
-
-
-        if (
-            typeof value === "string" ||
-            typeof value === "number"
-        ) {
-            values.push(
-                String(value)
-            );
-
-            return;
-        }
-
-
-        /*
-         * Arrays
-         */
-
-        if (
-            Array.isArray(value)
-        ) {
-
-            value.forEach(
-                function (item) {
-                    collect(item);
-                }
-            );
-
-            return;
-        }
-
-
-        /*
-         * Objects
-         */
-
-        if (
-            typeof value === "object"
-        ) {
-
-            Object.keys(value).forEach(
-                function (key) {
-
-                    /*
-                     * Include field name too.
-                     */
-
-                    values.push(key);
-
-                    collect(
-                        value[key]
-                    );
-                }
-            );
-        }
-    }
-
-
-    collect(paper);
-
-
-    /*
-     * Add useful generic search terms.
-     */
-
-    values.push(
-        "past papers",
-        "past paper",
-        "papers",
-        "paper",
-        "exam",
-        "exams",
-        "examination",
-        "examinations"
-    );
-
-
-    /*
-     * ---------------------------------------------------------
-     * SPECIAL EXAMINATIONS
-     * ---------------------------------------------------------
-     *
-     * These are sources/sub-types inside
-     * Special Examinations:
-     *
-     * ISESE
-     * JEPGOS
-     * TAHOSSA
-     * CSSC
-     * Special School
-     *
-     * We include the canonical names and aliases.
-     * ---------------------------------------------------------
-     */
-
-    const combined =
-        normalizeText(
-            values.join(" ")
-        );
-
-
-    if (
-        combined.includes("isese")
-    ) {
-        values.push(
-            "ISESE"
-        );
-    }
-
-
-    if (
-        combined.includes("jepgos")
-    ) {
-        values.push(
-            "JEPGOS"
-        );
-    }
-
-
-    if (
-        combined.includes("tahossa")
-    ) {
-        values.push(
-            "TAHOSSA"
-        );
-    }
-
-
-    if (
-        combined.includes("cssc")
-    ) {
-        values.push(
-            "CSSC"
-        );
-    }
-
-
-    if (
-        combined.includes("special school") ||
-        combined.includes("specialschool")
-    ) {
-        values.push(
-            "Special School",
-            "SpecialSchool"
-        );
-    }
-
-
-    /*
-     * ---------------------------------------------------------
-     * SPECIAL EXAMINATIONS ALIASES
-     * ---------------------------------------------------------
-     */
-
-    if (
-        combined.includes("special examination") ||
-        combined.includes("special examinations") ||
-        combined.includes("special exam") ||
-        combined.includes("special exams") ||
-        combined.includes("special_examination") ||
-        combined.includes("special-examination")
-    ) {
-
-        values.push(
-            "Special Examinations",
-            "Special Examination",
-            "Special Exam",
-            "Special Exams",
-            "specialexaminations"
-        );
-    }
-
-
-    /*
-     * ---------------------------------------------------------
-     * PRE-NECTA ALIASES
-     * ---------------------------------------------------------
-     */
-
-    if (
-        combined.includes("pre necta") ||
-        combined.includes("pre-necta") ||
-        combined.includes("pre_necta") ||
-        combined.includes("prenecta")
-    ) {
-
-        values.push(
-            "Pre-NECTA",
-            "Pre NECTA",
-            "Pre_NECTA",
-            "PreNecta",
-            "prenecta"
-        );
-    }
-
-
-    /*
-     * ---------------------------------------------------------
-     * RETURN SEARCH TEXT
-     * ---------------------------------------------------------
-     */
-
-    return values.join(" ");
+        .replace(/[\u0300-\u036f]/g, "");
+
+    text = text
+        .replace(/\bf1\b/g, "form1")
+        .replace(/\bf2\b/g, "form2")
+        .replace(/\bf3\b/g, "form3")
+        .replace(/\bf4\b/g, "form4")
+        .replace(/\bf5\b/g, "form5")
+        .replace(/\bf6\b/g, "form6");
+
+    return text;
 }
 
 
@@ -644,378 +151,113 @@ function buildPaperSearchText(paper) {
 ========================================================= */
 
 function performSearch(query) {
-
-    const cleanQuery =
-        normalizeSearchValue(query);
+    const cleanQuery = normalizeText(query);
 
     if (!cleanQuery) {
         showInitialState();
         return;
     }
 
-
     const tokens =
         cleanQuery
             .split(/\s+/)
             .filter(Boolean);
 
-
     const index =
         buildSearchIndex();
-
-
-    /*
-     * ---------------------------------------------------------
-     * DETECT EXAM TYPE REQUEST
-     * ---------------------------------------------------------
-     */
-
-    const requestedPaperType =
-        normalizePaperType(
-            cleanQuery
-        );
-
-
-    /*
-     * ---------------------------------------------------------
-     * DETECT SPECIAL EXAM SOURCE
-     * ---------------------------------------------------------
-     */
-
-    const requestedSpecialSource =
-        normalizeSpecialExamSource(
-            cleanQuery
-        );
-
 
     allSearchResults =
         index
             .map(
                 function (item) {
-
                     const searchable =
-                        normalizeSearchValue(
+                        normalizeText(
                             item.searchText
                         );
 
                     const titleClean =
-                        normalizeSearchValue(
+                        normalizeText(
                             item.title
                         );
 
-
                     let score = 0;
-
-                    let isPriority =
-                        false;
-
-
-                    /*
-                     * -------------------------------------------------
-                     * FULL QUERY MATCH
-                     * -------------------------------------------------
-                     */
+                    let isPriority = false;
 
                     if (
                         titleClean.includes(
                             cleanQuery
                         )
                     ) {
-
                         score += 50;
-
                         isPriority = true;
-
                     } else if (
                         searchable.includes(
                             cleanQuery
                         )
                     ) {
-
                         score += 20;
                     }
 
-
-                    /*
-                     * -------------------------------------------------
-                     * TOKEN MATCH
-                     * -------------------------------------------------
-                     */
-
                     let matchedTokens = 0;
-
 
                     tokens.forEach(
                         function (token) {
-
                             if (
                                 searchable.includes(
                                     token
                                 )
                             ) {
-
                                 score += 5;
-
                                 matchedTokens++;
                             }
-
 
                             if (
                                 titleClean.includes(
                                     token
                                 )
                             ) {
-
                                 score += 10;
                             }
                         }
                     );
-
-
-                    /*
-                     * -------------------------------------------------
-                     * ALL TOKENS MATCH
-                     * -------------------------------------------------
-                     */
 
                     if (
                         matchedTokens ===
                             tokens.length &&
                         tokens.length > 1
                     ) {
-
-                        score += 15;
-
                         isPriority = true;
+                        score += 15;
                     }
 
-
                     /*
-                     * -------------------------------------------------
-                     * SPECIAL SOURCE SEARCH
-                     * -------------------------------------------------
-                     *
-                     * ISESE
-                     * JEPGOS
-                     * TAHOSSA
-                     * CSSC
-                     * Special School
-                     * -------------------------------------------------
+                     * Notes query should not show Past Papers.
                      */
-
                     if (
-                        requestedSpecialSource &&
+                        wantsNotesQuery(cleanQuery) &&
                         item.type === "papers"
                     ) {
-
-                        const itemSpecialSource =
-                            normalizeSpecialExamSource(
-                                [
-                                    item.specialExam,
-                                    item.category,
-                                    item.paperType,
-                                    item.searchText
-                                ].join(" ")
-                            );
-
-
-                        if (
-                            itemSpecialSource ===
-                            requestedSpecialSource
-                        ) {
-
-                            score += 100;
-
-                            isPriority = true;
-
-                        } else {
-
-                            score = 0;
-                        }
-                    }
-
-
-                    /*
-                     * -------------------------------------------------
-                     * SPECIAL EXAMINATIONS SEARCH
-                     * -------------------------------------------------
-                     *
-                     * Search:
-                     *
-                     * "special examination"
-                     * "special examinations"
-                     * "special exam"
-                     * "special exams"
-                     *
-                     * should return all five:
-                     *
-                     * ISESE
-                     * JEPGOS
-                     * TAHOSSA
-                     * CSSC
-                     * Special School
-                     * -------------------------------------------------
-                     */
-
-                    const isSpecialExamQuery =
-                        cleanQuery ===
-                            "specialexaminations" ||
-                        cleanQuery ===
-                            "specialexamination" ||
-                        cleanQuery ===
-                            "special exam" ||
-                        cleanQuery ===
-                            "special exams" ||
-                        cleanQuery.includes(
-                            "specialexaminations"
-                        );
-
-
-                    if (
-                        isSpecialExamQuery &&
-                        item.type === "papers"
-                    ) {
-
-                        const itemText =
-                            normalizeSearchValue(
-                                item.searchText
-                            );
-
-
-                        const isSpecialPaper =
-                            itemText.includes(
-                                "specialexaminations"
-                            ) ||
-                            itemText.includes(
-                                "isese"
-                            ) ||
-                            itemText.includes(
-                                "jepgos"
-                            ) ||
-                            itemText.includes(
-                                "tahossa"
-                            ) ||
-                            itemText.includes(
-                                "cssc"
-                            ) ||
-                            itemText.includes(
-                                "specialschool"
-                            ) ||
-                            itemText.includes(
-                                "special school"
-                            );
-
-
-                        if (
-                            isSpecialPaper
-                        ) {
-
-                            score += 100;
-
-                            isPriority = true;
-
-                        } else {
-
-                            score = 0;
-                        }
-                    }
-
-
-                    /*
-                     * -------------------------------------------------
-                     * EXACT PAPER TYPE
-                     * -------------------------------------------------
-                     */
-
-                    if (
-                        requestedPaperType &&
-                        item.type === "papers"
-                    ) {
-
-                        const itemPaperType =
-                            normalizePaperType(
-                                [
-                                    item.paperType,
-                                    item.category,
-                                    item.searchText
-                                ].join(" ")
-                            );
-
-
-                        if (
-                            itemPaperType ===
-                            requestedPaperType
-                        ) {
-
-                            score += 80;
-
-                            isPriority = true;
-
-                        } else {
-
-                            /*
-                             * Don't remove Special Examination
-                             * source results when the query itself
-                             * is Special Examination.
-                             */
-
-                            if (
-                                requestedPaperType !==
-                                "specialexaminations"
-                            ) {
-
-                                score = 0;
-                            }
-                        }
-                    }
-
-
-                    /*
-                     * -------------------------------------------------
-                     * NOTES QUERY
-                     * -------------------------------------------------
-                     */
-
-                    if (
-                        wantsNotesQuery(
-                            cleanQuery
-                        ) &&
-                        item.type === "papers"
-                    ) {
-
                         score = 0;
                     }
 
-
                     /*
-                     * -------------------------------------------------
-                     * PAST PAPER QUERY
-                     * -------------------------------------------------
+                     * Past Paper query should not show Notes.
                      */
-
                     if (
-                        wantsPapersQuery(
-                            cleanQuery
-                        ) &&
+                        wantsPapersQuery(cleanQuery) &&
                         (
                             item.type === "notes" ||
                             item.type === "topics" ||
                             item.type === "practical"
                         )
                     ) {
-
                         score = 0;
                     }
 
-
                     return {
                         ...item,
-
-                        score:
-                            score,
-
-                        isPriority:
-                            isPriority
+                        score: score,
+                        isPriority: isPriority
                     };
                 }
             )
@@ -1026,28 +268,21 @@ function performSearch(query) {
             )
             .sort(
                 function (a, b) {
-                    return (
-                        b.score -
-                        a.score
-                    );
+                    return b.score - a.score;
                 }
             );
-
 
     const searchTitle =
         document.getElementById(
             "searchTitle"
         );
 
-
     if (searchTitle) {
-
         searchTitle.textContent =
             'Search results for "' +
             query +
             '"';
     }
-
 
     renderResults();
 }
@@ -1058,38 +293,24 @@ function performSearch(query) {
 ========================================================= */
 
 function wantsNotesQuery(query) {
-
-    const text =
-        normalizeSearchValue(query);
-
     return (
-        text.includes("note") ||
-        text.includes("notes") ||
-        text.includes("topic") ||
-        text.includes("topics") ||
-        text.includes("practical")
+        query.includes("note") ||
+        query.includes("topic") ||
+        query.includes("practical")
     );
 }
 
-
 function wantsPapersQuery(query) {
-
-    const text =
-        normalizeSearchValue(query);
-
     return (
-        text.includes("paper") ||
-        text.includes("papers") ||
-        text.includes("past") ||
-        text.includes("exam") ||
-        text.includes("examination") ||
-        text.includes("mock") ||
-        text.includes("midterm") ||
-        text.includes("terminal") ||
-        text.includes("annual") ||
-        text.includes("joint") ||
-        text.includes("prenecta") ||
-        text.includes("special")
+        query.includes("paper") ||
+        query.includes("past") ||
+        query.includes("exam") ||
+        query.includes("mock") ||
+        query.includes("special") ||
+        query.includes("isese") ||
+        query.includes("jepgos") ||
+        query.includes("tahossa") ||
+        query.includes("cssc")
     );
 }
 
@@ -1099,9 +320,7 @@ function wantsPapersQuery(query) {
 ========================================================= */
 
 function buildSearchIndex() {
-
     const index = [];
-
 
     /*
      * =========================================================
@@ -1114,17 +333,14 @@ function buildSearchIndex() {
         notesData &&
         typeof notesData === "object"
     ) {
-
         Object.keys(notesData).forEach(
             function (key) {
-
                 const group =
                     notesData[key];
 
                 if (!group) {
                     return;
                 }
-
 
                 /*
                  * -------------------------------------------------
@@ -1133,13 +349,10 @@ function buildSearchIndex() {
                  */
 
                 if (group.full) {
-
                     const full =
                         group.full;
 
-
                     index.push({
-
                         uniqueKey:
                             "full-" +
                             full.id,
@@ -1216,17 +429,13 @@ function buildSearchIndex() {
                         group.topics
                     )
                 ) {
-
                     group.topics.forEach(
                         function (topic) {
-
                             if (!topic) {
                                 return;
                             }
 
-
                             index.push({
-
                                 uniqueKey:
                                     "topic-" +
                                     topic.id,
@@ -1307,10 +516,8 @@ function buildSearchIndex() {
         practicalNotes &&
         typeof practicalNotes === "object"
     ) {
-
         Object.keys(practicalNotes).forEach(
             function (level) {
-
                 const list =
                     practicalNotes[level];
 
@@ -1318,23 +525,18 @@ function buildSearchIndex() {
                     return;
                 }
 
-
                 list.forEach(
                     function (item) {
-
                         if (!item) {
                             return;
                         }
-
 
                         const subject =
                             extractSubjectFromKey(
                                 item.id || ""
                             );
 
-
                         index.push({
-
                             uniqueKey:
                                 "practical-" +
                                 item.id,
@@ -1397,74 +599,58 @@ function buildSearchIndex() {
      * =========================================================
      * PAST PAPERS
      * =========================================================
+     *
+     * HAPA NDIKO TUMEBORESHA SEARCH YA SPECIAL EXAMINATIONS.
+     *
+     * Logic ya Past Paper haijabadilishwa.
+     * Tumeongeza taarifa za Special Examination
+     * kwenye searchText tu.
+     * =========================================================
      */
 
     const paperSource =
         getPastPaperSource();
 
-
-    if (
-        Array.isArray(
-            paperSource
-        )
-    ) {
-
+    if (Array.isArray(paperSource)) {
         paperSource.forEach(
             function (
                 paper,
                 indexNumber
             ) {
-
                 if (!paper) {
                     return;
                 }
 
-
                 /*
-                 * -------------------------------------------------
-                 * BASIC PAPER DATA
-                 * -------------------------------------------------
-                 */
-
-                const paperType =
-                    paper.type ||
-                    "";
-
-                const category =
-                    paper.category ||
-                    "";
-
-                const specialExam =
-                    paper.specialExam ||
-                    "";
-
-
-                /*
-                 * -------------------------------------------------
-                 * SEARCH TEXT
-                 * -------------------------------------------------
+                 * Tengeneza search text ya paper.
                  *
-                 * Hapa tunakusanya taarifa zote za paper.
-                 * Hii ndiyo sehemu muhimu kwa:
+                 * Hii inaruhusu kutafuta:
                  *
+                 * Pre NECTA
+                 * Special Examinations
                  * ISESE
                  * JEPGOS
                  * TAHOSSA
                  * CSSC
                  * Special School
-                 *
-                 * pamoja na sources nyingine mpya.
-                 * -------------------------------------------------
+                 * Physics
+                 * Chemistry
+                 * Form 1 - Form 6
+                 * Miaka yoyote
+                 * Mock
+                 * Joint
+                 * Annual
+                 * Terminal
+                 * Midterm
+                 * NECTA
                  */
 
                 const paperSearchText =
-                    buildPaperSearchText(
+                    buildPastPaperSearchText(
                         paper
                     );
 
-
                 index.push({
-
                     uniqueKey:
                         "paper-" +
                         (
@@ -1506,17 +692,20 @@ function buildSearchIndex() {
                         "",
 
                     paperType:
-                        paperType,
+                        paper.type ||
+                        "",
 
                     category:
-                        category,
+                        paper.category ||
+                        "",
 
                     region:
                         paper.region ||
                         "",
 
                     specialExam:
-                        specialExam,
+                        paper.specialExam ||
+                        "",
 
                     actionUrl:
                         buildPaperUrl(
@@ -1530,10 +719,163 @@ function buildSearchIndex() {
         );
     }
 
-
     return deduplicateResults(
         index
     );
+}
+
+
+/* =========================================================
+   BUILD PAST PAPER SEARCH TEXT
+========================================================= */
+
+function buildPastPaperSearchText(paper) {
+    if (!paper) {
+        return "";
+    }
+
+    const values = [
+        paper.title,
+        paper.name,
+        paper.description,
+        paper.year,
+        paper.form,
+        paper.subject,
+        paper.type,
+        paper.category,
+        paper.region,
+        paper.specialExam,
+        paper.specialExamination,
+        paper.source,
+        paper.organization,
+        paper.organisation,
+        paper.examBoard,
+        paper.examBody
+    ];
+
+    const searchValues = [];
+
+    values.forEach(
+        function (value) {
+            if (
+                typeof value === "string" ||
+                typeof value === "number"
+            ) {
+                searchValues.push(
+                    String(value)
+                );
+            }
+        }
+    );
+
+
+    /*
+     * =========================================================
+     * SPECIAL EXAMINATION DETECTION
+     * =========================================================
+     *
+     * Kama paper ina specialExam,
+     * tunaongeza "Special Examinations"
+     * kama keyword ya search.
+     *
+     * Hii ndiyo inafanya:
+     *
+     * Search: Special Examinations
+     *
+     * ionyeshe papers zote zenye
+     * special examination source.
+     */
+
+    const specialExamValue =
+        typeof paper.specialExam === "string"
+            ? paper.specialExam.trim()
+            : "";
+
+    const specialExaminationValue =
+        typeof paper.specialExamination === "string"
+            ? paper.specialExamination.trim()
+            : "";
+
+    const sourceValue =
+        typeof paper.source === "string"
+            ? paper.source.trim()
+            : "";
+
+    const organizationValue =
+        typeof paper.organization === "string"
+            ? paper.organization.trim()
+            : "";
+
+    const organisationValue =
+        typeof paper.organisation === "string"
+            ? paper.organisation.trim()
+            : "";
+
+
+    /*
+     * Angalia kama type/category inaonyesha
+     * Special Examination.
+     */
+
+    const typeText =
+        normalizeText(
+            paper.type || ""
+        );
+
+    const categoryText =
+        normalizeText(
+            paper.category || ""
+        );
+
+
+    const isSpecialPaper =
+        Boolean(
+            specialExamValue ||
+            specialExaminationValue ||
+            (
+                typeText &&
+                typeText.includes(
+                    "special"
+                )
+            ) ||
+            (
+                categoryText &&
+                categoryText.includes(
+                    "special"
+                )
+            )
+        );
+
+
+    if (isSpecialPaper) {
+        searchValues.push(
+            "Special Examinations"
+        );
+
+        searchValues.push(
+            "Special Examination"
+        );
+
+        searchValues.push(
+            "Special Exams"
+        );
+    }
+
+
+    /*
+     * Return search text.
+     *
+     * Hatubadilishi:
+     * "Pre NECTA"
+     *
+     * kuwa:
+     * "PreNECTA"
+     *
+     * kwa sababu tunataka query ya
+     * "pre necta" ibaki kufanya kazi.
+     */
+
+    return searchValues.join(" ");
 }
 
 
@@ -1542,26 +884,18 @@ function buildSearchIndex() {
 ========================================================= */
 
 function getPastPaperSource() {
-
     const possibleNames = [
-
         "pastPaperRecords",
-
         "pastPapers",
-
         "pastpapers",
-
         "pastPaperData"
-
     ];
-
 
     for (
         let i = 0;
         i < possibleNames.length;
         i++
     ) {
-
         if (
             typeof window[
                 possibleNames[i]
@@ -1572,13 +906,11 @@ function getPastPaperSource() {
                 ]
             )
         ) {
-
             return window[
                 possibleNames[i]
             ];
         }
     }
-
 
     return [];
 }
@@ -1589,17 +921,11 @@ function getPastPaperSource() {
 ========================================================= */
 
 function deduplicateResults(items) {
-
-    const seen =
-        new Set();
-
-    const output =
-        [];
-
+    const seen = new Set();
+    const output = [];
 
     items.forEach(
         function (item) {
-
             const key =
                 item.uniqueKey ||
                 (
@@ -1608,22 +934,14 @@ function deduplicateResults(items) {
                     item.title
                 );
 
-
-            if (
-                seen.has(key)
-            ) {
+            if (seen.has(key)) {
                 return;
             }
 
-
             seen.add(key);
-
-            output.push(
-                item
-            );
+            output.push(item);
         }
     );
-
 
     return output;
 }
@@ -1634,13 +952,9 @@ function deduplicateResults(items) {
 ========================================================= */
 
 function extractFormFromKey(key) {
-
     const match =
         String(key || "")
-            .match(
-                /form\s*([1-6])/i
-            );
-
+            .match(/form([1-6])/i);
 
     if (
         !match ||
@@ -1649,11 +963,7 @@ function extractFormFromKey(key) {
         return "";
     }
 
-
-    return (
-        "Form " +
-        match[1]
-    );
+    return "Form " + match[1];
 }
 
 
@@ -1662,28 +972,20 @@ function extractFormFromKey(key) {
 ========================================================= */
 
 function extractSubjectFromKey(key) {
-
     const value =
         normalizeText(key);
 
-
     if (
-        value.includes(
-            "physics"
-        )
+        value.includes("physics")
     ) {
         return "Physics";
     }
 
-
     if (
-        value.includes(
-            "chemistry"
-        )
+        value.includes("chemistry")
     ) {
         return "Chemistry";
     }
-
 
     return "";
 }
@@ -1694,28 +996,20 @@ function extractSubjectFromKey(key) {
 ========================================================= */
 
 function extractSyllabusFromKey(key) {
-
     const value =
         normalizeText(key);
 
-
     if (
-        value.includes(
-            "old"
-        )
+        value.includes("old")
     ) {
         return "Old Syllabus";
     }
 
-
     if (
-        value.includes(
-            "new"
-        )
+        value.includes("new")
     ) {
         return "New Syllabus";
     }
-
 
     return "";
 }
@@ -1726,13 +1020,9 @@ function extractSyllabusFromKey(key) {
 ========================================================= */
 
 function buildNotesUrl(key) {
-
     const match =
         String(key || "")
-            .match(
-                /form\s*([1-6])/i
-            );
-
+            .match(/form([1-6])/i);
 
     if (
         !match ||
@@ -1741,12 +1031,10 @@ function buildNotesUrl(key) {
         return "notes.html";
     }
 
-
     return (
         "notes.html?form=" +
         encodeURIComponent(
-            "form" +
-            match[1]
+            "form" + match[1]
         )
     );
 }
@@ -1757,7 +1045,6 @@ function buildNotesUrl(key) {
 ========================================================= */
 
 function buildPaperUrl(paper) {
-
     return (
         paper &&
         paper.file
@@ -1772,30 +1059,24 @@ function buildPaperUrl(paper) {
 ========================================================= */
 
 function renderResults() {
-
     const container =
         document.getElementById(
             "results"
         );
 
-
     if (!container) {
         return;
     }
 
-
     let filtered =
         allSearchResults;
-
 
     if (
         currentFilter !== "all"
     ) {
-
         filtered =
             allSearchResults.filter(
                 function (item) {
-
                     return (
                         item.type ===
                         currentFilter
@@ -1804,19 +1085,15 @@ function renderResults() {
             );
     }
 
-
     const count =
         filtered.length;
-
 
     const searchCount =
         document.getElementById(
             "searchCount"
         );
 
-
     if (searchCount) {
-
         searchCount.textContent =
             count +
             " result" +
@@ -1828,35 +1105,15 @@ function renderResults() {
             " found.";
     }
 
-
     if (!count) {
-
         container.innerHTML =
             '<div class="empty-state">' +
-
             '<h3>No results found</h3>' +
-
-            '<p>' +
-            'Try another keyword such as ' +
-            '<strong>Physics</strong>, ' +
-            '<strong>Chemistry</strong>, ' +
-            '<strong>Waves</strong>, ' +
-            '<strong>Mock</strong>, ' +
-            '<strong>Pre-NECTA</strong>, ' +
-            '<strong>Special Examinations</strong>, ' +
-            '<strong>ISESE</strong>, ' +
-            '<strong>JEPGOS</strong>, ' +
-            '<strong>TAHOSSA</strong>, ' +
-            '<strong>CSSC</strong> ' +
-            'or ' +
-            '<strong>Special School</strong>.' +
-            '</p>' +
-
+            '<p>Try another keyword such as <strong>Physics</strong>, <strong>Chemistry</strong>, <strong>Waves</strong>, or <strong>Mock</strong>.</p>' +
             '</div>';
 
         return;
     }
-
 
     const priorityItems =
         filtered.filter(
@@ -1865,7 +1122,6 @@ function renderResults() {
             }
         );
 
-
     const relevantItems =
         filtered.filter(
             function (item) {
@@ -1873,27 +1129,19 @@ function renderResults() {
             }
         );
 
-
     let htmlOutput = "";
-
 
     if (
         priorityItems.length > 0
     ) {
-
         htmlOutput +=
-            '<div class="search-section-title">' +
-            'Best Matches (Priority)' +
-            '</div>';
-
+            '<div class="search-section-title">Best Matches (Priority)</div>';
 
         htmlOutput +=
             '<div class="priority-list">' +
-
             priorityItems
                 .map(
                     function (item) {
-
                         return createResultCard(
                             item,
                             true
@@ -1901,28 +1149,20 @@ function renderResults() {
                     }
                 )
                 .join("") +
-
             '</div>';
     }
-
 
     if (
         relevantItems.length > 0
     ) {
-
         htmlOutput +=
-            '<div class="search-section-title">' +
-            'Other Relevant Resources' +
-            '</div>';
-
+            '<div class="search-section-title">Other Relevant Resources</div>';
 
         htmlOutput +=
             '<div class="relevant-grid">' +
-
             relevantItems
                 .map(
                     function (item) {
-
                         return createResultCard(
                             item,
                             false
@@ -1930,10 +1170,8 @@ function renderResults() {
                     }
                 )
                 .join("") +
-
             '</div>';
     }
-
 
     container.innerHTML =
         htmlOutput;
@@ -1948,53 +1186,42 @@ function createResultCard(
     item,
     isPriority
 ) {
-
     const title =
         escapeHtml(
             item.title
         );
-
 
     const description =
         escapeHtml(
             item.description
         );
 
-
     const typeLabel =
         escapeHtml(
             item.typeLabel
         );
-
 
     const subject =
         item.subject
             ? item.subject.toLowerCase()
             : "";
 
-
     let colorClass =
         "card-default";
-
 
     if (
         subject === "physics"
     ) {
-
         colorClass =
             "card-physics";
-
     } else if (
         subject === "chemistry"
     ) {
-
         colorClass =
             "card-chemistry";
-
     } else if (
         item.type === "practical"
     ) {
-
         colorClass =
             "card-practical";
     }
@@ -2002,87 +1229,54 @@ function createResultCard(
 
     /*
      * ---------------------------------------------------------
-     * META
+     * META INFORMATION
      * ---------------------------------------------------------
      */
 
     let meta = "";
 
-
     if (item.form) {
-
         meta +=
             '<span class="meta-item">' +
-
             escapeHtml(
                 item.form
             ) +
-
             '</span>';
     }
 
-
     if (item.subject) {
-
         meta +=
             '<span class="meta-item">' +
-
             escapeHtml(
                 item.subject
             ) +
-
             '</span>';
     }
 
-
     if (item.syllabus) {
-
         meta +=
             '<span class="meta-item">' +
-
             escapeHtml(
                 item.syllabus
             ) +
-
             '</span>';
     }
 
-
     if (item.year) {
-
         meta +=
             '<span class="meta-item">' +
-
             escapeHtml(
                 item.year
             ) +
-
             '</span>';
     }
 
-
     if (item.paperType) {
-
         meta +=
             '<span class="meta-item">' +
-
             escapeHtml(
                 item.paperType
             ) +
-
-            '</span>';
-    }
-
-
-    if (item.specialExam) {
-
-        meta +=
-            '<span class="meta-item">' +
-
-            escapeHtml(
-                item.specialExam
-            ) +
-
             '</span>';
     }
 
@@ -2095,22 +1289,16 @@ function createResultCard(
 
     let priceHTML = "";
 
-
     if (
         item.price !== null &&
         item.price !== undefined &&
         item.price !== ""
     ) {
-
         priceHTML =
-            '<div class="price">' +
-
-            'TZS ' +
-
+            '<div class="price">TZS ' +
             Number(
                 item.price
             ).toLocaleString() +
-
             '</div>';
     }
 
@@ -2119,69 +1307,57 @@ function createResultCard(
      * ---------------------------------------------------------
      * ACTION
      * ---------------------------------------------------------
+     *
+     * NOTES:
+     *     NUNUA
+     *     → Email
+     *     → PesaPal
+     *
+     * PAPERS:
+     *     Open Paper
+     *     → PDF
+     *
+     * ---------------------------------------------------------
      */
 
     let actionHTML = "";
-
 
     if (
         item.type === "notes" ||
         item.type === "topics" ||
         item.type === "practical"
     ) {
-
         actionHTML =
             '<button ' +
-
             'class="result-action search-buy-note" ' +
-
             'type="button" ' +
-
             'data-notes-id="' +
-
             escapeAttribute(
                 item.notesId
             ) +
-
             '" ' +
-
             'data-title="' +
-
             escapeAttribute(
                 item.title
             ) +
-
             '" ' +
-
             'data-price="' +
-
             escapeAttribute(
                 item.price
             ) +
-
             '">' +
-
             'Nunua' +
-
             '</button>';
-
     } else {
-
         actionHTML =
             '<a ' +
-
             'class="result-action" ' +
-
             'href="' +
-
             escapeAttribute(
                 item.actionUrl
             ) +
-
             '">' +
-
             'Open Paper' +
-
             '</a>';
     }
 
@@ -2193,69 +1369,46 @@ function createResultCard(
      */
 
     return (
-
         '<article class="result-card ' +
-
         colorClass +
-
         (
             isPriority
                 ? " priority-card"
                 : ""
         ) +
-
         '">' +
 
-
         '<span class="result-type">' +
-
         typeLabel +
-
         '</span>' +
 
-
         '<h3>' +
-
         title +
-
         '</h3>' +
-
 
         (
             description
                 ? (
-
                     '<div class="result-description">' +
-
                     description +
-
                     '</div>'
-
                 )
                 : ""
         ) +
-
 
         (
             meta
                 ? (
-
                     '<div class="result-meta">' +
-
                     meta +
-
                     '</div>'
-
                 )
                 : ""
         ) +
 
-
         priceHTML +
 
-
         actionHTML +
-
 
         '</article>'
     );
@@ -2271,12 +1424,15 @@ async function purchaseNoteFromSearch(
     title,
     price
 ) {
+    /*
+     * Kama notes.js tayari ipo,
+     * tumia function iliyopo.
+     */
 
     if (
         typeof window.anzishaUnunuziWaNotes ===
         "function"
     ) {
-
         window.anzishaUnunuziWaNotes(
             notesId,
             title,
@@ -2287,23 +1443,24 @@ async function purchaseNoteFromSearch(
     }
 
 
+    /*
+     * Kama notes.js haijapakiwa kwenye
+     * search.html, i-load hapa.
+     */
+
     try {
-
         await loadNotesPaymentEngine();
-
 
         if (
             typeof window.anzishaUnunuziWaNotes !==
             "function"
         ) {
-
             alert(
                 "Payment system haijapakia vizuri. Tafadhali refresh page kisha ujaribu tena."
             );
 
             return;
         }
-
 
         window.anzishaUnunuziWaNotes(
             notesId,
@@ -2312,12 +1469,10 @@ async function purchaseNoteFromSearch(
         );
 
     } catch (error) {
-
         console.error(
             "Failed to load notes.js:",
             error
         );
-
 
         alert(
             "Payment system haijapatikana kwa sasa. Tafadhali jaribu tena."
@@ -2331,32 +1486,32 @@ async function purchaseNoteFromSearch(
 ========================================================= */
 
 function loadNotesPaymentEngine() {
-
     return new Promise(
-        function (
-            resolve,
-            reject
-        ) {
+        function (resolve, reject) {
+
+            /*
+             * Angalia kama tayari ime-load.
+             */
 
             if (
                 typeof window.anzishaUnunuziWaNotes ===
                 "function"
             ) {
-
                 resolve();
-
                 return;
             }
 
+
+            /*
+             * Usipakie script mara mbili.
+             */
 
             const existingScript =
                 document.querySelector(
                     'script[data-gepam-notes-payment="true"]'
                 );
 
-
             if (existingScript) {
-
                 existingScript.addEventListener(
                     "load",
                     function () {
@@ -2367,58 +1522,52 @@ function loadNotesPaymentEngine() {
                     }
                 );
 
-
                 existingScript.addEventListener(
                     "error",
                     function () {
-
                         reject(
                             new Error(
                                 "notes.js failed to load."
                             )
                         );
-
                     },
                     {
                         once: true
                     }
                 );
 
-
                 return;
             }
 
+
+            /*
+             * Create script dynamically.
+             */
 
             const script =
                 document.createElement(
                     "script"
                 );
 
-
             script.src =
                 "notes.js";
 
-
             script.dataset.gepamNotesPayment =
                 "true";
-
 
             script.onload =
                 function () {
                     resolve();
                 };
 
-
             script.onerror =
                 function () {
-
                     reject(
                         new Error(
                             "Unable to load notes.js"
                         )
                     );
                 };
-
 
             document.head.appendChild(
                 script
@@ -2433,50 +1582,36 @@ function loadNotesPaymentEngine() {
 ========================================================= */
 
 function showInitialState() {
-
     const searchTitle =
         document.getElementById(
             "searchTitle"
         );
-
 
     const searchCount =
         document.getElementById(
             "searchCount"
         );
 
-
     const results =
         document.getElementById(
             "results"
         );
 
-
     if (searchTitle) {
-
         searchTitle.textContent =
             "Search GEPAM resources";
     }
 
-
     if (searchCount) {
-
         searchCount.textContent =
             "Search Notes, Topics, Practical Notes and Past Papers.";
     }
 
-
     if (results) {
-
         results.innerHTML =
             '<div class="empty-state">' +
-
             '<h3>What are you looking for?</h3>' +
-
-            '<p>' +
-            'Search for a subject, topic, form, year, exam type or keyword.' +
-            '</p>' +
-
+            '<p>Search for a subject, topic, form, year, exam type or keyword.</p>' +
             '</div>';
     }
 }
@@ -2487,7 +1622,6 @@ function showInitialState() {
 ========================================================= */
 
 function escapeHtml(value) {
-
     return String(
         value || ""
     )
@@ -2519,8 +1653,5 @@ function escapeHtml(value) {
 ========================================================= */
 
 function escapeAttribute(value) {
-
-    return escapeHtml(
-        value
-    );
+    return escapeHtml(value);
 }
