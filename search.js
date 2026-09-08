@@ -67,6 +67,7 @@ function initializeSearch() {
         }
     );
 
+
     /*
      * =========================================================
      * SEARCH NOTES PURCHASE
@@ -230,9 +231,15 @@ function performSearch(query) {
                         score += 15;
                     }
 
+
                     /*
-                     * Notes query should not show Past Papers.
+                     * =================================================
+                     * NOTES QUERY
+                     * =================================================
+                     *
+                     * Notes search haitaki Past Papers.
                      */
+
                     if (
                         wantsNotesQuery(cleanQuery) &&
                         item.type === "papers"
@@ -240,9 +247,15 @@ function performSearch(query) {
                         score = 0;
                     }
 
+
                     /*
-                     * Past Paper query should not show Notes.
+                     * =================================================
+                     * PAST PAPER QUERY
+                     * =================================================
+                     *
+                     * Search ya Past Papers haitaki Notes.
                      */
+
                     if (
                         wantsPapersQuery(cleanQuery) &&
                         (
@@ -253,6 +266,58 @@ function performSearch(query) {
                     ) {
                         score = 0;
                     }
+
+
+                    /*
+                     * =================================================
+                     * PRE-NECTA
+                     * =================================================
+                     *
+                     * "pre necta" ya kawaida haitaki
+                     * Special Examinations.
+                     *
+                     * Special Examination papers zinaweza
+                     * kuwa na type = pre_necta, lakini zinatakiwa
+                     * kutafutwa kupitia ISESE/JEPGOS/etc au
+                     * Special Examinations.
+                     */
+
+                    if (
+                        wantsPreNectaQuery(cleanQuery) &&
+                        item.type === "papers" &&
+                        isSpecialExaminationPaper(item)
+                    ) {
+                        score = 0;
+                    }
+
+
+                    /*
+                     * =================================================
+                     * SPECIAL EXAMINATION QUERY
+                     * =================================================
+                     *
+                     * Hapa tunaruhusu:
+                     *
+                     * Special Examinations
+                     * ISESE
+                     * JEPGOS
+                     * TAHOSSA
+                     * CSSC
+                     * Special School
+                     *
+                     * na combinations zao.
+                     */
+
+                    if (
+                        wantsSpecialExaminationQuery(
+                            cleanQuery
+                        ) &&
+                        item.type === "papers" &&
+                        !isSpecialExaminationPaper(item)
+                    ) {
+                        score = 0;
+                    }
+
 
                     return {
                         ...item,
@@ -300,17 +365,88 @@ function wantsNotesQuery(query) {
     );
 }
 
+
 function wantsPapersQuery(query) {
     return (
         query.includes("paper") ||
         query.includes("past") ||
         query.includes("exam") ||
         query.includes("mock") ||
+        query.includes("joint") ||
+        query.includes("annual") ||
+        query.includes("terminal") ||
+        query.includes("midterm") ||
+        query.includes("necta") ||
+        query.includes("isese") ||
+        query.includes("jepgos") ||
+        query.includes("tahossa") ||
+        query.includes("cssc") ||
+        query.includes("special") ||
+        query.includes("series")
+    );
+}
+
+
+/* =========================================================
+   PRE-NECTA QUERY
+========================================================= */
+
+function wantsPreNectaQuery(query) {
+    return (
+        query.includes("pre necta") ||
+        query.includes("pre-necta") ||
+        query.includes("pre_necta") ||
+        query === "prenecta"
+    );
+}
+
+
+/* =========================================================
+   SPECIAL EXAMINATION QUERY
+========================================================= */
+
+function wantsSpecialExaminationQuery(query) {
+    return (
         query.includes("special") ||
         query.includes("isese") ||
         query.includes("jepgos") ||
         query.includes("tahossa") ||
-        query.includes("cssc")
+        query.includes("cssc") ||
+        query.includes("special school") ||
+        query.includes("special_school")
+    );
+}
+
+
+/* =========================================================
+   CHECK SPECIAL EXAMINATION PAPER
+========================================================= */
+
+function isSpecialExaminationPaper(paper) {
+    if (!paper) {
+        return false;
+    }
+
+    const category =
+        normalizeText(
+            paper.category || ""
+        );
+
+    const specialExam =
+        normalizeText(
+            paper.specialExam || ""
+        );
+
+    const specialExamination =
+        normalizeText(
+            paper.specialExamination || ""
+        );
+
+    return (
+        category === "special" ||
+        category.includes("special") ||
+        specialExam !== "" ||
+        specialExamination !== ""
     );
 }
 
@@ -321,6 +457,7 @@ function wantsPapersQuery(query) {
 
 function buildSearchIndex() {
     const index = [];
+
 
     /*
      * =========================================================
@@ -341,6 +478,7 @@ function buildSearchIndex() {
                 if (!group) {
                     return;
                 }
+
 
                 /*
                  * -------------------------------------------------
@@ -597,19 +735,13 @@ function buildSearchIndex() {
 
     /*
      * =========================================================
-     * PAST PAPERS
-     * =========================================================
-     *
-     * HAPA NDIKO TUMEBORESHA SEARCH YA SPECIAL EXAMINATIONS.
-     *
-     * Logic ya Past Paper haijabadilishwa.
-     * Tumeongeza taarifa za Special Examination
-     * kwenye searchText tu.
+     * NORMAL PAST PAPERS
      * =========================================================
      */
 
     const paperSource =
         getPastPaperSource();
+
 
     if (Array.isArray(paperSource)) {
         paperSource.forEach(
@@ -621,103 +753,60 @@ function buildSearchIndex() {
                     return;
                 }
 
-                /*
-                 * Tengeneza search text ya paper.
-                 *
-                 * Hii inaruhusu kutafuta:
-                 *
-                 * Pre NECTA
-                 * Special Examinations
-                 * ISESE
-                 * JEPGOS
-                 * TAHOSSA
-                 * CSSC
-                 * Special School
-                 * Physics
-                 * Chemistry
-                 * Form 1 - Form 6
-                 * Miaka yoyote
-                 * Mock
-                 * Joint
-                 * Annual
-                 * Terminal
-                 * Midterm
-                 * NECTA
-                 */
-
-                const paperSearchText =
-                    buildPastPaperSearchText(
-                        paper
-                    );
-
-                index.push({
-                    uniqueKey:
-                        "paper-" +
-                        (
-                            paper.id ||
-                            indexNumber
-                        ),
-
-                    type:
-                        "papers",
-
-                    typeLabel:
-                        "Past Paper",
-
-                    title:
-                        paper.title ||
-                        paper.name ||
-                        "Past Paper",
-
-                    description:
-                        paper.description ||
-                        "",
-
-                    price:
-                        null,
-
-                    form:
-                        paper.form ||
-                        "",
-
-                    subject:
-                        paper.subject ||
-                        "",
-
-                    syllabus:
-                        "",
-
-                    year:
-                        paper.year ||
-                        "",
-
-                    paperType:
-                        paper.type ||
-                        "",
-
-                    category:
-                        paper.category ||
-                        "",
-
-                    region:
-                        paper.region ||
-                        "",
-
-                    specialExam:
-                        paper.specialExam ||
-                        "",
-
-                    actionUrl:
-                        buildPaperUrl(
-                            paper
-                        ),
-
-                    searchText:
-                        paperSearchText
-                });
+                index.push(
+                    createPastPaperSearchItem(
+                        paper,
+                        "normal-" + indexNumber
+                    )
+                );
             }
         );
     }
+
+
+    /*
+     * =========================================================
+     * SPECIAL EXAMINATION PAPERS
+     * =========================================================
+     *
+     * HII NDIYO SEHEMU ILIYOKUWA HAIPO KWENYE
+     * SEARCH YA ZAMANI.
+     *
+     * Data yako iko kwenye:
+     *
+     * specialPaperRecords
+     *
+     * tofauti na:
+     *
+     * pastPaperRecords
+     *
+     * Sasa zote zinaingia kwenye search index.
+     */
+
+    const specialSource =
+        getSpecialPaperSource();
+
+
+    if (Array.isArray(specialSource)) {
+        specialSource.forEach(
+            function (
+                paper,
+                indexNumber
+            ) {
+                if (!paper) {
+                    return;
+                }
+
+                index.push(
+                    createPastPaperSearchItem(
+                        paper,
+                        "special-" + indexNumber
+                    )
+                );
+            }
+        );
+    }
+
 
     return deduplicateResults(
         index
@@ -726,128 +815,72 @@ function buildSearchIndex() {
 
 
 /* =========================================================
-   BUILD PAST PAPER SEARCH TEXT
+   CREATE PAST PAPER SEARCH ITEM
 ========================================================= */
 
-function buildPastPaperSearchText(paper) {
-    if (!paper) {
-        return "";
-    }
+function createPastPaperSearchItem(
+    paper,
+    uniqueId
+) {
+    const title =
+        paper.title ||
+        paper.name ||
+        "Past Paper";
 
-    const values = [
+
+    /*
+     * Search text ya Past Paper.
+     *
+     * Tunajumuisha fields zote muhimu
+     * za data yako.
+     */
+
+    const searchValues = [
         paper.title,
         paper.name,
         paper.description,
+
         paper.year,
+
         paper.form,
         paper.subject,
+
         paper.type,
         paper.category,
+
         paper.region,
+
         paper.specialExam,
         paper.specialExamination,
+
+        paper.series,
+        paper.seriesName,
+
         paper.source,
+
         paper.organization,
         paper.organisation,
+
         paper.examBoard,
         paper.examBody
     ];
 
-    const searchValues = [];
-
-    values.forEach(
-        function (value) {
-            if (
-                typeof value === "string" ||
-                typeof value === "number"
-            ) {
-                searchValues.push(
-                    String(value)
-                );
-            }
-        }
-    );
-
 
     /*
-     * =========================================================
-     * SPECIAL EXAMINATION DETECTION
-     * =========================================================
+     * Special Examination aliases.
      *
-     * Kama paper ina specialExam,
-     * tunaongeza "Special Examinations"
-     * kama keyword ya search.
+     * Hii inaruhusu:
      *
-     * Hii ndiyo inafanya:
-     *
-     * Search: Special Examinations
-     *
-     * ionyeshe papers zote zenye
-     * special examination source.
+     * Special Examinations
+     * Special Examination
+     * Special Exams
      */
 
-    const specialExamValue =
-        typeof paper.specialExam === "string"
-            ? paper.specialExam.trim()
-            : "";
-
-    const specialExaminationValue =
-        typeof paper.specialExamination === "string"
-            ? paper.specialExamination.trim()
-            : "";
-
-    const sourceValue =
-        typeof paper.source === "string"
-            ? paper.source.trim()
-            : "";
-
-    const organizationValue =
-        typeof paper.organization === "string"
-            ? paper.organization.trim()
-            : "";
-
-    const organisationValue =
-        typeof paper.organisation === "string"
-            ? paper.organisation.trim()
-            : "";
-
-
-    /*
-     * Angalia kama type/category inaonyesha
-     * Special Examination.
-     */
-
-    const typeText =
-        normalizeText(
-            paper.type || ""
-        );
-
-    const categoryText =
-        normalizeText(
-            paper.category || ""
-        );
-
-
-    const isSpecialPaper =
-        Boolean(
-            specialExamValue ||
-            specialExaminationValue ||
-            (
-                typeText &&
-                typeText.includes(
-                    "special"
-                )
-            ) ||
-            (
-                categoryText &&
-                categoryText.includes(
-                    "special"
-                )
-            )
-        );
-
-
-    if (isSpecialPaper) {
+    if (
+        isSpecialExaminationPaper(
+            paper
+        )
+    ) {
         searchValues.push(
             "Special Examinations"
         );
@@ -863,24 +896,125 @@ function buildPastPaperSearchText(paper) {
 
 
     /*
-     * Return search text.
+     * Special Exam name aliases.
      *
-     * Hatubadilishi:
-     * "Pre NECTA"
+     * Kwa mfano:
      *
-     * kuwa:
-     * "PreNECTA"
+     * specialExam = special_school
      *
-     * kwa sababu tunataka query ya
-     * "pre necta" ibaki kufanya kazi.
+     * search iweze kupata:
+     *
+     * Special School
      */
 
-    return searchValues.join(" ");
+    const specialExam =
+        normalizeText(
+            paper.specialExam || ""
+        );
+
+
+    if (specialExam) {
+        searchValues.push(
+            specialExam.replace(
+                /_/g,
+                " "
+            )
+        );
+    }
+
+
+    /*
+     * Region inaweza kuwa ISESE,
+     * JEPGOS, TAHOSSA, CSSC n.k.
+     *
+     * Kwa hiyo region pia inaingia
+     * kwenye search.
+     */
+
+
+    return {
+        uniqueKey:
+            "paper-" +
+            uniqueId,
+
+        type:
+            "papers",
+
+        typeLabel:
+            "Past Paper",
+
+        title:
+            title,
+
+        description:
+            paper.description ||
+            "",
+
+        price:
+            null,
+
+        form:
+            paper.form ||
+            "",
+
+        subject:
+            paper.subject ||
+            "",
+
+        syllabus:
+            "",
+
+        year:
+            paper.year ||
+            "",
+
+        paperType:
+            paper.type ||
+            "",
+
+        category:
+            paper.category ||
+            "",
+
+        region:
+            paper.region ||
+            "",
+
+        specialExam:
+            paper.specialExam ||
+            "",
+
+        actionUrl:
+            buildPaperUrl(
+                paper
+            ),
+
+        searchText:
+            searchValues
+                .filter(
+                    function (value) {
+                        return (
+                            typeof value ===
+                                "string" ||
+                            typeof value ===
+                                "number"
+                        );
+                    }
+                )
+                .map(
+                    function (value) {
+                        return String(
+                            value
+                        );
+                    }
+                )
+                .join(" ")
+    };
 }
 
 
 /* =========================================================
-   GET PAST PAPER SOURCE
+   GET NORMAL PAST PAPER SOURCE
 ========================================================= */
 
 function getPastPaperSource() {
@@ -911,6 +1045,98 @@ function getPastPaperSource() {
             ];
         }
     }
+
+    return [];
+}
+
+
+/* =========================================================
+   GET SPECIAL PAPER SOURCE
+========================================================= */
+
+function getSpecialPaperSource() {
+
+    const possibleNames = [
+        "specialPaperRecords",
+        "specialExaminations"
+    ];
+
+
+    for (
+        let i = 0;
+        i < possibleNames.length;
+        i++
+    ) {
+        const source =
+            window[
+                possibleNames[i]
+            ];
+
+
+        /*
+         * Direct array.
+         */
+
+        if (
+            Array.isArray(
+                source
+            )
+        ) {
+            return source;
+        }
+    }
+
+
+    /*
+     * Kama specialExaminations ni object,
+     * jaribu kuchukua arrays zilizomo ndani yake.
+     */
+
+    const specialData =
+        window.specialExaminations;
+
+
+    if (
+        specialData &&
+        typeof specialData === "object" &&
+        !Array.isArray(specialData)
+    ) {
+        const output = [];
+
+
+        Object.keys(
+            specialData
+        ).forEach(
+            function (key) {
+
+                const value =
+                    specialData[key];
+
+
+                if (
+                    Array.isArray(
+                        value
+                    )
+                ) {
+                    value.forEach(
+                        function (item) {
+                            if (item) {
+                                output.push(
+                                    item
+                                );
+                            }
+                        }
+                    );
+                }
+            }
+        );
+
+
+        if (output.length > 0) {
+            return output;
+        }
+    }
+
 
     return [];
 }
@@ -1307,17 +1533,6 @@ function createResultCard(
      * ---------------------------------------------------------
      * ACTION
      * ---------------------------------------------------------
-     *
-     * NOTES:
-     *     NUNUA
-     *     → Email
-     *     → PesaPal
-     *
-     * PAPERS:
-     *     Open Paper
-     *     → PDF
-     *
-     * ---------------------------------------------------------
      */
 
     let actionHTML = "";
@@ -1424,11 +1639,6 @@ async function purchaseNoteFromSearch(
     title,
     price
 ) {
-    /*
-     * Kama notes.js tayari ipo,
-     * tumia function iliyopo.
-     */
-
     if (
         typeof window.anzishaUnunuziWaNotes ===
         "function"
@@ -1441,12 +1651,6 @@ async function purchaseNoteFromSearch(
 
         return;
     }
-
-
-    /*
-     * Kama notes.js haijapakiwa kwenye
-     * search.html, i-load hapa.
-     */
 
     try {
         await loadNotesPaymentEngine();
@@ -1489,10 +1693,6 @@ function loadNotesPaymentEngine() {
     return new Promise(
         function (resolve, reject) {
 
-            /*
-             * Angalia kama tayari ime-load.
-             */
-
             if (
                 typeof window.anzishaUnunuziWaNotes ===
                 "function"
@@ -1500,11 +1700,6 @@ function loadNotesPaymentEngine() {
                 resolve();
                 return;
             }
-
-
-            /*
-             * Usipakie script mara mbili.
-             */
 
             const existingScript =
                 document.querySelector(
@@ -1538,11 +1733,6 @@ function loadNotesPaymentEngine() {
 
                 return;
             }
-
-
-            /*
-             * Create script dynamically.
-             */
 
             const script =
                 document.createElement(
