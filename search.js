@@ -2524,7 +2524,3 @@ function escapeAttribute(value) {
         value
     );
 }
-
-Mkuu, hii ndiyo version ya kujaribu sasa. Kitu nilichokilenga hasa ni kwamba "Special Examinations" isiwe sawa na "ISESE" pekee: search ya “Special Examinations” inapaswa kuonyesha ISESE + JEPGOS + TAHOSSA + CSSC + Special School, wakati ukitafuta jina moja inapaswa kulenga hiyo source.
-
-Baada ya kuweka hii, refresh kwa nguvu (Ctrl+F5 kwenye PC, au clear/reload kwenye simu) kisha jaribu kwanza "ISESE", "JEPGOS", "TAHOSSA", "CSSC", "Special School", halafu "Special Examinations".
