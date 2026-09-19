@@ -263,6 +263,21 @@ const notesData = {
                     "Ionic theory, electrolytes and non-electrolytes, electrolysis, mechanisms of electrolysis, Faraday’s laws of electrolysis, and applications of electrolysis.",
 
                 price: 1500
+            },
+
+                {
+     id:
+        "notes_chemistry_f3_old_extraction_of_metals",
+
+     title:
+        "Topic 8: Extraction of Metals",
+           
+      description:
+        "Mining and extraction, Using reduction, Using electrolysis,Environmental impacts and Summary activities.",
+
+     price:
+        1500
+              
             }
 
         ]
