@@ -1357,15 +1357,18 @@ const pastPapers = [
 const specialPaperRecords = [
 
 {
-    "category":"special",
-    "specialExam":"isese",
-    "title":"ISESE - Series One",
-    "type":"series",
-    "series":"series1",
-    "seriesName":"Series One",
-    "file":"papers/special/isese/series_one.pdf",
-    "markingScheme":""
-},
+    category: "special",
+    specialExam: "isese",
+    form: "form3",
+    subject: "physics",
+    type: "series",
+    year: 2026,
+    series: "series1",
+    seriesName: "Series One",
+    title: "Form 3 Physics - ISESE Series One 2026",
+    file: "papers/form3/physics/series/special_examinations/isese/2026/F3_PHYSICS_ISESE_S01_2026.pdf",
+    markingScheme: "papers/form2/physics/series/special_examinations/isese/2026/F3_PHYSICS_MS_ISESE_S01_2026.pdf"
+}
 
 {
     "category":"special",
