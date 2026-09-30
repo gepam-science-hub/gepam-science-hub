@@ -170,13 +170,10 @@ const notesData = {
  {
      id:
         "notes_chemistry_f2_new_PERIODIC_CLASSIFICATION",
-
      title:
-        "Topic 2: Periodic Classification",
-           
+        "Topic 2: Periodic Classification",    
       description:
         "PeriodicTable, Periodic laws.",
-
      price:
         1000
               }
