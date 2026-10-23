@@ -48,6 +48,14 @@ const notesData = {
             price: 5000
         },
 
+        {
+            id: "notes_physics_f1_new_full",
+            title: "Form 1 Physics — Full Notes",
+            description:
+                "Complete Form 1 Physics Premium Notes.",
+            price: 4500
+        },
+    
         topics: [
             {
                 id: "notes_physics_f1_introduction",
@@ -60,7 +68,7 @@ const notesData = {
     },
 
 
-    "form1-old-chemistry": {
+    "form1-old-chemistry":{
         full: {
             id: "notes_chemistry_f1_full",
             title: "Form 1 Chemistry — Full Notes",
@@ -139,6 +147,38 @@ const notesData = {
                 description:
                     "Electric charges and applications of static electricity.",
                 price: 1500
+            },
+                {
+                id:
+                    "notes_physics_f2_old_NEWTON'S LAWS OF MOTION",
+
+                title:
+                    "Topic 7: NEWTON'S LAWS OF MOTION",
+
+                price:
+                    1000
+            },
+
+              {
+                id:
+                    "notes_physics_f2_old_TEMPERATURE",
+
+               title:
+                  "Topic 8: TEMPERATURE",
+
+                price:
+                    1000
+            },
+
+              {
+                id:
+                    "notes_physics_f2_old_SUSTAINABLE ENERGY SOURCES",
+
+                title:
+                    "Topic 9: SUSTAINABLE ENERGY SOURCES",
+
+                price:
+                    1000
             }
         ]
     },
